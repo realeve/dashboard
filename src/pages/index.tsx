@@ -23,9 +23,10 @@ export default function() {
 
   return (
     <div className={styles.chartContainer}>
-      <Draggable handle="strong" style={size}>
+      <Draggable bounds="parent" cancel=".react-resizable-handle">
         <ResizableBox
           {...size}
+          style={{ ...size }}
           onResize={onResize}
           draggableOpts={{ grid: [25, 25] }}
           maxConstraints={[1200, 600]}
