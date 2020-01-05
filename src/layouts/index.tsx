@@ -1,8 +1,6 @@
 import React from 'react';
-import styles from './index.less';
-
-const BasicLayout: React.FC = props => {
-  return <div className={styles.app}>{props.children}</div>;
+import { Layout } from 'antd';
+import './index.less';
+export default props => {
+  return <Layout>{props.children}</Layout>;
 };
-
-export default BasicLayout;
