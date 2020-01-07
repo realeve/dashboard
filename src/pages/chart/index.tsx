@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { autoChart, AutoChartOptions } from '@antv/chart-advisor/src';
-import { Row, Col } from 'antd';
+
 /**
  * 主页:https://www.npmjs.com/package/@antv/chart-advisor
  *
@@ -27,7 +27,7 @@ export const AChart = ({ option: { data = [], ...option }, ...props }) => {
       return;
     }
     autoChart(instance.current, data, option || {}).then(chart => {
-      console.log(chart);
+      console.log(chart, chart.plot.registerTheme);
     });
   }, [option, data]);
   return <div ref={instance} style={{ width: '100%', height: '100%' }} {...props} />;
