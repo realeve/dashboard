@@ -6,6 +6,7 @@
     "test": "umi test"
   },
   "dependencies": {
+    "@antv/chart-advisor": "^0.1.2-alpha.19",
     "@types/react-resizable": "^1.7.2",
     "antd": "^4.0.0-rc.0",
     "axios": "^0.19.0",

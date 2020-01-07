@@ -1,16 +1,43 @@
 :global {
-  .react-grid-item>.react-resizable-handle {
-    &-se {
-      bottom: -5px;
-      right: -5px;
-      width: 24px;
-      height: 24px;
-      background-size: 50% 50%;
+
+  .react-grid-item {
+    border: 1px solid #ececec;
+    padding: 10px;
+
+    .remove {
+      position: absolute;
+      right: 7px;
+      top: 1px;
+      cursor: pointer;
+      z-index: 999;
+      display: none;
     }
 
-    &-e,
-    &-s {
-      background-size: 50% 50%;
+    .react-resizable-handle {
+      visibility: hidden;
+
+      &-se {
+        bottom: -5px;
+        right: -5px;
+        width: 24px;
+        height: 24px;
+        background-size: 50% 50%;
+      }
+
+      &-e,
+      &-s {
+        background-size: 50% 50%;
+      }
+    }
+
+    &:hover {
+      .remove {
+        display: inline-block;
+      }
+
+      .react-resizable-handle {
+        visibility: visible;
+      }
     }
   }
 
