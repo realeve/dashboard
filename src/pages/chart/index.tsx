@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { autoChart, AutoChartOptions } from '@antv/chart-advisor/src';
 
+// import { registerGlobalTheme } from '@antv/g2plot/lib/theme/global';
+// import theme from './theme';
+// registerGlobalTheme('default', theme);
 /**
  * 主页:https://www.npmjs.com/package/@antv/chart-advisor
  *

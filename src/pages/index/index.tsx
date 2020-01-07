@@ -5,8 +5,8 @@ import _ from 'lodash';
 import { AChart } from '../chart';
 import { CloseOutlined } from '@ant-design/icons';
 
-import { registerGlobalTheme } from '@antv/g2plot/lib/theme/global';
-import theme from '../chart/theme';
+import { registerGlobalTheme } from '@antv/g2plot/lib/theme';
+// import theme from '../chart/theme';
 
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
@@ -15,6 +15,153 @@ import './index.less';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const { Header, Content } = Layout;
 
+let theme = {
+  backgroundStyle: { fill: '#222e4e' },
+  title: {
+    padding: [24, 24, 24, 24],
+    fontFamily: 'PingFang SC',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fill: 'rgba(255,255,255,0.65)',
+    stroke: 'rgba(0,0,0,0.95)',
+    textAlign: 'left',
+    textBaseline: 'top',
+    lineHeight: 20,
+    alignWithAxis: false,
+  },
+  axis: {
+    y: {
+      visible: true,
+      position: 'left',
+      autoHideLabel: false,
+      autoRotateLabel: false,
+      autoRotateTitle: true,
+      grid: {
+        visible: true,
+        style: {
+          stroke: 'rgba(255, 255, 255, 0.15)',
+          lineWidth: 1,
+          lineDash: [0, 0],
+        },
+      },
+      line: {
+        visible: false,
+        style: {
+          stroke: 'rgba(255, 255, 255, 0.45)',
+          lineWidth: 1,
+        },
+      },
+      tickLine: {
+        visible: false,
+        style: {
+          stroke: 'rgba(255, 255, 255, 0.45)',
+          lineWidth: 0.5,
+          length: 4,
+        },
+      },
+      label: {
+        visible: true,
+        offset: 8,
+        style: {
+          fill: 'rgba(255, 255, 255, 0.45)',
+          fontSize: 12,
+        },
+      },
+      title: {
+        visible: false,
+        offset: 12,
+        style: {
+          fill: 'rgba(255, 255, 255, 0.65)',
+          fontSize: 12,
+          textBaseline: 'bottom',
+        },
+      },
+    },
+    x: {
+      visible: true,
+      position: 'bottom',
+      autoHideLabel: false,
+      autoRotateLabel: false,
+      autoRotateTitle: false,
+      grid: {
+        visible: false,
+        style: {
+          stroke: 'rgba(255, 255, 255, 0.15)',
+          lineWidth: 1,
+          lineDash: [0, 0],
+        },
+      },
+      line: {
+        visible: false,
+        style: {
+          stroke: 'rgba(255, 255, 255, 0.45)',
+        },
+      },
+      tickLine: {
+        visible: true,
+        style: {
+          length: 4,
+          stroke: 'rgba(255, 255, 255, 0.45)',
+          lineWidth: 0.5,
+        },
+      },
+      label: {
+        visible: true,
+        style: {
+          fill: 'rgba(255, 255, 255, 0.65)',
+          fontSize: 12,
+        },
+        offset: 16,
+      },
+      title: {
+        visible: false,
+        offset: 12,
+        style: {
+          fill: 'rgba(255, 255, 255, 0.65)',
+          fontSize: 12,
+        },
+      },
+    },
+    circle: {
+      autoHideLabel: false,
+      autoRotateLabel: true,
+      autoRotateTitle: true,
+      // gridType: 'line',
+      grid: {
+        style: {
+          lineDash: null,
+          lineWidth: 1,
+          stroke: '#E3E8EC',
+        },
+      },
+      line: {
+        style: {
+          lineWidth: 1,
+          stroke: '#BFBFBF',
+        },
+      },
+      tickLine: {
+        style: {
+          lineWidth: 1,
+          stroke: '#bdc8d3',
+          length: 4,
+          alignWithLabel: true,
+        },
+      },
+      label: {
+        offset: 16,
+        style: {
+          fill: '#a0a4aa',
+          fontSize: 12,
+        },
+      },
+      title: {
+        offset: 12,
+        style: { fill: '#767b84', fontSize: 12 },
+      },
+    },
+  },
+};
 // 注册全局组件
 registerGlobalTheme('dashboard', theme);
 
