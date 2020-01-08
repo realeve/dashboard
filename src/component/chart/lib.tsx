@@ -1,4 +1,10 @@
 import * as g2plot from '@antv/g2plot';
+import { AutoChartOptions } from '@/lib/chart-advisor/src';
+
+export interface IAChart extends AutoChartOptions {
+  data: any[];
+  [key: string]: any;
+}
 
 export const showDefaultOption = chartType => {
   console.log(

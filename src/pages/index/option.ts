@@ -1,3 +1,5 @@
+import { IAChart } from '@/component/chart/lib';
+
 const data = [
   {
     x: '2019-03',
@@ -51,7 +53,7 @@ const data = [
   },
 ];
 
-let lineChart = {
+let lineChart: IAChart = {
   data,
   config: {
     configs: {
@@ -79,7 +81,7 @@ let lineChart = {
   },
 };
 
-let barChart = {
+let barChart: IAChart = {
   data: [
     {
       x: '2019-03',

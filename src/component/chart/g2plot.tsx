@@ -2,11 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as g2plot from '@antv/g2plot';
 import { useSize, useDebounce } from 'react-use';
 import theme from './theme';
-import { showDefaultOption } from './lib';
+import { showDefaultOption, IAChart } from './lib';
 
 g2plot.registerGlobalTheme('dashboard', theme);
 
-export const AChart = ({ option: { type, data, ...option }, ...props }) => {
+export const AChart = ({
+  option: {
+    data,
+    config: { type, configs: option },
+  },
+  ...props
+}: IAChart) => {
   const instance = useRef(null);
   const [plot, setPlot] = useState(null);
 
@@ -37,7 +43,7 @@ export const AChart = ({ option: { type, data, ...option }, ...props }) => {
     let _plot = new g2plot[type](
       instance.current,
       {
-        animation: false,
+        // animation: false,
         data,
         ...option,
         theme: 'dashboard',

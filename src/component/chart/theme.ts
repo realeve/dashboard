@@ -1,4 +1,3 @@
-import { DEFAULT_GLOBAL_THEME as theme } from '@antv/g2plot/lib/theme/default';
 import * as default_1 from '@antv/g2plot/lib/theme/default';
 export default {
   backgroundStyle: {

@@ -2,7 +2,11 @@ import React, { PureComponent } from 'react';
 import { Layout, Button } from 'antd';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import _ from 'lodash';
-import { AChart } from '@/component/chart';
+
+// AVA 图表
+// import { AChart } from '@/component/chart/ava';
+
+import { AChart as GChart } from '@/component/chart/g2plot';
 import { CloseOutlined } from '@ant-design/icons';
 
 import 'react-resizable/css/styles.css';
@@ -62,7 +66,7 @@ export default class DragLayout extends PureComponent {
       return (
         <div key={item.i} data-grid={item}>
           <CloseOutlined className="remove" onClick={this.onRemoveItem.bind(this, i)} />
-          <AChart option={getOption(item.type)} />
+          <GChart option={getOption(item.type)} />
         </div>
       );
     });

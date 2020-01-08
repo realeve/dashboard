@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { autoChart, AutoChartOptions } from '@/lib/chart-advisor/src';
+import { autoChart } from '@/lib/chart-advisor/src';
 import { useSize, useDebounce } from 'react-use';
 import _ from 'lodash';
 import theme from './theme';
-import { showDefaultOption } from './lib';
+import { showDefaultOption, IAChart } from './lib';
 import * as g2plot from '@antv/g2plot';
 g2plot.registerGlobalTheme('dashboard', theme);
 
@@ -21,15 +21,10 @@ g2plot.registerGlobalTheme('dashboard', theme);
  * 示例：https://observablehq.com/@jiazhewang/autochart-automatic-chart-dev-library-by-antv
  */
 
-export interface IAChart extends AutoChartOptions {
-  data: any[];
-  [key: string]: any;
-}
-
 const getDefaultConfig = option => {
   let configs = {
-    forceFit: false,
-    animation: false,
+    // forceFit: false,
+    // animation: false,
     theme: 'dashboard',
   };
   if (!option.config) {
@@ -65,7 +60,7 @@ const getDefaultConfig = option => {
   };
 };
 
-export const AChart = ({ option: { data = [], ...option }, ...props }) => {
+export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) => {
   const instance = useRef(null);
   const [plot, setPlot] = useState(null);
 
