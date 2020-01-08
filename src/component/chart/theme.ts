@@ -1,5 +1,5 @@
 import { DEFAULT_GLOBAL_THEME as theme } from '@antv/g2plot/lib/theme/default';
-
+import * as default_1 from '@antv/g2plot/lib/theme/default';
 export default {
   backgroundStyle: {
     fill: '#222e4e',
@@ -7,13 +7,13 @@ export default {
   defaultColor: '#5B8FF9',
   width: 400,
   height: 400,
-  bleeding: [theme.TOP_BLEEDING, 24, theme.BOTTOM_BLEEDING, 24],
+  bleeding: [default_1.TOP_BLEEDING, 24, default_1.BOTTOM_BLEEDING, 24],
   padding: 'auto',
   title: {
-    padding: [24, 24, 24, 24],
+    padding: [12, 24, 12, 24],
     fontFamily: 'PingFang SC',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '200',
     fill: 'rgba(255,255,255,0.65)',
     stroke: 'rgba(0,0,0,0.95)',
     textAlign: 'left',
@@ -22,7 +22,7 @@ export default {
     alignWithAxis: false,
   },
   description: {
-    padding: [10, 24, theme.DESCRIPTION_BOTTOM_MARGIN, 24],
+    padding: [10, 24, default_1.DESCRIPTION_BOTTOM_MARGIN, 24],
     fontFamily: 'PingFang SC',
     fontSize: 12,
     fill: 'rgba(255, 255, 255, 0.65)',

@@ -1,0 +1,53 @@
+{
+  "name": "@antv/chart-advisor",
+  "version": "0.1.2-alpha.19",
+  "description": "Chart advisor",
+  "main": "lib/index.js",
+  "browser": "dist/index.js",
+  "module": "es/index.js",
+  "files": [
+    "src",
+    "es",
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "build": "rm -rf lib && tsc --pretty",
+    "module": "rm -rf es && tsc -t ES5 -m ESNext --outDir es",
+    "prepublish": "npm run module && npm run build && npm run pack",
+    "pack": "webpack --config=webpack.config.js",
+    "lint": "eslint --ext .ts src __tests__"
+  },
+  "author": "AFX",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@antv/dw-analyzer": "^0.0.2-alpha.15",
+    "@antv/g2plot": "^0.11.1",
+    "@antv/rules": "^0.1.2-alpha.15",
+    "@antv/thumbnails": "^0.2.0",
+    "@antv/wiki": "^0.1.2-alpha.15",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.7.4",
+    "@babel/runtime": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "gitHead": "7918d86d03fc446f0c03033d0df2725e3f2bf878",
+  "__npminstall_done": "Tue Jan 07 2020 19:37:29 GMT+0800 (GMT+08:00)",
+  "_from": "@antv/chart-advisor@0.1.2-alpha.19",
+  "_resolved": "https://registry.npm.taobao.org/@antv/chart-advisor/download/@antv/chart-advisor-0.1.2-alpha.19.tgz"
+}

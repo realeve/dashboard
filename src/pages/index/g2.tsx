@@ -2,31 +2,18 @@ import React, { PureComponent } from 'react';
 import { Layout, Button } from 'antd';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import _ from 'lodash';
-import { AChart } from '@/component/chart';
+import { AChart } from '@/component/chart/g2chart';
 import { CloseOutlined } from '@ant-design/icons';
-
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import './index.less';
-
-import getOption from './option';
-
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const { Header, Content } = Layout;
-
-const headerStyle = {
-  position: 'fixed',
-  background: '#222e4e',
-  zIndex: 1,
-  bottom: 0,
-  width: '100%',
-  padding: '0 20px',
-};
 
 export default class DragLayout extends PureComponent {
   static defaultProps = {
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-    rowHeight: 150,
+    rowHeight: 100,
   };
 
   constructor(props) {
@@ -56,13 +43,65 @@ export default class DragLayout extends PureComponent {
       );
     }
   }
-
   generateDOM = () => {
-    return _.map(this.state.widgets, (item, i) => {
+    const data = [
+      {
+        year: '1991',
+        value: 31,
+      },
+      {
+        year: '1992',
+        value: 41,
+      },
+      {
+        year: '1993',
+        value: 35,
+      },
+      {
+        year: '1994',
+        value: 55,
+      },
+      {
+        year: '1995',
+        value: 49,
+      },
+      {
+        year: '1996',
+        value: 15,
+      },
+      {
+        year: '1997',
+        value: 17,
+      },
+      {
+        year: '1998',
+        value: 29,
+      },
+      {
+        year: '1999',
+        value: 33,
+      },
+    ];
+
+    const option = {
+      title: {
+        visible: true,
+        text: '某图表',
+      },
+      description: {
+        visible: true,
+        text: '某图表',
+      },
+      data,
+      xField: 'year',
+      yField: 'value',
+      type: 'Column',
+    };
+    return _.map(this.state.widgets, (l, i) => {
       return (
-        <div key={item.i} data-grid={item}>
+        <div key={l.i} data-grid={l}>
           <CloseOutlined className="remove" onClick={this.onRemoveItem.bind(this, i)} />
-          <AChart option={getOption(item.type)} />
+          <AChart option={option} />
         </div>
       );
     });
@@ -85,6 +124,7 @@ export default class DragLayout extends PureComponent {
   }
 
   onRemoveItem(i) {
+    console.log(this.state.widgets);
     this.setState({
       widgets: this.state.widgets.filter((item, index) => index != i),
     });
@@ -96,29 +136,25 @@ export default class DragLayout extends PureComponent {
   }
 
   render() {
-    let chartList = [
-      {
-        name: '柱状图',
-        type: 'PercentageStackBar',
-      },
-      {
-        name: '曲线图',
-        type: 'Line',
-      },
-    ];
     return (
       <>
-        <Header style={headerStyle}>
-          {chartList.map(item => (
-            <Button
-              key={item.type}
-              type="primary"
-              style={{ marginRight: '7px' }}
-              onClick={this.addChart.bind(this, item.type)}
-            >
-              添加{item.name}
-            </Button>
-          ))}
+        <Header
+          style={{
+            position: 'fixed',
+            background: '#222e4e',
+            zIndex: 1,
+            bottom: 0,
+            width: '100%',
+            padding: '0 20px',
+          }}
+        >
+          <Button
+            type="primary"
+            style={{ marginRight: '7px' }}
+            onClick={this.addChart.bind(this, 'bar')}
+          >
+            添加图表
+          </Button>
         </Header>
         <Content>
           <div style={{ background: '#222e4e', padding: 10, height: '100vh' }}>
