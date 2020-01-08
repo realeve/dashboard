@@ -7,6 +7,8 @@ import { showDefaultOption, IAChart } from './lib';
 import * as g2plot from '@antv/g2plot';
 g2plot.registerGlobalTheme('dashboard', theme);
 
+import { themeName } from '@/utils/setting';
+
 /**
  * 主页:https://www.npmjs.com/package/@antv/chart-advisor
  *
@@ -25,7 +27,7 @@ const getDefaultConfig = option => {
   let configs = {
     // forceFit: false,
     // animation: false,
-    theme: 'dashboard',
+    theme: themeName,
   };
   if (!option.config) {
     return {

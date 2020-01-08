@@ -4,9 +4,11 @@ import { WidthProvider, Responsive } from 'react-grid-layout';
 import _ from 'lodash';
 
 // AVA 图表
-// import { AChart } from '@/component/chart/ava';
+import { AChart as AutoChart } from '@/component/chart/ava';
 
-import { AChart as GChart } from '@/component/chart/g2plot';
+// g2 plot 原生
+// import { AChart  as AutoChart  } from '@/component/chart/g2plot';
+
 import { CloseOutlined } from '@ant-design/icons';
 
 import 'react-resizable/css/styles.css';
@@ -66,7 +68,7 @@ export default class DragLayout extends PureComponent {
       return (
         <div key={item.i} data-grid={item}>
           <CloseOutlined className="remove" onClick={this.onRemoveItem.bind(this, i)} />
-          <GChart option={getOption(item.type)} />
+          <AutoChart option={getOption(item.type)} />
         </div>
       );
     });
@@ -103,11 +105,15 @@ export default class DragLayout extends PureComponent {
     let chartList = [
       {
         name: '柱状图',
-        type: 'PercentageStackBar',
+        type: 'GroupColumn',
       },
       {
         name: '曲线图',
         type: 'Line',
+      },
+      {
+        name: '堆叠柱形图',
+        type: 'StackColumn',
       },
     ];
     return (

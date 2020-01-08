@@ -3,6 +3,7 @@ import * as g2plot from '@antv/g2plot';
 import { useSize, useDebounce } from 'react-use';
 import theme from './theme';
 import { showDefaultOption, IAChart } from './lib';
+import { themeName } from '@/utils/setting';
 
 g2plot.registerGlobalTheme('dashboard', theme);
 
@@ -46,7 +47,7 @@ export const AChart = ({
         // animation: false,
         data,
         ...option,
-        theme: 'dashboard',
+        theme: themeName,
       } || {},
     );
 
