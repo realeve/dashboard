@@ -165,7 +165,7 @@ export default () => {
         <div
           style={{
             background: '#222e4e',
-            padding: 10,
+            // padding: 10,
             minHeight: 'calc( 100vh - 64px )',
           }}
         >
