@@ -12,3 +12,8 @@ export const showDefaultOption = chartType => {
     g2plot[chartType] && g2plot[chartType].getDefaultOptions(),
   );
 };
+
+export const getNonce = () =>
+  Math.random()
+    .toString(36)
+    .slice(2, 11);

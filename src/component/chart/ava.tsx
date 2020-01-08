@@ -101,7 +101,6 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
     autoChart(instance.current, data, getDefaultConfig(config)).then(chart => {
       _plot = chart;
       setPlot(_plot);
-      console.log(plot);
     });
     return () => {
       if (!_plot) {
