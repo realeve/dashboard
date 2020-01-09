@@ -14,7 +14,7 @@ export class EmptyContent {
     this.rendered = true;
     this.content.innerHTML = `
       <div style="margin-bottom: 16px;">
-        <img src="https://gw.alipayobjects.com/zos/basement_prod/9a59280d-8f23-4234-b5cf-02956a91b6ff.svg" />
+        <img src="/img/no-data.svg" />
       </div>
       <div>暂无数据</div>
     `;

@@ -4,11 +4,10 @@ import { WidthProvider, Responsive } from 'react-grid-layout';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
 // AVA 图表
-import { AChart as AutoChart } from '@/component/chart/ava';
+import GridItem from '@/component/chart/chart';
 import * as lib from '@/utils/lib';
 
-// g2 plot 原生
-// import { AChart  as AutoChart  } from '@/component/chart/g2plot';
+import { saveLayout, loadLayout, saveToLS } from './lib';
 
 import {
   CloseOutlined,
@@ -20,7 +19,6 @@ import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import './index.less';
 import { getNonce } from '@/component/chart/lib';
-import getOption from './option';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const { Header, Content } = Layout;
@@ -38,62 +36,8 @@ let layoutCfg = {
   rowHeight: 150,
 };
 
-const getFromLS = key => {
-  let ls = {};
-  if (global.localStorage) {
-    ls = JSON.parse(global.localStorage.getItem(key) || '{}');
-  }
-  return ls['_' + key];
-};
-
-const saveToLS = (key, value) => {
-  if (global.localStorage) {
-    global.localStorage.setItem(
-      key,
-      JSON.stringify({
-        ['_' + key]: value,
-      }),
-    );
-  }
-};
-
-const saveLayout = state => {
-  if (state.widgets.length === 0) {
-    return {
-      layouts: {
-        lg: [],
-      },
-    };
-  }
-  let layout = [];
-  state.layouts.lg.forEach(({ h, i, w, x, y }) => {
-    let obj = { h, i, w, x, y };
-    let item = R.find(item => item.i === i)(state.widgets);
-    if (item) {
-      layout.push({
-        type: item.type,
-        ...obj,
-      });
-    }
-  });
-  return layout;
-};
-const loadLayout = (widgets = getFromLS('dashboard')) => {
-  if (!widgets) {
-    return {
-      layouts: {
-        lg: [],
-      },
-      widgets: [],
-    };
-  }
-  let lg = R.map(({ type, ...item }) => item)(widgets);
-  return {
-    layouts: { lg },
-    widgets,
-  };
-};
 const maxCols = 12;
+
 let chartList = [
   {
     name: '柱状图',
@@ -106,6 +50,10 @@ let chartList = [
   {
     name: '堆叠柱形图',
     type: 'StackColumn',
+  },
+  {
+    name: '占位区域',
+    type: '',
   },
 ];
 
@@ -178,7 +126,7 @@ export default () => {
             {state.widgets.map(({ i: key, type, ...grid }, idx) => (
               <div data-grid={grid} key={key}>
                 <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
-                <AutoChart option={getOption(type)} />
+                <GridItem type={type} />
               </div>
             ))}
           </ResponsiveReactGridLayout>

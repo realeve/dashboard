@@ -12,7 +12,7 @@ interface Cache {
 
 const CALLBACKS: Map<string, Cache> = new Map();
 
-window.addEventListener('message', (e) => {
+window.addEventListener('message', e => {
   if (e.data && e.data.type === MOCK_CHART) {
     const { id, error, result } = e.data;
     const cache = CALLBACKS.get(id);
@@ -55,7 +55,7 @@ export class MockPanel {
     trigger.className = `${CLASS_PREFIX}mock_guide`;
     trigger.innerHTML = `
       <div style="margin-bottom: 16px;">
-        <img src="https://gw.alipayobjects.com/zos/basement_prod/9a59280d-8f23-4234-b5cf-02956a91b6ff.svg" />
+        <img src="/img/no-data.svg" />
       </div>
       <div>暂无数据</div>
       <div class="${CLASS_PREFIX}mock_guide_button">初始化</div>

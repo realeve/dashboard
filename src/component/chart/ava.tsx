@@ -95,8 +95,11 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
         }
       : option || {};
 
-    let chartType = option.config.type;
-    showDefaultOption(chartType);
+    if (option.config && option.config.type) {
+      let chartType = option.config.type;
+      showDefaultOption(chartType);
+    }
+
     let _plot = null;
     autoChart(instance.current, data, getDefaultConfig(config)).then(chart => {
       _plot = chart;
@@ -119,7 +122,7 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
   }, [data]);
 
   useEffect(() => {
-    if (!plot) {
+    if (!plot || !option.config) {
       return;
     }
     plot.updateConfig(option.config.configs);

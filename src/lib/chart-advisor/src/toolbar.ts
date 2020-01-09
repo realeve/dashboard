@@ -24,7 +24,7 @@ function getAdvicesHtml(advices: Advice[]) {
 
 const TOOLBAR_HTML = `
 <div data-id="chart-type-btn" class="${CLASS_PREFIX}chart_type_btn">
-  <img src="https://gw.alipayobjects.com/zos/basement_prod/4530bc52-9f00-46f8-afac-3c438ed1337a.svg" />
+  <img src="/img/toolbar.svg" />
 </div>
 <div data-id="advices" class="${CLASS_PREFIX}advice_container"></div>
 `;
@@ -74,7 +74,8 @@ export class Toolbar {
       if (e && e.target) {
         const target = e.target as HTMLElement;
         if (target.getAttribute('data-id') === 'chart-type-btn') {
-          advicesContainer.style.display = getElementDispay(advicesContainer) === 'none' ? 'block' : 'none';
+          advicesContainer.style.display =
+            getElementDispay(advicesContainer) === 'none' ? 'block' : 'none';
         } else {
           const dataIndex = target.getAttribute('data-index');
           if (dataIndex) {
