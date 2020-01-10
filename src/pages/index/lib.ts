@@ -32,7 +32,7 @@ export const saveLayout = state => {
     let item = R.find(item => item.i === i)(state.widgets);
     if (item) {
       layout.push({
-        type: item.type,
+        config: item.config,
         ...obj,
       });
     }

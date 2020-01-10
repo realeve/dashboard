@@ -1,7 +1,9 @@
 import * as default_1 from '@antv/g2plot/lib/theme/default';
+
 export default {
   backgroundStyle: {
-    fill: '#222e4e',
+    // fill: '#222e4e',
+    fill: 'rgba(0,0,0,0)',
   },
   defaultColor: '#5B8FF9',
   width: 400,
@@ -12,8 +14,8 @@ export default {
     padding: [12, 24, 12, 24],
     fontFamily: 'PingFang SC',
     fontSize: 18,
-    fontWeight: '200',
-    fill: 'rgba(255,255,255,0.65)',
+    fontWeight: '400',
+    fill: '#54dcf2',
     stroke: 'rgba(0,0,0,0.95)',
     textAlign: 'left',
     textBaseline: 'top',
@@ -24,7 +26,7 @@ export default {
     padding: [10, 24, default_1.DESCRIPTION_BOTTOM_MARGIN, 24],
     fontFamily: 'PingFang SC',
     fontSize: 12,
-    fill: 'rgba(255, 255, 255, 0.65)',
+    fill: '#54dcf2',
     stroke: 'rgba(0,0,0,0.95)',
     textAlign: 'left',
     textBaseline: 'top',

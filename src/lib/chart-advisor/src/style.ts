@@ -148,8 +148,13 @@ const ADVISOR_STYLE = `
     text-align: center;
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); 
   }
+  
+  .${CLASS_PREFIX}no_data_content, .${CLASS_PREFIX}mock_guide img {
+    max-width:100px;
+  }
+  
   .${CLASS_PREFIX}mock_guide_button {
     margin-top: 22px;
     border-radius: 3px;

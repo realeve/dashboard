@@ -62,7 +62,12 @@ const getDefaultConfig = option => {
   };
 };
 
-export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) => {
+export const AChart = ({
+  option: { data = [], onMockChange, ...option },
+  ...props
+}: {
+  option: IAChart;
+}) => {
   const instance = useRef(null);
   const [plot, setPlot] = useState(null);
 
@@ -79,7 +84,7 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
     () => {
       setSize({ width, height });
     },
-    300,
+    500,
     [width, height],
   );
 
@@ -101,7 +106,7 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
     }
 
     let _plot = null;
-    autoChart(instance.current, data, getDefaultConfig(config)).then(chart => {
+    autoChart(instance.current, data, { onMockChange, ...getDefaultConfig(config) }).then(chart => {
       _plot = chart;
       setPlot(_plot);
     });
@@ -113,21 +118,24 @@ export const AChart = ({ option: { data = [], ...option }, ...props }: IAChart) 
     };
   }, []);
 
-  useEffect(() => {
-    if (!plot) {
-      return;
-    }
-    plot.changeData(data);
-    plot.render();
-  }, [data]);
+  // useEffect(() => {
+  //   if (!plot) {
+  //     return;
+  //   }
+  //   plot.changeData(data);
+  //   plot.render();
+  //   console.log('data 变更');
+  // }, [data]);
 
   useEffect(() => {
     if (!plot || !option.config) {
       return;
     }
-    plot.updateConfig(option.config.configs);
+
+    plot.updateConfig(option.config);
     plot.render();
-  }, [option]);
+    console.log('option 变更');
+  }, [JSON.stringify(option)]);
 
   useEffect(() => {
     if (!plot || !size.width) {

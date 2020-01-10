@@ -56,6 +56,11 @@ export interface AutoChartOptions extends AdvisorOptions {
    * 无数据的渲染逻辑
    */
   noDataContent?: NoDataRenderer;
+
+  /**
+   * 无数据场景,Mock完成之后触发
+   */
+  onMockChange?: (result: { config?: any; data?: any[] }) => void;
 }
 
 export { AdvisorOptions };
@@ -64,7 +69,7 @@ export class AutoChart {
   static async create(
     container: HTMLElement,
     data: any[] | Promise<any[]>,
-    options?: AutoChartOptions
+    options?: AutoChartOptions,
   ): Promise<AutoChart> {
     let dataP: any[];
     if (Array.isArray(data)) {
@@ -102,7 +107,7 @@ export class AutoChart {
   private data!: any[];
   private options: AutoChartOptions = {};
   private toolbar?: Toolbar;
-  private configPanel?: ConfigPanel; 
+  private configPanel?: ConfigPanel;
 
   private noDataContent?: NoDataRenderer;
   private mockPanel?: MockPanel;
@@ -115,7 +120,7 @@ export class AutoChart {
     this.options = options || {};
     const { fields, development, noDataContent } = this.options;
     this.noDataContent = noDataContent || new EmptyContent(this.container);
-    this.data = fields && fields.length > 0 ? data.map((item) => pick(item, fields)) : data;
+    this.data = fields && fields.length > 0 ? data.map(item => pick(item, fields)) : data;
     this.development =
       (development === undefined && process.env.NODE_ENV === 'development') ||
       (development !== undefined && development === true);
@@ -126,7 +131,7 @@ export class AutoChart {
   async render() {
     const { options, container, development, noDataContent } = this;
     const { title, theme, toolbar, description, purpose, preferences } = options;
-    let { config } = options;
+    let { config, onMockChange } = options;
     if (this.data && this.data.length === 0) {
       if (development) {
         // 如果是在开发模式下 等待用户mock的数据和配置
@@ -136,6 +141,7 @@ export class AutoChart {
         const result = await mockPanel.ps;
         this.data = result.data;
         config = result.config;
+        onMockChange && onMockChange(result);
         this.mockPanel.destroy();
       } else {
         noDataContent!.render(container);
@@ -158,7 +164,7 @@ export class AutoChart {
         this.data,
         { title, theme, description, purpose, preferences },
         oldAdvices,
-        oldIndex
+        oldIndex,
       );
 
       if (toolbar) {
@@ -167,7 +173,7 @@ export class AutoChart {
     }
 
     if (development) {
-      this.configPanel = new ConfigPanel(this.plot, this.isMocked); 
+      this.configPanel = new ConfigPanel(this.plot, this.isMocked);
     }
   }
 

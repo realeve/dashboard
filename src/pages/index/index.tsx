@@ -20,21 +20,23 @@ import 'react-grid-layout/css/styles.css';
 import './index.less';
 import { getNonce } from '@/component/chart/lib';
 
+import styles from './index.less';
+import classNames from 'classnames';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const { Header, Content } = Layout;
 
-const headerStyle: React.CSSProperties = {
-  background: '#222e4e',
-  zIndex: 1,
-  bottom: 0,
-  width: '100%',
-  padding: '0 20px',
-};
-
+/**
+ * https://www.npmjs.com/package/react-grid-layout
+ * 初始化配置项
+ */
+let initHeight = 100;
 let layoutCfg = {
   cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-  rowHeight: 150,
+  rowHeight: 50,
+  margin: [15, 15],
+  containerPadding: [15, 15],
 };
+let zoom = initHeight / layoutCfg.rowHeight;
 
 const maxCols = 12;
 
@@ -57,7 +59,7 @@ let chartList = [
   },
   {
     name: '占位区域',
-    type: '',
+    type: 'blank',
   },
 ];
 
@@ -73,19 +75,19 @@ export default () => {
   //   setState(config);
   // }, []);
 
-  const addChart = type => {
+  const addChart = (widgetType, type) => {
     const addItem = {
       x: (state.widgets.length * 3) % maxCols,
       y: Infinity, // puts it at the bottom
       w: 3,
-      h: 2,
+      h: 2 * zoom,
       i: getNonce(),
     };
     let widgets = [
       ...state.widgets,
       {
         ...addItem,
-        type,
+        config: { widgetType, type },
       },
     ];
     setState({
@@ -108,45 +110,72 @@ export default () => {
     let layout = saveLayout(state);
     saveToLS('dashboard', layout);
     lib.saveDashboard(layout);
-    console.log(state);
+  };
+
+  // mock完毕
+  const onMockChange = ({ config, data }, idx) => {
+    let widgets = R.clone(state.widgets);
+    let item = R.nth(idx)(widgets);
+
+    config.configs = { theme: 'dashboard', padding: 'auto', ...(config.configs || {}) };
+    item.config = {
+      widgetType: 'autochart',
+      config,
+      data,
+    };
+    R.update(idx, item)(widgets);
+    setState({ widgets });
   };
 
   return (
     <>
-      <Content>
-        <div
-          style={{
-            background: '#222e4e',
-            // padding: 10,
-            minHeight: 'calc( 100vh - 64px )',
-          }}
+      <Content className={styles.theme1}>
+        <div className={styles.header}>某业务仪表盘</div>
+        <ResponsiveReactGridLayout
+          className={classNames('layout', styles.canvas)}
+          {...layoutCfg}
+          layouts={state.layouts}
+          onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
         >
-          <ResponsiveReactGridLayout
-            className="layout"
-            {...layoutCfg}
-            layouts={state.layouts}
-            onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
-          >
-            {state.widgets.map(({ i: key, type, ...grid }, idx) => (
-              <div data-grid={grid} key={key}>
-                <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
-                <GridItem type={type} />
-              </div>
-            ))}
-          </ResponsiveReactGridLayout>
-        </div>
+          {state.widgets.map(({ i: key, config, ...grid }, idx) => (
+            <div data-grid={grid} key={key}>
+              <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
+              {config.type === '_blank' ? null : (
+                <>
+                  <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />
+                  <span className="top-left border-span" />
+                  <span className="top-right border-span" />
+                  <span className="bottom-left border-span" />
+                  <span className="bottom-right border-span" />
+                </>
+              )}
+            </div>
+          ))}
+        </ResponsiveReactGridLayout>
+        <div className={styles.footer} />
       </Content>
-      <Header style={headerStyle}>
+      <Header className={styles.config}>
         {chartList.map(item => (
           <Button
             key={item.type}
-            type="primary"
             style={{ marginRight: 7 }}
-            onClick={() => addChart(item.type)}
+            onClick={() => addChart('chart', item.type)}
           >
             添加{item.name}
           </Button>
         ))}
+        <Button
+          type="primary"
+          style={{ marginRight: 7, marginLeft: 15 }}
+          onClick={() => {
+            setState({
+              layouts: {},
+              widgets: [],
+            });
+          }}
+        >
+          清空
+        </Button>
         <Button style={{ marginRight: 7, marginLeft: 15 }} onClick={save}>
           <VerticalAlignBottomOutlined /> 存储配置
         </Button>

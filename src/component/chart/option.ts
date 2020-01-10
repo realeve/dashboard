@@ -1,3 +1,4 @@
+import { IAChart } from './lib';
 const getLineOption = () => {
   const data = [
     {
@@ -347,7 +348,7 @@ const getRadarOption = () => {
   };
 };
 
-export default type => {
+const getOption: (type: string) => IAChart = type => {
   switch (type) {
     case 'Line':
       return getLineOption();
@@ -363,3 +364,5 @@ export default type => {
       };
   }
 };
+
+export default getOption;
