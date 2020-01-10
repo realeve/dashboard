@@ -265,6 +265,87 @@ const getStackColumnOption = () => {
     },
   };
 };
+const getRadarOption = () => {
+  return {
+    data: [
+      {
+        type: '防御',
+        name: '孙尚香',
+        value: 5,
+      },
+      {
+        type: '防御',
+        name: '黄忠',
+        value: 49,
+      },
+      {
+        type: '攻击',
+        name: '孙尚香',
+        value: 6,
+      },
+      {
+        type: '攻击',
+        name: '黄忠',
+        value: 44,
+      },
+      {
+        type: '速度',
+        name: '孙尚香',
+        value: 61,
+      },
+      {
+        type: '速度',
+        name: '黄忠',
+        value: 33,
+      },
+      {
+        type: '穿透',
+        name: '孙尚香',
+        value: 55,
+      },
+      {
+        type: '穿透',
+        name: '黄忠',
+        value: 75,
+      },
+      {
+        type: '护甲',
+        name: '孙尚香',
+        value: 68,
+      },
+      {
+        type: '护甲',
+        name: '黄忠',
+        value: 4,
+      },
+      {
+        type: '暴击',
+        name: '孙尚香',
+        value: 45,
+      },
+      {
+        type: '暴击',
+        name: '黄忠',
+        value: 75,
+      },
+    ],
+    config: {
+      configs: {
+        angleField: 'type',
+        radiusField: 'value',
+        seriesField: 'name',
+        angleAxis: {
+          label: {
+            textStyle: {
+              fill: '#fff',
+            },
+          },
+        },
+      },
+      type: 'Radar',
+    },
+  };
+};
 
 export default type => {
   switch (type) {
@@ -274,6 +355,8 @@ export default type => {
       return getGroupBarOption();
     case 'StackColumn':
       return getStackColumnOption();
+    case 'Radar':
+      return getRadarOption();
     default:
       return {
         data: [],

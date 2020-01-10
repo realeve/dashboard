@@ -52,6 +52,10 @@ let chartList = [
     type: 'StackColumn',
   },
   {
+    name: '雷达图',
+    type: 'Radar',
+  },
+  {
     name: '占位区域',
     type: '',
   },

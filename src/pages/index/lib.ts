@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 export const getFromLS = key => {
   let ls = {};
   if (global.localStorage) {
