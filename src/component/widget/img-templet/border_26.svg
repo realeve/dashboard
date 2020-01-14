@@ -1,0 +1,41 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg" width="680" height="240">
+    <defs>
+        <linearGradient id="border-box-9-gradient-1579014819483" x1="30.2044%" y1="0%" x2="69.7956%" y2="100%">
+            <animate attributeName="x1" values="0%;100%;0%" dur="10s" begin="0s" repeatCount="indefinite"></animate>
+            <animate attributeName="x2" values="100%;0%;100%" dur="10s" begin="0s" repeatCount="indefinite"></animate>
+            <stop offset="0%" stop-color="#11eefd">
+                <animate attributeName="stop-color" values="#11eefd;#0078d2;#11eefd" dur="10s" begin="0s" repeatCount="indefinite"></animate>
+            </stop>
+            <stop offset="100%" stop-color="#0078d2">
+                <animate attributeName="stop-color" values="#0078d2;#11eefd;#0078d2" dur="10s" begin="0s" repeatCount="indefinite"></animate>
+            </stop>
+        </linearGradient>
+        <mask id="border-box-9-mask-1579014819483">
+            <polyline stroke="#fff" stroke-width="3" fill="transparent" points="8, 96 8, 3, 279, 3"></polyline>
+            <polyline fill="#fff" points="8, 36 8, 3, 75, 3
+                68, 8 14, 8 14, 29
+              "></polyline>
+            <polyline stroke="#fff" stroke-width="3" fill="transparent" points="340, 3 677, 3, 677, 60"></polyline>
+            <polyline fill="#fff" points="
+                353.6, 3 394.4, 3
+                387.4, 9 360.6, 9
+              "></polyline>
+            <polyline fill="#fff" points="
+                612, 3 677, 3 677, 24
+                671, 17 671, 9 619, 9
+              "></polyline>
+            <polyline stroke="#fff" stroke-width="3" fill="transparent" points="8, 120 8, 237 211, 237"></polyline>
+            <polyline fill="#fff" points="
+                8, 132 8, 168
+                2, 161 2, 139
+              "></polyline>
+            <polyline stroke="#fff" stroke-width="3" fill="transparent" points="237.99999999999997, 237 677, 237 677, 84"></polyline>
+            <polyline fill="#fff" points="
+                625.6, 237 677, 237 677, 192
+                671, 199 671, 231 632.6, 231
+              "></polyline>
+        </mask>
+    </defs>
+    <rect x="0" y="0" width="680" height="240" fill="url(#border-box-9-gradient-1579014819483)" mask="url(#border-box-9-mask-1579014819483)"></rect>
+</svg>

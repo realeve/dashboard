@@ -18,8 +18,8 @@ export const saveToLS = (key, value) => {
   }
 };
 
-export const saveLayout = state => {
-  if (state.widgets.length === 0) {
+export const saveLayout = ({ widgets, layouts, ...state }) => {
+  if (widgets.length === 0) {
     return {
       layouts: {
         lg: [],
@@ -27,9 +27,9 @@ export const saveLayout = state => {
     };
   }
   let layout = [];
-  state.layouts.lg.forEach(({ h, i, w, x, y }) => {
+  layouts.lg.forEach(({ h, i, w, x, y }) => {
     let obj = { h, i, w, x, y };
-    let item = R.find(item => item.i === i)(state.widgets);
+    let item = R.find(item => item.i === i)(widgets);
     if (item) {
       layout.push({
         config: item.config,
@@ -37,10 +37,10 @@ export const saveLayout = state => {
       });
     }
   });
-  return layout;
+  return { layout, ...state };
 };
-export const loadLayout = (widgets = getFromLS('dashboard')) => {
-  if (!widgets) {
+export const loadLayout = (state = getFromLS('dashboard')) => {
+  if (!state) {
     return {
       layouts: {
         lg: [],
@@ -48,9 +48,13 @@ export const loadLayout = (widgets = getFromLS('dashboard')) => {
       widgets: [],
     };
   }
+
+  let { layout: widgets, ...props } = state;
+
   let lg = R.map(({ type, ...item }) => item)(widgets);
   return {
     layouts: { lg },
     widgets,
+    ...props,
   };
 };

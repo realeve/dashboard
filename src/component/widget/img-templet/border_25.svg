@@ -1,0 +1,39 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"  width="680" height="240">
+    <defs>
+        <filter id="borderr-box-12-filterId-1579014819504" height="150%" width="150%" x="-25%" y="-25%">
+            <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="thicken"></feMorphology>
+            <feGaussianBlur in="thicken" stdDeviation="2" result="blurred"></feGaussianBlur>
+            <feFlood flood-color="rgba(124,231,253,0.7)" result="glowColor">
+                <animate attributeName="flood-color" values="
+                rgba(124,231,253,0.7);
+                rgba(124,231,253,0.3);
+                rgba(124,231,253,0.7);
+              " dur="3s" begin="0s" repeatCount="indefinite"></animate>
+            </feFlood>
+            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlowColored"></feComposite>
+            <feMerge>
+                <feMergeNode in="softGlowColored"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <path fill="transparent" stroke-width="2" stroke="#2e6099" d="
+            M15 5 L 665 5 Q 675 5, 675 15
+            L 675 225 Q 675 235, 665 235
+            L 15, 235 Q 5 235 5 225 L 5 15
+            Q 5 5 15 5
+          "></path>
+    <path stroke-width="2" fill="transparent" stroke-linecap="round" filter="url(#borderr-box-12-filterId-1579014819504)" stroke="#7ce7fd" d="M 20 5 L 15 5 Q 5 5 5 15 L 5 20"></path>
+    <path stroke-width="2" fill="transparent" stroke-linecap="round" filter="url(#borderr-box-12-filterId-1579014819504)" stroke="#7ce7fd" d="M 660 5 L 665 5 Q 675 5 675 15 L 675 20"></path>
+    <path stroke-width="2" fill="transparent" stroke-linecap="round" filter="url(#borderr-box-12-filterId-1579014819504)" stroke="#7ce7fd" d="
+          M 660 235 L 665 235
+          Q 675 235 675 225
+          L 675 220
+        "></path>
+    <path stroke-width="2" fill="transparent" stroke-linecap="round" filter="url(#borderr-box-12-filterId-1579014819504)" stroke="#7ce7fd" d="
+          M 20 235 L 15 235
+          Q 5 235 5 225
+          L 5 220
+        "></path>
+</svg>

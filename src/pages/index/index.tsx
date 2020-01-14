@@ -19,6 +19,7 @@ import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import './index.less';
 import { getNonce } from '@/component/chart/lib';
+import { ProgressBar, BorderItem } from '@/component/widget';
 
 import styles from './index.less';
 import classNames from 'classnames';
@@ -67,6 +68,7 @@ export default () => {
   const [state, setState] = useSetState({
     layouts: {},
     widgets: [],
+    borderName: '边框29',
   });
 
   // 改由文件加载
@@ -139,16 +141,20 @@ export default () => {
         >
           {state.widgets.map(({ i: key, config, ...grid }, idx) => (
             <div data-grid={grid} key={key}>
-              <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
-              {config.type === '_blank' ? null : (
-                <>
+              <BorderItem name={state.borderName}>
+                <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
+                {config.type === '_blank' ? null : (
+                  // <>
+                  //   <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />
+                  //   <span className="top-left border-span" />
+                  //   <span className="top-right border-span" />
+                  //   <span className="bottom-left border-span" />
+                  //   <span className="bottom-right border-span" />
+                  // </>
                   <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />
-                  <span className="top-left border-span" />
-                  <span className="top-right border-span" />
-                  <span className="bottom-left border-span" />
-                  <span className="bottom-right border-span" />
-                </>
-              )}
+                )}
+                {/* <ProgressBar /> */}
+              </BorderItem>
             </div>
           ))}
         </ResponsiveReactGridLayout>

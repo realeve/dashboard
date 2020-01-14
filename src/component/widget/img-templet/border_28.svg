@@ -1,0 +1,19 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg" width="680" height="240">
+    <circle fill="gray" cx="5" cy="5" r="2"></circle>
+    <circle fill="gray" cx="675" cy="5" r="2"></circle>
+    <circle fill="gray" cx="675" cy="235" r="2"></circle>
+    <circle fill="gray" cx="5" cy="235" r="2"></circle>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="10, 4 670, 4"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="10, 236 670, 236"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="5, 70 5, 170"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="675, 70 675, 170"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="3, 10, 3, 50"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="7, 30 7, 80"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="677, 10 677, 50"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="673, 30 673, 80"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="3, 230 3, 190"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="7, 210 7, 160"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="677, 230 677, 190"></polyline>
+    <polyline stroke="rgba(255, 255, 255, 0.35)" points="673, 210 673, 160"></polyline>
+</svg>

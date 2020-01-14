@@ -1,0 +1,128 @@
+.chartItem {
+  //   background-image: linear-gradient(45deg, rgba(61, 76, 72, 0.3) 0%, rgba(0, 195, 255, 0.3) 100%);
+
+  .title {
+    width: 138px;
+    height: 70px;
+    font-family: 'Microsoft Yahei', Arial, sans-serif;
+    font-size: 22px;
+    color: rgb(154, 168, 212);
+    font-weight: normal;
+    justify-content: center;
+    text-align: left;
+  }
+  .progress-bar-warpper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .progress-bar {
+      width: 90%;
+      position: relative;
+      border-radius: 50%;
+      height: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+
+      &-bar {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        border-radius: 10px;
+        background: linear-gradient(to right, #24cbff 30%, #7760f6 100%);
+        width: 0;
+        transition: width 0.8s;
+      }
+
+      &-bar-light {
+        width: 6px;
+        height: 6px;
+        border-radius: 6px;
+        margin: 2px;
+        background: #fff;
+      }
+
+      &-tip {
+        position: absolute;
+        line-height: 1.2;
+        width: 100%;
+        text-align: center;
+        font-family: 'Microsoft Yahei';
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        top: -30.8px;
+        margin-left: -50%;
+        left: 0;
+        transition: left 0.8s;
+      }
+
+      &-triangle {
+        @triangleSize: 5px;
+        position: absolute;
+        top: 12px;
+        border-bottom: @triangleSize solid #fff;
+        border-left: @triangleSize solid transparent;
+        border-right: @triangleSize solid transparent;
+        left: 0;
+        transition: left 0.8s;
+      }
+
+      //   &-round {
+      //     position: relative;
+      //     width: 90%;
+      //     padding-bottom: 90%;
+
+      //     &-tip {
+      //       position: absolute;
+      //       left: 0;
+      //       right: 0;
+      //       top: 0;
+      //       bottom: 0;
+      //       display: flex;
+      //       align-items: center;
+      //       justify-content: center;
+      //     }
+      //     &-wrapper {
+      //       width: 50%;
+      //       height: 100%;
+      //       position: absolute;
+      //       top: 0;
+      //       .circle {
+      //         width: 200%;
+      //         height: 100%;
+      //         border: 20px solid transparent;
+      //         border-radius: 50%;
+      //         position: absolute;
+      //         top: 0;
+      //       }
+      //       .circle.right {
+      //         right: 0;
+      //         transform: rotate(45deg);
+      //         border-width: 10px;
+      //         border-style: solid;
+      //         border-color: #24cbff #24cbff rgba(204, 204, 204, 0.2) rgba(204, 204, 204, 0.2);
+      //       }
+
+      //       .circle.left {
+      //         left: 0;
+      //         transform: rotate(-54.18deg);
+      //         border-width: 10px;
+      //         border-style: solid;
+      //         border-color: rgba(204, 204, 204, 0.2) rgba(204, 204, 204, 0.2) #7760f6 #24cbff;
+      //       }
+      //     }
+      //     &-wrapper.right {
+      //       right: 1px;
+      //     }
+
+      //     &-wrapper.left {
+      //       left: 0;
+      //     }
+      //   }
+    }
+  }
+}
+
