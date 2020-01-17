@@ -256,6 +256,10 @@ const getStackColumnOption = () => {
     xField: 'x',
     yField: 'y',
     stackField: 'serie',
+    connectedArea: {
+      visible: true,
+      triggerOn: false,
+    },
   };
 
   return {
