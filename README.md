@@ -1,5 +1,5 @@
 # dashboard
-dashboard manager
+[dashboard manager](https://github.com/realeve/dashboard)
 
 ## chartcube
 [http://localhost:8000/chartcube](http://localhost:8000/chartcube)
@@ -56,7 +56,9 @@ A——B——C
 
 需要了解的一些前置知识：
 阿里 g2 plot:[https://g2plot.antv.vision/zh/examples/gallery](https://g2plot.antv.vision/zh/examples/gallery)
+
 echarts: [https://www.echartsjs.com/examples/zh/index.html](https://www.echartsjs.com/examples/zh/index.html)
+
 chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/) 
 
 阿里 ava：[https://github.com/antvis/ava](https://github.com/antvis/ava)
@@ -94,6 +96,8 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [ ] header设置
 - [ ] footer设置
 
+--- 
+
 - [ ] 图表项
 - [ ] step条
 - [ ] 边框
@@ -105,10 +109,14 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [ ] 实时预览
 - [ ] 存储图表项内容
 
+--- 
+
 - [ ] dashboard
 - [ ] 图表项配置/初始化参考AVA做实现
 - [ ] 支持复制图表项配置
 - [ ] 支持粘贴图表项配置，实时生效
+
+---  
 
 - [ ] widgets
 - [ ] 翻牌器
@@ -116,3 +124,8 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [ ] g2 plot中 柱状图/曲线图
 - [ ] echarts中借鉴借鉴的图表适配
 - [ ] 主题配色提取
+
+
+---
+
+- [ ] 单元测试
