@@ -68,6 +68,15 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 
 可供参考的一些线上dashboard:
 
+### dataV
+
+[https://datav.aliyuncs.com/share/f3e3cdc01dda91ebe90a81e4e475a4a6](https://datav.aliyuncs.com/share/f3e3cdc01dda91ebe90a81e4e475a4a6)
+
+[https://datav.aliyuncs.com/share/939eeac006c02ee5525469e2877fda04](https://datav.aliyuncs.com/share/939eeac006c02ee5525469e2877fda04)
+
+[https://datav.aliyuncs.com/share/782bf1b94d6b56e0f3c671f21e2528de](https://datav.aliyuncs.com/share/782bf1b94d6b56e0f3c671f21e2528de)
+
+
 ### 百度sugar
 [https://sugar.aipage.com/dashboard/5f81db321ff3e080e9f09168c923854f](https://sugar.aipage.com/dashboard/5f81db321ff3e080e9f09168c923854f)
 

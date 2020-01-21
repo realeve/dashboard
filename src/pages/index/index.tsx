@@ -61,6 +61,10 @@ let chartList = [
     name: '进度条',
     type: 'progress',
   },
+  {
+    name: '滚动表单',
+    type: 'scrollBoard',
+  },
 ];
 
 export default () => {

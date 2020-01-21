@@ -3,3 +3,4 @@ const { borders, pics, backgrounds, reportBackground } = assets;
 export { borders, pics, backgrounds, reportBackground };
 export { default as BorderItem, borderNames } from './border';
 export { default as ProgressBar } from './progressbar';
+export { default as ScrollBoard } from './ScrollBoard';

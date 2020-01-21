@@ -1,8 +1,9 @@
 import { IConfig } from 'umi-types';
-
+import theme from './config/theme';
 // ref: https://umijs.org/config/
 const config: IConfig = {
   treeShaking: true,
+  theme,
   // routes: [
   //   {
   //     path: '/',
