@@ -69,6 +69,10 @@ let chartList = [
     name: '排名表',
     type: 'rankingBoard',
   },
+  {
+    name: '翻牌器',
+    type: 'flipboard',
+  },
 ];
 
 export default () => {
