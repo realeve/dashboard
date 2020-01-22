@@ -100,7 +100,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
       case '_blank':
         return null;
       case 'flipboard':
-        return <FlipBoard title="某指标" value={12336} prefix={null} />;
+        return <FlipBoard title="某指标" value={12336.354} precision={2} suffix="元" />;
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

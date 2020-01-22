@@ -1,14 +1,26 @@
 @import '../../../style/theme.less';
 .flipBoard {
-  :global {
-    .ant-statistic {
-      &-title {
-        color: @textColor;
-        font-size: 18px;
-      }
-      &-content-value-decimal {
-        font-size: 18px;
-      }
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  .item {
+    color: #fff;
+    font-family: Acens;
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding: 0px 0.2em;
+    box-sizing: content-box;
+    text-align: center;
+  }
+  span {
+    .item;
+    color: @textColor;
+    font-size: 20px;
+  }
+  .value {
+    .item;
+    background-color: rgb(15, 57, 107);
   }
 }
