@@ -7,6 +7,8 @@ import { useAutoResize, co } from '@/utils/useAutoResize';
 
 import styles from './index.less';
 
+export const emojiList = ['🥇', '🥈', '🥉'];
+
 const defaultConfig = {
   /**
    * @description Board header
@@ -109,9 +111,9 @@ function calcRows({ data, index, headerBGC, rowNum }) {
       row = [...row];
 
       const indexTag = `<div class="${styles.index}" style="background-color: ${
-        i < 3 ? '#f14646' : headerBGC
+        i < 3 ? 'transparent' : headerBGC
       };">
-      ${i + 1}
+      ${i < 3 ? emojiList[i] : i + 1}
     </div>`;
 
       row.unshift(indexTag);

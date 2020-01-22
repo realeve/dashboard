@@ -65,6 +65,10 @@ let chartList = [
     name: '滚动表单',
     type: 'scrollBoard',
   },
+  {
+    name: '排名表',
+    type: 'rankingBoard',
+  },
 ];
 
 export default () => {

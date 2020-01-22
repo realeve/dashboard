@@ -6,7 +6,9 @@ import classnames from 'classnames';
 
 import { useAutoResize, co } from '@/utils/useAutoResize';
 
-import './index.less';
+import styles from './index.less';
+
+import { emojiList } from '../ScrollBoard';
 
 import * as R from 'ramda';
 const deepClone = R.clone,
@@ -30,7 +32,7 @@ const defaultConfig = {
    * @type {Number}
    * @default waitTime = 2000
    */
-  waitTime: 2000,
+  waitTime: 4000,
   /**
    * @description Carousel type
    * @type {String}
@@ -209,25 +211,29 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     }
   }, [width, height, domRef.current]);
 
-  const classNames = useMemo(() => classnames('dv-scroll-ranking-board', className), [className]);
+  const classNames = useMemo(() => classnames(styles['dv-scroll-ranking-board'], className), [
+    className,
+  ]);
 
   return (
     <div className={classNames} style={style} ref={domRef}>
       {rows.map((item, i) => (
         <div
-          className="row-item"
+          className={styles['row-item']}
           key={item.toString() + item.scroll}
           style={{ height: `${heights[i]}px` }}
         >
-          <div className="ranking-info">
-            <div className="rank">No.{item.ranking}</div>
-            <div className="info-name">{item.name}</div>
-            <div className="ranking-value">{item.value + mergedConfig.unit}</div>
+          <div className={styles['ranking-info']}>
+            <div className={styles.rank}>
+              {item.ranking <= 3 ? emojiList[item.ranking - 1] : item.ranking}
+            </div>
+            <div className={styles['info-name']}>{item.name}</div>
+            <div className={styles['info-value']}>{item.value + mergedConfig.unit}</div>
           </div>
 
-          <div className="ranking-column">
-            <div className="inside-column" style={{ width: `${item.percent}%` }}>
-              <div className="shine" />
+          <div className={styles['ranking-column']}>
+            <div className={styles['inside-column']} style={{ width: `${item.percent}%` }}>
+              <div className={styles.shine} />
             </div>
           </div>
         </div>
