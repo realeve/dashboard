@@ -8,13 +8,14 @@ export default ({
   value,
   valueColor = '#73aae5',
   prefix = <ArrowUpOutlined />,
+  precision = 0,
   ...props
 }) => {
   return (
     <Statistic
       title={title}
       value={value}
-      precision={2}
+      precision={precision}
       valueStyle={{ color: valueColor, fontSize: 36 }}
       prefix={prefix}
       className={styles.flipBoard}
