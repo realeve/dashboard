@@ -12,12 +12,14 @@ import {
   ScrollBoard,
   ScrollRankingBoard,
   FlipBoard,
+  ActiveRingChart,
 } from '@/component/widget';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
-  if (config.type === 'progress') {
+  const itemType = config.type.toLowerCase();
+  if (itemType === 'progress') {
     return <ProgressBar percent={43.3} title="指标占比" {...props} />;
-  } else if (config.type === 'scrollBoard') {
+  } else if (itemType === 'scrollboard') {
     return (
       <ScrollBoard
         config={{
@@ -42,7 +44,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         }}
       />
     );
-  } else if (config.type === 'rankingBoard') {
+  } else if (itemType === 'rankingboard') {
     return (
       <ScrollRankingBoard
         config={{
@@ -96,13 +98,47 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
   }
 
   const Detail = () => {
-    switch (config.type) {
+    switch (itemType) {
       case '_blank':
         return null;
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
+      case 'activeringchart':
+        return (
+          <ActiveRingChart
+            config={{
+              radius: '70%',
+              activeRadius: '75%',
+              data: [
+                {
+                  name: '周口',
+                  value: 55,
+                },
+                {
+                  name: '南阳',
+                  value: 120,
+                },
+                {
+                  name: '西峡',
+                  value: 78,
+                },
+                {
+                  name: '驻马店',
+                  value: 66,
+                },
+                {
+                  name: '新乡',
+                  value: 80,
+                },
+              ],
+              digitalFlopStyle: {},
+              lineWidth: 15,
+            }}
+            style={{ width: '100%', height: '100%' }}
+          />
+        );
       default:
-        return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
+        return <GridItem config={{ config }} onMockChange={result => onMockChange(result, idx)} />;
     }
   };
 

@@ -73,6 +73,10 @@ let chartList = [
     name: '翻牌器',
     type: 'flipboard',
   },
+  {
+    name: '动态环图',
+    type: 'activeRingChart',
+  },
 ];
 
 export default () => {

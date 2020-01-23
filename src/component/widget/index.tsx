@@ -6,3 +6,5 @@ export { default as ProgressBar } from './progressbar';
 export { default as ScrollBoard } from './ScrollBoard';
 export { default as ScrollRankingBoard } from './ScrollRankingBoard';
 export { default as FlipBoard } from './FlipBoard';
+
+export { default as ActiveRingChart } from './ActiveRingChart';

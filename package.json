@@ -8,6 +8,8 @@
   "dependencies": {
     "@antv/chart-advisor": "^0.1.2-alpha.19",
     "@antv/g2plot": "^0.11.21",
+    "@jiaminghi/c-render": "^0.4.3",
+    "@jiaminghi/charts": "^0.2.12",
     "@types/react-resizable": "^1.7.2",
     "antd": "^4.0.0-rc.0",
     "axios": "^0.19.1",
