@@ -14,9 +14,12 @@ import {
   FlipBoard,
   ActiveRingChart,
 } from '@/component/widget';
+import Echarts from '@/component/echarts';
+import echarts from 'echarts';
+import * as lib from './option';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
-  const itemType = config.type.toLowerCase();
+  const itemType = (config.type || '').toLowerCase();
   if (itemType === 'progress') {
     return <ProgressBar percent={43.3} title="指标占比" {...props} />;
   } else if (itemType === 'scrollboard') {
@@ -106,39 +109,36 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
       case 'activeringchart':
         return (
           <ActiveRingChart
-            config={{
-              radius: '70%',
-              activeRadius: '75%',
-              data: [
-                {
-                  name: '周口',
-                  value: 55,
-                },
-                {
-                  name: '南阳',
-                  value: 120,
-                },
-                {
-                  name: '西峡',
-                  value: 78,
-                },
-                {
-                  name: '驻马店',
-                  value: 66,
-                },
-                {
-                  name: '新乡',
-                  value: 80,
-                },
-              ],
-              digitalFlopStyle: {},
-              lineWidth: 15,
-            }}
-            style={{ width: '100%', height: '100%' }}
+            config={lib.activeRingChart([
+              {
+                name: '周口',
+                value: 55,
+              },
+              {
+                name: '南阳',
+                value: 120,
+              },
+              {
+                name: '西峡',
+                value: 78,
+              },
+              {
+                name: '驻马店',
+                value: 66,
+              },
+              {
+                name: '新乡',
+                value: 80,
+              },
+            ])}
           />
         );
+      case 'ringchart':
+        return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
+      case 'water':
+        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
       default:
-        return <GridItem config={{ config }} onMockChange={result => onMockChange(result, idx)} />;
+        return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }
   };
 

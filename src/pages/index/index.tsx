@@ -77,6 +77,14 @@ let chartList = [
     name: '动态环图',
     type: 'activeRingChart',
   },
+  {
+    name: '百分比环图',
+    type: 'RingChart',
+  },
+  {
+    name: '水球图',
+    type: 'water',
+  },
 ];
 
 export default () => {
@@ -179,6 +187,7 @@ export default () => {
             添加{item.name}
           </Button>
         ))}
+        <br />
         <Button
           type="primary"
           style={{ marginRight: 7, marginLeft: 15 }}

@@ -8,3 +8,4 @@ export { default as ScrollRankingBoard } from './ScrollRankingBoard';
 export { default as FlipBoard } from './FlipBoard';
 
 export { default as ActiveRingChart } from './ActiveRingChart';
+export { default as RingChart } from './ringChart';

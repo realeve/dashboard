@@ -63,7 +63,7 @@ const defaultConfig = {
   animationFrame: 50,
 };
 
-const DigitalFlop = ({ config = {}, className, style }) => {
+const DigitalFlop = ({ config = {}, className, style = {} }) => {
   const domRef = useRef(null);
   const rendererRef = useRef(null);
   const graphRef = useRef(null);
@@ -128,7 +128,7 @@ const DigitalFlop = ({ config = {}, className, style }) => {
   const classNames = useMemo(() => classnames(styles['dv-digital-flop'], className), [className]);
 
   return (
-    <div className={classNames} style={style}>
+    <div className={classNames} style={{ width: '100%', height: '100%', ...style }}>
       <canvas ref={domRef} />
     </div>
   );
