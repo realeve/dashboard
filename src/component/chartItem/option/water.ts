@@ -2,7 +2,7 @@ export default ({ value, title = '' }) => {
   let data = [value, value, value];
   let option = {
     title: {
-      text: (value * 100).toFixed(0) + '{a|%}',
+      text: (value * 100).toFixed(0) + '%',
       textStyle: {
         fontSize: 50,
         fontFamily: 'Microsoft Yahei',
@@ -98,7 +98,7 @@ export default ({ value, title = '' }) => {
             shadowColor: '#000',
           },
         },
-        color: ['rgba(31, 222, 225, 0.7)', 'rgba(31, 222, 225, .4)', 'rgba(58, 71, 212, 0.1)'],
+        color: ['rgba(31, 222, 225, 0.5)', 'rgba(31, 222, 225, .3)', 'rgba(58, 71, 212, 0.1)'],
         label: {
           normal: {
             formatter: '',

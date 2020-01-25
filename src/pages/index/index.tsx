@@ -85,6 +85,14 @@ let chartList = [
     name: '水球图',
     type: 'water',
   },
+  {
+    name: '渐变柱形图',
+    type: 'roundBar',
+  },
+  {
+    name: '静态饼图',
+    type: 'pie',
+  },
 ];
 
 export default () => {

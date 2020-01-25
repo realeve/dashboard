@@ -225,7 +225,7 @@ const ActiveRingChart = ({ config = {}, className, style }) => {
   ]);
 
   return (
-    <div className={classNames} style={style}>
+    <div className={classNames} style={{ width: '100%', height: '100%', ...style }}>
       <div className={styles['active-ring-chart-container']} ref={domRef} />
       <div className={styles['active-ring-info']}>
         <DigitalFlop config={digitalFlop} />

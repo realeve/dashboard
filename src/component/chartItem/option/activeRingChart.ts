@@ -1,7 +1,7 @@
 export default data => ({
-  radius: '70%',
-  activeRadius: '75%',
+  radius: '80%',
+  activeRadius: '85%',
   data,
   digitalFlopStyle: {},
-  lineWidth: 15,
+  lineWidth: 25,
 });

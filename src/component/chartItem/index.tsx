@@ -133,10 +133,43 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             ])}
           />
         );
+      case 'roundbar':
+        return (
+          <Echarts
+            option={lib.roundBar({
+              value: [
+                ['新能源智能汽车', 23],
+                ['航天航空', 12],
+                ['第三代半导体', 18],
+                ['产业金融', 12],
+                ['商务会展', 43],
+                ['临空经济', 23],
+                ['文创旅游', 32],
+                ['智能制造业', 21],
+              ],
+            })}
+            // renderer="svg"
+          />
+        );
+      case 'pie':
+        return (
+          <Echarts
+            option={lib.pie({
+              value: [
+                ['体育技能', 17],
+                ['体育行为', 23],
+                ['体质健康', 27],
+                ['体育意识', 33],
+                ['体育知识', 29],
+              ],
+              title: '某指标',
+            })}
+          />
+        );
       case 'ringchart':
         return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
       case 'water':
-        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
+        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="svg" />;
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

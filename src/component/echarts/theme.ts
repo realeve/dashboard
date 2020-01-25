@@ -5,10 +5,10 @@ export default {
   backgroundColor: 'transparent',
   color: color.COLOR_PLATE_8,
   animationDuration: 1500,
-  // animationEasing: "elasticOut",
-  // animationEasingUpdate: "elasticOut",
-  // animationDelay: idx => idx * 20,
-  // animationDelayUpdate: idx => idx * 20,
+  // animationEasing: 'elasticOut',
+  // animationEasingUpdate: 'elasticOut',
+  animationDelay: idx => idx * 100,
+  animationDelayUpdate: idx => idx * 100,
   singleAxis: {
     top: 50,
     bottom: 50,
@@ -86,10 +86,10 @@ export default {
   grid: {
     borderWidth: 0,
     left: 10,
-    right: 10,
-    top: 10,
+    right: 5,
+    top: 5,
     bottom: 10,
-    // containLabel: true
+    containLabel: true,
   },
   categoryAxis: {
     axisLine: {
