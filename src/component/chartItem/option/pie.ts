@@ -1,6 +1,6 @@
 import color from '@/component/echarts/themeColor';
 export type circlePos = 'inner' | 'outter';
-export default ({ value, title, x = 0, y = 1, circlePos = 'inner' }) => {
+export default ({ data: value, title, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
   let _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
   let data = value.map(item => ({
     value: item[y],
@@ -10,8 +10,8 @@ export default ({ value, title, x = 0, y = 1, circlePos = 'inner' }) => {
   let radius =
     circlePos === 'inner'
       ? [
-          ['35%', '81%'],
-          ['35%', '45%'],
+          ['50%', '90%'],
+          ['50%', '60%'],
         ]
       : [
           ['35%', '81%'],
@@ -19,25 +19,6 @@ export default ({ value, title, x = 0, y = 1, circlePos = 'inner' }) => {
         ];
 
   return {
-    // title: [
-    //   {
-    //     text: title,
-    //     x: 'center',
-    //     y: 'center',
-    //     padding: [0, 0, 0, -20],
-    //     textStyle: {
-    //       fontSize: 22,
-    //       color: ['#fff'],
-    //       rich: {
-    //         align: 'right',
-    //       },
-    //     },
-    //     subtextStyle: {
-    //       color: '#7D838D',
-    //       fontSize: 12,
-    //     },
-    //   },
-    // ],
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c} ({d}%)',
@@ -63,51 +44,32 @@ export default ({ value, title, x = 0, y = 1, circlePos = 'inner' }) => {
         center: ['50%', '50%'],
         type: 'pie',
         z: 0,
+        roseType,
         labelLine: {
           normal: {
-            show: true,
-            length: 15,
-            length2: 80,
-            lineStyle: {
-              color: '#9aa8d4',
-            },
-            align: 'right',
-          },
-          color: '#000',
-          emphasis: {
-            show: true,
+            show: false,
           },
         },
+        animation: true,
         label: {
-          position: 'outer',
-          alignTo: 'edge',
-          margin: 20,
-          normal: {
-            formatter: function(params) {
-              return `{nameStyle|${params.name}} {rate|${params.percent}%}`;
-            },
-            padding: [0, -80],
-            height: 45,
-            rich: {
-              nameStyle: {
-                fontSize: 14,
-                color: '#9aa8d4',
-                align: 'left',
-              },
-              rate: {
-                fontSize: 16,
-                color: '#1ab4b8',
-                align: 'left',
-              },
-            },
-          },
-          //   emphasis: {
-          //     show: true,
-          //     textStyle: {
-          //       fontSize: '20',
-          //       fontWeight: 'bold',
-          //     },
+          // position: 'center',
+          show: false,
+          // formatter: function(params) {
+          //   return `{rate|${params.percent}%}\n\n{nameStyle|${params.name}}`;
+          // },
+          // height: 45,
+          // rich: {
+          //   nameStyle: {
+          //     fontSize: 16,
+          //     color: '#9aa8d4',
+          //     align: 'left',
           //   },
+          //   rate: {
+          //     fontSize: 20,
+          //     color: '#1ab4b8',
+          //     align: 'center',
+          //   },
+          // },
         },
         data,
       },

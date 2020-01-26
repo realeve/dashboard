@@ -81,7 +81,7 @@ export default ({ value, title = '' }) => {
               colorStops: [
                 {
                   offset: 0,
-                  color: 'rgba(69, 73, 240, 0)',
+                  color: 'rgba(69, 73, 240, 0.05)',
                 },
                 {
                   offset: 0.5,
@@ -98,7 +98,7 @@ export default ({ value, title = '' }) => {
             shadowColor: '#000',
           },
         },
-        color: ['rgba(31, 222, 225, 0.5)', 'rgba(31, 222, 225, .3)', 'rgba(58, 71, 212, 0.1)'],
+        color: ['rgba(31, 222, 225, 0.6)', 'rgba(31, 222, 225, .4)', 'rgba(58, 71, 212, 0.2)'],
         label: {
           normal: {
             formatter: '',

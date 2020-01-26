@@ -74,10 +74,6 @@ let chartList = [
     type: 'flipboard',
   },
   {
-    name: '动态环图',
-    type: 'activeRingChart',
-  },
-  {
     name: '百分比环图',
     type: 'RingChart',
   },
@@ -90,8 +86,16 @@ let chartList = [
     type: 'roundBar',
   },
   {
-    name: '静态饼图',
+    name: '动态环图',
     type: 'pie',
+  },
+  {
+    name: '玫瑰图',
+    type: 'rose',
+  },
+  {
+    name: '华夫图',
+    type: 'waffle',
   },
 ];
 

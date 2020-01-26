@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // AVA 图表
 import GridItem from '@/component/chart/chart';
 
@@ -12,14 +12,24 @@ import {
   ScrollBoard,
   ScrollRankingBoard,
   FlipBoard,
-  ActiveRingChart,
+  Pie,
 } from '@/component/widget';
 import Echarts from '@/component/echarts';
-import echarts from 'echarts';
+import G2 from '@/component/g2';
 import * as lib from './option';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
+
+  // useInterval(() => {
+  //   if (!['pie', 'rose'].includes(itemType) || !instance) {
+  //     return;
+  //   }
+
+  //   console.log(instance);
+  //   console.log(instance.getOption());
+  // }, 3000);
+
   if (itemType === 'progress') {
     return <ProgressBar percent={43.3} title="指标占比" {...props} />;
   } else if (itemType === 'scrollboard') {
@@ -106,38 +116,12 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         return null;
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
-      case 'activeringchart':
-        return (
-          <ActiveRingChart
-            config={lib.activeRingChart([
-              {
-                name: '周口',
-                value: 55,
-              },
-              {
-                name: '南阳',
-                value: 120,
-              },
-              {
-                name: '西峡',
-                value: 78,
-              },
-              {
-                name: '驻马店',
-                value: 66,
-              },
-              {
-                name: '新乡',
-                value: 80,
-              },
-            ])}
-          />
-        );
+
       case 'roundbar':
         return (
           <Echarts
             option={lib.roundBar({
-              value: [
+              data: [
                 ['新能源智能汽车', 23],
                 ['航天航空', 12],
                 ['第三代半导体', 18],
@@ -148,14 +132,13 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['智能制造业', 21],
               ],
             })}
-            // renderer="svg"
           />
         );
       case 'pie':
         return (
-          <Echarts
-            option={lib.pie({
-              value: [
+          <Pie
+            option={{
+              data: [
                 ['体育技能', 17],
                 ['体育行为', 23],
                 ['体质健康', 27],
@@ -163,13 +146,45 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['体育知识', 29],
               ],
               title: '某指标',
-            })}
+            }}
+          />
+        );
+      case 'rose':
+        return (
+          <Pie
+            option={{
+              data: [
+                ['体育技能', 17],
+                ['体育行为', 23],
+                ['体质健康', 27],
+                ['体育意识', 33],
+                ['体育知识', 29],
+              ],
+              title: '某指标',
+              roseType: 'rose',
+            }}
           />
         );
       case 'ringchart':
         return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
       case 'water':
-        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="svg" />;
+        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
+      case 'waffle':
+        return (
+          <G2
+            option={{
+              data: [
+                ['type 1', 32],
+                ['type 2', 65],
+                ['type 3', 30],
+                ['type 4', 42],
+              ].map(item => ({ name: item[0], value: item[1] })),
+              onMount: lib.waffle,
+              height: 160,
+            }}
+            renderer="svg"
+          />
+        );
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

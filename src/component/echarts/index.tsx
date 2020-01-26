@@ -1,54 +1,49 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactEcharts from './echarts-for-react';
+import { useInterval } from 'react-use';
+import * as R from 'ramda';
+
 export type tRender = 'canvas' | 'svg';
 interface IProp {
   renderer?: tRender;
   option: any;
+  toggleItem?: boolean;
   [key: string]: any;
 }
 
-/**
- * todo:
- * 1.增加group选项，数据以此做切换(2018-11-25 已完成)；
- * 2.对参数长度排序，以最长的为准做合并，避免出现 &id=a&id=a...&otherparams的情况
- */
-export default class Charts extends Component<IProp> {
-  static defaultProps: Partial<IProp> = {
-    renderer: 'canvas',
-  };
-  constructor(props) {
-    super(props);
-    // 创建echarts实例
-    this.echarts_react = React.createRef();
-  }
+let toggleSeriesItem = (option, idx) => {
+  let len = option.series[0].data.length;
+  option.series[0].data = option.series[0].data.map((item, i) => {
+    let flag = i === idx % len;
+    item.selected = flag;
+    // item.label = { show: flag };
+    return item;
+  });
+  idx = (idx + 1) % len;
+  return { option, idx };
+};
 
-  echarts_react = null;
+export default ({ toggleItem = false, setToggleIdx, renderer, ...props }: IProp) => {
+  const echarts_react = useRef(null);
+  useEffect(() => {
+    return () => {
+      if (echarts_react && echarts_react.current && echarts_react.current.dispose) {
+        echarts_react.current.dispose();
+      }
+    };
+  }, []);
 
-  componentWillUnmount() {
-    if (this.echarts_react && this.echarts_react.dispose) {
-      this.echarts_react.dispose();
+  const [idx, setIdx] = useState(0);
+  useInterval(() => {
+    if (!echarts_react || !toggleItem) {
+      return;
     }
-  }
+    let chart = echarts_react.current.getEchartsInstance();
+    setToggleIdx && setToggleIdx(idx);
+    let { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
+    setIdx(id);
+    chart.setOption(option, true);
+  }, 3000);
 
-  componentDidMount() {
-    // console.log('componentDidMount 4')
-    if (this.echarts_react && this.props.setInstance) {
-      this.props.setInstance(this.echarts_react.getEchartsInstance());
-    }
-  }
-
-  render() {
-    let { option, renderer, ...props } = this.props;
-
-    return (
-      <ReactEcharts
-        ref={e => {
-          this.echarts_react = e;
-        }}
-        option={option}
-        {...props}
-        opts={{ renderer }}
-      />
-    );
-  }
-}
+  return <ReactEcharts ref={echarts_react} {...props} opts={{ renderer: renderer || 'canvas' }} />;
+};

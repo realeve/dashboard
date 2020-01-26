@@ -1,6 +1,6 @@
 import echarts from 'echarts';
 
-export default ({ value, x = 0, y = 1 }) => {
+export default ({ data: value, x = 0, y = 1 }) => {
   let xData = [],
     yData = [];
   value.forEach(item => {
