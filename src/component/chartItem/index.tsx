@@ -165,6 +165,8 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             }}
           />
         );
+        case 'radialbar':
+          return <Echarts option={lib.radialBarChart({ data: [['周一',15], ['周张2二',6], ['周三',17], ['周四',8],['周一2',9], ['周张2二2',9], ['周三2',23], ['周四2',7]]  })}  renderer="svg"/>;
       case 'ringchart':
         return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
       case 'water':

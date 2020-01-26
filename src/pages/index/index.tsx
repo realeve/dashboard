@@ -96,7 +96,10 @@ let chartList = [
   {
     name: '华夫图',
     type: 'waffle',
-  },
+  },{
+    name:'玉珏图',
+    type:'radialbar'
+  }
 ];
 
 export default () => {
