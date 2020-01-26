@@ -1,10 +1,22 @@
 import color from '@/component/echarts/themeColor';
-export default ({ value, title, x = 0, y = 1 }) => {
+export type circlePos = 'inner' | 'outter';
+export default ({ value, title, x = 0, y = 1, circlePos = 'inner' }) => {
   let _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
   let data = value.map(item => ({
     value: item[y],
     name: item[x],
   }));
+
+  let radius =
+    circlePos === 'inner'
+      ? [
+          ['35%', '81%'],
+          ['35%', '45%'],
+        ]
+      : [
+          ['35%', '81%'],
+          ['73%', '81%'],
+        ];
 
   return {
     // title: [
@@ -47,14 +59,15 @@ export default ({ value, title, x = 0, y = 1 }) => {
     series: [
       // 主要展示层的
       {
-        radius: ['55%', '81%'],
+        radius: radius[0],
         center: ['50%', '50%'],
         type: 'pie',
+        z: 0,
         labelLine: {
           normal: {
             show: true,
             length: 15,
-            length2: 120,
+            length2: 80,
             lineStyle: {
               color: '#9aa8d4',
             },
@@ -73,7 +86,7 @@ export default ({ value, title, x = 0, y = 1 }) => {
             formatter: function(params) {
               return `{nameStyle|${params.name}} {rate|${params.percent}%}`;
             },
-            padding: [0, -100],
+            padding: [0, -80],
             height: 45,
             rich: {
               nameStyle: {
@@ -100,8 +113,9 @@ export default ({ value, title, x = 0, y = 1 }) => {
       },
       // 边框的设置
       {
-        radius: ['75%', '81%'],
+        radius: radius[1],
         center: ['50%', '50%'],
+        z: 1,
         type: 'pie',
         label: {
           normal: {
@@ -125,7 +139,8 @@ export default ({ value, title, x = 0, y = 1 }) => {
         },
         itemStyle: {
           normal: {
-            color: 'rgba(250,250,250,0.5)',
+            color: '#fff',
+            opacity: 0.5,
           },
         },
         data: [
