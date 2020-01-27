@@ -4,7 +4,7 @@ export default ({ value, half = false }) => {
     name: '脱贫人数占比',
     type: 'gauge',
     animation: true,
-    radius: half ? '140%' : '90%',
+    radius: half ? '140%' : '95%',
     startAngle: (359.99 * percent) / 100 / (half ? 2 : 1),
     center: ['50%', half ? '90%' : '50%'],
     endAngle: 0,

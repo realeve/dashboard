@@ -2,7 +2,12 @@ import panel from '@/component/echarts/themeColor';
 import * as R from 'ramda';
 export const getBarMax = (data, y) => {
   let item = R.last(data)[y];
-  return Math.ceil(item / 10) * 10;
+  return getMax(item);
+};
+
+export const getMax = val => {
+  let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
+  return (Number(String(val)[0]) + 1) * pow;
 };
 
 // let color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c' ];

@@ -105,6 +105,10 @@ let chartList = [
     name: '百分比',
     type: 'percent',
   },
+  {
+    name: '间隔柱状图',
+    type: 'pictorial',
+  },
 ];
 
 export default () => {

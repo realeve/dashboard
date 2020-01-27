@@ -191,6 +191,23 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
       case 'water':
         return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
+      case 'pictorial':
+        return (
+          <Echarts
+            option={lib.pictorialBar({
+              data: [
+                ['通信', 2691],
+                ['网络', 4300],
+                ['能源', 3416],
+                ['建筑', 4666],
+              ],
+              size: 32,
+              yAxis: Math.random() > 0.5,
+              theme: Math.random() > 0.5 ? 'rect' : 'round',
+            })}
+            // renderer="svg"
+          />
+        );
       case 'waffle':
         return (
           <G2
