@@ -192,6 +192,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
       case 'water':
         return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
       case 'pictorial':
+        let theme: 'rect' | 'round' = Math.random() > 0.5 ? 'rect' : 'round';
         return (
           <Echarts
             option={lib.pictorialBar({
@@ -203,9 +204,9 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               ],
               size: 32,
               yAxis: Math.random() > 0.5,
-              theme: Math.random() > 0.5 ? 'rect' : 'round',
+              theme,
             })}
-            // renderer="svg"
+            renderer={theme === 'rect' ? 'svg' : 'canvas'}
           />
         );
       case 'waffle':
