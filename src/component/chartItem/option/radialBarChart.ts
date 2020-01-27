@@ -5,9 +5,9 @@ export const getBarMax = (data, y) => {
   return Math.ceil(item / 10) * 10;
 };
 
-// let color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...panel.COLOR_PLATE_16];
+// let color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c' ];
 
-let color= panel.COLOR_PLATE_16;
+let color = panel.COLOR_PLATE_16;
 
 export default ({ data: value, x = 0, y = 1 }) => {
   let data = value.sort((a, b) => a[y] - b[y]);
@@ -28,7 +28,6 @@ export default ({ data: value, x = 0, y = 1 }) => {
         show: false,
       },
     },
-    tooltip: { trigger: 'item' },
     radiusAxis: {
       type: 'category',
       data: data.map(item => item[x]),
@@ -52,7 +51,10 @@ export default ({ data: value, x = 0, y = 1 }) => {
         },
       },
     },
-    polar: {},
+    tooltip: {},
+    polar: {
+      tooltip: { trigger: 'item' },
+    },
     series: [
       {
         type: 'bar',

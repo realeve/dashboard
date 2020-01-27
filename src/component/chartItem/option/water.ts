@@ -1,16 +1,17 @@
 export default ({ value, title = '' }) => {
   let data = [value, value, value];
+
   let option = {
     title: {
-      text: (value * 100).toFixed(0) + '%',
+      text: `${(value * 100).toFixed(0)} {a|%}`,
       textStyle: {
-        fontSize: 50,
+        fontSize: 30,
         fontFamily: 'Microsoft Yahei',
         fontWeight: 'normal',
         color: '#bcb8fb',
         rich: {
           a: {
-            fontSize: 28,
+            fontSize: 16,
           },
         },
       },
@@ -31,7 +32,7 @@ export default ({ value, title = '' }) => {
             style: {
               fill: '#aab2fa',
               text: title,
-              font: '20px Microsoft YaHei',
+              font: '16px Microsoft YaHei',
             },
           },
         ],

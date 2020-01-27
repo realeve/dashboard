@@ -96,10 +96,15 @@ let chartList = [
   {
     name: '华夫图',
     type: 'waffle',
-  },{
-    name:'玉珏图',
-    type:'radialbar'
-  }
+  },
+  {
+    name: '玉珏图',
+    type: 'radialbar',
+  },
+  {
+    name: '百分比',
+    type: 'percent',
+  },
 ];
 
 export default () => {

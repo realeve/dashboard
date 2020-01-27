@@ -13,6 +13,7 @@ import {
   ScrollRankingBoard,
   FlipBoard,
   Pie,
+  Percent,
 } from '@/component/widget';
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
@@ -30,90 +31,93 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
   //   console.log(instance.getOption());
   // }, 3000);
 
-  if (itemType === 'progress') {
-    return <ProgressBar percent={43.3} title="指标占比" {...props} />;
-  } else if (itemType === 'scrollboard') {
-    return (
-      <ScrollBoard
-        config={{
-          header: ['列1', '列2', '列3'],
-          data: [
-            ['23', '行1列2', '行1列3'],
-            ['43', '行2列2', '行2列3'],
-            ['133', '行3列2', '行3列3'],
-            ['54', '行4列2', '行4列3'],
-            ['32', '行5列2', '行5列3'],
-            ['56', '行6列2', '行6列3'],
-            ['76', '行7列2', '行7列3'],
-            ['543', '行8列2', '行8列3'],
-            ['332', '行9列2', '行9列3'],
-            ['1121', '行10列2', '行10列3'],
-          ],
-          index: true,
-          columnWidth: [50],
-          align: ['center'],
-          carousel: 'page',
-          waitTime: 4000,
-        }}
-      />
-    );
-  } else if (itemType === 'rankingboard') {
-    return (
-      <ScrollRankingBoard
-        config={{
-          waitTime: 4000,
-          data: [
-            {
-              name: '周口',
-              value: 55,
-            },
-            {
-              name: '南阳',
-              value: 120,
-            },
-            {
-              name: '西峡',
-              value: 78,
-            },
-            {
-              name: '驻马店',
-              value: 66,
-            },
-            {
-              name: '新乡',
-              value: 80,
-            },
-            {
-              name: '信阳',
-              value: 45,
-            },
-            {
-              name: '漯河',
-              value: 29,
-            },
-            {
-              name: '漯河2',
-              value: 129,
-            },
-            {
-              name: '漯河3',
-              value: 59,
-            },
-            {
-              name: '漯河4',
-              value: 19,
-            },
-          ],
-          carousel: 'page',
-        }}
-      />
-    );
+  switch (itemType) {
+    case 'progress':
+      return <ProgressBar percent={43.3} title="指标占比" {...props} />;
+    case 'scrollboard':
+      return (
+        <ScrollBoard
+          config={{
+            header: ['列1', '列2', '列3'],
+            data: [
+              ['23', '行1列2', '行1列3'],
+              ['43', '行2列2', '行2列3'],
+              ['133', '行3列2', '行3列3'],
+              ['54', '行4列2', '行4列3'],
+              ['32', '行5列2', '行5列3'],
+              ['56', '行6列2', '行6列3'],
+              ['76', '行7列2', '行7列3'],
+              ['543', '行8列2', '行8列3'],
+              ['332', '行9列2', '行9列3'],
+              ['1121', '行10列2', '行10列3'],
+            ],
+            index: true,
+            columnWidth: [50],
+            align: ['center'],
+            carousel: 'page',
+            waitTime: 4000,
+          }}
+        />
+      );
+    case 'rankingboard':
+      return (
+        <ScrollRankingBoard
+          config={{
+            waitTime: 4000,
+            data: [
+              {
+                name: '周口',
+                value: 55,
+              },
+              {
+                name: '南阳',
+                value: 120,
+              },
+              {
+                name: '西峡',
+                value: 78,
+              },
+              {
+                name: '驻马店',
+                value: 66,
+              },
+              {
+                name: '新乡',
+                value: 80,
+              },
+              {
+                name: '信阳',
+                value: 45,
+              },
+              {
+                name: '漯河',
+                value: 29,
+              },
+              {
+                name: '漯河2',
+                value: 129,
+              },
+              {
+                name: '漯河3',
+                value: 59,
+              },
+              {
+                name: '漯河4',
+                value: 19,
+              },
+            ],
+            carousel: 'page',
+          }}
+        />
+      );
   }
 
   const Detail = () => {
     switch (itemType) {
       case '_blank':
         return null;
+      case 'percent':
+        return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
 
@@ -165,8 +169,24 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             }}
           />
         );
-        case 'radialbar':
-          return <Echarts option={lib.radialBarChart({ data: [['周一',15], ['周张2二',6], ['周三',17], ['周四',8],['周一2',9], ['周张2二2',9], ['周三2',23], ['周四2',7]]  })}  renderer="svg"/>;
+      case 'radialbar':
+        return (
+          <Echarts
+            option={lib.radialBarChart({
+              data: [
+                ['周一', 15],
+                ['周张2二', 6],
+                ['周三', 17],
+                ['周四', 8],
+                ['周一2', 9],
+                ['周张2二2', 9],
+                ['周三2', 23],
+                ['周四2', 7],
+              ],
+            })}
+            renderer="svg"
+          />
+        );
       case 'ringchart':
         return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
       case 'water':
