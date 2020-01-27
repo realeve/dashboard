@@ -1,0 +1,60 @@
+@import '../../../style/theme.less';
+
+.dv-scroll-board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+
+  font-family: 'Acens';
+  .text {
+    padding: 0 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: @textColor;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: bold;
+    .header-item {
+      .text;
+      transition: all 0.3s;
+      color: #f2f2f2;
+      flex: 1;
+    }
+  }
+
+  .rows {
+    overflow: hidden;
+
+    .row-item {
+      display: flex;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .ceil {
+      .text;
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .index {
+      // border-radius: 3px;
+      // padding: 0px 3px;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
