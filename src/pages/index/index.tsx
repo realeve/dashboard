@@ -4,22 +4,17 @@ import { WidthProvider, Responsive } from 'react-grid-layout';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
 // AVA 图表
-import GridItem from '@/component/chart/chart';
+import ChartItem from '@/component/chartItem';
 import * as lib from '@/utils/lib';
 
 import { saveLayout, loadLayout, saveToLS } from './lib';
 
-import {
-  CloseOutlined,
-  VerticalAlignTopOutlined,
-  VerticalAlignBottomOutlined,
-} from '@ant-design/icons';
+import { VerticalAlignTopOutlined, VerticalAlignBottomOutlined } from '@ant-design/icons';
 
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import './index.less';
 import { getNonce } from '@/component/chart/lib';
-import { ProgressBar, BorderItem } from '@/component/widget';
 
 import styles from './index.less';
 import classNames from 'classnames';
@@ -61,6 +56,46 @@ let chartList = [
   {
     name: '占位区域',
     type: 'blank',
+  },
+  {
+    name: '进度条',
+    type: 'progress',
+  },
+  {
+    name: '滚动表单',
+    type: 'scrollBoard',
+  },
+  {
+    name: '排名表',
+    type: 'rankingBoard',
+  },
+  {
+    name: '翻牌器',
+    type: 'flipboard',
+  },
+  {
+    name: '百分比环图',
+    type: 'RingChart',
+  },
+  {
+    name: '水球图',
+    type: 'water',
+  },
+  {
+    name: '渐变柱形图',
+    type: 'roundBar',
+  },
+  {
+    name: '动态环图',
+    type: 'pie',
+  },
+  {
+    name: '玫瑰图',
+    type: 'rose',
+  },
+  {
+    name: '华夫图',
+    type: 'waffle',
   },
 ];
 
@@ -109,6 +144,7 @@ export default () => {
   };
 
   const save = () => {
+    console.log(state);
     let layout = saveLayout(state);
     saveToLS('dashboard', layout);
     lib.saveDashboard(layout);
@@ -141,20 +177,13 @@ export default () => {
         >
           {state.widgets.map(({ i: key, config, ...grid }, idx) => (
             <div data-grid={grid} key={key}>
-              <BorderItem name={state.borderName}>
-                <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
-                {config.type === '_blank' ? null : (
-                  // <>
-                  //   <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />
-                  //   <span className="top-left border-span" />
-                  //   <span className="top-right border-span" />
-                  //   <span className="bottom-left border-span" />
-                  //   <span className="bottom-right border-span" />
-                  // </>
-                  <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />
-                )}
-                {/* <ProgressBar /> */}
-              </BorderItem>
+              <ChartItem
+                config={config}
+                onMockChange={onMockChange}
+                idx={idx}
+                borderName={state.borderName}
+                onRemoveItem={onRemoveItem}
+              />
             </div>
           ))}
         </ResponsiveReactGridLayout>
@@ -170,6 +199,7 @@ export default () => {
             添加{item.name}
           </Button>
         ))}
+        <br />
         <Button
           type="primary"
           style={{ marginRight: 7, marginLeft: 15 }}

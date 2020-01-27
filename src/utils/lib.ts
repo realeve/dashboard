@@ -49,3 +49,26 @@ export const loadDashboard = async file => {
 
 export const encodeBase64 = (str: string) => window.btoa(unescape(encodeURIComponent(str)));
 export const decodeBase64 = (str: string) => decodeURIComponent(escape(window.atob(str)));
+
+/**
+ * 千分位格式化数字
+ * @param {数字} num
+ * @param {小数位数} decimalLength
+ */
+export const thouandsNum: {
+  (num: number, len?: number): string;
+} = (num, decimalLength = 0) => {
+  if (String(num).length === 0) {
+    return '';
+  }
+
+  let numStr: string = Number(num).toLocaleString();
+  if (numStr.includes('.')) {
+    let [integer, decimal] = numStr.split('.');
+    return integer + '.' + decimal.padEnd(decimalLength, '0');
+  }
+  if (decimalLength === 0) {
+    return numStr;
+  }
+  return numStr + '.' + ''.padEnd(decimalLength, '0');
+};
