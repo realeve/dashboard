@@ -109,6 +109,10 @@ let chartList = [
     name: '间隔柱状图',
     type: 'pictorial',
   },
+  {
+    name: '渐变堆叠曲线图',
+    type: 'gardientLine',
+  },
 ];
 
 export default () => {

@@ -162,7 +162,7 @@ export default ({
           return arr;
         })(chartData),
 
-        boundaryGap: ['20%', '20%'],
+        // boundaryGap: ['20%', '20%'],
         splitLine: {
           show: false,
         },

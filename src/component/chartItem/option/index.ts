@@ -6,3 +6,4 @@ export { default as ringchart } from './ringchart';
 export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
 export { default as pictorialBar } from './pictorialBar';
+export { default as gardientLine } from './gardientLine';

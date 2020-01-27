@@ -145,6 +145,20 @@ const getColor: (len: number, type: string) => Array<string> = (len, type) => {
   return len <= 8 ? COLOR_PLATE_8 : len <= 16 ? COLOR_PLATE_16 : COLOR_PLATE_24;
 };
 
+const hex2rgb = (str, alpha = 1) => {
+  str = str.slice(1);
+  if (str.length > 3) {
+    let r = parseInt(str.slice(0, 2), 16);
+    let g = parseInt(str.slice(2, 4), 16);
+    let b = parseInt(str.slice(4, 6), 16);
+    return `rgba(${r},${g},${b},${alpha})`;
+  }
+  let r = parseInt(str.slice(0, 1) + str.slice(0, 1), 16);
+  let g = parseInt(str.slice(1, 2) + str.slice(1, 2), 16);
+  let b = parseInt(str.slice(2, 3) + str.slice(2, 3), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+};
+
 export default {
   COLOR_PLATE_8,
   COLOR_PLATE_16,
@@ -155,4 +169,5 @@ export default {
   ANTV,
   FLAT_UI_COLOR,
   getColor,
+  hex2rgb,
 };
