@@ -20,7 +20,7 @@ export default ({ option }) => {
   return (
     <div className={styles.pie}>
       <Echarts option={lib.percent(option)} renderer="svg" />
-      <div className={styles.tip}>
+      <div className={styles.tip} style={{ justifyContent: option.half ? 'flex-end' : 'center' }}>
         <div className={styles.name}>{val.name}</div>
         <CountUp {...val} decimals={2} suffix="%" className={styles.value} />
       </div>
