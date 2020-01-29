@@ -274,9 +274,9 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               innerPercent: 15,
               startAngle: 180,
               endAngle: 360,
-              legend: false,
+              legend: true,
+              padding: [0, 0, 40, 0],
               onMount: lib.g2Rose,
-              height: '100%',
             }}
             renderer="svg"
           />

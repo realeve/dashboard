@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import G2 from '@antv/g2';
+// import { useSize } from 'react-use';
 
 export default ({
   className = '',
   style = {},
-  option: { data, height = 250, onMount = ({ data: [] }, e: any) => null, ...props },
+  option: {
+    data,
+    height = 0,
+    padding = [20, 20, 40, 20],
+    onMount = ({ data: [] }, e: any) => null,
+    ...props
+  },
   renderer = 'canvas',
 }) => {
   const ref = useRef(null);
@@ -13,11 +20,13 @@ export default ({
     if (!ref) {
       return;
     }
+    height = height || ref.current.offsetHeight;
+
     const _chart = new G2.Chart({
       container: ref.current,
       forceFit: true,
       height,
-      padding: [20, 20, 40, 20],
+      padding,
       renderer,
     });
     setChart(_chart);
