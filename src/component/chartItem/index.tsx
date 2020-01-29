@@ -246,8 +246,34 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['type 3', 30],
                 ['type 4', 42],
               ],
-              onMount: lib.waffle,
+              ...lib.waffle,
               height: 160,
+            }}
+            renderer="svg"
+          />
+        );
+      case 'g2radialbar':
+        return (
+          <G2
+            option={{
+              data: [
+                ['Zombieland', 9],
+                ['Wieners', 8],
+                ['Toy Story', 8],
+                ['trashkannon', 7],
+                ['the GROWLERS', 6],
+                ['mudweiser', 6],
+                ['ThunderCats', 4],
+                ['The Taqwacores - Motion Picture', 4],
+                ['The Shawshank Redemption', 2],
+                ['The Olivia Experiment', 1],
+              ],
+              innerPercent: 20,
+              color: '0', //'#8543e0',
+              header: ['指标', '值'],
+              title: '这是一组标题',
+              padding: 5,
+              ...lib.g2RadialBarChart,
             }}
             renderer="svg"
           />
@@ -268,8 +294,13 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['2009', 38.3],
               ],
               header: ['年份', '指标'],
-              innerPercent: 15,
-              colorful: Math.random() > 0.5,
+              innerPercent: Math.random() > 0.5 ? 15 : 0,
+              color:
+                Math.random() > 0.3
+                  ? '#40a9ff-#0050b3'
+                  : Math.random() > 0.6
+                  ? '#1890FF'
+                  : 'rainbow',
               startAngle: Math.random() > 0.5 ? 180 : 0,
               endAngle: 360,
               legend: true,

@@ -9,9 +9,9 @@ export default (
     y = 1,
     innerPercent = 20,
     startAngle = 0,
-    colorful = true,
     endAngle = 360,
     legend = true,
+    color = 'rainbow',
   },
   chart,
 ) => {
@@ -38,8 +38,9 @@ export default (
       lineWidth: 1,
       stroke: '#fff',
     });
-  if (colorful) {
-    interval.color(String(x), G2.Global.colors_pie_16); // util.getColor(data.length)) //
+
+  if (color) {
+    interval.color(String(x), color === 'rainbow' ? G2.Global.colors_pie_16 : color); // util.getColor(data.length))
   }
 
   chart.legend(legend);

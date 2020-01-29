@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import G2 from '@antv/g2';
-// import { useSize } from 'react-use';
 
 export default ({
   className = '',
@@ -9,17 +8,20 @@ export default ({
     data,
     height = 0,
     padding = [20, 20, 40, 20],
-    onMount = ({ data: [] }, e: any) => null,
+    onMount, // = ({ data: [] }, e: any) => null,
+    transformer,
     ...props
   },
   renderer = 'canvas',
 }) => {
   const ref = useRef(null);
   const [chart, setChart] = useState(null);
+
   useEffect(() => {
     if (!ref) {
       return;
     }
+
     height = height || ref.current.offsetHeight;
 
     const _chart = new G2.Chart({
@@ -29,16 +31,23 @@ export default ({
       padding,
       renderer,
     });
+
     setChart(_chart);
+
+    // onMount返回数据转换器，在部分数据处理中需要对原始数据做加工
     onMount && onMount({ data, ...props }, _chart);
   }, []);
 
   // 数据更新
   useEffect(() => {
-    if (!chart) {
+    if (!chart || !data) {
       return;
     }
-    chart.changeData(data);
+
+    // 数据转换器
+    let { data: dv } = transformer ? transformer({ data, ...props }) : { data };
+
+    chart.changeData(dv);
   }, [data]);
 
   return (

@@ -1,6 +1,7 @@
 import { View } from '@antv/data-set';
 
-export default ({ data: val, x = 0, y = 1 }, chart) => {
+// 数据转换器，外部数据变更时，将计算结果注入至source
+export const transformer = ({ data: val, x, y }) => {
   let data = val.map(item => ({ name: item[x], value: item[y] }));
   let sum = val.map(item => item[y]).reduce((a, b) => a + b, 0);
   let percent = {};
@@ -14,8 +15,13 @@ export default ({ data: val, x = 0, y = 1 }, chart) => {
     maxCount,
     rows: 5,
   });
+  return { data: dv };
+};
 
+export const onMount = ({ data: val, x = 0, y = 1 }, chart) => {
+  const { data: dv } = transformer({ data: val, x, y });
   chart.source(dv);
+
   chart.scale({
     x: { nice: false },
     y: { nice: false },

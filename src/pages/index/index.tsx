@@ -117,6 +117,10 @@ let chartList = [
     name: '扇形图',
     type: 'g2rose',
   },
+  {
+    name: '玉珏线图',
+    type: 'g2radialbar',
+  },
 ];
 
 export default () => {

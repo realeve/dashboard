@@ -1,6 +1,6 @@
 import panel from '@/component/echarts/themeColor';
 import * as R from 'ramda';
-export const getBarMax = (data, y) => {
+export const getBarMax = (data, y = 1) => {
   let item = R.last(data)[y];
   return getMax(item);
 };
