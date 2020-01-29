@@ -113,6 +113,10 @@ let chartList = [
     name: '渐变堆叠曲线图',
     type: 'gardientLine',
   },
+  {
+    name: '扇形图',
+    type: 'g2rose',
+  },
 ];
 
 export default () => {

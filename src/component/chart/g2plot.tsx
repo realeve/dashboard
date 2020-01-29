@@ -82,7 +82,7 @@ export const AChart = ({
       return;
     }
     plot.changeData(data);
-    plot.render();
+    // plot.render();
   }, [data]);
 
   return chartDom;

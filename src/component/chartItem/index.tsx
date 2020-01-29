@@ -252,6 +252,35 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             renderer="svg"
           />
         );
+      case 'g2rose':
+        return (
+          <G2
+            option={{
+              data: [
+                ['2001', 41.8],
+                ['2002', 38],
+                ['2003', 33.7],
+                ['2004', 30.7],
+                ['2005', 25.8],
+                ['2006', 31.7],
+                ['2007', 33],
+                ['2008', 46],
+                ['2009', 38.3],
+                ['2010', 28],
+                ['2011', 42.5],
+                ['2012', 30.3],
+                ['2013', 38.3],
+              ].map(item => ({ name: item[0], value: item[1] })),
+              innerPercent: 15,
+              startAngle: 180,
+              endAngle: 360,
+              legend: false,
+              onMount: lib.g2Rose,
+              height: '100%',
+            }}
+            renderer="svg"
+          />
+        );
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

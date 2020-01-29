@@ -7,3 +7,4 @@ export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
 export { default as pictorialBar } from './pictorialBar';
 export { default as gardientLine } from './gardientLine';
+export { default as g2Rose } from './g2_rose';

@@ -4,7 +4,7 @@ import G2 from '@antv/g2';
 export default ({
   className = '',
   style = {},
-  option: { data, height = 250, onMount = ({ data: [] }, e: any) => null },
+  option: { data, height = 250, onMount = ({ data: [] }, e: any) => null, ...props },
   renderer = 'canvas',
 }) => {
   const ref = useRef(null);
@@ -21,7 +21,7 @@ export default ({
       renderer,
     });
     setChart(_chart);
-    onMount && onMount({ data }, _chart);
+    onMount && onMount({ data, ...props }, _chart);
   }, []);
 
   // 数据更新

@@ -138,7 +138,7 @@ const ANTV = [
   '#ffaa74',
 ];
 
-const getColor: (len: number, type: string) => Array<string> = (len, type) => {
+const getColor: (len: number, type?: string) => Array<string> = (len, type = '') => {
   if (type === 'pie') {
     return len > 8 ? COLOR_PIE_16 : COLOR_PIE;
   }
