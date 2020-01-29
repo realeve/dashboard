@@ -245,7 +245,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['type 2', 65],
                 ['type 3', 30],
                 ['type 4', 42],
-              ].map(item => ({ name: item[0], value: item[1] })),
+              ],
               onMount: lib.waffle,
               height: 160,
             }}
@@ -266,19 +266,17 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['2007', 33],
                 ['2008', 46],
                 ['2009', 38.3],
-                ['2010', 28],
-                ['2011', 42.5],
-                ['2012', 30.3],
-                ['2013', 38.3],
-              ].map(item => ({ name: item[0], value: item[1] })),
+              ],
+              header: ['年份', '指标'],
               innerPercent: 15,
-              startAngle: 180,
+              colorful: Math.random() > 0.5,
+              startAngle: Math.random() > 0.5 ? 180 : 0,
               endAngle: 360,
               legend: true,
               padding: [0, 0, 40, 0],
               onMount: lib.g2Rose,
             }}
-            renderer="svg"
+            renderer="canvas"
           />
         );
       default:
