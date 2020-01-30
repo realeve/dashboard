@@ -121,6 +121,10 @@ let chartList = [
     name: '玉珏线图',
     type: 'g2radialbar',
   },
+  {
+    name: '旋风图',
+    type: 'wind',
+  },
 ];
 
 export default () => {

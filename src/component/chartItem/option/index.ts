@@ -15,3 +15,5 @@ import * as g2RadialBarChart from './g2_radialBarChart';
 export { g2RadialBarChart };
 
 export const textColor = '#9aa8d4';
+
+export { default as g2Wind } from './g2_wind';
