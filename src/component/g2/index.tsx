@@ -45,7 +45,7 @@ export default ({
     }
 
     // 数据转换器
-    let { data: dv } = transformer ? transformer({ data, ...props }) : { data };
+    let { data: dv } = transformer ? transformer({ data, ...props }, chart) : { data };
 
     chart.changeData(dv);
   }, [data]);
