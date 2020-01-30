@@ -269,7 +269,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['The Olivia Experiment', 1],
               ],
               innerPercent: 20,
-              color: '0', //'#8543e0',
+              color: Math.random() > 0.3 ? '0' : Math.random() > 0.3 ? '1' : '#8543e0',
               header: ['指标', '值'],
               title: '这是一组标题',
               padding: 5,
@@ -298,7 +298,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               color:
                 Math.random() > 0.3
                   ? '#40a9ff-#0050b3'
-                  : Math.random() > 0.6
+                  : Math.random() > 0.3
                   ? '#1890FF'
                   : 'rainbow',
               startAngle: Math.random() > 0.5 ? 180 : 0,
