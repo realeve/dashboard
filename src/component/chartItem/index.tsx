@@ -318,10 +318,12 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         );
       case 'facet3':
         let seed = Math.random();
-        let type: 'line' | 'bar' | 'column' = seed > 0.7 ? 'column' : seed > 0.4 ? 'line' : 'bar';
+        let type: 'line' | 'bar' | 'column' | 'point' =
+          seed > 0.75 ? 'point' : seed > 0.5 ? 'line' : seed > 0.25 ? 'column' : 'bar';
         let padding = {
           line: [20, 20, 30, 0],
           bar: [20, 20, 30, 0],
+          point: [20, 20, 30, 0],
           column: [20, 0, 0, 10],
         };
         return (
@@ -364,6 +366,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               legend: 0,
               x: 1,
               y: 2,
+              normalize: true, // 数据归一化，不同列Y轴共享最大值
               padding: padding[type],
               onMount: lib.g2Facet3,
               type,
@@ -372,49 +375,36 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
           />
         );
       case 'facet2':
+        seed = Math.random();
+        type = seed > 0 ? 'point' : seed > 0.5 ? 'line' : seed > 0.25 ? 'column' : 'bar';
+        padding = {
+          line: [10, 20, 20, 0],
+          point: [20, 20, 20, 0],
+          bar: [10, 20, 20, 0],
+          column: [20, 90, 40, 80],
+        };
         return (
           <G2
             option={{
               data: [
-                ['转基因作物种植面积', '印度', 10.8],
-                ['转基因作物种植面积', '美国', 72.9],
-                ['转基因作物种植面积', '中国', 2.8],
-                ['转基因作物种植面积', '巴西', 49.1],
-                ['转基因作物种植面积', '加拿大', 11.6],
-                ['转基因作物种植面积', '阿根廷', 23.8],
-                ['转基因作物种植面积', '巴基斯坦', 2.9],
-                ['转基因作物种植面积', '南非', 2.7],
-                ['转基因作物种植面积', '巴拉圭', 3.6],
-                ['转基因作物种植面积', '乌拉圭', 1.3],
-                ['耕地总面积', '印度', 175.4],
-                ['耕地总面积', '美国', 165.2],
-                ['耕地总面积', '中国', 108.4],
-                ['耕地总面积', '巴西', 73.2],
-                ['耕地总面积', '加拿大', 46.9],
-                ['耕地总面积', '阿根廷', 38.6],
-                ['耕地总面积', '巴基斯坦', 22],
-                ['耕地总面积', '南非', 12.1],
-                ['耕地总面积', '巴拉圭', 5.5],
-                ['耕地总面积', '乌拉圭', 1.8],
-                ['转基因作物种植占比（%）', '印度', 6.2],
-                ['转基因作物种植占比（%）', '美国', 44.1],
-                ['转基因作物种植占比（%）', '中国', 2.6],
-                ['转基因作物种植占比（%）', '巴西', 67],
-                ['转基因作物种植占比（%）', '加拿大', 24.7],
-                ['转基因作物种植占比（%）', '阿根廷', 61.6],
-                ['转基因作物种植占比（%）', '巴基斯坦', 13.2],
-                ['转基因作物种植占比（%）', '南非', 22.4],
-                ['转基因作物种植占比（%）', '巴拉圭', 65.7],
-                ['转基因作物种植占比（%）', '乌拉圭', 73],
+                ['办公用品', '收纳', 340],
+                ['办公用品', '笔', 20760],
+                ['办公用品', '纸张', 28750],
+                ['技术', '配件', 4090],
+                ['技术', '电话', 9880],
+                ['技术', '复印机', 40988],
+                ['家具', '桌子', 14870],
+                ['家具', '椅子', 37098],
+                ['家具', '书架', 49099],
               ],
               header: ['类型', '国家', '数值'],
-              showLegend: false,
+              showLegend: true,
               legend: 0,
               x: 1,
               y: 2,
-              padding: [0, 20, 20, 0],
+              padding: padding[type],
               onMount: lib.g2Facet2,
-              type: Math.random() > 0.5 ? 'line' : 'bar',
+              type,
             }}
             renderer="svg"
           />

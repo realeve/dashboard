@@ -2,11 +2,16 @@ import { textColor } from './index';
 import * as R from 'ramda';
 import G2 from '@antv/g2';
 import { IG2Config } from './g2_wind';
-interface IFacet extends IG2Config {
-  type: 'line' | 'bar';
+export interface IFacet extends IG2Config {
+  type: 'line' | 'bar' | 'column' | 'point';
 }
-
-export default (
+export let chartType = {
+  bar: 'interval',
+  line: 'line',
+  point: 'point',
+  column: 'interval',
+};
+const lineNBar = (
   { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
   chart,
 ) => {
@@ -14,16 +19,24 @@ export default (
   x = String(x);
   y = String(y);
 
-  chart.source(data);
+  chart.source(data, {
+    [y]: {
+      alias: header[y],
+    },
+    [legend]: {
+      sync: true,
+    },
+  });
 
   if (showLegend) {
     chart.legend({
-      position: 'bottom-center',
+      position: type === 'point' ? 'top-center' : 'bottom-center',
       attachLast: true,
     });
   }
 
   let legendData = R.compose(R.uniq, R.pluck(legend))(data);
+
   const getColor = type => {
     let colors = G2.Global.colors;
     let idx = R.findIndex(item => item == type)(legendData);
@@ -32,20 +45,18 @@ export default (
 
   // chart.coord().transpose();
 
-  let showTitle = !showLegend
-    ? {
-        rowTitle: {
-          offsetX: 15,
-          style: {
-            fontSize: 12,
-            rotate: 90,
-            textAlign: 'center',
-            fill: '#8d8d8d',
-          },
-        },
-        showTitle: true,
-      }
-    : { showTitle: false };
+  let showTitle = {
+    rowTitle: {
+      offsetX: 15,
+      style: {
+        fontSize: 12,
+        rotate: 90,
+        textAlign: 'center',
+        fill: '#8d8d8d',
+      },
+    },
+    showTitle: true,
+  };
 
   chart.facet('rect', {
     fields: [null, legend],
@@ -69,11 +80,10 @@ export default (
 
       view.axis(y, false);
 
-      const color = getColor(facet.rowValue);
+      const color = type === 'point' ? G2.Global.colors : getColor(facet.rowValue);
 
-      let chartType = type === 'bar' ? 'interval' : 'line';
-      view[chartType]()
-        .shape('smooth')
+      view[chartType[type]]()
+        .shape(type === 'point' ? 'circle' : 'smooth')
         .opacity(0.8)
         .position(`${x}*${y}`)
         .color(legend, color)
@@ -87,4 +97,78 @@ export default (
     },
   });
   chart.render();
+};
+
+const column = (
+  { data, header, type = 'column', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
+  chart,
+) => {
+  legend = String(legend);
+  x = String(x);
+  y = String(y);
+  chart.source(data, {
+    [y]: {
+      alias: header[y],
+    },
+  });
+
+  if (showLegend) {
+    chart.legend({
+      attachLast: true,
+      position: 'right',
+    });
+  }
+
+  chart.axis(x, {
+    label: {
+      textStyle: {
+        fill: textColor,
+        fontSize: 12,
+      },
+    },
+    tickLine: {
+      alignWithLabel: false,
+      length: 0,
+    },
+    line: {
+      lineWidth: 0,
+    },
+  });
+  chart.axis(y, {
+    label: null,
+    title: {
+      offset: 30,
+      textStyle: {
+        fontSize: 12,
+        fontWeight: 300,
+      },
+    },
+    grid: {
+      lineStyle: {
+        lineWidth: 0,
+      },
+    },
+  });
+
+  chart.coord().transpose();
+  chart
+    .interval()
+    .position(`${x}*${y}`)
+    .color(legend, G2.Global.colors)
+    .label(y, {
+      textStyle: {
+        fill: textColor,
+      },
+      offset: 10,
+      formatter: text => {
+        return text.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+      },
+    });
+
+  chart.render();
+};
+
+export default (props, chart) => {
+  let method = ['line', 'bar', 'point'].includes(props.type) ? lineNBar : column;
+  method(props, chart);
 };

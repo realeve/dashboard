@@ -1,21 +1,29 @@
 import { textColor } from './index';
 import * as R from 'ramda';
 import G2 from '@antv/g2';
-import { IG2Config } from './g2_wind';
-interface IFacet extends IG2Config {
-  type: 'line' | 'bar' | 'column';
-}
-
+import { chartType, IFacet } from './g2_facet2';
 export default (
-  { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
+  {
+    data,
+    header,
+    type = 'bar',
+    normalize = false,
+    legend = 0,
+    x = 1,
+    y = 2,
+    showLegend = false,
+  }: IFacet,
   chart,
 ) => {
-  let chartType = ['column', 'bar'].includes(type) ? 'interval' : 'line';
   legend = String(legend);
   x = String(x);
   y = String(y);
 
-  chart.source(data);
+  chart.source(data, {
+    [legend]: {
+      sync: true,
+    },
+  });
 
   if (showLegend) {
     chart.legend({
@@ -23,7 +31,8 @@ export default (
       attachLast: true,
     });
   }
-  if (['line', 'bar'].includes(type)) {
+
+  if (normalize && ['line', 'bar', 'point'].includes(type)) {
     let max = Math.max(...R.pluck(y)(data));
     chart.scale(y, {
       max,
@@ -54,21 +63,23 @@ export default (
 
   if (type === 'column') {
     chart.coord().transpose();
-  } else if (['line', 'bar'].includes(type)) {
+  } else if (['line', 'bar', 'point'].includes(type)) {
+    let xLen = R.uniq(R.pluck(x, data)).length;
     chart.scale(x, {
       range: [0, 1],
-      tickCount: 4,
+      tickCount: xLen > 4 ? 4 : xLen,
     });
   }
 
-  chart.facet('rect', {
+  chart.facet(type === 'point' ? 'list' : 'rect', {
     fields: [legend],
     ...showTitle,
     // 自动调整间距
     padding: [10, 0, 0, 5 + 13 * 4],
+    cols: legendData.length > 4 ? 4 : legendData.length, // 超过4个换行
     eachView: function eachView(view, facet) {
-      if (['line', 'bar'].includes(type) || facet.colIndex === 0) {
-        view.axis(['line', 'bar'].includes(type) ? y : x, {
+      if (['line', 'bar', 'point'].includes(type) || facet.colIndex === 0) {
+        view.axis(['line', 'bar', 'point'].includes(type) ? y : x, {
           label: {
             textStyle: {
               fill: textColor,
@@ -86,7 +97,7 @@ export default (
         });
       }
 
-      if (['line', 'bar'].includes(type)) {
+      if (['line', 'bar', 'point'].includes(type)) {
         view.axis(x);
       } else {
         if (facet.colIndex === 0) {
@@ -96,15 +107,17 @@ export default (
         }
       }
 
-      const color = getColor(facet.colValue);
+      const color = type === 'point' ? G2.Global.colors : getColor(facet.colValue);
 
-      view[chartType]()
-        .shape('smooth')
+      let chartView = view[chartType[type]]()
+        .shape(type === 'point' ? 'circle' : 'smooth')
         .opacity(0.8)
         .position(`${x}*${y}`)
-        .color(legend, color)
-        .label(y, function(value) {
-          const offset = ['line', 'bar'].includes(type) ? 10 : value < 25 ? 10 : -4;
+        .color(legend, color);
+
+      if (type !== 'point') {
+        chartView.label(y, function(value) {
+          const offset = ['line', 'bar', 'point'].includes(type) ? 10 : value < 25 ? 10 : -4;
           const fill = value < 25 ? textColor : '#ffffff';
           const textAlign = value < 25 ? 'start' : 'end';
           return {
@@ -119,6 +132,7 @@ export default (
             },
           };
         });
+      }
     },
   });
   chart.render();
