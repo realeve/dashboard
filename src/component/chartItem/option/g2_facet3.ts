@@ -12,7 +12,7 @@ export default (
 
   chart.source(data, {
     [legend]: {
-      sync: true,
+      sync: type !== 'line',
     },
     [y]: {
       sync: true,
@@ -27,9 +27,8 @@ export default (
   }
 
   let legendData = R.compose(R.uniq, R.pluck(legend))(data);
-  const getColor = type => {
+  const getColor = idx => {
     let colors = G2.Global.colors;
-    let idx = R.findIndex(item => item == type)(legendData);
     return colors[idx % colors.length];
   };
 
@@ -94,7 +93,7 @@ export default (
         }
       }
 
-      const color = type === 'point' ? G2.Global.colors : getColor(facet.colValue);
+      const color = type === 'point' ? G2.Global.colors : getColor(facet.colIndex);
 
       let chartView = view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')

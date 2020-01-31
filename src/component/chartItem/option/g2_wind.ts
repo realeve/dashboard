@@ -48,15 +48,22 @@ export default (
         },
   );
 
+  let textStyle = {
+    fill: textColor, // 文本的颜色
+    fontSize: 12,
+  };
+
   chart.axis(x, {
     line: null,
     tickLine: null,
     label: {
-      textStyle: {
-        textAlign: isVertical ? 'right' : 'center', // 文本对齐方向，可取值为： start middle end
-        fill: textColor, // 文本的颜色
-        textBaseline: 'middle', // 文本基准线，可取 top middle bottom，默认为middle
-      },
+      textStyle: isVertical
+        ? textStyle
+        : {
+            ...textStyle,
+            textAlign: isVertical ? 'right' : 'center', // 文本对齐方向，可取值为： start middle end
+            textBaseline: 'middle', // 文本基准线，可取 top middle bottom，默认为middle
+          },
       offset: isVertical ? 5 : 15,
     },
   });
@@ -103,7 +110,6 @@ export default (
         .interval()
         .position(`${x}*${y}`)
         .color(legend, [color, '#ebedf0'])
-        // .size(30)
         .label(y, function(val) {
           if (!isVertical) {
             return {

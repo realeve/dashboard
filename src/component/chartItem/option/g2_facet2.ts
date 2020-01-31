@@ -25,7 +25,7 @@ const lineNBar = (
       sync: true,
     },
     [legend]: {
-      sync: true,
+      sync: type !== 'line',
     },
   });
 
@@ -36,11 +36,8 @@ const lineNBar = (
     });
   }
 
-  let legendData = R.compose(R.uniq, R.pluck(legend))(data);
-
-  const getColor = type => {
+  const getColor = idx => {
     let colors = G2.Global.colors;
-    let idx = R.findIndex(item => item == type)(legendData);
     return colors[idx % colors.length];
   };
 
@@ -81,8 +78,7 @@ const lineNBar = (
 
       view.axis(y, false);
 
-      const color = type === 'point' ? G2.Global.colors : getColor(facet.rowValue);
-
+      const color = type === 'point' ? G2.Global.colors : getColor(facet.rowIndex);
       view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
         .opacity(0.8)
@@ -97,6 +93,7 @@ const lineNBar = (
         });
     },
   });
+
   chart.render();
 };
 
@@ -110,6 +107,7 @@ const column = (
   chart.source(data, {
     [y]: {
       alias: header[y],
+      sync: true,
     },
   });
 
