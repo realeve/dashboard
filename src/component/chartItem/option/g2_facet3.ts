@@ -3,16 +3,7 @@ import * as R from 'ramda';
 import G2 from '@antv/g2';
 import { chartType, IFacet } from './g2_facet2';
 export default (
-  {
-    data,
-    header,
-    type = 'bar',
-    normalize = false,
-    legend = 0,
-    x = 1,
-    y = 2,
-    showLegend = false,
-  }: IFacet,
+  { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
   chart,
 ) => {
   legend = String(legend);
@@ -23,19 +14,15 @@ export default (
     [legend]: {
       sync: true,
     },
+    [y]: {
+      sync: true,
+    },
   });
 
   if (showLegend) {
     chart.legend({
       position: 'top-center',
       attachLast: true,
-    });
-  }
-
-  if (normalize && ['line', 'bar', 'point'].includes(type)) {
-    let max = Math.max(...R.pluck(y)(data));
-    chart.scale(y, {
-      max,
     });
   }
 

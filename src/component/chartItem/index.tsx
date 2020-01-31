@@ -280,6 +280,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
           />
         );
       case 'wind':
+        var direction: 'horizontal' | 'vertical' = Math.random() > 0.5 ? 'horizontal' : 'vertical';
         return (
           <G2
             option={{
@@ -307,10 +308,11 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               ],
               header: ['类型', '国家', '数值'],
               showLegend: true,
+              direction,
               legend: 0,
               x: 1,
               y: 2,
-              padding: [20, 0, 10, 0],
+              padding: direction === 'horizontal' ? [20, 0, 10, 30] : [20, 0, 10, 0],
               onMount: lib.g2Wind,
             }}
             renderer="svg"
@@ -366,7 +368,6 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               legend: 0,
               x: 1,
               y: 2,
-              normalize: true, // 数据归一化，不同列Y轴共享最大值
               padding: padding[type],
               onMount: lib.g2Facet3,
               type,
@@ -376,7 +377,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         );
       case 'facet2':
         seed = Math.random();
-        type = seed > 0 ? 'point' : seed > 0.5 ? 'line' : seed > 0.25 ? 'column' : 'bar';
+        type = seed > 0.75 ? 'point' : seed > 0.5 ? 'line' : seed > 0.25 ? 'column' : 'bar';
         padding = {
           line: [10, 20, 20, 0],
           point: [20, 20, 20, 0],

@@ -22,6 +22,7 @@ const lineNBar = (
   chart.source(data, {
     [y]: {
       alias: header[y],
+      sync: true,
     },
     [legend]: {
       sync: true,

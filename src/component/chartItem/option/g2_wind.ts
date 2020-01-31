@@ -8,43 +8,57 @@ export interface IG2Config {
   x?: string | number;
   y?: string | number;
   showLegend?: boolean;
+  direction?: 'horizontal' | 'vertical';
   [key: string]: any;
 }
 export default (
-  { data, header, legend = 0, x = 1, y = 2, showLegend = true }: IG2Config,
+  { data, header, legend = 0, x = 1, y = 2, showLegend = true, direction = 'vertical' }: IG2Config,
   chart,
 ) => {
   legend = String(legend);
   x = String(x);
   y = String(y);
+  const isVertical = direction === 'vertical';
 
-  let val = R.pluck([y])(data);
   let xLen = R.map(item => item.length)(R.pluck([x])(data));
 
   //别名
   chart.scale(header.map(alias => ({ alias })));
+  let yConfig = {
+    nice: false,
+    alias: header[y],
+    sync: true,
+  };
 
   chart.source(data, {
-    [y]: {
-      nice: false,
-      alias: header[y],
-      max: Math.max(...val),
-    },
+    [y]: yConfig,
   });
 
-  chart.axis(y, false);
+  chart.axis(
+    y,
+    isVertical
+      ? false
+      : {
+          grid: null,
+          label: {
+            textStyle: {
+              fill: textColor, // 文本的颜色
+            },
+          },
+        },
+  );
+
   chart.axis(x, {
     line: null,
     tickLine: null,
     label: {
       textStyle: {
-        textAlign: 'right', // 文本对齐方向，可取值为： start middle end
+        textAlign: isVertical ? 'right' : 'center', // 文本对齐方向，可取值为： start middle end
         fill: textColor, // 文本的颜色
         textBaseline: 'middle', // 文本基准线，可取 top middle bottom，默认为middle
       },
-      offset: 5,
+      offset: isVertical ? 5 : 15,
     },
-    offset: 5,
   });
 
   if (showLegend) {
@@ -68,26 +82,37 @@ export default (
       }
     : { showTitle: false };
 
-  chart.coord().transpose();
+  if (isVertical) {
+    chart.coord().transpose();
+  }
+
   chart.facet('mirror', {
     fields: [legend],
     autoSetAxis: false,
-    transpose: true,
+    transpose: isVertical,
     ...showTitle,
     // 自动调整两侧间距
-    padding: [10, 5 + 13 * Math.max(...xLen), 0, 0],
+    padding: isVertical ? [10, 5 + 13 * Math.max(...xLen), 0, 0] : [0, 0, 30, 0],
     eachView: function eachView(view, facet) {
-      const facetIndex = facet.colIndex;
-      if (facetIndex === 0) {
-        view.axis(false);
+      const facetIndex = facet[isVertical ? 'colIndex' : 'rowIndex'];
+      if ((isVertical && facetIndex === 0) || (!isVertical && facetIndex > 0)) {
+        view.axis(x, false);
       }
       const color = facetIndex === 0 ? '#1890ff' : '#2fc25b';
       view
-        .intervalStack()
+        .interval()
         .position(`${x}*${y}`)
         .color(legend, [color, '#ebedf0'])
         // .size(30)
         .label(y, function(val) {
+          if (!isVertical) {
+            return {
+              offset: 10,
+              textStyle: {
+                fill: val < 15 ? textColor : '#fff',
+              },
+            };
+          }
           let offset = -4;
           let shadowBlur = 2;
           let textAlign = facetIndex === 1 ? 'end' : 'start';
