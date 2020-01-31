@@ -125,6 +125,14 @@ let chartList = [
     name: '旋风图',
     type: 'wind',
   },
+  {
+    name: '分面图_条形',
+    type: 'facet3',
+  },
+  {
+    name: '分面图_横向',
+    type: 'facet2',
+  },
 ];
 
 export default () => {

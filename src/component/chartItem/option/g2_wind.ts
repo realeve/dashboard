@@ -1,7 +1,7 @@
 import { textColor } from './index';
 import * as R from 'ramda';
 // JSON.stringify(data.map(item => Object.values(item)));
-interface IG2Config {
+export interface IG2Config {
   data: (string | number)[][];
   header: string[];
   legend?: string | number;
