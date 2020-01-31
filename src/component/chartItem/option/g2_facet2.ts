@@ -7,7 +7,7 @@ interface IFacet extends IG2Config {
 }
 
 export default (
-  { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IG2Config,
+  { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
   chart,
 ) => {
   legend = String(legend);
@@ -29,6 +29,8 @@ export default (
     let idx = R.findIndex(item => item == type)(legendData);
     return colors[idx % colors.length];
   };
+
+  // chart.coord().transpose();
 
   let showTitle = !showLegend
     ? {
@@ -62,9 +64,6 @@ export default (
         line: {
           lineWidth: 0.5,
         },
-        grid: null,
-      });
-      view.axis(y, {
         grid: null,
       });
 

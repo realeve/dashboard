@@ -18,6 +18,7 @@ import {
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
+import { Column } from '@antv/g2plot';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
@@ -316,6 +317,13 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
           />
         );
       case 'facet3':
+        let seed = Math.random();
+        let type: 'line' | 'bar' | 'column' = seed > 0.7 ? 'column' : seed > 0.4 ? 'line' : 'bar';
+        let padding = {
+          line: [20, 20, 30, 0],
+          bar: [20, 20, 30, 0],
+          column: [20, 0, 0, 10],
+        };
         return (
           <G2
             option={{
@@ -356,8 +364,9 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               legend: 0,
               x: 1,
               y: 2,
-              padding: [20, 0, 0, 10],
+              padding: padding[type],
               onMount: lib.g2Facet3,
+              type,
             }}
             renderer="svg"
           />

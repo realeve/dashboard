@@ -24,6 +24,14 @@ export const onMount = (
   let res = transformer({ data: val, x, y });
   let { data, scaleConfig } = res;
   chart.source(data, scaleConfig);
+
+  // dv.transform({
+  //   type: 'sort',
+  //   callback(a, b) {
+  //     return a.year - b.year;
+  //   }
+  // });
+
   //别名
   chart.scale(header.map(alias => ({ alias })));
 

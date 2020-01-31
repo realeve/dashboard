@@ -126,7 +126,7 @@ let chartList = [
     type: 'wind',
   },
   {
-    name: '分面图_条形',
+    name: '分面图_纵向',
     type: 'facet3',
   },
   {

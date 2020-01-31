@@ -2,10 +2,15 @@ import { textColor } from './index';
 import * as R from 'ramda';
 import G2 from '@antv/g2';
 import { IG2Config } from './g2_wind';
+interface IFacet extends IG2Config {
+  type: 'line' | 'bar' | 'column';
+}
+
 export default (
-  { data, header, legend = 0, x = 1, y = 2, showLegend = false }: IG2Config,
+  { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
   chart,
 ) => {
+  let chartType = ['column', 'bar'].includes(type) ? 'interval' : 'line';
   legend = String(legend);
   x = String(x);
   y = String(y);
@@ -16,6 +21,12 @@ export default (
     chart.legend({
       position: 'top-center',
       attachLast: true,
+    });
+  }
+  if (['line', 'bar'].includes(type)) {
+    let max = Math.max(...R.pluck(y)(data));
+    chart.scale(y, {
+      max,
     });
   }
 
@@ -41,7 +52,14 @@ export default (
       }
     : { showTitle: false };
 
-  chart.coord().transpose();
+  if (type === 'column') {
+    chart.coord().transpose();
+  } else if (['line', 'bar'].includes(type)) {
+    chart.scale(x, {
+      range: [0, 1],
+      tickCount: 4,
+    });
+  }
 
   chart.facet('rect', {
     fields: [legend],
@@ -49,8 +67,8 @@ export default (
     // 自动调整间距
     padding: [10, 0, 0, 5 + 13 * 4],
     eachView: function eachView(view, facet) {
-      if (facet.colIndex === 0) {
-        view.axis(x, {
+      if (['line', 'bar'].includes(type) || facet.colIndex === 0) {
+        view.axis(['line', 'bar'].includes(type) ? y : x, {
           label: {
             textStyle: {
               fill: textColor,
@@ -64,21 +82,29 @@ export default (
           line: {
             lineWidth: 0,
           },
+          grid: null,
         });
+      }
 
-        view.axis(y, false);
+      if (['line', 'bar'].includes(type)) {
+        view.axis(x);
       } else {
-        view.axis(false);
+        if (facet.colIndex === 0) {
+          view.axis(y, false);
+        } else {
+          view.axis(false);
+        }
       }
 
       const color = getColor(facet.colValue);
-      view
-        .interval()
+
+      view[chartType]()
+        .shape('smooth')
+        .opacity(0.8)
         .position(`${x}*${y}`)
         .color(legend, color)
-        // .size(20)
         .label(y, function(value) {
-          const offset = value < 25 ? 10 : -4;
+          const offset = ['line', 'bar'].includes(type) ? 10 : value < 25 ? 10 : -4;
           const fill = value < 25 ? textColor : '#ffffff';
           const textAlign = value < 25 ? 'start' : 'end';
           return {
@@ -86,7 +112,7 @@ export default (
             textStyle: {
               fill,
               fontSize: 12,
-              textAlign,
+              // textAlign,
               fontWeight: 300,
               shadowBlur: 2,
               shadowColor: 'rgba(0, 0, 0, .45)',
