@@ -1,4 +1,3 @@
-// import util from '@/component/echarts/themeColor';
 import G2 from '@antv/g2';
 
 export default (
@@ -40,7 +39,7 @@ export default (
     });
 
   if (color) {
-    interval.color(String(x), color === 'rainbow' ? G2.Global.colors_pie_16 : color); // util.getColor(data.length))
+    interval.color(String(x), color === 'rainbow' ? G2.Global.colors_pie_16 : color);
   }
 
   chart.legend(legend);

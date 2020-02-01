@@ -18,7 +18,6 @@ import {
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
-import { Column } from '@antv/g2plot';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
@@ -274,7 +273,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               header: ['指标', '值'],
               title: '这是一组标题',
               padding: 5,
-              ...lib.g2RadialBarChart,
+              onMount: lib.g2RadialBarChart,
             }}
             renderer="svg"
           />
@@ -440,6 +439,24 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
               onMount: lib.g2Rose,
             }}
             renderer="canvas"
+          />
+        );
+      case 'g2pielist':
+        return (
+          <G2
+            option={{
+              data: [
+                ['2A', 92.4],
+                ['3A', 88.6],
+                ['6T', 77.6],
+                ['7T', 78.6],
+              ],
+              header: ['品种', '好品率'],
+              innerPercent: 75,
+              padding: [0, 0, 0, 0],
+              onMount: lib.g2PieList,
+            }}
+            renderer="svg"
           />
         );
       default:

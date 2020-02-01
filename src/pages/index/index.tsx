@@ -133,6 +133,10 @@ let chartList = [
     name: '分面图_横向',
     type: 'facet2',
   },
+  {
+    name: '分面图_饼图',
+    type: 'g2pielist',
+  },
 ];
 
 export default () => {

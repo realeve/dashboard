@@ -31,12 +31,11 @@ export const transformer = ({ data: val, x, y }, chart) => {
 
 export const onMount = ({ data: val, x = 0, y = 1 }, chart) => {
   const { data: dv } = transformer({ data: val, x, y }, chart);
-  chart.source(dv);
-
-  chart.scale({
+  chart.source(dv, {
     x: { nice: false },
     y: { nice: false },
   });
+
   chart.axis(false);
   chart.legend('name', {
     position: 'bottom',

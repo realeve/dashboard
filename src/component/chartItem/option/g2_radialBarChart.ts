@@ -1,36 +1,19 @@
-import { getBarMax } from './radialBarChart';
 import { textColor } from './index';
-import * as R from 'ramda';
 
-// 数据转换器，外部数据变更时，将计算结果注入至source
-export const transformer = ({ data: val, x, y }) => {
-  let data = R.sort((a, b) => a[y] - b[y])(val);
-  let max = getBarMax(data, y);
-
-  return {
-    data,
-    scaleConfig: {
-      [y]: {
-        max,
-      },
-    },
-  };
-};
-
-export const onMount = (
-  { data: val, header, title = '', x = 0, y = 1, color = '#8543e0', innerPercent = 20 },
+export default (
+  { data, header, title = '', x = 0, y = 1, color = '#8543e0', innerPercent = 20 },
   chart,
 ) => {
-  let res = transformer({ data: val, x, y });
-  let { data, scaleConfig } = res;
-  chart.source(data, scaleConfig);
+  let dv = chart.source(data, {
+    [y]: { scale: true },
+  });
 
-  // dv.transform({
-  //   type: 'sort',
-  //   callback(a, b) {
-  //     return a.year - b.year;
-  //   }
-  // });
+  dv.transform({
+    type: 'sort',
+    callback(a, b) {
+      return a[y] - b[y];
+    },
+  });
 
   //别名
   chart.scale(header.map(alias => ({ alias })));
