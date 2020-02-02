@@ -137,13 +137,17 @@ let chartList = [
     name: '分面图_饼图',
     type: 'g2pielist',
   },
+  {
+    name: '带详情的饼图',
+    type: 'g2pieother',
+  },
 ];
 
 export default () => {
   const [state, setState] = useSetState({
     layouts: {},
     widgets: [],
-    borderName: '边框29',
+    borderName: '边框' + Math.ceil(Math.random() * 28),
   });
 
   // 改由文件加载

@@ -1,3 +1,4 @@
+import { textColor } from './index';
 import util from '@/component/echarts/themeColor';
 import echarts from 'echarts';
 export interface IGardientLine {
@@ -82,7 +83,7 @@ export default ({ yAxis = true, smooth = true, data, scale = 1 }: IGardientLine)
       axisLabel: {
         textStyle: {
           fontSize: 14 * scale,
-          color: '#9aa8d4',
+          color: textColor,
         },
       },
     },
@@ -99,13 +100,13 @@ export default ({ yAxis = true, smooth = true, data, scale = 1 }: IGardientLine)
         inside: true,
         length: 10 * scale,
         lineStyle: {
-          color: '#9aa8d4',
+          color: textColor,
         },
       },
       axisLabel: {
         show: yAxis,
         textStyle: {
-          color: '#9aa8d4',
+          color: textColor,
           fontSize: 14 * scale,
         },
       },

@@ -459,6 +459,37 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             renderer="svg"
           />
         );
+      case 'g2pieother':
+        return (
+          <G2
+            option={{
+              data: [
+                ['微博', 13.33],
+                ['微博1', 5.33],
+                ['微博2', 3.33],
+                ['微博3', 12.33],
+                ['微博4', 13.33],
+                ['微博5', 14.33],
+                ['微博6', 15.33],
+                ['论坛', 1.77],
+                ['网站', 1.44],
+                ['微信', 1.12],
+                ['客户端', 1.05],
+                ['新闻', 0.81],
+                ['视频', 0.39],
+                ['博客', 0.37],
+                ['报刊', 0.17],
+              ],
+              header: ['类型', '数值'],
+              innerPercent: 10,
+              pieItem: 7,
+              otherChart: 'bar',
+              padding: [0, 30, 0, 0],
+              ...lib.g2PieOther,
+            }}
+            renderer="svg"
+          />
+        );
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

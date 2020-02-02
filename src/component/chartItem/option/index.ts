@@ -20,3 +20,5 @@ export { default as g2Wind } from './g2_wind';
 export { default as g2Facet3 } from './g2_facet3';
 export { default as g2Facet2 } from './g2_facet2';
 export { default as g2PieList } from './g2_pieList';
+import * as g2PieOther from './g2_pieOther';
+export { g2PieOther };
