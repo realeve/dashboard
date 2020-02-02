@@ -490,6 +490,30 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             renderer="svg"
           />
         );
+      case 'g2piespider':
+        return (
+          <G2
+            option={{
+              data: [
+                ['居住', 7140],
+                ['食品烟酒', 3875],
+                ['交通通信', 2267],
+                ['教育、文化、娱乐', 1853],
+                ['医疗保健', 1685],
+                ['衣着', 1179],
+                ['生活用品及服务', 1088],
+                ['其他用品及服务', 583],
+              ],
+              header: ['类型', '数值'],
+              innerPercent: 50,
+              color: null,
+              padding: [20, 0, 0, 0],
+              onMount: lib.g2PieSpider,
+            }}
+            // renderer="svg"
+          />
+        );
+
       default:
         return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
     }

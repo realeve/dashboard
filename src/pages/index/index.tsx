@@ -141,6 +141,10 @@ let chartList = [
     name: '带详情的饼图',
     type: 'g2pieother',
   },
+  {
+    name: '带标注的饼图',
+    type: 'g2piespider',
+  },
 ];
 
 export default () => {

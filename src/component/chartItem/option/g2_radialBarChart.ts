@@ -1,18 +1,21 @@
 import { textColor } from './index';
+import { DataSet } from '@antv/data-set';
 
 export default (
   { data, header, title = '', x = 0, y = 1, color = '#8543e0', innerPercent = 20 },
   chart,
 ) => {
-  let dv = chart.source(data, {
-    [y]: { scale: true },
-  });
-
+  const ds = new DataSet();
+  const dv = ds.createView().source(data);
   dv.transform({
     type: 'sort',
     callback(a, b) {
       return a[y] - b[y];
     },
+  });
+
+  chart.source(dv, {
+    [y]: { scale: true },
   });
 
   //别名
