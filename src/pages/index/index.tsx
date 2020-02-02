@@ -74,6 +74,10 @@ let chartList = [
     type: 'flipboard',
   },
   {
+    name: '滚动翻牌器',
+    type: 'digitalscroll',
+  },
+  {
     name: '百分比环图',
     type: 'RingChart',
   },

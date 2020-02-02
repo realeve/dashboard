@@ -14,6 +14,7 @@ import {
   FlipBoard,
   Pie,
   Percent,
+  DigitalScroll,
 } from '@/component/widget';
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
@@ -120,6 +121,8 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
+      case 'digitalscroll':
+        return <DigitalScroll title="某指标" value={13362.438} decimals={2} suffix="元" />;
 
       case 'roundbar':
         return (
