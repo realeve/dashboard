@@ -3,7 +3,7 @@
   .title {
     color: @textColor;
     height: 45px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
     display: flex;
   }
@@ -11,15 +11,26 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    i {
-      width: 33px;
-      height: 47px;
+    .num {
+      width: 31.695px;
+      height: 53.693px;
       display: inline-block;
-      background: url('./number1.png') no-repeat;
+      background: url('./number.svg') no-repeat;
+      background-size: 100%;
+      // background: url('./number.png') no-repeat;
       background-position: 0 0;
       transition: background-position cubic-bezier(0.4, 0, 0.2, 1) 0.8s;
-      margin-right: 10px;
+      margin: 0 10px;
     }
+    .theme2 {
+      background-image: url('./number_white.svg');
+    }
+
+    .theme1 {
+      outline: 1px solid #0996f9;
+      box-shadow: 0px 0px 6px 1px #40e4e87a;
+    }
+
     .item {
       color: #fff;
       font-family: Acens;
@@ -29,12 +40,12 @@
       margin-right: 4px;
       box-sizing: content-box;
       text-align: center;
-      margin-right: 10px;
+      margin: 0 10px;
     }
     span {
       .item;
       color: @textColor;
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }

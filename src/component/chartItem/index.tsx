@@ -122,7 +122,9 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
-        return <DigitalScroll title="某指标" value={13362.438} decimals={2} suffix="元" />;
+        return (
+          <DigitalScroll title="某指标" value={1382.48} theme="theme1" decimals={2} suffix="元" />
+        );
 
       case 'roundbar':
         return (

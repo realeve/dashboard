@@ -14,8 +14,24 @@ export interface ICountUp extends CountUpProps {
   decimals?: number;
   className?: string;
   style?: React.CSSProperties;
+  theme?: 'transparent' | 'theme1' | 'theme2';
   [key: string]: any;
 }
+
+let numId = {
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  '.': 10,
+  ',': 11,
+};
 
 export default ({
   title = '',
@@ -27,7 +43,8 @@ export default ({
   style,
   duration = 0.8,
   scale = 1.2,
-  ...props
+  theme = 'theme1',
+  // ...props
 }: ICountUp) => {
   const [inited, setInited] = useState(false);
   const [val, setVal] = useState<string | number>(
@@ -64,18 +81,19 @@ export default ({
         {thouandsNum(val, decimals)
           .split('')
           .map((num, idx) => {
-            if (['.', ','].includes(num)) {
-              return (
-                <div className={styles.item} key={idx}>
-                  {num}
-                </div>
-              );
-            }
+            // if (['.', ','].includes(num)) {
+            //   return (
+            //     <div className={styles.item} key={idx}>
+            //       {num}
+            //     </div>
+            //   );
+            // }parseInt(num)
             return (
-              <i
+              <div
                 key={idx}
+                className={classnames(styles.num, styles[theme])}
                 style={{
-                  backgroundPosition: `0 ${-parseInt(num) * 58}px`,
+                  backgroundPosition: `0 ${-numId[num] * 61.1}px`, //58
                   transitionDuration: `${duration} s`,
                   transform: `scale(${scale})`,
                 }}
