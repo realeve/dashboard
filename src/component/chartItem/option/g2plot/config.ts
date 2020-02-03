@@ -11,7 +11,8 @@ export interface IG2Config {
   group?: boolean; //分组
   point?: boolean; // 显示曲线上的点
   area?: boolean; //曲面图
-  step?: boolean; //阶梯图
+  step?: null | 'hv' | 'vh' | 'vhv' | 'hvh'; //阶梯图
+  percent?: boolean; //百分比堆叠图
   thumbnail?: boolean; // 显示缩略图
   labelStyle?: 'line' | 'area'; //标签跟随样式
   [key: string]: any;

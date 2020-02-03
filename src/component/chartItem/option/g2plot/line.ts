@@ -3,6 +3,7 @@ import { IG2Config } from './config';
 const chartType = {
   line: 'Line',
   bar: 'Column',
+  column: 'Bar',
 };
 
 export interface IG2PlotConfig {
@@ -47,10 +48,12 @@ export interface IG2PlotConfig {
   interactions?: {
     type: string;
     cfg: {
-      start: number;
-      end: number;
+      start?: number;
+      end?: number;
+      type?: string;
     };
   }[];
+  step?: 'hv' | 'vh' | 'vhv' | 'hvh';
 }
 
 export default ({
@@ -67,9 +70,11 @@ export default ({
   stack = false,
   area = false,
   thumbnail = false,
-  step = false,
+  step = null,
   labelStyle = null,
+  percent = false,
 }: IG2Config) => {
+  // handle data index
   legend = String(legend);
   x = String(x);
   y = String(y);
@@ -77,11 +82,20 @@ export default ({
     legend = undefined;
   }
 
+  // 条形图需要交换x,y轴
+  if (type === 'column') {
+    let temp = x;
+    x = y;
+    y = temp;
+  }
+
+  let _type = chartType[type];
+
   let configs: IG2PlotConfig = {
     smooth,
     label: {
       visible: true,
-      type: labelStyle || (area ? 'area' : 'line'),
+      type: labelStyle || (percent || area ? 'area' : 'line'),
       autoScale: true,
     },
     legend: {
@@ -111,17 +125,24 @@ export default ({
     },
   };
 
-  let _type = chartType[type];
   if (area) {
     _type = 'Area';
+    stack = true;
   }
 
   if (step) {
     _type = 'Step' + _type;
+    if (Boolean(step) === true) {
+      step = 'hv';
+    }
 
     // step 模式下不支持Group
     stack = false;
     group = false;
+    configs = {
+      ...configs,
+      step,
+    };
   }
 
   if (group) {
@@ -146,18 +167,36 @@ export default ({
     configs.seriesField = legend;
   }
 
+  if (percent) {
+    if (type === 'line') {
+      _type = 'PercentageStackArea';
+    } else if (type === 'bar') {
+      _type = 'PercentageStackColumn';
+    } else if (type === 'column') {
+      _type = 'PercentageStackBar';
+    }
+  }
+
   if (thumbnail) {
+    let thumbCfg =
+      type === 'column'
+        ? {
+            type: 'scrollbar',
+            cfg: {
+              type: 'horizontal',
+            },
+          }
+        : {
+            type: 'slider',
+            cfg: {
+              start: 0,
+              end: 1,
+            },
+          };
+
     configs = {
       ...configs,
-      interactions: [
-        {
-          type: 'slider',
-          cfg: {
-            start: 0,
-            end: 1,
-          },
-        },
-      ],
+      interactions: [thumbCfg],
     };
   }
 
