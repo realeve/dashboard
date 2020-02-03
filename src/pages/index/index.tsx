@@ -47,6 +47,10 @@ let chartList = [
     type: 'line',
   },
   {
+    name: '瀑布图',
+    type: 'waterfall',
+  },
+  {
     name: '雷达图',
     type: 'radar',
   },

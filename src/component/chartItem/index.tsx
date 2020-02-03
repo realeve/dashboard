@@ -615,6 +615,21 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
         });
 
         return <AChart option={option} />;
+      case 'waterfall':
+        option = g2PlotLib.waterfall({
+          header: ['类别', '数值'],
+          data: [
+            ['日用品', 120],
+            ['伙食费', 900],
+            ['交通费', 200],
+            ['水电费', 300],
+            ['房租', 1200],
+            ['商场消费', 1000],
+            ['应酬红包', -200],
+          ],
+        });
+
+        return <AChart option={option} />;
 
       default:
         return <G2Plot config={config} onMockChange={result => onMockChange(result, idx)} />;
