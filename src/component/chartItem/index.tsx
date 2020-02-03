@@ -588,7 +588,32 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
           smooth: false,
           thumbnail: false,
         });
-        console.log(option);
+
+        return <AChart option={option} />;
+
+      case 'radar':
+        option = g2PlotLib.radar({
+          header: ['角色', '维度', '数值'],
+          data: [
+            ['孙尚香', '防御', 5],
+            ['黄忠', '防御', 49],
+            ['孙尚香', '攻击', 6],
+            ['黄忠', '攻击', 44],
+            ['孙尚香', '速度', 61],
+            ['黄忠', '速度', 33],
+            ['孙尚香', '穿透', 55],
+            ['黄忠', '穿透', 75],
+            ['孙尚香', '护甲', 68],
+            ['黄忠', '护甲', 4],
+            ['孙尚香', '暴击', 45],
+            ['黄忠', '暴击', 75],
+          ],
+          legend: 0,
+          x: 1,
+          y: 2,
+          showLegend: false,
+        });
+
         return <AChart option={option} />;
 
       default:

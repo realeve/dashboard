@@ -4,7 +4,7 @@ import { IG2Config } from './config';
 export interface IG2PlotConfig {
   angleField: string;
   radiusField: string;
-  seriesField: string;
+  seriesField?: string;
   angleAxis: {
     title: {
       text: any;
@@ -23,9 +23,8 @@ export default ({ data, header, legend = 0, x = 1, y = 2 }: IG2Config) => {
   y = String(y);
 
   let configs: IG2PlotConfig = {
-    angleField: legend,
+    angleField: x,
     radiusField: y,
-    seriesField: x,
     angleAxis: {
       title: {
         text: header[legend],
@@ -37,6 +36,10 @@ export default ({ data, header, legend = 0, x = 1, y = 2 }: IG2Config) => {
       },
     },
   };
+
+  if (typeof legend !== 'undefined') {
+    configs.seriesField = legend;
+  }
 
   return {
     data,
