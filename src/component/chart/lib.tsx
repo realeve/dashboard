@@ -3,7 +3,7 @@ import { AutoChartOptions } from '@/lib/chart-advisor/src';
 
 export type TMockChange = (result: { config?: any; data: any[] }) => void;
 export interface IAChart extends AutoChartOptions {
-  data: any[];
+  data: (string | number)[][];
   onMockChange?: TMockChange;
   [key: string]: any;
 }

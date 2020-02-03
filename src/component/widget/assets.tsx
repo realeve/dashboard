@@ -212,18 +212,21 @@ assets.borders = {
 assets.pics = {
   紫色圆形装饰动图gif: {
     url: require('./img-templet/pic-228-2cff2e714fff18e2.gif'),
+    node: true,
   },
   蓝色频谱音频装饰动图gif: {
     url: require('./img-templet/pic-230-1abf980f5d966f30.gif'),
   },
   紫色圆形频谱音频装饰动图gif: {
     url: require('./img-templet/pic-232-f5b366790d3979f7.gif'),
+    node: true,
   },
   蓝色橙色圆形3D效果科技装饰动图gif: {
     url: require('./img-templet/pic-233-e01e793cd1bdcdc9.gif'),
   },
   蓝色直线线条装饰动图gif: {
     url: require('./img-templet/pic-237-dc21156e2c9fe530.gif'),
+    node: true,
   },
   蓝色橙色标尺装饰动图gif: {
     url: require('./img-templet/pic-238-0e821128f121a815.gif'),
@@ -239,6 +242,7 @@ assets.pics = {
   },
   蓝色透明圆形科技图形装饰: {
     url: require('./img-templet/pic-GhM7QJJFM28Z8jcP.svg'),
+    animate: 'rotateZ',
   },
   绿色科技电路电子透明装饰图标矢量: {
     url: require('./img-templet/pic-3moMpFVj89T6bVMB.svg'),
@@ -248,18 +252,23 @@ assets.pics = {
   },
   红色灰色透明圆形六边形科技内容容器: {
     url: require('./img-templet/pic-9-e2cbd920849c06fe.svg'),
+    animate: 'rotateZ',
   },
   蓝色透明科技直线边框装饰图标图形1: {
     url: require('./img-templet/pic-27-07e1d5cca344220f.svg'),
+    node: true,
   },
   粉色透明科技圆形内容容器: {
     url: require('./img-templet/pic-46-1d3103c5e4f4b2a2.svg'),
+    animate: 'rotateZ',
+    node: true,
   },
   蓝色黄色透明圆形科技多内容容器: {
     url: require('./img-templet/pic-51-0da4922447ec2bed.svg'),
   },
   红色黑色透明圆形柱状装饰内容容器: {
     url: require('./img-templet/pic-108-eab4f8f97693c58a.svg'),
+    node: true,
   },
   蓝色透明矩形方形科技异形内容容器: {
     url: require('./img-templet/pic-200-641cc54ae2668ab9.svg'),

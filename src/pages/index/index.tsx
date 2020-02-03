@@ -39,19 +39,16 @@ const maxCols = 12;
 let chartList = [
   {
     name: '柱状图',
-    type: 'GroupColumn',
+    type: 'bar',
+    group: true,
   },
   {
     name: '曲线图',
-    type: 'Line',
-  },
-  {
-    name: '堆叠柱形图',
-    type: 'StackColumn',
+    type: 'line',
   },
   {
     name: '雷达图',
-    type: 'Radar',
+    type: 'radar',
   },
   {
     name: '占位区域',
@@ -146,8 +143,12 @@ let chartList = [
     type: 'g2pieother',
   },
   {
-    name: '带标注的饼图',
+    name: '蜘蛛布局饼图',
     type: 'g2piespider',
+  },
+  {
+    name: '装饰挂件',
+    type: 'decotation',
   },
 ];
 

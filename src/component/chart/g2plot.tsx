@@ -41,6 +41,7 @@ export const AChart = ({
 
     showDefaultOption(type);
 
+    console.log(g2plot, type, option);
     let _plot = new g2plot[type](
       instance.current,
       {

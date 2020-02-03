@@ -69,7 +69,7 @@ export default ({
   }, []);
 
   useInterval(() => {
-    let nextVal = Number(val) + Number((Math.random() * 500).toFixed(decimals));
+    let nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
     setVal(nextVal);
   }, 2000);
 

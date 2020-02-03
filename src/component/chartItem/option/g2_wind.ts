@@ -1,16 +1,9 @@
 import { textColor } from './index';
 import * as R from 'ramda';
-// JSON.stringify(data.map(item => Object.values(item)));
-export interface IG2Config {
-  data: (string | number)[][];
-  header: string[];
-  legend?: string | number;
-  x?: string | number;
-  y?: string | number;
-  showLegend?: boolean;
-  direction?: 'horizontal' | 'vertical';
-  [key: string]: any;
-}
+export { IG2Config } from './g2plot/config';
+
+import { IG2Config } from './g2plot/config';
+
 export default (
   { data, header, legend = 0, x = 1, y = 2, showLegend = true, direction = 'vertical' }: IG2Config,
   chart,

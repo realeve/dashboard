@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 // AVA 图表
-import GridItem from '@/component/chart/chart';
+import G2Plot from '@/component/chart/chart';
+
+import { AChart } from '@/component/chart/g2plot';
 
 import { CloseOutlined } from '@ant-design/icons';
 
@@ -15,10 +17,12 @@ import {
   Pie,
   Percent,
   DigitalScroll,
+  Decotation,
 } from '@/component/widget';
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
+import * as g2PlotLib from './option/g2plot';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
@@ -33,6 +37,12 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
   // }, 3000);
 
   switch (itemType) {
+    case 'decotation':
+      return (
+        <Decotation name="粉色蓝色透明圆形科技图标内容容器" {...props}>
+          <span>65%</span>
+        </Decotation>
+      );
     case 'progress':
       return <ProgressBar percent={43.3} title="指标占比" {...props} />;
     case 'scrollboard':
@@ -122,9 +132,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
       case 'flipboard':
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
-        return (
-          <DigitalScroll title="某指标" value={1382.48} theme="theme1" decimals={2} suffix="元" />
-        );
+        return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
 
       case 'roundbar':
         return (
@@ -518,9 +526,71 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
             // renderer="svg"
           />
         );
+      case 'bar':
+        let stack = Math.random() > 0.5;
+        let group = !stack;
+        let option = g2PlotLib.line({
+          header: ['类型', '日期', '数值'],
+          data: [
+            ['download', '2018/8/1', 4623],
+            ['register', '2018/8/1', 2208],
+            ['bill', '2018/8/1', 182],
+            ['download', '2018/8/2', 6145],
+            ['register', '2018/8/2', 2016],
+            ['bill', '2018/8/2', 257],
+            ['download', '2018/8/3', 508],
+            ['register', '2018/8/3', 2916],
+            ['bill', '2018/8/3', 289],
+            ['download', '2018/8/4', 6268],
+            ['register', '2018/8/4', 4512],
+            ['bill', '2018/8/4', 428],
+            ['download', '2018/8/5', 6411],
+            ['register', '2018/8/5', 8281],
+            ['bill', '2018/8/5', 619],
+          ],
+          showLegend: true,
+          type: 'bar',
+          stack,
+          group,
+        });
+        return <AChart option={option} />;
+      case 'line':
+        option = g2PlotLib.line({
+          header: ['类型', '日期', '数值'],
+          data: [
+            ['download', '2018/8/1', 4623],
+            ['register', '2018/8/1', 2208],
+            ['bill', '2018/8/1', 182],
+            ['download', '2018/8/2', 6145],
+            ['register', '2018/8/2', 2016],
+            ['bill', '2018/8/2', 257],
+            ['download', '2018/8/3', 508],
+            ['register', '2018/8/3', 2916],
+            ['bill', '2018/8/3', 289],
+            ['download', '2018/8/4', 6268],
+            ['register', '2018/8/4', 4512],
+            ['bill', '2018/8/4', 428],
+            ['download', '2018/8/5', 6411],
+            ['register', '2018/8/5', 8281],
+            ['bill', '2018/8/5', 619],
+          ],
+          legend: 0,
+          x: 1,
+          y: 2,
+          type: 'line',
+          step: true,
+          // area: true,
+          stack: true,
+          showLegend: false,
+          point: false,
+          smooth: false,
+          thumbnail: false,
+        });
+        console.log(option);
+        return <AChart option={option} />;
 
       default:
-        return <GridItem config={config} onMockChange={result => onMockChange(result, idx)} />;
+        return <G2Plot config={config} onMockChange={result => onMockChange(result, idx)} />;
     }
   };
 

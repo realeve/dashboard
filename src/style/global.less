@@ -1,0 +1,48 @@
+.hcenter {
+  display: flex;
+  justify-content: center;
+}
+.vcenter {
+  display: flex;
+  align-items: center;
+}
+.center {
+  .hcenter;
+  align-items: center;
+}
+
+.alignRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.alignColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes rotateX {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+@keyframes rotateY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes rotateZ {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
