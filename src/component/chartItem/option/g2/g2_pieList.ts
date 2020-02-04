@@ -1,7 +1,7 @@
 import insertCss from 'insert-css';
 import G2 from '@antv/g2';
 import { IG2Config } from './g2_wind';
-import { textColor } from './index';
+import { textColor } from '../index';
 
 export default (
   { data: val, header, title = '', x = 0, y = 1, max = 100, innerPercent = 75 }: IG2Config,

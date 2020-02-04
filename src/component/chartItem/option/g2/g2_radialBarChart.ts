@@ -1,4 +1,4 @@
-import { textColor } from './index';
+import { textColor } from '../index';
 import { DataSet } from '@antv/data-set';
 
 export default (

@@ -1,5 +1,5 @@
 import insertCss from 'insert-css';
-import { textColor } from './index';
+import { textColor } from '../index';
 import { IG2Config } from './g2_wind';
 import { DataSet } from '@antv/data-set';
 

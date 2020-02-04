@@ -1,7 +1,7 @@
 import insertCss from 'insert-css';
 import G2 from '@antv/g2';
 import { IG2Config } from './g2_wind';
-import { textColor } from './index';
+import { textColor } from '../index';
 import * as R from 'ramda';
 export const transformer = ({ data: val, x, y, pieItem }, chart) => {
   let _data = R.map(item => ({ type: item[x], value: item[y] }))(val);

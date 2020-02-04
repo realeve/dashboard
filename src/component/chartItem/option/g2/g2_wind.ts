@@ -1,8 +1,7 @@
-import { textColor } from './index';
+import { textColor } from '../index';
 import * as R from 'ramda';
-export { IG2Config } from './g2plot/config';
-
-import { IG2Config } from './g2plot/config';
+export { IG2Config } from '../g2plot/config';
+import { IG2Config } from '../g2plot/config';
 
 export default (
   { data, header, legend = 0, x = 1, y = 2, showLegend = true, direction = 'vertical' }: IG2Config,

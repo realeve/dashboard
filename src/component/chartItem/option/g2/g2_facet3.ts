@@ -1,4 +1,4 @@
-import { textColor } from './index';
+import { textColor } from '../index';
 import * as R from 'ramda';
 import G2 from '@antv/g2';
 import { chartType, IFacet } from './g2_facet2';
