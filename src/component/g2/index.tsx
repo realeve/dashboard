@@ -40,6 +40,7 @@ export default ({
 
   // 数据更新
   useEffect(() => {
+    // console.log('will update');
     if (!chart || !data) {
       return;
     }

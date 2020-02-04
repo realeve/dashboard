@@ -27,3 +27,7 @@ export { default as g2PieSpider } from './g2/g2_pieSpider';
 
 import * as waterfall from './g2/waterfall';
 export { waterfall };
+
+// min-max-average区间图
+import * as rangeLine from './g2/rangeLine';
+export { rangeLine };

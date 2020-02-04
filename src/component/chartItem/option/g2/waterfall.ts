@@ -1,6 +1,8 @@
 import { Util, Shape, Global } from '@antv/g2';
 // import { textColor } from '../index';
 let textColor = 'rgba(255, 255, 255, 0.45)';
+import * as R from 'ramda';
+
 function getRectPath(points) {
   const path = [];
   for (let i = 0; i < points.length; i++) {
@@ -26,10 +28,37 @@ function getFillAttrs(cfg) {
   return attrs;
 }
 
+export const handleAxisStyle = (chart, { x, y }) => {
+  let fieldColor = {
+    label: {
+      textStyle: {
+        fill: textColor,
+      },
+    },
+  };
+
+  chart.axis(x, {
+    tickLine: {
+      visible: false,
+    },
+    ...fieldColor,
+  });
+  chart.axis(y, {
+    grid: {
+      lineStyle: {
+        stroke: 'rgba(255, 255, 255, 0.15)',
+        lineWidth: 1,
+        lineDash: [0, 0],
+      },
+    },
+    ...fieldColor,
+  });
+};
+
 // 数据转换器，外部数据变更时，将计算结果注入至source
 export const transformer = ({ data: val, x, y }) => {
   let sum = val.reduce((a, b) => a + b[1], 0);
-  let data = [...val, ['总计', sum]];
+  let data = [...R.clone(val), ['总计', sum]];
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
@@ -105,25 +134,7 @@ export const onMount = (
     ],
   });
 
-  let fieldColor = {
-    label: {
-      textStyle: {
-        fill: textColor,
-      },
-    },
-  };
-
-  chart.axis(x, fieldColor);
-  chart.axis(y, {
-    grid: {
-      lineStyle: {
-        stroke: 'rgba(255, 255, 255, 0.15)',
-        lineWidth: 1,
-        lineDash: [0, 0],
-      },
-    },
-    ...fieldColor,
-  });
+  handleAxisStyle(chart, { x, y });
 
   chart
     .interval()

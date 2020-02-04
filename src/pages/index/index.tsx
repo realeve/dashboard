@@ -151,6 +151,10 @@ let chartList = [
     type: 'g2piespider',
   },
   {
+    name: '区间曲线图',
+    type: 'rangeline',
+  },
+  {
     name: '装饰挂件',
     type: 'decotation',
   },

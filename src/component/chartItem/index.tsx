@@ -23,17 +23,32 @@ import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
+import { useInterval } from 'react-use';
+import * as R from 'ramda';
 
 export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
+  // const [data, setData] = useState({
+  //   header: ['类别', '数值'],
+  //   data: [
+  //     ['日用品', 120],
+  //     ['伙食费', 900],
+  //     ['交通费', 200],
+  //     ['水电费', 300],
+  //     ['房租', 1200],
+  //     ['商场消费', 1000],
+  //     ['应酬红包', -200],
+  //   ],
+  // });
 
   // useInterval(() => {
-  //   if (!['pie', 'rose'].includes(itemType) || !instance) {
-  //     return;
-  //   }
 
-  //   console.log(instance);
-  //   console.log(instance.getOption());
+  //   let res = R.clone(data);
+  //   res.data = res.data.map(item => {
+  //     item[1] += Math.random() * 200;
+  //     return item;
+  //   });
+  //   setData(res);
   // }, 3000);
 
   switch (itemType) {
@@ -616,6 +631,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
 
         return <AChart option={option} />;
       case 'waterfall':
+        // g2 plot 的waterfall存在 Y轴样式的问题，暂时用g2实现
         // option = g2PlotLib.waterfall({
         //   header: ['类别', '数值'],
         //   data: [
@@ -631,23 +647,41 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
 
         // return <AChart option={option} />;
 
+        option = {
+          header: ['类别', '数值'],
+          data: [
+            ['日用品', 120],
+            ['伙食费', 900],
+            ['交通费', 200],
+            ['水电费', 300],
+            ['房租', 1200],
+            ['商场消费', 1000],
+            ['应酬红包', -200],
+          ],
+          padding: [20, 0, 30, 40],
+          ...lib.waterfall,
+        };
+
+        return <G2 option={option} renderer="svg" />;
+
+      case 'rangeline':
         return (
           <G2
             option={{
-              header: ['类别', '数值'],
+              header: ['类型', '最小值', '最大值', '均值'],
               data: [
-                ['日用品', 120],
-                ['伙食费', 900],
-                ['交通费', 200],
-                ['水电费', 300],
-                ['房租', 1200],
-                ['商场消费', 1000],
-                ['应酬红包', -200],
+                ['分类一', 76, 100, 85],
+                ['分类二', 56, 108, 77],
+                ['分类三', 38, 129, 103],
+                ['分类四', 58, 155, 98],
+                ['分类五', 45, 120, 83],
+                ['分类六', 23, 99, 62],
+                ['分类七', 18, 56, 44],
+                ['分类八', 18, 34, 23],
               ],
-              padding: [20, 0, 30, 40],
-              ...lib.waterfall,
+              padding: [20, 10, 30, 40],
+              ...lib.rangeLine,
             }}
-            renderer="svg"
           />
         );
 

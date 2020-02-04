@@ -8,7 +8,8 @@ export default {
   defaultColor: '#5B8FF9',
   width: 400,
   height: 400,
-  bleeding: [default_1.TOP_BLEEDING, 24, default_1.BOTTOM_BLEEDING, 24],
+  // bleeding: [default_1.TOP_BLEEDING, 24, default_1.BOTTOM_BLEEDING, 24],
+  bleeding: [12, 12, 12, 12],
   padding: 'auto',
   title: {
     padding: [12, 24, 12, 24],
