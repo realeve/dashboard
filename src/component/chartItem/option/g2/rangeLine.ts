@@ -9,7 +9,11 @@ const transform = ({ data, x, y, y2, y3 }) =>
     y2: item[y3],
   }))(data);
 
-export const onMount = ({ data: val, header, x = 0, y = 1, y2 = 2, y3 = 3 }, chart) => {
+export const onMount = (
+  { data: val, rangeChart = 'area', header, x = 0, y = 1, y2 = 2, y3 = 3 },
+  chart,
+) => {
+  let rangeChartType = rangeChart === 'bar' ? 'interval' : 'area';
   chart.scale({
     y: {
       sync: true,
@@ -21,8 +25,7 @@ export const onMount = ({ data: val, header, x = 0, y = 1, y2 = 2, y3 = 3 }, cha
   let view1 = chart.view(),
     view2 = chart.view();
   view1.source(data), view2.source(data2);
-  view1
-    .area()
+  view1[rangeChartType]()
     .position('x*y')
     .color('#1890ff')
     .shape('smooth')

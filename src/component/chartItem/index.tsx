@@ -680,6 +680,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
                 ['分类八', 18, 34, 23],
               ],
               padding: [20, 10, 30, 40],
+              rangeChart: Math.random() > 0.5 ? 'bar' : 'area',
               ...lib.rangeLine,
             }}
           />
