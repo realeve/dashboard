@@ -18,6 +18,7 @@ import {
   Percent,
   DigitalScroll,
   Decotation,
+  Blank,
 } from '@/component/widget';
 import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
@@ -141,7 +142,7 @@ export default ({ config, borderName, onMockChange, onRemoveItem, idx, ...props 
   const Detail = () => {
     switch (itemType) {
       case '_blank':
-        return null;
+        return <Blank />;
       case 'percent':
         return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':

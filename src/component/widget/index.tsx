@@ -13,3 +13,4 @@ export { default as Percent } from './percent';
 export { default as DigitalScroll } from './DigitalScroll';
 
 export { default as Decotation } from './decotation';
+export { default as Blank } from './blank';

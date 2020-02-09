@@ -56,7 +56,7 @@ let chartList = [
   },
   {
     name: '占位区域',
-    type: 'blank',
+    type: '_blank',
   },
   {
     name: '进度条',
