@@ -16,7 +16,6 @@ export default ({
 }) => {
   const ref = useRef(null);
   const [chart, setChart] = useState(null);
-
   useEffect(() => {
     if (!ref) {
       return;
