@@ -2,7 +2,7 @@ import React from 'react';
 import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
-
+import * as R from 'ramda';
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
@@ -20,6 +20,9 @@ export default ({ name, children, style, className, ...props }: WidgetBorder) =>
   //     padding['padding' + keyName] = img[key];
   //   });
   // }
+  if (R.isNil(url)) {
+    return children;
+  }
 
   return (
     <div

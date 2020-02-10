@@ -5,10 +5,10 @@ import { Modal, Steps } from 'antd';
 import { BorderPanel } from './config';
 const { Step } = Steps;
 
-export default ({ onChange }) => {
+export default ({ onChange, config }) => {
   const [show, setShow] = useToggle(false);
   const [current, setCurrent] = useState(0);
-  const [border, setBorder] = useState(null);
+  const [border, setBorder] = useState(config.border || null);
 
   return (
     <div className={styles.mock_guide}>
@@ -42,6 +42,7 @@ export default ({ onChange }) => {
           current={current}
           onChange={setCurrent}
           className="site-navigation-steps"
+          size="small"
         >
           <Step title="边框样式" />
           <Step title="标题样式" />
@@ -49,7 +50,7 @@ export default ({ onChange }) => {
           <Step title="接口" />
         </Steps>
         <div className={styles.content}>
-          {current === 0 && <BorderPanel onChange={setBorder} />}
+          {current === 0 && <BorderPanel border={border} onChange={setBorder} />}
         </div>
       </Modal>
     </div>

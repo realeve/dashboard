@@ -5,6 +5,13 @@ let assets = {
   reportBackground: {},
 };
 assets.borders = {
+  无边框: {
+    url: null,
+    top: 10,
+    right: 16,
+    bottom: 15,
+    left: 10,
+  },
   边框1: {
     url: require('./img-templet/border-1.png'),
     top: 10,
@@ -195,7 +202,7 @@ assets.borders = {
     left: 8,
   },
   边框28: {
-    url: require('./img-templet/border_27.svg'),
+    url: require('./img-templet/border_28.svg'),
     top: 8,
     right: 8,
     bottom: 8,

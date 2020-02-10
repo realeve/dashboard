@@ -4,8 +4,8 @@ import styles from './index.less';
 import classnames from 'classnames';
 let borderKeys = Object.keys(assets.borders);
 
-export default ({ onChange }) => {
-  const [active, setActive] = useState(null);
+export default ({ border, onChange }) => {
+  const [active, setActive] = useState(border);
 
   return (
     <div className={styles.configGrid}>
@@ -15,16 +15,14 @@ export default ({ onChange }) => {
           <div
             key={name}
             className={classnames(styles.item, {
-              [styles.itemActive]: active === idx,
+              [styles.itemActive]: border === name,
             })}
             onClick={() => {
               setActive(idx);
               onChange(name);
             }}
           >
-            <div className={styles.img}>
-              <img src={val.url} alt={name} />
-            </div>
+            <div className={styles.img}>{val.url && <img src={val.url} alt={name} />}</div>
             <div className={styles.name}>{name}</div>
           </div>
         );

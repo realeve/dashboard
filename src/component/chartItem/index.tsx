@@ -142,7 +142,7 @@ export default ({ config, borderName, onChange, onMockChange, onRemoveItem, idx,
   const Detail = () => {
     switch (itemType) {
       case '_blank':
-        return <Blank onChange={onChange} />;
+        return <Blank config={{ border: borderName }} onChange={onChange} />;
       case 'percent':
         return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':
