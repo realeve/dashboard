@@ -11,6 +11,7 @@ export default ({ onChange, config }) => {
   const [border, setBorder] = useState(config.border || null);
   const [background, setBackground] = useState(config.background || null);
   const [header, setHeader] = useState(config.header || null);
+  const [footer, setFooter] = useState(config.footer || null);
 
   return (
     <div className={styles.mock_guide}>
@@ -34,6 +35,7 @@ export default ({ onChange, config }) => {
             border,
             background,
             header,
+            footer,
           });
         }}
         onCancel={() => {
@@ -50,6 +52,8 @@ export default ({ onChange, config }) => {
         >
           <Step title="背景" />
           <Step title="边框样式" />
+          <Step title="头部样式" />
+          <Step title="底部样式" />
           <Step title="标题样式" />
           <Step title="图表" />
           <Step title="接口" />
@@ -60,6 +64,7 @@ export default ({ onChange, config }) => {
           )}
           {current === 1 && <AssetItem assetKey="borders" value={border} onChange={setBorder} />}
           {current === 2 && <AssetItem assetKey="headers" value={header} onChange={setHeader} />}
+          {current === 3 && <AssetItem assetKey="footers" value={footer} onChange={setFooter} />}
         </div>
       </Modal>
     </div>

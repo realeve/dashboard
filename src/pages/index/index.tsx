@@ -162,6 +162,8 @@ let chartList = [
   },
 ];
 
+const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
+
 export default () => {
   const [state, setState] = useSetState({
     layouts: {},
@@ -169,8 +171,10 @@ export default () => {
     border: '边框' + Math.ceil(Math.random() * 28),
     background: '默认',
     header: '默认',
+    footer: '默认',
   });
 
+  // console.log(state);
   // 改由文件加载
   // useEffect(() => {
   //   let config = loadLayout();
@@ -230,25 +234,21 @@ export default () => {
     setState({ widgets });
   };
 
-  console.log(state);
-
   return (
     <>
       <Content
         className={styles.theme1}
         style={{
           backgroundImage: `url('${assets.backgrounds[state.background].url}')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top center',
           backgroundSize: 'cover',
+          ...backgroundStyle,
         }}
       >
         <div
           className={styles.header}
           style={{
             backgroundImage: `url('${assets.headers[state.header].url}')`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'top center',
+            ...backgroundStyle,
           }}
         >
           某业务仪表盘
@@ -272,13 +272,20 @@ export default () => {
                     border: config.border,
                     background: config.background,
                     header: config.header,
+                    footer: config.footer,
                   });
                 }}
               />
             </div>
           ))}
         </ResponsiveReactGridLayout>
-        <div className={styles.footer} />
+        <div
+          className={styles.footer}
+          style={{
+            backgroundImage: `url('${assets.footers[state.footer].url}')`,
+            ...backgroundStyle,
+          }}
+        />
       </Content>
       <Header className={styles.config}>
         {chartList.map(item => (

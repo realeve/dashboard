@@ -4,6 +4,7 @@ let assets = {
   backgrounds: {},
   reportBackground: {},
   headers: {},
+  footers: {},
 };
 assets.borders = {
   无边框: {
@@ -1127,6 +1128,14 @@ assets.headers = {
   },
   蓝色2: {
     url: require('./img-templet/header_04.png'),
+  },
+};
+assets.footers = {
+  默认: {
+    url: null,
+  },
+  蓝色底部: {
+    url: require('./img-templet/footer_03.png'),
   },
 };
 assets.reportBackground = Object.assign(

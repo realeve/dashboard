@@ -5,9 +5,11 @@ import classnames from 'classnames';
 
 export default ({ value, onChange, assetKey = 'borders' }) => {
   let keys = Object.keys(assets[assetKey]);
-  console.log(assetKey, value);
+
   return (
-    <div className={styles[assetKey !== 'headers' ? 'configGrid' : 'configList']}>
+    <div
+      className={styles[['headers', 'footers'].includes(assetKey) ? 'configList' : 'configGrid']}
+    >
       {keys.map((name, idx) => {
         let val = assets[assetKey][name];
         return (
