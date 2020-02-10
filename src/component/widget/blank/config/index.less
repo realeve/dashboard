@@ -1,0 +1,31 @@
+@import '../../../../style/theme.less';
+@size: 128px;
+.configGrid {
+  display: flex;
+  flex-wrap: wrap;
+  background: #0e0134;
+  .item {
+    height: 20 + @size;
+    width: 4 + @size;
+    margin: 8px;
+
+    padding: 2px;
+    .img {
+      height: @size;
+      width: @size;
+      img {
+        width: 100%;
+        max-height: -4 + @size;
+      }
+    }
+    .name {
+      height: 20px;
+      font-size: 12px;
+      text-align: center;
+      color: @borderColor;
+    }
+    &Active {
+      outline: 1px solid #7cfffc82;
+    }
+  }
+}

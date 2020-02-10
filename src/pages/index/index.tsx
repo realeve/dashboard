@@ -244,6 +244,11 @@ export default () => {
                 idx={idx}
                 borderName={state.borderName}
                 onRemoveItem={onRemoveItem}
+                onChange={config => {
+                  setState({
+                    borderName: config.border,
+                  });
+                }}
               />
             </div>
           ))}
