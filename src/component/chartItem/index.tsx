@@ -27,7 +27,7 @@ import * as g2PlotLib from './option/g2plot';
 import { useInterval } from 'react-use';
 import * as R from 'ramda';
 
-export default ({ config, borderName, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
+export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
   // const [data, setData] = useState({
   //   header: ['类别', '数值'],
@@ -142,7 +142,7 @@ export default ({ config, borderName, onChange, onMockChange, onRemoveItem, idx,
   const Detail = () => {
     switch (itemType) {
       case '_blank':
-        return <Blank config={{ border: borderName }} onChange={onChange} />;
+        return <Blank config={initState} onChange={onChange} />;
       case 'percent':
         return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':
@@ -693,7 +693,7 @@ export default ({ config, borderName, onChange, onMockChange, onRemoveItem, idx,
   };
 
   return (
-    <BorderItem name={borderName} {...props}>
+    <BorderItem name={initState.border} {...props}>
       <CloseOutlined className="remove" onClick={() => onRemoveItem(idx)} />
       <Detail />
     </BorderItem>

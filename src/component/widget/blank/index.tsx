@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import styles from './index.less';
 import { useToggle } from 'react-use';
 import { Modal, Steps } from 'antd';
-import { BorderPanel } from './config';
+import { AssetItem } from './config';
 const { Step } = Steps;
 
 export default ({ onChange, config }) => {
   const [show, setShow] = useToggle(false);
   const [current, setCurrent] = useState(0);
   const [border, setBorder] = useState(config.border || null);
+  const [background, setBackground] = useState(config.background || null);
+  const [header, setHeader] = useState(config.header || null);
 
   return (
     <div className={styles.mock_guide}>
@@ -30,6 +32,8 @@ export default ({ onChange, config }) => {
           setShow(false);
           onChange({
             border,
+            background,
+            header,
           });
         }}
         onCancel={() => {
@@ -44,13 +48,18 @@ export default ({ onChange, config }) => {
           className="site-navigation-steps"
           size="small"
         >
+          <Step title="背景" />
           <Step title="边框样式" />
           <Step title="标题样式" />
           <Step title="图表" />
           <Step title="接口" />
         </Steps>
         <div className={styles.content}>
-          {current === 0 && <BorderPanel border={border} onChange={setBorder} />}
+          {current === 0 && (
+            <AssetItem assetKey="backgrounds" value={background} onChange={setBackground} />
+          )}
+          {current === 1 && <AssetItem assetKey="borders" value={border} onChange={setBorder} />}
+          {current === 2 && <AssetItem assetKey="headers" value={header} onChange={setHeader} />}
         </div>
       </Modal>
     </div>

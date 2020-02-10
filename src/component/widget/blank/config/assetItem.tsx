@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { assets } from '@/component/widget';
 import styles from './index.less';
 import classnames from 'classnames';
-let borderKeys = Object.keys(assets.borders);
 
-export default ({ border, onChange }) => {
-  const [active, setActive] = useState(border);
-
+export default ({ value, onChange, assetKey = 'borders' }) => {
+  let keys = Object.keys(assets[assetKey]);
+  console.log(assetKey, value);
   return (
-    <div className={styles.configGrid}>
-      {borderKeys.map((name, idx) => {
-        let val = assets.borders[name];
+    <div className={styles[assetKey !== 'headers' ? 'configGrid' : 'configList']}>
+      {keys.map((name, idx) => {
+        let val = assets[assetKey][name];
         return (
           <div
             key={name}
             className={classnames(styles.item, {
-              [styles.itemActive]: border === name,
+              [styles.itemActive]: value === name,
             })}
             onClick={() => {
-              setActive(idx);
               onChange(name);
             }}
           >

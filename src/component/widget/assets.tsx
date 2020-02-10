@@ -3,6 +3,7 @@ let assets = {
   pics: {},
   backgrounds: {},
   reportBackground: {},
+  headers: {},
 };
 assets.borders = {
   无边框: {
@@ -1017,14 +1018,23 @@ assets.pics = {
   },
 };
 assets.backgrounds = {
+  默认: {
+    url: require('./img-templet/bg_03.png'),
+  },
+  深色蓝色网格: {
+    url: require('./img-templet/background-3.png'),
+  },
+  深色蓝色标题: {
+    url: require('./img-templet/bg_01.png'),
+  },
+  深色蓝色渐变: {
+    url: require('./img-templet/bg_02.png'),
+  },
   深色蓝色简约: {
     url: require('./img-templet/background-1.png'),
   },
   深色蓝色网格标题: {
     url: require('./img-templet/background-2.png'),
-  },
-  深色蓝色网格: {
-    url: require('./img-templet/background-3.png'),
   },
   深色蓝色星空: {
     url: require('./img-templet/background-zKvVf3rb7brY6rK8.jpg'),
@@ -1100,6 +1110,23 @@ assets.backgrounds = {
   },
   深色蓝色光点水滴唯美柔光网格标题容器科技: {
     url: require('./img-templet/background-16.png'),
+  },
+};
+assets.headers = {
+  默认: {
+    url: require('./img-templet/header_03.png'),
+  },
+  无: {
+    url: null,
+  },
+  淡蓝色: {
+    url: require('./img-templet/header_01.png'),
+  },
+  蓝色: {
+    url: require('./img-templet/header_02.png'),
+  },
+  蓝色2: {
+    url: require('./img-templet/header_04.png'),
   },
 };
 assets.reportBackground = Object.assign(

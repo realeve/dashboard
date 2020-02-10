@@ -1,1 +1,1 @@
-export { default as BorderPanel } from './border';
+export { default as AssetItem } from './assetItem';

@@ -18,6 +18,8 @@ import { getNonce } from '@/component/chart/lib';
 
 import styles from './index.less';
 import classNames from 'classnames';
+import assets from '@/component/widget/assets';
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const { Header, Content } = Layout;
 
@@ -164,7 +166,9 @@ export default () => {
   const [state, setState] = useSetState({
     layouts: {},
     widgets: [],
-    borderName: '边框' + Math.ceil(Math.random() * 28),
+    border: '边框' + Math.ceil(Math.random() * 28),
+    background: '默认',
+    header: '默认',
   });
 
   // 改由文件加载
@@ -226,10 +230,29 @@ export default () => {
     setState({ widgets });
   };
 
+  console.log(state);
+
   return (
     <>
-      <Content className={styles.theme1}>
-        <div className={styles.header}>某业务仪表盘</div>
+      <Content
+        className={styles.theme1}
+        style={{
+          backgroundImage: `url('${assets.backgrounds[state.background].url}')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'top center',
+          backgroundSize: 'cover',
+        }}
+      >
+        <div
+          className={styles.header}
+          style={{
+            backgroundImage: `url('${assets.headers[state.header].url}')`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'top center',
+          }}
+        >
+          某业务仪表盘
+        </div>
         <ResponsiveReactGridLayout
           className={classNames('layout', styles.canvas)}
           {...layoutCfg}
@@ -242,11 +265,13 @@ export default () => {
                 config={config}
                 onMockChange={onMockChange}
                 idx={idx}
-                borderName={state.borderName}
+                initState={state}
                 onRemoveItem={onRemoveItem}
                 onChange={config => {
                   setState({
-                    borderName: config.border,
+                    border: config.border,
+                    background: config.background,
+                    header: config.header,
                   });
                 }}
               />

@@ -1,21 +1,21 @@
 @import '../../../../style/theme.less';
-@size: 128px;
-.configGrid {
+
+.config(@width:128px,@height:128px) {
   display: flex;
   flex-wrap: wrap;
   background: #0e0134;
   .item {
-    height: 20 + @size;
-    width: 4 + @size;
+    height: 20 + @height;
+    width: 4 + @width;
     margin: 8px;
 
     padding: 2px;
     .img {
-      height: @size;
-      width: @size;
+      height: @height;
+      width: @width;
       img {
         width: 100%;
-        max-height: -4 + @size;
+        max-height: -4 + @height;
       }
     }
     .name {
@@ -31,4 +31,10 @@
       }
     }
   }
+}
+.configGrid {
+  .config(128px, 128px);
+}
+.configList {
+  .config(700px, 64px);
 }
