@@ -67,10 +67,11 @@ const useFetch = <T extends {} | void>({
     // }
 
     // 加载时，data置为空
-    setData(null);
+    // setData(null);
 
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
+      setData(null);
       return;
     }
 
