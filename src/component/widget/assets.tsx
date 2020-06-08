@@ -1022,6 +1022,9 @@ assets.backgrounds = {
   默认: {
     url: require('./img-templet/bg_03.png'),
   },
+  蓝色网格: {
+    url: require('./img-templet/background-17.png'),
+  },
   深色蓝色网格: {
     url: require('./img-templet/background-3.png'),
   },
