@@ -54,10 +54,24 @@ export default ({ setHide, hide }) => {
             </div>
           </div>
           <div className={styles['drawer-actions']}>
-            <div className={classnames(styles['header-button'], styles.ml4)}>
+            <div
+              className={classnames(styles['header-button'], styles.ml4, {
+                [styles.selected]: !hide.filter,
+              })}
+              onClick={() => {
+                setHide({ filter: !hide.filter });
+              }}
+            >
               <i className="datav-icon datav-font icon-filter header-button-icon" />
             </div>
-            <div className={classnames(styles['header-button'], styles.ml4)}>
+            <div
+              className={classnames(styles['header-button'], styles.ml4, {
+                [styles.selected]: !hide.beauty,
+              })}
+              onClick={() => {
+                setHide({ beauty: !hide.beauty });
+              }}
+            >
               <i className="datav-icon datav-font icon-beauttification header-button-icon" />
             </div>
           </div>

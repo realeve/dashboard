@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-import HeaderComponent from './header';
-import ComponentPanel from './componentPanel';
-
 import { useSetState } from 'react-use';
+import HeaderComponent from './header';
+import ComponentPanel from './panel/components';
+import LayerPanel from './panel/layer';
+import BeautyPanel from './panel/beauty';
+import FilterPanel from './panel/filterManager';
 
 export default () => {
   const [hide, setHide] = useSetState({
@@ -12,23 +14,18 @@ export default () => {
     components: false,
     toolbox: false,
     config: false,
+    beauty: true,
+    filter: true,
   });
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
       <div className={styles.main}>
-        <div
-          className={classnames(styles['layer-panel-wp'], {
-            [styles.hide]: hide.layer,
-          })}
-        >
-          图层
-        </div>
-        <ComponentPanel
-          className={classnames({
-            [styles.hide]: hide.components,
-          })}
-        />
+        <LayerPanel setHide={setHide} hide={hide} />
+        <BeautyPanel setHide={setHide} hide={hide} />
+        <FilterPanel setHide={setHide} hide={hide} />
+        <ComponentPanel setHide={setHide} hide={hide} />
 
         <div className={styles['right-edit-main']}>
           <div
