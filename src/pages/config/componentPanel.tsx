@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './componentPanel.less';
 import classnames from 'classnames';
 
-export default () => {
+export default ({ className, ...props }) => {
   return (
-    <div className={styles['component-panel-wp']}>
+    <div className={classnames(styles['component-panel-wp'], className)}>
       <div className={styles['component-panel']}>
         <div className={styles.panelTitle}>
           <span>

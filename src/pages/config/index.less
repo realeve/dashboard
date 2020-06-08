@@ -1,6 +1,6 @@
 @import '../../style/theme.less';
 
-.edit {
+.editor {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -30,9 +30,6 @@
       border-right: 1px solid #000;
     }
 
-    .hide {
-      width: 0;
-    }
     .right-edit-main {
       flex: 1;
       flex-direction: column;
@@ -56,6 +53,10 @@
           align-items: center;
           height: 100%;
         }
+      }
+      .toolbox-hide {
+        height: 0;
+        overflow: hidden;
       }
       .editor-panel-wp {
         width: 100%;
@@ -167,6 +168,9 @@
       transition: width 0.25s ease-in-out;
       overflow: hidden;
       box-shadow: -1px 0 #000;
+    }
+    .hide {
+      width: 0;
     }
   }
 }

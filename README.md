@@ -1,6 +1,10 @@
 # dashboard
 [dashboard manager](https://github.com/realeve/dashboard)
 
+## 图表配置页面
+
+[http://localhost:8000/config](http://localhost:8000/config)
+
 ## chartcube
 [http://localhost:8000/chartcube](http://localhost:8000/chartcube)
 
