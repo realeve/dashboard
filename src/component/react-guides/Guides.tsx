@@ -100,6 +100,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
           style={{
             transform: `${translateName}(${pos * zoom}px)`,
           }}
+          title="双击删除参考线"
         >
           <span>{this.props.dragPosFormat(pos)}</span>
         </div>
