@@ -21,12 +21,12 @@ canvas {
     top: 0;
     left: 0;
     will-change: transform;
-    z-index: 2000;
+    z-index: 100;
 }
 .display-drag {
     position: absolute;
     will-change: transform;
-    z-index: 2000;
+    z-index: 100;
     font-weight: bold;
     font-size: 12px;
     display: none;
