@@ -14,6 +14,21 @@
   left: @rulerSize;
   position: absolute;
   height: @rulerSize;
+  :global {
+    .scena-guide {
+      span {
+        position: absolute;
+        left: -23px;
+        transform: rotate(-90deg);
+        background: var(--datav-ruler-tag-bg);
+        padding: 0 5px;
+        // border-radius: 4px;
+        line-height: 17px;
+        font-size: 11px;
+        height: 17px;
+      }
+    }
+  }
 }
 .rulerv {
   position: fixed;
@@ -24,6 +39,21 @@
   cursor: ew-resize;
   top: @rulerSize;
   position: absolute;
+
+  :global {
+    .scena-guide {
+      span {
+        position: absolute;
+        top: -17px;
+        background: var(--datav-ruler-tag-bg);
+        padding: 0 5px;
+        // border-radius: 4px;
+        line-height: 17px;
+        font-size: 11px;
+        height: 17px;
+      }
+    }
+  }
 }
 .guide {
   border-right: 1px solid var(--datav-ruler-font-color);
@@ -55,14 +85,17 @@
     border-radius: 1px;
     box-shadow: 0 0 5px -3px #000;
     background: var(--datav-ruler-tag-bg) !important;
-    span {
-      position: absolute;
-      top: 0px;
-      background: var(--datav-ruler-tag-bg);
-      padding: 0 10px;
-      border-radius: 4px;
-      line-height: 17px;
-      font-size: 11px;
+  }
+  .scena-horizontal {
+    .scena-adder {
+      background: transparent !important;
+      border-top: 1px dashed #f33;
+    }
+  }
+  .scena-vertical {
+    .scena-adder {
+      background: transparent !important;
+      border-right: 1px dashed #f33;
     }
   }
 }

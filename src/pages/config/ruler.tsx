@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './ruler.less';
-import Guides from '@scena/react-guides';
+// import Guides from '@scena/react-guides';
+
+import Guides from '@/component/react-guides';
 import { useSetState, useToggle } from 'react-use';
 
 const style = {
@@ -65,8 +67,6 @@ export default ({ zoom = 1, canvasSize }: IRulerProps) => {
     hRuler?.current?.loadGuides(guideVisible ? guides.h : []);
     vRuler?.current?.loadGuides(guideVisible ? guides.v : []);
   }, [guideVisible]);
-
-  console.log(guides);
 
   return (
     <>
