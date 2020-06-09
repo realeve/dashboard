@@ -1,5 +1,5 @@
-import { prefixNames } from "framework-utils";
+import { prefixNames } from 'framework-utils';
 
 export function prefix(...classNames: string[]) {
-    return prefixNames("scena-", ...classNames);
+  return prefixNames('datav-', ...classNames);
 }

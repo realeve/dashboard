@@ -8,7 +8,7 @@ export const GUIDE = prefix('guide');
 export const DRAGGING = prefix('dragging');
 export const DISPLAY_DRAG = prefix('display-drag');
 export const GUIDES_CSS = prefixCSS(
-  'scena-',
+  'datav-',
   `
 {
     position: relative;

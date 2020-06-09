@@ -74,11 +74,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
           direction={direction}
         />
         <div className={GUIDES} ref={ref(this, 'guidesElement')}>
-          {displayDragPos && (
-            <div className={DISPLAY_DRAG} ref={ref(this, 'displayElement')}>
-              <span>{this.state.dragPos}</span>
-            </div>
-          )}
+          {displayDragPos && <div className={DISPLAY_DRAG} ref={ref(this, 'displayElement')} />}
           <div className={ADDER} ref={ref(this, 'adderElement')}>
             <span>{this.state.dragPos}</span>
           </div>
@@ -214,13 +210,6 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
       nextPos = guidePos * zoom!;
     }
     if (displayDragPos) {
-      //   const rect = datas.rect;
-      //   const displayPos =
-      //     type === 'horizontal' ? [clientX - rect.left, guidePos] : [guidePos, clientY - rect.top];
-      //   this.displayElement.style.cssText += `display: block;transform: translate(-50%, -50%) translate(${displayPos
-      //     .map(v => `${v}px`)
-      //     .join(', ')})`;
-
       const displayPos = type === 'horizontal' ? [-40, nextPos] : [nextPos - 32, 0];
 
       this.displayElement.style.cssText += `transform:translate(${displayPos
@@ -234,7 +223,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
     }
     datas.target.setAttribute('data-pos', guidePos);
     datas.target.style.transform = `${this.getTranslateName()}(${nextPos}px)`;
-
+    datas.target.innerHTML = `<span>${this.props.dragPosFormat(guidePos)}</span>`;
     return nextPos;
   };
   private onDragEnd = ({ datas, clientX, clientY, isDouble }: OnDragEnd) => {

@@ -3,7 +3,17 @@
   position: fixed;
   z-index: 1;
 }
+.guideSpan {
+  position: absolute;
+  background: var(--datav-ruler-tag-bg);
 
+  line-height: 17px;
+  font-size: 11px;
+  height: 17px;
+  user-select: none;
+  width: 28px;
+  text-align: center;
+}
 @rulerSize: 25px;
 .rulerh {
   width: calc(100% - @rulerSize);
@@ -15,17 +25,11 @@
   position: absolute;
   height: @rulerSize;
   :global {
-    .scena-guide {
+    .datav-guide {
       span {
-        position: absolute;
-        left: -23px;
+        left: -5px;
         transform: rotate(-90deg);
-        background: var(--datav-ruler-tag-bg);
-        padding: 0 5px;
-        // border-radius: 4px;
-        line-height: 17px;
-        font-size: 11px;
-        height: 17px;
+        .guideSpan;
       }
     }
   }
@@ -41,16 +45,10 @@
   position: absolute;
 
   :global {
-    .scena-guide {
+    .datav-guide {
       span {
-        position: absolute;
-        top: -17px;
-        background: var(--datav-ruler-tag-bg);
-        padding: 0 5px;
-        // border-radius: 4px;
-        line-height: 17px;
-        font-size: 11px;
-        height: 17px;
+        top: 0;
+        .guideSpan;
       }
     }
   }
@@ -75,7 +73,7 @@
 }
 
 :global {
-  .scena-guide {
+  .datav-guide {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -86,16 +84,28 @@
     box-shadow: 0 0 5px -3px #000;
     background: var(--datav-ruler-tag-bg) !important;
   }
-  .scena-horizontal {
-    .scena-adder {
+  .datav-horizontal {
+    .datav-adder,
+    .datav-dragging {
       background: transparent !important;
-      border-top: 1px dashed #f33;
+      border-top: 1px dashed var(--datav-ruler-tag-bg);
+      span {
+        top: -9px;
+        width: 28px;
+        text-align: center;
+      }
     }
   }
-  .scena-vertical {
-    .scena-adder {
+  .datav-vertical {
+    .datav-adder,
+    .datav-dragging {
       background: transparent !important;
-      border-right: 1px dashed #f33;
+      border-right: 1px dashed var(--datav-ruler-tag-bg);
+      span {
+        left: -13px;
+        width: 28px;
+        text-align: center;
+      }
     }
   }
 }

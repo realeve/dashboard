@@ -10,8 +10,7 @@ const style = {
   lineColor: '#364152',
   textColor: '#808e9b',
   unit: 100,
-  displayDragPos: true,
-  dragPosFormat: e => e - 40,
+  dragPosFormat: e => e - 44,
 };
 
 const key = 'datav_guide';
@@ -20,7 +19,7 @@ const guideDb = {
   load: canvasSize =>
     JSON.parse(
       window.localStorage.getItem(key) ||
-        `{v:[${canvasSize.width / 2 + 40}],h:[${canvasSize.height / 2 + 40}]}`,
+        `{v:[${canvasSize.width / 2 + 44}],h:[${canvasSize.height / 2 + 44}]}`,
     ),
 };
 
