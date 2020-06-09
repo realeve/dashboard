@@ -3,6 +3,21 @@ import React, { useRef, useEffect } from 'react';
 import styles from './ruler.less';
 import { useSetState } from 'react-use';
 
+/**
+ * ruler组件：
+ *  defaultProps = {
+        type: "horizontal",
+        zoom: 1,
+        width: 0,
+        height: 0,
+        unit: 50,
+        direction: "end",
+        style: { width: "100%", height: "100%" },
+        backgroundColor: "#333333",
+        textColor: "#ffffff",
+        lineColor: "#777777",
+    }
+ */
 export default ({ zoom, canvasSize }) => {
   const hRuler = useRef();
   const vRuler = useRef();
@@ -19,9 +34,7 @@ export default ({ zoom, canvasSize }) => {
       lineColor: '#364152',
       textColor: '#808e9b',
       zoom,
-      textFormat: res => {
-        return res % 100 === 0 ? String(res) : '';
-      },
+      unit: 100,
     };
 
     const h = new Ruler(hRuler.current, {
@@ -49,10 +62,10 @@ export default ({ zoom, canvasSize }) => {
   return (
     <>
       <div className={styles.rulerh}>
-        <div ref={hRuler} style={{ width: canvasSize.width }} />
+        <div ref={hRuler} style={{ width: canvasSize.width, height: 20 }} />
       </div>
       <div className={styles.rulerv}>
-        <div ref={vRuler} style={{ height: canvasSize.height }} />
+        <div ref={vRuler} style={{ height: canvasSize.height, width: 20 }} />
       </div>
       <div className={styles.guide} />
     </>
