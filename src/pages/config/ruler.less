@@ -1,0 +1,41 @@
+@import '../../style/theme.less';
+.datav-ruler {
+  position: fixed;
+  z-index: 1;
+}
+
+@rulerSize: 25px;
+.rulerh {
+  width: calc(100% - @rulerSize);
+  background: var(--datav-ruler-bg);
+
+  left: @rulerSize;
+  cursor: ew-resize;
+  position: absolute;
+  height: @rulerSize;
+}
+.rulerv {
+  position: fixed;
+  height: calc(100% - @rulerSize);
+  width: @rulerSize;
+  background: var(--datav-ruler-bg);
+
+  cursor: ns-resize;
+  top: @rulerSize;
+  position: absolute;
+}
+.guide {
+  border-right: 1px solid var(--datav-ruler-font-color);
+  border-bottom: 1px solid var(--datav-ruler-font-color);
+  width: @rulerSize;
+  height: @rulerSize;
+  font-size: 16px;
+  cursor: pointer;
+  position: fixed;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: var(--datav-ruler-font-color);
+  background: var(--datav-ruler-bg);
+}
