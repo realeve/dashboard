@@ -1,22 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './ruler.less';
 import Guides from '@scena/react-guides';
-
-/**
- * ruler组件：
- *  defaultProps = {
-        type: "horizontal",
-        zoom: 1,
-        width: 0,
-        height: 0,
-        unit: 50,
-        direction: "end",
-        style: { width: "100%", height: "100%" },
-        backgroundColor: "#333333",
-        textColor: "#ffffff",
-        lineColor: "#777777",
-    }
- */
+import { useSetState, useToggle } from 'react-use';
 
 const style = {
   backgroundColor: '#0e1013',
@@ -27,16 +12,61 @@ const style = {
   dragPosFormat: e => e - 40,
 };
 
-export default ({ zoom, canvasSize }) => {
+const key = 'datav_guide';
+const guideDb = {
+  save: e => window.localStorage.setItem(key, JSON.stringify(e)),
+  load: canvasSize =>
+    JSON.parse(
+      window.localStorage.getItem(key) ||
+        `{v:[${canvasSize.width / 2 + 40}],h:[${canvasSize.height / 2 + 40}]}`,
+    ),
+};
+
+export interface IRulerProps {
+  zoom?: number;
+  canvasSize: {
+    width: number;
+    height: number;
+  };
+}
+
+interface IGuideProps {
+  h: number[];
+  v: number[];
+}
+
+export default ({ zoom = 1, canvasSize }: IRulerProps) => {
   const hRuler = useRef();
   const vRuler = useRef();
+
+  const [guides, setGuides] = useSetState<IGuideProps>({
+    v: [canvasSize.width / 2 + 40],
+    h: [canvasSize.height / 2 + 40],
+  });
+
+  const loadGuides = () => {
+    setTimeout(() => {
+      let initGuides: IGuideProps = guideDb.load(canvasSize);
+      hRuler?.current?.loadGuides(initGuides.h);
+      vRuler?.current?.loadGuides(initGuides.v);
+    }, 0);
+  };
 
   useEffect(() => {
     // 偏移
     const offset = -50;
     hRuler?.current?.scroll(offset);
     vRuler?.current?.scroll(offset);
+    loadGuides();
   }, []);
+
+  const [guideVisible, toogleGuide] = useToggle(true);
+  useEffect(() => {
+    hRuler?.current?.loadGuides(guideVisible ? guides.h : []);
+    vRuler?.current?.loadGuides(guideVisible ? guides.v : []);
+  }, [guideVisible]);
+
+  console.log(guides);
 
   return (
     <>
@@ -47,8 +77,9 @@ export default ({ zoom, canvasSize }) => {
           zoom={zoom}
           ref={hRuler}
           style={{ width: canvasSize.width, height: 25 }}
-          onChangeGuides={({ guides }) => {
-            console.log(guides);
+          onChangeGuides={({ guides: h }) => {
+            guideDb.save({ ...guides, h });
+            setGuides({ h });
           }}
         />
       </div>
@@ -59,9 +90,19 @@ export default ({ zoom, canvasSize }) => {
           zoom={zoom}
           ref={vRuler}
           style={{ height: canvasSize.height, width: 25 }}
+          onChangeGuides={({ guides: v }) => {
+            setGuides({ v });
+            guideDb.save({ ...guides, v });
+          }}
         />
       </div>
-      <div className={styles.guide}></div>
+      <div className={styles.guide}>
+        <i
+          className={`datav-icon datav-font icon-line-${guideVisible ? 'show' : 'hide'}`}
+          style={{ zIndex: 10 }}
+          onClick={toogleGuide}
+        />
+      </div>
     </>
   );
 };
