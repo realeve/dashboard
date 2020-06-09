@@ -1,7 +1,6 @@
-import Ruler from '@scena/ruler';
 import React, { useRef, useEffect } from 'react';
 import styles from './ruler.less';
-import { useSetState } from 'react-use';
+import Guides from '@scena/react-guides';
 
 /**
  * ruler组件：
@@ -18,56 +17,51 @@ import { useSetState } from 'react-use';
         lineColor: "#777777",
     }
  */
+
+const style = {
+  backgroundColor: '#0e1013',
+  lineColor: '#364152',
+  textColor: '#808e9b',
+  unit: 100,
+  displayDragPos: true,
+  dragPosFormat: e => e - 40,
+};
+
 export default ({ zoom, canvasSize }) => {
   const hRuler = useRef();
   const vRuler = useRef();
 
-  const [ruler, setRuler] = useSetState({
-    h: null,
-    v: null,
-  });
-
   useEffect(() => {
-    const offset = -50;
-    const style = {
-      backgroundColor: '#0e1013',
-      lineColor: '#364152',
-      textColor: '#808e9b',
-      zoom,
-      unit: 100,
-    };
-
-    const h = new Ruler(hRuler.current, {
-      type: 'horizontal',
-      height: 25,
-      ...style,
-    });
-
-    const v = new Ruler(vRuler.current, {
-      type: 'vertical',
-      width: 25,
-      ...style,
-    });
-
     // 偏移
-    h.scroll(offset);
-    v.scroll(offset);
-
-    setRuler({
-      h,
-      v,
-    });
+    const offset = -50;
+    hRuler?.current?.scroll(offset);
+    vRuler?.current?.scroll(offset);
   }, []);
 
   return (
     <>
       <div className={styles.rulerh}>
-        <div ref={hRuler} style={{ width: canvasSize.width, height: 20 }} />
+        <Guides
+          type="horizontal"
+          {...style}
+          zoom={zoom}
+          ref={hRuler}
+          style={{ width: canvasSize.width, height: 25 }}
+          onChangeGuides={({ guides }) => {
+            console.log(guides);
+          }}
+        />
       </div>
       <div className={styles.rulerv}>
-        <div ref={vRuler} style={{ height: canvasSize.height, width: 20 }} />
+        <Guides
+          type="vertical"
+          {...style}
+          zoom={zoom}
+          ref={vRuler}
+          style={{ height: canvasSize.height, width: 25 }}
+        />
       </div>
-      <div className={styles.guide} />
+      <div className={styles.guide}></div>
     </>
   );
 };
