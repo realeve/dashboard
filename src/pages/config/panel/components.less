@@ -131,5 +131,86 @@
     overflow: hidden;
     margin-top: 0;
     padding-top: 0;
+    .panel {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      background: var(--datav-nav-bg);
+      .collapse {
+        background: var(--datav-cp-bg-color);
+        .header {
+          color: #bcc9d4;
+          height: 40px;
+          border-bottom: 1px solid #2c2e33;
+          border-bottom: var(--datav-cp-border);
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          font-size: 14px;
+          padding-right: 16px;
+
+          .collapse-hd {
+            display: flex;
+            align-items: center;
+            span {
+              margin-left: 5px;
+              font-size: 12px;
+            }
+          }
+        }
+        .wp {
+          overflow: hidden;
+          box-sizing: border-box;
+          .menulist {
+            width: 100%;
+            background: #0a0b0d;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 5px;
+            list-style: none;
+            li {
+              width: 80px;
+              cursor: pointer;
+              display: inline-block;
+              color: #bcc9d4;
+              vertical-align: top;
+              user-select: none;
+              flex: none;
+              margin-bottom: 6px;
+              border-radius: 3px;
+              box-sizing: border-box;
+              overflow: hidden;
+              position: relative;
+              .text {
+                font-size: 12px;
+                padding: 0 5px;
+                text-align: left;
+                overflow: hidden;
+                background: #212326;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                line-height: 22px;
+              }
+              .img {
+                height: 58px;
+                width: 100%;
+                overflow: hidden;
+                background-clip: content-box;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color: #17191c;
+                position: relative;
+                text-align: center;
+                box-sizing: content-box;
+                transition: border-color 0.2s;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
