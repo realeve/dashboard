@@ -28,6 +28,42 @@ export default ({ setHide, hide, ...props }) => {
             }}
           />
         </div>
+        <div className={styles['component-panel-wrapper']}>
+          <div className={styles['datav-tabs']}>
+            <div className={styles.nav}>
+              <div className={styles.wp}>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-regular" />
+                </div>
+                <div className={classnames(styles.tab, styles.tabActived)}>
+                  <i className="com-font  icon-com-map icon-active" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-media" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-text" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-network" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-material" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-interact" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-decorate" />
+                </div>
+                <div className={styles.tab}>
+                  <i className="com-font  icon-com-favorite" />
+                </div>
+              </div>
+            </div>
+            <div className={styles.content}>d</div>
+          </div>
+        </div>
       </div>
     </div>
   );

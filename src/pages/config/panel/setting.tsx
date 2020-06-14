@@ -16,8 +16,8 @@ export default ({ setHide, hide, ...props }) => {
           <div className={styles['datav-gui']}>
             <Field title="屏幕大小">
               <div className="alignRow">
-                <input type="number" step="2" style={{ marginRight: 10 }} />
-                <input type="text" />
+                <input type="number" step="2" style={{ marginRight: 10 }} value={1920} />
+                <input type="text" value={1080} />
               </div>
             </Field>
           </div>
