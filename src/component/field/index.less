@@ -1,0 +1,88 @@
+@import '../../style/theme.less';
+
+.field {
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding-right: var(--datav-gui-field-padding-right);
+  transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+  &:not(.--basic) {
+    padding-bottom: 4px !important;
+  }
+  &:first-child {
+    padding-top: 16px;
+  }
+
+  font-size: var(--datav-gui-font-size-base);
+  color: var(--datav-gui-font-color-1);
+  padding-left: var(--datav-gui-field-padding-left-level-1);
+  background: var(--datav-gui-background-color-front);
+
+  .title {
+    flex: 1;
+    height: var(--datav-gui-component-height);
+    line-height: var(--datav-gui-component-height);
+    padding-right: 5px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .container {
+    width: var(--datav-gui-component-container-width);
+    .component {
+      width: 100%;
+      height: var(--datav-gui-component-height);
+
+      font-size: var(--datav-gui-font-size-base);
+      color: var(--datav-gui-font-color-1);
+      outline: none;
+      box-shadow: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      line-height: var(--datav-gui-component-height);
+    }
+  }
+
+  input {
+    color: var(--datav-gui-font-color-1);
+    background: var(--datav-gui-component-background-color) !important;
+    border: 1px solid var(--datav-gui-component-border-color) !important;
+    text-align: start;
+    font-size: 12px;
+    min-width: 72px;
+    width: 72px;
+    flex: 1;
+    height: 24px;
+    display: block;
+    line-height: 24px;
+    resize: none;
+    padding-left: 7px;
+    &:hover,
+    &:active,
+    &:focus {
+      background: var(--datav-gui-component-background-hover-color);
+      border: 1px solid var(--datav-gui-primary-color);
+      font-size: var(--datav-gui-font-size-base);
+      color: var(--datav-gui-font-color-1);
+      outline: none;
+      box-shadow: none;
+    }
+
+    caret-color: var(--datav-main-color);
+    box-sizing: border-box;
+    box-shadow: none;
+    margin: 0;
+    outline: none;
+    border-radius: 0;
+    font-size: 12px;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+}

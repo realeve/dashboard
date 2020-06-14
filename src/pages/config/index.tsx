@@ -8,6 +8,7 @@ import LayerPanel from './panel/layer';
 import BeautyPanel from './panel/beauty';
 import FilterPanel from './panel/filterManager';
 import Ruler from './ruler';
+import Setting from './panel/setting';
 
 export default () => {
   const [hide, setHide] = useSetState({
@@ -47,9 +48,7 @@ export default () => {
             <div
               className={styles['canvas-panel']}
               style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
-            >
-              内容
-            </div>
+            />
             <div className={classnames(styles.thumbnail, styles['thumbnail-show'])}>
               <div className={styles['datav-thumbnail']}>
                 <span
@@ -61,13 +60,7 @@ export default () => {
           </div>
           <div className={styles['edit-slider']} />
         </div>
-        <div
-          className={classnames(styles['config-panel-wp'], {
-            [styles.hide]: hide.config,
-          })}
-        >
-          工具栏右侧
-        </div>
+        <Setting setHide={setHide} hide={hide} />
       </div>
     </div>
   );

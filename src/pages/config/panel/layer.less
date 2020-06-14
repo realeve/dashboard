@@ -11,6 +11,29 @@
   z-index: 5;
   overflow: hidden;
   border-right: 1px solid #000;
+  .selected {
+    color: var(--datav-main-color);
+  }
+  .layer-manager-top {
+    background: var(--datav-panel-title-bg);
+    text-indent: 10px;
+    height: 30px;
+    color: #bcc9d4;
+    line-height: 30px;
+    position: relative;
+    user-select: none;
+    .layer-num {
+      line-height: 30px;
+      vertical-align: middle;
+    }
+    .layer-manager-layout-selector {
+      position: absolute;
+      top: 0;
+      right: 1px;
+      font-size: 0;
+      letter-spacing: 4px;
+    }
+  }
 }
 
 .hide {
