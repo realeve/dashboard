@@ -9,8 +9,8 @@
     "@antv/chart-advisor": "^0.1.2-alpha.19",
     "@antv/data-set": "^0.10.2",
     "@antv/g2": "^3.5.11",
-    "@antv/g2plot": "^0.11.27", 
-    "@scena/react-guides": "^0.7.0", 
+    "@antv/g2plot": "^0.11.27",
+    "@scena/react-guides": "^0.7.0",
     "@types/react-resizable": "^1.7.2",
     "antd": "^4.0.0-rc.0",
     "axios": "^0.19.1",
@@ -31,6 +31,7 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^4.2.0",
     "react-grid-layout": "^0.17.1",
+    "react-moveable": "^0.20.10",
     "react-resizable": "^1.10.1",
     "react-use": "^13.14.0"
   },

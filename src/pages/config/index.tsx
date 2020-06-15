@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import { useSetState } from 'react-use';
+
+import Moveable from 'react-moveable';
+
 import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
@@ -9,6 +12,10 @@ import BeautyPanel from './panel/beauty';
 import FilterPanel from './panel/filterManager';
 import Ruler from './ruler';
 import Setting from './panel/setting';
+import Thumbnail from './thumbnail';
+import Toolbox from './toolbox';
+import EditSlider from './EditSlider';
+import CanvasComponent from './canvas';
 
 export default () => {
   const [hide, setHide] = useSetState({
@@ -36,29 +43,13 @@ export default () => {
         <ComponentPanel setHide={setHide} hide={hide} />
 
         <div className={styles['right-edit-main']}>
-          <div
-            className={classnames(styles['toolbox-panel-wp'], {
-              [styles['toolbox-hide']]: hide.toolbox,
-            })}
-          >
-            <div className={styles['toolbox-panel']}>工具栏</div>
-          </div>
+          <Toolbox hide={hide} />
           <div className={styles['editor-panel-wp']}>
             <Ruler zoom={zoom} canvasSize={canvasSize} />
-            <div
-              className={styles['canvas-panel']}
-              style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
-            />
-            <div className={classnames(styles.thumbnail, styles['thumbnail-show'])}>
-              <div className={styles['datav-thumbnail']}>
-                <span
-                  className={styles['select-span']}
-                  style={{ transform: `scale(${zoom}) translate(0px, 0px)` }}
-                />
-              </div>
-            </div>
+            <CanvasComponent zoom={zoom} canvasSize={canvasSize} />
+            <Thumbnail zoom={zoom} />
           </div>
-          <div className={styles['edit-slider']} />
+          <EditSlider />
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>
