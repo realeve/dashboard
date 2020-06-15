@@ -24,6 +24,7 @@
     "echarts-liquidfill": "^2.0.5",
     "element-resize-event": "^3.0.3",
     "file-saver": "^2.0.2",
+    "framework-utils": "^0.3.4",
     "js-beautify": "^1.10.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",

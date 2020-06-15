@@ -36,7 +36,7 @@ interface IGuideProps {
   v: number[];
 }
 
-export default ({ zoom = 1, canvasSize }: IRulerProps) => {
+export default ({ zoom = 1, canvasSize, onGuidesChange }: IRulerProps) => {
   const hRuler = useRef();
   const vRuler = useRef();
 
@@ -50,6 +50,7 @@ export default ({ zoom = 1, canvasSize }: IRulerProps) => {
       let initGuides: IGuideProps = guideDb.load(canvasSize);
       hRuler?.current?.loadGuides(initGuides.h);
       vRuler?.current?.loadGuides(initGuides.v);
+      onGuidesChange && onGuidesChange(initGuides);
     }, 0);
   };
 
@@ -79,6 +80,7 @@ export default ({ zoom = 1, canvasSize }: IRulerProps) => {
           onChangeGuides={({ guides: h }) => {
             guideDb.save({ ...guides, h });
             setGuides({ h });
+            onGuidesChange({ ...guides, h });
           }}
         />
       </div>
@@ -92,6 +94,7 @@ export default ({ zoom = 1, canvasSize }: IRulerProps) => {
           onChangeGuides={({ guides: v }) => {
             setGuides({ v });
             guideDb.save({ ...guides, v });
+            onGuidesChange({ ...guides, v });
           }}
         />
       </div>

@@ -3,8 +3,6 @@ import styles from './index.less';
 import classnames from 'classnames';
 import { useSetState } from 'react-use';
 
-import Moveable from 'react-moveable';
-
 import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
@@ -33,6 +31,11 @@ export default () => {
     height: 1080,
   });
 
+  const [guides, setGuides] = useState({
+    v: [],
+    h: [],
+  });
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -45,8 +48,8 @@ export default () => {
         <div className={styles['right-edit-main']}>
           <Toolbox hide={hide} />
           <div className={styles['editor-panel-wp']}>
-            <Ruler zoom={zoom} canvasSize={canvasSize} />
-            <CanvasComponent zoom={zoom} canvasSize={canvasSize} />
+            <Ruler zoom={zoom} canvasSize={canvasSize} onGuidesChange={setGuides} />
+            <CanvasComponent zoom={zoom} canvasSize={canvasSize} guides={guides} />
             <Thumbnail zoom={zoom} />
           </div>
           <EditSlider />
