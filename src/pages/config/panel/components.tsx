@@ -65,7 +65,7 @@ export default ({ setHide, hide, ...props }) => {
               <div className={styles.panel}>
                 <div className={styles.collapse}>
                   <div className={styles.header}>
-                    <i className="datav-icon datav-font icon-right datav-collapse-panel-arrow" />
+                    <i className="datav-icon datav-font icon-right arrow" />
                     <div className={styles['collapse-hd']}>
                       <i className="com-font datav-com-icon icon-com-default icon-com-all" />
                       <span>全部(5)</span>
@@ -74,9 +74,9 @@ export default ({ setHide, hide, ...props }) => {
                 </div>
                 <div className={styles.collapse}>
                   <div className={styles.header}>
-                    <i className="datav-icon datav-font icon-right datav-collapse-panel-arrow" />
+                    <i className="datav-icon datav-font icon-right arrow" />
                     <div className={styles['collapse-hd']}>
-                      <i className="com-font datav-com-icon icon-com-default con-com-media_image icon-com-medial" />
+                      <i className="com-font datav-com-icon icon-com-default icon-com-media_image" />
                       <span>图片(2)</span>
                     </div>
                   </div>
@@ -88,8 +88,7 @@ export default ({ setHide, hide, ...props }) => {
                         <div
                           className={styles.img}
                           style={{
-                            backgroundImage:
-                              'url("//img.alicdn.com/tfs/TB1pImNlF67gK0jSZPfXXahhFXa-334-144.png")',
+                            backgroundImage: 'url("/img/config/img_single.png")',
                             pointerEvents: 'none',
                           }}
                         />
@@ -99,8 +98,7 @@ export default ({ setHide, hide, ...props }) => {
                         <div
                           className={styles.img}
                           style={{
-                            backgroundImage:
-                              'url("//img.alicdn.com/tfs/TB17pTqlND1gK0jSZFKXXcJrVXa-334-144.png")',
+                            backgroundImage: 'url("/img/config/img_multi.png")',
                             pointerEvents: 'none',
                           }}
                         />
@@ -111,11 +109,12 @@ export default ({ setHide, hide, ...props }) => {
                 <div className={styles.collapse}>
                   <div className={styles.header}>
                     <i
-                      className="datav-icon datav-font icon-right datav-collapse-panel-arrow"
-                      style={{ transform: 'rotate(0.25turn)' }}
+                      className={classnames('datav-icon datav-font icon-right arrow', {
+                        [styles.arrowActive]: true,
+                      })}
                     />
                     <div className={styles['collapse-hd']}>
-                      <i className="com-font datav-com-icon icon-com-default con-com-media_video icon-com-medial" />
+                      <i className="com-font datav-com-icon icon-com-default con-com-media_video icon-com-media" />
                       <span>视频(3)</span>
                     </div>
                   </div>
@@ -126,8 +125,7 @@ export default ({ setHide, hide, ...props }) => {
                         <div
                           className={styles.img}
                           style={{
-                            backgroundImage:
-                              'url("//img.alicdn.com/tfs/TB1IhfqlUY1gK0jSZFCXXcwqXXa-334-144.png")',
+                            backgroundImage: 'url("/img/config/video_rtmp.png")',
                             pointerEvents: 'none',
                           }}
                         />
@@ -137,8 +135,7 @@ export default ({ setHide, hide, ...props }) => {
                         <div
                           className={styles.img}
                           style={{
-                            backgroundImage:
-                              'url("http://img.alicdn.com/tfs/TB14jnqlHj1gK0jSZFuXXcrHpXa-334-144.png")',
+                            backgroundImage: 'url("/img/config/video.png")',
                             pointerEvents: 'none',
                           }}
                         />
@@ -148,8 +145,7 @@ export default ({ setHide, hide, ...props }) => {
                         <div
                           className={styles.img}
                           style={{
-                            backgroundImage:
-                              'url("//img.alicdn.com/tfs/TB1hTYnlQY2gK0jSZFgXXc5OFXa-334-144.png")',
+                            backgroundImage: 'url("/img/config/video_stone.png")',
                             pointerEvents: 'none',
                           }}
                         />

@@ -158,6 +158,13 @@
               font-size: 12px;
             }
           }
+          .arrow {
+            transform: rotate(0);
+            transition: 0.5s transform linear;
+            &Active {
+              transform: rotate(0.25turn);
+            }
+          }
         }
         .wp {
           overflow: hidden;
