@@ -72,3 +72,8 @@ export const thouandsNum: {
   }
   return numStr + '.' + ''.padEnd(decimalLength, '0');
 };
+
+export const noncer = () =>
+  Math.random()
+    .toString(16)
+    .slice(2);

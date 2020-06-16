@@ -4,6 +4,10 @@ import classnames from 'classnames';
 import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
+
+import * as lib from '@/utils/lib';
+import { co } from '@/utils/useAutoResize';
+
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
  * beautiful dnd 文档
@@ -27,6 +31,8 @@ interface ILayerItem {
   img: string;
   title: string;
   icon: string;
+  id: string;
+  [key: string]: any;
 }
 
 export default ({ setHide, hide, ...props }) => {
@@ -40,6 +46,7 @@ export default ({ setHide, hide, ...props }) => {
       img: '//resource.datav.aliyun.com/cube/com/@xhzy-anime/single-piechart/0.0.2/icons/cover.png',
       title: '基本饼图',
       icon: 'com-font icon-com-regular_pie',
+      id: lib.noncer(),
     },
     {
       type: 'column.multi',
@@ -47,6 +54,15 @@ export default ({ setHide, hide, ...props }) => {
         '//resource.datav.aliyun.com/cube/com/@xhzy-anime/multiple-barchart/0.0.1/icons/cover.png',
       title: '多柱状图',
       icon: 'com-font icon-com-regular_bar',
+      id: lib.noncer(),
+    },
+    {
+      type: 'column.multi',
+      img:
+        '//resource.datav.aliyun.com/cube/com/@xhzy-anime/multiple-barchart/0.0.1/icons/cover.png',
+      title: '多柱状图2',
+      icon: 'com-font icon-com-regular_bar',
+      id: lib.noncer(),
     },
   ]);
 
@@ -70,8 +86,6 @@ export default ({ setHide, hide, ...props }) => {
     setLayerList(items);
     setSelected(to);
   };
-
-  console.log(selected);
 
   return (
     <div
@@ -176,7 +190,7 @@ export default ({ setHide, hide, ...props }) => {
                 ref={provided.innerRef}
               >
                 {layerList.map((item, idx) => (
-                  <Draggable key={item.type} draggableId={item.type} index={idx}>
+                  <Draggable key={item.id} draggableId={item.id} index={idx}>
                     {(provided, snapshot) => (
                       <li
                         ref={provided.innerRef}
