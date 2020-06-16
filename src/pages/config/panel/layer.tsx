@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './layer.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
 
+const layerList = [
+  {
+    type: 'pie.basic',
+    img: '//resource.datav.aliyun.com/cube/com/@xhzy-anime/single-piechart/0.0.2/icons/cover.png',
+    title: '基本饼图',
+    icon: 'com-font icon-com-regular_pie',
+  },
+  {
+    type: 'column.multi',
+    img: '//resource.datav.aliyun.com/cube/com/@xhzy-anime/multiple-barchart/0.0.1/icons/cover.png',
+    title: '多柱状图',
+    icon: 'com-font icon-com-regular_bar',
+  },
+];
+
 export default ({ setHide, hide, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
+
+  const [selected, setSelected] = useState(null);
+
   return (
     <div
       className={classnames(styles['layer-panel-wp'], {
@@ -74,6 +92,37 @@ export default ({ setHide, hide, ...props }) => {
             },
           )}
           title="置底"
+        />
+      </div>
+
+      <div className={styles.layerWrap}>
+        {layerList.map(item => (
+          <li
+            key={item.type}
+            className={classnames({
+              [styles.thumbnail]: isThumb,
+              [styles.selected]: selected === item.type,
+            })}
+            onClick={() => {
+              setSelected(item.type);
+            }}
+          >
+            {!isThumb ? (
+              <i className={item.icon} />
+            ) : (
+              <img src={item.img} alt={item.title} className={styles.img} />
+            )}
+
+            <div className={styles.text}>
+              <span>{item.title}</span>
+            </div>
+          </li>
+        ))}
+        <div
+          className={styles['last-flex-item']}
+          onClick={() => {
+            setSelected(null);
+          }}
         />
       </div>
     </div>

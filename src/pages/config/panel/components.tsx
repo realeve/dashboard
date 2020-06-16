@@ -67,7 +67,7 @@ export default ({ setHide, hide, ...props }) => {
                   <div className={styles.header}>
                     <i className="datav-icon datav-font icon-right arrow" />
                     <div className={styles['collapse-hd']}>
-                      <i className="com-font datav-com-icon icon-com-default icon-com-all" />
+                      <i className="com-font icon-com-all" />
                       <span>全部(5)</span>
                     </div>
                   </div>
@@ -76,7 +76,7 @@ export default ({ setHide, hide, ...props }) => {
                   <div className={styles.header}>
                     <i className="datav-icon datav-font icon-right arrow" />
                     <div className={styles['collapse-hd']}>
-                      <i className="com-font datav-com-icon icon-com-default icon-com-media_image" />
+                      <i className="com-font icon-com-media_image" />
                       <span>图片(2)</span>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default ({ setHide, hide, ...props }) => {
                       })}
                     />
                     <div className={styles['collapse-hd']}>
-                      <i className="com-font datav-com-icon icon-com-default con-com-media_video icon-com-media" />
+                      <i className="com-font con-com-media_video icon-com-media" />
                       <span>视频(3)</span>
                     </div>
                   </div>

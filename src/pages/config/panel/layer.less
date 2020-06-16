@@ -60,6 +60,74 @@
       opacity: 1;
     }
   }
+  .layerWrap {
+    height: 100%;
+    flex: auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #bcc9d4;
+    font-size: 12px;
+    list-style: none;
+    line-height: 2;
+    user-select: none;
+    position: relative;
+    background: var(--datav-panel-color);
+    li {
+      padding-left: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      height: 32px;
+      padding: 0 6px;
+      position: relative;
+      background: var(--datav-panel-item-bg);
+      transition: background 0.2s;
+      cursor: pointer;
+      flex: none;
+      .text {
+        flex: auto;
+        margin-left: 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        span {
+          flex: auto;
+          text-indent: 7px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      .img {
+        width: 53px;
+        height: 34px;
+        flex: none;
+        display: block;
+        border: 1px solid #3a4659;
+        background: #282a30;
+      }
+      // .extra {
+      //   position: absolute;
+      //   line-height: 1;
+      //   right: 4px;
+      //   top: 3px;
+      // }
+    }
+    .last-flex-item {
+      flex: auto;
+      min-height: 40px;
+    }
+    .selected {
+      background: var(--datav-sub-main-color);
+      color: #fff;
+    }
+    .thumbnail {
+      height: 48px;
+    }
+  }
 }
 
 .hide {
