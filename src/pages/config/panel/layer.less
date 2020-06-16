@@ -55,9 +55,11 @@
       height: 20px;
       width: 20px;
       opacity: 0.3;
+      cursor: not-allowed;
     }
     .enable {
       opacity: 1;
+      cursor: pointer;
     }
   }
   .layerWrap {
@@ -123,6 +125,9 @@
     .selected {
       background: var(--datav-sub-main-color);
       color: #fff;
+    }
+    .dragging {
+      background: var(--datav-main-hover-color);
     }
     .thumbnail {
       height: 48px;

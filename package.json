@@ -28,6 +28,7 @@
     "js-beautify": "^1.10.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
+    "react-beautiful-dnd": "^13.0.0",
     "react-countup": "^4.3.2",
     "react-dom": "^16.8.6",
     "react-draggable": "^4.2.0",
