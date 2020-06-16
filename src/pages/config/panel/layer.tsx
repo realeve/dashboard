@@ -38,6 +38,44 @@ export default ({ setHide, hide, ...props }) => {
           />
         </div>
       </div>
+      <div className={styles.toolbar}>
+        <i
+          className={classnames(
+            'datav-icon datav-font icon-move-prev',
+            styles['layer-toolbar-icon'],
+            {
+              [styles.enable]: true,
+            },
+          )}
+          title="上移一层"
+        />
+        <i
+          className={classnames(
+            'datav-icon datav-font icon-move-next',
+            styles['layer-toolbar-icon'],
+            {
+              [styles.enable]: true,
+            },
+          )}
+          title="下移一层"
+        />
+        <i
+          className={classnames('datav-icon datav-font icon-to-top', styles['layer-toolbar-icon'], {
+            [styles.enable]: false,
+          })}
+          title="置顶"
+        />
+        <i
+          className={classnames(
+            'datav-icon datav-font icon-to-bottom',
+            styles['layer-toolbar-icon'],
+            {
+              [styles.enable]: false,
+            },
+          )}
+          title="置底"
+        />
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-import Moveable, { OnDrag, OnResize, OnScale } from 'react-moveable';
+import Moveable, { OnDrag, OnResize } from 'react-moveable';
 const padding = 30;
 
 export interface IMoveableItem {
@@ -31,16 +31,43 @@ export default ({
 }: IMoveableItem) => {
   const dom = useRef(null);
   const [rotate, setRotate] = useState(0);
+
+  const [baseCfg, setBaseCfg] = useState({
+    resizable: true,
+    rotatable: true,
+    renderDirections: ['s', 'se', 'e'],
+  });
+
+  const toggle = () => {
+    if (baseCfg.resizable) {
+      setBaseCfg({
+        resizable: false,
+        rotatable: false,
+        renderDirections: [],
+      });
+    } else {
+      setBaseCfg({
+        resizable: true,
+        rotatable: true,
+        renderDirections: ['s', 'se', 'e'],
+      });
+    }
+  };
+
   return (
     <div className={styles.moveableItem}>
-      <div ref={dom} className={classnames(styles.wrap, className)} style={style}>
+      <div ref={dom} data-target="sdf" className={classnames(styles.wrap, className)} style={style}>
         {children}
       </div>
       <Moveable
-        snappable={true}
         bounds={{ left: 0, top: 0, right: canvasSize.width, bottom: canvasSize.height }}
         target={dom?.current}
         draggable={true}
+        snappable={true}
+        {...baseCfg}
+        click={e => {
+          toggle();
+        }}
         throttleDrag={0}
         zoom={zoom}
         verticalGuidelines={guides.v.map(item => item - padding / zoom)}
@@ -49,22 +76,12 @@ export default ({
           target.style.transform = transform;
           console.log(left, top, transform, '存储位置信息');
         }}
-        renderDirections={['s', 'se', 'e']}
-        resizable={true}
         throttleResize={0}
         onResize={({ target, width, height, delta }: OnResize) => {
           delta[0] && (target!.style.width = `${width}px`);
           delta[1] && (target!.style.height = `${height}px`);
         }}
-        /* scalable */
-        /* Only one of resizable, scalable, warpable can be used. */
-        // scalable={true}
-        // throttleScale={0}
-        // onScale={({ target, scale, dist, delta, transform, clientX, clientY }: OnScale) => {
-        //   target!.style.transform = transform;
-        // }}
         // keepRatio={true}
-        rotatable={true}
         throttleRotate={0}
         onRotate={({ target, delta }) => {
           let nextRotate = rotate + delta;

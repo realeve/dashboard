@@ -34,6 +34,32 @@
       letter-spacing: 4px;
     }
   }
+  .toolbar {
+    border-bottom: 1px solid var(--datav-panel-border-color);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    background: #20242a;
+    flex: none;
+    .layer-toolbar-icon {
+      transition: background 0.2s;
+      background: var(--datav-panel-border-color);
+      color: #bcc9d4;
+      border-radius: 1px;
+      margin: 0 9px;
+      font-size: 16px;
+      text-align: center;
+      line-height: 20px;
+      height: 20px;
+      width: 20px;
+      opacity: 0.3;
+    }
+    .enable {
+      opacity: 1;
+    }
+  }
 }
 
 .hide {
