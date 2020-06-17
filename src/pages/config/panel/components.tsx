@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './components.less';
 import classnames from 'classnames';
+import { Tooltip } from 'antd';
 
 const componentList = [
   {
@@ -74,20 +75,20 @@ export default ({ setHide, hide, ...props }) => {
               <div className={styles.wp}>
                 {componentList.map((item, idx) => (
                   <div
-                    key={item.icon}
                     className={classnames(styles.tab, {
                       [styles.tabActived]: idx == tab,
                     })}
-                    title={item.title}
                     onClick={() => {
                       setTab(idx);
                     }}
                   >
-                    <i
-                      className={classnames('com-font', item.icon, {
-                        'icon-active': idx == tab,
-                      })}
-                    />
+                    <Tooltip placement="left" trigger="hover" key={item.icon} title={item.title}>
+                      <i
+                        className={classnames('com-font', item.icon, {
+                          'icon-active': idx == tab,
+                        })}
+                      />
+                    </Tooltip>
                   </div>
                 ))}
               </div>
