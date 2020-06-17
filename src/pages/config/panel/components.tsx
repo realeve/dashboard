@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './components.less';
 import classnames from 'classnames';
 
+const componentList = [
+  {
+    title: '常规图表',
+    icon: 'icon-com-regular',
+  },
+  {
+    title: '地图',
+    icon: 'icon-com-map',
+  },
+  {
+    title: '媒体',
+    icon: 'icon-com-media',
+  },
+  {
+    title: '文字',
+    icon: 'icon-com-text',
+  },
+  {
+    title: '关系网格',
+    icon: 'icon-com-network',
+  },
+  {
+    title: '素材',
+    icon: 'icon-com-material',
+  },
+  {
+    title: '交互',
+    icon: 'icon-com-interact',
+  },
+  {
+    title: '其他',
+    icon: 'icon-com-decorate',
+  },
+  {
+    title: '收藏',
+    icon: 'icon-com-favorite',
+  },
+];
+
 export default ({ setHide, hide, ...props }) => {
+  const [tab, setTab] = useState(0);
   return (
     <div
       className={classnames(styles['component-panel-wp'], {
@@ -32,33 +72,24 @@ export default ({ setHide, hide, ...props }) => {
           <div className={styles['datav-tabs']}>
             <div className={styles.nav}>
               <div className={styles.wp}>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-regular" />
-                </div>
-                <div className={classnames(styles.tab, styles.tabActived)}>
-                  <i className="com-font  icon-com-map icon-active" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-media" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-text" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-network" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-material" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-interact" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-decorate" />
-                </div>
-                <div className={styles.tab}>
-                  <i className="com-font  icon-com-favorite" />
-                </div>
+                {componentList.map((item, idx) => (
+                  <div
+                    key={item.icon}
+                    className={classnames(styles.tab, {
+                      [styles.tabActived]: idx == tab,
+                    })}
+                    title={item.title}
+                    onClick={() => {
+                      setTab(idx);
+                    }}
+                  >
+                    <i
+                      className={classnames('com-font', item.icon, {
+                        'icon-active': idx == tab,
+                      })}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className={styles.content}>
