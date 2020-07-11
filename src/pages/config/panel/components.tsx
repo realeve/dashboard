@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from './components.less';
 import classnames from 'classnames';
 import { Tooltip } from 'antd';
+import Collapse from '@/component/collapse';
+const { Panel } = Collapse;
 
 const componentList = [
   {
@@ -41,6 +43,44 @@ const componentList = [
     icon: 'icon-com-favorite',
   },
 ];
+// const XPanel = () => (
+//   <div className={styles.rc_panel}>
+//     <div className={styles.collapse}>
+//       <div className={styles.header}>
+//         <i className="datav-icon datav-font icon-right arrow" />
+//         <div className={styles['collapse-hd']}>
+//           <i className="com-font icon-com-all" />
+//           <span>全部(5)</span>
+//         </div>
+//       </div>
+//     </div>
+//     <div className={styles.collapse}>
+//       <div className={styles.header}>
+//         <i className="datav-icon datav-font icon-right arrow" />
+//         <div className={styles['collapse-hd']}>
+//           <i className="com-font icon-com-media_image" />
+//           <span>图片(2)</span>
+//         </div>
+//       </div>
+
+//       <div className={styles.wp}></div>
+//     </div>
+//     <div className={styles.collapse}>
+//       <div className={styles.header}>
+//         <i
+//           className={classnames('datav-icon datav-font icon-right arrow', {
+//             [styles.arrowActive]: true,
+//           })}
+//         />
+//         <div className={styles['collapse-hd']}>
+//           <i className="com-font con-com-media_video icon-com-media" />
+//           <span>视频(3)</span>
+//         </div>
+//       </div>
+//       <div className={styles.wp}></div>
+//     </div>
+//   </div>
+// );
 
 export default ({ setHide, hide, ...props }) => {
   const [tab, setTab] = useState(0);
@@ -94,98 +134,121 @@ export default ({ setHide, hide, ...props }) => {
               </div>
             </div>
             <div className={styles.content}>
-              <div className={styles.panel}>
-                <div className={styles.collapse}>
-                  <div className={styles.header}>
-                    <i className="datav-icon datav-font icon-right arrow" />
-                    <div className={styles['collapse-hd']}>
-                      <i className="com-font icon-com-all" />
-                      <span>全部(5)</span>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.collapse}>
-                  <div className={styles.header}>
-                    <i className="datav-icon datav-font icon-right arrow" />
-                    <div className={styles['collapse-hd']}>
-                      <i className="com-font icon-com-media_image" />
-                      <span>图片(2)</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.wp}>
-                    <ul className={styles.menulist}>
-                      <li title="单张图片" style={{ border: 0 }}>
-                        <div className={styles.text}>单张图片</div>
-                        <div
-                          className={styles.img}
-                          style={{
-                            backgroundImage: 'url("/img/config/img_single.png")',
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      </li>
-                      <li title="轮播图" style={{ border: 0 }}>
-                        <div className={styles.text}>轮播图</div>
-                        <div
-                          className={styles.img}
-                          style={{
-                            backgroundImage: 'url("/img/config/img_multi.png")',
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className={styles.collapse}>
-                  <div className={styles.header}>
-                    <i
-                      className={classnames('datav-icon datav-font icon-right arrow', {
-                        [styles.arrowActive]: true,
-                      })}
-                    />
-                    <div className={styles['collapse-hd']}>
-                      <i className="com-font con-com-media_video icon-com-media" />
-                      <span>视频(3)</span>
-                    </div>
-                  </div>
-                  <div className={styles.wp}>
-                    <ul className={styles.menulist}>
-                      <li title="RTMP视频播放器" style={{ border: 0 }}>
-                        <div className={styles.text}>RTMP视频播放器</div>
-                        <div
-                          className={styles.img}
-                          style={{
-                            backgroundImage: 'url("/img/config/video_rtmp.png")',
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      </li>
-                      <li title="视频" style={{ border: 0 }}>
-                        <div className={styles.text}>视频</div>
-                        <div
-                          className={styles.img}
-                          style={{
-                            backgroundImage: 'url("/img/config/video.png")',
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      </li>
-                      <li title="萤石云播放器" style={{ border: 0 }}>
-                        <div className={styles.text}>萤石云播放器</div>
-                        <div
-                          className={styles.img}
-                          style={{
-                            backgroundImage: 'url("/img/config/video_stone.png")',
-                            pointerEvents: 'none',
-                          }}
-                        />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/* <XPanel /> */}
+              <Collapse accordion>
+                <Panel header="全部(5)" key="0">
+                  <ul className={styles.menulist}>
+                    <li title="单张图片" style={{ border: 0 }}>
+                      <div className={styles.text}>单张图片</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/img_single.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="轮播图" style={{ border: 0 }}>
+                      <div className={styles.text}>轮播图</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/img_multi.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>{' '}
+                    <li title="RTMP视频播放器" style={{ border: 0 }}>
+                      <div className={styles.text}>RTMP视频播放器</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video_rtmp.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="视频" style={{ border: 0 }}>
+                      <div className={styles.text}>视频</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="萤石云播放器" style={{ border: 0 }}>
+                      <div className={styles.text}>萤石云播放器</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video_stone.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                  </ul>
+                </Panel>
+                <Panel header="图片(2)" key="1">
+                  <ul className={styles.menulist}>
+                    <li title="单张图片" style={{ border: 0 }}>
+                      <div className={styles.text}>单张图片</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/img_single.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="轮播图" style={{ border: 0 }}>
+                      <div className={styles.text}>轮播图</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/img_multi.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                  </ul>
+                </Panel>
+                <Panel header="视频(3)" key="2">
+                  <ul className={styles.menulist}>
+                    <li title="RTMP视频播放器" style={{ border: 0 }}>
+                      <div className={styles.text}>RTMP视频播放器</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video_rtmp.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="视频" style={{ border: 0 }}>
+                      <div className={styles.text}>视频</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                    <li title="萤石云播放器" style={{ border: 0 }}>
+                      <div className={styles.text}>萤石云播放器</div>
+                      <div
+                        className={styles.img}
+                        style={{
+                          backgroundImage: 'url("/img/config/video_stone.png")',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </li>
+                  </ul>
+                </Panel>
+              </Collapse>
             </div>
           </div>
         </div>

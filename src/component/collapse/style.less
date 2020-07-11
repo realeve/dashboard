@@ -1,0 +1,55 @@
+:global {
+  .ant-collapse {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: var(--datav-nav-bg);
+    background-color: var(--datav-nav-bg);
+    border: none;
+
+    &-header {
+      color: #bcc9d4 !important;
+
+      height: 40px;
+      border-bottom: 1px solid #2c2e33 !important;
+      border-bottom: var(--datav-cp-border) !important;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0 16px 0 6px !important;
+      span {
+        margin-right: 5px;
+        font-size: 12px;
+      }
+
+      .collapse-hd {
+        display: flex;
+        align-items: center;
+      }
+      .arrow {
+        transform: rotate(0);
+        transition: 0.5s transform linear;
+        &Active {
+          transform: rotate(0.25turn);
+        }
+      }
+    }
+    &-item {
+      background: var(--datav-cp-bg-color);
+      border-bottom: none !important;
+    }
+    &-content {
+      overflow: hidden;
+      color: rgba(0, 0, 0, 0.65);
+      background-color: transparent !important;
+      border-top: none !important;
+      &-box {
+        padding: 0 !important;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
