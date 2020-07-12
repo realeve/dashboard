@@ -62,8 +62,13 @@ const Collapse: CollapseInterface = props => {
     const icon = (expandIcon ? (
       expandIcon(panelProps)
     ) : (
-      <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />
+      <i
+        className={classNames('datav-icon datav-font icon-right arrow', {
+          arrowActive: panelProps.isActive,
+        })}
+      />
     )) as React.ReactNode;
+    //   <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />
 
     return cloneElement(icon, () => ({
       className: classNames((icon as any).props.className, `${prefixCls}-arrow`),
