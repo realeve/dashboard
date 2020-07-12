@@ -50,6 +50,7 @@ export default ({ setHide, hide, ...props }) => {
                     onClick={() => {
                       setTab(idx);
                     }}
+                    key={item.title}
                   >
                     <Tooltip placement="left" trigger="hover" key={item.icon} title={item.title}>
                       <i
