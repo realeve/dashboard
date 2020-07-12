@@ -657,7 +657,287 @@ const componentList: IComponent[] = [
   {
     title: '地图',
     icon: 'icon-com-map',
-    list: [],
+    list: [
+      {
+        title: '',
+        icon: '',
+        list: [
+          {
+            type: 'map_3d_city_lite_subcoms,map_3d_city_lite_subcoms_add',
+            title: '动态轨迹线层',
+            image: 'https://img.alicdn.com/tfs/TB1y5HUACrqK1RjSZK9XXXyypXa-180-180.png',
+          },
+          {
+            type: 'map_3d_city_lite_subcoms,map_3d_city_lite_subcoms_add',
+            title: '地理围栏',
+            image: 'https://img.alicdn.com/tfs/TB1borYAwTqK1RjSZPhXXXfOFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_city_lite_subcoms,map_3d_city_lite_subcoms_add',
+            title: '粒子',
+            image: 'https://img.alicdn.com/tfs/TB1iSb3AyrpK1RjSZFhXXXSdXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_city_lite_subcoms,map_3d_city_lite_subcoms_add',
+            title: '文字标签',
+            image: 'https://img.alicdn.com/tfs/TB1J9T7AxTpK1RjSZFMXXbG_VXa-180-180.png',
+          },
+          {
+            type: 'map_earth',
+            title: '3D地球',
+            image: '//img.alicdn.com/tfs/TB104.0mUH1gK0jSZSyXXXtlpXa-368-208.png',
+          },
+          {
+            type: 'map_cloud_conference_2017',
+            title: '云栖大会监控屏',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/efff3c1c538f1b504eaa7c1cf7c6515a.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '环境光层',
+            image: 'https://img.alicdn.com/tfs/TB1NAr0ACzqK1RjSZFLXXcn2XXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine-test_subcoms',
+            title: '动画标记点',
+            image: '//img.alicdn.com/tfs/TB1uIz7ApzqK1RjSZFCXXbbxVXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '贴图建筑',
+            image: 'https://img.alicdn.com/tfs/TB1AqZvAFzqK1RjSZFCXXbbxVXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '双环比较',
+            image: '//img.alicdn.com/tfs/TB1OUP3ArvpK1RjSZPiXXbmwXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '环形标记',
+            image: '//img.alicdn.com/tfs/TB11X_3ACzqK1RjSZFjXXblCFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '巡航标记',
+            image: '//img.alicdn.com/tfs/TB18jr3AAvoK1RjSZPfXXXPKFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '动态图标组件',
+            image: 'https://img.alicdn.com/tfs/TB10R_3AyrpK1RjSZFhXXXSdXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '热力层',
+            image: 'https://img.alicdn.com/tfs/TB1gl3nAxnaK1RjSZFBXXcW7VXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '图片说明组件',
+            image: 'https://img.alicdn.com/tfs/TB1dPv3AAvoK1RjSZPfXXXPKFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '模型加载器',
+            image: 'https://img.alicdn.com/tfs/TB1hpz6ACzqK1RjSZFpXXakSXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '粒子组件',
+            image: 'https://img.alicdn.com/tfs/TB1iSb3AyrpK1RjSZFhXXXSdXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '点光源层',
+            image: 'https://img.alicdn.com/tfs/TB1.Xr6ACzqK1RjSZFpXXakSXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '进度条',
+            image: 'https://img.alicdn.com/tfs/TB1dxL4Aq6qK1RjSZFmXXX0PFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '雷达扫描',
+            image: '//img.alicdn.com/tfs/TB1Yar2AzTpK1RjSZKPXXa3UpXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '扫光层',
+            image: 'https://img.alicdn.com/tfs/TB1xLT7AAPoK1RjSZKbXXX1IXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '场景管理器',
+            image: 'https://img.alicdn.com/tfs/TB1BuT8AwHqK1RjSZJnXXbNLpXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '序列帧动画',
+            image: '//img.alicdn.com/tfs/TB1cCb3AyrpK1RjSZFhXXXSdXXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '天空盒层',
+            image: 'https://img.alicdn.com/tfs/TB1hyUqAFYqK1RjSZLeXXbXppXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '聚光灯层',
+            image: 'https://img.alicdn.com/tfs/TB1UnQbAxYaK1RjSZFnXXa80pXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '文字标记',
+            image: 'https://img.alicdn.com/tfs/TB1J9T7AxTpK1RjSZFMXXbG_VXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine_subcoms',
+            title: '地形展示组件',
+            image: 'https://img.alicdn.com/tfs/TB1dhL4Aq6qK1RjSZFmXXX0PFXa-180-180.png',
+          },
+          {
+            type: 'map_3d_engine-test_subcoms',
+            title: '水体展示组件',
+            image: 'https://img.alicdn.com/tfs/TB1dXfYAwDqK1RjSZSyXXaxEVXa-180-180.png',
+          },
+          {
+            type: 'map_datavmap',
+            title: '基础平面地图',
+            image: '//img.alicdn.com/tfs/TB17332mQY2gK0jSZFgXXc5OFXa-368-208.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '高德在线底图',
+            image: 'https://img.alicdn.com/tfs/TB1lG.fAxjaK1RjSZFAXXbdLFXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '区域热力层',
+            image: 'https://img.alicdn.com/tfs/TB15tj6ArvpK1RjSZFqXXcXUVXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '呼吸气泡层',
+            image: 'https://img.alicdn.com/tfs/TB1tkf4Aq6qK1RjSZFmXXX0PFXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '区域下钻热力层',
+            image: 'https://img.alicdn.com/tfs/TB1nwv7AwHqK1RjSZFPXXcwapXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '飞线层',
+            image: 'https://img.alicdn.com/tfs/TB1b.20Ar2pK1RjSZFsXXaNlXXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '网格热力图',
+            image: 'https://img.alicdn.com/tfs/TB1Wwz3ApzqK1RjSZFvXXcB7VXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '点热力层',
+            image: 'https://img.alicdn.com/tfs/TB18Y6_AwHqK1RjSZFEXXcGMXXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '背景层',
+            image: 'https://img.alicdn.com/tfs/TB1cUz4ArrpK1RjSZTEXXcWAVXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '等值面层',
+            image: 'https://img.alicdn.com/tfs/TB1xUwnAxnaK1RjSZFBXXcW7VXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '线热力层',
+            image: 'https://img.alicdn.com/tfs/TB1oBTmAQvoK1RjSZFNXXcxMVXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '点聚合',
+            image: 'https://img.alicdn.com/tfs/TB1Rq6ZAwTqK1RjSZPhXXXfOFXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '散点层',
+            image: 'https://img.alicdn.com/tfs/TB1Rq6ZAwTqK1RjSZPhXXXfOFXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '流式气泡层',
+            image: 'https://img.alicdn.com/tfs/TB1NEYZACzqK1RjSZPxXXc4tVXa-180-180.png',
+          },
+          {
+            type: 'datavmap_subcoms',
+            title: '底图层',
+            image: 'https://img.alicdn.com/tfs/TB1jH6_AwHqK1RjSZFEXXcGMXXa-180-180.png',
+          },
+          { type: 'datavmap_subcoms', title: '轨迹流场', image: '' },
+          {
+            type: 'map_datavgl',
+            title: 'datav.gl地图',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/6450e59e70413b3045d19402f63e010e.png',
+          },
+          {
+            type: 'datavmap_proj4_subcoms',
+            title: '自定义底图层',
+            image: 'https://img.alicdn.com/tfs/TB1jH6_AwHqK1RjSZFEXXcGMXXa-180-180.png',
+          },
+          {
+            type: 'map_exhibition',
+            title: '冬奥展馆组件集',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/efff3c1c538f1b504eaa7c1cf7c6515a.png',
+          },
+          {
+            type: 'map_3d_plane',
+            title: '3D平面世界地图',
+            image: '//img.alicdn.com/tfs/TB1ewjxXc4IxuRjHxuRXXb_jXXa-270-160.png',
+          },
+          {
+            type: 'map_3d_plane',
+            title: '3D平面中国地图',
+            image: '//img.alicdn.com/tfs/TB1dp6zXc4IxuRjHxuIXXa.ppXa-270-160.png',
+          },
+          {
+            type: 'map_earth',
+            title: '3D球形地图',
+            image: '//img.alicdn.com/tfs/TB1sRfpXcXIxuRkSRThXXcgupXa-270-160.png',
+          },
+          {
+            type: 'map_earth',
+            title: '自定义3d球形地图',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/31b4f3a1748a5207c79624f4089cbe0e.png',
+          },
+          {
+            type: 'map_earth',
+            title: '3d地球组合组件',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/31b4f3a1748a5207c79624f4089cbe0e.png',
+          },
+          {
+            type: 'map_plate',
+            title: '平面2d地图',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/68f542e56f7dc10a2d0ab578f53e4bc7.png',
+          },
+          {
+            type: 'map_earth',
+            title: '平面3d地图',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/68f542e56f7dc10a2d0ab578f53e4bc7.png',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '媒体',
@@ -705,27 +985,237 @@ const componentList: IComponent[] = [
   {
     title: '文字',
     icon: 'icon-com-text',
-    list: [],
+    list: [
+      {
+        title: '标题',
+        icon: 'com-font datav-com-icon icon-com-default icon-com-text_label icon-com-text',
+        list: [
+          {
+            type: 'text_label',
+            title: '词云',
+            image:
+              '//resource.datav.aliyun.com/cube/com/@xhzy-anime/wordcloud/0.0.1/icons/cover.png',
+          },
+
+          {
+            type: 'text_label',
+            title: '业务指标趋势',
+            image: '//img.alicdn.com/tfs/TB1nGwRtpT7gK0jSZFpXXaTkpXa-160-116.png',
+          },
+          {
+            type: 'text_label',
+            title: '通用标题',
+            image: '//img.alicdn.com/tfs/TB1gFTolQL0gK0jSZFAXXcA9pXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '跑马灯',
+            image: '//img.alicdn.com/tfs/TB1wVjnlRv0gK0jSZKbXXbK2FXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '词云2',
+            image: '//img.alicdn.com/tfs/TB16HjqlNv1gK0jSZFFXXb0sXXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '数字翻牌器',
+            image: '//img.alicdn.com/tfs/TB16dHmlKL2gK0jSZPhXXahvXXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '多行文本',
+            image: '//img.alicdn.com/tfs/TB1KJHmlKL2gK0jSZPhXXahvXXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '进度条',
+            image: '//img.alicdn.com/tfs/TB1IxrrlQT2gK0jSZFkXXcIQFXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '状态卡片',
+            image: '//img.alicdn.com/tfs/TB1_CjllKT2gK0jSZFvXXXnFXXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '文字标签',
+            image: '//img.alicdn.com/tfs/TB153HnlNn1gK0jSZKPXXXvUXXa-370-208.png',
+          },
+          {
+            type: 'text_label',
+            title: '时间器',
+            image: '//img.alicdn.com/tfs/TB1HuzmlQL0gK0jSZFtXXXQCXXa-370-208.png',
+          },
+        ],
+      },
+      {
+        title: '列表',
+        icon: 'com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text',
+        list: [
+          {
+            type: 'text_table',
+            title: '轮播列表',
+            image: '//img.alicdn.com/tfs/TB12GDqlKL2gK0jSZFmXXc7iXXa-370-208.png',
+          },
+          {
+            type: 'text_table',
+            title: '键值表格',
+            image: '//img.alicdn.com/tfs/TB1Yp7Sk1bviK0jSZFNXXaApXXa-370-208.png',
+          },
+          {
+            type: 'text_table',
+            title: '轮播列表柱状图',
+            image: '//img.alicdn.com/tfs/TB1ErDnlQP2gK0jSZPxXXacQpXa-370-208.png',
+          },
+          {
+            type: 'text_table',
+            title: '进度条表格',
+            image: '//img.alicdn.com/tfs/TB1ifkYtuL2gK0jSZPhXXahvXXa-332-144.png',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '关系网格',
     icon: 'icon-com-network',
-    list: [],
+    list: [
+      {
+        title: '',
+        icon: '',
+        list: [
+          {
+            type: 'network_force',
+            title: '弦图',
+            image: '//img.alicdn.com/tfs/TB1iDjmlRv0gK0jSZKbXXbK2FXa-370-208.png',
+          },
+          {
+            type: 'network_graph',
+            title: '网络图',
+            image: '//img.alicdn.com/tfs/TB17C_qlHY1gK0jSZTEXXXDQVXa-370-210.png',
+          },
+          {
+            type: 'network_force',
+            title: '关系网络',
+            image: '//img.alicdn.com/tfs/TB1i4nmlUH1gK0jSZSyXXXtlpXa-370-208.png',
+          },
+          {
+            title: '流程图',
+            image: '//img.alicdn.com/tfs/TB1w.QRtAL0gK0jSZFtXXXQCXXa-332-144.png',
+            type: 'network',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '素材',
     icon: 'icon-com-material',
-    list: [],
+    list: [
+      {
+        title: '',
+        icon: '',
+        list: [
+          {
+            type: 'material_decorate',
+            title: '箭头标绘',
+            image: '//img.alicdn.com/tfs/TB1UI35mND1gK0jSZFyXXciOVXa-370-208.png',
+          },
+          {
+            type: 'material_decorate',
+            title: '自定义背景块',
+            image: '//img.alicdn.com/tfs/TB1LPnllFT7gK0jSZFpXXaTkpXa-370-208.png',
+          },
+          {
+            type: 'material_decorate',
+            title: '边框',
+            image: '//img.alicdn.com/tfs/TB1TPnqlND1gK0jSZFKXXcJrVXa-370-208.png',
+          },
+          {
+            type: 'material_decorate',
+            title: '装饰',
+            image: '//img.alicdn.com/tfs/TB1sHAzl2b2gK0jSZK9XXaEgFXa-370-208.png',
+          },
+          {
+            type: 'material_decorate',
+            title: '标志墙',
+            image: '//img.alicdn.com/tfs/TB1rFvplO_1gK0jSZFqXXcpaXXa-370-208.png',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '交互',
     icon: 'icon-com-interact',
-    list: [],
+    list: [
+      {
+        title: '',
+        icon: '',
+        list: [
+          {
+            type: 'interact',
+            title: '按钮',
+            image: '//img.alicdn.com/tfs/TB1ww.ZmFT7gK0jSZFpXXaTkpXa-368-208.png',
+          },
+          {
+            type: 'interact',
+            title: '轮播页面',
+            image: '//img.alicdn.com/tfs/TB1pC_qlHY1gK0jSZTEXXXDQVXa-368-208.png',
+          },
+          {
+            type: 'interact',
+            title: '全屏切换',
+            image: '//img.alicdn.com/tfs/TB1omLolO_1gK0jSZFqXXcpaXXa-368-208.png',
+          },
+          {
+            type: 'interact',
+            title: 'iframe',
+            image: '//img.alicdn.com/tfs/TB13WrllFY7gK0jSZKzXXaikpXa-368-208.png',
+          },
+          {
+            type: 'interact',
+            title: '时间轴',
+            image: '//img.alicdn.com/tfs/TB11XYnlUT1gK0jSZFrXXcNCXXa-368-208.png',
+          },
+          {
+            type: 'interact',
+            title: '地理搜索框',
+            image: '//img.alicdn.com/tfs/TB1pj_nlSf2gK0jSZFPXXXsopXa-368-208.png',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '其他',
     icon: 'icon-com-decorate',
-    list: [],
+    list: [
+      {
+        title: '',
+        icon: '',
+        list: [
+          {
+            type: 'decorate_timeselector',
+            title: '时间选择器',
+            image: '//wyc-store.oss-cn-shanghai.aliyuncs.com/images/datav/time-selector.jpg',
+          },
+          {
+            type: 'decorate_clock',
+            title: '时钟',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/36be7c5c3b5204f7f937c29acc987a6d.png',
+          },
+          {
+            type: 'decorate_video',
+            title: '视频轮播',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/89b46ecb372bf61848988cde09cc3143.png',
+          },
+        ],
+      },
+    ],
   },
   {
     title: '收藏',
@@ -755,5 +1245,6 @@ const handleList = (list: IComponentItem[]) => {
     return item;
   });
   all.num = all.list.length;
-  return [all, ...res];
+  res = [all, ...res].filter(item => item.title.length > 0);
+  return res;
 };
