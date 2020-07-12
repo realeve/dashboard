@@ -6,7 +6,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 
 import * as lib from '@/utils/lib';
-import { co } from '@/utils/useAutoResize';
 
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
@@ -228,6 +227,32 @@ export default ({ setHide, hide, ...props }) => {
           onClick={() => {
             setSelected(-1);
           }}
+        />
+      </div>
+      <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
+        {/* <i
+          className={classnames('datav-icon datav-font icon-group', {
+            enable: selected > -1,
+          })}
+          title="成组"
+        /> */}
+        <i
+          className={classnames('datav-icon datav-font icon-delete', {
+            enable: selected > -1,
+          })}
+          title="删除"
+        />
+        <i
+          className={classnames('datav-icon datav-font icon-lock', {
+            enable: selected > -1,
+          })}
+          title="锁定"
+        />
+        <i
+          className={classnames('datav-icon datav-font icon-hide', {
+            enable: selected > -1,
+          })}
+          title="隐藏"
         />
       </div>
     </div>

@@ -133,6 +133,38 @@
       height: 48px;
     }
   }
+
+  .layer-toolbar-bottom {
+    border-top: 1px solid var(--datav-panel-border-color);
+  }
+  .layer-toolbar {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    background: #20242a;
+    flex: none;
+    :global {
+      .datav-icon {
+        transition: background 0.2s;
+        color: #bcc9d4;
+        margin: 0 5px;
+        border: 1px solid transparent;
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1px;
+        opacity: 0.3;
+      }
+      .enable {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .hide {
