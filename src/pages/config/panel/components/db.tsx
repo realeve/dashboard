@@ -38,16 +38,6 @@ const componentList: IComponent[] = [
               '//resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0/icons/316x238icon.png?time=1513585888239',
           },
           {
-            type: 'regular_line',
-            title: '基础区域图',
-            image: 'https://img.alicdn.com/tfs/TB19wvDoeL2gK0jSZPhXXahvXXa-370-208.png',
-          },
-          {
-            type: 'regular_line',
-            title: '堆叠区域图',
-            image: 'https://img.alicdn.com/tfs/TB1CKfIobj1gK0jSZFOXXc7GpXa-370-208.png',
-          },
-          {
             type: 'regular_bar',
             title: '圆弧柱形图',
             image: 'https://img.alicdn.com/tfs/TB1S8YIoeH2gK0jSZJnXXaT1FXa-370-208.png',
@@ -73,19 +63,9 @@ const componentList: IComponent[] = [
             image: 'https://img.alicdn.com/tfs/TB1EHjAoaL7gK0jSZFBXXXZZpXa-370-210.png',
           },
           {
-            type: 'regular_scatterplot',
-            title: '气泡图',
-            image: 'https://img.alicdn.com/tfs/TB1EInFokL0gK0jSZFAXXcA9pXa-185-104.png',
-          },
-          {
             type: 'regular_radar',
-            title: '雷达图',
+            title: '雷达图2',
             image: 'https://img.alicdn.com/tfs/TB10OzEobr1gK0jSZFDXXb9yVXa-370-208.png',
-          },
-          {
-            type: 'regular_rose',
-            title: '玫瑰图',
-            image: 'https://img.alicdn.com/tfs/TB1wz_FoeH2gK0jSZFEXXcqMpXa-370-208.png',
           },
 
           {
@@ -237,12 +217,6 @@ const componentList: IComponent[] = [
             image:
               'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/de03b8c190a88078cd25c8f9e9319bd4.png',
           },
-          {
-            type: 'regular_bar',
-            title: '折线柱状图',
-            image:
-              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/bf02c665dd1c62118c6f5ecc2e4a8323.png',
-          },
 
           {
             type: 'regular_line',
@@ -281,17 +255,23 @@ const componentList: IComponent[] = [
           },
           {
             type: 'regular_bar',
-            title: '梯形柱状图',
+            title: '梯形柱状图2',
             image: '//img.alicdn.com/tfs/TB1CEM4mHY1gK0jSZTEXXXDQVXa-368-208.png',
           },
           {
             type: 'regular_bar',
-            title: '瀑布图',
+            title: '瀑布图2',
             image: '//img.alicdn.com/tfs/TB1vp0ZxHY1gK0jSZTEXXXDQVXa-368-208.png',
           },
           {
             type: 'regular_bar',
             title: '折线柱状图',
+            image:
+              'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/bf02c665dd1c62118c6f5ecc2e4a8323.png',
+          },
+          {
+            type: 'regular_bar',
+            title: '折线柱状图2',
             image: '//img.alicdn.com/tfs/TB1kcYqlQT2gK0jSZPcXXcKkpXa-368-208.png',
           },
           {
@@ -302,6 +282,11 @@ const componentList: IComponent[] = [
           {
             type: 'regular_scatterplot',
             title: '气泡图',
+            image: '//img.alicdn.com/tfs/TB1EInFokL0gK0jSZFAXXcA9pXa-185-104.png',
+          },
+          {
+            type: 'regular_scatterplot',
+            title: '气泡图2',
             image: '//img.alicdn.com/tfs/TB1V5kZmFT7gK0jSZFpXXaTkpXa-368-208.png',
           },
           {
@@ -315,6 +300,16 @@ const componentList: IComponent[] = [
         title: '折线图',
         icon: 'com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular',
         list: [
+          {
+            type: 'regular_line',
+            title: '基础区域图',
+            image: 'https://img.alicdn.com/tfs/TB19wvDoeL2gK0jSZPhXXahvXXa-370-208.png',
+          },
+          {
+            type: 'regular_line',
+            title: '堆叠区域图',
+            image: 'https://img.alicdn.com/tfs/TB1CKfIobj1gK0jSZFOXXc7GpXa-370-208.png',
+          },
           {
             type: 'regular_line',
             title: '24时折线图',
@@ -410,7 +405,7 @@ const componentList: IComponent[] = [
           },
           {
             type: 'regular_line',
-            title: '基本折线图',
+            title: '基本折线图2',
             image: '//img.alicdn.com/tfs/TB19MQ1mHr1gK0jSZFDXXb9yVXa-368-208.png',
           },
           {
@@ -475,6 +470,11 @@ const componentList: IComponent[] = [
             type: 'regular_pie',
             title: '玫瑰图',
             image: '//img.alicdn.com/tfs/TB1tVMSk1bviK0jSZFNXXaApXXa-368-208.png',
+          },
+          {
+            type: 'regular_rose',
+            title: '玫瑰图2',
+            image: 'https://img.alicdn.com/tfs/TB1wz_FoeH2gK0jSZFEXXcqMpXa-370-208.png',
           },
           {
             type: 'regular_pie',
@@ -1240,8 +1240,10 @@ const handleList = (list: IComponentItem[]) => {
     list: [],
   };
   let res = R.clone(list).map(item => {
-    item.num = item.list.length;
-    all.list = [...all.list, ...item.list];
+    if (item.list[0] && item.list[0].title != '全部') {
+      item.num = item.list.length;
+      all.list = [...all.list, ...item.list];
+    }
     return item;
   });
   all.num = all.list.length;
