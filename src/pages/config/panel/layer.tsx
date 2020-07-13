@@ -303,7 +303,13 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         />
       </div>
 
-      <ContextMenu id={MENU_TYPE} collect={props => props}>
+      <ContextMenu
+        id={MENU_TYPE}
+        onShow={e => {
+          // 右键点击选中当前
+          setSelected(e.detail.data.idx);
+        }}
+      >
         {MENU_LIST.map(item =>
           item.icon.includes('divider') ? (
             <div className="react-contextmenu-item--divider" key={item.icon} />
