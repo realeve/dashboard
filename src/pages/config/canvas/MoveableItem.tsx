@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import Moveable, { OnDrag, OnResize } from 'react-moveable';
-const padding = 30;
 
+import { useDebounce, useSetState } from 'react-use';
+
+const padding = 30;
 export interface IMoveableItem {
   guides?: {
     v: number[];
@@ -40,40 +42,32 @@ const handleTransform = (str: string) => {
   return `matrix(${matrix.join(',')}) translate${translate}`;
 };
 
+const baseCfg = {
+  resizable: true,
+  rotatable: true,
+  renderDirections: ['s', 'se', 'e'],
+};
 export default ({
   guides,
   zoom = 1,
   canvasSize,
   children,
   className,
-  style = { width: 800, height: 500, rotate: 0 },
+  style = { width: 800, height: 500 },
   onResize = () => {},
-  ...props
 }: IMoveableItem) => {
   const dom = useRef(null);
   const [rotate, setRotate] = useState(0);
 
-  const [baseCfg, setBaseCfg] = useState({
-    resizable: true,
-    rotatable: true,
-    renderDirections: ['s', 'se', 'e'],
-  });
-
-  const toggle = () => {
-    if (baseCfg.resizable) {
-      setBaseCfg({
-        resizable: false,
-        rotatable: false,
-        renderDirections: [],
-      });
-    } else {
-      setBaseCfg({
-        resizable: true,
-        rotatable: true,
-        renderDirections: ['s', 'se', 'e'],
-      });
-    }
-  };
+  // 使用curStyle 暂存数据，无操作500ms以后向父组件触发。
+  const [curStyle, setCurStyle] = useSetState({});
+  useDebounce(
+    () => {
+      onResize(curStyle);
+    },
+    500,
+    [JSON.stringify(curStyle)],
+  );
 
   return (
     <div className={styles.moveableItem}>
@@ -94,10 +88,6 @@ export default ({
         draggable={true}
         snappable={true}
         {...baseCfg}
-        click={e => {
-          console.log(e);
-          toggle();
-        }}
         throttleDrag={0}
         zoom={zoom}
         verticalGuidelines={guides.v.map(item => item - padding / zoom)}
@@ -106,7 +96,7 @@ export default ({
           target.style.transform = transform;
           // target!.style.left = `${left}px`;
           // target!.style.top = `${top}px`;
-          onResize({
+          setCurStyle({
             transform: handleTransform(transform),
           });
         }}
@@ -114,11 +104,11 @@ export default ({
         onResize={({ target, width, height, delta }: OnResize) => {
           delta[0] && (target!.style.width = `${width}px`);
           delta[1] && (target!.style.height = `${height}px`);
-          onResize &
-            onResize({
-              width: (width / zoom).toFixed(0),
-              height: (height / zoom).toFixed(0),
-            });
+
+          setCurStyle({
+            width: (width / zoom).toFixed(0),
+            height: (height / zoom).toFixed(0),
+          });
         }}
         // keepRatio={true}
         throttleRotate={0}
@@ -129,7 +119,7 @@ export default ({
             target.style.transform.split('rotate')[0] + ' rotate(' + nextRotate + 'deg)';
           target.style.transform = transform;
 
-          onResize({
+          setCurStyle({
             transform: handleTransform(transform),
             rotate: nextRotate,
           });

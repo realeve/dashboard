@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './index.less';
 import MoveableItem from './MoveableItem';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
 
-export const defaultStyle = {
-  style: { width: 640, height: 400, rotate: 0, transform: 'translate(100p,100px)' },
-};
-
-const Index = ({ canvasSize, zoom, guides, panel }) => {
-  const [canvasItem, setCanvasItem] = useState([]);
-  useEffect(() => {
-    let obj = JSON.parse(
-      window.localStorage.getItem('canvas') || `[${JSON.stringify(defaultStyle)}]`,
-    );
-    setCanvasItem(obj);
-  }, []);
-
-  console.log(panel);
-
+const Index = ({ canvasSize, zoom, guides, panel, dispatch }) => {
   const onResize = (idx: number) => e => {
-    let prevItem = R.clone(canvasItem);
+    let prevItem = R.clone(panel);
     let prevStyle = prevItem[idx].style;
 
     let width = e.width || prevStyle.width;
@@ -35,11 +21,15 @@ const Index = ({ canvasSize, zoom, guides, panel }) => {
         width,
         height,
         rotate,
-        transform: e.transform,
+        transform: e.transform || prevStyle.transform,
       },
     };
-    setCanvasItem(prevItem);
-    window.localStorage.setItem('canvas', JSON.stringify(prevItem));
+    dispatch({
+      type: 'common/updatePanel',
+      payload: {
+        panel: prevItem,
+      },
+    });
   };
 
   return (
@@ -47,14 +37,14 @@ const Index = ({ canvasSize, zoom, guides, panel }) => {
       className={styles['canvas-panel']}
       style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
     >
-      {canvasItem.map((item, idx) => (
+      {panel.map((item, idx) => (
         <MoveableItem
           zoom={zoom}
           guides={guides}
           canvasSize={canvasSize}
           style={item.style}
           onResize={onResize(idx)}
-          key={idx}
+          key={item.id}
         >
           001
         </MoveableItem>

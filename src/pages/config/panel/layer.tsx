@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
-import * as lib from '@/utils/lib';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
 /**

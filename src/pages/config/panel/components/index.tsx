@@ -5,12 +5,16 @@ import { Tooltip } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
 import { IComponentItem, IComponent } from './db';
-import { defaultStyle } from '@/pages/config/canvas';
+
+export const defaultStyle = {
+  style: { width: 640, height: 400, rotate: 0, transform: 'translate(100p,100px)' },
+};
 
 const { Panel } = Collapse;
 
 export default ({ setHide, hide, onAddPanel, ...props }) => {
   const [tab, setTab] = useState(0);
+  const [activeKey, setActiveKey] = useState('');
   const [itemList, setItemList] = useState<IComponent[]>([]);
   useEffect(() => {
     db.getComponentList().then(setItemList);
@@ -66,7 +70,7 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
               </div>
             </div>
             <div className={styles.content}>
-              <Collapse accordion>
+              <Collapse accordion defaultActiveKey={['全部']}>
                 {((itemList[tab] || { list: [] }).list as IComponentItem[]).map(
                   (item: IComponentItem) => (
                     <Panel
