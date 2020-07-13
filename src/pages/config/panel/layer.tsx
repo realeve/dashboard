@@ -6,6 +6,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
+
+// contextmenu 右键菜单
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
  * beautiful dnd 文档
@@ -32,6 +36,83 @@ interface ILayerItem {
   id: string;
   [key: string]: any;
 }
+
+export enum MENU_ACTIONS {
+  TOP,
+  BOTTOM,
+  MOVE_PREV,
+  MOVE_NEXT,
+  LOCK,
+  HIDE,
+  RENAME,
+  COPY,
+  REMOVE,
+  FAVORITE,
+}
+
+const MENU_LIST = [
+  {
+    title: '置顶',
+    action: MENU_ACTIONS.TOP,
+    icon: 'icon-to-top',
+  },
+  {
+    title: '置底',
+    action: MENU_ACTIONS.BOTTOM,
+    icon: 'icon-to-bottom',
+  },
+  {
+    title: '上移一层',
+    action: MENU_ACTIONS.MOVE_PREV,
+    icon: 'icon-move-prev',
+  },
+  {
+    title: '下移一层',
+    action: MENU_ACTIONS.MOVE_NEXT,
+    icon: 'icon-move-next',
+  },
+  {
+    icon: 'divider1',
+  },
+  {
+    title: '锁定',
+    action: MENU_ACTIONS.LOCK,
+    icon: 'icon-lock',
+  },
+  {
+    title: '隐藏',
+    action: MENU_ACTIONS.HIDE,
+    icon: 'icon-hide',
+  },
+  {
+    icon: 'divider2',
+  },
+  {
+    title: '重命名',
+    action: MENU_ACTIONS.RENAME,
+    icon: 'icon-edit',
+  },
+  {
+    title: '复制',
+    action: MENU_ACTIONS.COPY,
+    icon: 'icon-copy',
+  },
+  {
+    title: '删除',
+    action: MENU_ACTIONS.REMOVE,
+    icon: 'icon-delete',
+  },
+  {
+    title: '收藏',
+    action: MENU_ACTIONS.FAVORITE,
+    icon: 'icon-favorite',
+  },
+  {
+    icon: 'divider3',
+  },
+];
+
+const MENU_TYPE = 'CONTEXT_MENU';
 
 const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
@@ -62,6 +143,12 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
       },
     });
     setSelected(to);
+  };
+
+  const handleClick = (e, data, target) => {
+    let action = data.action;
+    let idx = data.idx;
+    console.log({ action, idx, id: panel[idx].id });
   };
 
   return (
@@ -182,15 +269,22 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
                           setSelected(idx);
                         }}
                       >
-                        {!isThumb ? (
-                          <i className={item.icon} />
-                        ) : (
-                          <img src={item.image} alt={item.title} className={styles.img} />
-                        )}
+                        <ContextMenuTrigger
+                          id={MENU_TYPE}
+                          holdToDisplay={1000}
+                          idx={idx}
+                          collect={props => props}
+                        >
+                          {!isThumb ? (
+                            <i className={item.icon} />
+                          ) : (
+                            <img src={item.image} alt={item.title} className={styles.img} />
+                          )}
 
-                        <div className={styles.text}>
-                          <span>{item.title}</span>
-                        </div>
+                          <div className={styles.text}>
+                            <span>{item.title}</span>
+                          </div>
+                        </ContextMenuTrigger>
                       </li>
                     )}
                   </Draggable>
@@ -200,6 +294,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             )}
           </Droppable>
         </DragDropContext>
+
         <div
           className={styles['last-flex-item']}
           onClick={() => {
@@ -207,6 +302,19 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           }}
         />
       </div>
+
+      <ContextMenu id={MENU_TYPE} collect={props => props}>
+        {MENU_LIST.map(item =>
+          item.icon.includes('divider') ? (
+            <div className="react-contextmenu-item--divider" key={item.icon} />
+          ) : (
+            <MenuItem key={item.icon} onClick={handleClick} data={{ action: item.action }}>
+              <i className={`datav-icon datav-font ${item.icon}`} />
+              {item.title}
+            </MenuItem>
+          ),
+        )}
+      </ContextMenu>
       <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
         {/* <i
           className={classnames('datav-icon datav-font icon-group', {
@@ -219,6 +327,14 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             enable: selected > -1,
           })}
           title="删除"
+          onClick={() => {
+            dispatch({
+              type: 'common/removePanel',
+              payload: {
+                idx: selected,
+              },
+            });
+          }}
         />
         <i
           className={classnames('datav-icon datav-font icon-lock', {

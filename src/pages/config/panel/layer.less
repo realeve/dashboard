@@ -89,6 +89,14 @@
       transition: background 0.2s;
       cursor: pointer;
       flex: none;
+      :global {
+        .react-contextmenu-wrapper {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+      }
       .text {
         flex: auto;
         margin-left: 6px;
@@ -169,4 +177,37 @@
 
 .hide {
   width: 0;
+}
+
+:global {
+  .react-contextmenu {
+    // z-index: 9999;
+    background: var(--datav-context-menu-bg);
+    color: var(--datav-font-color);
+    position: fixed;
+    user-select: none;
+    .datav-icon {
+      margin-right: 3px;
+    }
+    &-item {
+      padding: 0 6px;
+      line-height: 28px;
+      height: 28px;
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      overflow: hidden;
+      padding-right: 3em;
+      display: flex;
+      &--divider {
+        height: 1px;
+        width: 100%;
+        background-color: var(--datav-context-menu-line);
+      }
+      &:hover {
+        background-color: var(--datav-context-menu-hover);
+        color: var(--datav-main-color);
+        border-left: 2px solid var(--datav-main-color);
+      }
+    }
+  }
 }
