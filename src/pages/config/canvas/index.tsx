@@ -46,7 +46,7 @@ const Index = ({ canvasSize, zoom, guides, panel, dispatch }) => {
           onResize={onResize(idx)}
           key={item.id}
         >
-          001
+          <div style={{ color: '#fff', fontSize: 20 }}>{item.title}</div>
         </MoveableItem>
       ))}
     </div>
