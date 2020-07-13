@@ -4,9 +4,9 @@ import classnames from 'classnames';
 import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
-
 import * as lib from '@/utils/lib';
-
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
  * beautiful dnd 文档
@@ -34,36 +34,10 @@ interface ILayerItem {
   [key: string]: any;
 }
 
-export default ({ setHide, hide, ...props }) => {
+const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState(-1);
-
-  const [layerList, setLayerList] = useState<ILayerItem[]>([
-    {
-      type: 'pie.basic',
-      img: '//resource.datav.aliyun.com/cube/com/@xhzy-anime/single-piechart/0.0.2/icons/cover.png',
-      title: '基本饼图',
-      icon: 'com-font icon-com-regular_pie',
-      id: lib.noncer(),
-    },
-    {
-      type: 'column.multi',
-      img:
-        '//resource.datav.aliyun.com/cube/com/@xhzy-anime/multiple-barchart/0.0.1/icons/cover.png',
-      title: '多柱状图',
-      icon: 'com-font icon-com-regular_bar',
-      id: lib.noncer(),
-    },
-    {
-      type: 'column.multi',
-      img:
-        '//resource.datav.aliyun.com/cube/com/@xhzy-anime/multiple-barchart/0.0.1/icons/cover.png',
-      title: '多柱状图2',
-      icon: 'com-font icon-com-regular_bar',
-      id: lib.noncer(),
-    },
-  ]);
 
   const onDragEnd = result => {
     // dropped outside the list
@@ -81,8 +55,13 @@ export default ({ setHide, hide, ...props }) => {
    * @param to 结束索引
    */
   const moveLayerItem = (from: number, to: number) => {
-    const items = reorder(layerList, from, to);
-    setLayerList(items);
+    const items = reorder(panel, from, to);
+    dispatch({
+      type: 'common/updatePanel',
+      payload: {
+        panel: items,
+      },
+    });
     setSelected(to);
   };
 
@@ -140,12 +119,12 @@ export default ({ setHide, hide, ...props }) => {
             'datav-icon datav-font icon-move-next',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected >= 0 && selected < layerList.length - 1,
+              [styles.enable]: selected >= 0 && selected < panel.length - 1,
             },
           )}
           title="下移一层"
           onClick={() => {
-            if (selected >= 0 && selected < layerList.length - 1) {
+            if (selected >= 0 && selected < panel.length - 1) {
               moveLayerItem(selected, selected + 1);
             }
           }}
@@ -166,13 +145,13 @@ export default ({ setHide, hide, ...props }) => {
             'datav-icon datav-font icon-to-bottom',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected >= 0 && selected < layerList.length - 1,
+              [styles.enable]: selected >= 0 && selected < panel.length - 1,
             },
           )}
           title="置底"
           onClick={() => {
-            if (selected >= 0 && selected < layerList.length - 1) {
-              moveLayerItem(selected, layerList.length - 1);
+            if (selected >= 0 && selected < panel.length - 1) {
+              moveLayerItem(selected, panel.length - 1);
             }
           }}
         />
@@ -188,7 +167,7 @@ export default ({ setHide, hide, ...props }) => {
                 // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
                 ref={provided.innerRef}
               >
-                {layerList.map((item, idx) => (
+                {panel.map((item, idx) => (
                   <Draggable key={item.id} draggableId={item.id} index={idx}>
                     {(provided, snapshot) => (
                       <li
@@ -207,7 +186,7 @@ export default ({ setHide, hide, ...props }) => {
                         {!isThumb ? (
                           <i className={item.icon} />
                         ) : (
-                          <img src={item.img} alt={item.title} className={styles.img} />
+                          <img src={item.image} alt={item.title} className={styles.img} />
                         )}
 
                         <div className={styles.text}>
@@ -258,3 +237,5 @@ export default ({ setHide, hide, ...props }) => {
     </div>
   );
 };
+
+export default connect(({ common }: { common: ICommon }) => ({ panel: common.panel }))(Index);

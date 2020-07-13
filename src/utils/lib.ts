@@ -1,6 +1,8 @@
 import { saveAs } from 'file-saver';
 import moment from 'dayjs';
 import beautify from 'js-beautify';
+import * as axios from './axios';
+import * as R from 'ramda';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
@@ -77,3 +79,26 @@ export const noncer = () =>
   Math.random()
     .toString(16)
     .slice(2);
+
+export const getType = axios.getType;
+
+interface Store {
+  payload: any;
+}
+export const setStore = (state, store: Store) => {
+  let { payload } = store;
+  if (typeof payload === 'undefined') {
+    payload = store;
+    // throw new Error('需要更新的数据请设置在payload中');
+  }
+  let nextState = R.clone(state);
+  Object.keys(payload).forEach(key => {
+    let val = payload[key];
+    if (getType(val) == 'object') {
+      nextState[key] = Object.assign({}, nextState[key], val);
+    } else {
+      nextState[key] = val;
+    }
+  });
+  return nextState;
+};

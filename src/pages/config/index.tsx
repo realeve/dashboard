@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import classnames from 'classnames';
 import { useSetState } from 'react-use';
 
 import HeaderComponent from './header';
@@ -15,11 +14,13 @@ import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
 import CanvasComponent from './canvas';
 
-export default () => {
+import { connect } from 'dva';
+
+const Index = ({ dispatch }) => {
   const [hide, setHide] = useSetState({
     layer: false,
     components: false,
-    toolbox: false,
+    toolbox: true,
     config: true,
     beauty: true,
     filter: true,
@@ -43,7 +44,16 @@ export default () => {
         <LayerPanel setHide={setHide} hide={hide} />
         <BeautyPanel setHide={setHide} hide={hide} />
         <FilterPanel setHide={setHide} hide={hide} />
-        <ComponentPanel setHide={setHide} hide={hide} />
+        <ComponentPanel
+          setHide={setHide}
+          hide={hide}
+          onAddPanel={panel => {
+            dispatch({
+              type: 'common/addPanel',
+              payload: { panel },
+            });
+          }}
+        />
 
         <div className={styles['right-edit-main']}>
           <Toolbox hide={hide} />
@@ -59,3 +69,4 @@ export default () => {
     </div>
   );
 };
+export default connect()(Index);

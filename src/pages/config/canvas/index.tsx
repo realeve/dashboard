@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import MoveableItem from './MoveableItem';
 import * as R from 'ramda';
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
 
-export default ({ canvasSize, zoom, guides }) => {
+export const defaultStyle = {
+  style: { width: 640, height: 400, rotate: 0, transform: 'translate(100p,100px)' },
+};
+
+const Index = ({ canvasSize, zoom, guides, panel }) => {
   const [canvasItem, setCanvasItem] = useState([]);
   useEffect(() => {
     let obj = JSON.parse(
-      window.localStorage.getItem('canvas') || '[{"style":{"width":640,"height":400,"rotate":0}}]',
+      window.localStorage.getItem('canvas') || `[${JSON.stringify(defaultStyle)}]`,
     );
     setCanvasItem(obj);
   }, []);
+
+  console.log(panel);
 
   const onResize = (idx: number) => e => {
     let prevItem = R.clone(canvasItem);
@@ -54,3 +62,5 @@ export default ({ canvasSize, zoom, guides }) => {
     </div>
   );
 };
+
+export default connect(({ common }: { common: ICommon }) => ({ panel: common.panel }))(Index);

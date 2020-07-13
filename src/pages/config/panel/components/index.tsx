@@ -5,9 +5,11 @@ import { Tooltip } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
 import { IComponentItem, IComponent } from './db';
+import { defaultStyle } from '@/pages/config/canvas';
+
 const { Panel } = Collapse;
 
-export default ({ setHide, hide, ...props }) => {
+export default ({ setHide, hide, onAddPanel, ...props }) => {
   const [tab, setTab] = useState(0);
   const [itemList, setItemList] = useState<IComponent[]>([]);
   useEffect(() => {
@@ -80,7 +82,14 @@ export default ({ setHide, hide, ...props }) => {
                     >
                       <ul className={styles.menulist}>
                         {item.list.map(panel => (
-                          <li title={panel.title} key={panel.title} style={{ border: 0 }}>
+                          <li
+                            title={panel.title}
+                            key={panel.title}
+                            style={{ border: 0 }}
+                            onClick={() => {
+                              onAddPanel && onAddPanel({ ...panel, ...defaultStyle });
+                            }}
+                          >
                             <div className={styles.text}>{panel.title}</div>
                             <div
                               className={styles.img}
