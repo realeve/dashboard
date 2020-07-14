@@ -15,7 +15,7 @@ const updatePanel = function*({ panel, call, put }) {
 
 const copyArray = (idx, array) => {
   let arr = R.clone(array);
-  let newItem = arr[idx];
+  let newItem = R.nth(idx, array);
   newItem.id = lib.noncer();
   return [...arr.slice(0, idx), newItem, ...arr.slice(idx, arr.length)];
 };
