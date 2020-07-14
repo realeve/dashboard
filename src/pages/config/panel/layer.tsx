@@ -75,12 +75,12 @@ const MENU_LIST = [
     icon: 'divider1',
   },
   {
-    title: '锁定',
+    title: '锁定/解锁',
     action: MENU_ACTIONS.LOCK,
     icon: 'icon-lock',
   },
   {
-    title: '隐藏',
+    title: '隐藏/显示',
     action: MENU_ACTIONS.HIDE,
     icon: 'icon-hide',
   },
@@ -145,10 +145,76 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
     setSelected(to);
   };
 
-  const handleClick = (e, data, target) => {
+  // 更新第idx个数据的属性
+  const updatePanelItem = (idx: number, attrib: {}) => {
+    dispatch({
+      type: 'common/updatePanelAttrib',
+      payload: {
+        idx,
+        attrib,
+      },
+    });
+  };
+
+  const handleClick = (_, data) => {
     let action = data.action;
     let idx = data.idx;
-    console.log({ action, idx, id: panel[idx].id });
+    handleAction(action, idx);
+  };
+  const handleAction = (action, idx) => {
+    if (typeof idx === 'undefined') {
+      idx = selected;
+    }
+    switch (action) {
+      case MENU_ACTIONS.TOP:
+        idx > 0 && moveLayerItem(idx, 0);
+        break;
+      case MENU_ACTIONS.BOTTOM:
+        idx >= 0 && idx < panel.length - 1 && moveLayerItem(idx, panel.length - 1);
+        break;
+      case MENU_ACTIONS.MOVE_PREV:
+        if (idx > 0) {
+          moveLayerItem(idx, idx - 1);
+        }
+        break;
+      case MENU_ACTIONS.MOVE_NEXT:
+        if (idx >= 0 && idx < panel.length - 1) {
+          moveLayerItem(idx, idx + 1);
+        }
+        break;
+      case MENU_ACTIONS.LOCK:
+        let lock = R.nth(idx, panel).lock || false;
+        updatePanelItem(idx, { lock: !lock });
+        break;
+      case MENU_ACTIONS.HIDE:
+        let hide = R.nth(idx, panel).hide || false;
+        updatePanelItem(idx, { hide: !hide });
+        break;
+      case MENU_ACTIONS.RENAME:
+        console.log('该功能待添加');
+        break;
+      case MENU_ACTIONS.COPY:
+        dispatch({
+          type: 'common/copyPanel',
+          payload: {
+            idx,
+          },
+        });
+        break;
+      case MENU_ACTIONS.REMOVE:
+        dispatch({
+          type: 'common/removePanel',
+          payload: {
+            idx,
+          },
+        });
+        break;
+      case MENU_ACTIONS.FAVORITE:
+        console.log('该功能待添加');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -195,9 +261,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           )}
           title="上移一层"
           onClick={() => {
-            if (selected > 0) {
-              moveLayerItem(selected, selected - 1);
-            }
+            handleAction(MENU_ACTIONS.MOVE_PREV, selected);
           }}
         />
         <i
@@ -210,9 +274,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           )}
           title="下移一层"
           onClick={() => {
-            if (selected >= 0 && selected < panel.length - 1) {
-              moveLayerItem(selected, selected + 1);
-            }
+            handleAction(MENU_ACTIONS.MOVE_NEXT, selected);
           }}
         />
         <i
@@ -221,9 +283,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           })}
           title="置顶"
           onClick={() => {
-            if (selected > 0) {
-              moveLayerItem(selected, 0);
-            }
+            handleAction(MENU_ACTIONS.TOP, selected);
           }}
         />
         <i
@@ -236,9 +296,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           )}
           title="置底"
           onClick={() => {
-            if (selected >= 0 && selected < panel.length - 1) {
-              moveLayerItem(selected, panel.length - 1);
-            }
+            handleAction(MENU_ACTIONS.BOTTOM, selected);
           }}
         />
       </div>
@@ -262,6 +320,8 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
                         {...provided.dragHandleProps}
                         className={classnames({
                           [styles.thumbnail]: isThumb,
+                          [styles.locked]: item.lock,
+                          [styles.hided]: item.hide,
                           [styles.selected]: selected === idx,
                           [styles.dragging]: snapshot.isDragging,
                         })}
@@ -283,6 +343,14 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
 
                           <div className={styles.text}>
                             <span>{item.title}</span>
+                          </div>
+                          <div
+                            className={classnames({
+                              [styles['layer-thumbail-item']]: item.lock || !item.show,
+                            })}
+                          >
+                            {item.hide && <i className="lock-toggle-btn datav-font icon-hide" />}
+                            {item.lock && <i className="lock-toggle-btn datav-font icon-lock" />}
                           </div>
                         </ContextMenuTrigger>
                       </li>
@@ -334,12 +402,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
           })}
           title="删除"
           onClick={() => {
-            dispatch({
-              type: 'common/removePanel',
-              payload: {
-                idx: selected,
-              },
-            });
+            handleAction(MENU_ACTIONS.REMOVE, selected);
           }}
         />
         <i
@@ -347,12 +410,18 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             enable: selected > -1,
           })}
           title="锁定"
+          onClick={() => {
+            handleAction(MENU_ACTIONS.LOCK, selected);
+          }}
         />
         <i
           className={classnames('datav-icon datav-font icon-hide', {
             enable: selected > -1,
           })}
           title="隐藏"
+          onClick={() => {
+            handleAction(MENU_ACTIONS.HIDE, selected);
+          }}
         />
       </div>
     </div>

@@ -13,6 +13,13 @@ const updatePanel = function*({ panel, call, put }) {
   });
 };
 
+const copyArray = (idx, array) => {
+  let arr = R.clone(array);
+  let newItem = arr[idx];
+  newItem.id = lib.noncer();
+  return [...arr.slice(0, idx), newItem, ...arr.slice(idx, arr.length)];
+};
+
 const namespace = 'common';
 export interface IPanelStyle {
   width: number;
@@ -21,12 +28,14 @@ export interface IPanelStyle {
   transform: string;
 }
 export interface IPanelConfig {
-  type: string;
-  title: string;
-  image: string;
-  id?: string;
-  icon?: string;
+  type: string; //类型
+  title: string; //标题
+  image: string; // 缩略图
+  id?: string; // 自动生成的ID
+  icon?: string; // 图标
   style?: IPanelStyle;
+  lock?: boolean; //锁定
+  hide?: boolean; // 隐藏
   [key: string]: any;
 }
 export interface ICommon {
@@ -79,6 +88,31 @@ export default {
       let nextPanel = R.remove(idx, 1, prevPanel);
       yield updatePanel({
         panel: nextPanel,
+        call,
+        put,
+      });
+    },
+    // 更新第I个面板的属性
+    *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
+      let panel = yield select(state => state[namespace].panel);
+      let _item = R.nth(idx)(panel);
+      _item = {
+        ..._item,
+        ...attrib,
+      };
+      let _panel = R.update(idx, _item, panel);
+      yield updatePanel({
+        panel: _panel,
+        call,
+        put,
+      });
+    },
+    // 复制一份
+    *copyPanel({ payload: { idx } }, { put, call, select }) {
+      let panel = yield select(state => state[namespace].panel);
+      let _panel = copyArray(idx, panel);
+      yield updatePanel({
+        panel: _panel,
         call,
         put,
       });

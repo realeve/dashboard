@@ -119,6 +119,20 @@
         border: 1px solid #3a4659;
         background: #282a30;
       }
+
+      .layer-thumbail-item {
+        position: absolute;
+        line-height: 1;
+        right: 4px;
+        top: 3px;
+        :global {
+          .datav-font {
+            font-size: 14px;
+            padding: 0 2px;
+          }
+        }
+      }
+
       // .extra {
       //   position: absolute;
       //   line-height: 1;
@@ -130,12 +144,20 @@
       flex: auto;
       min-height: 40px;
     }
-    .selected {
-      background: var(--datav-sub-main-color);
-      color: #fff;
+    .locked {
+      color: #576369;
+      background: #1c1f25;
+    }
+    .hided {
+      color: #576369;
+      background: #1c1f25;
     }
     .dragging {
       background: var(--datav-main-hover-color);
+    }
+    .selected {
+      background: var(--datav-sub-main-color);
+      color: #fff;
     }
     .thumbnail {
       height: 48px;
