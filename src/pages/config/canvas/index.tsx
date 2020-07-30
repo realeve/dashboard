@@ -4,8 +4,32 @@ import MoveableItem from './MoveableItem';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
+import ChartItem from './chartItem';
+import { Dispatch } from 'redux';
+import { IChartConfig } from '../panel/components/db';
 
-const Index = ({ canvasSize, zoom, guides, panel, dispatch }) => {
+interface ICanvasProp {
+  panel: IChartConfig[];
+  dispatch: Dispatch;
+  canvasSize: {
+    width: number;
+    height: number;
+  };
+  zoom: number;
+  guides: {
+    v: number[];
+    h: number[];
+  };
+  [key:string]:any;
+}
+
+const Index = ({
+  canvasSize,
+  zoom,
+  guides,
+  panel,
+  dispatch,
+}:ICanvasProp) => {
   const onResize = (idx: number) => e => {
     let prevItem = R.clone(panel);
     let prevStyle = prevItem[idx].style;
@@ -44,9 +68,9 @@ const Index = ({ canvasSize, zoom, guides, panel, dispatch }) => {
           canvasSize={canvasSize}
           style={item.style}
           onResize={onResize(idx)}
-          key={item.id}
+          key={item.id} 
         >
-          <div style={{ color: '#fff', fontSize: 20 }}>{item.title}</div>
+          <ChartItem config={item} />
         </MoveableItem>
       ))}
     </div>

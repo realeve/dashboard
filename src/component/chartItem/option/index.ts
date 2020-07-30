@@ -33,4 +33,9 @@ import * as rangeLine from './g2/rangeLine';
 export { rangeLine };
 
 // 水平正负柱状图
-export { default as barChartPositiveNegative } from './barChartPositiveNegative';
+import * as barChartPositiveNegative from './barChart/positiveNegative'
+export {  barChartPositiveNegative } 
+
+// 折线柱图
+import * as barChartLine from './barChart/line'
+export {  barChartLine } 

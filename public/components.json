@@ -16,6 +16,9 @@
             "image": "//resource.datav.aliyun.com/cube/com/@ChJ.limit_free/horizontal-positive-negative-bar-chart/0.2.2/icons/316x238icon.png?time=1541142278860"
           },
           {
+            "name": "@ChJ.limit_free/line-bar-chart",
+            "key": "barChartLine",
+            "engine": "echarts",
             "type": "regular_bar",
             "title": "折线柱图",
             "image": "//resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0/icons/316x238icon.png?time=1513585888239"

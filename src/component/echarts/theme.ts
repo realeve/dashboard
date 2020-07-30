@@ -86,8 +86,8 @@ export default {
   grid: {
     borderWidth: 0,
     left: 10,
-    right: 5,
-    top: 5,
+    right: 10,
+    top: 10,
     bottom: 10,
     containLabel: true,
   },

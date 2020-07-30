@@ -92,6 +92,7 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
                             onClick={() => {
                               onAddPanel && onAddPanel({ ...panel, ...defaultStyle });
                             }}
+                            className={classnames({[styles.finished]:panel.key})}
                           >
                             <div className={styles.text}>{panel.title}</div>
                             <div

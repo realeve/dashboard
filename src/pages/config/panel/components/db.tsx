@@ -1,28 +1,37 @@
-import { axios, mock } from '@/utils/axios';
+import { axios } from '@/utils/axios';
 import * as R from 'ramda';
+
+export interface IChartConfig {
+  title: string;
+  image: string;
+  type: string;
+  name?: string;
+  key?: string;
+  engine?: 'echarts' | 'g2' | 'g2plot';
+  style?: Partial<{
+    width: string | number;
+    height: string | number;
+    rotate: string | number;
+    transform: string;
+  }>;
+  [key: string]: any;
+}
 export interface IComponentItem {
   title: string;
   icon: string;
   num?: number;
-  list: {
-    title: string;
-    image: string;
-    type: string;
-  }[];
+  list: IChartConfig[];
 }
 export interface IComponent {
   title: string;
   icon: string;
-  name?:string;
-  key?:string;
-  engine?:string;
   list: IComponentItem[];
+  [key: string]: any;
 }
- 
 
-export const getComponentList:()=>Promise<IComponent> = () =>
+export const getComponentList: () => Promise<IComponent> = () =>
   axios({
-    url:window.location.origin+'/components.json'
+    url: window.location.origin + '/components.json',
   }).then(res =>
     res.map(item => {
       item.list = handleList(item.list);
