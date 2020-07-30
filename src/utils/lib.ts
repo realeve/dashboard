@@ -44,6 +44,11 @@ export let loadDataFile: (file: File) => Promise<null | Blob> = async (file: Fil
   });
 };
 
+
+// 数字
+export const isNumOrFloat = str =>
+  /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
+
 export const loadDashboard = async file => {
   let str = await loadDataFile(file).then(buffer => buffer || '[]');
   return JSON.parse(str as string);

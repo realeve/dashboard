@@ -14,7 +14,6 @@ const { Panel } = Collapse;
 
 export default ({ setHide, hide, onAddPanel, ...props }) => {
   const [tab, setTab] = useState(0);
-  const [activeKey, setActiveKey] = useState('');
   const [itemList, setItemList] = useState<IComponent[]>([]);
   useEffect(() => {
     db.getComponentList().then(setItemList);

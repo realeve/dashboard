@@ -31,3 +31,6 @@ export { waterfall };
 // min-max-average区间图
 import * as rangeLine from './g2/rangeLine';
 export { rangeLine };
+
+// 水平正负柱状图
+export { default as barChartPositiveNegative } from './barChartPositiveNegative';
