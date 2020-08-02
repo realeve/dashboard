@@ -27,6 +27,8 @@
     "framework-utils": "^0.3.4",
     "js-beautify": "^1.10.2",
     "jstat": "^1.9.3",
+    "keycon": "^0.8.0",
+    "moveable": "^0.18.5",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^13.0.0",
@@ -35,7 +37,7 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^4.2.0",
     "react-grid-layout": "^0.17.1",
-    "react-moveable": "^0.20.10",
+    "react-moveable": "^0.21.6",
     "react-resizable": "^1.10.1",
     "react-use": "^13.14.0"
   },

@@ -56,10 +56,17 @@ const Index = ({
     });
   };
 
+  
+  const [resizable, setResizable] = React.useState(true);
+
   return (
     <div
       className={styles['canvas-panel']}
-      style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
+      style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}      
+      onClick={e => {
+        e.stopPropagation(); 
+        setResizable(false) 
+      }}
     >
       {panel.map((item, idx) => (
         <MoveableItem
@@ -69,6 +76,10 @@ const Index = ({
           style={item.style}
           onResize={onResize(idx)}
           key={item.id} 
+          resizable={resizable} 
+          onResizable={()=>{
+            setResizable(true)
+          }}
         >
           <ChartItem config={item} />
         </MoveableItem>

@@ -3,6 +3,7 @@ import styles from './index.less';
 import classnames from 'classnames';
 import Moveable, { OnDrag, OnResize } from 'react-moveable';
 
+import KeyController from 'keycon';
 import { useDebounce, useSetState } from 'react-use';
 
 const padding = 30;
@@ -20,6 +21,7 @@ export interface IMoveableItem {
   className?: string;
   style?: React.CSSProperties;
   onResize?: (e: any) => void;
+  resizable?: boolean;
   [key: string]: any;
 }
 
@@ -42,11 +44,6 @@ const handleTransform = (str: string) => {
   return `matrix(${matrix.join(',')}) translate${translate}`;
 };
 
-const baseCfg = {
-  resizable: true,
-  rotatable: true,
-  renderDirections: ['s', 'se', 'e'],
-};
 export default ({
   guides,
   zoom = 1,
@@ -55,6 +52,8 @@ export default ({
   className,
   style = { width: 800, height: 500 },
   onResize = () => {},
+  resizable: parentResizable = false,
+  onResizable = ()=>{}
 }: IMoveableItem) => {
   const dom = useRef(null);
   const [rotate, setRotate] = useState(0);
@@ -69,6 +68,18 @@ export default ({
     [JSON.stringify(curStyle)],
   );
 
+  const [frame, setFrame] = React.useState({
+    translate: [0, 0],
+    rotate: 0,
+    transformOrigin: '50% 50%',
+  });
+
+  const [resizable, setResizable] = React.useState(false);
+  React.useEffect(() => {
+    if (!parentResizable) setResizable(parentResizable);
+  }, [parentResizable]);
+ 
+
   return (
     <div className={styles.moveableItem}>
       <div
@@ -79,50 +90,57 @@ export default ({
           height: (style?.height || 500) * zoom,
           transform: style.transform,
         }}
+        onClick={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!resizable) {
+            setResizable(true);
+            onResizable()
+          }
+        }}
       >
         {children}
       </div>
       <Moveable
         bounds={{ left: 0, top: 0, right: canvasSize.width, bottom: canvasSize.height }}
         target={dom?.current}
-        draggable={true}
-        snappable={true}
-        {...baseCfg}
-        throttleDrag={0}
+        resizable={resizable}
+        rotatable={resizable}
+        draggable={resizable}
+        origin={resizable}
+        snappable={resizable}
+        throttleDrag={0}  
+        throttleRotate={15}
         zoom={zoom}
         verticalGuidelines={guides.v.map(item => item - padding / zoom)}
         horizontalGuidelines={guides.h.map(item => item - padding / zoom)}
-        onDrag={({ target, left, top, transform, ...props }: OnDrag) => {
-          target.style.transform = transform;
-          // target!.style.left = `${left}px`;
-          // target!.style.top = `${top}px`;
-          setCurStyle({
-            transform: handleTransform(transform),
-          });
+        onDragStart={({ set }) => {
+          set(frame.translate);
         }}
-        throttleResize={0}
-        onResize={({ target, width, height, delta }: OnResize) => {
-          delta[0] && (target!.style.width = `${width}px`);
-          delta[1] && (target!.style.height = `${height}px`);
-
-          setCurStyle({
-            width: (width / zoom).toFixed(0),
-            height: (height / zoom).toFixed(0),
-          });
+        onDrag={({ target, beforeTranslate }) => {
+          frame.translate = beforeTranslate;
         }}
-        // keepRatio={true}
-        throttleRotate={0}
-        onRotate={({ target, delta }) => {
-          let nextRotate = rotate + delta;
-          setRotate(nextRotate);
-          let transform =
-            target.style.transform.split('rotate')[0] + ' rotate(' + nextRotate + 'deg)';
-          target.style.transform = transform;
+        onRotateStart={({ set }) => {
+          set(frame.rotate);
+        }}
+        onRotate={({ beforeRotate }) => {
+          frame.rotate = beforeRotate;
+        }}
+        onRender={({ target }) => {
+          const { translate, rotate } = frame;
+          target.style.transform =
+            `translate(${translate[0]}px, ${translate[1]}px)` + ` rotate(${rotate}deg)`;
+        }}
+        onResizeStart={({ dragStart }) => {
+          dragStart && dragStart.set(frame.translate);
+        }}
+        onResize={({ target, width, height, drag }) => {
+          const beforeTranslate = drag.beforeTranslate;
 
-          setCurStyle({
-            transform: handleTransform(transform),
-            rotate: nextRotate,
-          });
+          frame.translate = beforeTranslate;
+          target.style.width = `${width}px`;
+          target.style.height = `${height}px`;
+          target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
         }}
       />
     </div>

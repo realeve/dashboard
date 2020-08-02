@@ -71,7 +71,7 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 20 }) => {
  
 
   const color = '#ddd';
-  const axisColor = '#0055bd'; //'#203651';
+  const axisColor = '#203651'; // '#0055bd'; // 
 
   return {
     tooltip: {
@@ -85,7 +85,7 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 20 }) => {
         textStyle:{
             color
         },
-        top:20,
+        top:15,
         left:'center'
     },
     grid: {
