@@ -79,6 +79,7 @@ export default ({
     if (!parentResizable) setResizable(parentResizable);
   }, [parentResizable]);
  
+  // moveable
 
   return (
     <div className={styles.moveableItem}>
@@ -109,11 +110,15 @@ export default ({
         draggable={resizable}
         origin={resizable}
         snappable={resizable}
+        
         throttleDrag={0}  
         throttleRotate={15}
         zoom={zoom}
         verticalGuidelines={guides.v.map(item => item - padding / zoom)}
         horizontalGuidelines={guides.h.map(item => item - padding / zoom)}
+        
+        isDisplaySnapDigit={true}
+
         onDragStart={({ set }) => {
           set(frame.translate);
         }}

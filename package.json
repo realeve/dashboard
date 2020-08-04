@@ -25,10 +25,12 @@
     "element-resize-event": "^3.0.3",
     "file-saver": "^2.0.2",
     "framework-utils": "^0.3.4",
+    "html2canvas": "^1.0.0-rc.5",
     "js-beautify": "^1.10.2",
     "jstat": "^1.9.3",
     "keycon": "^0.8.0",
     "moveable": "^0.18.5",
+    "moveable-helper": "^0.2.0",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^13.0.0",
@@ -37,9 +39,12 @@
     "react-dom": "^16.8.6",
     "react-draggable": "^4.2.0",
     "react-grid-layout": "^0.17.1",
+    "react-infinite-viewer": "^0.6.0",
     "react-moveable": "^0.21.6",
     "react-resizable": "^1.10.1",
-    "react-use": "^13.14.0"
+    "react-selecto": "^1.5.2",
+    "react-use": "^13.14.0",
+    "scenejs": "^1.2.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",

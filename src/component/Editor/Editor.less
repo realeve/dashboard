@@ -1,0 +1,143 @@
+
+@import '../../style/theme.less';
+:global {
+  .scena-editor {
+    --tabs: 0px;
+    --menu: 0px;
+  }
+
+  .scena-editor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    --mainColor: #4af;
+    --back1: #1a1a1a;
+    --back2: #2a2a2a;
+    --back3: #333;
+    --back4: #444;
+    --back5: #555;
+    --back6: #666;
+    transform-style: preserve-3d;
+    cursor: unset;
+    background-color: rgba(13, 42, 67, 0);
+  }
+  .scena-editor .selecto-selection {
+    border: 1px dashed #4af !important;
+    background: unset !important;
+  }
+
+  .scena-hand {
+    cursor: grab;
+  }
+
+  .scena-hand .selecto-selection {
+    display: none !important;
+  }
+
+  .scena-editor .scena-viewer {
+    position: absolute !important;
+    left: calc(30px + var(--menu));
+    top: 30px;
+    width: calc(100% - 30px - var(--menu) - var(--tabs));
+    height: calc(100% - 30px);
+  }
+
+  .scena-viewport-container {
+    position: relative;
+    background-image: url(/img/panel/panelbg.png);
+    transform-origin: 0 0; 
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 30px 0;
+  }
+  .scena-viewport {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+    box-sizing: border-box;
+  }
+
+  .scena-guides {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    transform: translateZ(1px);
+  }
+
+  .scena-guides.scena-horizontal {
+    left: calc(var(--menu) + 30px);
+    width: calc(100% - 30px - var(--menu) - var(--tabs));
+    height: 30px !important;
+  }
+
+  .scena-guides.scena-vertical {
+    top: 30px;
+    left: var(--menu);
+    height: calc(100% - 30px);
+    width: 30px !important;
+  }
+
+  .scena-reset {
+    position: absolute !important;
+    background: var(--back3);
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+    border-right: 1px solid var(--back4);
+    border-bottom: 1px solid var(--back4);
+    box-sizing: border-box;
+    cursor: pointer;
+    left: var(--menu);
+    top: 0px;
+  }
+
+  .scena-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .moveable-dimension {
+    position: absolute;
+    background: var(--mainColor);
+    border-radius: 2px;
+    padding: 1px 3px;
+    color: white;
+    font-size: 13px;
+    white-space: nowrap;
+    font-weight: bold;
+    transform: translate(-50%);
+    pointer-events: none;
+  }
+}
+ 
+.guideSpan {
+  position: absolute;
+  background: var(--datav-ruler-tag-bg);
+
+  line-height: 14px;
+  font-size: 10px;
+  height: 14px;
+  user-select: none;
+  width: 28px;
+  text-align: center;
+  color:white;
+}
+
+:global {
+  .datav-horizontal {
+    span {
+      left: -7px;
+      transform: rotate(-90deg);
+      .guideSpan;
+    }
+  }
+  .datav-vertical {
+    span {
+      top: 0;
+      .guideSpan;
+    }
+  }
+}

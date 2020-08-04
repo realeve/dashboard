@@ -1,0 +1,42 @@
+
+.scena-icon {
+    position: relative;
+    display: block;
+    font-size: 0;
+    padding: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    transition: all ease 0.2s;
+}    
+ 
+
+.scena-keyboard {
+    background: #fff;
+    border-radius: 3px;
+    width: 90%;
+    height: 15px;
+    margin: 3px 0px 7px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2px; 
+    --back2: #2a2a2a;
+}
+
+.scena-key {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    background: var(--back2);
+    margin: 1px;
+}
+.scena-space {
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    background: var(--back2);
+    margin: 1px;
+    border-radius: 1px;
+}

@@ -24,15 +24,6 @@
   left: @rulerSize;
   position: absolute;
   height: @rulerSize;
-  :global {
-    .datav-guide {
-      span {
-        left: -7px;
-        transform: rotate(-90deg);
-        .guideSpan;
-      }
-    }
-  }
 }
 .rulerv {
   position: fixed;
@@ -43,16 +34,8 @@
   cursor: ew-resize;
   top: @rulerSize;
   position: absolute;
-
-  :global {
-    .datav-guide {
-      span {
-        top: 0;
-        .guideSpan;
-      }
-    }
-  }
 }
+
 .guide {
   border-right: 1px solid var(--datav-ruler-font-color);
   border-bottom: 1px solid var(--datav-ruler-font-color);

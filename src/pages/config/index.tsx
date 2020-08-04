@@ -13,7 +13,7 @@ import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
 import CanvasComponent from './canvas';
-
+import Editor, { generateId, KeyboardIcon } from '@/component/Editor';
 import { connect } from 'dva';
 
 const Index = ({ dispatch }) => {
@@ -37,6 +37,15 @@ const Index = ({ dispatch }) => {
     h: [],
   });
 
+  const editor = React.useRef<Editor>(null);
+  const [instance, setInstance] = React.useState<Editor | null>(null);
+  useEffect(() => {
+    if (instance) {
+      return;
+    }
+    editor.current && setInstance(editor.current);
+  }, [editor]);
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -58,8 +67,22 @@ const Index = ({ dispatch }) => {
         <div className={styles['right-edit-main']}>
           <Toolbox hide={hide} />
           <div className={styles['editor-panel-wp']}>
-            <Ruler zoom={zoom} canvasSize={canvasSize} onGuidesChange={setGuides} />
-            <CanvasComponent zoom={zoom} canvasSize={canvasSize} guides={guides} />
+            {/* <Ruler zoom={zoom} canvasSize={canvasSize} onGuidesChange={setGuides} /> */}
+            {/* <CanvasComponent zoom={zoom} canvasSize={canvasSize} guides={guides} /> */}
+            <Editor
+              ref={editor}
+              debug={true}
+              zoom={zoom}
+              onRemove={e => {
+                console.log('移除', e);
+              }}
+              onSelect={e => {
+                console.log('选中了', e);
+              }}
+              onChange={e => {
+                console.log('变更', e);
+              }}
+            />
             <Thumbnail zoom={zoom} />
           </div>
           <EditSlider />
