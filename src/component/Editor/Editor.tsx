@@ -4,7 +4,7 @@ import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
 
 import Guides from '@/component/react-guides';
 
-import Selecto, { OnDragEvent } from 'react-selecto';
+import Selecto, { OnDragEvent } from './react-selecto';
 import './Editor.less';
 import Viewport, { ElementInfo, MovedInfo, MovedResult } from './Viewport/Viewport';
 import { prefix, getIds, checkImageLoaded, getScenaAttrs } from './utils/utils';
@@ -98,6 +98,8 @@ export interface IEditorProps {
   // 缩放系数
   zoom?: number;
 
+  domHash?: string;
+
   // 缩放回调
   onZoom?: (e: number) => void;
 
@@ -116,6 +118,7 @@ export interface IEditorProps {
  * @param height 画布高度
  * @param debug 调试模式
  * @param style 样式
+ * @param domHash 页面变更hash值，该值变更时需要重新计算偏移;
  * @param zoom 缩放系数
  * @param onZoom 缩放回调
  * @param onSelect 选中元素
@@ -137,6 +140,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       x: 0,
       y: 0,
     },
+    rectOffset: {
+      x: 0,
+      y: 0,
+    },
   };
   public historyManager = new HistoryManager(this);
   public console = new Debugger(this.props.debug);
@@ -154,6 +161,26 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public viewport = React.createRef<Viewport>();
 
   public editorElement = React.createRef<HTMLDivElement>();
+
+  // 获取编辑器相对于屏幕的位置
+  public getEditorPosition = () => {
+    let rect = this.editorElement.current.getBoundingClientRect();
+    let rectOffset = {
+      x: rect.x,
+      y: rect.y,
+    };
+    this.setState({
+      rectOffset,
+    }); 
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.domHash == nextProps.domHash) {
+      return;
+    }
+    // hash变更
+    this.getEditorPosition();
+  }
 
   public render() {
     const {
@@ -175,6 +202,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     if (zoom < 0.8) {
       unit = Math.floor(1 / zoom) * 50;
     }
+
     return (
       <div
         className={classnames(prefix('editor'), {
@@ -229,7 +257,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           zoom={zoom}
           onZoom={this.props.onZoom}
           zoomRange={[0.3, 2]}
-       
           onAbortPinch={e => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
@@ -279,19 +306,20 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           selectFromInside={false}
           toggleContinueSelect={['shift']}
           preventDefault={true}
-          scrollOptions={
-            infiniteViewer.current
-              ? {
-                  container: infiniteViewer.current.getContainer(),
-                  threshold: 30,
-                  throttleTime: 30,
-                  getScrollPosition: () => {
-                    const current = infiniteViewer.current!;
-                    return [current.getScrollLeft(), current.getScrollTop()];
-                  },
-                }
-              : undefined
-          }
+          rectOffset={this.state.rectOffset}
+          // scrollOptions={
+          //   infiniteViewer.current
+          //     ? {
+          //         container: infiniteViewer.current.getContainer(),
+          //         threshold: 30,
+          //         throttleTime: 30,
+          //         getScrollPosition: () => {
+          //           const current = infiniteViewer.current!;
+          //           return [current.getScrollLeft(), current.getScrollTop()];
+          //         },
+          //       }
+          //     : undefined
+          // }
           onDragStart={e => {
             if (selectedMenu === 'hand') {
               return;
@@ -299,7 +327,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             const inputEvent = e.inputEvent;
             const target = inputEvent.target;
             this.checkBlur();
-            
+
             if (
               (inputEvent.type === 'touchstart' && e.isTrusted) ||
               moveableManager.current!.getMoveable().isMoveableElement(target) ||
@@ -343,7 +371,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     memory.set('background-color', '#4af');
 
     requestAnimationFrame(() => {
-      infiniteViewer.current!.scrollCenter();
+     infiniteViewer.current?.scrollCenter?.();
     });
     window.addEventListener('resize', this.onResize);
     const viewport = this.getViewport();
@@ -523,11 +551,13 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     return this.appendJSXs([info]).then(targets => targets[0]);
   }
   public append(jsx: ScenaJSXType, name?: string) {
-    name = name || generateId();
+    let id = generateId();
+    name = name || id;
     return this.appendJSXs([
       {
         jsx,
         name,
+        id,
         frame: getDefaultStyle(),
       },
     ]).then(targets => targets[0]);

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { IObject, isString, isArray } from "@daybrush/utils";
+import * as React from 'react';
+import { IObject, isString, isArray } from '@daybrush/utils';
 import {
   prefix,
   getId,
@@ -8,9 +8,9 @@ import {
   isScenaElement,
   isNumber,
   isScenaFunctionElement,
-} from "../utils/utils";
-import { DATA_SCENA_ELEMENT_ID } from "../consts";
-import { ScenaJSXElement, ScenaComponent, ScenaJSXType } from "../types";
+} from '../utils/utils';
+import { DATA_SCENA_ELEMENT_ID } from '../consts';
+import { ScenaJSXElement, ScenaComponent, ScenaJSXType } from '../types';
 
 export interface AddedInfo {
   added: ElementInfo[];
@@ -52,8 +52,8 @@ export default class Viewport extends React.PureComponent<{
   public jsxs: IObject<ScenaJSXElement> = {};
   public viewport: ElementInfo = {
     jsx: <div></div>,
-    name: "Viewport",
-    id: "viewport",
+    name: 'Viewport',
+    id: 'viewport',
     children: [],
   };
   public ids: IObject<ElementInfo> = {
@@ -63,11 +63,11 @@ export default class Viewport extends React.PureComponent<{
   public viewportRef = React.createRef<HTMLDivElement>();
   public render() {
     return (
-      <div className={prefix("viewport-container")} {...this.props}>
+      <div className={prefix('viewport-container')} {...this.props}>
         {this.props.children}
         <div
-          className={prefix("viewport")}
-          {...{ [DATA_SCENA_ELEMENT_ID]: "viewport" }}
+          className={prefix('viewport')}
+          {...{ [DATA_SCENA_ELEMENT_ID]: 'viewport' }}
           ref={this.viewportRef}
         >
           {this.renderChildren(this.getViewportInfos())}
@@ -79,7 +79,7 @@ export default class Viewport extends React.PureComponent<{
     this.ids.viewport.el = this.viewportRef.current!;
   }
   public renderChildren(children: ElementInfo[]): ScenaJSXElement[] {
-    return children.map((info) => {
+    return children.map(info => {
       const jsx = info.jsx;
       const nextChildren = info.children!;
       const renderedChildren = this.renderChildren(nextChildren);
@@ -90,11 +90,7 @@ export default class Viewport extends React.PureComponent<{
 
       if (isString(jsx)) {
         props[DATA_SCENA_ELEMENT_ID] = id;
-        return React.createElement(
-          jsx,
-          props,
-          ...renderedChildren
-        ) as ScenaJSXElement;
+        return React.createElement(jsx, props, ...renderedChildren) as ScenaJSXElement;
       } else if (isScenaFunction(jsx)) {
         props.scenaElementId = id;
         props.scenaAttrs = info.attrs || {};
@@ -115,7 +111,7 @@ export default class Viewport extends React.PureComponent<{
         jsx,
         { ...jsx.props, ...props },
         ...(isArray(jsxChildren) ? jsxChildren : [jsxChildren]),
-        ...this.renderChildren(nextChildren)
+        ...this.renderChildren(nextChildren),
       ) as ScenaJSXElement;
     });
   }
@@ -184,31 +180,26 @@ export default class Viewport extends React.PureComponent<{
     return this.viewport.children!;
   }
   public getIndexes(target: HTMLElement | SVGElement | string): number[] {
-    const info = (isString(target)
-      ? this.getInfo(target)
-      : this.getInfoByElement(target))!;
+    const info = (isString(target) ? this.getInfo(target) : this.getInfoByElement(target))!;
 
     if (!info.scopeId) {
       return [];
     }
     const parentInfo = this.getInfo(info.scopeId)!;
 
-    return [
-      ...this.getIndexes(info.scopeId),
-      parentInfo.children!.indexOf(info),
-    ];
+    return [...this.getIndexes(info.scopeId), parentInfo.children!.indexOf(info)];
   }
   public registerChildren(jsxs: ElementInfo[], parentScopeId?: string) {
-    return jsxs.map((info) => {
-      const id = info.name || info.id || this.makeId();
+    return jsxs.map(info => {
+      const id = info.id || info.name || this.makeId();
       const jsx = info.jsx;
       const children = info.children || [];
-      const scopeId = parentScopeId || info.scopeId || "viewport";
-      let componentId = "";
-      let jsxId = info.name || info?.jsxId || "";
+      const scopeId = parentScopeId || info.scopeId || 'viewport';
+      let componentId = '';
+      let jsxId = id || info.name || info?.jsxId || '';
 
       if (isScenaElement(jsx)) {
-        if (jsxId === "") jsxId = this.makeId(this.jsxs);
+        if (jsxId === '') jsxId = this.makeId(this.jsxs);
         this.jsxs[jsxId] = jsx;
         // const component = jsx.type;
         // componentId = component.scenaComponentId;
@@ -232,7 +223,7 @@ export default class Viewport extends React.PureComponent<{
   public appendJSXs(
     jsxs: ElementInfo[],
     appendIndex: number,
-    scopeId?: string
+    scopeId?: string,
   ): Promise<AddedInfo> {
     const jsxInfos = this.registerChildren(jsxs, scopeId);
 
@@ -251,14 +242,12 @@ export default class Viewport extends React.PureComponent<{
       }
     });
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.forceUpdate(() => {
         const infos = jsxInfos.map(function registerElement(info) {
           const id = info.id!;
 
-          const target = document.querySelector<HTMLElement>(
-            `[${DATA_SCENA_ELEMENT_ID}="${id}"]`
-          )!;
+          const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
           const attrs = info.attrs || {};
 
           info.el = target;
@@ -272,16 +261,16 @@ export default class Viewport extends React.PureComponent<{
           if (children.length) {
             children.forEach(registerElement);
           } else if (info.attrs!.contenteditable) {
-            if ("innerText" in info) {
-              (target as HTMLElement).innerText = info.innerText || "";
+            if ('innerText' in info) {
+              (target as HTMLElement).innerText = info.innerText || '';
             } else {
-              info.innerText = (target as HTMLElement).innerText || "";
+              info.innerText = (target as HTMLElement).innerText || '';
             }
           } else if (!info.componentId) {
-            if ("innerHTML" in info) {
-              target.innerHTML = info.innerHTML || "";
+            if ('innerHTML' in info) {
+              target.innerHTML = info.innerHTML || '';
             } else {
-              info.innerHTML = target.innerHTML || "";
+              info.innerHTML = target.innerHTML || '';
             }
           }
           return { ...info };
@@ -298,20 +287,15 @@ export default class Viewport extends React.PureComponent<{
     return length ? indexes[length - 1] : -1;
   }
   public getElements(ids: string[]) {
-    return ids.map((id) => this.getElement(id)).filter((el) => el) as Array<
-      HTMLElement | SVGElement
-    >;
+    return ids.map(id => this.getElement(id)).filter(el => el) as Array<HTMLElement | SVGElement>;
   }
-  public unregisterChildren(
-    children: ElementInfo[],
-    isChild?: boolean
-  ): ElementInfo[] {
+  public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {
     const ids = this.ids;
 
-    return children.slice(0).map((info) => {
+    return children.slice(0).map(info => {
       const target = info.el!;
-      let innerText = "";
-      let innerHTML = "";
+      let innerText = '';
+      let innerHTML = '';
 
       if (info.attrs!.contenteditable) {
         innerText = (target as HTMLElement).innerText;
@@ -339,21 +323,19 @@ export default class Viewport extends React.PureComponent<{
       };
     });
   }
-  public removeTargets(
-    targets: Array<HTMLElement | SVGElement>
-  ): Promise<RemovedInfo> {
+  public removeTargets(targets: Array<HTMLElement | SVGElement>): Promise<RemovedInfo> {
     const removedChildren = this.getSortedTargets(targets)
-      .map((target) => {
+      .map(target => {
         return this.getInfoByElement(target);
       })
-      .filter((info) => info) as ElementInfo[];
-    const indexes = removedChildren.map((info) => this.getIndex(info.id!));
+      .filter(info => info) as ElementInfo[];
+    const indexes = removedChildren.map(info => this.getIndex(info.id!));
     const removed = this.unregisterChildren(removedChildren);
 
     removed.forEach((info, i) => {
       info.index = indexes[i];
     });
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.forceUpdate(() => {
         resolve({
           removed,
@@ -361,10 +343,8 @@ export default class Viewport extends React.PureComponent<{
       });
     });
   }
-  public getSortedIndexesList(
-    targets: Array<string | HTMLElement | SVGElement | number[]>
-  ) {
-    const indexesList = targets.map((target) => {
+  public getSortedIndexesList(targets: Array<string | HTMLElement | SVGElement | number[]>) {
+    const indexesList = targets.map(target => {
       if (Array.isArray(target)) {
         return target;
       }
@@ -388,29 +368,21 @@ export default class Viewport extends React.PureComponent<{
     return indexesList;
   }
   public getSortedTargets(targets: Array<string | HTMLElement | SVGElement>) {
-    return this.getSortedInfos(targets).map((info) => info.el!);
+    return this.getSortedInfos(targets).map(info => info.el!);
   }
   public getSortedInfos(targets: Array<string | HTMLElement | SVGElement>) {
     const indexesList = this.getSortedIndexesList(targets);
 
-    return indexesList.map((indexes) => this.getInfoByIndexes(indexes));
+    return indexesList.map(indexes => this.getInfoByIndexes(indexes));
   }
-  public moveInside(
-    target: HTMLElement | SVGElement | string
-  ): Promise<MovedResult> {
-    const info = isString(target)
-      ? this.getInfo(target)!
-      : this.getInfoByElement(target)!;
+  public moveInside(target: HTMLElement | SVGElement | string): Promise<MovedResult> {
+    const info = isString(target) ? this.getInfo(target)! : this.getInfoByElement(target)!;
 
     const prevInfo = this.getPrevInfo(info.id!);
 
     let moved: ElementInfo[];
 
-    if (
-      !prevInfo ||
-      isScenaFunction(prevInfo.jsx) ||
-      isScenaFunctionElement(prevInfo.jsx)
-    ) {
+    if (!prevInfo || isScenaFunction(prevInfo.jsx) || isScenaFunctionElement(prevInfo.jsx)) {
       moved = [];
     } else {
       moved = [info];
@@ -418,12 +390,8 @@ export default class Viewport extends React.PureComponent<{
     const lastInfo = prevInfo && this.getLastChildInfo(prevInfo.id!);
     return this.move(moved, prevInfo, lastInfo);
   }
-  public moveOutside(
-    target: HTMLElement | SVGElement | string
-  ): Promise<MovedResult> {
-    const info = isString(target)
-      ? this.getInfo(target)!
-      : this.getInfoByElement(target)!;
+  public moveOutside(target: HTMLElement | SVGElement | string): Promise<MovedResult> {
+    const info = isString(target) ? this.getInfo(target)! : this.getInfoByElement(target)!;
     const parentInfo = this.getInfo(info.scopeId!);
     const rootInfo = this.getInfo(parentInfo.scopeId!);
 
@@ -436,7 +404,7 @@ export default class Viewport extends React.PureComponent<{
       info: ElementInfo;
       parentInfo: ElementInfo;
       prevInfo?: ElementInfo;
-    }>
+    }>,
   ): Promise<MovedResult> {
     const prevInfos = nextInfos.map(({ info }) => {
       return {
@@ -451,24 +419,18 @@ export default class Viewport extends React.PureComponent<{
       children.splice(children.indexOf(info), 1);
 
       const parnetChildren = parentInfo.children!;
-      parnetChildren.splice(
-        prevInfo ? parnetChildren.indexOf(prevInfo) + 1 : 0,
-        0,
-        info
-      );
+      parnetChildren.splice(prevInfo ? parnetChildren.indexOf(prevInfo) + 1 : 0, 0, info);
 
       info.scopeId = parentInfo.id;
     });
 
     const infos = nextInfos.map(({ info }) => info);
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.forceUpdate(() => {
         infos.forEach(function moveInfo(info) {
           const id = info.id!;
-          const target = document.querySelector<HTMLElement>(
-            `[${DATA_SCENA_ELEMENT_ID}="${id}"]`
-          )!;
+          const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
 
           info.el = target;
 
@@ -485,9 +447,9 @@ export default class Viewport extends React.PureComponent<{
   public move(
     infos: ElementInfo[],
     parentInfo: ElementInfo,
-    prevInfo?: ElementInfo
+    prevInfo?: ElementInfo,
   ): Promise<MovedResult> {
-    const sortedInfos = this.getSortedInfos(infos.map((info) => info.el!));
+    const sortedInfos = this.getSortedInfos(infos.map(info => info.el!));
 
     return this.moves(
       sortedInfos.map((info, i) => {
@@ -496,7 +458,7 @@ export default class Viewport extends React.PureComponent<{
           parentInfo,
           prevInfo: i === 0 ? prevInfo : sortedInfos[i - 1],
         };
-      })
+      }),
     );
   }
 }

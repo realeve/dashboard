@@ -1,21 +1,25 @@
-import { IObject } from "@daybrush/utils";
-import Memory from "./utils/Memory";
-import EventBus from "./utils/EventBus";
-import MoveableData from "./utils/MoveableData";
-import MoveableManager from "./Viewport/MoveableMananger";
-import KeyManager from "./KeyManager/KeyManager";
-import Editor from "./Editor";
-import HistoryManager from "./utils/HistoryManager";
-import Debugger from "./utils/Debugger";
-import * as React from "react";
+import { IObject } from '@daybrush/utils';
+import Memory from './utils/Memory';
+import EventBus from './utils/EventBus';
+import MoveableData from './utils/MoveableData';
+import MoveableManager from './Viewport/MoveableMananger';
+import KeyManager from './KeyManager/KeyManager';
+import Editor from './Editor';
+import HistoryManager from './utils/HistoryManager';
+import Debugger from './utils/Debugger';
+import * as React from 'react';
 
 export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
   horizontalGuides: number[];
   verticalGuides: number[];
-  selectedMenu: "hand" | "MoveTool"; 
-  zoom:number;
+  selectedMenu: 'hand' | 'MoveTool';
+  zoom: number;
   canvas: {
+    x: number;
+    y: number;
+  };
+  rectOffset: {
     x: number;
     y: number;
   };
@@ -66,13 +70,11 @@ export interface ScenaProps {
 }
 
 export type ScenaFunctionComponent<T> = ((
-  props: T & ScenaProps
+  props: T & ScenaProps,
 ) => React.ReactElement<any, any>) & { scenaComponentId: string };
 export type ScenaComponent = React.JSXElementConstructor<ScenaProps> & {
   scenaComponentId: string;
 };
-export type ScenaJSXElement =
-  | React.ReactElement<any, string>
-  | ScenaFunctionJSXElement;
+export type ScenaJSXElement = React.ReactElement<any, string> | ScenaFunctionJSXElement;
 export type ScenaFunctionJSXElement = React.ReactElement<any, ScenaComponent>;
 export type ScenaJSXType = ScenaJSXElement | string | ScenaComponent;

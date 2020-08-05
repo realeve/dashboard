@@ -26,6 +26,8 @@ const Index = ({ dispatch }) => {
     filter: true,
   });
 
+  const [hash, setHash] = useState(generateId());
+
   const [zoom, setZoom] = useState(0.7);
   const [canvasSize, setCanvasSize] = useSetState({
     width: 1920,
@@ -46,7 +48,17 @@ const Index = ({ dispatch }) => {
     editor.current && setInstance(editor.current);
   }, [editor]);
 
-  
+  useEffect(() => {
+    // 页面动画变更完后再变更hash, CSS动画执行时长为300ms,增加10ms再执行
+    const tid = window.setTimeout(() => {
+      // 记录页面有变更
+      setHash(generateId());
+    }, 310);
+    return () => {
+      window.clearTimeout(tid);
+    };
+  }, [hide]);
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -75,6 +87,7 @@ const Index = ({ dispatch }) => {
               debug={true}
               zoom={zoom}
               onZoom={setZoom}
+              domHash={hash}
               onRemove={e => {
                 console.log('移除', e);
               }}
