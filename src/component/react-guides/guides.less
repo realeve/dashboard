@@ -1,0 +1,31 @@
+
+@import '../../style/theme.less';
+
+.guideSpan {
+  position: absolute;
+  background: var(--datav-ruler-tag-bg);
+
+  line-height: 14px;
+  font-size: 10px;
+  height: 14px;
+  user-select: none;
+  width: 28px;
+  text-align: center;
+  color:white;
+}
+
+:global {
+  .datav-horizontal {
+    span {
+      left: -7px;
+      transform: rotate(-90deg);
+      .guideSpan;
+    }
+  }
+  .datav-vertical {
+    span {
+      top: 0;
+      .guideSpan;
+    }
+  }
+}

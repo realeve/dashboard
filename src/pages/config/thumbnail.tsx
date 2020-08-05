@@ -8,7 +8,7 @@ export default ({ zoom }) => {
       <div className={styles['datav-thumbnail']}>
         <span
           className={styles['select-span']}
-          style={{ transform: `scale(${zoom}) translate(0px, 0px)` }}
+          style={{ transform: `scale(${Math.min(1, zoom)}) translate(0px, 0px)` }}
         />
       </div>
     </div>

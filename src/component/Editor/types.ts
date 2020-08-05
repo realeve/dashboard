@@ -13,8 +13,8 @@ export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
   horizontalGuides: number[];
   verticalGuides: number[];
-  selectedMenu: "hand" | "MoveTool";
-  zoom: number;
+  selectedMenu: "hand" | "MoveTool"; 
+  zoom:number;
   canvas: {
     x: number;
     y: number;

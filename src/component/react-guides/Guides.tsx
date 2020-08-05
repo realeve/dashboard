@@ -7,6 +7,7 @@ import { GUIDES, GUIDE, DRAGGING, ADDER, DISPLAY_DRAG, GUIDES_CSS } from './cons
 import { prefix } from './utils';
 import { hasClass, addClass, removeClass } from '@daybrush/utils';
 import { GuidesState, GuidesProps, GuidesInterface } from './types';
+import './guides.less';
 
 const GuidesElement = styled('div', GUIDES_CSS);
 

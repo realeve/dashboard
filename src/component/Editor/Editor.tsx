@@ -1,5 +1,5 @@
 import * as React from 'react';
-import InfiniteViewer, { OnScroll } from 'react-infinite-viewer';
+import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
 // import Guides from '@scena/react-guides';
 
 import Guides from '@/component/react-guides';
@@ -95,7 +95,11 @@ export interface IEditorProps {
   debug?: boolean;
   style?: React.CSSProperties;
 
+  // 缩放系数
   zoom?: number;
+
+  // 缩放回调
+  onZoom?: (e: number) => void;
 
   // 选中元素
   onSelect?: (name: string[]) => void;
@@ -103,10 +107,21 @@ export interface IEditorProps {
   // 移除元素
   onRemove?: (name: string[]) => void;
 
-  // 属性变更
+  // 元素属性变更
   onChange?: (name: { id: string; next: {} }[]) => void;
 }
 
+/**
+ * @param width 画布宽度
+ * @param height 画布高度
+ * @param debug 调试模式
+ * @param style 样式
+ * @param zoom 缩放系数
+ * @param onZoom 缩放回调
+ * @param onSelect 选中元素
+ * @param onRemove 移除元素
+ * @param onChange 元素属性变更
+ */
 class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
   public static defaultProps = {
     width: 1920,
@@ -116,8 +131,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     selectedTargets: [],
     horizontalGuides: [],
     verticalGuides: [],
-    zoom: this.props?.zoom || 1,
     selectedMenu: 'MoveTool',
+    zoom: this.props.zoom || 1,
     canvas: {
       x: 0,
       y: 0,
@@ -151,6 +166,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       state,
     } = this;
     const { selectedMenu, selectedTargets, zoom } = state;
+
     const { width, height } = this.props;
     const horizontalSnapGuides = [0, height, height / 2, ...state.horizontalGuides];
     const verticalSnapGuides = [0, width, width / 2, ...state.verticalGuides];
@@ -181,7 +197,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           snapThreshold={5}
           snaps={horizontalSnapGuides}
           displayDragPos={true}
-          // dragPosFormat={v => `${v}px`}
           zoom={zoom}
           unit={unit}
           onChangeGuides={e => {
@@ -198,7 +213,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           snapThreshold={5}
           snaps={verticalSnapGuides}
           displayDragPos={true}
-          // dragPosFormat={v => `${v}px`}
           zoom={zoom}
           unit={unit}
           onChangeGuides={e => {
@@ -213,8 +227,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           usePinch={true}
           pinchThreshold={50}
           zoom={zoom}
-          rangeX={rangeX}
-          rangeY={rangeY}
+          onZoom={this.props.onZoom}
+          zoomRange={[0.3, 2]}
+       
           onAbortPinch={e => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
@@ -284,7 +299,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             const inputEvent = e.inputEvent;
             const target = inputEvent.target;
             this.checkBlur();
-
+            
             if (
               (inputEvent.type === 'touchstart' && e.isTrusted) ||
               moveableManager.current!.getMoveable().isMoveableElement(target) ||

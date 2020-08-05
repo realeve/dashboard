@@ -46,6 +46,7 @@ const Index = ({ dispatch }) => {
     editor.current && setInstance(editor.current);
   }, [editor]);
 
+  
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -73,6 +74,7 @@ const Index = ({ dispatch }) => {
               ref={editor}
               debug={true}
               zoom={zoom}
+              onZoom={setZoom}
               onRemove={e => {
                 console.log('移除', e);
               }}
