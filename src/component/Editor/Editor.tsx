@@ -98,6 +98,9 @@ export interface IEditorProps {
   // 缩放系数
   zoom?: number;
 
+  curTool?: 'MoveTool' | 'hand';
+
+  // DOM变更时，hash值变更，重新计算偏移量
   domHash?: string;
 
   // 缩放回调
@@ -134,7 +137,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     selectedTargets: [],
     horizontalGuides: [],
     verticalGuides: [],
-    selectedMenu: 'MoveTool',
     zoom: this.props.zoom || 1,
     canvas: {
       x: 0,
@@ -171,7 +173,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     };
     this.setState({
       rectOffset,
-    }); 
+    });
   };
 
   componentWillReceiveProps(nextProps) {
@@ -192,9 +194,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       selecto,
       state,
     } = this;
-    const { selectedMenu, selectedTargets, zoom } = state;
+    const { selectedTargets, zoom } = state;
 
-    const { width, height } = this.props;
+    const { curTool: selectedMenu, width, height } = this.props;
     const horizontalSnapGuides = [0, height, height / 2, ...state.horizontalGuides];
     const verticalSnapGuides = [0, width, width / 2, ...state.verticalGuides];
     let unit = 50;
@@ -371,7 +373,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     memory.set('background-color', '#4af');
 
     requestAnimationFrame(() => {
-     infiniteViewer.current?.scrollCenter?.();
+      infiniteViewer.current?.scrollCenter?.();
     });
     window.addEventListener('resize', this.onResize);
     const viewport = this.getViewport();

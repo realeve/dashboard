@@ -28,13 +28,13 @@ export default abstract class Icon extends React.PureComponent<{
       <div
         className={prefix('icon', this.props.selected ? 'selected' : '')}
         onClick={this.onClick}
-        title={this.constructor?.title}
+        title={(this.constructor as any)?.title}
       >
         {this.renderIcon()}
       </div>
     );
   }
-  public onClick = () => {
+  public onClick = () => { 
     this.props?.onSelect?.((this.constructor as any).id);
   };
 

@@ -59,6 +59,8 @@ const Index = ({ dispatch }) => {
     };
   }, [hide]);
 
+  const [curTool,setCurTool] = useState('MoveTool');
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -88,6 +90,7 @@ const Index = ({ dispatch }) => {
               zoom={zoom}
               onZoom={setZoom}
               domHash={hash}
+              curTool={curTool}
               onRemove={e => {
                 console.log('移除', e);
               }}
@@ -100,7 +103,7 @@ const Index = ({ dispatch }) => {
             />
             <Thumbnail zoom={zoom} />
           </div>
-          <EditSlider editor={instance}/>
+          <EditSlider editor={instance} onMenuChange={setCurTool}/>
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>

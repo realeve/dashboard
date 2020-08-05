@@ -8,11 +8,11 @@ export default class KeyboardIcon extends Icon {
   public static id = '快捷键';
   public keys = ['s'];
   public state = {
-    renderPopup: false,
+    show: false,
   };
   public renderIcon() {
     return (
-      <div className={prefix('i')}>
+      <div className={prefix('i')} style={{ width: 28 }} title={this.constructor.id + '(s)'}>
         <div className={prefix('keyboard')}>
           <div className={prefix('key')} />
           <div className={prefix('key')} />
@@ -23,7 +23,7 @@ export default class KeyboardIcon extends Icon {
           <div className={prefix('key')} />
           <div className={prefix('space')} />
         </div>
-        {this.state.renderPopup && (
+        {this.state.show && (
           <Popup container=".scena-editor" onClose={this.onClose}>
             <h2>快捷键</h2>
             <ul className={prefix('key-list')}>
@@ -50,12 +50,12 @@ export default class KeyboardIcon extends Icon {
 
   public onClick = () => {
     this.setState({
-      renderPopup: true,
+      show: true,
     });
   };
   public onClose = () => {
     this.setState({
-      renderPopup: false,
+      show: false,
     });
   };
 }
