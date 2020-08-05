@@ -9,11 +9,12 @@ import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import * as React from 'react';
 
+export type TQuickTool = 'MoveTool' | 'hand';
+
 export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
   horizontalGuides: number[];
   verticalGuides: number[];
-  selectedMenu: 'hand' | 'MoveTool';
   zoom: number;
   canvas: {
     x: number;
@@ -23,6 +24,7 @@ export interface ScenaEditorState {
     x: number;
     y: number;
   };
+  guideVisible?: boolean;
 }
 
 export interface TagAppendInfo {

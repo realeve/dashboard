@@ -72,8 +72,7 @@
   .scena-reset {
     position: absolute !important;
     background: var(--back3);
-    width: 30px;
-    height: 30px;
+
     z-index: 1;
     border-right: 1px solid var(--back4);
     border-bottom: 1px solid var(--back4);
@@ -81,6 +80,23 @@
     cursor: pointer;
     left: var(--menu);
     top: 0px;
+    
+    width: 30px;
+    height: 30px;
+    border-right: 1px solid var(--datav-ruler-font-color);
+    border-bottom: 1px solid var(--datav-ruler-font-color); 
+    font-size: 16px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: var(--datav-ruler-font-color);
+    background: var(--datav-ruler-bg);
+    &:hover {
+      color: #fff;
+    }
   }
 
   .scena-overlay {

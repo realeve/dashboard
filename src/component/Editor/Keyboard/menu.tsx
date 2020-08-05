@@ -4,6 +4,8 @@ import MoveToolIcon from './MoveToolIcon';
 import './Menu.less';
 import Icon from './Icon';
 import Editor from '../Editor';
+import { TQuickTool } from '../types';
+
 import KeyboardIcon from './KeyboardIcon';
 import HandIcon from './HandIcon';
 
@@ -11,6 +13,7 @@ const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, KeyboardIcon];
 export default class Menu extends React.PureComponent<{
   editor: Editor;
   onSelect?: (id: string) => any;
+  curTool?: TQuickTool;
 }> {
   public state = {
     selected: 'MoveTool',
@@ -18,6 +21,13 @@ export default class Menu extends React.PureComponent<{
   public menuRefs: Array<React.RefObject<Icon>> = [];
   public render() {
     return <div className={prefix('menu')}>{this.renderMenus()}</div>;
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.curTool !== this.state.selected) {
+      this.setState({
+        selected: nextProps.curTool,
+      });
+    }
   }
   public renderMenus() {
     const selected = this.state.selected;

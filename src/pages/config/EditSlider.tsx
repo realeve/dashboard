@@ -4,10 +4,10 @@ import classnames from 'classnames';
 
 import ToolMenu from './ToolMenu';
 
-export default ({ editor, onMenuChange }) => {
+export default ({ editor, onMenuChange,curTool }) => {
   return (
     <div className={styles['edit-slider']}>
-      {editor && <ToolMenu editor={editor} onSelect={onMenuChange} />}
+      {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}
     </div>
   );
 };

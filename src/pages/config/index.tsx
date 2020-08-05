@@ -13,7 +13,7 @@ import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
 // import CanvasComponent from './canvas';
-import Editor, { generateId } from '@/component/Editor';
+import Editor, { generateId, TQuickTool } from '@/component/Editor';
 import { connect } from 'dva';
 
 const Index = ({ dispatch }) => {
@@ -59,7 +59,7 @@ const Index = ({ dispatch }) => {
     };
   }, [hide]);
 
-  const [curTool,setCurTool] = useState('MoveTool');
+  const [curTool, setCurTool] = useState<TQuickTool>('MoveTool');
 
   return (
     <div className={styles.editor}>
@@ -91,6 +91,7 @@ const Index = ({ dispatch }) => {
               onZoom={setZoom}
               domHash={hash}
               curTool={curTool}
+              setCurTool={setCurTool}
               onRemove={e => {
                 console.log('移除', e);
               }}
@@ -103,7 +104,7 @@ const Index = ({ dispatch }) => {
             />
             <Thumbnail zoom={zoom} />
           </div>
-          <EditSlider editor={instance} onMenuChange={setCurTool}/>
+          <EditSlider editor={instance} onMenuChange={setCurTool} curTool={curTool}/>
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>

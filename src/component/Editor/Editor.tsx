@@ -15,7 +15,13 @@ import Memory from './utils/Memory';
 import MoveableManager from './Viewport/MoveableMananger';
 import MoveableData from './utils/MoveableData';
 import KeyManager from './KeyManager/KeyManager';
-import { ScenaEditorState, SavedScenaData, ScenaJSXElement, ScenaJSXType } from './types';
+import {
+  ScenaEditorState,
+  SavedScenaData,
+  ScenaJSXElement,
+  ScenaJSXType,
+  TQuickTool,
+} from './types';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
@@ -98,7 +104,8 @@ export interface IEditorProps {
   // 缩放系数
   zoom?: number;
 
-  curTool?: 'MoveTool' | 'hand';
+  curTool?: TQuickTool;
+  setCurTool?: (e: TQuickTool) => void;
 
   // DOM变更时，hash值变更，重新计算偏移量
   domHash?: string;
@@ -146,6 +153,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       x: 0,
       y: 0,
     },
+    guideVisible: true,
   };
   public historyManager = new HistoryManager(this);
   public console = new Debugger(this.props.debug);
@@ -194,7 +202,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       selecto,
       state,
     } = this;
-    const { selectedTargets, zoom } = state;
+    const { selectedTargets, zoom, guideVisible } = state;
 
     const { curTool: selectedMenu, width, height } = this.props;
     const horizontalSnapGuides = [0, height, height / 2, ...state.horizontalGuides];
@@ -204,6 +212,14 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     if (zoom < 0.8) {
       unit = Math.floor(1 / zoom) * 50;
     }
+
+    const GuideStyle = {
+      backgroundColor: '#0e1013',
+      lineColor: '#364152',
+      textColor: '#808e9b',
+      unit: 100,
+      dragPosFormat: e => e - 44,
+    };
 
     return (
       <div
@@ -217,13 +233,21 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           className={prefix('reset')}
           onClick={e => {
             infiniteViewer.current!.scrollCenter();
+            this.setState(preState => ({
+              guideVisible: !preState.guideVisible,
+            }));
           }}
-        />
+        >
+          <i
+            className={`datav-icon datav-font icon-line-${guideVisible ? 'show' : 'hide'}`}
+            style={{ zIndex: 10 }}
+          />
+        </div>
         <Guides
           ref={horizontalGuides}
           type="horizontal"
           className={prefix('guides', 'horizontal')}
-          style={{}}
+          {...GuideStyle}
           snapThreshold={5}
           snaps={horizontalSnapGuides}
           displayDragPos={true}
@@ -239,9 +263,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           ref={verticalGuides}
           type="vertical"
           className={prefix('guides', 'vertical')}
-          style={{}}
           snapThreshold={5}
           snaps={verticalSnapGuides}
+          {...GuideStyle}
           displayDragPos={true}
           zoom={zoom}
           unit={unit}
@@ -387,10 +411,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       this.forceUpdate();
     });
 
-    const handleSelectMode = (selectedMenu: 'MoveTool' | 'hand') => {
-      this.setState({
-        selectedMenu,
-      });
+    const handleSelectMode = (selectedMenu: TQuickTool) => {
+      this.props.setCurTool(selectedMenu);
     };
 
     this.keyManager.keydown(
