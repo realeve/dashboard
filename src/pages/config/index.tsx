@@ -7,13 +7,13 @@ import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
 import BeautyPanel from './panel/beauty';
 import FilterPanel from './panel/filterManager';
-import Ruler from './ruler';
+// import Ruler from './ruler';
 import Setting from './panel/setting';
 import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
-import CanvasComponent from './canvas';
-import Editor, { generateId, KeyboardIcon } from '@/component/Editor';
+// import CanvasComponent from './canvas';
+import Editor, { generateId } from '@/component/Editor';
 import { connect } from 'dva';
 
 const Index = ({ dispatch }) => {
@@ -100,7 +100,7 @@ const Index = ({ dispatch }) => {
             />
             <Thumbnail zoom={zoom} />
           </div>
-          <EditSlider />
+          <EditSlider editor={instance}/>
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>

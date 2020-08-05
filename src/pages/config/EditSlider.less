@@ -3,14 +3,18 @@
 .edit-slider {
   background: #222528;
   height: 30px;
-  width: 100%;
+  width: calc(100% - 30px);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   position: absolute;
-  right: 0;
+  left: 30px;
   bottom: 0;
   box-shadow: 0 -1px #000;
   user-select: none;
   z-index: 99;
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
 }
