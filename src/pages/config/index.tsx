@@ -101,10 +101,13 @@ const Index = ({ dispatch }) => {
               onChange={e => {
                 console.log('变更', e);
               }}
+              onGuidesChange={e => {
+                console.log(e, '辅助线');
+              }}
             />
             <Thumbnail zoom={zoom} />
           </div>
-          <EditSlider editor={instance} onMenuChange={setCurTool} curTool={curTool}/>
+          <EditSlider editor={instance} onMenuChange={setCurTool} curTool={curTool} />
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>

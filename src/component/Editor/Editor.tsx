@@ -7,7 +7,7 @@ import Guides from '@/component/react-guides';
 import Selecto, { OnDragEvent } from './react-selecto';
 import './Editor.less';
 import Viewport, { ElementInfo, MovedInfo, MovedResult } from './Viewport/Viewport';
-import { prefix, getIds, checkImageLoaded, getScenaAttrs } from './utils/utils';
+import { prefix, getIds, checkImageLoaded, getScenaAttrs, IGuideProps } from './utils/utils';
 
 import EventBus from './utils/EventBus';
 import { IObject } from '@daybrush/utils';
@@ -26,7 +26,7 @@ import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
 import ClipboardManager from './utils/ClipboardManager';
-import { generateId } from './utils/utils';
+import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
 
 const getDefaultStyle = (style?: React.CSSProperties) => {
@@ -121,6 +121,9 @@ export interface IEditorProps {
 
   // 元素属性变更
   onChange?: (name: { id: string; next: {} }[]) => void;
+
+  // 辅助线变更
+  onGuidesChange?: (e: IGuideProps) => void;
 }
 
 /**
@@ -185,12 +188,47 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.domHash == nextProps.domHash) {
+    if (this.props.domHash !== nextProps.domHash) {
+      // hash变更
+      this.getEditorPosition();
       return;
     }
-    // hash变更
-    this.getEditorPosition();
+
+    if (this.props.curTool !== nextProps.curTool) {
+      if (nextProps.curTool === 'home') {
+        this.infiniteViewer.current!.scrollCenter();
+      }
+    }
   }
+
+  componentWillMount() {
+    setTimeout(() => {
+      let initGuides: IGuideProps = guideDb.load({
+        width: this.props.width,
+        height: this.props.height,
+      });
+
+      this.setState({
+        horizontalGuides: initGuides.h,
+        verticalGuides: initGuides.v,
+      });
+
+      this.horizontalGuides?.current?.loadGuides(initGuides.h);
+      this.verticalGuides?.current?.loadGuides(initGuides.v);
+
+      this.props.onGuidesChange?.(initGuides);
+    }, 0);
+  }
+
+  toggleGuides = () => {
+    const { horizontalGuides, verticalGuides } = this;
+    const prevVisible = this.state.guideVisible;
+    horizontalGuides.current.loadGuides(prevVisible ? [] : this.state.horizontalGuides);
+    verticalGuides.current.loadGuides(prevVisible ? [] : this.state.verticalGuides);
+    this.setState(preState => ({
+      guideVisible: !preState.guideVisible,
+    }));
+  };
 
   public render() {
     const {
@@ -231,11 +269,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       >
         <div
           className={prefix('reset')}
-          onClick={e => {
-            infiniteViewer.current!.scrollCenter();
-            this.setState(preState => ({
-              guideVisible: !preState.guideVisible,
-            }));
+          onClick={() => {
+            this.toggleGuides();
           }}
         >
           <i
@@ -253,10 +288,14 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           displayDragPos={true}
           zoom={zoom}
           unit={unit}
-          onChangeGuides={e => {
+          dragPosFormat={e => e}
+          onChangeGuides={({ guides: v }) => {
+            const next = { h: this.state.horizontalGuides, v };
+            guideDb.save(next);
             this.setState({
-              horizontalGuides: e.guides,
+              verticalGuides: v,
             });
+            this.props.onGuidesChange?.(next);
           }}
         />
         <Guides
@@ -269,10 +308,14 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           displayDragPos={true}
           zoom={zoom}
           unit={unit}
-          onChangeGuides={e => {
+          dragPosFormat={e => e}
+          onChangeGuides={({ guides: h }) => {
+            const next = { v: this.state.verticalGuides, h };
+            guideDb.save(next);
             this.setState({
-              verticalGuides: e.guides,
+              horizontalGuides: h,
             });
+            this.props.onGuidesChange?.(next);
           }}
         />
         <InfiniteViewer
@@ -421,6 +464,14 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         handleSelectMode('hand');
       },
       '移动工具：移动屏幕位置',
+    );
+
+    this.keyManager.keydown(
+      ['m'],
+      e => {
+        this.infiniteViewer.current!.scrollCenter();
+      },
+      '画布居中',
     );
 
     this.keyManager.keydown(

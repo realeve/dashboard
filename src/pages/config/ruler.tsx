@@ -36,7 +36,7 @@ interface IGuideProps {
   v: number[];
 }
 
-export default ({ zoom = 1, canvasSize, onGuidesChange }: IRulerProps) => {
+export default ({ zoom = 1, canvasSize,  ...props}: IRulerProps) => {
   const hRuler = useRef();
   const vRuler = useRef();
 
@@ -50,7 +50,7 @@ export default ({ zoom = 1, canvasSize, onGuidesChange }: IRulerProps) => {
       let initGuides: IGuideProps = guideDb.load(canvasSize);
       hRuler?.current?.loadGuides(initGuides.h);
       vRuler?.current?.loadGuides(initGuides.v);
-      onGuidesChange && onGuidesChange(initGuides);
+      props?.onGuidesChange?.(initGuides);
     }, 0);
   };
 

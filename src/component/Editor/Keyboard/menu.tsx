@@ -8,8 +8,9 @@ import { TQuickTool } from '../types';
 
 import KeyboardIcon from './KeyboardIcon';
 import HandIcon from './HandIcon';
+import CenterIcon from './CenterIcon';
 
-const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, KeyboardIcon];
+const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, CenterIcon, KeyboardIcon];
 export default class Menu extends React.PureComponent<{
   editor: Editor;
   onSelect?: (id: string) => any;
