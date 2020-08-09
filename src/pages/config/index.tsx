@@ -107,7 +107,13 @@ const Index = ({ dispatch }) => {
             />
             <Thumbnail zoom={zoom} />
           </div>
-          <EditSlider editor={instance} onMenuChange={setCurTool} curTool={curTool} />
+          <EditSlider
+            zoom={zoom}
+            onZoom={setZoom}
+            editor={instance}
+            onMenuChange={setCurTool}
+            curTool={curTool}
+          />
         </div>
         <Setting setHide={setHide} hide={hide} />
       </div>

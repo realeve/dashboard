@@ -199,6 +199,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         this.infiniteViewer.current!.scrollCenter();
       }
     }
+
+    if (this.props.zoom != nextProps.zoom) {
+      this.setState({ zoom: nextProps.zoom });
+    }
   }
 
   componentWillMount() {
@@ -325,7 +329,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           pinchThreshold={50}
           zoom={zoom}
           onZoom={this.props.onZoom}
-          zoomRange={[0.3, 2]}
+          zoomRange={[0.3, 1.5]}
           onAbortPinch={e => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
