@@ -65,6 +65,8 @@ const Index = ({ dispatch }) => {
   // 拖动的相对距离
   const [dragPercent, setDragPercent] = useState({ x: 0, y: 0 });
 
+  const [thumbVisible, toggleThumb] = useState(true);
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
@@ -110,7 +112,7 @@ const Index = ({ dispatch }) => {
               }}
               onDrag={setDragPercent}
             />
-            <Thumbnail zoom={zoom} dragPercent={dragPercent} />
+            <Thumbnail visible={thumbVisible} zoom={zoom} dragPercent={dragPercent} />
           </div>
           <EditSlider
             zoom={zoom}
@@ -118,6 +120,9 @@ const Index = ({ dispatch }) => {
             editor={instance}
             onMenuChange={setCurTool}
             curTool={curTool}
+            onToggleThumb={() => {
+              toggleThumb(!thumbVisible);
+            }}
           />
         </div>
         <Setting setHide={setHide} hide={hide} />

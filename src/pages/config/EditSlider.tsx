@@ -20,7 +20,7 @@ export const InputRange = props => {
   );
 };
 
-export default ({ editor, onMenuChange, curTool, zoom, onZoom }) => {
+export default ({ editor, onMenuChange, curTool, zoom, onZoom, onToggleThumb }) => {
   return (
     <div className={styles['edit-slider']}>
       {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}
@@ -51,6 +51,9 @@ export default ({ editor, onMenuChange, curTool, zoom, onZoom }) => {
             onZoom(nextVal);
           }}
         />
+      </div>
+      <div className={styles['toggle-thumbnail']} onClick={onToggleThumb}>
+        <i className="datav-icon datav-font icon-viewport" />
       </div>
     </div>
   );

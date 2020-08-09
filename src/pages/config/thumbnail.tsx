@@ -2,12 +2,25 @@ import React, { useEffect, useState } from 'react';
 import styles from './thumbnail.less';
 import classnames from 'classnames';
 import { rangeCfg } from './EditSlider';
-export default ({ zoom, dragPercent }: { zoom: number; dragPercent: { x: number; y: number } }) => {
+export default ({
+  zoom,
+  dragPercent,
+  visible,
+}: {
+  visible: boolean;
+  zoom: number;
+  dragPercent: { x: number; y: number };
+}) => {
   const thumbnailSize = { width: 191, height: 112 };
   // 缩放比
-  const scale = rangeCfg.min / zoom; 
+  const scale = rangeCfg.min / zoom;
   return (
-    <div className={classnames(styles.thumbnail, styles['thumbnail-show'])}>
+    <div
+      className={classnames(
+        styles.thumbnail,
+        styles[`thumbnail-${visible ? 'show' : 'hide'}`],
+      )}
+    >
       <div className={styles['datav-thumbnail']}>
         <span
           className={styles['select-span']}
