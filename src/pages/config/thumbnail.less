@@ -11,12 +11,10 @@
   right: 5px;
   bottom: 35px;
   width: 190px;
-  height: 113px;
+  height: 112px;
   background: rgb(8, 9, 10);
   .datav-thumbnail {
-    position: absolute;
-    right: 5px;
-    bottom: 35px;
+    position: relative;
     user-select: none;
     .select-span {
       transform: translate(0px, 0px);
@@ -25,9 +23,8 @@
       border: 1px solid var(--datav-main-color);
       box-shadow: 0 0 30px 0 #000;
       z-index: 2;
-      position: absolute;
-      top: -78px;
-      left: -186px;
+      position: absolute; 
+      transform-origin: left top;
       cursor: move;
     }
   }

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 import ToolMenu from './ToolMenu';
 
+export const rangeCfg = { min: 0.3, max: 1.5, step: 0.1 };
 export const InputRange = props => {
   const percent = props.value / props.max;
   return (
@@ -20,7 +21,6 @@ export const InputRange = props => {
 };
 
 export default ({ editor, onMenuChange, curTool, zoom, onZoom }) => {
-  const rangeCfg = { min: 0.3, max: 1.5, step: 0.1 };
   return (
     <div className={styles['edit-slider']}>
       {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}

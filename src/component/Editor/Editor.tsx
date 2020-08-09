@@ -95,6 +95,17 @@ const range = { padding: 100, width: 1920, height: 1200 };
 const rangeX = [-range.padding, range.width / 3 + range.padding],
   rangeY = [-range.padding, range.height / 3 + range.padding];
 
+export const canvasSize = {
+  width: 1920,
+  height: 1080,
+};
+
+export const calcDragPos = (left: number, top: number) => {
+  const init = { x: -105, y: -105 };
+  const delta = { x: left - init.x, y: top - init.y };
+  return { x: (delta.x / canvasSize.width) * 100, y: (delta.y / canvasSize.height) * 100 };
+};
+
 export interface IEditorProps {
   width: number;
   height: number;
@@ -124,8 +135,10 @@ export interface IEditorProps {
 
   // 辅助线变更
   onGuidesChange?: (e: IGuideProps) => void;
-}
 
+  // 画面拖动
+  onDrag?: (e: { x: number; y: number }) => void;
+}
 /**
  * @param width 画布宽度
  * @param height 画布高度
@@ -137,12 +150,10 @@ export interface IEditorProps {
  * @param onSelect 选中元素
  * @param onRemove 移除元素
  * @param onChange 元素属性变更
+ * @param onDrag 拖动画布
  */
 class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
-  public static defaultProps = {
-    width: 1920,
-    height: 1080,
-  };
+  public static defaultProps = canvasSize;
   public state: ScenaEditorState = {
     selectedTargets: [],
     horizontalGuides: [],
@@ -414,9 +425,17 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               return;
             }
             let { x, y } = this.state.canvas;
-            infiniteViewer.current!.scrollBy(
-              x === 0 || x * e.deltaX > 0 ? -e.deltaX : 0,
-              y === 0 || y * e.deltaY > 0 ? -e.deltaY : 0,
+            const dragPos = {
+              x: x === 0 || x * e.deltaX > 0 ? -e.deltaX : 0,
+              y: y === 0 || y * e.deltaY > 0 ? -e.deltaY : 0,
+            };
+            infiniteViewer.current!.scrollBy(dragPos.x, dragPos.y);
+
+            this.props?.onDrag?.(
+              calcDragPos(
+                infiniteViewer.current!.getScrollLeft(),
+                infiniteViewer.current!.getScrollTop(),
+              ),
             );
           }}
           onSelectEnd={({ isDragStart, selected, inputEvent }) => {

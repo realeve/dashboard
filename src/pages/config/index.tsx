@@ -59,7 +59,11 @@ const Index = ({ dispatch }) => {
     };
   }, [hide]);
 
+  // 当前的菜单
   const [curTool, setCurTool] = useState<TQuickTool>('MoveTool');
+
+  // 拖动的相对距离
+  const [dragPercent, setDragPercent] = useState({ x: 0, y: 0 });
 
   return (
     <div className={styles.editor}>
@@ -104,8 +108,9 @@ const Index = ({ dispatch }) => {
               onGuidesChange={e => {
                 console.log(e, '辅助线');
               }}
+              onDrag={setDragPercent}
             />
-            <Thumbnail zoom={zoom} />
+            <Thumbnail zoom={zoom} dragPercent={dragPercent} />
           </div>
           <EditSlider
             zoom={zoom}
