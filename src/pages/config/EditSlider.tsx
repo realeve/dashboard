@@ -25,6 +25,9 @@ export default ({ editor, onMenuChange, curTool, zoom, onZoom }) => {
     <div className={styles['edit-slider']}>
       {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}
       <div className={styles['datav-slider']}>
+        <span style={{ color: '#bcc9d4', width: 35, fontSize: 12, textAlign: 'right' }}>
+          {Math.floor(zoom * 100)} %
+        </span>
         <i
           className="datav-icon datav-font icon-zoom-out slider-icon zoom-out "
           onClick={e => {
