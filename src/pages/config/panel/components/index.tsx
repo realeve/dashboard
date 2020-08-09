@@ -5,10 +5,7 @@ import { Tooltip } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
 import { IComponentItem, IComponent } from './db';
-
-export const defaultStyle = {
-  style: { width: 640, height: 400, rotate: 0, transform: 'translate(100p,100px)' },
-};
+import * as lib from '@/utils/lib';
 
 const { Panel } = Collapse;
 
@@ -90,9 +87,9 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
                             key={panel.title}
                             style={{ border: 0 }}
                             onClick={() => {
-                              onAddPanel && onAddPanel({ ...panel, ...defaultStyle });
+                              onAddPanel && onAddPanel({ ...panel, id: lib.noncer() });
                             }}
-                            className={classnames({[styles.finished]:panel.key})}
+                            className={classnames({ [styles.finished]: panel.key })}
                           >
                             <div className={styles.text}>{panel.title}</div>
                             <div

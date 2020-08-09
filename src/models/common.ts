@@ -73,7 +73,7 @@ export default {
       let panelItem = R.clone(panel);
       panelItem = {
         ...panelItem,
-        id: lib.noncer(),
+        id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,
       };
       let nextPanel = [...prevPanel, panelItem];

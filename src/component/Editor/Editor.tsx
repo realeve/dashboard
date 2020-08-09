@@ -29,7 +29,7 @@ import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
 
-const getDefaultStyle = (style?: React.CSSProperties) => {
+export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     top: 80,
     left: 80,
@@ -44,7 +44,6 @@ const getDefaultStyle = (style?: React.CSSProperties) => {
     position: 'absolute',
     width: `${rect.width}px`,
     height: `${rect.height}px`,
-    background: '#4af',
   } as React.CSSProperties;
 };
 
@@ -648,9 +647,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public appendJSX(info: ElementInfo) {
     return this.appendJSXs([info]).then(targets => targets[0]);
   }
-  public append(jsx: ScenaJSXType, name?: string) {
-    let id = generateId();
-    name = name || id;
+  public append(jsx: ScenaJSXType, config: { id?: string; name?: string }) {
+    let id = config.id || generateId();
+    let name = config.name || id;
     return this.appendJSXs([
       {
         jsx,

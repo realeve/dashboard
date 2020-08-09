@@ -13,8 +13,24 @@ import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
 // import CanvasComponent from './canvas';
-import Editor, { generateId, TQuickTool } from '@/component/Editor';
+import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
 import { connect } from 'dva';
+import ChartItem from './canvas/chartItem';
+import { IChartConfig } from './panel/components/db';
+
+interface IPanelItem extends IChartConfig {
+  style: React.CSSProperties;
+  id: string;
+  title: string;
+}
+const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => {
+  editor?.current.append(
+    <div style={style}>
+      <ChartItem config={config} />
+    </div>,
+    { id: config.id, name: config.title },
+  );
+};
 
 const Index = ({ dispatch }) => {
   const [hide, setHide] = useSetState({
@@ -78,10 +94,13 @@ const Index = ({ dispatch }) => {
           setHide={setHide}
           hide={hide}
           onAddPanel={panel => {
+            const style = getDefaultStyle();
+            const nextPanel = { ...panel, style };
             dispatch({
               type: 'common/addPanel',
-              payload: { panel },
+              payload: { panel: nextPanel },
             });
+            addPanel(editor, nextPanel);
           }}
         />
 
