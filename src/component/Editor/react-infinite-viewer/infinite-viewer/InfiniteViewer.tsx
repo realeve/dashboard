@@ -392,13 +392,12 @@ class InfiniteViewer extends Component {
     let nextOffsetY = (1 - loopY) * margin + offsetY;
 
     // 限制无限滚动
-    nextOffsetX = Math.min(580, nextOffsetX);
-    nextOffsetY = Math.min(580, nextOffsetY);
+    // nextOffsetX = Math.min(580, nextOffsetX);
+    // nextOffsetY = Math.min(580, nextOffsetY);
 
-    
-    nextOffsetX = Math.max(-40, nextOffsetX);
-    nextOffsetY = Math.max(140, nextOffsetY);
- 
+    // nextOffsetX = Math.max(-40, nextOffsetX);
+    // nextOffsetY = Math.max(140, nextOffsetY);
+
     this.scrollArea.style.cssText += `position:absolute;top:0;left:0;width:${size};height:${size};`;
     this.viewport.style.cssText += `transform-origin: 0 0;transform:translate(${nextOffsetX}px, ${nextOffsetY}px) scale(${zoom});`;
   }
@@ -409,7 +408,7 @@ class InfiniteViewer extends Component {
     container.scrollTop = scrollTop;
   }
   private onScroll = () => {
-    const container = this.container;
+    const container = this.container; 
     const { scrollLeft, scrollTop } = container;
     const { margin = 0, threshold = 0, loopX, loopY, rangeX = [0, 0], rangeY = [0, 0] } = this;
     const endThreshold = margin * 2 - threshold;
@@ -449,7 +448,7 @@ class InfiniteViewer extends Component {
     this.loopX = nextLoopX;
     this.loopY = nextLoopY;
 
-    this.render();
+    this.render(); 
 
     if (isChangeLoop || isChangeScroll) {
       this.trigger('scroll', {
@@ -457,7 +456,6 @@ class InfiniteViewer extends Component {
         scrollTop: this.getScrollTop(),
       });
     }
-
     if (isChangeScroll) {
       this.move(nextScrollLeft, nextScrollTop);
     }
@@ -477,7 +475,7 @@ class InfiniteViewer extends Component {
         inputEvent: e,
       });
     } else {
-      this.scrollBy(e.deltaX, e.deltaY);
+      this.options.allowWheel && this.scrollBy(e.deltaX, e.deltaY);
     }
     e.preventDefault();
   };

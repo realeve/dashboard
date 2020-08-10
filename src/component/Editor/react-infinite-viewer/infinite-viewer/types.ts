@@ -17,11 +17,14 @@ export interface InfiniteViewerOptions {
   wheelScale: number;
   cspNonce: string;
 
-  // 绽放范围，最大最小值
+  // 缩放范围，最大最小值
   zoomRange?: number[];
 
   // 缩放变更
   onZoom?: (e: number) => void;
+
+  // 允许滚动
+  allowWheel?: boolean;
 }
 
 /**

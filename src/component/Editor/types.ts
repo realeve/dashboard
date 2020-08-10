@@ -16,11 +16,7 @@ export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
   horizontalGuides: number[];
   verticalGuides: number[];
-  zoom: number;
-  canvas: {
-    x: number;
-    y: number;
-  };
+  zoom: number; 
   rectOffset: {
     x: number;
     y: number;

@@ -63,13 +63,9 @@ export default class Viewport extends React.PureComponent<{
   public viewportRef = React.createRef<HTMLDivElement>();
   public render() {
     return (
-      <div className={prefix('viewport-container')} {...this.props}>
+      <div ref={this.viewportRef} className={prefix('viewport-container')} {...this.props}>
         {this.props.children}
-        <div
-          className={prefix('viewport')}
-          {...{ [DATA_SCENA_ELEMENT_ID]: 'viewport' }}
-          ref={this.viewportRef}
-        >
+        <div className={prefix('viewport')} {...{ [DATA_SCENA_ELEMENT_ID]: 'viewport' }}>
           {this.renderChildren(this.getViewportInfos())}
         </div>
       </div>
@@ -289,7 +285,7 @@ export default class Viewport extends React.PureComponent<{
     return length ? indexes[length - 1] : -1;
   }
   public getElements(ids: string[]) {
-    console.log(ids)
+    console.log(ids);
     return ids.map(id => this.getElement(id)).filter(el => el) as Array<HTMLElement | SVGElement>;
   }
   public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {

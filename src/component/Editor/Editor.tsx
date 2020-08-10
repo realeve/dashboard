@@ -29,6 +29,19 @@ import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
 
+const edgeConfig = {
+  zoom60: 50,
+  zoom70: 56,
+  zoom80: 60,
+  zoom90: 64,
+  zoom100: 70,
+  zoom110: 72,
+  zoom120: 74,
+  zoom130: 76,
+  zoom140: 78,
+  zoom150: 80,
+};
+
 export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     top: 80,
@@ -88,11 +101,7 @@ function undoMove({ prevInfos }: MovedResult, editor: Editor) {
 }
 function redoMove({ nextInfos }: MovedResult, editor: Editor) {
   editor.moves(nextInfos, true);
-}
-
-const range = { padding: 100, width: 1920, height: 1200 };
-const rangeX = [-range.padding, range.width / 3 + range.padding],
-  rangeY = [-range.padding, range.height / 3 + range.padding];
+} 
 
 export const canvasSize = {
   width: 1920,
@@ -157,11 +166,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     selectedTargets: [],
     horizontalGuides: [],
     verticalGuides: [],
-    zoom: this.props.zoom || 1,
-    canvas: {
-      x: 0,
-      y: 0,
-    },
+    zoom: this.props.zoom || 1, 
     rectOffset: {
       x: 0,
       y: 0,
@@ -338,25 +343,20 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           ref={infiniteViewer}
           className={prefix('viewer')}
           usePinch={true}
+          threshold={100}
           pinchThreshold={50}
           zoom={zoom}
+          allowWheel={false}
           onZoom={this.props.onZoom}
           zoomRange={[0.3, 1.5]}
           onAbortPinch={e => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
-          onScroll={(e: OnScroll) => {
-            let x = e.scrollLeft < rangeX[0] ? -1 : e.scrollLeft < rangeX[1] ? 0 : 1,
-              y = e.scrollTop < rangeY[0] ? -1 : e.scrollTop < rangeY[1] ? 0 : 1;
-
-            this.setState({
-              canvas: { x, y },
-            });
-
-            !x && horizontalGuides.current!.scroll(e.scrollLeft);
+          onScroll={(e: OnScroll) => { 
+            horizontalGuides.current!.scroll(e.scrollLeft);
             horizontalGuides.current!.scrollGuides(e.scrollTop);
-
-            !y && verticalGuides.current!.scroll(e.scrollTop);
+ 
+            verticalGuides.current!.scroll(e.scrollTop);
             verticalGuides.current!.scrollGuides(e.scrollLeft);
           }}
           onPinch={e => {
@@ -425,19 +425,27 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (selectedMenu === 'MoveTool') {
               return;
             }
-            let { x, y } = this.state.canvas;
+            const { offsetWidth, offsetHeight } = infiniteViewer.current.getContainer();
+            let zoomWidth = width * zoom,
+              zoomHeight = height * zoom;
+ 
             const dragPos = {
-              x: x === 0 || x * e.deltaX > 0 ? -e.deltaX : 0,
-              y: y === 0 || y * e.deltaY > 0 ? -e.deltaY : 0,
+              x: zoomWidth < offsetWidth - 40 ? 0 : -e.deltaX,
+              y: zoomHeight < offsetHeight - 40 ? 0 : -e.deltaY,
             };
-            infiniteViewer.current!.scrollBy(dragPos.x, dragPos.y);
 
-            this.props?.onDrag?.(
-              calcDragPos(
-                infiniteViewer.current!.getScrollLeft(),
-                infiniteViewer.current!.getScrollTop(),
-              ),
+            let left = infiniteViewer.current!.getScrollLeft(),
+              top = infiniteViewer.current!.getScrollTop();
+
+            let pos = calcDragPos(left, top);
+            let zoomKey = 'zoom' + Math.floor(zoom * 100);
+            let maxPos = edgeConfig[zoomKey] || 50; 
+
+            infiniteViewer.current!.scrollBy(
+              left < -150 ? 20 : pos.x < maxPos ? dragPos.x : -20,
+              top < -150 ? 20 : pos.y < maxPos ? dragPos.y : -20,
             );
+            this.props?.onDrag?.(pos);
           }}
           onSelectEnd={({ isDragStart, selected, inputEvent }) => {
             if (selectedMenu === 'hand') {
