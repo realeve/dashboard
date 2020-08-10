@@ -158,7 +158,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   };
 
   // 更新第idx个数据的属性
-  const updatePanelItem = (idx: number, attrib: {}) => {
+  const updatePanelItem = (idx: string, attrib: {}) => { 
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
@@ -177,6 +177,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     if (typeof idx === 'undefined') {
       idx = selected;
     }
+    let item = R.nth(idx, panel);
     switch (action) {
       case MENU_ACTIONS.TOP:
         idx > 0 && moveLayerItem(idx, 0);
@@ -195,12 +196,12 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         }
         break;
       case MENU_ACTIONS.LOCK:
-        let lock = R.nth(idx, panel).lock || false;
-        updatePanelItem(idx, { lock: !lock });
+        let lock = item.lock || false;
+        updatePanelItem(item.id, { lock: !lock });
         break;
       case MENU_ACTIONS.HIDE:
-        let hide = R.nth(idx, panel).hide || false;
-        updatePanelItem(idx, { hide: !hide });
+        let hide = item.hide || false;
+        updatePanelItem(item.id, { hide: !hide });
         break;
       case MENU_ACTIONS.RENAME:
         console.log('该功能待添加');
@@ -215,7 +216,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
       case MENU_ACTIONS.REMOVE:
         // 全局状态在父组件中更新；
-        onRemove?.([panel[idx]?.id]); 
+        onRemove?.([panel[idx]?.id]);
         break;
       case MENU_ACTIONS.FAVORITE:
         console.log('该功能待添加');

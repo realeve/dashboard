@@ -29,7 +29,7 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
     <div style={style}>
       <ChartItem config={config} />
     </div>,
-    { id: config.id, name: config.title },
+    { id: config.id, name: config.title, style },
   );
 };
 
@@ -135,7 +135,6 @@ const Index = ({ dispatch, panel }) => {
               setCurTool={setCurTool}
               onRemove={removePanel}
               onSelect={e => {
-                console.log('选中了', e);
                 dispatch({
                   type: 'common/setStore',
                   payload: {
@@ -144,7 +143,15 @@ const Index = ({ dispatch, panel }) => {
                 });
               }}
               onChange={e => {
-                console.log('变更', e);
+                e.forEach(({ id: idx, next: style }) => {
+                  dispatch({
+                    type: 'common/updatePanelAttrib',
+                    payload: {
+                      idx,
+                      attrib: { style },
+                    },
+                  });
+                });
               }}
               onGuidesChange={e => {
                 console.log(e, '辅助线');

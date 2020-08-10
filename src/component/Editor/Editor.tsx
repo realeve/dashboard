@@ -541,7 +541,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       () => {
         let targets = this.getSelectedTargets();
         const ids = getIds(targets);
-        this.props.onRemove?.(ids); 
+        this.props.onRemove?.(ids);
         this.removeElements(targets);
       },
       '删除',
@@ -647,15 +647,18 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public appendJSX(info: ElementInfo) {
     return this.appendJSXs([info]).then(targets => targets[0]);
   }
-  public append(jsx: ScenaJSXType, config: { id?: string; name?: string }) {
+  public append(
+    jsx: ScenaJSXType,
+    config: { id?: string; name?: string; style?: React.CSSProperties },
+  ) {
     let id = config.id || generateId();
-    let name = config.name || id;
+    let name = config.name || id; 
     return this.appendJSXs([
       {
         jsx,
         name,
         id,
-        frame: getDefaultStyle(),
+        frame: config?.style || getDefaultStyle(),
       },
     ]).then(targets => targets[0]);
   }

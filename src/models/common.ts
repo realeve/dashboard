@@ -88,7 +88,6 @@ export default {
     *removePanel({ payload: { idx } }, { put, call, select }) {
       let prevPanel = yield select(state => state[namespace].panel);
       let nextPanel = R.reject(item => idx.includes(item.id))(prevPanel);
-      console.log(idx,nextPanel,prevPanel)
       yield updatePanel({
         panel: nextPanel,
         call,
@@ -98,12 +97,14 @@ export default {
     // 更新第I个面板的属性
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
       let panel = yield select(state => state[namespace].panel);
-      let _item = R.nth(idx)(panel);
+      let id = R.findIndex(R.propEq('id', idx))(panel);
+      let _item = R.nth(id)(panel);
       _item = {
         ..._item,
         ...attrib,
       };
-      let _panel = R.update(idx, _item, panel);
+      let _panel = R.update(id, _item, panel);
+      
       yield updatePanel({
         panel: _panel,
         call,
