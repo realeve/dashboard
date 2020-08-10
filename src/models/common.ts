@@ -40,9 +40,11 @@ export interface IPanelConfig {
 }
 export interface ICommon {
   panel: IPanelConfig[];
+  selectedPanel: string[];
 }
 const defaultState: ICommon = {
   panel: [],
+  selectedPanel: [],
 };
 
 export default {

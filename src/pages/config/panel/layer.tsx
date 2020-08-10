@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './layer.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
@@ -114,10 +114,21 @@ const MENU_LIST = [
 
 const MENU_TYPE = 'CONTEXT_MENU';
 
-const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
+const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
-  const [selected, setSelected] = useState(-1);
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    let _selected = [];
+    panel.forEach((item, idx) => {
+      if (selectedPanel.includes(item.id)) {
+        _selected.push(idx);
+      }
+    });
+    // console.log(_selected, selectedPanel);
+    setSelected(_selected);
+  }, [selectedPanel.join('')]);
 
   const onDragEnd = result => {
     // dropped outside the list
@@ -142,7 +153,8 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         panel: items,
       },
     });
-    setSelected(to);
+    console.log(items);
+    setSelected([to]);
   };
 
   // 更新第idx个数据的属性
@@ -202,6 +214,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         });
         break;
       case MENU_ACTIONS.REMOVE:
+        onRemove?.([panel[idx].id]);
         dispatch({
           type: 'common/removePanel',
           payload: {
@@ -256,7 +269,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             'datav-icon datav-font icon-move-prev',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected > 0,
+              [styles.enable]: selected.length > 0 && selected.join('') != panel[0]?.id,
             },
           )}
           title="上移一层"
@@ -269,7 +282,8 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             'datav-icon datav-font icon-move-next',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected >= 0 && selected < panel.length - 1,
+              [styles.enable]:
+                selected.length > 0 && selected.join('') != panel[panel.length - 1]?.id,
             },
           )}
           title="下移一层"
@@ -279,7 +293,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         />
         <i
           className={classnames('datav-icon datav-font icon-to-top', styles['layer-toolbar-icon'], {
-            [styles.enable]: selected > 0,
+            [styles.enable]: selected.length > 0 && selected.join('') != panel[0]?.id,
           })}
           title="置顶"
           onClick={() => {
@@ -291,7 +305,8 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
             'datav-icon datav-font icon-to-bottom',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected >= 0 && selected < panel.length - 1,
+              [styles.enable]:
+                selected.length >= 0 && selected.join('') != panel[panel.length - 1]?.id,
             },
           )}
           title="置底"
@@ -322,11 +337,11 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
                           [styles.thumbnail]: isThumb,
                           [styles.locked]: item.lock,
                           [styles.hided]: item.hide,
-                          [styles.selected]: selected === idx,
+                          [styles.selected]: selected.includes(idx),
                           [styles.dragging]: snapshot.isDragging,
                         })}
                         onClick={() => {
-                          setSelected(idx);
+                          setSelected([idx]);
                         }}
                       >
                         <ContextMenuTrigger
@@ -366,7 +381,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         <div
           className={styles['last-flex-item']}
           onClick={() => {
-            setSelected(-1);
+            setSelected([]);
           }}
         />
       </div>
@@ -375,7 +390,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         id={MENU_TYPE}
         onShow={e => {
           // 右键点击选中当前
-          setSelected(e.detail.data.idx);
+          setSelected([e.detail.data.idx]);
         }}
       >
         {MENU_LIST.map(item =>
@@ -398,7 +413,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         /> */}
         <i
           className={classnames('datav-icon datav-font icon-delete', {
-            enable: selected > -1,
+            enable: selected.length > 0,
           })}
           title="删除"
           onClick={() => {
@@ -407,7 +422,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         />
         <i
           className={classnames('datav-icon datav-font icon-lock', {
-            enable: selected > -1,
+            enable: selected.length > 0,
           })}
           title="锁定"
           onClick={() => {
@@ -416,7 +431,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
         />
         <i
           className={classnames('datav-icon datav-font icon-hide', {
-            enable: selected > -1,
+            enable: selected.length > 0,
           })}
           title="隐藏"
           onClick={() => {
@@ -428,4 +443,7 @@ const Index = ({ setHide, hide, panel, dispatch, ...props }) => {
   );
 };
 
-export default connect(({ common }: { common: ICommon }) => ({ panel: common.panel }))(Index);
+export default connect(({ common }: { common: ICommon }) => ({
+  panel: common.panel,
+  selectedPanel: common.selectedPanel,
+}))(Index);

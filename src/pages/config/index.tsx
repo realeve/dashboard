@@ -32,6 +32,10 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
+const removePanel = (editor: React.MutableRefObject<Editor>, idx: string[]) => {
+  editor?.current.removeByIds(idx);
+};
+
 const Index = ({ dispatch }) => {
   const [hide, setHide] = useSetState({
     layer: false,
@@ -87,7 +91,14 @@ const Index = ({ dispatch }) => {
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
       <div className={styles.main}>
-        <LayerPanel setHide={setHide} hide={hide} />
+        <LayerPanel
+          setHide={setHide}
+          hide={hide}
+          onRemove={id => {
+            console.log(id)
+            removePanel(editor, id);
+          }}
+        />
         <BeautyPanel setHide={setHide} hide={hide} />
         <FilterPanel setHide={setHide} hide={hide} />
         <ComponentPanel
@@ -122,6 +133,12 @@ const Index = ({ dispatch }) => {
               }}
               onSelect={e => {
                 console.log('选中了', e);
+                dispatch({
+                  type: 'common/setStore',
+                  payload: {
+                    selectedPanel: e,
+                  },
+                });
               }}
               onChange={e => {
                 console.log('变更', e);
