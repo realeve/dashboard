@@ -222,6 +222,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         height: this.props.height,
       });
 
+      console.log(initGuides);
+
       this.setState({
         horizontalGuides: initGuides.h,
         verticalGuides: initGuides.v,
@@ -303,11 +305,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           zoom={zoom}
           unit={unit}
           dragPosFormat={e => e}
-          onChangeGuides={({ guides: v }) => {
-            const next = { h: this.state.horizontalGuides, v };
+          onChangeGuides={({ guides: h }) => {
+            const next = { v: this.state.verticalGuides, h };
             guideDb.save(next);
             this.setState({
-              verticalGuides: v,
+              horizontalGuides: h,
             });
             this.props.onGuidesChange?.(next);
           }}
@@ -323,11 +325,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           zoom={zoom}
           unit={unit}
           dragPosFormat={e => e}
-          onChangeGuides={({ guides: h }) => {
-            const next = { v: this.state.verticalGuides, h };
+          onChangeGuides={({ guides: v }) => {
+            const next = { h: this.state.horizontalGuides, v };
             guideDb.save(next);
             this.setState({
-              horizontalGuides: h,
+              verticalGuides: v,
             });
             this.props.onGuidesChange?.(next);
           }}
@@ -652,7 +654,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     config: { id?: string; name?: string; style?: React.CSSProperties },
   ) {
     let id = config.id || generateId();
-    let name = config.name || id; 
+    let name = config.name || id;
     return this.appendJSXs([
       {
         jsx,

@@ -132,7 +132,10 @@ export const generateId: () => string = () =>
 
 const key = 'datav_guide';
 export const guideDb = {
-  save: e => window.localStorage.setItem(key, JSON.stringify(e)),
+  save: e => {
+    let res = { h: e.h.filter(item => item > -100), v: e.v.filter(item => item > -100) };
+    window.localStorage.setItem(key, JSON.stringify(res));
+  },
   load: canvasSize =>
     JSON.parse(
       window.localStorage.getItem(key) ||
