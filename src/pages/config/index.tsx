@@ -134,16 +134,16 @@ const Index = ({ dispatch, panel }) => {
               curTool={curTool}
               setCurTool={setCurTool}
               onRemove={removePanel}
-              onSelect={e => {
+              onSelect={panels => {
                 dispatch({
                   type: 'common/setStore',
                   payload: {
-                    selectedPanel: e,
+                    selectedPanel: panels,
                   },
                 });
               }}
-              onChange={e => {
-                e.forEach(({ id: idx, next: style }) => {
+              onChange={panels => {
+                panels.forEach(({ id: idx, next: style }) => {
                   dispatch({
                     type: 'common/updatePanelAttrib',
                     payload: {
