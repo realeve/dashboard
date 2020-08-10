@@ -143,14 +143,16 @@ export default class Viewport extends React.PureComponent<{
 
   public getLastChildInfo(id: string) {
     const info = this.getInfo(id);
+    if (!info) {
+      return false;
+    }
     const children = info.children!;
-
     return children[children.length - 1];
   }
   public getNextInfo(id: string) {
     const info = this.getInfo(id);
     const parentInfo = this.getInfo(info.scopeId!)!;
-    const parentChildren = parentInfo.children!;
+    const parentChildren = parentInfo?.children! || [];
     const index = parentChildren.indexOf(info);
 
     return parentChildren[index + 1];
@@ -182,7 +184,7 @@ export default class Viewport extends React.PureComponent<{
   public getIndexes(target: HTMLElement | SVGElement | string): number[] {
     const info = (isString(target) ? this.getInfo(target) : this.getInfoByElement(target))!;
 
-    if (!info.scopeId) {
+    if (!info?.scopeId) {
       return [];
     }
     const parentInfo = this.getInfo(info.scopeId)!;
@@ -287,6 +289,7 @@ export default class Viewport extends React.PureComponent<{
     return length ? indexes[length - 1] : -1;
   }
   public getElements(ids: string[]) {
+    console.log(ids)
     return ids.map(id => this.getElement(id)).filter(el => el) as Array<HTMLElement | SVGElement>;
   }
   public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {
@@ -297,7 +300,7 @@ export default class Viewport extends React.PureComponent<{
       let innerText = '';
       let innerHTML = '';
 
-      if (info.attrs!.contenteditable) {
+      if (info?.attrs?.contenteditable) {
         innerText = (target as HTMLElement).innerText;
       } else {
         innerHTML = target.innerHTML;
@@ -305,6 +308,9 @@ export default class Viewport extends React.PureComponent<{
 
       if (!isChild) {
         const parentInfo = this.getInfo(info.scopeId!);
+        if (!parentInfo) {
+          return;
+        }
         const parentChildren = parentInfo.children!;
         const index = parentChildren.indexOf(info);
         parentInfo.children!.splice(index, 1);
@@ -333,7 +339,9 @@ export default class Viewport extends React.PureComponent<{
     const removed = this.unregisterChildren(removedChildren);
 
     removed.forEach((info, i) => {
-      info.index = indexes[i];
+      if (info) {
+        info.index = indexes[i];
+      }
     });
     return new Promise(resolve => {
       this.forceUpdate(() => {
@@ -388,7 +396,7 @@ export default class Viewport extends React.PureComponent<{
       moved = [info];
     }
     const lastInfo = prevInfo && this.getLastChildInfo(prevInfo.id!);
-    return this.move(moved, prevInfo, lastInfo);
+    return lastInfo && this.move(moved, prevInfo, lastInfo);
   }
   public moveOutside(target: HTMLElement | SVGElement | string): Promise<MovedResult> {
     const info = isString(target) ? this.getInfo(target)! : this.getInfoByElement(target)!;

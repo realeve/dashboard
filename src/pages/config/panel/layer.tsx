@@ -214,13 +214,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         });
         break;
       case MENU_ACTIONS.REMOVE:
-        onRemove?.([panel[idx].id]);
-        dispatch({
-          type: 'common/removePanel',
-          payload: {
-            idx,
-          },
-        });
+        // 全局状态在父组件中更新；
+        onRemove?.([panel[idx]?.id]); 
         break;
       case MENU_ACTIONS.FAVORITE:
         console.log('该功能待添加');

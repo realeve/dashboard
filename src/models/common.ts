@@ -87,7 +87,8 @@ export default {
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
       let prevPanel = yield select(state => state[namespace].panel);
-      let nextPanel = R.remove(idx, 1, prevPanel);
+      let nextPanel = R.reject(item => idx.includes(item.id))(prevPanel);
+      console.log(idx,nextPanel,prevPanel)
       yield updatePanel({
         panel: nextPanel,
         call,

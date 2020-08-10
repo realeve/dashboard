@@ -541,7 +541,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       () => {
         let targets = this.getSelectedTargets();
         const ids = getIds(targets);
-        this.props.onRemove?.(ids);
+        this.props.onRemove?.(ids); 
         this.removeElements(targets);
       },
       '删除',
@@ -724,6 +724,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     targets.forEach(function removeFrame(target) {
       const info = viewport.getInfoByElement(target)!;
+      if (!info) {
+        return;
+      }
 
       frameMap[info.id!] = moveableData.getFrame(target).get();
       moveableData.removeFrame(target);
@@ -778,6 +781,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       !isRestore &&
         this.historyManager.addAction('removeElements', {
           infos: removed.map(function removeTarget(info: ElementInfo): ElementInfo {
+            if (!info) {
+              return {};
+            }
             return {
               ...info,
               children: info.children!.map(removeTarget),

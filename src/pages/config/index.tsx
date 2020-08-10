@@ -17,6 +17,7 @@ import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Edi
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
+import { ICommon } from '@/models/common';
 
 interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
@@ -32,11 +33,7 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
-const removePanel = (editor: React.MutableRefObject<Editor>, idx: string[]) => {
-  editor?.current.removeByIds(idx);
-};
-
-const Index = ({ dispatch }) => {
+const Index = ({ dispatch, panel }) => {
   const [hide, setHide] = useSetState({
     layer: false,
     components: false,
@@ -66,6 +63,11 @@ const Index = ({ dispatch }) => {
       return;
     }
     editor.current && setInstance(editor.current);
+
+    // onMount,载入初始panel
+    panel.map(item => {
+      addPanel(editor, item);
+    });
   }, [editor]);
 
   useEffect(() => {
@@ -87,18 +89,21 @@ const Index = ({ dispatch }) => {
 
   const [thumbVisible, toggleThumb] = useState(true);
 
+  const removePanel = (idx: string[]) => {
+    editor?.current.removeByIds(idx);
+    dispatch({
+      type: 'common/removePanel',
+      payload: {
+        idx,
+      },
+    });
+  };
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} />
       <div className={styles.main}>
-        <LayerPanel
-          setHide={setHide}
-          hide={hide}
-          onRemove={id => {
-            console.log(id)
-            removePanel(editor, id);
-          }}
-        />
+        <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
         <BeautyPanel setHide={setHide} hide={hide} />
         <FilterPanel setHide={setHide} hide={hide} />
         <ComponentPanel
@@ -128,9 +133,7 @@ const Index = ({ dispatch }) => {
               domHash={hash}
               curTool={curTool}
               setCurTool={setCurTool}
-              onRemove={e => {
-                console.log('移除', e);
-              }}
+              onRemove={removePanel}
               onSelect={e => {
                 console.log('选中了', e);
                 dispatch({
@@ -166,4 +169,6 @@ const Index = ({ dispatch }) => {
     </div>
   );
 };
-export default connect()(Index);
+export default connect(({ common }: { common: ICommon }) => ({
+  panel: common.panel,
+}))(Index);
