@@ -636,8 +636,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }).then(() => {
       if (!isRestore) {
         const prevs = getIds(this.moveableData.getSelectedTargets());
-        const nexts = getIds(targets);
-        console.log({nexts,prevs,targets})
+        const nexts = getIds(targets); 
         if (prevs.length !== nexts.length || !prevs.every((prev, i) => nexts[i] === prev)) {
           // 被选中
           this.props?.onSelect?.(nexts);
@@ -808,7 +807,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     });
   }
   public setProperty(scope: string[], value: any, isUpdate?: boolean) {
-    const infos = this.moveableData.setProperty(scope, value);
+    const infos = this.moveableData.setProperty(scope, value); 
     this.historyManager.addAction('renders', { infos });
     if (isUpdate) {
       this.moveableManager.current!.updateRect();

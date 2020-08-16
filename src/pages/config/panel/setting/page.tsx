@@ -1,15 +1,10 @@
 import React from 'react';
-import styles from './setting.less';
-import classnames from 'classnames';
+import styles from './index.less'; 
 import Field from '@/component/field';
 
-export default ({ setHide, hide, ...props }) => {
+export default (props) => {
   return (
-    <div
-      className={classnames(styles['config-panel-wp'], {
-        [styles.hide]: hide.config,
-      })}
-    >
+    <>
       <div className={styles.head}>页面设置</div>
       <div className={styles.body}>
         <div className={styles.pageconfig}>
@@ -23,6 +18,6 @@ export default ({ setHide, hide, ...props }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

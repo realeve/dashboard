@@ -179,7 +179,18 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
             }}
           />
         </div>
-        <Setting setHide={setHide} hide={hide} />
+        <Setting
+          setHide={setHide}
+          hide={hide}
+          onChange={(e, type) => {
+            // 调整大小
+            if (type === 'size') {
+              let key = Object.keys(e);
+              editor?.current.setProperty(key, Object.values(e)[0]+'px', true);
+            }
+            console.log(e, type);
+          }}
+        />
       </div>
     </div>
   );

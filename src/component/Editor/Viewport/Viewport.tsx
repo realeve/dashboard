@@ -284,8 +284,7 @@ export default class Viewport extends React.PureComponent<{
     const length = indexes.length;
     return length ? indexes[length - 1] : -1;
   }
-  public getElements(ids: string[]) {
-    console.log(ids);
+  public getElements(ids: string[]) { 
     return ids.map(id => this.getElement(id)).filter(el => el) as Array<HTMLElement | SVGElement>;
   }
   public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {
