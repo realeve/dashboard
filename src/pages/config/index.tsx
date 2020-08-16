@@ -33,7 +33,7 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
-const Index = ({ dispatch, panel }) => {
+const Index = ({ dispatch, panel, selectedPanel }) => {
   const [hide, setHide] = useSetState({
     layer: false,
     components: false,
@@ -80,6 +80,14 @@ const Index = ({ dispatch, panel }) => {
       window.clearTimeout(tid);
     };
   }, [hide]);
+
+  // 选择组件
+  useEffect(() => {
+    editor?.current.setSelectedTargets(
+      editor?.current.viewport.current!.getElements(selectedPanel),
+      true,
+    );
+  }, [selectedPanel.join(',')]);
 
   // 当前的菜单
   const [curTool, setCurTool] = useState<TQuickTool>('MoveTool');
@@ -178,4 +186,5 @@ const Index = ({ dispatch, panel }) => {
 };
 export default connect(({ common }: { common: ICommon }) => ({
   panel: common.panel,
+  selectedPanel: common.selectedPanel,
 }))(Index);

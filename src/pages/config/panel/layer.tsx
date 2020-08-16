@@ -337,7 +337,13 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           [styles.dragging]: snapshot.isDragging,
                         })}
                         onClick={() => {
-                          setSelected([idx]);
+                          dispatch({
+                            type: 'common/setStore',
+                            payload: {
+                              selectedPanel: [item.id],
+                            },
+                          }); 
+                          // setSelected([idx]);
                         }}
                       >
                         <ContextMenuTrigger
@@ -378,6 +384,12 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           className={styles['last-flex-item']}
           onClick={() => {
             setSelected([]);
+            dispatch({
+              type: 'common/setStore',
+              payload: {
+                selectedPanel: [],
+              },
+            }); 
           }}
         />
       </div>

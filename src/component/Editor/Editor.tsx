@@ -80,10 +80,10 @@ function restoreElements({ infos }: IObject<any>, editor: Editor) {
     true,
   );
 }
-function undoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
+function undoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) { 
   editor.setSelectedTargets(editor.viewport.current!.getElements(prevs), true);
 }
-function redoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
+function redoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) { 
   editor.setSelectedTargets(editor.viewport.current!.getElements(nexts), true);
 }
 function undoChangeText({ prev, next, id }: IObject<any>, editor: Editor) {
@@ -637,7 +637,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       if (!isRestore) {
         const prevs = getIds(this.moveableData.getSelectedTargets());
         const nexts = getIds(targets);
-
+        console.log({nexts,prevs,targets})
         if (prevs.length !== nexts.length || !prevs.every((prev, i) => nexts[i] === prev)) {
           // 被选中
           this.props?.onSelect?.(nexts);
