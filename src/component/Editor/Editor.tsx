@@ -718,8 +718,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       .filter(el => el);
 
     return Promise.all(targets.map(target => checkImageLoaded(target))).then(() => {
-      this.setSelectedTargets(targets, true);
-
+      this.setSelectedTargets(targets, true); 
       return targets;
     });
   }

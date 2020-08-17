@@ -68,6 +68,17 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
     panel.map(item => {
       addPanel(editor, item);
     });
+
+    // setting selected panel.
+    if (panel.length > 0) {
+      let lastPanel = panel[panel.length - 1];
+      dispatch({
+        type: 'common/setStore',
+        payload: {
+          selectedPanel: [lastPanel.id],
+        },
+      });
+    }
   }, [editor]);
 
   useEffect(() => {
@@ -186,7 +197,7 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
             // 调整大小
             if (type === 'size') {
               let key = Object.keys(e);
-              editor?.current.setProperty(key, Object.values(e)[0]+'px', true);
+              editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
             }
             console.log(e, type);
           }}
