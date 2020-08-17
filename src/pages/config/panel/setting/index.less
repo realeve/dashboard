@@ -21,9 +21,7 @@
   }
   .body {
     width: 100%;
-    height: 100%;
-    margin-top: -36px;
-    padding-top: 36px;
+    height: calc(100% - 60px); 
     .pageconfig {
       height: 100%;
       overflow-y: scroll;
@@ -41,6 +39,11 @@
         --grid-all: 24;
       }
     }
+  }
+  .bottom {
+    .head;
+    background: var(--datav-main-color);
+    cursor: pointer;
   }
 }
 .hide {

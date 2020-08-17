@@ -11,10 +11,11 @@ interface IPanel {
   selectedIdx: number;
   panel: IPanelConfig[];
   dispatch: Dispatch;
-  onChange:(e:any,type:string)=>void;
+  setHide: () => void;
+  onChange: (e: any, type: string) => void;
 }
 
-const Index = ({ selectedIdx, panel, dispatch,onChange }: IPanel) => {
+const Index = ({ setHide, selectedIdx, panel, dispatch, onChange }: IPanel) => {
   const [size, setSize] = useSetState({ width: 480, height: 270 });
   useEffect(() => {
     const setting = panel[selectedIdx];
@@ -39,7 +40,7 @@ const Index = ({ selectedIdx, panel, dispatch,onChange }: IPanel) => {
         },
       },
     });
-    onChange(item,'size')
+    onChange(item, 'size');
   };
 
   return (
@@ -75,6 +76,9 @@ const Index = ({ selectedIdx, panel, dispatch,onChange }: IPanel) => {
             </Field>
           </div>
         </div>
+      </div>
+      <div className={styles.bottom} onClick={setHide}>
+        确定
       </div>
     </>
   );

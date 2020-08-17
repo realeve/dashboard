@@ -18,6 +18,7 @@ export default (props) => {
           </div>
         </div>
       </div>
+      <div className={styles.bottom} onClick={props.setHide}>确定</div>
     </>
   );
 };

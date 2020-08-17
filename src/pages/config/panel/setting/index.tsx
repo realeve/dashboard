@@ -8,7 +8,7 @@ import Config from './config';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex(item => selected == item.id);
 
-const Index = ({ setHide, hide, selectedPanel, panel,onChange }) => {
+const Index = ({ setHide, hide, selectedPanel, panel, onChange }) => {
   return (
     <div
       className={classnames(styles['config-panel-wp'], {
@@ -16,9 +16,19 @@ const Index = ({ setHide, hide, selectedPanel, panel,onChange }) => {
       })}
     >
       {selectedPanel.length === 1 ? (
-        <Config selectedIdx={getSelectedPanelConfig(panel, selectedPanel[0])} onChange={onChange}/>
+        <Config
+          setHide={() => {
+            setHide({ config: true });
+          }}
+          selectedIdx={getSelectedPanelConfig(panel, selectedPanel[0])}
+          onChange={onChange}
+        />
       ) : (
-        <Page />
+        <Page
+          setHide={() => {
+            setHide({ config: true });
+          }}
+        />
       )}
     </div>
   );
