@@ -4,11 +4,21 @@ import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 
 const updatePanel = function*({ panel, call, put }) {
-  yield call(db.savePanel, panel);
+  yield call(db.savePanel(), panel);
   yield put({
     type: 'setStore',
     payload: {
       panel,
+    },
+  });
+};
+
+const updatePage = function*({ page, call, put }) {
+  yield call(db.savePanel('page'), page);
+  yield put({
+    type: 'setStore',
+    payload: {
+      page,
     },
   });
 };
@@ -72,7 +82,7 @@ const defaultState: ICommon = {
     chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
     head: {
       theme: '',
-      background: 'linear-gradient(90deg,#151920 0%,#222834 40%,transparent 70%)',
+      background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, transparent 70%)',
       fontSize: 20,
       color: '#aec1f9',
     },
@@ -101,6 +111,17 @@ export default {
     *updatePanel({ payload: { panel } }, { put, call }) {
       yield updatePanel({
         panel,
+        call,
+        put,
+      });
+    },
+    *updatePage({ payload: { page } }, { put, call, select }) {
+      let prevPage = yield select(state => state[namespace].page);
+      yield updatePage({
+        page: {
+          ...prevPage,
+          ...page,
+        },
         call,
         put,
       });

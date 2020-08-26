@@ -1,8 +1,8 @@
-export const loadPanel = async () => {
-  let obj = JSON.parse(window.localStorage.getItem('panel') || `[]`);
+export const loadPanel = async (key = 'panel') => {
+  let obj = JSON.parse(window.localStorage.getItem(key) || `[]`);
   return obj;
 };
 
-export const savePanel = async panel => {
-  window.localStorage.setItem('panel', JSON.stringify(panel));
+export const savePanel = (key = 'panel') => panel => {
+  window.localStorage.setItem(key, JSON.stringify(panel));
 };

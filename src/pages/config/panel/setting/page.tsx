@@ -13,8 +13,10 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
   // 更新配置
   const updatePage = page => {
     dispatch({
-      type: 'common/setStore',
-      page,
+      type: 'common/updatePage',
+      payload: {
+        page,
+      },
     });
   };
 
@@ -38,7 +40,8 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                   }}
                 />
                 <input
-                  type="text"
+                  type="number"
+                  step="2"
                   defaultValue={page.height}
                   onChange={e => {
                     updatePage({

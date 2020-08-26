@@ -48,15 +48,6 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
   const [hash, setHash] = useState(generateId());
 
   const [zoom, setZoom] = useState(0.7);
-  // const [canvasSize, setCanvasSize] = useSetState({
-  //   width: 1920,
-  //   height: 1080,
-  // });
-
-  const [guides, setGuides] = useState({
-    v: [],
-    h: [],
-  });
 
   const editor = React.useRef<Editor>(null);
   const [instance, setInstance] = React.useState<Editor | null>(null);
@@ -144,8 +135,6 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
         <div className={styles['right-edit-main']}>
           <Toolbox hide={hide} />
           <div className={styles['editor-panel-wp']}>
-            {/* <Ruler zoom={zoom} canvasSize={canvasSize} onGuidesChange={setGuides} /> */}
-            {/* <CanvasComponent zoom={zoom} canvasSize={canvasSize} guides={guides} /> */}
             <Editor
               ref={editor}
               debug={true}
