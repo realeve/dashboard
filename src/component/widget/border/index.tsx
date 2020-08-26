@@ -21,7 +21,11 @@ export default ({ name, children, style, className, ...props }: WidgetBorder) =>
   //   });
   // }
   if (R.isNil(url)) {
-    return children;
+    return (
+      <div style={style} className={className} {...props}>
+        {children}
+      </div>
+    );
   }
 
   return (

@@ -68,16 +68,16 @@ const defaultState: ICommon = {
   page: {
     width: '1920',
     height: '1080',
-    background: '#2d3341',
-    chartBackground: '#2c2d36', // 'rgba(38,42,50,0.6)'
+    background: '默认',
+    chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
     head: {
       theme: '',
-      background: 'linear-gradient(90deg, #151920, #222834)',
+      background: 'linear-gradient(90deg,#151920 0%,#222834 40%,transparent 70%)',
       fontSize: 20,
       color: '#aec1f9',
     },
     border: {
-      theme: '',
+      theme: '边框12', // 边框12
     },
   },
 };

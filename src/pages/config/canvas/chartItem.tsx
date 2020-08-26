@@ -7,7 +7,9 @@ import { connect } from 'dva';
 import { ICommon, IPage } from '@/models/common';
 import styles from './chartItem.less';
 
-const Item = ({ config, style }: { config: IChartConfig; style: React.CSSProperties }) => {
+import { BorderItem } from '@/component/widget';
+
+const Item = ({ config, style = {} }: { config: IChartConfig; style?: React.CSSProperties }) => {
   if (config.engine === 'echarts') {
     const { default: method, ...lib } = chartLib[config.key];
     return (
@@ -29,7 +31,7 @@ const Item = ({ config, style }: { config: IChartConfig; style: React.CSSPropert
 const Index = ({ config, page }: { config: IChartConfig; page: IPage }) => {
   console.log(config);
   return (
-    <div className={styles.chartItem} style={{ background: page.chartBackground }}>
+    <>
       <div
         style={{
           color: page.head.color,
@@ -40,15 +42,13 @@ const Index = ({ config, page }: { config: IChartConfig; page: IPage }) => {
       >
         {config.title}
       </div>
-      <Item
-        config={config}
-        style={{
-          background: page.chartBackground,
-          height: 'calc(100% - 50px)',
-          padding: 5,
-        }}
-      />
-    </div>
+      <BorderItem
+        name={page.border.theme}
+        style={{ background: page.chartBackground, width: '100%', height: 'calc(100% - 50px)' }}
+      >
+        <Item config={config}/>
+      </BorderItem>
+    </>
   );
 };
 

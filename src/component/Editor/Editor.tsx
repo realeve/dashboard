@@ -29,6 +29,9 @@ import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
 
+import assets from '@/component/widget/assets';
+const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
+
 const edgeConfig = {
   zoom60: 50,
   zoom70: 56,
@@ -370,7 +373,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             style={{
               width: `${width}px`,
               height: `${height}px`,
-              background: this.props.background || 'url(/img/panel/panelbg.png)',
+              backgroundImage: this.props.background
+                ? `url('${assets.backgrounds[this.props.background].url}')`
+                : 'url(/img/panel/panelbg.png)',
+              backgroundSize: 'cover',
+              ...backgroundStyle,
             }}
           >
             <MoveableManager
