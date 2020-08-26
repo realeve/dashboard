@@ -29,7 +29,7 @@ export interface IComponent {
   [key: string]: any;
 }
 
-export const getComponentList: () => Promise<IComponent> = () =>
+export const getComponentList: () => Promise<IComponent[]> = () =>
   axios({
     url: window.location.origin + '/components.json',
   }).then(res =>

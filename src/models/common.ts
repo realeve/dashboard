@@ -38,13 +38,48 @@ export interface IPanelConfig {
   hide?: boolean; // 隐藏
   [key: string]: any;
 }
+
+export interface IPage {
+  width: string; // 页面宽
+  height: string; // 页面高
+  background: string; // 页面背景
+  chartBackground: string; // 卡片背景
+  head: {
+    // 卡片标题栏
+    theme: string;
+    background: string;
+    fontSize: number;
+    color: string;
+  };
+  border: {
+    // 边框
+    theme: string;
+  };
+}
+
 export interface ICommon {
   panel: IPanelConfig[];
   selectedPanel: string[];
+  page: Partial<IPage>;
 }
 const defaultState: ICommon = {
   panel: [],
   selectedPanel: [],
+  page: {
+    width: '1920',
+    height: '1080',
+    background: '#2d3341',
+    chartBackground: '#2c2d36', // 'rgba(38,42,50,0.6)'
+    head: {
+      theme: '',
+      background: 'linear-gradient(90deg, #151920, #222834)',
+      fontSize: 20,
+      color: '#aec1f9',
+    },
+    border: {
+      theme: '',
+    },
+  },
 };
 
 export default {
@@ -104,7 +139,7 @@ export default {
         ...attrib,
       };
       let _panel = R.update(id, _item, panel);
-      
+
       yield updatePanel({
         panel: _panel,
         call,

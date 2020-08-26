@@ -1,8 +1,23 @@
 import React from 'react';
-import styles from './index.less'; 
+import styles from './index.less';
 import Field from '@/component/field';
+import { IPage } from '@/models/common';
+import { Dispatch } from 'redux';
 
-export default (props) => {
+interface IPageProps {
+  page: IPage;
+  setHide: () => void;
+  dispatch: Dispatch;
+}
+export default ({ page, setHide, dispatch }: IPageProps) => {
+  // 更新配置
+  const updatePage = page => {
+    dispatch({
+      type: 'common/setStore',
+      page,
+    });
+  };
+
   return (
     <>
       <div className={styles.head}>页面设置</div>
@@ -11,14 +26,34 @@ export default (props) => {
           <div className={styles['datav-gui']}>
             <Field title="屏幕大小">
               <div className="alignRow">
-                <input type="number" step="2" style={{ marginRight: 10 }} defaultValue={1920} />
-                <input type="text" defaultValue={1080} />
+                <input
+                  type="number"
+                  step="2"
+                  style={{ marginRight: 10 }}
+                  defaultValue={page.width}
+                  onChange={e => {
+                    updatePage({
+                      width: e.target.value,
+                    });
+                  }}
+                />
+                <input
+                  type="text"
+                  defaultValue={page.height}
+                  onChange={e => {
+                    updatePage({
+                      height: e.target.value,
+                    });
+                  }}
+                />
               </div>
             </Field>
           </div>
         </div>
       </div>
-      <div className={styles.bottom} onClick={props.setHide}>确定</div>
+      <div className={styles.bottom} onClick={setHide}>
+        确定
+      </div>
     </>
   );
 };

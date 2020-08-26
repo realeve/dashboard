@@ -80,10 +80,10 @@ function restoreElements({ infos }: IObject<any>, editor: Editor) {
     true,
   );
 }
-function undoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) { 
+function undoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
   editor.setSelectedTargets(editor.viewport.current!.getElements(prevs), true);
 }
-function redoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) { 
+function redoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
   editor.setSelectedTargets(editor.viewport.current!.getElements(nexts), true);
 }
 function undoChangeText({ prev, next, id }: IObject<any>, editor: Editor) {
@@ -101,7 +101,7 @@ function undoMove({ prevInfos }: MovedResult, editor: Editor) {
 }
 function redoMove({ nextInfos }: MovedResult, editor: Editor) {
   editor.moves(nextInfos, true);
-} 
+}
 
 export const canvasSize = {
   width: 1920,
@@ -119,7 +119,7 @@ export interface IEditorProps {
   height: number;
   debug?: boolean;
   style?: React.CSSProperties;
-
+  background?: string;
   // 缩放系数
   zoom?: number;
 
@@ -166,7 +166,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     selectedTargets: [],
     horizontalGuides: [],
     verticalGuides: [],
-    zoom: this.props.zoom || 1, 
+    zoom: this.props.zoom || 1,
     rectOffset: {
       x: 0,
       y: 0,
@@ -352,10 +352,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           onAbortPinch={e => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
-          onScroll={(e: OnScroll) => { 
+          onScroll={(e: OnScroll) => {
             horizontalGuides.current!.scroll(e.scrollLeft);
             horizontalGuides.current!.scrollGuides(e.scrollTop);
- 
+
             verticalGuides.current!.scroll(e.scrollTop);
             verticalGuides.current!.scrollGuides(e.scrollLeft);
           }}
@@ -370,6 +370,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             style={{
               width: `${width}px`,
               height: `${height}px`,
+              background: this.props.background || 'url(/img/panel/panelbg.png)',
             }}
           >
             <MoveableManager
@@ -428,7 +429,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             const { offsetWidth, offsetHeight } = infiniteViewer.current.getContainer();
             let zoomWidth = width * zoom,
               zoomHeight = height * zoom;
- 
+
             const dragPos = {
               x: zoomWidth < offsetWidth - 40 ? 0 : -e.deltaX,
               y: zoomHeight < offsetHeight - 40 ? 0 : -e.deltaY,
@@ -439,7 +440,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
             let pos = calcDragPos(left, top);
             let zoomKey = 'zoom' + Math.floor(zoom * 100);
-            let maxPos = edgeConfig[zoomKey] || 50; 
+            let maxPos = edgeConfig[zoomKey] || 50;
 
             infiniteViewer.current!.scrollBy(
               left < -150 ? 20 : pos.x < maxPos ? dragPos.x : -20,
@@ -636,7 +637,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }).then(() => {
       if (!isRestore) {
         const prevs = getIds(this.moveableData.getSelectedTargets());
-        const nexts = getIds(targets); 
+        const nexts = getIds(targets);
         if (prevs.length !== nexts.length || !prevs.every((prev, i) => nexts[i] === prev)) {
           // 被选中
           this.props?.onSelect?.(nexts);
@@ -718,7 +719,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       .filter(el => el);
 
     return Promise.all(targets.map(target => checkImageLoaded(target))).then(() => {
-      this.setSelectedTargets(targets, true); 
+      this.setSelectedTargets(targets, true);
       return targets;
     });
   }
@@ -806,7 +807,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     });
   }
   public setProperty(scope: string[], value: any, isUpdate?: boolean) {
-    const infos = this.moveableData.setProperty(scope, value); 
+    const infos = this.moveableData.setProperty(scope, value);
     this.historyManager.addAction('renders', { infos });
     if (isUpdate) {
       this.moveableManager.current!.updateRect();

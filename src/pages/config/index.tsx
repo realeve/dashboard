@@ -19,11 +19,13 @@ import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
 import { ICommon } from '@/models/common';
 
-interface IPanelItem extends IChartConfig {
+export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
   title: string;
 }
+
+// 添加内容
 const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => {
   editor?.current.append(
     <div style={style}>
@@ -33,7 +35,7 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
-const Index = ({ dispatch, panel, selectedPanel }) => {
+const Index = ({ dispatch, panel, selectedPanel, page }) => {
   const [hide, setHide] = useSetState({
     layer: false,
     components: false,
@@ -46,10 +48,10 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
   const [hash, setHash] = useState(generateId());
 
   const [zoom, setZoom] = useState(0.7);
-  const [canvasSize, setCanvasSize] = useSetState({
-    width: 1920,
-    height: 1080,
-  });
+  // const [canvasSize, setCanvasSize] = useSetState({
+  //   width: 1920,
+  //   height: 1080,
+  // });
 
   const [guides, setGuides] = useState({
     v: [],
@@ -153,6 +155,7 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
               curTool={curTool}
               setCurTool={setCurTool}
               onRemove={removePanel}
+              background={page.background}
               onSelect={panels => {
                 dispatch({
                   type: 'common/setStore',
@@ -172,9 +175,9 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
                   });
                 });
               }}
-              onGuidesChange={e => {
-                console.log(e, '辅助线');
-              }}
+              // onGuidesChange={e => {
+              //   console.log(e, '辅助线');
+              // }}
               onDrag={setDragPercent}
             />
             <Thumbnail visible={thumbVisible} zoom={zoom} dragPercent={dragPercent} />
@@ -209,4 +212,5 @@ const Index = ({ dispatch, panel, selectedPanel }) => {
 export default connect(({ common }: { common: ICommon }) => ({
   panel: common.panel,
   selectedPanel: common.selectedPanel,
+  page: common.page,
 }))(Index);

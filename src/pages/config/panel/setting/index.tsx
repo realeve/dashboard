@@ -8,7 +8,7 @@ import Config from './config';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex(item => selected == item.id);
 
-const Index = ({ setHide, hide, selectedPanel, panel, onChange }) => {
+const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }) => {
   return (
     <div
       className={classnames(styles['config-panel-wp'], {
@@ -25,6 +25,8 @@ const Index = ({ setHide, hide, selectedPanel, panel, onChange }) => {
         />
       ) : (
         <Page
+          dispatch={dispatch}
+          page={page}
           setHide={() => {
             setHide({ config: true });
           }}
@@ -37,4 +39,5 @@ const Index = ({ setHide, hide, selectedPanel, panel, onChange }) => {
 export default connect(({ common }: { common: ICommon }) => ({
   panel: common.panel,
   selectedPanel: common.selectedPanel,
+  page: common.page,
 }))(Index);
