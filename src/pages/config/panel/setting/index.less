@@ -21,22 +21,42 @@
   }
   .body {
     width: 100%;
-    height: calc(100% - 60px); 
+    height: calc(100% - 60px);
     .pageconfig {
       height: 100%;
       overflow-y: scroll;
       position: relative;
       .datav-gui {
         height: auto;
-      }
-      .datav-gui {
         font-style: normal;
         -webkit-font-smoothing: antialiased;
         width: 100%;
         background: var(--datav-gui-background-color-back);
+        :global {
+          .ant-divider {
+            color: #6e7481;
+            margin: 0;
+            padding: 10px;
+            background: #1c1f25;
+            &:before,
+            &:after {
+              border-top-color: #6e7481;
+            }
+          }
+        }
       }
       .datav-gui {
         --grid-all: 24;
+      }
+      .img {
+        height: 90px;
+        max-width: 180px;
+        border: 1px dashed #2681ff80; //var(--datav-main-color);
+        vertical-align: unset;
+        position: absolute;
+        top: 5px;
+        padding: 5px;
+        cursor: pointer;
       }
     }
   }

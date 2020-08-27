@@ -29,13 +29,12 @@ const Item = ({ config, style = {} }: { config: IChartConfig; style?: React.CSSP
 };
 
 const Index = ({ config, page }: { config: IChartConfig; page: IPage }) => {
-  console.log(config);
   return (
     <>
       <div
         style={{
           color: page.head.color,
-          fontSize: page.head.fontSize,
+          fontSize: Number(page.head.fontSize),
           background: page.head.background,
           padding: 10,
         }}
@@ -43,7 +42,7 @@ const Index = ({ config, page }: { config: IChartConfig; page: IPage }) => {
         {config.title}
       </div>
       <BorderItem
-        name={page.border.theme}
+        name={page.border}
         style={{ background: page.chartBackground, width: '100%', height: 'calc(100% - 50px)' }}
       >
         <Item config={config}/>

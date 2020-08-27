@@ -3,37 +3,53 @@
 .config(@width:128px,@height:128px) {
   display: flex;
   flex-wrap: wrap;
-  background: #0e0134;
+  // background: #0e0134;
   .item {
-    height: 20 + @height;
-    width: 4 + @width;
-    margin: 8px;
-
+    // height: 20 + @height;
+    cursor: pointer;
+    width: 3 + @width;
+    margin: 6px;
     padding: 2px;
+    display: flex;
+    flex-direction: column;
     .img {
-      height: @height;
+      max-height: @height;
       width: @width;
+      flex: 1;
       img {
         width: 100%;
         max-height: -4 + @height;
       }
     }
     .name {
-      height: 20px;
+      height: 30px;
       font-size: 12px;
       text-align: center;
       color: @borderColor;
+      padding: 5px 0;
+      width: 10em;
+      display: inline-block; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    &Active {
+    &Active,
+    &:hover {
       outline: 1px solid #ffc00e;
       .name {
         color: #ffc00e;
       }
     }
+    &:nth-child(4n + 1) {
+      margin-left: 1px;
+    }
+    &:nth-child(4n + 4) {
+      margin-right: 1px;
+    }
   }
 }
 .configGrid {
-  .config(128px, 128px);
+  .config(120px, 60px);
 }
 .configList {
   .config(700px, 64px);

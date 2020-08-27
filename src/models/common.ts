@@ -53,6 +53,7 @@ export interface IPage {
   width: string; // 页面宽
   height: string; // 页面高
   background: string; // 页面背景
+  border: string; // 边框样式
   chartBackground: string; // 卡片背景
   head: {
     // 卡片标题栏
@@ -60,10 +61,6 @@ export interface IPage {
     background: string;
     fontSize: number;
     color: string;
-  };
-  border: {
-    // 边框
-    theme: string;
   };
 }
 
@@ -79,15 +76,13 @@ const defaultState: ICommon = {
     width: '1920',
     height: '1080',
     background: '默认',
+    border: '边框29', // 边框12,
     chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
     head: {
       theme: '',
       background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, transparent 70%)',
       fontSize: 20,
       color: '#aec1f9',
-    },
-    border: {
-      theme: '边框12', // 边框12
     },
   },
 };
@@ -113,6 +108,18 @@ export default {
         panel,
         call,
         put,
+      });
+    },
+    *loadPage({}, { put, call }) {
+      let page = yield call(() => db.loadPanel('page'));
+      if (!page[0]) {
+        return;
+      }
+      yield put({
+        type: 'setStore',
+        payload: {
+          page,
+        },
       });
     },
     *updatePage({ payload: { page } }, { put, call, select }) {
@@ -183,6 +190,9 @@ export default {
     setup({ dispatch, history }) {
       dispatch({
         type: 'loadPanel',
+      });
+      dispatch({
+        type: 'loadPage',
       });
       return history.listen(() => {
         // 地址变更

@@ -1,8 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
 import { IPage } from '@/models/common';
 import { Dispatch } from 'redux';
+import assets from '@/component/widget/assets';
+import { SettingOutlined } from '@ant-design/icons';
+import Popup from '@/component/Editor/Popup/Popup';
+import { AssetItem } from '@/component/widget/blank/config';
+import { Divider } from 'antd';
+import ColorPicker from '@/component/field/ColorPicker';
+
+const ImgSelector = ({
+  title,
+  type = 'backgrounds',
+  value,
+  onChange,
+  style = {},
+}: {
+  title: string;
+  type: 'backgrounds' | 'borders';
+  value: string;
+  onChange: (e: string) => void;
+  style?: React.CSSProperties;
+}) => {
+  const [show, setShow] = useState(false);
+  return (
+    <Field title={title} style={{ ...style, height: 100 }}>
+      <img
+        className={styles.img}
+        src={assets[type][value].url}
+        onClick={() => {
+          setShow(!show);
+        }}
+      />
+      {show && (
+        <Popup
+          onClose={() => {
+            setShow(false);
+          }}
+        >
+          <div style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
+            <SettingOutlined /> 设置{title}
+          </div>
+          <AssetItem
+            assetKey={type}
+            style={{ overflowY: 'auto', height: 'calc(100% - 30px)' }}
+            value={value}
+            onChange={onChange}
+          />
+        </Popup>
+      )}
+    </Field>
+  );
+};
 
 interface IPageProps {
   page: IPage;
@@ -50,6 +100,49 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                   }}
                 />
               </div>
+            </Field>
+            <ImgSelector
+              title="背景"
+              value={page.background}
+              type="backgrounds"
+              onChange={background => {
+                updatePage({
+                  background,
+                });
+              }}
+            />
+            <Divider plain>组件通用设置</Divider>
+            <ImgSelector
+              title="边框"
+              value={page.border}
+              type="borders"
+              onChange={border => {
+                updatePage({
+                  border,
+                });
+              }}
+            />
+            <Field title="标题文字大小">
+              <input
+                type="number"
+                step="1"
+                defaultValue={page.head.fontSize}
+                onChange={e => {
+                  updatePage({
+                    head: { ...page.head, fontSize: e.target.value },
+                  });
+                }}
+              />
+            </Field>
+            <Field title="标题背景色">
+              <ColorPicker
+                value={'#0F0'}
+                onChange={background => {
+                  updatePage({
+                    head: { ...page.head, background },
+                  });
+                }}
+              />
             </Field>
           </div>
         </div>

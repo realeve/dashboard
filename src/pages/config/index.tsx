@@ -36,11 +36,12 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
 };
 
 const Index = ({ dispatch, panel, selectedPanel, page }) => {
+  // 面板默认显示状态设置
   const [hide, setHide] = useSetState({
-    layer: false,
+    layer: true,
     components: false,
     toolbox: true,
-    config: true,
+    config: false,
     beauty: true,
     filter: true,
   });
@@ -145,6 +146,8 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               setCurTool={setCurTool}
               onRemove={removePanel}
               background={page.background}
+              width={page.width}
+              height={page.height}
               onSelect={panels => {
                 dispatch({
                   type: 'common/setStore',

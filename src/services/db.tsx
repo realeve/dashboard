@@ -1,4 +1,4 @@
-export const loadPanel = async (key = 'panel') => {
+export const loadPanel = (key = 'panel') => {
   let obj = JSON.parse(window.localStorage.getItem(key) || `[]`);
   return obj;
 };

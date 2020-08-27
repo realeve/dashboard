@@ -3,12 +3,13 @@ import { assets } from '@/component/widget';
 import styles from './index.less';
 import classnames from 'classnames';
 
-export default ({ value, onChange, assetKey = 'borders' }) => {
+export default ({ value,style={}, onChange, assetKey = 'borders' }) => {
   let keys = Object.keys(assets[assetKey]);
 
   return (
     <div
       className={styles[['headers', 'footers'].includes(assetKey) ? 'configList' : 'configGrid']}
+      style={style}
     >
       {keys.map((name, idx) => {
         let val = assets[assetKey][name];

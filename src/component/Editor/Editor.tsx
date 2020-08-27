@@ -105,24 +105,31 @@ function undoMove({ prevInfos }: MovedResult, editor: Editor) {
 function redoMove({ nextInfos }: MovedResult, editor: Editor) {
   editor.moves(nextInfos, true);
 }
+ 
 
-export const canvasSize = {
-  width: 1920,
-  height: 1080,
-};
-
-export const calcDragPos = (left: number, top: number) => {
+export const calcDragPos = (
+  left: number,
+  top: number,
+  canvasSize: {
+    width: string;
+    height: string;
+  },
+) => {
   const init = { x: -105, y: -105 };
   const delta = { x: left - init.x, y: top - init.y };
-  return { x: (delta.x / canvasSize.width) * 100, y: (delta.y / canvasSize.height) * 100 };
+  return {
+    x: (delta.x / Number(canvasSize.width)) * 100,
+    y: (delta.y / Number(canvasSize.height)) * 100,
+  };
 };
 
 export interface IEditorProps {
-  width: number;
-  height: number;
+  width: string;
+  height: string;
   debug?: boolean;
   style?: React.CSSProperties;
   background?: string;
+
   // 缩放系数
   zoom?: number;
 
@@ -163,8 +170,7 @@ export interface IEditorProps {
  * @param onChange 元素属性变更
  * @param onDrag 拖动画布
  */
-class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
-  public static defaultProps = canvasSize;
+class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> { 
   public state: ScenaEditorState = {
     selectedTargets: [],
     horizontalGuides: [],
@@ -230,7 +236,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         height: this.props.height,
       });
 
-      console.log(initGuides);
+      // console.log(initGuides);
 
       this.setState({
         horizontalGuides: initGuides.h,
@@ -267,8 +273,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const { selectedTargets, zoom, guideVisible } = state;
 
     const { curTool: selectedMenu, width, height } = this.props;
-    const horizontalSnapGuides = [0, height, height / 2, ...state.horizontalGuides];
-    const verticalSnapGuides = [0, width, width / 2, ...state.verticalGuides];
+    const horizontalSnapGuides = [0, Number(height), Number(height) / 2, ...state.horizontalGuides];
+    const verticalSnapGuides = [0, Number(width), Number(width) / 2, ...state.verticalGuides];
     let unit = 50;
 
     if (zoom < 0.8) {
@@ -434,8 +440,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               return;
             }
             const { offsetWidth, offsetHeight } = infiniteViewer.current.getContainer();
-            let zoomWidth = width * zoom,
-              zoomHeight = height * zoom;
+            let zoomWidth = Number(width) * zoom,
+              zoomHeight = Number(height) * zoom;
 
             const dragPos = {
               x: zoomWidth < offsetWidth - 40 ? 0 : -e.deltaX,
@@ -445,7 +451,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             let left = infiniteViewer.current!.getScrollLeft(),
               top = infiniteViewer.current!.getScrollTop();
 
-            let pos = calcDragPos(left, top);
+            let pos = calcDragPos(left, top, {
+              width: this.props.width,
+              height: this.props.height,
+            });
             let zoomKey = 'zoom' + Math.floor(zoom * 100);
             let maxPos = edgeConfig[zoomKey] || 50;
 

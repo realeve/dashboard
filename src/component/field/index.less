@@ -7,7 +7,7 @@
   padding-right: var(--datav-gui-field-padding-right);
   transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
   &:not(.--basic) {
-    padding-bottom: 4px !important;
+    padding-bottom: 8px !important;
   }
   &:first-child {
     padding-top: 16px;
@@ -20,19 +20,21 @@
 
   .title {
     flex: 1;
-    height: var(--datav-gui-component-height);
+    // height: var(--datav-gui-component-height);
     line-height: var(--datav-gui-component-height);
     padding-right: 5px;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
   }
   .container {
     width: var(--datav-gui-component-container-width);
     .component {
       width: 100%;
-      height: var(--datav-gui-component-height);
+      min-height: var(--datav-gui-component-height);
 
       font-size: var(--datav-gui-font-size-base);
       color: var(--datav-gui-font-color-1);
