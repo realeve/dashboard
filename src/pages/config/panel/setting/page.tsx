@@ -8,7 +8,7 @@ import { SettingOutlined } from '@ant-design/icons';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
 import { Divider } from 'antd';
-import ColorPicker from '@/component/field/ColorPicker';
+import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 const ImgSelector = ({
   title,
@@ -111,9 +111,9 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 });
               }}
             />
-            <Divider plain>1.组件边框</Divider>
+            <Divider plain>1.组件通用配置</Divider>
             <ImgSelector
-              title="边框"
+              title="组件边框"
               value={page.border}
               type="borders"
               onChange={border => {
@@ -122,6 +122,16 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 });
               }}
             />
+            <Field title="组件背景" style={{ padding: 10 }}>
+              <ColorPicker
+                value={page.chartBackground}
+                onChange={chartBackground => {
+                  updatePage({
+                    chartBackground,
+                  });
+                }}
+              />
+            </Field>
             <Divider plain>2.组件标题</Divider>
             <Field title="字号">
               <input
@@ -135,6 +145,18 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 }}
               />
             </Field>
+
+            <Field title="文字颜色">
+              <PureColor
+                value={page.head.color}
+                onChange={color => {
+                  updatePage({
+                    head: { ...page.head, color },
+                  });
+                }}
+              />
+            </Field>
+
             <Field title="边距">
               <input
                 type="number"
@@ -175,7 +197,6 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
               <ColorPicker
                 value={page.head.background}
                 onChange={background => {
-                  console.log(background);
                   updatePage({
                     head: { ...page.head, background },
                   });

@@ -80,7 +80,7 @@ const defaultState: ICommon = {
     border: '边框29', // 边框12,
     chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
     head: {
-      background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, transparent 70%)',
+      background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)',
       fontSize: 20,
       color: '#aec1f9',
       textAlign: 'left',

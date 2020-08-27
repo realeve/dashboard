@@ -5,19 +5,45 @@
       color: #fff;
       border-color: var(--datav-gui-primary-color);
       &-checked,
-      &:before { 
+      &:before {
         background: var(--datav-gui-primary-color);
+      }
+      &:hover {
+        background: var(--datav-gui-primary-color);
+        opacity: 0.9;
+        color: #fff;
       }
     }
   }
   display: flex;
   flex-direction: column;
-  .head {
-    height: 30px;
+  .gardient {
     width: 178px;
-    margin-top: 10px;
-    color:#fff;
-    text-align: center;
-    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
   }
+  .tools {
+    position: relative;
+    .item {
+      width: 18px;
+      height: 18px;
+      cursor: ew-resize;
+      text-align: center;
+    }
+    .itemWrapper {
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
+.head {
+  height: 30px;
+  width: 178px;
+  margin-top: 5px;
+  color: #fff;
+  text-align: center;
+  cursor: crosshair;
 }
