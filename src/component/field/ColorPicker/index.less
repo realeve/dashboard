@@ -8,6 +8,13 @@
       &:before {
         background: var(--datav-gui-primary-color);
       }
+      
+      &:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child,
+      &:not(.ant-radio-button-wrapper-disabled):first-child {
+        border-color: var(--datav-gui-primary-color);
+        border-right-color: var(--datav-gui-primary-color);
+      }
+
       &:hover {
         background: var(--datav-gui-primary-color);
         opacity: 0.9;
