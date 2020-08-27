@@ -80,7 +80,7 @@ const GardientPicker = ({ value, onChange }) => {
             axis="x"
             key={idx}
             defaultPosition={{ x: 0, y: 0 }}
-            position={{ x: color[idx][1] * 1.78 - 9, y: 0 }}
+            position={{ x: color[idx][1] * 1.78 - 12, y: 0 }}
             onDrag={e => {
               let nextPos = (Number(e.layerX) / 1.78).toFixed(0);
               nextPos = R.clamp(0, 100, nextPos);

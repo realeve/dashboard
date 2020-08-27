@@ -8,7 +8,7 @@
       &:before {
         background: var(--datav-gui-primary-color);
       }
-      
+
       &:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child,
       &:not(.ant-radio-button-wrapper-disabled):first-child {
         border-color: var(--datav-gui-primary-color);
@@ -34,14 +34,23 @@
   .tools {
     position: relative;
     .item {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       cursor: ew-resize;
       text-align: center;
     }
     .itemWrapper {
       position: absolute;
       top: 0;
+      &:before {
+        content: '';
+        width: 1px;
+        height: 30px;
+        top: -30px;
+        background: #aaa;
+        position: absolute;
+        left: 12px;
+      }
     }
   }
 }
