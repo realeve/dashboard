@@ -31,21 +31,12 @@ const Item = ({ config, style = {} }: { config: IChartConfig; style?: React.CSSP
 const Index = ({ config, page }: { config: IChartConfig; page: IPage }) => {
   return (
     <>
-      <div
-        style={{
-          color: page.head.color,
-          fontSize: Number(page.head.fontSize),
-          background: page.head.background,
-          padding: 10,
-        }}
-      >
-        {config.title}
-      </div>
+      <div style={page.head}>{config.title}</div>
       <BorderItem
         name={page.border}
         style={{ background: page.chartBackground, width: '100%', height: 'calc(100% - 50px)' }}
       >
-        <Item config={config}/>
+        <Item config={config} />
       </BorderItem>
     </>
   );

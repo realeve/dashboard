@@ -55,13 +55,14 @@ export interface IPage {
   background: string; // 页面背景
   border: string; // 边框样式
   chartBackground: string; // 卡片背景
-  head: {
-    // 卡片标题栏
-    theme: string;
-    background: string;
-    fontSize: number;
-    color: string;
-  };
+  // 卡片标题栏
+  head: React.CSSProperties;
+  // {
+  //   background: string;
+  //   fontSize: number;
+  //   color: string;
+  //   textAlign: 'left' | 'right' | 'center';
+  // };
 }
 
 export interface ICommon {
@@ -79,10 +80,11 @@ const defaultState: ICommon = {
     border: '边框29', // 边框12,
     chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
     head: {
-      theme: '',
       background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, transparent 70%)',
       fontSize: 20,
       color: '#aec1f9',
+      textAlign: 'left',
+      padding: 10,
     },
   },
 };
@@ -112,7 +114,7 @@ export default {
     },
     *loadPage({}, { put, call }) {
       let page = yield call(() => db.loadPanel('page'));
-      if (!page[0]) {
+      if (!page.width) {
         return;
       }
       yield put({

@@ -9,7 +9,7 @@ import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
 import { Divider } from 'antd';
 import ColorPicker from '@/component/field/ColorPicker';
-
+import Radio from '@/component/field/Radio';
 const ImgSelector = ({
   title,
   type = 'backgrounds',
@@ -111,7 +111,7 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 });
               }}
             />
-            <Divider plain>组件通用设置</Divider>
+            <Divider plain>1.组件边框</Divider>
             <ImgSelector
               title="边框"
               value={page.border}
@@ -122,22 +122,60 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 });
               }}
             />
-            <Field title="标题文字大小">
+            <Divider plain>2.组件标题</Divider>
+            <Field title="字号">
               <input
                 type="number"
                 step="1"
                 defaultValue={page.head.fontSize}
                 onChange={e => {
                   updatePage({
-                    head: { ...page.head, fontSize: e.target.value },
+                    head: { ...page.head, fontSize: Number(e.target.value) },
                   });
                 }}
               />
             </Field>
-            <Field title="标题背景色">
+            <Field title="边距">
+              <input
+                type="number"
+                step="1"
+                defaultValue={page.head.padding}
+                onChange={e => {
+                  updatePage({
+                    head: { ...page.head, padding: Number(e.target.value) },
+                  });
+                }}
+              />
+            </Field>
+            <Field title="对齐">
+              <Radio
+                value={page.head.textAlign}
+                onChange={textAlign => {
+                  updatePage({
+                    head: { ...page.head, textAlign },
+                  });
+                }}
+                config={[
+                  {
+                    title: '居左',
+                    value: 'left',
+                  },
+                  {
+                    title: '居中',
+                    value: 'center',
+                  },
+                  {
+                    title: '居右',
+                    value: 'right',
+                  },
+                ]}
+              />
+            </Field>
+            <Field title="背景色">
               <ColorPicker
-                value={'#0F0'}
+                value={page.head.background}
                 onChange={background => {
+                  console.log(background);
                   updatePage({
                     head: { ...page.head, background },
                   });
