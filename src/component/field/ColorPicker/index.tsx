@@ -53,13 +53,17 @@ const getInitVal = value => {
   ];
 };
 
-const getGardient = color =>
-  `linear-gradient(90deg, ${color[0].join(' ')}%, ${color[1].join(' ')}%, ${color[2].join(' ')}%)`;
+const getGardient = _color => {
+  let color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color); 
+  return `linear-gradient(90deg, ${color[0].join(' ')}%, ${color[1].join(' ')}%, ${color[2].join(
+    ' ',
+  )}%)`;
+};
 
 /**
  * 渐变选择器
  */
-const GardientPicker = ({ value, onChange }) => { 
+const GardientPicker = ({ value, onChange }) => {
   const [color, setColor] = useState(getInitVal(value));
   useEffect(() => {
     onChange(getGardient(color));
@@ -81,7 +85,7 @@ const GardientPicker = ({ value, onChange }) => {
             key={idx}
             defaultPosition={{ x: 0, y: 0 }}
             position={{ x: color[idx][1] * 1.78 - 12, y: 0 }}
-            onDrag={e => {
+            onStop={e => {
               let nextPos = (Number(e.layerX) / 1.78).toFixed(0);
               nextPos = R.clamp(0, 100, nextPos);
               let prev = R.nth(idx, color);

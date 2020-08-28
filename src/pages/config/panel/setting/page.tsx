@@ -54,6 +54,104 @@ const ImgSelector = ({
   );
 };
 
+// 组件的通用样式设置
+export const ComponentConfig = ({ border, chartBackground, head, onChange: updatePage }) => (
+  <>
+    <Divider plain>组件</Divider>
+    <ImgSelector
+      title="边框"
+      value={border}
+      type="borders"
+      onChange={border => {
+        updatePage({
+          border,
+        });
+      }}
+    />
+    <Field title="背景" style={{ padding: 10 }}>
+      <ColorPicker
+        value={chartBackground}
+        onChange={chartBackground => {
+          updatePage({
+            chartBackground,
+          });
+        }}
+      />
+    </Field>
+    <Divider plain>标题</Divider>
+    <Field title="字号">
+      <input
+        type="number"
+        step="1"
+        defaultValue={head.fontSize}
+        onChange={e => {
+          updatePage({
+            head: { ...head, fontSize: Number(e.target.value) },
+          });
+        }}
+      />
+    </Field>
+
+    <Field title="文字颜色">
+      <PureColor
+        value={head.color}
+        onChange={color => {
+          updatePage({
+            head: { ...head, color },
+          });
+        }}
+      />
+    </Field>
+
+    <Field title="边距">
+      <input
+        type="number"
+        step="1"
+        defaultValue={head.padding}
+        onChange={e => {
+          updatePage({
+            head: { ...head, padding: Number(e.target.value) },
+          });
+        }}
+      />
+    </Field>
+    <Field title="对齐">
+      <Radio
+        value={head.textAlign}
+        onChange={textAlign => {
+          updatePage({
+            head: { ...head, textAlign },
+          });
+        }}
+        config={[
+          {
+            title: '居左',
+            value: 'left',
+          },
+          {
+            title: '居中',
+            value: 'center',
+          },
+          {
+            title: '居右',
+            value: 'right',
+          },
+        ]}
+      />
+    </Field>
+    <Field title="背景色">
+      <ColorPicker
+        value={head.background}
+        onChange={background => {
+          updatePage({
+            head: { ...head, background },
+          });
+        }}
+      />
+    </Field>
+  </>
+);
+
 interface IPageProps {
   page: IPage;
   setHide: () => void;
@@ -111,98 +209,12 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
                 });
               }}
             />
-            <Divider plain>1.组件通用配置</Divider>
-            <ImgSelector
-              title="组件边框"
-              value={page.border}
-              type="borders"
-              onChange={border => {
-                updatePage({
-                  border,
-                });
-              }}
+            <ComponentConfig
+              onChange={updatePage}
+              border={page.border}
+              chartBackground={page.chartBackground}
+              head={page.head}
             />
-            <Field title="组件背景" style={{ padding: 10 }}>
-              <ColorPicker
-                value={page.chartBackground}
-                onChange={chartBackground => {
-                  updatePage({
-                    chartBackground,
-                  });
-                }}
-              />
-            </Field>
-            <Divider plain>2.组件标题</Divider>
-            <Field title="字号">
-              <input
-                type="number"
-                step="1"
-                defaultValue={page.head.fontSize}
-                onChange={e => {
-                  updatePage({
-                    head: { ...page.head, fontSize: Number(e.target.value) },
-                  });
-                }}
-              />
-            </Field>
-
-            <Field title="文字颜色">
-              <PureColor
-                value={page.head.color}
-                onChange={color => {
-                  updatePage({
-                    head: { ...page.head, color },
-                  });
-                }}
-              />
-            </Field>
-
-            <Field title="边距">
-              <input
-                type="number"
-                step="1"
-                defaultValue={page.head.padding}
-                onChange={e => {
-                  updatePage({
-                    head: { ...page.head, padding: Number(e.target.value) },
-                  });
-                }}
-              />
-            </Field>
-            <Field title="对齐">
-              <Radio
-                value={page.head.textAlign}
-                onChange={textAlign => {
-                  updatePage({
-                    head: { ...page.head, textAlign },
-                  });
-                }}
-                config={[
-                  {
-                    title: '居左',
-                    value: 'left',
-                  },
-                  {
-                    title: '居中',
-                    value: 'center',
-                  },
-                  {
-                    title: '居右',
-                    value: 'right',
-                  },
-                ]}
-              />
-            </Field>
-            <Field title="背景色">
-              <ColorPicker
-                value={page.head.background}
-                onChange={background => {
-                  updatePage({
-                    head: { ...page.head, background },
-                  });
-                }}
-              />
-            </Field>
           </div>
         </div>
       </div>
