@@ -3,7 +3,7 @@ import { Radio } from 'antd';
 import React, { useState, useEffect } from 'react';
 import 'rc-color-picker/assets/index.css';
 import styles from './index.less';
-import { hex2rgb } from '@/component/chartItem/option/lib';
+import { hex2rgb, rgb2hex } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
 import Draggable from 'react-draggable';
 
@@ -23,20 +23,24 @@ const getTabIdx = value => {
   return EColorType.GARDIENT;
 };
 
-const ColorItem = ({ value, onChange, position }) => (
-  <ColorPicker
-    color={value}
-    onChange={e => {
-      let color = hex2rgb(e.color);
-      onChange(`rgba(${color},${e.alpha / 100})`);
-    }}
-    placement="bottomRight"
-  >
-    <div className={styles.item} style={{ backgroundColor: value }}>
-      {position}
-    </div>
-  </ColorPicker>
-);
+const ColorItem = ({ value, onChange, position }) => {
+  let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
+  return (
+    <ColorPicker
+      color={rgb2hex(value).slice(0, 7)}
+      alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
+      onChange={e => {
+        let color = hex2rgb(e.color);
+        onChange(`rgba(${color},${e.alpha / 100})`);
+      }}
+      placement="bottomRight"
+    >
+      <div className={styles.item} style={{ backgroundColor: value }}>
+        {position}
+      </div>
+    </ColorPicker>
+  );
+};
 
 const getInitVal = value => {
   if (value.slice(0, 6) == 'linear') {
@@ -54,7 +58,7 @@ const getInitVal = value => {
 };
 
 const getGardient = _color => {
-  let color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color); 
+  let color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color);
   return `linear-gradient(90deg, ${color[0].join(' ')}%, ${color[1].join(' ')}%, ${color[2].join(
     ' ',
   )}%)`;
@@ -96,6 +100,7 @@ const GardientPicker = ({ value, onChange }) => {
             bounds={{ top: 0, left: 0, right: 178, bottom: 0 }}
           >
             <div className={styles.itemWrapper}>
+              <div className={styles.arrayTop} style={{ borderBottomColor: color[idx][0] }} />
               <ColorItem
                 value={item[0]}
                 onChange={e => {
@@ -114,20 +119,24 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value, onChange }) => (
-  <ColorPicker
-    color={value}
-    onChange={e => {
-      let color = hex2rgb(e.color);
-      onChange(`rgba(${color},${e.alpha / 100})`);
-    }}
-    placement="bottomRight"
-  >
-    <div className={styles.head} style={{ backgroundColor: value }}>
-      点击设置颜色
-    </div>
-  </ColorPicker>
-);
+export const PureColor = ({ value, onChange }) => {
+  let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
+  return (
+    <ColorPicker
+      color={rgb2hex(value).slice(0, 7)}
+      alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
+      onChange={e => {
+        let color = hex2rgb(e.color);
+        onChange(`rgba(${color},${e.alpha / 100})`);
+      }}
+      placement="bottomRight"
+    >
+      <div className={styles.head} style={{ backgroundColor: value }}>
+        点击设置颜色
+      </div>
+    </ColorPicker>
+  );
+};
 
 export default ({ value, onChange }) => {
   const [tab, setTab] = useState(getTabIdx(value));

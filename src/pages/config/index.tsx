@@ -64,15 +64,15 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
     });
 
     // setting selected panel.
-    if (panel.length > 0) {
-      let lastPanel = panel[panel.length - 1];
-      dispatch({
-        type: 'common/setStore',
-        payload: {
-          selectedPanel: [lastPanel.id],
-        },
-      });
-    }
+    // if (panel.length > 0) {
+    //   let lastPanel = panel[panel.length - 1];
+    //   dispatch({
+    //     type: 'common/setStore',
+    //     payload: {
+    //       selectedPanel: [lastPanel.id],
+    //     },
+    //   });
+    // }
   }, [editor]);
 
   useEffect(() => {

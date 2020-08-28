@@ -105,7 +105,6 @@ function undoMove({ prevInfos }: MovedResult, editor: Editor) {
 function redoMove({ nextInfos }: MovedResult, editor: Editor) {
   editor.moves(nextInfos, true);
 }
- 
 
 export const calcDragPos = (
   left: number,
@@ -170,7 +169,7 @@ export interface IEditorProps {
  * @param onChange 元素属性变更
  * @param onDrag 拖动画布
  */
-class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> { 
+class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
   public state: ScenaEditorState = {
     selectedTargets: [],
     horizontalGuides: [],
@@ -712,9 +711,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     return this.getViewport()
       .appendJSXs(jsxs, appendIndex, scopeId)
-      .then(({ added }) => {
-        return this.appendComplete(added, isRestore);
-      });
+      .then(({ added }) => this.appendComplete(added, isRestore));
   }
 
   public appendComplete(infos: ElementInfo[], isRestore?: boolean) {
@@ -735,7 +732,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       .filter(el => el);
 
     return Promise.all(targets.map(target => checkImageLoaded(target))).then(() => {
-      this.setSelectedTargets(targets, true);
+      // this.setSelectedTargets(targets, true);
       return targets;
     });
   }

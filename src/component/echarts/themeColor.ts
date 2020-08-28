@@ -159,6 +159,7 @@ const hex2rgb = (str, alpha = 1) => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
+
 export default {
   COLOR_PLATE_8,
   COLOR_PLATE_16,
@@ -169,5 +170,5 @@ export default {
   ANTV,
   FLAT_UI_COLOR,
   getColor,
-  hex2rgb,
+  hex2rgb, 
 };

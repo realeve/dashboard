@@ -1,7 +1,6 @@
- 
-import * as lib from '@/utils/lib'; 
-import * as R from 'ramda'
-import {EChartsSeriesType} from 'echarts';
+import * as lib from '@/utils/lib';
+import * as R from 'ramda';
+import { EChartsSeriesType } from 'echarts';
 
 export interface IChart {
   key?: string;
@@ -11,11 +10,11 @@ export interface IChart {
   type?: string;
 }
 
-export type TChartConfig = Array<IChart>; 
+export type TChartConfig = Array<IChart>;
 
 let uniq: <T>(arr: Array<T>) => Array<T> = arr => R.uniq(arr);
- 
-export const tooltipFormatter = (p, unit, axisName, append=false) => {
+
+export const tooltipFormatter = (p, unit, axisName, append = false) => {
   let title: boolean | string = false;
   let str = '';
   p = p.filter(item => typeof item.value !== 'undefined');
@@ -102,22 +101,22 @@ let handleDefaultOption = (option, config, showDateRange = true) => {
     {
       toolbox,
       tooltip: {},
-      legend: defaultLegend, 
+      legend: defaultLegend,
     },
-    option
+    option,
   );
 
   if (['bar', 'line'].includes(config.type)) {
     let axisPointerType: 'shadow' | 'cross' = 'shadow';
     let tooltipTrigger: string = 'axis';
     switch (config.type) {
-      case 'bar': 
+      case 'bar':
         axisPointerType = 'shadow';
         break;
       case 'line':
       default:
         axisPointerType = 'cross';
-        break; 
+        break;
     }
 
     /**
@@ -214,7 +213,7 @@ export const handleSimpleMode = (option, config) => {
 export let str2Date: (str: string) => string = str => {
   str = String(str);
   let needConvert: boolean = /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(0[1-9]|1[0-2])$/.test(
-    str
+    str,
   );
   if (!needConvert) {
     return str;
@@ -239,28 +238,28 @@ export let str2Num: (str: string) => number | string = str => {
 
 export let isDate: (dateStr: string) => boolean = dateStr => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/.test(
-    dateStr
+    dateStr,
   );
 };
 
 export let needConvertDate: (dateStr: string) => boolean = dateStr => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(-|)(0[1-9]|1[0-2])$/.test(
-    dateStr
+    dateStr,
   );
 };
 
 export let getDataByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
   R.pluck(key)(data);
 
-  export let getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
+export let getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
   R.uniq(
     getDataByIdx({
       key,
       data,
-    })
+    }),
   );
 
-  export let getDataByKeys = ({ keys, data }) => {
+export let getDataByKeys = ({ keys, data }) => {
   let _data = R.project(keys)(data);
   return R.map(R.values)(_data);
 };
@@ -402,30 +401,27 @@ export function hex2rgb(hexVal: string): string {
 }
 
 export type arrRgb = Array<string>;
-export function rgb2hex(val: string): arrRgb {
-  let rgbVal: arrRgb = val
-    .replace(/rgb/, '')
-    .replace(/\(/, '')
-    .replace(/\)/, '')
-    .split(',');
-  rgbVal[0] =
-    parseInt(rgbVal[0], 10).toString(16).length === 2
-      ? parseInt(rgbVal[0], 10).toString(16)
-      : '0' + parseInt(rgbVal[0], 10).toString(16);
-  rgbVal[1] =
-    parseInt(rgbVal[1], 10).toString(16).length === 2
-      ? parseInt(rgbVal[1], 10).toString(16)
-      : '0' + parseInt(rgbVal[1], 10).toString(16);
-  rgbVal[2] =
-    parseInt(rgbVal[2], 10).toString(16).length === 2
-      ? parseInt(rgbVal[2], 10).toString(16)
-      : '0' + parseInt(rgbVal[2], 10).toString(16);
-
-  return rgbVal;
-}
+export const rgb2hex = str => {
+  if (str[0] === '#') {
+    return str;
+  }
+  let val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
+  let alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
+  val[3] = alpha;
+  return (
+    '#' +
+    val
+      .map(item =>
+        Number(item)
+          .toString(16)
+          .padStart(2, '0'),
+      )
+      .join('')
+  );
+};
 
 export let getLegendData: <T>(
-  arr: Array<T>
+  arr: Array<T>,
 ) => Array<{
   icon: string;
   name: T;
@@ -435,7 +431,7 @@ export let getLegendData: <T>(
     icon: 'circle',
   }));
 
-  export type tGl =
+export type tGl =
   | 'bar3d'
   | 'line3d'
   | 'scatter3d'
@@ -445,7 +441,7 @@ export let getLegendData: <T>(
   | 'paralell'
   | 'calendar'
   | EChartsSeriesType;
-  export let chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
+export let chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
 
 export type tRender = 'canvas' | 'svg';
 export let getRenderer: (params: {
@@ -456,7 +452,7 @@ export let getRenderer: (params: {
   params.render ||
   (['paralell', ...chartGL].includes(params.type) || params.histogram ? 'canvas' : 'svg');
 
-  export interface Iparams {
+export interface Iparams {
   type: tGl;
   height?: string | number;
   size?: number;
@@ -507,7 +503,7 @@ export let handleMinMax: (params: {
 
 export let getLegend: (
   params: any,
-  selectedMode?: string
+  selectedMode?: string,
 ) => {
   show?: boolean;
   selectedMode?: string;
@@ -533,7 +529,7 @@ export type axis = 'value' | 'category';
 // 获取指定key对应的轴数据
 export let getAxis: (
   param: { data: any; header: string[] },
-  key: string
+  key: string,
 ) => {
   xAxis: Array<string | number>;
   xAxisType: axis;
@@ -551,4 +547,4 @@ export let getAxis: (
     xAxis,
     xAxisType,
   };
-}; 
+};

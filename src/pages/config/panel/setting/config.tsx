@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import { IPanelConfig, ICommon } from '@/models/common';
+import { IPanelConfig, ICommon, IPage } from '@/models/common';
 import { connect } from 'dva';
 import { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
+import { ComponentConfig, IComponentConfig } from './index';
+import { Tabs } from 'antd';
 
 interface IPanel {
   selectedIdx: number;
   panel: IPanelConfig[];
+  page: IPage;
   dispatch: Dispatch;
-  setHide: () => void;
   onChange: (e: any, type: string) => void;
 }
 
-const Index = ({ setHide, selectedIdx, panel, dispatch, onChange }: IPanel) => {
+// 获取通用配置
+const getGeneralConfig = ({ selectedIdx, panel, page }) =>
+  R.clone(
+    panel[selectedIdx].general || {
+      border: page.border,
+      chartBackground: page.chartBackground,
+      head: page.head,
+    },
+  );
+
+const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
+  // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
   useEffect(() => {
     const setting = panel[selectedIdx];
@@ -24,8 +37,10 @@ const Index = ({ setHide, selectedIdx, panel, dispatch, onChange }: IPanel) => {
       height: Number(String(setting?.style?.height).replace('px', '')),
     };
     setSize(_size);
+    setGeneral(getGeneralConfig({ selectedIdx, panel, page }));
   }, [selectedIdx]);
 
+  // 更新样式
   const updateStyle = (item: { [key: string]: any }) => {
     const style = R.clone(panel[selectedIdx].style || {});
     dispatch({
@@ -43,10 +58,14 @@ const Index = ({ setHide, selectedIdx, panel, dispatch, onChange }: IPanel) => {
     onChange(item, 'size');
   };
 
+  // 通用配置
+  const [general, setGeneral] = useState(null);
+
+  console.log(general);
+
   return (
-    <>
-      <div className={styles.head}>组件设置</div>
-      <div className={styles.body}>
+    <Tabs defaultActiveKey="1" type="line">
+      <Tabs.TabPane tab="通用设置" key="1" style={{ color: '#eee' }}>
         <div className={styles.pageconfig}>
           <div className={styles['datav-gui']}>
             <Field title="组件尺寸">
@@ -74,16 +93,18 @@ const Index = ({ setHide, selectedIdx, panel, dispatch, onChange }: IPanel) => {
                 />
               </div>
             </Field>
+            {/* {general && <ComponentConfig {...general} onChange={setGeneral} />} */}
           </div>
         </div>
-      </div>
-      <div className={styles.bottom} onClick={setHide}>
-        确定
-      </div>
-    </>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="接口配置" key="2">
+        Content of Tab Pane 2
+      </Tabs.TabPane>
+    </Tabs>
   );
 };
 
 export default connect(({ common }: { common: ICommon }) => ({
   panel: common.panel,
+  page: common.page,
 }))(Index);

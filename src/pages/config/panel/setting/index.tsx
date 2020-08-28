@@ -9,29 +9,38 @@ import Config from './config';
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex(item => selected == item.id);
 
 const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }) => {
+  const pageChart = selectedPanel.length == 1;
   return (
     <div
       className={classnames(styles['config-panel-wp'], {
         [styles.hide]: hide.config,
       })}
     >
-      {selectedPanel.length === 1 ? (
-        <Config
-          setHide={() => {
-            setHide({ config: true });
-          }}
-          selectedIdx={getSelectedPanelConfig(panel, selectedPanel[0])}
-          onChange={onChange}
-        />
-      ) : (
-        <Page
-          dispatch={dispatch}
-          page={page}
-          setHide={() => {
-            setHide({ config: true });
-          }}
-        />
-      )}
+      {!pageChart && <div className={styles.head}>页面设置</div>}
+
+      <div
+        className={styles.body}
+        style={{
+          height: `calc(100% - ${pageChart ? 30 : 60}px)`,
+        }}
+      >
+        {pageChart ? (
+          <Config
+            selectedIdx={getSelectedPanelConfig(panel, selectedPanel[0])}
+            onChange={onChange}
+          />
+        ) : (
+          <Page dispatch={dispatch} page={page} />
+        )}
+      </div>
+      <div
+        className={styles.bottom}
+        onClick={() => {
+          setHide({ config: true });
+        }}
+      >
+        确定
+      </div>
     </div>
   );
 };

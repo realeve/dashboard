@@ -2,7 +2,7 @@
 // https://ant-design.gitee.io/docs/react/customize-theme-cn#Ant-Design-%E7%9A%84%E6%A0%B7%E5%BC%8F%E5%8F%98%E9%87%8F
 
 export default {
-  'primary-color': '#7827ff',
+  'primary-color': '#2681ff', // '#7827ff',
   // 'error-color': '#e60012',
   // 'border-radius-base': '4px',
   // 'border-radius-sm': '2px',

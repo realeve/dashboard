@@ -48,21 +48,15 @@ export interface IPanelConfig {
   hide?: boolean; // 隐藏
   [key: string]: any;
 }
-
-export interface IPage {
+export interface ICommonConfig{
+  border: string; // 边框样式
+  chartBackground: string; // 卡片背景 
+  head: React.CSSProperties; // 卡片标题栏
+} 
+export interface IPage extends ICommonConfig {
   width: string; // 页面宽
   height: string; // 页面高
-  background: string; // 页面背景
-  border: string; // 边框样式
-  chartBackground: string; // 卡片背景
-  // 卡片标题栏
-  head: React.CSSProperties;
-  // {
-  //   background: string;
-  //   fontSize: number;
-  //   color: string;
-  //   textAlign: 'left' | 'right' | 'center';
-  // };
+  background: string; // 页面背景 
 }
 
 export interface ICommon {

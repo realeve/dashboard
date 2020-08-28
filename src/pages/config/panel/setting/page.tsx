@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import { IPage } from '@/models/common';
+import { IPage, ICommonConfig } from '@/models/common';
 import { Dispatch } from 'redux';
 import assets from '@/component/widget/assets';
 import { SettingOutlined } from '@ant-design/icons';
@@ -55,7 +55,15 @@ const ImgSelector = ({
 };
 
 // 组件的通用样式设置
-export const ComponentConfig = ({ border, chartBackground, head, onChange: updatePage }) => (
+export interface IComponentConfig extends ICommonConfig {
+  onChange: (e: {}) => void;
+}
+export const ComponentConfig = ({
+  border,
+  chartBackground,
+  head,
+  onChange: updatePage,
+}: IComponentConfig) => (
   <>
     <Divider plain>组件</Divider>
     <ImgSelector
@@ -152,13 +160,12 @@ export const ComponentConfig = ({ border, chartBackground, head, onChange: updat
   </>
 );
 
+// 页面配置
 interface IPageProps {
-  page: IPage;
-  setHide: () => void;
+  page: IPage; 
   dispatch: Dispatch;
 }
-export default ({ page, setHide, dispatch }: IPageProps) => {
-  // 更新配置
+export default ({ page,  dispatch }: IPageProps) => {
   const updatePage = page => {
     dispatch({
       type: 'common/updatePage',
@@ -169,58 +176,50 @@ export default ({ page, setHide, dispatch }: IPageProps) => {
   };
 
   return (
-    <>
-      <div className={styles.head}>页面设置</div>
-      <div className={styles.body}>
-        <div className={styles.pageconfig}>
-          <div className={styles['datav-gui']}>
-            <Field title="屏幕大小">
-              <div className="alignRow">
-                <input
-                  type="number"
-                  step="2"
-                  style={{ marginRight: 10 }}
-                  defaultValue={page.width}
-                  onChange={e => {
-                    updatePage({
-                      width: e.target.value,
-                    });
-                  }}
-                />
-                <input
-                  type="number"
-                  step="2"
-                  defaultValue={page.height}
-                  onChange={e => {
-                    updatePage({
-                      height: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-            </Field>
-            <ImgSelector
-              title="背景"
-              value={page.background}
-              type="backgrounds"
-              onChange={background => {
+    <div className={styles.pageconfig}>
+      <div className={styles['datav-gui']}>
+        <Field title="屏幕大小">
+          <div className="alignRow">
+            <input
+              type="number"
+              step="2"
+              style={{ marginRight: 10 }}
+              defaultValue={page.width}
+              onChange={e => {
                 updatePage({
-                  background,
+                  width: e.target.value,
                 });
               }}
             />
-            <ComponentConfig
-              onChange={updatePage}
-              border={page.border}
-              chartBackground={page.chartBackground}
-              head={page.head}
+            <input
+              type="number"
+              step="2"
+              defaultValue={page.height}
+              onChange={e => {
+                updatePage({
+                  height: e.target.value,
+                });
+              }}
             />
           </div>
-        </div>
+        </Field>
+        <ImgSelector
+          title="背景"
+          value={page.background}
+          type="backgrounds"
+          onChange={background => {
+            updatePage({
+              background,
+            });
+          }}
+        />
+        <ComponentConfig
+          onChange={updatePage}
+          border={page.border}
+          chartBackground={page.chartBackground}
+          head={page.head}
+        />
       </div>
-      <div className={styles.bottom} onClick={setHide}>
-        确定
-      </div>
-    </>
+    </div>
   );
 };
