@@ -48,16 +48,28 @@ export interface IPanelConfig {
   hide?: boolean; // 隐藏
   [key: string]: any;
 }
-export interface ICommonConfig{
+export interface ICommonConfig {
   border: string; // 边框样式
-  chartBackground: string; // 卡片背景 
+  chartBackground: string; // 卡片背景
   head: React.CSSProperties; // 卡片标题栏
-} 
+}
 export interface IPage extends ICommonConfig {
   width: string; // 页面宽
   height: string; // 页面高
-  background: string; // 页面背景 
+  background: string; // 页面背景
 }
+
+const panelGeneral: ICommonConfig = {
+  border: '边框29', // 边框12,
+  chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
+  head: {
+    background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)',
+    fontSize: 20,
+    color: '#aec1f9',
+    textAlign: 'left',
+    padding: 10,
+  },
+};
 
 export interface ICommon {
   panel: IPanelConfig[];
@@ -71,15 +83,7 @@ const defaultState: ICommon = {
     width: '1920',
     height: '1080',
     background: '默认',
-    border: '边框29', // 边框12,
-    chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
-    head: {
-      background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)',
-      fontSize: 20,
-      color: '#aec1f9',
-      textAlign: 'left',
-      padding: 10,
-    },
+    ...panelGeneral,
   },
 };
 
@@ -136,6 +140,7 @@ export default {
         ...panelItem,
         id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,
+        general: panelGeneral,
       };
       let nextPanel = [...prevPanel, panelItem];
       yield updatePanel({

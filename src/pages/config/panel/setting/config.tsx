@@ -6,7 +6,8 @@ import { connect } from 'dva';
 import { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
-import { ComponentConfig, IComponentConfig } from './index';
+import { ComponentConfig } from './page';
+
 import { Tabs } from 'antd';
 
 interface IPanel {
@@ -43,30 +44,34 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 更新样式
   const updateStyle = (item: { [key: string]: any }) => {
     const style = R.clone(panel[selectedIdx].style || {});
+    const nextStyle = {
+      style: {
+        ...style,
+        ...item,
+      },
+    };
+    updateAttrib(nextStyle);
+    onChange(item, 'size');
+  };
+
+  const updateAttrib = (res: {}) => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
         idx: selectedIdx,
         attrib: {
-          style: {
-            ...style,
-            ...item,
-          },
+          ...res,
         },
       },
     });
-    onChange(item, 'size');
   };
 
   // 通用配置
   const [general, setGeneral] = useState(null);
-
-  console.log(general);
-
   return (
     <Tabs defaultActiveKey="1" type="line">
-      <Tabs.TabPane tab="通用设置" key="1" style={{ color: '#eee' }}>
-        <div className={styles.pageconfig}>
+      <Tabs.TabPane tab="通用设置" key="1" style={{ color: '#eee', height: '100%' }}>
+        <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
             <Field title="组件尺寸">
               <div className="alignRow">
@@ -93,7 +98,19 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 />
               </div>
             </Field>
-            {/* {general && <ComponentConfig {...general} onChange={setGeneral} />} */}
+            {general && (
+              <ComponentConfig
+                {...general}
+                onChange={e => {
+                  const next = {
+                    ...general,
+                    ...e,
+                  };
+                  setGeneral(next);
+                  updateAttrib(next);
+                }}
+              />
+            )}
           </div>
         </div>
       </Tabs.TabPane>

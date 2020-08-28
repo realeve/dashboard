@@ -70,6 +70,10 @@ const getGardient = _color => {
 const GardientPicker = ({ value, onChange }) => {
   const [color, setColor] = useState(getInitVal(value));
   useEffect(() => {
+    const nextGardient = getGardient(color);
+    if (value === nextGardient) {
+      return;
+    }
     onChange(getGardient(color));
   }, [color]);
 

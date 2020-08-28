@@ -18,6 +18,7 @@ import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
 import { ICommon } from '@/models/common';
+import * as R from 'ramda';
 
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
@@ -64,15 +65,15 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
     });
 
     // setting selected panel.
-    // if (panel.length > 0) {
-    //   let lastPanel = panel[panel.length - 1];
-    //   dispatch({
-    //     type: 'common/setStore',
-    //     payload: {
-    //       selectedPanel: [lastPanel.id],
-    //     },
-    //   });
-    // }
+    if (panel.length > 0) {
+      let lastPanel = R.last(panel);
+      dispatch({
+        type: 'common/setStore',
+        payload: {
+          selectedPanel: [lastPanel.id],
+        },
+      });
+    }
   }, [editor]);
 
   useEffect(() => {
