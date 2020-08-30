@@ -1,6 +1,6 @@
 import React from 'react';
 import Echarts from '@/component/echarts';
-import { IChartConfig } from '../panel/components/db'; 
+import { IChartConfig } from '../panel/components/db';
 import * as chartLib from '@/component/chartItem/option';
 import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig } from '@/models/common';
@@ -28,9 +28,18 @@ const Item = ({ config, style = {} }: { config: IChartConfig; style?: React.CSSP
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{config.title}</div>;
 };
 
-const Index = ({ chartid, page, panel }: { chartid: string; page: IPage; panel: IPanelConfig }) => {
+const Index = ({
+  chartid,
+  page: _page,
+  panel,
+}: {
+  chartid: string;
+  page: IPage;
+  panel: IPanelConfig;
+}) => {
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
   let config = R.find<IChartConfig[]>(R.propEq('id', chartid))(panel) as IChartConfig;
+  let page = { ..._page, ...config.general };
 
   return (
     <>

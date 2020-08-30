@@ -120,7 +120,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                     ...e,
                   };
                   setGeneral(next);
-                  updateAttrib(next);
+                  updateAttrib({ general: next });
                 }}
               />
             )}
