@@ -8,7 +8,7 @@ import { useSetState } from 'react-use';
 import * as R from 'ramda';
 import { ComponentConfig } from './page';
 
-import { Tabs } from 'antd';
+import { Tabs, Switch } from 'antd';
 
 interface IPanel {
   selectedIdx: number;
@@ -32,7 +32,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
   useEffect(() => {
-    const setting = panel[selectedIdx];
+    let setting = panel[selectedIdx];
     const _size = {
       width: Number(String(setting?.style?.width).replace('px', '')),
       height: Number(String(setting?.style?.height).replace('px', '')),
@@ -58,7 +58,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
-        idx: selectedIdx,
+        idx: panel[selectedIdx].id,
         attrib: {
           ...res,
         },
@@ -68,6 +68,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
 
   // 通用配置
   const [general, setGeneral] = useState(null);
+
   return (
     <Tabs defaultActiveKey="1" type="line">
       <Tabs.TabPane tab="通用设置" key="1" style={{ color: '#eee', height: '100%' }}>
@@ -98,7 +99,19 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 />
               </div>
             </Field>
-            {general && (
+            <Field title="显示标题">
+              <Switch
+                checked={panel[selectedIdx].showTitle}
+                onChange={showTitle => {
+                  updateAttrib({
+                    showTitle,
+                  });
+                }}
+                checkedChildren="显示"
+                unCheckedChildren="隐藏"
+              />
+            </Field>
+            {general && panel[selectedIdx].showTitle && (
               <ComponentConfig
                 {...general}
                 onChange={e => {

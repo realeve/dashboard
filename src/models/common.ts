@@ -46,6 +46,9 @@ export interface IPanelConfig {
   style?: IPanelStyle;
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
+
+  showTitle?: boolean; // 显示标题
+
   [key: string]: any;
 }
 export interface ICommonConfig {
@@ -141,6 +144,7 @@ export default {
         id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,
         general: panelGeneral,
+        showTitle: true,
       };
       let nextPanel = [...prevPanel, panelItem];
       yield updatePanel({
@@ -161,7 +165,7 @@ export default {
     // 更新第I个面板的属性
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
       let panel = yield select(state => state[namespace].panel);
-      let id = R.findIndex(R.propEq('id', idx))(panel);
+      let id = R.findIndex(R.propEq('id', idx))(panel); 
       let _item = R.nth(id)(panel);
       _item = {
         ..._item,

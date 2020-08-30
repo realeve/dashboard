@@ -2,9 +2,9 @@ import { axios } from '@/utils/axios';
 import * as R from 'ramda';
 
 export interface IChartConfig {
+  type: string;
   title: string;
   image: string;
-  type: string;
   name?: string;
   key?: string;
   engine?: 'echarts' | 'g2' | 'g2plot';
@@ -14,6 +14,7 @@ export interface IChartConfig {
     rotate: string | number;
     transform: string;
   }>;
+  showTitle?: number;
   [key: string]: any;
 }
 export interface IComponentItem {

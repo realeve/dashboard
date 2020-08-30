@@ -20,16 +20,10 @@ interface ICanvasProp {
     v: number[];
     h: number[];
   };
-  [key:string]:any;
+  [key: string]: any;
 }
 
-const Index = ({
-  canvasSize,
-  zoom,
-  guides,
-  panel,
-  dispatch,
-}:ICanvasProp) => {
+const Index = ({ canvasSize, zoom, guides, panel, dispatch }: ICanvasProp) => {
   const onResize = (idx: number) => e => {
     let prevItem = R.clone(panel);
     let prevStyle = prevItem[idx].style;
@@ -56,16 +50,15 @@ const Index = ({
     });
   };
 
-  
   const [resizable, setResizable] = React.useState(true);
 
   return (
     <div
       className={styles['canvas-panel']}
-      style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}      
+      style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
       onClick={e => {
-        e.stopPropagation(); 
-        setResizable(false) 
+        e.stopPropagation();
+        setResizable(false);
       }}
     >
       {panel.map((item, idx) => (
@@ -75,13 +68,13 @@ const Index = ({
           canvasSize={canvasSize}
           style={item.style}
           onResize={onResize(idx)}
-          key={item.id} 
-          resizable={resizable} 
-          onResizable={()=>{
-            setResizable(true)
+          key={item.id}
+          resizable={resizable}
+          onResizable={() => {
+            setResizable(true);
           }}
         >
-          <ChartItem config={item} />
+          <ChartItem chartid={item.id} />
         </MoveableItem>
       ))}
     </div>
