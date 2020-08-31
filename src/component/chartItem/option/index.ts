@@ -32,10 +32,12 @@ export { waterfall };
 import * as rangeLine from './g2/rangeLine';
 export { rangeLine };
 
-// 水平正负柱状图
+// -------------    自定义接口配置项     ----------
+
+// 01.水平正负柱状图
 import * as barChartPositiveNegative from './barChart/positiveNegative'
 export {  barChartPositiveNegative } 
 
-// 折线柱图
+// 02.折线柱图
 import * as barChartLine from './barChart/line'
 export {  barChartLine } 

@@ -7,8 +7,8 @@ import { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
 import { ComponentConfig } from './page';
-
 import { Tabs, Switch } from 'antd';
+import ComponentSetting from './componentSetting';
 
 interface IPanel {
   selectedIdx: number;
@@ -45,7 +45,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
     let next = getGeneralConfig({ selectedIdx, panel, page });
     setGeneral(next);
   }, [selectedIdx, JSON.stringify(panel)]);
- 
+
   // 更新样式
   const updateStyle = (item: { [key: string]: any }) => {
     const style = R.clone(panel[selectedIdx].style || {});
@@ -72,11 +72,11 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   };
 
   // 通用配置
-  const [general, setGeneral] = useState(null); 
+  const [general, setGeneral] = useState(null);
 
   return (
     <Tabs defaultActiveKey="1" type="line">
-      <Tabs.TabPane tab="通用设置" key="1" style={{ color: '#eee', height: '100%' }}>
+      <Tabs.TabPane tab="外观设置" key="1" style={{ color: '#eee', height: '100%' }}>
         <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
             <Field title="组件尺寸">
@@ -124,7 +124,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                     updateAttrib({
                       useGeneralStyle,
                       general: null, // 使用全局配置时，当前项置为空
-                    }); 
+                    });
                   } else {
                     updateAttrib({
                       useGeneralStyle,
@@ -152,8 +152,18 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
           </div>
         </div>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="接口配置" key="2">
-        Content of Tab Pane 2
+      <Tabs.TabPane tab="组件配置" key="2">
+        <ComponentSetting
+          onChange={e => {
+            console.log(e);
+          }}
+          chartkey={panel[selectedIdx].key}
+        />
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="接口配置" key="3">
+        <div className={styles.pageconfig} style={{ height: '100%' }}>
+          <div className={styles['datav-gui']}>sdf</div>
+        </div>
       </Tabs.TabPane>
     </Tabs>
   );
