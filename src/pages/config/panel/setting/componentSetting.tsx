@@ -8,7 +8,6 @@ import * as R from 'ramda';
 import { useSetState } from 'react-use';
 import Radio from '@/component/field/Radio';
 import { IPanelConfig } from '@/models/common';
-import { ComponentConfig } from './page';
 
 const FormItem = ({
   value,
@@ -83,23 +82,19 @@ export default ({
             <FormItem
               value={state[config.key]}
               onChange={res => {
-                setState({
+                let next = {
                   [config.key]: res,
+                };
+                setState(next);
+                onChange({
+                  ...state,
+                  ...next,
                 });
               }}
               config={config}
             />
           </Field>
-        ))}
-
-        <div
-          className={styles.btn}
-          onClick={() => {
-            onChange(state);
-          }}
-        >
-          预览样式
-        </div>
+        ))} 
       </div>
     </div>
   );

@@ -246,7 +246,7 @@ export default ({
         },
         itemStyle: {
           normal: {
-            barBorderRadius: [0, barWidth / 2, barWidth / 2, 0],
+            barBorderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
