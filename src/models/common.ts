@@ -49,6 +49,10 @@ export interface IPanelConfig {
 
   showTitle?: boolean; // 显示标题
   useGeneralStyle?: boolean; //使用全局设置
+
+  componentConfig?: {
+    [key: string]: any;
+  }; // 组件自带配置项
   [key: string]: any;
 }
 export interface ICommonConfig {
@@ -146,6 +150,9 @@ export default {
         general: panelGeneral,
         showTitle: true,
         useGeneralStyle: true,
+
+        // 自定义配置
+        componentConfig: {},
       };
       let nextPanel = [...prevPanel, panelItem];
       yield updatePanel({

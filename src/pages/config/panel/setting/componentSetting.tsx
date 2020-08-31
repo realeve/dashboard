@@ -81,6 +81,15 @@ export default ({ onChange, chartkey }: { onChange: (e: any) => void; chartkey: 
             />
           </Field>
         ))}
+
+        <div
+          className={styles.btn}
+          onClick={() => {
+            onChange(state);
+          }}
+        >
+          预览样式
+        </div>
       </div>
     </div>
   );
