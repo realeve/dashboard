@@ -19,14 +19,17 @@ interface IPanel {
 }
 
 // 获取通用配置
-const getGeneralConfig = ({ selectedIdx, panel, page }) =>
-  R.clone(
-    panel[selectedIdx].general || {
-      border: page.border,
-      chartBackground: page.chartBackground,
-      head: page.head,
-    },
-  );
+const getGeneralConfig = ({ selectedIdx, panel, page }) => {
+  let item = panel[selectedIdx];
+  let commonConfig = {
+    border: page.border,
+    chartBackground: page.chartBackground,
+    head: page.head,
+  };
+
+  let res = R.clone(item.general || commonConfig);
+  return item.useGeneralStyle ? null : res;
+};
 
 const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 尺寸
@@ -38,9 +41,11 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
       height: Number(String(setting?.style?.height).replace('px', '')),
     };
     setSize(_size);
-    setGeneral(getGeneralConfig({ selectedIdx, panel, page }));
-  }, [selectedIdx]);
 
+    let next = getGeneralConfig({ selectedIdx, panel, page });
+    setGeneral(next);
+  }, [selectedIdx, JSON.stringify(panel)]);
+ 
   // 更新样式
   const updateStyle = (item: { [key: string]: any }) => {
     const style = R.clone(panel[selectedIdx].style || {});
@@ -67,7 +72,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   };
 
   // 通用配置
-  const [general, setGeneral] = useState(null);
+  const [general, setGeneral] = useState(null); 
 
   return (
     <Tabs defaultActiveKey="1" type="line">
@@ -111,6 +116,25 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 unCheckedChildren="隐藏"
               />
             </Field>
+            <Field title="使用全局样式">
+              <Switch
+                checked={panel[selectedIdx]?.useGeneralStyle}
+                onChange={useGeneralStyle => {
+                  if (useGeneralStyle) {
+                    updateAttrib({
+                      useGeneralStyle,
+                      general: null, // 使用全局配置时，当前项置为空
+                    }); 
+                  } else {
+                    updateAttrib({
+                      useGeneralStyle,
+                    });
+                  }
+                }}
+                checkedChildren="是"
+                unCheckedChildren="否"
+              />
+            </Field>
             {general && (
               <ComponentConfig
                 {...general}
@@ -121,7 +145,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                     ...e,
                   };
                   setGeneral(next);
-                  updateAttrib({ general: next });
+                  updateAttrib({ general: next, useGeneralStyle: false });
                 }}
               />
             )}

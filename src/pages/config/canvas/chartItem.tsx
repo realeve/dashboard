@@ -39,8 +39,13 @@ const Index = ({
 }) => {
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
   let config = R.find<IChartConfig[]>(R.propEq('id', chartid))(panel) as IChartConfig;
-  let page = { ..._page, ...config.general };
-
+  let page = R.clone(_page);
+  if (config.useGeneralStyle) {
+    page = { ...config.general, ...page };
+  } else {
+    page = { ...page, ...config.general };
+  }
+  
   return (
     <>
       {config.showTitle && <div style={page.head}>{config.title}</div>}

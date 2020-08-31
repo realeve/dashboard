@@ -48,7 +48,7 @@ export interface IPanelConfig {
   hide?: boolean; // 隐藏
 
   showTitle?: boolean; // 显示标题
-
+  useGeneralStyle?: boolean; //使用全局设置
   [key: string]: any;
 }
 export interface ICommonConfig {
@@ -145,6 +145,7 @@ export default {
         icon: `com-font icon-com-${panelItem.type}`,
         general: panelGeneral,
         showTitle: true,
+        useGeneralStyle: true,
       };
       let nextPanel = [...prevPanel, panelItem];
       yield updatePanel({
