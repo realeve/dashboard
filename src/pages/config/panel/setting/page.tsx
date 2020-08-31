@@ -56,12 +56,14 @@ const ImgSelector = ({
 
 // 组件的通用样式设置
 export interface IComponentConfig extends ICommonConfig {
+  showTitle?: boolean;
   onChange: (e: {}) => void;
 }
 export const ComponentConfig = ({
   border,
   chartBackground,
   head,
+  showTitle = true,
   onChange: updatePage,
 }: IComponentConfig) => (
   <>
@@ -86,86 +88,88 @@ export const ComponentConfig = ({
         }}
       />
     </Field>
-    <Divider plain>标题</Divider>
-    <Field title="字号">
-      <input
-        type="number"
-        step="1"
-        defaultValue={head.fontSize}
-        onChange={e => {
-          updatePage({
-            head: { ...head, fontSize: Number(e.target.value) },
-          });
-        }}
-      />
-    </Field>
-
-    <Field title="文字颜色">
-      <PureColor
-        value={head.color}
-        onChange={color => {
-          updatePage({
-            head: { ...head, color },
-          });
-        }}
-      />
-    </Field>
-
-    <Field title="边距">
-      <input
-        type="number"
-        step="1"
-        defaultValue={head.padding}
-        onChange={e => {
-          updatePage({
-            head: { ...head, padding: Number(e.target.value) },
-          });
-        }}
-      />
-    </Field>
-    <Field title="对齐">
-      <Radio
-        value={head.textAlign}
-        onChange={textAlign => {
-          updatePage({
-            head: { ...head, textAlign },
-          });
-        }}
-        config={[
-          {
-            title: '居左',
-            value: 'left',
-          },
-          {
-            title: '居中',
-            value: 'center',
-          },
-          {
-            title: '居右',
-            value: 'right',
-          },
-        ]}
-      />
-    </Field>
-    <Field title="背景色">
-      <ColorPicker
-        value={head.background}
-        onChange={background => {
-          updatePage({
-            head: { ...head, background },
-          });
-        }}
-      />
-    </Field>
+    {showTitle && (
+      <>
+        <Divider plain>标题</Divider>
+        <Field title="字号">
+          <input
+            type="number"
+            step="1"
+            defaultValue={head.fontSize}
+            onChange={e => {
+              updatePage({
+                head: { ...head, fontSize: Number(e.target.value) },
+              });
+            }}
+          />
+        </Field>
+        <Field title="文字颜色">
+          <PureColor
+            value={head.color}
+            onChange={color => {
+              updatePage({
+                head: { ...head, color },
+              });
+            }}
+          />
+        </Field>
+        <Field title="边距">
+          <input
+            type="number"
+            step="1"
+            defaultValue={head.padding}
+            onChange={e => {
+              updatePage({
+                head: { ...head, padding: Number(e.target.value) },
+              });
+            }}
+          />
+        </Field>
+        <Field title="对齐">
+          <Radio
+            value={head.textAlign}
+            onChange={textAlign => {
+              updatePage({
+                head: { ...head, textAlign },
+              });
+            }}
+            config={[
+              {
+                title: '居左',
+                value: 'left',
+              },
+              {
+                title: '居中',
+                value: 'center',
+              },
+              {
+                title: '居右',
+                value: 'right',
+              },
+            ]}
+          />
+        </Field>
+        <Field title="背景色">
+          <ColorPicker
+            value={head.background}
+            onChange={background => {
+              updatePage({
+                head: { ...head, background },
+              });
+            }}
+          />
+        </Field>
+      </>
+    )}
   </>
 );
 
 // 页面配置
 interface IPageProps {
-  page: IPage; 
+  page: IPage;
   dispatch: Dispatch;
 }
-export default ({ page,  dispatch }: IPageProps) => {
+export default ({ page, dispatch }: IPageProps) => {
   const updatePage = page => {
     dispatch({
       type: 'common/updatePage',

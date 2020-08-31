@@ -101,7 +101,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             </Field>
             <Field title="显示标题">
               <Switch
-                checked={panel[selectedIdx].showTitle}
+                checked={panel[selectedIdx]?.showTitle}
                 onChange={showTitle => {
                   updateAttrib({
                     showTitle,
@@ -111,9 +111,10 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 unCheckedChildren="隐藏"
               />
             </Field>
-            {general && panel[selectedIdx].showTitle && (
+            {general && (
               <ComponentConfig
                 {...general}
+                showTitle={panel[selectedIdx].showTitle}
                 onChange={e => {
                   const next = {
                     ...general,

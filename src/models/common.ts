@@ -152,10 +152,25 @@ export default {
         call,
         put,
       });
+
+      // 默认选中最新添加的面板
+      yield put({
+        type: 'setStore',
+        payload: {
+          selectedPanel: [panel.id],
+        },
+      });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
       let prevPanel = yield select(state => state[namespace].panel);
       let nextPanel = R.reject(item => idx.includes(item.id))(prevPanel);
+      // 默认选中最新添加的面板
+      yield put({
+        type: 'setStore',
+        payload: {
+          selectedPanel: [],
+        },
+      });
       yield updatePanel({
         panel: nextPanel,
         call,
@@ -165,7 +180,7 @@ export default {
     // 更新第I个面板的属性
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
       let panel = yield select(state => state[namespace].panel);
-      let id = R.findIndex(R.propEq('id', idx))(panel); 
+      let id = R.findIndex(R.propEq('id', idx))(panel);
       let _item = R.nth(id)(panel);
       _item = {
         ..._item,
