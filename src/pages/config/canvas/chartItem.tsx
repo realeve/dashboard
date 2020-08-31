@@ -1,6 +1,6 @@
 import React from 'react';
 import Echarts from '@/component/echarts';
-import { IChartConfig } from '../panel/components/db';
+
 import * as chartLib from '@/component/chartItem/option';
 import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig } from '@/models/common';

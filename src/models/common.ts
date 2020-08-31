@@ -53,6 +53,11 @@ export interface IPanelConfig {
   componentConfig?: {
     [key: string]: any;
   }; // 组件自带配置项
+
+  api?: {
+    [key: string]: any;
+  }; // 接口配置项
+  
   [key: string]: any;
 }
 export interface ICommonConfig {
@@ -153,6 +158,7 @@ export default {
 
         // 自定义配置
         componentConfig: {},
+        api: {},
       };
       let nextPanel = [...prevPanel, panelItem];
       yield updatePanel({

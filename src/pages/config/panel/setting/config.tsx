@@ -9,6 +9,7 @@ import * as R from 'ramda';
 import { ComponentConfig } from './page';
 import { Tabs, Switch } from 'antd';
 import ComponentSetting from './componentSetting';
+import ApiSetting from './apiSetting';
 
 interface IPanel {
   selectedIdx: number;
@@ -155,16 +156,18 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
       <Tabs.TabPane tab="组件配置" key="2">
         <ComponentSetting
           onChange={componentConfig => {
-            console.log(componentConfig)
             updateAttrib({ componentConfig });
           }}
           panel={panel[selectedIdx]}
         />
       </Tabs.TabPane>
       <Tabs.TabPane tab="接口配置" key="3">
-        <div className={styles.pageconfig} style={{ height: '100%' }}>
-          <div className={styles['datav-gui']}>sdf</div>
-        </div>
+        <ApiSetting
+          onChange={api => {
+            updateAttrib({ api });
+          }}
+          panel={panel[selectedIdx]}
+        />
       </Tabs.TabPane>
     </Tabs>
   );

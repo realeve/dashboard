@@ -2,7 +2,12 @@ import echarts from 'echarts';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
 import jStat from 'jstat';
-import { IChartDefaultValue, IChartConfig, IChartProps } from '@/component/chartItem/interface';
+import {
+  IChartDefaultValue,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 
 /**
  * // TODO 自定义组件文档说明 更新自2020-08-31
@@ -18,6 +23,8 @@ import { IChartDefaultValue, IChartConfig, IChartProps } from '@/component/chart
  * 三、config
  * 组件自身所需的配置项，内容为
  *
+ * 四、apiConfig
+ * api接口配置所需的配置项，数据结构及约定规则与config相同
  * -------
  *
  * 注：组件配置信息写在组件定义中，不定义在public/components.json文件中，通过json文件中的key在组件中索引配置项，更方便扩展。
@@ -80,24 +87,6 @@ const handleData = ({ data }: IChartDefaultValue, { legend, x, y }) => {
  * 需要对外暴露的配置信息均定义在此处
  */
 export const config: IChartConfig[] = [
-  // {
-  //   key: 'legend',
-  //   title: 'legend 字段',
-  //   defaultValue: 0,
-  //   min: 0,
-  // },
-  // {
-  //   key: 'x',
-  //   title: 'x 字段',
-  //   defaultValue: 1,
-  //   min: 0,
-  // },
-  // {
-  //   key: 'y',
-  //   title: 'y 字段',
-  //   defaultValue: 2,
-  //   min: 0,
-  // },
   {
     key: 'barWidth',
     defaultValue: 20,
@@ -122,6 +111,30 @@ export const config: IChartConfig[] = [
     ],
   },
 ];
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  config: [
+    {
+      key: 'legend',
+      title: 'legend 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 2,
+      min: 0,
+    },
+  ],
+};
 
 /**
  *  默认导出的主函数,参数说明如下：

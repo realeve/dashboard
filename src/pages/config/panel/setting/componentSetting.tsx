@@ -9,19 +9,20 @@ import { useSetState } from 'react-use';
 import Radio from '@/component/field/Radio';
 import { IPanelConfig } from '@/models/common';
 
-const FormItem = ({
+export const FormItem = ({
   value,
   onChange,
   config: { defaultValue, type, key, title, ...config },
 }: {
   config: IChartConfig;
-  value: string | number;
-  onChange: (e: string | number) => void;
+  value: string | number | boolean;
+  onChange: (e: string | number | boolean) => void;
 }) => {
+  let Item: null | React.ReactNode = null;
   switch (type) {
     case 'input':
     default:
-      return (
+      Item = (
         <input
           type="number"
           onChange={e => {
@@ -31,10 +32,16 @@ const FormItem = ({
           {...config}
         />
       );
+      break;
     case 'radio':
       let { option, ...props } = config;
-      return <Radio onChange={onChange} value={value} config={option} {...props} />;
+      Item = <Radio onChange={onChange} value={value} config={option} {...props} />;
+      break;
+    case 'switch':
+      Item = <Switch checked={value as boolean} onChange={onChange} {...config} />;
+      break;
   }
+  return <Field title={title || key}>{Item}</Field>;
 };
 
 /**
@@ -42,7 +49,7 @@ const FormItem = ({
  * @param configs 组件对外导出的配置项
  * @param componentConfig 组件默认存储的设置信息
  */
-const getDefaultState = (configs: IChartConfig[], componentConfig: {}) => {
+export const getDefaultState = (configs: IChartConfig[], componentConfig: {}) => {
   let res = {};
   configs.forEach(item => {
     res[item.key] = typeof item.defaultValue === 'undefined' ? '' : item.defaultValue;
@@ -78,23 +85,22 @@ export default ({
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
         {configs.map(config => (
-          <Field title={config.title || config.key} key={config.key}>
-            <FormItem
-              value={state[config.key]}
-              onChange={res => {
-                let next = {
-                  [config.key]: res,
-                };
-                setState(next);
-                onChange({
-                  ...state,
-                  ...next,
-                });
-              }}
-              config={config}
-            />
-          </Field>
-        ))} 
+          <FormItem
+            key={config.key}
+            value={state[config.key]}
+            onChange={res => {
+              let next = {
+                [config.key]: res,
+              };
+              setState(next);
+              onChange({
+                ...state,
+                ...next,
+              });
+            }}
+            config={config}
+          />
+        ))}
       </div>
     </div>
   );
