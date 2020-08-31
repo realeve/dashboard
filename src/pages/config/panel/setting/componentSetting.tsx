@@ -13,10 +13,12 @@ export const FormItem = ({
   value,
   onChange,
   config: { defaultValue, type, key, title, ...config },
+  style,
 }: {
   config: IChartConfig;
   value: string | number | boolean;
   onChange: (e: string | number | boolean) => void;
+  style?: React.CSSProperties;
 }) => {
   let Item: null | React.ReactNode = null;
   switch (type) {
@@ -41,7 +43,11 @@ export const FormItem = ({
       Item = <Switch checked={value as boolean} onChange={onChange} {...config} />;
       break;
   }
-  return <Field title={title || key}>{Item}</Field>;
+  return (
+    <Field title={title || key} style={style}>
+      {Item}
+    </Field>
+  );
 };
 
 /**

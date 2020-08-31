@@ -1,12 +1,11 @@
-import styles from './index.less';
 import React, { useEffect } from 'react';
 import * as chartLib from '@/component/chartItem/option';
-import Field from '@/component/field';
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
 import { IPanelConfig } from '@/models/common';
 import { FormItem, getDefaultState } from './componentSetting';
+import styles from './index.less';
 
 const initState = (configs: IApiConfig, api: any) => {
   // 配置项中的信息
@@ -42,6 +41,15 @@ const appendConfig: IChartConfig[] = [
     key: 'url',
   },
 ];
+
+const JsonViewer = ({ json }) => {
+  return (
+    <div className={styles.jsonwrapper}>
+      <div className={styles.title}>(在下方粘贴模拟数据)</div>
+      <div className={styles.json}>{JSON.stringify(json)}</div>
+    </div>
+  );
+};
 
 export default ({
   onChange,
@@ -98,7 +106,7 @@ export default ({
             config={appendConfig[1]}
           />
         )}
-        {state.api_type === 'url' && (
+        {state.api_type === 'url' ? (
           <FormItem
             value={state[appendConfig[2].key]}
             onChange={res => {
@@ -106,11 +114,14 @@ export default ({
             }}
             config={appendConfig[2]}
           />
+        ) : (
+          <JsonViewer json={res.defaultValue || {}} />
         )}
 
         {state.show &&
-          configs.config.map(config => (
+          configs.config.map((config, idx) => (
             <FormItem
+              style={{ paddingTop: idx == 0 ? 10 : 0 }}
               key={config.key}
               value={state[config.key]}
               onChange={res => {
@@ -119,15 +130,6 @@ export default ({
               config={config}
             />
           ))}
-
-        {/* <div
-          className={styles.btn}
-          onChange={() => {
-            onChange(state)
-          }}
-        >
-          应用配置项
-        </div> */}
       </div>
     </div>
   );
