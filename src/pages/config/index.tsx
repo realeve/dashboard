@@ -36,16 +36,27 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
+const initState = {
+  layer: true,
+  components: false,
+  toolbox: true,
+  config: false,
+  beauty: true,
+  filter: true,
+};
+
 const Index = ({ dispatch, panel, selectedPanel, page }) => {
   // 面板默认显示状态设置
-  const [hide, setHide] = useSetState({
-    layer: true,
-    components: false,
-    toolbox: true,
-    config: false,
-    beauty: true,
-    filter: true,
-  });
+  const [hide, setHide] = useSetState(initState);
+
+  useEffect(() => {
+    // 存储
+    let res = window.localStorage.getItem('panel_show');
+    if (!res) {
+      return;
+    }
+    setHide(JSON.parse(res));
+  }, []);
 
   const [hash, setHash] = useState(generateId());
 
@@ -82,6 +93,10 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
       // 记录页面有变更
       setHash(generateId());
     }, 310);
+
+    // 存储
+    window.localStorage.setItem('panel_show', JSON.stringify(hide));
+
     return () => {
       window.clearTimeout(tid);
     };
