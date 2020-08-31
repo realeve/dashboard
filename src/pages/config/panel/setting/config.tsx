@@ -154,10 +154,11 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
       </Tabs.TabPane>
       <Tabs.TabPane tab="组件配置" key="2">
         <ComponentSetting
-          onChange={e => {
-            console.log(e);
+          onChange={componentConfig => {
+            console.log(componentConfig)
+            updateAttrib({ componentConfig });
           }}
-          chartkey={panel[selectedIdx].key}
+          panel={panel[selectedIdx]}
         />
       </Tabs.TabPane>
       <Tabs.TabPane tab="接口配置" key="3">

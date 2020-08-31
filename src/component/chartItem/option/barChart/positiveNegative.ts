@@ -116,7 +116,7 @@ export const config: IChartConfig[] = [
         value: true,
       },
       {
-        title: '半角',
+        title: '矩形',
         value: false,
       },
     ],
