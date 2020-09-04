@@ -12,25 +12,26 @@ import { IPanelConfig } from '@/models/common';
 export const FormItem = ({
   value,
   onChange,
-  config: { defaultValue, type, key, title, ...config },
+  config: { defaultValue, valueType = 'number', type, key, title, ...config },
   style,
 }: {
   config: IChartConfig;
   value: string | number | boolean;
   onChange: (e: string | number | boolean) => void;
   style?: React.CSSProperties;
+  type?: string;
 }) => {
-  let Item: null | React.ReactNode = null;
+  let Item: null | React.ReactNode = null; 
   switch (type) {
     case 'input':
     default:
       Item = (
         <input
-          type="number"
+          type={valueType}
           onChange={e => {
-            onChange(Number(e.target.value));
+            onChange(valueType === 'number' ? Number(e.target.value) : e.target.value);
           }}
-          value={String(value)}
+          value={String(R.isNil(value) ? '' : value)}
           {...config}
         />
       );

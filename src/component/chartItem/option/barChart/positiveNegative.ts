@@ -2,12 +2,7 @@ import echarts from 'echarts';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
 import jStat from 'jstat';
-import {
-  IChartDefaultValue,
-  IChartConfig,
-  IChartProps,
-  IApiConfig,
-} from '@/component/chartItem/interface';
+import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 /**
  * // TODO 自定义组件文档说明 更新自2020-08-31
@@ -17,7 +12,7 @@ import {
  *  export default ({data,...config})=>
  *  默认导出的函数将作为主函数用于数据处理，接收参数为 data及其它参数，其中data为数据部分，其余参数为设置信息。
  *
- * 二、defaultValue:IChartDefaultValue
+ * mock:IChartMock
  * 导出该项数据用于在没有配置api接口的时候如何显示数据；
  *
  * 三、config
@@ -30,7 +25,7 @@ import {
  * 注：组件配置信息写在组件定义中，不定义在public/components.json文件中，通过json文件中的key在组件中索引配置项，更方便扩展。
  */
 
-export let defaultValue: IChartDefaultValue = {
+export let mock: IChartMock = {
   data: [
     ['周一', '收入', 320],
     ['周一', '付出', 120],
@@ -47,13 +42,13 @@ export let defaultValue: IChartDefaultValue = {
     ['周日', '收入', 420],
     ['周日', '付出', 210],
   ],
-  title: '水平正负柱状图',
+  title: '旋风图示例',
   header: ['星期', '类型', '交易发生值'],
   rows: 14,
   hash: 'mockdata',
 };
 
-const handleData = ({ data }: IChartDefaultValue, { legend, x, y }) => {
+const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   (legend = Number(legend)), (x = Number(x)), (y = Number(y));
 
   let max = jStat.max(R.pluck([String(y)])(data));
@@ -110,10 +105,12 @@ export const config: IChartConfig[] = [
       },
     ],
   },
+  ...lib.getPositionConfig(),
 ];
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
+  url: 'http://localhost:8000/mock/01_positive_negative.json',
   config: [
     {
       key: 'legend',
@@ -150,6 +147,8 @@ export default ({
   y = 2,
   barWidth = 20,
   roundBorder = true,
+  legendAlign = 'center',
+  legendPosition = 'top',
 }: IChartProps) => {
   let res = handleData(data, { legend, x, y });
 
@@ -168,8 +167,8 @@ export default ({
       textStyle: {
         color,
       },
-      top: 15,
-      left: 'center',
+      [legendPosition]: 15,
+      left: legendAlign,
     },
     grid: {
       left: '3%',

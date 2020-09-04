@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Echarts from '@/component/echarts';
 
 import * as chartLib from '@/component/chartItem/option';
@@ -6,16 +6,46 @@ import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig } from '@/models/common';
 import styles from './chartItem.less';
 import * as R from 'ramda';
-
+import ErrorBoundary from './ErrorBoundary';
 import { BorderItem } from '@/component/widget';
+import { Skeleton } from 'antd';
+import useFetch from '@/component/hooks/useFetch';
 
-const Item = ({ config, style = {} }: { config: IPanelConfig; style?: React.CSSProperties }) => {
+const Item = ({
+  config,
+  title,
+  style = {},
+  onLoad,
+}: {
+  config: IPanelConfig;
+  style?: React.CSSProperties;
+  title?: string;
+  onLoad?: (e: string) => void;
+}) => {
+  const { default: method, ...lib } = chartLib[config.key];
+  let api = config.api || {};
+  let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
+  let valid = api?.api_type === 'url' && api?.url?.length > 0;
+  let { data, loading, error } = useFetch({
+    param: { url: api?.url },
+    valid: () => valid,
+    callback(e) {
+      if (e && e.title) {
+        onLoad(e.title);
+      }
+      return e;
+    },
+  }); 
+
+  if (valid && (loading||!data)) {
+    return <Skeleton />;
+  }
+
   if (config.engine === 'echarts') {
-    const { default: method, ...lib } = chartLib[config.key];
     return (
       <Echarts
         option={method({
-          data: lib.defaultValue,
+          data: valid ? data : mock,
           legend: 1,
           x: 0,
           y: 2,
@@ -26,7 +56,7 @@ const Item = ({ config, style = {} }: { config: IPanelConfig; style?: React.CSSP
     );
   }
 
-  return <div style={{ color: '#fff', fontSize: 20, ...style }}>{config.title}</div>;
+  return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;
 };
 
 const Index = ({
@@ -47,9 +77,22 @@ const Index = ({
     page = { ...page, ...config.general };
   }
 
+  const [title, setTitle] = useState(config.title);
+
+  useEffect(() => {
+    if (config?.api?.api_type === 'mock') {
+      try {
+        setTitle(JSON.parse(config.api.mock || '{}').title || title);
+      } catch (e) {
+        console.error('mock数据读取出错:', config.api.mock);
+        console.error(e);
+      }
+    }
+  }, [config?.api?.api_type]);
+
   return (
     <>
-      {config.showTitle && <div style={page.head}>{config.title}</div>}
+      {config.showTitle && <div style={page.head}>{title}</div>}
       <BorderItem
         name={page.border}
         style={{
@@ -58,13 +101,19 @@ const Index = ({
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
         }}
       >
-        <Item config={config} />
+        <Item config={config} title={title} onLoad={setTitle} />
       </BorderItem>
     </>
   );
 };
 
+const ChartPage = props => (
+  <ErrorBoundary>
+    <Index {...props} />
+  </ErrorBoundary>
+);
+
 export default connect(({ common }: { common: ICommon }) => ({
   page: common.page,
   panel: common.panel,
-}))(Index);
+}))(ChartPage);

@@ -548,3 +548,52 @@ export let getAxis: (
     xAxisType,
   };
 };
+
+interface IPositionConfig {
+  key: string;
+  defaultValue: string;
+  title: string;
+  type: 'radio';
+  option: {
+    title: string;
+    value: string;
+  }[];
+}
+export const getPositionConfig: () => IPositionConfig[] = () => [
+  {
+    key: 'legendAlign',
+    defaultValue: 'center',
+    title: '图例对齐',
+    type: 'radio',
+    option: [
+      {
+        title: '居左',
+        value: 'left',
+      },
+      {
+        title: '居中',
+        value: 'center',
+      },
+      {
+        title: '居右',
+        value: 'right',
+      },
+    ],
+  },
+  {
+    key: 'legendPosition',
+    defaultValue: 'top',
+    title: '图例位置',
+    type: 'radio',
+    option: [
+      {
+        title: '顶部',
+        value: 'top',
+      },
+      {
+        title: '底部',
+        value: 'bottom',
+      },
+    ],
+  },
+];

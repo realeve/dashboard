@@ -142,3 +142,12 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 ---
 
 - [ ] 单元测试
+
+
+
+## todo 2
+- [ ] 视频背景
+- [ ] 作废率报表解析上传
+- [ ] 不同尺寸屏幕的缩放
+- [ ] 缩略图显示
+- [ ] 文字、图片组件；图片动画

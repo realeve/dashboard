@@ -10,6 +10,7 @@ const getSelectedPanelConfig = (panel, selected) => panel.findIndex(item => sele
 
 const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }) => {
   const pageChart = selectedPanel.length == 1;
+ 
   return (
     <div
       className={classnames(styles['config-panel-wp'], {
@@ -33,14 +34,16 @@ const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }
           <Page dispatch={dispatch} page={page} />
         )}
       </div>
-      <div
-        className={styles.bottom}
-        onClick={() => {
-          setHide({ config: true });
-        }}
-      >
-        确定
-      </div>
+      {!pageChart && (
+        <div
+          className={styles.bottom}
+          onClick={() => {
+            setHide({ config: true });
+          }}
+        >
+          确定
+        </div>
+      )}
     </div>
   );
 };

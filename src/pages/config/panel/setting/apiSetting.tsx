@@ -6,6 +6,7 @@ import { useSetState } from 'react-use';
 import { IPanelConfig } from '@/models/common';
 import { FormItem, getDefaultState } from './componentSetting';
 import styles from './index.less';
+import JsonViewer from './JsonViewer';
 
 const initState = (configs: IApiConfig, api: any) => {
   // 配置项中的信息
@@ -18,8 +19,8 @@ const appendConfig: IChartConfig[] = [
     title: '发起请求',
     key: 'show',
     type: 'switch',
-    checkedChildren: '显示',
-    unCheckedChildren: '隐藏',
+    checkedChildren: 'ajax',
+    unCheckedChildren: '否',
   },
   {
     title: '类型',
@@ -39,17 +40,10 @@ const appendConfig: IChartConfig[] = [
   },
   {
     key: 'url',
+    valueType: 'text',
+    placeholder: '在此填入接口地址',
   },
 ];
-
-const JsonViewer = ({ json }) => {
-  return (
-    <div className={styles.jsonwrapper}>
-      <div className={styles.title}>(在下方粘贴模拟数据)</div>
-      <div className={styles.json}>{JSON.stringify(json)}</div>
-    </div>
-  );
-};
 
 export default ({
   onChange,
@@ -65,7 +59,7 @@ export default ({
 
   let configs = res.apiConfig as IApiConfig;
 
-  if (R.type(configs) != 'Object' || !configs.show) {
+  if (R.type(configs) != 'Object') {
     return <p>该组件无数据请求，无需配置接口信息</p>;
   }
 
@@ -74,17 +68,17 @@ export default ({
     setState(initState(configs, api));
   }, [JSON.stringify(configs)]);
 
-  console.log(state);
-
-  const handleStateChange = (res, config) => {
+  // 是否需要立即刷新
+  const handleStateChange = (res, config, update = true) => {
     let next = {
       [config.key]: res,
     };
     setState(next);
-    onChange({
-      ...state,
-      ...next,
-    });
+    update &&
+      onChange({
+        ...state,
+        ...next,
+      });
   };
 
   return (
@@ -101,22 +95,31 @@ export default ({
           <FormItem
             value={state[appendConfig[1].key]}
             onChange={res => {
+              if (res === 'mock') {
+                handleStateChange('', appendConfig[2]);
+              }
               handleStateChange(res, appendConfig[1]);
             }}
             config={appendConfig[1]}
           />
         )}
-        {state.api_type === 'url' ? (
-          <FormItem
-            value={state[appendConfig[2].key]}
-            onChange={res => {
-              handleStateChange(res, appendConfig[2]);
-            }}
-            config={appendConfig[2]}
-          />
-        ) : (
-          <JsonViewer json={res.defaultValue || {}} />
-        )}
+        {state.show &&
+          (state.api_type === 'url' ? (
+            <FormItem
+              value={state[appendConfig[2].key]}
+              onChange={res => {
+                handleStateChange(res, appendConfig[2]);
+              }}
+              config={appendConfig[2]}
+            />
+          ) : (
+            <JsonViewer
+              value={state.mock || JSON.stringify(res.mock || '')}
+              onChange={res => {
+                handleStateChange(res, { key: 'mock' });
+              }}
+            />
+          ))}
 
         {state.show &&
           configs.config.map((config, idx) => (
@@ -125,11 +128,20 @@ export default ({
               key={config.key}
               value={state[config.key]}
               onChange={res => {
-                handleStateChange(res, config);
+                handleStateChange(res, config, false);
               }}
               config={config}
             />
           ))}
+
+        <div
+          className={styles.btn}
+          onClick={() => {
+            onChange(state);
+          }}
+        >
+          应用设置
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import echarts from 'echarts';
 import * as lib from '../lib';
 
-export let defaultValue = [
+export let mock = [
   {
     "x": "1月",
     "y": 175,
