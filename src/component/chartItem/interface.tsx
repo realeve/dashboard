@@ -31,4 +31,5 @@ export interface IApiConfig {
   url?: string; // 默认地址
   data?: IChartMock;
   config: IChartConfig[];
+  interval?: number;
 }

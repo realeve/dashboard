@@ -23,6 +23,13 @@ const appendConfig: IChartConfig[] = [
     unCheckedChildren: '否',
   },
   {
+    title: '定时刷新(秒)',
+    key: 'interval',
+    defaultValue: '',
+    placeholder: '单位:秒',
+    min: 0,
+  },
+  {
     title: '类型',
     key: 'api_type',
     type: 'radio',

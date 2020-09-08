@@ -29,15 +29,16 @@ const Item = ({
   let { data, loading, error } = useFetch({
     param: { url: api?.url },
     valid: () => valid,
+    interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),
     callback(e) {
       if (e && e.title) {
         onLoad(e.title);
       }
       return e;
     },
-  }); 
+  });
 
-  if (valid && (loading||!data)) {
+  if (valid && (loading || !data)) {
     return <Skeleton />;
   }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { mock, axios, AxiosError } from '@/utils/axios';
 import http, { AxiosRequestConfig } from 'axios';
 import * as R from 'ramda';
+import { useInterval } from 'react-use';
 
 /**
  *
@@ -18,6 +19,7 @@ export interface IFetchProps<T> {
   initData?: T;
   valid?: (e?: any) => boolean;
   callback?: (data: any) => T;
+  interval?: number;
   [key: string]: any;
 }
 /**
@@ -26,6 +28,8 @@ export interface IFetchProps<T> {
  * @param initData 模拟数据请求时传入的初始数据，如果传入了数据则优先使用模拟数据，否则使用param的接口参数发起请求
  * @param callback 对数据的回调处理
  * @param valid 数据发起前有效性校验,返回true时正常发起请求调用，为False中断调用
+ * @param interval 定时刷新
+ * @param refreshOnWindowFocus 窗口聚焦刷新
  * 
  * @return data 接口返回的数据
    @return loading 数据载入状态
@@ -37,7 +41,9 @@ const useFetch = <T extends {} | void>({
   param,
   initData,
   callback = e => e,
+  interval = 0,
   valid = (e?: any) => true,
+  refreshOnWindowFocus = false,
 }: IFetchProps<T>): {
   data: T | null;
   loading: boolean;
@@ -117,15 +123,26 @@ const useFetch = <T extends {} | void>({
     // 监听axios数据请求中 url、get/post关键参数
   }, [param.url, JSON.stringify(param.params), JSON.stringify(param.data), initData, innerTrigger]);
 
+  const reFetch = () => {
+    // 数据刷新的场景中，重置innerTrigger，在useFetch中会
+    setInnerTrigger(+new Date());
+    console.log('refresh:', new Date());
+  };
+
+  // 定时自动刷新
+  useInterval(
+    () => {
+      reFetch();
+    },
+    interval > 0 ? interval * 1000 : null,
+  );
+
   return {
     data,
     loading,
     error,
     setData,
-    reFetch: () => {
-      // 数据刷新的场景中，重置innerTrigger，在useFetch中会
-      setInnerTrigger(+new Date());
-    },
+    reFetch,
   };
 };
 
