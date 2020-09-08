@@ -4,6 +4,11 @@ import http, { AxiosRequestConfig } from 'axios';
 import * as R from 'ramda';
 import { useInterval } from 'react-use';
 
+import { isDocumentVisible, limit } from './lib';
+
+import subscribeFocus from './windowFocus';
+import subscribeVisible from './windowVisible';
+
 /**
  *
  * @param axios所返回数据的自动解析，在返回数据只有单个对象时使用
@@ -30,6 +35,8 @@ export interface IFetchProps<T> {
  * @param valid 数据发起前有效性校验,返回true时正常发起请求调用，为False中断调用
  * @param interval 定时刷新
  * @param refreshOnWindowFocus 窗口聚焦刷新
+ * @param pollingWhenHidden 窗体隐藏时是否继续刷新数据
+ * @param focusTimespan focus后几秒重新加载数据
  * 
  * @return data 接口返回的数据
    @return loading 数据载入状态
@@ -44,12 +51,17 @@ const useFetch = <T extends {} | void>({
   interval = 0,
   valid = (e?: any) => true,
   refreshOnWindowFocus = false,
+  pollingWhenHidden = false,
+  focusTimespan = 2,
 }: IFetchProps<T>): {
   data: T | null;
   loading: boolean;
   error: AxiosError | null;
   setData: (data: T) => void;
   reFetch: () => void;
+  pollingWhenHidden?: boolean;
+  refreshOnWindowFocus?: boolean;
+  focusTimespan?: number;
 } => {
   // 同时未传时，返回空值
   // 部分场景允许不设置param时，返回默认状态为空的数据
@@ -65,6 +77,10 @@ const useFetch = <T extends {} | void>({
 
   // 用于强制刷新
   const [innerTrigger, setInnerTrigger] = useState(0);
+
+  const [pollingWhenVisibleFlag, setPollingWhenVisibleFlag] = useState(true);
+
+  const [unscribe, setUnscribe] = useState([]);
 
   // 首次加载
   useEffect(() => {
@@ -114,6 +130,11 @@ const useFetch = <T extends {} | void>({
         setError(e);
         setLoading(false);
         throw e;
+      })
+      .finally(() => {
+        // 如果屏幕隐藏，并且 !pollingWhenHidden, 则停止轮询，并记录 flag，等 visible 时，继续轮询
+        let needRefresh = !isDocumentVisible() && !pollingWhenHidden;
+        setPollingWhenVisibleFlag(!needRefresh);
       });
 
     // 路由变更时，取消axios
@@ -126,15 +147,32 @@ const useFetch = <T extends {} | void>({
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
     setInnerTrigger(+new Date());
-    console.log('refresh:', new Date());
+    console.log('即将刷新:', new Date());
   };
 
-  // 定时自动刷新
+  const limitRefresh = limit(reFetch, focusTimespan * 1000);
+  const rePolling = () => {
+    setPollingWhenVisibleFlag(true);
+    console.log('页面显示')
+  };
+
+  // 初始时
+  useEffect(() => {
+    let next = [subscribeVisible(rePolling), subscribeFocus(limitRefresh)];
+    setUnscribe(next);
+    return () => {
+      unscribe.forEach(s => {
+        s();
+      });
+    };
+  }, []);
+
+  // 定时自动刷新 
   useInterval(
     () => {
       reFetch();
     },
-    interval > 0 ? interval * 1000 : null,
+    pollingWhenVisibleFlag && interval > 0 ? interval * 1000 : null,
   );
 
   return {
