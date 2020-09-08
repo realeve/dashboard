@@ -12,7 +12,7 @@ export function isOnline(): boolean {
   return true;
 }
 
-export function limit(fn: any, timespan: number = 2000) {
+export function limit(fn: any, timespan: number = 5000) {
   let pending = false;
   return (...args: any[]) => {
     if (pending) return;

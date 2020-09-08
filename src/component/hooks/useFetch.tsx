@@ -50,9 +50,9 @@ const useFetch = <T extends {} | void>({
   callback = e => e,
   interval = 0,
   valid = (e?: any) => true,
-  refreshOnWindowFocus = false,
+  refreshOnWindowFocus = true,
   pollingWhenHidden = false,
-  focusTimespan = 2,
+  focusTimespan = 5,
 }: IFetchProps<T>): {
   data: T | null;
   loading: boolean;
@@ -153,12 +153,18 @@ const useFetch = <T extends {} | void>({
   const limitRefresh = limit(reFetch, focusTimespan * 1000);
   const rePolling = () => {
     setPollingWhenVisibleFlag(true);
-    console.log('页面显示')
+    console.log('页面显示');
   };
 
   // 初始时
   useEffect(() => {
-    let next = [subscribeVisible(rePolling), subscribeFocus(limitRefresh)];
+    let next = [];
+    if (interval > 0) {
+      next.push(subscribeVisible(rePolling));
+    }
+    if (refreshOnWindowFocus) {
+      next.push(subscribeFocus(limitRefresh));
+    }
     setUnscribe(next);
     return () => {
       unscribe.forEach(s => {
@@ -167,7 +173,7 @@ const useFetch = <T extends {} | void>({
     };
   }, []);
 
-  // 定时自动刷新 
+  // 定时自动刷新
   useInterval(
     () => {
       reFetch();
