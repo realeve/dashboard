@@ -26,18 +26,22 @@ const Item = ({
   let api = config.api || {};
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   let valid = api?.api_type === 'url' && api?.url?.length > 0;
- 
+
   let { data, loading, error } = useFetch({
     param: { url: api?.api_type === 'url' ? api?.url : null },
     valid: () => valid,
     interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),
-    callback(e) { 
+    callback(e) {
       if (e && e.title) {
         onLoad(e.title);
       }
       return e;
     },
   });
+
+  if (api?.api_type === 'mock' && mock && mock.title) {
+    onLoad(mock.title);
+  }
 
   if (valid && (loading || !data)) {
     return <Skeleton />;

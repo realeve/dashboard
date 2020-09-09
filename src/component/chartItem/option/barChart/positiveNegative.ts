@@ -42,7 +42,7 @@ export let mock: IChartMock = {
     ['周日', '收入', 420],
     ['周日', '付出', 210],
   ],
-  title: '旋风图示例',
+  title: '旋风图示例_mock',
   header: ['星期', '类型', '交易发生值'],
   rows: 14,
   hash: 'mockdata',
