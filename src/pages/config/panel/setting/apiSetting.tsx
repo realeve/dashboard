@@ -91,31 +91,18 @@ export default ({
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        <FormItem
-          value={state[appendConfig[0].key]}
-          onChange={res => {
-            handleStateChange(res, appendConfig[0]);
-          }}
-          config={appendConfig[0]}
-        />
-        <FormItem
-          value={state[appendConfig[1].key]}
-          onChange={res => {
-            handleStateChange(res, appendConfig[1]);
-          }}
-          config={appendConfig[1]}
-        />
-        {state.show && (
-          <FormItem
-            value={state[appendConfig[2].key]}
-            onChange={res => {
-              // if (res === 'mock') {
-              //   handleStateChange('', appendConfig[2]);
-              // }
-              handleStateChange(res, appendConfig[2]);
-            }}
-            config={appendConfig[2]}
-          />
+        {[0, 1, 2].map(
+          i =>
+            (i < 2 || state.show) && (
+              <FormItem
+                key={appendConfig[i].key}
+                value={state[appendConfig[i].key]}
+                onChange={res => {
+                  handleStateChange(res, appendConfig[i]);
+                }}
+                config={appendConfig[i]}
+              />
+            ),
         )}
         {state.show &&
           (state.api_type === 'url' ? (
