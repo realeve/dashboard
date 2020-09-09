@@ -98,26 +98,33 @@ export default ({
           }}
           config={appendConfig[0]}
         />
+        <FormItem
+          value={state[appendConfig[1].key]}
+          onChange={res => {
+            handleStateChange(res, appendConfig[1]);
+          }}
+          config={appendConfig[1]}
+        />
         {state.show && (
           <FormItem
-            value={state[appendConfig[1].key]}
+            value={state[appendConfig[2].key]}
             onChange={res => {
-              if (res === 'mock') {
-                handleStateChange('', appendConfig[2]);
-              }
-              handleStateChange(res, appendConfig[1]);
+              // if (res === 'mock') {
+              //   handleStateChange('', appendConfig[2]);
+              // }
+              handleStateChange(res, appendConfig[2]);
             }}
-            config={appendConfig[1]}
+            config={appendConfig[2]}
           />
         )}
         {state.show &&
           (state.api_type === 'url' ? (
             <FormItem
-              value={state[appendConfig[2].key]}
+              value={state[appendConfig[3].key]}
               onChange={res => {
-                handleStateChange(res, appendConfig[2]);
+                handleStateChange(res, appendConfig[3]);
               }}
-              config={appendConfig[2]}
+              config={appendConfig[3]}
             />
           ) : (
             <JsonViewer
