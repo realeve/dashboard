@@ -111,7 +111,7 @@ export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
   url: 'http://localhost:8000/mock/01_positive_negative.json',
-  interval: 5,
+  interval: 60,
   config: [
     {
       key: 'legend',
