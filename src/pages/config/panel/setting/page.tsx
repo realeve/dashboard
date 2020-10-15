@@ -10,6 +10,11 @@ import { AssetItem } from '@/component/widget/blank/config';
 import { Divider } from 'antd';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
+
+import { AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined } from '@ant-design/icons';
+
+import { AlignCenterIcon, AlignRightIcon, AlignLeftIcon } from './icon';
+
 const ImgSelector = ({
   title,
   type = 'backgrounds',
@@ -113,6 +118,34 @@ export const ComponentConfig = ({
             }}
           />
         </Field>
+        <Field title="加粗">
+          <Radio
+            value={head.fontWeight}
+            onChange={fontWeight => {
+              updatePage({
+                head: { ...head, fontWeight },
+              });
+            }}
+            config={[
+              {
+                title: '细',
+                value: 'lighter',
+              },
+              {
+                title: '正常',
+                value: 'normal',
+              },
+              {
+                title: '加粗',
+                value: 'bold',
+              },
+              {
+                title: '极粗',
+                value: 'bolder',
+              },
+            ]}
+          />
+        </Field>
         <Field title="边距">
           <input
             type="number"
@@ -135,15 +168,15 @@ export const ComponentConfig = ({
             }}
             config={[
               {
-                title: '居左',
+                title: <AlignLeftIcon style={{ color: '#fff' }} />,
                 value: 'left',
               },
               {
-                title: '居中',
+                title: <AlignCenterIcon style={{ color: '#fff' }} />,
                 value: 'center',
               },
               {
-                title: '居右',
+                title: <AlignRightIcon style={{ color: '#fff' }} />,
                 value: 'right',
               },
             ]}
