@@ -5,6 +5,10 @@ import Editor from '../Editor';
 import { EditorInterface } from '../types';
 import { IObject } from '@daybrush/utils';
 import { diff } from '@egjs/list-differ';
+import * as R from 'ramda';
+
+// 每次旋转最小旋转度数；
+const ROTATE_DEGREE = 5;
 
 function restoreRender(id: string, state: IObject<any>, prevState: IObject<any>, editor: Editor) {
   const el = editor.viewport.current!.getElement(id);
@@ -121,9 +125,9 @@ export default class MoveableManager extends React.PureComponent<{
         clippable={false}
         dragArea={selectedTargets.length > 1}
         checkInput={false}
-        throttleDragRotate={isShift ? 45 : 0}
+        throttleDragRotate={isShift ? 45 : 15}
         keepRatio={isShift}
-        rotatable={false}
+        rotatable={true}
         snappable={true}
         snapCenter={true}
         snapGap={false}
@@ -145,15 +149,18 @@ export default class MoveableManager extends React.PureComponent<{
         onResizeGroupStart={moveableData.onResizeGroupStart}
         onResizeGroup={moveableData.onResizeGroup}
         onRotateStart={moveableData.onRotateStart}
-        onRotate={moveableData.onRotate}
+        onRotate={e => {
+          moveableData.onRotate({
+            ...e,
+            beforeRotate: (Math.floor(e.beforeRotate / ROTATE_DEGREE) * ROTATE_DEGREE) % 360,
+          });
+        }}
         onRotateGroupStart={moveableData.onRotateGroupStart}
         onRotateGroup={moveableData.onRotateGroup}
         defaultClipPath={memory.get('crop') || 'inset'}
         onClip={moveableData.onClip}
         onDragOriginStart={moveableData.onDragOriginStart}
-        onDragOrigin={e => {
-          moveableData.onDragOrigin(e);
-        }}
+        onDragOrigin={moveableData.onDragOrigin}
         onRound={moveableData.onRound}
         onClickGroup={e => {
           selecto.current!.clickTarget(e.inputEvent, e.inputTarget);
@@ -171,10 +178,18 @@ export default class MoveableManager extends React.PureComponent<{
           if (!e.datas.isRender) {
             return;
           }
+          let next = R.clone(moveableData.getFrame(e.target).get());
+          // let rotate = next.transform.rotate.replace('deg', '');
+          // rotate = (Math.floor(Number(rotate) / 15) * 15) % 360;
+          // next.transform = {
+          //   ...next.transform,
+          //   rotate: `${rotate}deg`,
+          // };
           const item = {
             id: getId(e.target),
-            next: moveableData.getFrame(e.target).get(),
+            next,
           };
+
           this.props.onChange?.([item]);
           this.historyManager.addAction('render', {
             ...item,

@@ -20,14 +20,7 @@ export default ({ editor, onMenuChange, curTool, zoom, onZoom, onToggleThumb }) 
             onZoom(nextVal);
           }}
         />
-        <InputRange
-          {...rangeCfg}
-          value={zoom}
-          onChange={e => {
-            onZoom(Number(e.target.value));
-          }}
-          showValue={false}
-        />
+        <InputRange {...rangeCfg} value={zoom} onChange={onZoom} showValue={false} />
         <i
           className="datav-icon datav-font icon-zoom-in slider-icon zoom-in"
           onClick={e => {

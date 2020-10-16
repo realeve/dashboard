@@ -53,7 +53,7 @@ export default ({
   style = { width: 800, height: 500 },
   onResize = () => {},
   resizable: parentResizable = false,
-  onResizable = ()=>{}
+  onResizable = () => {},
 }: IMoveableItem) => {
   const dom = useRef(null);
   const [rotate, setRotate] = useState(0);
@@ -78,7 +78,7 @@ export default ({
   React.useEffect(() => {
     if (!parentResizable) setResizable(parentResizable);
   }, [parentResizable]);
- 
+
   // moveable
 
   return (
@@ -96,7 +96,7 @@ export default ({
           e.stopPropagation();
           if (!resizable) {
             setResizable(true);
-            onResizable()
+            onResizable();
           }
         }}
       >
@@ -110,15 +110,12 @@ export default ({
         draggable={resizable}
         origin={resizable}
         snappable={resizable}
-        
-        throttleDrag={0}  
+        throttleDrag={0}
         throttleRotate={15}
         zoom={zoom}
         verticalGuidelines={guides.v.map(item => item - padding / zoom)}
         horizontalGuidelines={guides.h.map(item => item - padding / zoom)}
-        
         isDisplaySnapDigit={true}
-
         onDragStart={({ set }) => {
           set(frame.translate);
         }}

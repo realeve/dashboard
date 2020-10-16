@@ -57,7 +57,7 @@ export interface IPanelConfig {
   api?: {
     [key: string]: any;
   }; // 接口配置项
-  
+
   [key: string]: any;
 }
 export interface ICommonConfig {

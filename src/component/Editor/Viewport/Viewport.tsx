@@ -244,6 +244,7 @@ export default class Viewport extends React.PureComponent<{
       this.forceUpdate(() => {
         const infos = jsxInfos.map(function registerElement(info) {
           const id = info.id!;
+          console.log(info);
 
           const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
           const attrs = info.attrs || {};

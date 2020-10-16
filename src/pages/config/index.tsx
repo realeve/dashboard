@@ -28,6 +28,7 @@ export interface IPanelItem extends IChartConfig {
 
 // 添加内容
 const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => {
+  console.log(style);
   editor?.current.append(
     <div style={style}>
       <ChartItem chartid={config.id} />

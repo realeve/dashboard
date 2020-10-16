@@ -10,6 +10,7 @@ import { ComponentConfig } from './page';
 import { Tabs, Switch } from 'antd';
 import ComponentSetting from './componentSetting';
 import ApiSetting from './apiSetting';
+import InputRange from '@/component/field/InputRange';
 
 interface IPanel {
   selectedIdx: number;
@@ -48,7 +49,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   }, [selectedIdx, JSON.stringify(panel)]);
 
   // 更新样式
-  const updateStyle = (item: { [key: string]: any }) => {
+  const updateStyle = (item: { [key: string]: any }, type = 'size') => {
     const style = R.clone(panel[selectedIdx].style || {});
     const nextStyle = {
       style: {
@@ -106,6 +107,32 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                   value={size.height}
                 />
               </div>
+            </Field>
+            <Field title="旋转角度">
+              <InputRange
+                step={15}
+                min={0}
+                max={360}
+                disabled
+                value={Math.floor(
+                  panel[selectedIdx].style.transform?.rotate?.replace('deg', '') || '0',
+                )}
+                onChange={rotate => {
+                  const style = R.clone(panel[selectedIdx].style || {});
+                  const nextStyle = {
+                    style: {
+                      ...style,
+                      transform: {
+                        ...style.transform,
+                        rotate: `${rotate}deg`,
+                      },
+                    },
+                  };
+                  console.log(nextStyle);
+
+                  updateAttrib(nextStyle);
+                }}
+              />
             </Field>
             <Field title="显示标题">
               <Switch

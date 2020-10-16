@@ -105,7 +105,6 @@ function undoMove({ prevInfos }: MovedResult, editor: Editor) {
 function redoMove({ nextInfos }: MovedResult, editor: Editor) {
   editor.moves(nextInfos, true);
 }
- 
 
 export const calcDragPos = (
   left: number,
@@ -170,7 +169,7 @@ export interface IEditorProps {
  * @param onChange 元素属性变更
  * @param onDrag 拖动画布
  */
-class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> { 
+class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
   public state: ScenaEditorState = {
     selectedTargets: [],
     horizontalGuides: [],
@@ -689,6 +688,16 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     ]).then(targets => targets[0]);
   }
 
+  // 待优化
+  // public updateJSX({ id, style }) {
+  //   const viewport = this.getViewport();
+  //   viewport.forceUpdate(() => {
+  //     const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
+  //     let { translate, rotate, scale } = style.transform;
+  //     target.style.transform = `translate(${translate}) rotate(${rotate}) scale(${scale})`;
+  //   });
+  // }
+
   public appendJSXs(
     jsxs: ElementInfo[],
     isRestore?: boolean,
@@ -709,7 +718,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }
 
     this.console.log('append jsxs', jsxs, appendIndex, scopeId);
-
+    console.log(this.getViewport().jsxs);
     return this.getViewport()
       .appendJSXs(jsxs, appendIndex, scopeId)
       .then(({ added }) => this.appendComplete(added, isRestore));
