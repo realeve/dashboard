@@ -48,13 +48,7 @@ export const FormItem = ({
       Item = <Switch checked={value as boolean} onChange={onChange} {...config} />;
       break;
     case 'range':
-      Item = (
-        <InputRange
-          value={Number(value)}
-          onChange={e => onChange(Number(e.target.value))}
-          {...config}
-        />
-      );
+      Item = <InputRange value={Number(value)} onChange={onChange} {...config} />;
       break;
   }
   return (

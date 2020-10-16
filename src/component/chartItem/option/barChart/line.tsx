@@ -65,38 +65,38 @@ const handleData = ({ data }, { legend, x, y }) => {
 export const config = [
   {
     key: 'legend',
-    default: 0,
+    defaultValue: 0,
   },
   {
     key: 'x',
-    default: 1,
+    defaultValue: 1,
   },
   {
     key: 'y',
-    default: 2,
+    defaultValue: 2,
   },
   {
     key: 'barWidth',
-    default: 20,
+    defaultValue: 20,
     title: '柱状宽度',
   },
   ...lib.getPositionConfig(),
   {
     key: 'chart1',
     title: '系列1图表类型',
-    default: 'bar',
+    defaultValue: 'bar',
     ...lib.chartType,
   },
   {
     key: 'chart2',
     title: '系列2图表类型',
-    default: 'bar',
+    defaultValue: 'bar',
     ...lib.chartType,
   },
   {
     key: 'chart3',
     title: '系列3图表类型',
-    default: 'line',
+    defaultValue: 'line',
     ...lib.chartType,
   },
   {
