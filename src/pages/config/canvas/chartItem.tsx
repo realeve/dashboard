@@ -4,7 +4,7 @@ import Echarts from '@/component/echarts';
 import * as chartLib from '@/component/chartItem/option';
 import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig } from '@/models/common';
-import styles from './chartItem.less';
+// import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from './ErrorBoundary';
 import { BorderItem } from '@/component/widget';
@@ -107,19 +107,21 @@ const Index = ({
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
         }}
       >
-        <Item config={config} title={title} onLoad={setTitle} />
+        <ErrorBoundary>
+          <Item config={config} title={title} onLoad={setTitle} />
+        </ErrorBoundary>
       </BorderItem>
     </>
   );
 };
 
-const ChartPage = props => (
-  <ErrorBoundary>
-    <Index {...props} />
-  </ErrorBoundary>
-);
+// const ChartPage = props => (
+//   <ErrorBoundary>
+//     <Index {...props} />
+//   </ErrorBoundary>
+// );
 
 export default connect(({ common }: { common: ICommon }) => ({
   page: common.page,
   panel: common.panel,
-}))(ChartPage);
+}))(Index);

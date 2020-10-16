@@ -1,36 +1,38 @@
+import React from 'react';
 import echarts from 'echarts';
 import * as lib from '../lib';
+
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {
   data: [
-    ['1月', '类目1', 175],
-    ['1月', '类目2', 210],
-    ['1月', '类目3', 23],
-    ['2月', '类目1', 125],
-    ['2月', '类目2', 140],
-    ['2月', '类目3', 17.5],
-    ['3月', '类目1', 98],
-    ['3月', '类目2', 120],
-    ['3月', '类目3', 15],
-    ['4月', '类目1', 120],
-    ['4月', '类目2', 140],
-    ['4月', '类目3', 12],
-    ['5月', '类目1', 50],
-    ['5月', '类目2', 60],
-    ['5月', '类目3', 8],
-    ['6月', '类目1', 60],
-    ['6月', '类目2', 70],
-    ['6月', '类目3', 7],
-    ['7月', '类目1', 50],
-    ['7月', '类目2', 60],
-    ['7月', '类目3', 6],
-    ['8月', '类目1', 50],
-    ['8月', '类目2', 55],
-    ['8月', '类目3', 5],
-    ['9月', '类目1', 50],
-    ['9月', '类目2', 55],
-    ['9月', '类目3', 5]
+    ['类目1', '1月', 175],
+    ['类目2', '1月', 210],
+    ['类目3', '1月', 23],
+    ['类目1', '2月', 125],
+    ['类目2', '2月', 140],
+    ['类目3', '2月', 17.5],
+    ['类目1', '3月', 98],
+    ['类目2', '3月', 120],
+    ['类目3', '3月', 15],
+    ['类目1', '4月', 120],
+    ['类目2', '4月', 140],
+    ['类目3', '4月', 12],
+    ['类目1', '5月', 50],
+    ['类目2', '5月', 60],
+    ['类目3', '5月', 8],
+    ['类目1', '6月', 60],
+    ['类目2', '6月', 70],
+    ['类目3', '6月', 7],
+    ['类目1', '7月', 50],
+    ['类目2', '7月', 60],
+    ['类目3', '7月', 6],
+    ['类目1', '8月', 50],
+    ['类目2', '8月', 55],
+    ['类目3', '8月', 5],
+    ['类目1', '9月', 50],
+    ['类目2', '9月', 55],
+    ['类目3', '9月', 5],
   ],
   title: '拆线柱图_MOCK数据',
   header: ['月份', '类型', '交易发生值'],
@@ -38,7 +40,7 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-const handleData = ({data}, { legend, x, y }) => {
+const handleData = ({ data }, { legend, x, y }) => {
   let legendArr = lib.getUniqByIdx({ key: legend, data });
   let xArr = lib.getUniqByIdx({ key: x, data });
   let series = [];
@@ -78,6 +80,34 @@ export const config = [
     default: 20,
     title: '柱状宽度',
   },
+  ...lib.getPositionConfig(),
+  {
+    key: 'chart1',
+    title: '系列1图表类型',
+    default: 'bar',
+    ...lib.chartType,
+  },
+  {
+    key: 'chart2',
+    title: '系列2图表类型',
+    default: 'bar',
+    ...lib.chartType,
+  },
+  {
+    key: 'chart3',
+    title: '系列3图表类型',
+    default: 'line',
+    ...lib.chartType,
+  },
+  {
+    key: 'lineWidth',
+    defaultValue: 2,
+    title: '线宽',
+    type: 'range',
+    min: 1,
+    max: 20,
+    step: 1,
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -107,17 +137,34 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ data, legend = 0, x = 1, y = 2, barWidth = 15 }) => {
+export default ({
+  data,
+  legend = 0,
+  x = 1,
+  y = 2,
+  barWidth = 15,
+  smooth = true,
+  legendAlign,
+  legendPosition,
+  chart1 = 'bar',
+  chart2 = 'bar',
+  chart3 = 'line',
+  area_opacity = 1,
+  lineWidth = 2,
+}) => {
+  if (String(legend) == '') {
+    return {};
+  }
   let res = handleData(data, { legend, x, y });
 
   const color = '#ddd';
   const axisColor = '#0055bd'; //'#203651';
-
   let series = [
     {
       name: res.series[0].name,
-      type: 'bar',
+      ...lib.getChartType(chart1, area_opacity),
       barWidth,
+      smooth,
       itemStyle: {
         normal: {
           barBorderRadius: [barWidth / 2, barWidth / 2, 0, 0],
@@ -133,12 +180,16 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 15 }) => {
           ]),
         },
       },
+      lineStyle: {
+        width: lineWidth,
+      },
       data: res.series[0].arr,
     },
     {
       name: res.series[1].name,
-      type: 'bar',
+      ...lib.getChartType(chart2, area_opacity),
       barWidth,
+      smooth,
       itemStyle: {
         normal: {
           barBorderRadius: [barWidth / 2, barWidth / 2, 0, 0],
@@ -154,6 +205,9 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 15 }) => {
           ]),
         },
       },
+      lineStyle: {
+        width: lineWidth,
+      },
       data: res.series[1].arr,
     },
   ];
@@ -161,13 +215,15 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 15 }) => {
   if (res.series.length === 3) {
     series.push({
       name: res.series[2].name,
-      type: 'line',
-      smooth: true,
+      ...lib.getChartType(chart3, area_opacity),
+      smooth,
       itemStyle: {
         normal: {
           color: '#11dddc',
-          lineWidth: 2.5,
         },
+      },
+      lineStyle: {
+        width: lineWidth,
       },
       data: res.series[2].arr,
       yAxisIndex: 1,
@@ -186,8 +242,9 @@ export default ({ data, legend = 0, x = 1, y = 2, barWidth = 15 }) => {
       textStyle: {
         color,
       },
-      top: 20,
-      left: 'center',
+      // top: 20,
+      // left: 'center',
+      ...lib.getLegendPosition({ legendAlign, legendPosition }),
     },
     grid: {
       left: '3%',

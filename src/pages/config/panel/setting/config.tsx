@@ -84,6 +84,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
               <div className="alignRow">
                 <input
                   type="number"
+                  className="data_input"
                   step="2"
                   style={{ marginRight: 10 }}
                   value={size.width}
@@ -95,6 +96,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 />
                 <input
                   type="number"
+                  className="data_input"
                   step="2"
                   onChange={e => {
                     const style = { height: Number(e.target.value) };

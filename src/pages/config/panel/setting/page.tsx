@@ -10,10 +10,7 @@ import { AssetItem } from '@/component/widget/blank/config';
 import { Divider } from 'antd';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
-
-import { AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined } from '@ant-design/icons';
-
-import { AlignCenterIcon, AlignRightIcon, AlignLeftIcon } from './icon';
+import Align from '@/component/field/Align';
 
 const ImgSelector = ({
   title,
@@ -99,6 +96,7 @@ export const ComponentConfig = ({
         <Field title="字号">
           <input
             type="number"
+            className="data_input"
             step="1"
             defaultValue={head.fontSize}
             onChange={e => {
@@ -149,6 +147,7 @@ export const ComponentConfig = ({
         <Field title="边距">
           <input
             type="number"
+            className="data_input"
             step="1"
             defaultValue={head.padding}
             onChange={e => {
@@ -159,27 +158,13 @@ export const ComponentConfig = ({
           />
         </Field>
         <Field title="对齐">
-          <Radio
+          <Align
             value={head.textAlign}
             onChange={textAlign => {
               updatePage({
                 head: { ...head, textAlign },
               });
             }}
-            config={[
-              {
-                title: <AlignLeftIcon style={{ color: '#fff' }} />,
-                value: 'left',
-              },
-              {
-                title: <AlignCenterIcon style={{ color: '#fff' }} />,
-                value: 'center',
-              },
-              {
-                title: <AlignRightIcon style={{ color: '#fff' }} />,
-                value: 'right',
-              },
-            ]}
           />
         </Field>
         <Field title="背景色">
@@ -219,6 +204,7 @@ export default ({ page, dispatch }: IPageProps) => {
           <div className="alignRow">
             <input
               type="number"
+              className="data_input"
               step="2"
               style={{ marginRight: 10 }}
               defaultValue={page.width}
@@ -230,6 +216,7 @@ export default ({ page, dispatch }: IPageProps) => {
             />
             <input
               type="number"
+              className="data_input"
               step="2"
               defaultValue={page.height}
               onChange={e => {

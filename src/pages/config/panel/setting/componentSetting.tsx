@@ -1,13 +1,15 @@
 import styles from './index.less';
 import React, { useEffect } from 'react';
 import * as chartLib from '@/component/chartItem/option';
-import { Switch } from 'antd';
 import Field from '@/component/field';
 import { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
-import Radio from '@/component/field/Radio';
 import { IPanelConfig } from '@/models/common';
+
+import Radio from '@/component/field/Radio';
+import { Switch } from 'antd';
+import InputRange from '@/component/field/InputRange';
 
 export const FormItem = ({
   value,
@@ -20,8 +22,9 @@ export const FormItem = ({
   onChange: (e: string | number | boolean) => void;
   style?: React.CSSProperties;
   type?: string;
+  [key: string]: any;
 }) => {
-  let Item: null | React.ReactNode = null; 
+  let Item: null | React.ReactNode = null;
   switch (type) {
     case 'input':
     default:
@@ -31,6 +34,7 @@ export const FormItem = ({
           onChange={e => {
             onChange(valueType === 'number' ? Number(e.target.value) : e.target.value);
           }}
+          className="data_input"
           value={String(R.isNil(value) ? '' : value)}
           {...config}
         />
@@ -42,6 +46,15 @@ export const FormItem = ({
       break;
     case 'switch':
       Item = <Switch checked={value as boolean} onChange={onChange} {...config} />;
+      break;
+    case 'range':
+      Item = (
+        <InputRange
+          value={Number(value)}
+          onChange={e => onChange(Number(e.target.value))}
+          {...config}
+        />
+      );
       break;
   }
   return (

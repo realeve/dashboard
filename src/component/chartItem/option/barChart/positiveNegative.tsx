@@ -134,6 +134,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
+
 /**
  *  默认导出的主函数,参数说明如下：
  *  data 为前台接口拿到的数据，也可以为配置的假数据；
@@ -150,6 +151,7 @@ export default ({
   roundBorder = true,
   legendAlign = 'center',
   legendPosition = 'top',
+  smooth = true,
 }: IChartProps) => {
   let res = handleData(data, { legend, x, y });
 
@@ -168,8 +170,7 @@ export default ({
       textStyle: {
         color,
       },
-      [legendPosition]: 15,
-      left: legendAlign,
+      ...lib.getLegendPosition({ legendAlign, legendPosition }),
     },
     grid: {
       left: '3%',
@@ -230,6 +231,7 @@ export default ({
           formatter: e => Math.abs(e.value),
           color: '#ff3e8b',
         },
+        smooth,
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [barWidth / 2, 0, 0, barWidth / 2] : 0,
@@ -257,6 +259,7 @@ export default ({
           position: 'right',
           color: '#00baff',
         },
+        smooth,
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,

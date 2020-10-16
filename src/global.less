@@ -1,6 +1,7 @@
 @import './style/theme.less';
 @import './style/icon/datav.less';
 @import './style/icon/comfont.less';
+@import './style/icon/gui.less';
 @import './style/center.less';
 @import './style/root.less';
 html,
@@ -24,4 +25,44 @@ body,
 @font-face {
   font-family: 'Prisma';
   src: url('./component/widget/fonts/Prisma.woff');
+}
+
+
+.data_input {
+  color: var(--datav-gui-font-color-1);
+  background: var(--datav-gui-component-background-color);
+  border: 1px solid var(--datav-gui-component-border-color);
+  text-align: start;
+  font-size: 12px;
+  min-width: 72px;
+  width: 72px;
+  flex: 1;
+  height: 30px;
+  display: block;
+  line-height: 30px;
+  resize: none;
+  padding-left: 7px;
+  &:hover,
+  &:active,
+  &:focus {
+    background: var(--datav-gui-component-background-hover-color);
+    border: 1px solid var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: var(--datav-gui-font-color-1);
+    outline: none;
+    box-shadow: none;
+  }
+
+  caret-color: var(--datav-main-color);
+  box-sizing: border-box;
+  box-shadow: none;
+  margin: 0;
+  outline: none;
+  border-radius: 0;
+  font-size: 12px;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
 }

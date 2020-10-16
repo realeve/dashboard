@@ -1,6 +1,9 @@
 import * as lib from '@/utils/lib';
 import * as R from 'ramda';
 import { EChartsSeriesType } from 'echarts';
+import * as Position from '@/component/field/Align/iconPosition';
+import * as Align from '@/component/field/Align/iconAlign';
+import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
 
 export interface IChart {
   key?: string;
@@ -551,14 +554,15 @@ export let getAxis: (
 
 interface IPositionConfig {
   key: string;
-  defaultValue: string;
+  defaultValue: string | number | boolean;
   title: string;
-  type: 'radio';
-  option: {
-    title: string;
-    value: string;
+  type: 'radio' | 'range';
+  option?: {
+    title: string | React.ReactNode;
+    value: string | number | boolean;
   }[];
 }
+
 export const getPositionConfig: () => IPositionConfig[] = () => [
   {
     key: 'legendAlign',
@@ -567,15 +571,15 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     type: 'radio',
     option: [
       {
-        title: '居左',
+        title: <Align.AlignLeftIcon style={{ color: '#fff' }} />,
         value: 'left',
       },
       {
-        title: '居中',
+        title: <Align.AlignCenterIcon style={{ color: '#fff' }} />,
         value: 'center',
       },
       {
-        title: '居右',
+        title: <Align.AlignRightIcon style={{ color: '#fff' }} />,
         value: 'right',
       },
     ],
@@ -587,13 +591,93 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     type: 'radio',
     option: [
       {
-        title: '顶部',
+        title: <Position.TopIcon title="上方" style={{ color: '#fff' }} />,
         value: 'top',
       },
       {
-        title: '底部',
+        title: <Position.RightIcon title="右方" style={{ color: '#fff' }} />,
+        value: 'right',
+      },
+      {
+        title: <Position.BottomIcon title="下方" style={{ color: '#fff' }} />,
         value: 'bottom',
+      },
+      {
+        title: <Position.LeftIcon title="左方" style={{ color: '#fff' }} />,
+        value: 'left',
       },
     ],
   },
+  {
+    key: 'smooth',
+    defaultValue: true,
+    title: '曲线样式',
+    type: 'radio',
+    option: [
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-smooth-line datav-gui-icon" />,
+        value: true,
+      },
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-poly-line datav-gui-icon" />,
+        value: false,
+      },
+    ],
+  },
+  {
+    key: 'area_opacity',
+    defaultValue: 1,
+    title: '面积图透明度',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.1,
+  },
 ];
+
+export const getLegendPosition = ({ legendAlign = 'center', legendPosition = 'top' }) => {
+  if (['top', 'bottom'].includes(legendPosition)) {
+    return {
+      [legendPosition]: 15,
+      left: legendAlign,
+    };
+  }
+  let position = {
+    left: 'top',
+    center: 'middle',
+    right: 'bottom',
+  };
+  return {
+    [legendPosition]: 15,
+    top: position[legendAlign],
+  };
+};
+
+// 图表类型，返回 柱状图，曲线图，面积图
+export const chartType = {
+  type: 'radio',
+  option: [
+    {
+      title: <BarChartOutlined style={{ color: '#fff' }} />,
+      value: 'bar',
+    },
+    {
+      title: <LineChartOutlined style={{ color: '#fff' }} />,
+      value: 'line',
+    },
+    {
+      title: <AreaChartOutlined style={{ color: '#fff' }} />,
+      value: 'area',
+    },
+  ],
+};
+
+export const getChartType = (type: string, opacity = 1) => {
+  if (type === 'area') {
+    return {
+      type: 'line',
+      areaStyle: { opacity },
+    };
+  }
+  return { type };
+};
