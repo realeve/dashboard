@@ -152,7 +152,12 @@ export default class MoveableManager extends React.PureComponent<{
         onRotate={e => {
           moveableData.onRotate({
             ...e,
-            beforeRotate: (Math.floor(e.beforeRotate / ROTATE_DEGREE) * ROTATE_DEGREE) % 360,
+            beforeRotate:
+              (Math.floor(
+                (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
+              ) *
+                ROTATE_DEGREE) %
+              360,
           });
         }}
         onRotateGroupStart={moveableData.onRotateGroupStart}
@@ -179,12 +184,7 @@ export default class MoveableManager extends React.PureComponent<{
             return;
           }
           let next = R.clone(moveableData.getFrame(e.target).get());
-          // let rotate = next.transform.rotate.replace('deg', '');
-          // rotate = (Math.floor(Number(rotate) / 15) * 15) % 360;
-          // next.transform = {
-          //   ...next.transform,
-          //   rotate: `${rotate}deg`,
-          // };
+
           const item = {
             id: getId(e.target),
             next,

@@ -948,6 +948,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 }
 export default Editor;
 
-// export default React.forwardRef((props: IEditorProps) => (
-//     <Editor {...defaultProps} {...props} />
-// ));
+// 旋转组件
+export const rotateJSX = (moveableData, { id, rotate }) => {
+  const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
+  const frame = moveableData.getFrame(target);
+  frame.set('transform', 'rotate', `${rotate}deg`);
+  target.style.cssText += frame.toCSS();
+};

@@ -128,8 +128,6 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                       },
                     },
                   };
-                  console.log(nextStyle);
-
                   updateAttrib(nextStyle);
                 }}
               />

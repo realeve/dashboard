@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './index.less';
+import classnames from 'classnames';
+
 export const rangeCfg = { min: 0.3, max: 1.5, step: 0.1 };
 export default ({
   showValue = true,
@@ -12,6 +14,7 @@ export default ({
   value?: number;
   showValue?: boolean;
   onChange?: (e) => void;
+  disabled?: boolean;
 }) => {
   const percent = props.value / props.max;
   return (
@@ -19,7 +22,9 @@ export default ({
       {showValue && <span>{props.value}</span>}
       <input
         type="range"
-        className={styles['input-range']}
+        className={classnames(styles['input-range'], {
+          [styles.disabled]: props.disabled,
+        })}
         {...props}
         onChange={e => onChange(Number(e.target.value))}
         style={{
