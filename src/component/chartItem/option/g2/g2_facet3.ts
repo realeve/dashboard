@@ -10,7 +10,7 @@ export default (
   x = String(x);
   y = String(y);
 
-  chart.source(data, {
+  chart.data(data, {
     [legend]: {
       sync: type !== 'line',
     },

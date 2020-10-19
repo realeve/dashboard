@@ -22,6 +22,14 @@
             "type": "regular_bar",
             "title": "折线柱图",
             "image": "/img/icons/02_barChartLine.png"
+          },
+          {
+            "name": "g2.waterfall",
+            "key": "waterfall",
+            "engine": "g2",
+            "type": "regular_bar",
+            "title": "瀑布图",
+            "image": "/img/icons/02_barChartLine.png"
           }
         ]
       }

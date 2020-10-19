@@ -633,6 +633,15 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     max: 1,
     step: 0.1,
   },
+  {
+    key: 'lineWidth',
+    defaultValue: 2,
+    title: '线宽',
+    type: 'range',
+    min: 1,
+    max: 20,
+    step: 1,
+  },
 ];
 
 export const getLegendPosition = ({ legendAlign = 'center', legendPosition = 'top' }) => {

@@ -18,7 +18,7 @@ const lineNBar = (
   x = String(x);
   y = String(y);
 
-  chart.source(data, {
+  chart.data(data, {
     [y]: {
       alias: header[y],
       sync: true,
@@ -103,7 +103,7 @@ const column = (
   legend = String(legend);
   x = String(x);
   y = String(y);
-  chart.source(data, {
+  chart.data(data, {
     [y]: {
       alias: header[y],
       sync: true,

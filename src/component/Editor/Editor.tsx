@@ -718,7 +718,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }
 
     this.console.log('append jsxs', jsxs, appendIndex, scopeId);
-    console.log(this.getViewport().jsxs);
+    // console.log(this.getViewport().jsxs);
     return this.getViewport()
       .appendJSXs(jsxs, appendIndex, scopeId)
       .then(({ added }) => this.appendComplete(added, isRestore));

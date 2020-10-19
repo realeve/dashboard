@@ -79,6 +79,10 @@ export const config = [
     key: 'barWidth',
     defaultValue: 20,
     title: '柱状宽度',
+    type: 'range',
+    min: 10,
+    max: 40,
+    step: 2,
   },
   ...lib.getPositionConfig(),
   {
@@ -98,15 +102,6 @@ export const config = [
     title: '系列3图表类型',
     defaultValue: 'line',
     ...lib.chartType,
-  },
-  {
-    key: 'lineWidth',
-    defaultValue: 2,
-    title: '线宽',
-    type: 'range',
-    min: 1,
-    max: 20,
-    step: 1,
   },
 ];
 

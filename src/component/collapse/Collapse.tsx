@@ -5,7 +5,7 @@ import RightOutlined from '@ant-design/icons/RightOutlined';
 
 import CollapsePanel from './CollapsePanel';
 import { ConfigContext } from 'antd/lib/config-provider';
-import animation from 'antd/lib/_util/openAnimation';
+import animation from './openAnimation';
 import { cloneElement } from 'antd/lib/_util/reactNode';
 // 自定义样式
 import 'antd/es/collapse/style';

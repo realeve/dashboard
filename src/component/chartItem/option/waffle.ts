@@ -8,7 +8,7 @@ export default ({ data }, chart) => {
     rows: 5,
   });
 
-  chart.source(dv);
+  chart.data(dv);
   chart.scale({
     x: { nice: false },
     y: { nice: false },

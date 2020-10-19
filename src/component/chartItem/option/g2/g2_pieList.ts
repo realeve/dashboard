@@ -32,7 +32,7 @@ export default (
     }
 `);
 
-  chart.source(data);
+  chart.data(data);
   chart.legend(false);
   //别名
   chart.scale({
@@ -62,7 +62,7 @@ export default (
         innerRadius: innerPercent / 100,
       });
       view
-        .intervalStack()
+        .interval().adjust('stack')
         .position('value')
         .color('type', [G2.Global.colors[facet.colIndex], '#eceef133'])
         .opacity(1)

@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import G2 from '@antv/g2';
+import { Chart } from '@antv/g2';
+import * as R from 'ramda';
+import elementResizeEvent from 'element-resize-event';
 
 export default ({
   className = '',
   style = {},
   option: {
     data,
-    height = 0,
-    padding = [20, 20, 40, 20],
-    onMount, // = ({ data: [] }, e: any) => null,
+    padding = [20, 20, 20, 20],
+    renderer = 'canvas',
+    onMount,
+    onConfigChange,
     transformer,
     ...props
   },
-  renderer = 'canvas',
 }) => {
   const ref = useRef(null);
   const [chart, setChart] = useState(null);
@@ -21,34 +23,52 @@ export default ({
       return;
     }
 
-    height = height || ref.current.offsetHeight;
-
-    const _chart = new G2.Chart({
+    const _chart: Chart = new Chart({
       container: ref.current,
-      forceFit: true,
-      height,
+      autoFit: true,
       padding,
       renderer,
     });
 
     setChart(_chart);
 
+    elementResizeEvent(ref.current, () => {
+      _chart.forceFit();
+    });
+
     // onMount返回数据转换器，在部分数据处理中需要对原始数据做加工
     onMount && onMount({ data, ...props }, _chart);
+
+    return () => {
+      try {
+        elementResizeEvent.unbind(ref.current);
+        _chart.destroy();
+      } catch (_) {}
+    };
   }, []);
 
   // 数据更新
   useEffect(() => {
-    // console.log('will update');
     if (!chart || !data) {
       return;
     }
 
+    let _data = R.clone(data.data);
+
     // 数据转换器
-    let { data: dv } = transformer ? transformer({ data, ...props }, chart) : { data };
+    let { data: dv } = transformer
+      ? transformer({ data: _data, ...props }, chart)
+      : { data: _data };
 
     chart.changeData(dv);
   }, [data]);
+
+  useEffect(() => {
+    if (!chart) {
+      return;
+    }
+    onMount && onMount({ data, ...props }, chart);
+  }, [JSON.stringify(props)]);
 
   return (
     <div

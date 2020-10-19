@@ -14,7 +14,7 @@ export default (
     },
   });
 
-  chart.source(dv, {
+  chart.data(dv, {
     [y]: { scale: true },
   });
 

@@ -1,4 +1,4 @@
-import * as default_1 from '@antv/g2plot/lib/theme/default';
+// import * as default_1 from '@antv/g2plot/lib/theme/default';
 
 export default {
   backgroundStyle: {
@@ -24,7 +24,7 @@ export default {
     alignWithAxis: false,
   },
   description: {
-    padding: [10, 24, default_1.DESCRIPTION_BOTTOM_MARGIN, 24],
+    padding: [10, 24, 10, 24],
     fontFamily: 'PingFang SC',
     fontSize: 12,
     fill: '#54dcf2',

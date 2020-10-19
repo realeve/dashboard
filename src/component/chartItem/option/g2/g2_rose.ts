@@ -14,7 +14,7 @@ export default (
   },
   chart,
 ) => {
-  chart.source(data);
+  chart.data(data);
 
   //别名
   chart.scale(header.map(alias => ({ alias })));

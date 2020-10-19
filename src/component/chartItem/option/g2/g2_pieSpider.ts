@@ -59,7 +59,7 @@ export default (
     as: 'percent',
   });
 
-  chart.source(dv);
+  chart.data(dv);
   chart.tooltip({ showTitle: false });
   chart.legend(false);
   chart.coord('theta', {
@@ -69,7 +69,7 @@ export default (
     endAngle: startAngle + Math.PI * 2,
   });
   chart
-    .intervalStack()
+    .interval().adjust('stack')
     .position('value')
     .color('type', color)
     .opacity(1)

@@ -22,7 +22,7 @@ export default (
     sync: true,
   };
 
-  chart.source(data, {
+  chart.data(data, {
     [y]: yConfig,
   });
 

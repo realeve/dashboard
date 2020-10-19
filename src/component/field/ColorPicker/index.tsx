@@ -23,7 +23,10 @@ const getTabIdx = value => {
   return EColorType.GARDIENT;
 };
 
-const ColorItem = ({ value, onChange, position }) => {
+const ColorItem = ({ value = '', onChange, position }) => {
+  if (!value) {
+    return null;
+  }
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
   return (
     <ColorPicker
@@ -123,7 +126,10 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value, onChange }) => {
+export const PureColor = ({ value = '', onChange }) => {
+  if (!value) {
+    return null;
+  }
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
   return (
     <ColorPicker

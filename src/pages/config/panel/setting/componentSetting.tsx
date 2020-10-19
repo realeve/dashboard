@@ -6,7 +6,7 @@ import { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
 import { IPanelConfig } from '@/models/common';
-
+import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import { Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
@@ -49,6 +49,12 @@ export const FormItem = ({
       break;
     case 'range':
       Item = <InputRange value={Number(value)} onChange={onChange} {...config} />;
+      break;
+    case 'color':
+      Item = <ColorPicker value={value} onChange={onChange} {...config} />;
+      break;
+    case 'purecolor':
+      Item = <PureColor value={value} onChange={onChange} {...config} />;
       break;
   }
   return (

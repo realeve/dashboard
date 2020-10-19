@@ -78,7 +78,7 @@ export const onMount = (
   color = color.reverse();
 
   view1
-    .intervalStack()
+    .interval().adjust('stack')
     .position('value')
     .color('type', color)
     .opacity(1)
@@ -119,7 +119,7 @@ export const onMount = (
     },
   });
   view2
-    .intervalStack()
+    .interval().adjust('stack')
     .position(otherChart === 'bar' ? '1*value' : 'value')
     .color('type', [
       '#063d8a',

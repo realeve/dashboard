@@ -11,6 +11,8 @@ import { BorderItem } from '@/component/widget';
 import { Skeleton } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
 
+import G2 from '@/component/g2';
+
 const Item = ({
   config,
   title,
@@ -22,7 +24,7 @@ const Item = ({
   title?: string;
   onLoad?: (e: string) => void;
 }) => {
-  const { default: method, ...lib } = chartLib[config.key];
+  const { default: method, defaultOption = {}, ...lib } = chartLib[config.key];
   let api = config.api || {};
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   let valid = api?.api_type === 'url' && api?.url?.length > 0;
@@ -51,12 +53,22 @@ const Item = ({
     return (
       <Echarts
         option={method({
-          data: valid ? data : mock,
-          legend: 1,
-          x: 0,
-          y: 2,
+          data: valid ? data : mock, 
           ...(config.componentConfig || {}),
         })}
+        style={style}
+      />
+    );
+  } else if (config.engine === 'g2') {
+    return (
+      <G2
+        option={{
+          data: valid ? data : mock,
+          onMount: method,
+          ...(config.componentConfig || {}),
+          transformer: lib.transformer || null,
+          ...defaultOption,
+        }}
         style={style}
       />
     );
@@ -114,12 +126,6 @@ const Index = ({
     </>
   );
 };
-
-// const ChartPage = props => (
-//   <ErrorBoundary>
-//     <Index {...props} />
-//   </ErrorBoundary>
-// );
 
 export default connect(({ common }: { common: ICommon }) => ({
   page: common.page,

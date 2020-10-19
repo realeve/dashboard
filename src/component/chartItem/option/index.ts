@@ -25,9 +25,6 @@ export { g2PieOther };
 
 export { default as g2PieSpider } from './g2/g2_pieSpider';
 
-import * as waterfall from './g2/waterfall';
-export { waterfall };
-
 // min-max-average区间图
 import * as rangeLine from './g2/rangeLine';
 export { rangeLine };
@@ -35,9 +32,13 @@ export { rangeLine };
 // -------------    自定义接口配置项     ----------
 
 // 01.水平正负柱状图
-import * as barChartPositiveNegative from './barChart/positiveNegative'
-export {  barChartPositiveNegative } 
+import * as barChartPositiveNegative from './barChart/positiveNegative';
+export { barChartPositiveNegative };
 
 // 02.折线柱图
-import * as barChartLine from './barChart/line'
-export {  barChartLine } 
+import * as barChartLine from './barChart/line';
+export { barChartLine };
+
+// 03.瀑布图
+import * as waterfall from './g2/waterfall';
+export { waterfall };
