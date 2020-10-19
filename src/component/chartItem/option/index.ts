@@ -1,7 +1,6 @@
 export const textColor = '#9aa8d4';
 
 export { default as roundBar } from './roundBar';
-export { default as pie } from './pie';
 
 export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
@@ -52,3 +51,8 @@ export { water };
 // 06.百分比环图
 import * as ringchart from './ringchart';
 export { ringchart };
+
+// 07.动态饼图
+export { default as pie } from './pie';
+import * as dynamicPie from './other/dynamicPie';
+export { dynamicPie };

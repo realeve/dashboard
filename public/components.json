@@ -36,6 +36,26 @@
     ]
   },
   {
+    "title": "饼图",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
+    "list": [
+      {
+        "title": "百分比",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+        "list": [
+          {
+            "name": "other.dynamicPie",
+            "key": "dynamicPie",
+            "engine": "other",
+            "type": "regular_pie",
+            "title": "动态饼图",
+            "image": "/img/icons/07_dynamicpie.png"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "素材",
     "icon": "icon-com-material",
     "list": [

@@ -102,8 +102,6 @@ const Index = ({
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
   let config = R.find<IPanelConfig[]>(R.propEq('id', chartid))(panel) as IPanelConfig;
 
-  const { defaultOption = {} } = chartLib[config.key];
-
   let page = R.clone(_page);
   if (config.useGeneralStyle) {
     page = { ...config.general, ...page };

@@ -75,15 +75,7 @@ let chartList = [
   {
     name: '渐变柱形图',
     type: 'roundBar',
-  },
-  {
-    name: '动态环图',
-    type: 'pie',
-  },
-  {
-    name: '玫瑰图',
-    type: 'rose',
-  },
+  }, 
   {
     name: '华夫图',
     type: 'waffle',

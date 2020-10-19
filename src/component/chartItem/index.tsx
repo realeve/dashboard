@@ -160,38 +160,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
               ],
             })}
           />
-        );
-      case 'pie':
-        return (
-          <Pie
-            option={{
-              data: [
-                ['体育技能', 17],
-                ['体育行为', 23],
-                ['体质健康', 27],
-                ['体育意识', 33],
-                ['体育知识', 29],
-              ],
-              title: '某指标',
-            }}
-          />
-        );
-      case 'rose':
-        return (
-          <Pie
-            option={{
-              data: [
-                ['体育技能', 17],
-                ['体育行为', 23],
-                ['体质健康', 27],
-                ['体育意识', 33],
-                ['体育知识', 29],
-              ],
-              title: '某指标',
-              roseType: 'rose',
-            }}
-          />
-        );
+        ); 
       case 'radialbar':
         return (
           <Echarts

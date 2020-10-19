@@ -1,6 +1,6 @@
 import color from '@/component/echarts/themeColor';
 export type circlePos = 'inner' | 'outter';
-export default ({ data: value, title, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
+export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
   let _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
   let data = value.map(item => ({
     value: item[y],
@@ -15,7 +15,7 @@ export default ({ data: value, title, x = 0, y = 1, circlePos = 'inner', roseTyp
         ]
       : [
           ['35%', '81%'],
-          ['73%', '81%'],
+          ['73%', '84%'],
         ];
 
   return {
@@ -37,8 +37,7 @@ export default ({ data: value, title, x = 0, y = 1, circlePos = 'inner', roseTyp
         color: '#f2f2f2',
       },
     },
-    series: [
-      // 主要展示层的
+    series: [ 
       {
         radius: radius[0],
         center: ['50%', '50%'],
@@ -52,28 +51,10 @@ export default ({ data: value, title, x = 0, y = 1, circlePos = 'inner', roseTyp
         },
         animation: true,
         label: {
-          // position: 'center',
           show: false,
-          // formatter: function(params) {
-          //   return `{rate|${params.percent}%}\n\n{nameStyle|${params.name}}`;
-          // },
-          // height: 45,
-          // rich: {
-          //   nameStyle: {
-          //     fontSize: 16,
-          //     color: '#9aa8d4',
-          //     align: 'left',
-          //   },
-          //   rate: {
-          //     fontSize: 20,
-          //     color: '#1ab4b8',
-          //     align: 'center',
-          //   },
-          // },
         },
         data,
       },
-      // 边框的设置
       {
         radius: radius[1],
         center: ['50%', '50%'],
