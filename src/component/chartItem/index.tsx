@@ -9,7 +9,6 @@ import { CloseOutlined } from '@ant-design/icons';
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import {
-  ProgressBar,
   BorderItem,
   ScrollBoard,
   ScrollRankingBoard,
@@ -24,9 +23,6 @@ import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
-import { useInterval } from 'react-use';
-import * as R from 'ramda';
-
 export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
   // const [data, setData] = useState({
@@ -59,8 +55,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
           <span>65%</span>
         </Decotation>
       );
-    case 'progress':
-      return <ProgressBar percent={43.3} title="指标占比" {...props} />;
     case 'scrollboard':
       return (
         <ScrollBoard
@@ -216,10 +210,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
             renderer="svg"
           />
         );
-      case 'ringchart':
-        return <Echarts option={lib.ringchart({ value: 73, title: '某项目' })} renderer="svg" />;
-      case 'water':
-        return <Echarts option={lib.water({ value: 0.3, title: '某項目' })} renderer="canvas" />;
       case 'pictorial':
         let theme: 'rect' | 'round' = Math.random() > 0.5 ? 'rect' : 'round';
         return (

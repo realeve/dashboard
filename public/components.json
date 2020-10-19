@@ -58,6 +58,14 @@
             "type": "others",
             "title": "水球图",
             "image": "/img/icons/05_water.png"
+          },
+          {
+            "name": "other.ringchart",
+            "key": "ringchart",
+            "engine": "echarts",
+            "type": "others",
+            "title": "百分比环图",
+            "image": "/img/icons/06_ringchart.png"
           }
         ]
       }

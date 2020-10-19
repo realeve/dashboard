@@ -3,7 +3,6 @@ export const textColor = '#9aa8d4';
 export { default as roundBar } from './roundBar';
 export { default as pie } from './pie';
 
-export { default as ringchart } from './ringchart';
 export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
 export { default as pictorialBar } from './pictorialBar';
@@ -49,3 +48,7 @@ export { progressBar };
 // 05.水球图
 import * as water from './water';
 export { water };
+
+// 06.百分比环图
+import * as ringchart from './ringchart';
+export { ringchart };

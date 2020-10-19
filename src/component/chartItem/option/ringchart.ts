@@ -1,22 +1,83 @@
 import echarts from 'echarts';
-export default ({ value, title = '' }) => {
+import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+
+export let mock: IChartMock = {
+  data: [[45.7]],
+  title: '百分比环图_MOCK数据',
+  header: ['指标值'],
+  rows: 1,
+  hash: 'mockdata',
+};
+
+export const config = [
+  {
+    key: 'valueFontSize',
+    defaultValue: 40,
+    title: '值字号',
+    step: 2,
+    type: 'range',
+    min: 20,
+    max: 80,
+  },
+  {
+    key: 'titleFontSize',
+    defaultValue: 16,
+    title: '标题字号',
+    step: 2,
+    type: 'range',
+    min: 0,
+    max: 60,
+  },
+  {
+    key: 'barWidth',
+    defaultValue: 40,
+    title: '圆环宽度',
+    step: 2,
+    type: 'range',
+    min: 10,
+    max: 100,
+  },
+];
+
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: 'http://localhost:8000/mock/04_progress_bar.json',
+  interval: 5,
+  config: [
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+  ],
+};
+
+export const defaultOption = {
+  renderer: 'svg',
+};
+
+export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, barWidth = 40 }) => {
+  let value = _data.data[0][x];
+  let title = _data.title;
   let _title = {
     text: value,
     textStyle: {
       color: '#01c4a3',
-      fontSize: 40,
+      fontSize: valueFontSize,
     },
     itemGap: -10, // 主副标题距离
     left: 'center',
     top: 'center',
   };
-  if (title.length > 0) {
+  if (title.length > 0 && titleFontSize > 0) {
     _title = {
       ..._title,
       subtext: title,
       subtextStyle: {
         color: '#f2f2f2',
-        fontSize: 14,
+        fontSize: titleFontSize,
       },
     };
   }
@@ -85,7 +146,7 @@ export default ({ value, title = '' }) => {
         ],
         coordinateSystem: 'polar',
         roundCap: true,
-        barWidth: 40,
+        barWidth: barWidth,
         barGap: '-100%', // 两环重叠
         z: 2,
       },
@@ -105,7 +166,7 @@ export default ({ value, title = '' }) => {
         ],
         coordinateSystem: 'polar',
         roundCap: true,
-        barWidth: 40,
+        barWidth: barWidth,
         barGap: '-100%', // 两环重叠
         z: 1,
       },
