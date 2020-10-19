@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as R from 'ramda';
-
-import { useAutoResize, co } from '@/utils/useAutoResize';
+import { useMeasure } from 'react-use';
+import { co } from '@/utils/useAutoResize';
 
 import styles from './index.less';
 
@@ -144,7 +144,10 @@ function calcAligns(mergedConfig, header) {
 }
 
 const ScrollBoard = ({ onClick, config, className, style }) => {
-  const { width, height, domRef } = useAutoResize();
+  // window resize时，以下语句才生效；在画板编辑模式中需要监听组件大小
+  // const { width, height, domRef } = useAutoResize();
+
+  const [domRef, { width, height }] = useMeasure();
 
   const [state, setState] = useState({
     mergedConfig: null,
@@ -314,6 +317,13 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     return co(loop);
   }, [config, domRef.current]);
+
+  // useEffect(() => {
+  //   elementResizeEvent(domRef.current, onResize);
+  //   return () => {
+  //     elementResizeEvent.unbind(domRef.current);
+  //   };
+  // }, []);
 
   useEffect(onResize, [width, height, domRef.current]);
 

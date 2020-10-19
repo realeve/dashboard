@@ -56,10 +56,10 @@ let chartList = [
     name: '占位区域',
     type: '_blank',
   },
-  {
-    name: '滚动表单',
-    type: 'scrollBoard',
-  },
+  // {
+  //   name: '滚动表单',
+  //   type: 'scrollBoard',
+  // },
   {
     name: '排名表',
     type: 'rankingBoard',

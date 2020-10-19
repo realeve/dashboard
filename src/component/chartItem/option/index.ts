@@ -56,3 +56,7 @@ export { ringchart };
 export { default as pie } from './pie';
 import * as dynamicPie from './other/dynamicPie';
 export { dynamicPie };
+
+// 08.滚动表单
+import * as scrollBoard from './other/scroll_board';
+export { scrollBoard };

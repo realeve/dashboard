@@ -88,6 +88,20 @@
             "image": "/img/icons/06_ringchart.png"
           }
         ]
+      },
+      {
+        "title": "列表",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+        "list": [
+          {
+            "name": "other.scrollBoard",
+            "key": "scrollBoard",
+            "engine": "other",
+            "type": "others",
+            "title": "滚动表单",
+            "image": "/img/icons/04_progress_bar.png"
+          }
+        ]
       }
     ]
   },
