@@ -49,20 +49,12 @@ let chartList = [
     type: 'line',
   },
   {
-    name: '瀑布图',
-    type: 'waterfall',
-  },
-  {
     name: '雷达图',
     type: 'radar',
   },
   {
     name: '占位区域',
     type: '_blank',
-  },
-  {
-    name: '进度条',
-    type: 'progress',
   },
   {
     name: '滚动表单',
@@ -83,10 +75,6 @@ let chartList = [
   {
     name: '百分比环图',
     type: 'RingChart',
-  },
-  {
-    name: '水球图',
-    type: 'water',
   },
   {
     name: '渐变柱形图',

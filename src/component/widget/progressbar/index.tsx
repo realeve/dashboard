@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './index.less';
-import { useTimeout } from 'react-use';
-import classnames from 'classnames';
 
-export default ({ percent = 45.2, title = '指标百分比' }) => {
-  const [position, setPosition] = useState(0);
-  const ready = useTimeout(1500);
-  useEffect(() => {
-    if (ready) {
-      setPosition(percent);
-    }
-  }, [ready, percent]);
-
+export default ({ percent: position = 45.2, style }) => {
   return (
-    <div className={styles.chartItem}>
-      <div className={styles.title}>{title}</div>
+    <div className={styles.chartItem} style={style}>
       <div className={styles['progress-bar-warpper']}>
         <div className={styles['progress-bar']}>
           <div
@@ -41,7 +30,6 @@ export default ({ percent = 45.2, title = '指标百分比' }) => {
           />
         </div>
       </div>
-      }
     </div>
   );
 };

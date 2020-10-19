@@ -21,6 +21,7 @@ const appendConfig: IChartConfig[] = [
     type: 'switch',
     checkedChildren: 'ajax',
     unCheckedChildren: '否',
+    defaultValue: 'ajax',
   },
   {
     title: '定时刷新(秒)',

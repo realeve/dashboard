@@ -29,7 +29,35 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "瀑布图",
-            "image": "/img/icons/02_barChartLine.png"
+            "image": "/img/icons/03_waterfall.png"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "素材",
+    "icon": "icon-com-material",
+    "list": [
+      {
+        "title": "百分比",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+        "list": [
+          {
+            "name": "other.percent",
+            "key": "progressBar",
+            "engine": "other",
+            "type": "others",
+            "title": "进度条",
+            "image": "/img/icons/04_progress_bar.png"
+          },
+          {
+            "name": "other.water",
+            "key": "water",
+            "engine": "echarts",
+            "type": "others",
+            "title": "水球图",
+            "image": "/img/icons/05_water.png"
           }
         ]
       }

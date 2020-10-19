@@ -11,7 +11,14 @@ export interface WidgetBorder {
 }
 export const borderNames = Object.keys(assets.borders);
 
-export default ({ name, children, style, className, ...props }: WidgetBorder) => {
+export default ({
+  name,
+  children,
+  style,
+  showBorder = true,
+  className,
+  ...props
+}: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
   // let padding = {};
   // if (img) {
@@ -20,7 +27,7 @@ export default ({ name, children, style, className, ...props }: WidgetBorder) =>
   //     padding['padding' + keyName] = img[key];
   //   });
   // }
-  if (R.isNil(url)) {
+  if (R.isNil(url) || !showBorder) {
     return (
       <div style={style} className={className} {...props}>
         {children}
@@ -32,13 +39,11 @@ export default ({ name, children, style, className, ...props }: WidgetBorder) =>
     <div
       style={{
         borderImageSource: `url(${url})`,
-        // ...padding,
         ...style,
       }}
       {...props}
       className={classnames(styles.widgetBorder, className)}
     >
-      {/* {name && url && <img src={url} className={styles.borderImg} />} */}
       {children}
     </div>
   );

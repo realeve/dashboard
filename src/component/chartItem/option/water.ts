@@ -1,17 +1,79 @@
-export default ({ value, title = '' }) => {
-  let data = [value, value, value];
+import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+
+export let mock: IChartMock = {
+  data: [[45.7]],
+  title: '水球图_MOCK数据',
+  header: ['指标值'],
+  rows: 1,
+  hash: 'mockdata',
+};
+
+export const config = [
+  {
+    key: 'valueFontSize',
+    defaultValue: 30,
+    title: '值字号',
+    step: 2,
+    type: 'range',
+    min: 20,
+    max: 80,
+  },
+  {
+    key: 'percentFontSize',
+    defaultValue: 16,
+    title: '百分比字号',
+    step: 2,
+    type: 'range',
+    min: 0,
+    max: 40,
+  },
+  {
+    key: 'titleFontSize',
+    defaultValue: 16,
+    title: '标题字号',
+    step: 2,
+    type: 'range',
+    min: 0,
+    max: 60,
+  },
+];
+
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: 'http://localhost:8000/mock/04_progress_bar.json',
+  interval: 5,
+  config: [
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+  ],
+};
+
+export default ({
+  data: _data,
+  x = 0,
+  valueFontSize = 30,
+  percentFontSize = 16,
+  titleFontSize = 16,
+}) => {
+  let value = _data.data[0][x];
+  let data = [value / 100, value / 100, value / 100];
 
   let option = {
     title: {
-      text: `${(value * 100).toFixed(0)} {a|%}`,
+      text: `${value.toFixed(0)}{a| %}`,
       textStyle: {
-        fontSize: 30,
+        fontSize: valueFontSize,
         fontFamily: 'Microsoft Yahei',
         fontWeight: 'normal',
         color: '#bcb8fb',
         rich: {
           a: {
-            fontSize: 16,
+            fontSize: percentFontSize,
           },
         },
       },
@@ -31,8 +93,9 @@ export default ({ value, title = '' }) => {
             top: 'middle',
             style: {
               fill: '#aab2fa',
-              text: title,
-              font: '16px Microsoft YaHei',
+              text: _data.title,
+              fontSize: titleFontSize,
+              fontFamily: 'Microsoft Yahei',
             },
           },
         ],

@@ -1,6 +1,5 @@
 export const textColor = '#9aa8d4';
 
-export { default as water } from './water';
 export { default as roundBar } from './roundBar';
 export { default as pie } from './pie';
 
@@ -42,3 +41,11 @@ export { barChartLine };
 // 03.瀑布图
 import * as waterfall from './g2/waterfall';
 export { waterfall };
+
+// 04.进度条
+import * as progressBar from './other/progress_bar';
+export { progressBar };
+
+// 05.水球图
+import * as water from './water';
+export { water };

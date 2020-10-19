@@ -144,6 +144,18 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 unCheckedChildren="隐藏"
               />
             </Field>
+            <Field title="显示边框">
+              <Switch
+                checked={panel[selectedIdx]?.showBorder}
+                onChange={showBorder => {
+                  updateAttrib({
+                    showBorder,
+                  });
+                }}
+                checkedChildren="显示"
+                unCheckedChildren="隐藏"
+              />
+            </Field>
             <Field title="使用全局样式">
               <Switch
                 checked={panel[selectedIdx]?.useGeneralStyle}

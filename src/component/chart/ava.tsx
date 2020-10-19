@@ -5,7 +5,7 @@ import _ from 'lodash';
 import theme from './theme';
 import { showDefaultOption, IAChart } from './lib';
 import * as g2plot from '@antv/g2plot';
-g2plot.registerGlobalTheme('dashboard', theme);
+// g2plot.registerGlobalTheme('dashboard', theme);
 
 import { themeName } from '@/utils/setting';
 

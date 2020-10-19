@@ -5,7 +5,7 @@ import theme from './theme';
 import { showDefaultOption, IAChart } from './lib';
 import { themeName } from '@/utils/setting';
 
-g2plot.registerGlobalTheme('dashboard', theme);
+// g2plot.registerGlobalTheme('dashboard', theme);
 
 export const AChart = ({
   option: {

@@ -50,10 +50,11 @@ const Item = ({
   }
 
   if (config.engine === 'echarts') {
+    console.log(config,data,mock)
     return (
       <Echarts
         option={method({
-          data: valid ? data : mock, 
+          data: valid ? data : mock,
           ...(config.componentConfig || {}),
         })}
         style={style}
@@ -67,6 +68,18 @@ const Item = ({
           onMount: method,
           ...(config.componentConfig || {}),
           transformer: lib.transformer || null,
+          ...defaultOption,
+        }}
+        style={style}
+      />
+    );
+  } else if (config.engine === 'other') {
+    const Item = method;
+    return (
+      <Item
+        option={{
+          data: valid ? data : mock,
+          ...(config.componentConfig || {}),
           ...defaultOption,
         }}
         style={style}
@@ -118,6 +131,7 @@ const Index = ({
           width: '100%',
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
         }}
+        showBorder={config.showBorder}
       >
         <ErrorBoundary>
           <Item config={config} title={title} onLoad={setTitle} />
