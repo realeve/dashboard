@@ -56,8 +56,8 @@
     ]
   },
   {
-    "title": "素材",
-    "icon": "icon-com-material",
+    "title": "其它",
+    "icon": "icon-com-decorate",
     "list": [
       {
         "title": "百分比",
@@ -99,7 +99,15 @@
             "engine": "other",
             "type": "others",
             "title": "滚动表单",
-            "image": "/img/icons/04_progress_bar.png"
+            "image": "/img/icons/08_scroll_board.png"
+          },
+          {
+            "name": "other.rankingBoard",
+            "key": "rankingBoard",
+            "engine": "other",
+            "type": "others",
+            "title": "排名表",
+            "image": "/img/icons/09_ranking_board.png"
           }
         ]
       }

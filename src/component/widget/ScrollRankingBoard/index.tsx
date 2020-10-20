@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import { useAutoResize, co } from '@/utils/useAutoResize';
+import { co } from '@/utils/useAutoResize';
 
 import styles from './index.less';
 
 import { emojiList } from '../ScrollBoard';
+import { useMeasure } from 'react-use';
 
 import * as R from 'ramda';
 const deepClone = R.clone,
@@ -47,6 +48,12 @@ const defaultConfig = {
    * @example unit = 'ton'
    */
   unit: '',
+
+  fontSize: 16,
+  fontWeight: 'normal',
+  fontColor: '#9aa8d4',
+  padding: 6,
+  barHeight: 16,
 };
 
 function calcRows({ data, rowNum }) {
@@ -78,7 +85,7 @@ function calcRows({ data, rowNum }) {
 }
 
 const ScrollRankingBoard = ({ config, className, style }) => {
-  const { width, height, domRef } = useAutoResize();
+  const [domRef, { width, height }] = useMeasure();
 
   const [state, setState] = useState({
     mergedConfig: null,
@@ -215,8 +222,22 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     className,
   ]);
 
+  const fontConfig = {
+    fontSize: config.fontSize,
+    fontWeight: config.fontWeight,
+    color: config.fontColor,
+  };
+ 
   return (
-    <div className={classNames} style={style} ref={domRef}>
+    <div
+      className={classNames}
+      style={{
+        ...style,
+        ...fontConfig,
+        padding: `0 ${config.padding}px`,
+      }}
+      ref={domRef}
+    >
       {rows.map((item, i) => (
         <div
           className={styles['row-item']}
@@ -224,15 +245,18 @@ const ScrollRankingBoard = ({ config, className, style }) => {
           style={{ height: `${heights[i]}px` }}
         >
           <div className={styles['ranking-info']}>
-            <div className={styles.rank}>
+            <div className={styles.rank} style={fontConfig}>
               {item.ranking <= 3 ? emojiList[item.ranking - 1] : item.ranking}
             </div>
             <div className={styles['info-name']}>{item.name}</div>
-            <div className={styles['info-value']}>{item.value + mergedConfig.unit}</div>
+            <div className={styles['info-value']}>{item.value} {mergedConfig.unit}</div>
           </div>
 
           <div className={styles['ranking-column']}>
-            <div className={styles['inside-column']} style={{ width: `${item.percent}%` }}>
+            <div
+              className={styles['inside-column']}
+              style={{ width: `${item.percent}%`, height: config.barHeight,borderRadius:`0 ${config.barHeight/2}px ${config.barHeight/2}px 0` }}
+            >
               <div className={styles.shine} />
             </div>
           </div>

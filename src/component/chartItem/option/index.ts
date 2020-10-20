@@ -60,3 +60,7 @@ export { dynamicPie };
 // 08.滚动表单
 import * as scrollBoard from './other/scroll_board';
 export { scrollBoard };
+
+// 09.排名表
+import * as rankingBoard from './other/rankingBoard';
+export { rankingBoard };

@@ -10,7 +10,7 @@ export interface IChartConfig {
 
 // 默认数据定义
 export interface IChartMock {
-  data: (string | number)[][];
+  data: ((string | number)[] | {})[];
   title: string;
   header: string[];
   rows: number;

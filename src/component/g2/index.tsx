@@ -28,6 +28,7 @@ export default ({
       autoFit: true,
       padding,
       renderer,
+      supportCSSTransform: true,
     });
 
     setChart(_chart);

@@ -10,10 +10,7 @@ import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import {
   BorderItem,
-  ScrollBoard,
-  ScrollRankingBoard,
   FlipBoard,
-  Pie,
   Percent,
   DigitalScroll,
   Decotation,
@@ -25,28 +22,6 @@ import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
 export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
-  // const [data, setData] = useState({
-  //   header: ['类别', '数值'],
-  //   data: [
-  //     ['日用品', 120],
-  //     ['伙食费', 900],
-  //     ['交通费', 200],
-  //     ['水电费', 300],
-  //     ['房租', 1200],
-  //     ['商场消费', 1000],
-  //     ['应酬红包', -200],
-  //   ],
-  // });
-
-  // useInterval(() => {
-
-  //   let res = R.clone(data);
-  //   res.data = res.data.map(item => {
-  //     item[1] += Math.random() * 200;
-  //     return item;
-  //   });
-  //   setData(res);
-  // }, 3000);
 
   switch (itemType) {
     case 'decotation':
@@ -54,82 +29,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         <Decotation name="粉色蓝色透明圆形科技图标内容容器" {...props}>
           <span>65%</span>
         </Decotation>
-      );
-    case 'scrollboard':
-      return (
-        <ScrollBoard
-          config={{
-            header: ['列1', '列2', '列3'],
-            data: [
-              ['23', '行1列2', '行1列3'],
-              ['43', '行2列2', '行2列3'],
-              ['133', '行3列2', '行3列3'],
-              ['54', '行4列2', '行4列3'],
-              ['32', '行5列2', '行5列3'],
-              ['56', '行6列2', '行6列3'],
-              ['76', '行7列2', '行7列3'],
-              ['543', '行8列2', '行8列3'],
-              ['332', '行9列2', '行9列3'],
-              ['1121', '行10列2', '行10列3'],
-            ],
-            index: true,
-            columnWidth: [50],
-            align: ['center'],
-            carousel: 'page',
-            waitTime: 4000,
-          }}
-        />
-      );
-    case 'rankingboard':
-      return (
-        <ScrollRankingBoard
-          config={{
-            waitTime: 4000,
-            data: [
-              {
-                name: '周口',
-                value: 55,
-              },
-              {
-                name: '南阳',
-                value: 120,
-              },
-              {
-                name: '西峡',
-                value: 78,
-              },
-              {
-                name: '驻马店',
-                value: 66,
-              },
-              {
-                name: '新乡',
-                value: 80,
-              },
-              {
-                name: '信阳',
-                value: 45,
-              },
-              {
-                name: '漯河',
-                value: 29,
-              },
-              {
-                name: '漯河2',
-                value: 129,
-              },
-              {
-                name: '漯河3',
-                value: 59,
-              },
-              {
-                name: '漯河4',
-                value: 19,
-              },
-            ],
-            carousel: 'page',
-          }}
-        />
       );
   }
 
@@ -160,7 +59,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
               ],
             })}
           />
-        ); 
+        );
       case 'radialbar':
         return (
           <Echarts

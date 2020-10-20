@@ -1,12 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
-import { Column } from '@antv/g2plot';
-import { registerAction, registerInteraction } from '@antv/g2';
-import ElementLinkByColor from '@antv/g2/lib/interaction/action/element/link-by-color';
+import { Column, G2 } from '@antv/g2plot';
 
-registerAction('element-link-by-color', ElementLinkByColor);
-console.log(ElementLinkByColor)
-registerInteraction('element-link', {
+G2.registerInteraction('element-link', {
   start: [{ trigger: 'interval:mouseenter', action: 'element-link-by-color:link' }],
   end: [{ trigger: 'interval:mouseleave', action: 'element-link-by-color:unlink' }],
 });
