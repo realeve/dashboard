@@ -8,7 +8,7 @@
         "icon": "com-font datav-com-icon icon-com-default icon-com-regular_bar icon-com-regular",
         "list": [
           {
-            "name": "@ChJ.limit_free/horizontal-positive-negative-bar-chart",
+            "name": "echarts.horizontal-positive-negative-bar-chart",
             "key": "barChartPositiveNegative",
             "engine": "echarts",
             "type": "regular_bar",
@@ -16,7 +16,7 @@
             "image": "/img/icons/01_barChartPositiveNegative.png"
           },
           {
-            "name": "@ChJ.limit_free/line-bar-chart",
+            "name": "echarts.line-bar-chart",
             "key": "barChartLine",
             "engine": "echarts",
             "type": "regular_bar",
@@ -30,6 +30,14 @@
             "type": "regular_bar",
             "title": "瀑布图",
             "image": "/img/icons/03_waterfall.png"
+          },
+          {
+            "name": "echarts.gardient_bar",
+            "key": "gardient_bar",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "渐变柱形图",
+            "image": "/img/icons/10_gardient_bar.png"
           }
         ]
       }

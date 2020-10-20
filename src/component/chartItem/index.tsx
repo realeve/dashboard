@@ -42,24 +42,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
-
-      case 'roundbar':
-        return (
-          <Echarts
-            option={lib.roundBar({
-              data: [
-                ['新能源智能汽车', 23],
-                ['航天航空', 12],
-                ['第三代半导体', 18],
-                ['产业金融', 12],
-                ['商务会展', 43],
-                ['临空经济', 23],
-                ['文创旅游', 32],
-                ['智能制造业', 21],
-              ],
-            })}
-          />
-        );
+ 
       case 'radialbar':
         return (
           <Echarts

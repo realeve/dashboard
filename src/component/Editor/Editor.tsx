@@ -49,8 +49,8 @@ export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     top: 80,
     left: 80,
-    width: 320,
-    height: 180,
+    width: 600,
+    height: 320,
     ...style,
   };
 

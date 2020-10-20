@@ -2,7 +2,7 @@ import React from 'react';
 import echarts from 'echarts';
 import * as lib from '../lib';
 
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {
   data: [

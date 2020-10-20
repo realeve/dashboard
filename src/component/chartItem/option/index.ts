@@ -1,7 +1,5 @@
 export const textColor = '#9aa8d4';
 
-export { default as roundBar } from './roundBar';
-
 export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
 export { default as pictorialBar } from './pictorialBar';
@@ -64,3 +62,7 @@ export { scrollBoard };
 // 09.排名表
 import * as rankingBoard from './other/rankingBoard';
 export { rankingBoard };
+
+// 10.渐变柱图
+import * as gardient_bar from './barChart/gardient_bar';
+export { gardient_bar };
