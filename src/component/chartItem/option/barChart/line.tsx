@@ -85,21 +85,26 @@ export const config = [
     step: 2,
   },
   ...lib.getPositionConfig(),
+
+  {
+    type: 'divider',
+    title: '系列图表类型',
+  },
   {
     key: 'chart1',
-    title: '系列1图表类型',
+    title: '系列1',
     defaultValue: 'bar',
     ...lib.chartType,
   },
   {
     key: 'chart2',
-    title: '系列2图表类型',
+    title: '系列2',
     defaultValue: 'bar',
     ...lib.chartType,
   },
   {
     key: 'chart3',
-    title: '系列3图表类型',
+    title: '系列3',
     defaultValue: 'line',
     ...lib.chartType,
   },

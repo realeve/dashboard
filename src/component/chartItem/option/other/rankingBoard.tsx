@@ -98,6 +98,18 @@ export const config = [
       },
     ],
   },
+  {
+    key: 'unit',
+    defaultValue: '',
+    placeholder: '输入数值后显示的单位',
+    title: '数值单位',
+    valueType: 'text',
+    type: 'input',
+  },
+  {
+    type: 'divider',
+    title: '样式设置',
+  },
   ...lib.getFontConfig(),
   {
     key: 'padding',
@@ -116,14 +128,6 @@ export const config = [
     type: 'range',
     min: 1,
     max: 60,
-  },
-  {
-    key: 'unit',
-    defaultValue: '',
-    placeholder:'输入数值后显示的单位',
-    title: '数值单位',
-    valueType: 'text',
-    type: 'input',
   },
 ];
 

@@ -553,10 +553,10 @@ export let getAxis: (
 };
 
 interface IPositionConfig {
-  key: string;
-  defaultValue: string | number | boolean;
+  key?: string;
+  defaultValue?: string | number | boolean;
   title: string;
-  type: 'radio' | 'range';
+  type: 'radio' | 'range' | 'divider';
   option?: {
     title: string | React.ReactNode;
     value: string | number | boolean;
@@ -565,9 +565,13 @@ interface IPositionConfig {
 
 export const getPositionConfig: () => IPositionConfig[] = () => [
   {
+    type: 'divider',
+    title: '图例配置',
+  },
+  {
     key: 'legendAlign',
     defaultValue: 'center',
-    title: '图例对齐',
+    title: '对齐',
     type: 'radio',
     option: [
       {
@@ -587,7 +591,7 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
   {
     key: 'legendPosition',
     defaultValue: 'top',
-    title: '图例位置',
+    title: '位置',
     type: 'radio',
     option: [
       {
@@ -609,9 +613,13 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     ],
   },
   {
+    type: 'divider',
+    title: '拆线图样式',
+  },
+  {
     key: 'smooth',
     defaultValue: true,
-    title: '曲线样式',
+    title: '曲线类型',
     type: 'radio',
     option: [
       {
@@ -694,9 +702,13 @@ export const getChartType = (type: string, opacity = 1) => {
 // 文字配置
 export const getFontConfig = (fontSize = 18, color = '#f2f2f2') => [
   {
+    type: 'divider',
+    title: '文字样式',
+  },
+  {
     key: 'fontSize',
     defaultValue: fontSize,
-    title: '文字字号',
+    title: '字号',
     step: 1,
     type: 'range',
     min: 12,
@@ -705,7 +717,7 @@ export const getFontConfig = (fontSize = 18, color = '#f2f2f2') => [
   {
     key: 'fontWeight',
     defaultValue: 'normal',
-    title: '文字加粗',
+    title: '加粗',
     type: 'radio',
     option: [
       {
@@ -729,7 +741,7 @@ export const getFontConfig = (fontSize = 18, color = '#f2f2f2') => [
   {
     key: 'fontColor',
     defaultValue: color,
-    title: '文字颜色',
+    title: '颜色',
     type: 'purecolor',
   },
 ];

@@ -10,6 +10,7 @@ import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import { Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
+import { Divider } from 'antd';
 
 export const FormItem = ({
   value,
@@ -24,6 +25,9 @@ export const FormItem = ({
   type?: string;
   [key: string]: any;
 }) => {
+  if (type === 'divider') {
+    return <Divider plain>{title}</Divider>;
+  }
   let Item: null | React.ReactNode = null;
   switch (type) {
     case 'input':

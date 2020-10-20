@@ -37,21 +37,25 @@ export let mock: IChartMock = {
  */
 export const config: IChartConfig[] = [
   {
+    type: 'divider',
+    title: '颜色设置',
+  },
+  {
     key: 'color_rising',
     defaultValue: 'rgb(240,102,74)',
-    title: '颜色_正值',
+    title: '正值',
     type: 'purecolor',
   },
   {
     key: 'color_falling',
     defaultValue: 'rgb(48,191,120)',
-    title: '颜色_负值',
+    title: '负值',
     type: 'purecolor',
   },
   {
     key: 'color_total',
     defaultValue: '#1890ff',
-    title: '颜色_合计',
+    title: '合计',
     type: 'purecolor',
   },
 ];

@@ -75,31 +75,40 @@ export const config = [
     type: 'switch',
   },
   ...lib.getFontConfig(),
+
+  {
+    type: 'divider',
+    title: '表头样式',
+  },
   {
     key: 'headerBGC',
     defaultValue: '#0d5dff',
-    title: '表头颜色',
+    title: '颜色',
     type: 'purecolor',
   },
   {
     key: 'headerHeight',
     defaultValue: 35,
-    title: '表头高度',
+    title: '高度',
     step: 5,
     type: 'range',
     min: 20,
     max: 80,
+  }, 
+  {
+    type: 'divider',
+    title: '行颜色',
   },
   {
     key: 'oddRowBGC',
     defaultValue: 'rgba(255,255,255,0.1)',
-    title: '偶数行颜色',
+    title: '偶数行',
     type: 'purecolor',
   },
   {
     key: 'evenRowBGC',
     defaultValue: 'transparent',
-    title: '奇数行颜色',
+    title: '奇数行',
     type: 'purecolor',
   },
 ];
