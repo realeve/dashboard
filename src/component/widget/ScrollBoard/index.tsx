@@ -91,6 +91,10 @@ const defaultConfig = {
    * @example carousel = 'single' | 'page'
    */
   carousel: 'single',
+
+  fontSize: 16,
+  fontWeight: 'normal',
+  fontColor: '#f2f2f2',
 };
 
 function calcHeaderData({ header, index, indexHeader }) {
@@ -318,13 +322,6 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     return co(loop);
   }, [config, domRef.current]);
 
-  // useEffect(() => {
-  //   elementResizeEvent(domRef.current, onResize);
-  //   return () => {
-  //     elementResizeEvent.unbind(domRef.current);
-  //   };
-  // }, []);
-
   useEffect(onResize, [width, height, domRef.current]);
 
   const classNames = useMemo(() => classnames(styles['dv-scroll-board'], className), [className]);
@@ -332,7 +329,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   return (
     <div className={classNames} style={style} ref={domRef}>
       {!!header.length && !!mergedConfig && (
-        <div className={styles.header} style={{ backgroundColor: `${mergedConfig.headerBGC}` }}>
+        <div
+          className={styles.header}
+          style={{
+            backgroundColor: `${mergedConfig.headerBGC}`,
+            fontSize: config.fontSize,
+            fontWeight: config.fontWeight,
+            color: config.fontColor,
+          }}
+        >
           {header.map((headerItem, i) => (
             <div
               className={styles['header-item']}
@@ -365,6 +370,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
                 height: `${heights[ri]}px`,
                 lineHeight: `${heights[ri]}px`,
                 backgroundColor: `${getBackgroundColor(row.rowIndex)}`,
+                fontSize: config.fontSize,
+                fontWeight: config.fontWeight,
+                color: config.fontColor,
               }}
             >
               {row.ceils.map((ceil, ci) => (

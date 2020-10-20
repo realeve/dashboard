@@ -1,6 +1,7 @@
 import { ScrollBoard } from '@/component/widget';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import * as lib from '../lib';
 
 export let mock: IChartMock = {
   header: ['列1', '列2', '列3'],
@@ -47,6 +48,60 @@ export const config = [
       },
     ],
   },
+  {
+    key: 'rowNum',
+    defaultValue: 5,
+    title: '每页数据',
+    type: 'radio',
+    option: [
+      {
+        title: '5条',
+        value: 5,
+      },
+      {
+        title: '10条',
+        value: 10,
+      },
+      {
+        title: '20条',
+        value: 20,
+      },
+    ],
+  },
+  {
+    key: 'index',
+    defaultValue: true,
+    title: '显示索引列',
+    type: 'switch',
+  },
+  ...lib.getFontConfig(),
+  {
+    key: 'headerBGC',
+    defaultValue: '#0d5dff',
+    title: '表头颜色',
+    type: 'purecolor',
+  },
+  {
+    key: 'headerHeight',
+    defaultValue: 35,
+    title: '表头高度',
+    step: 5,
+    type: 'range',
+    min: 20,
+    max: 80,
+  },
+  {
+    key: 'oddRowBGC',
+    defaultValue: 'rgba(255,255,255,0.1)',
+    title: '偶数行颜色',
+    type: 'purecolor',
+  },
+  {
+    key: 'evenRowBGC',
+    defaultValue: 'transparent',
+    title: '奇数行颜色',
+    type: 'purecolor',
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -57,7 +112,7 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
-export default ({ option: { data, waitTime = 4, carousel = 'page' } }) => {
+export default ({ option: { data, waitTime = 4, carousel = 'page', ...config } }) => {
   return (
     <ScrollBoard
       config={{
@@ -67,6 +122,7 @@ export default ({ option: { data, waitTime = 4, carousel = 'page' } }) => {
         align: ['center'],
         carousel,
         waitTime: waitTime * 1000,
+        ...config,
       }}
     />
   );

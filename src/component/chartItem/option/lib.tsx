@@ -690,3 +690,46 @@ export const getChartType = (type: string, opacity = 1) => {
   }
   return { type };
 };
+
+// 文字配置
+export const getFontConfig = (fontSize = 18, color = '#f2f2f2') => [
+  {
+    key: 'fontSize',
+    defaultValue: fontSize,
+    title: '文字字号',
+    step: 1,
+    type: 'range',
+    min: 12,
+    max: 60,
+  },
+  {
+    key: 'fontWeight',
+    defaultValue: 'normal',
+    title: '文字加粗',
+    type: 'radio',
+    option: [
+      {
+        title: <div style={{ fontWeight: 'lighter', fontSize: fontSize }}>Aa</div>,
+        value: 'lighter',
+      },
+      {
+        title: <div style={{ fontWeight: 'normal', fontSize: fontSize }}>Aa</div>,
+        value: 'normal',
+      },
+      {
+        title: <div style={{ fontWeight: 'bold', fontSize: fontSize }}>Aa</div>,
+        value: 'bold',
+      },
+      {
+        title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
+        value: 'bolder',
+      },
+    ],
+  },
+  {
+    key: 'fontColor',
+    defaultValue: color,
+    title: '文字颜色',
+    type: 'purecolor',
+  },
+];
