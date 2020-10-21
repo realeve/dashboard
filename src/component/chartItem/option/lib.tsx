@@ -613,6 +613,22 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     ],
   },
   {
+    key: 'legendOrient',
+    defaultValue: 'horizontal',
+    title: '排列方式',
+    type: 'radio',
+    option: [
+      {
+        title: '水平',
+        value: 'horizontal',
+      },
+      {
+        title: '垂直',
+        value: 'vertical',
+      },
+    ],
+  },
+  {
     type: 'divider',
     title: '拆线图样式',
   },
@@ -652,11 +668,16 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
   },
 ];
 
-export const getLegendPosition = ({ legendAlign = 'center', legendPosition = 'top' }) => {
+export const getLegendPosition = ({
+  legendAlign = 'center',
+  legendPosition = 'top',
+  legendOrient = 'horizontal',
+}) => {
   if (['top', 'bottom'].includes(legendPosition)) {
     return {
       [legendPosition]: 15,
       left: legendAlign,
+      orient: legendOrient,
     };
   }
   let position = {
@@ -667,6 +688,7 @@ export const getLegendPosition = ({ legendAlign = 'center', legendPosition = 'to
   return {
     [legendPosition]: 15,
     top: position[legendAlign],
+    orient: legendOrient,
   };
 };
 

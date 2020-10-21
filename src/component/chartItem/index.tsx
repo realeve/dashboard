@@ -79,33 +79,33 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
             renderer={theme === 'rect' ? 'svg' : 'canvas'}
           />
         );
-      case 'gardientline':
-        return (
-          <Echarts
-            option={lib.gardientLine({
-              data: {
-                x: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                y: [
-                  {
-                    name: 'name1',
-                    value: [320, 232, 101, 334, 244, 235, 332],
-                  },
-                  {
-                    name: 'name2',
-                    value: [148, 232, 254, 231, 176, 121, 232],
-                  },
-                  {
-                    name: 'name3',
-                    value: [148, 132, 154, 131, 176, 121, 132],
-                  },
-                ],
-              },
-              yAxis: false,
-              smooth: false,
-            })}
-            renderer="svg"
-          />
-        );
+      // case 'gardientline':
+      //   return (
+      //     <Echarts
+      //       option={lib.gardientLine({
+      //         data: {
+      //           x: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      //           y: [
+      //             {
+      //               name: 'name1',
+      //               value: [320, 232, 101, 334, 244, 235, 332],
+      //             },
+      //             {
+      //               name: 'name2',
+      //               value: [148, 232, 254, 231, 176, 121, 232],
+      //             },
+      //             {
+      //               name: 'name3',
+      //               value: [148, 132, 154, 131, 176, 121, 132],
+      //             },
+      //           ],
+      //         },
+      //         yAxis: false,
+      //         smooth: false,
+      //       })}
+      //       renderer="svg"
+      //     />
+      //   );
       case 'waffle':
         return (
           <G2

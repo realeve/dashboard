@@ -155,6 +155,7 @@ export default ({
   roundBorder = true,
   legendAlign = 'center',
   legendPosition = 'top',
+  legendOrient,
   smooth = true,
 }: IChartProps) => {
   let res = handleData(data, { legend, x, y });
@@ -174,7 +175,7 @@ export default ({
       textStyle: {
         color,
       },
-      ...lib.getLegendPosition({ legendAlign, legendPosition }),
+      ...lib.getLegendPosition({ legendAlign, legendPosition, legendOrient }),
     },
     grid: {
       left: '3%',

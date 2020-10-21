@@ -72,10 +72,10 @@ let chartList = [
     name: '滚动翻牌器',
     type: 'digitalscroll',
   }, 
-  {
-    name: '渐变柱形图',
-    type: 'roundBar',
-  }, 
+  // {
+  //   name: '渐变柱形图',
+  //   type: 'roundBar',
+  // }, 
   {
     name: '华夫图',
     type: 'waffle',
@@ -92,10 +92,10 @@ let chartList = [
     name: '间隔柱状图',
     type: 'pictorial',
   },
-  {
-    name: '渐变堆叠曲线图',
-    type: 'gardientLine',
-  },
+  // {
+  //   name: '渐变堆叠曲线图',
+  //   type: 'gardientLine',
+  // },
   {
     name: '扇形图',
     type: 'g2rose',

@@ -8,7 +8,6 @@ export { default as pictorialBar } from './pictorialBar';
 import * as waffle from './g2/waffle';
 export { waffle };
 
-export { default as gardientLine } from './gardientLine';
 export { default as g2Rose } from './g2/g2_rose';
 export { default as g2RadialBarChart } from './g2/g2_radialBarChart';
 export { default as g2Wind } from './g2/g2_wind';
@@ -66,3 +65,7 @@ export { rankingBoard };
 // 10.渐变柱图
 import * as gardient_bar from './barChart/gardient_bar';
 export { gardient_bar };
+
+// 11.渐变面积图
+import * as gardientLine from './barChart/gardientLine';
+export { gardientLine };

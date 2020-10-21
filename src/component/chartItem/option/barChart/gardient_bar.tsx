@@ -1,6 +1,5 @@
 import React from 'react';
-import echarts from 'echarts';
-import * as lib from '../lib';
+import echarts from 'echarts'; 
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 

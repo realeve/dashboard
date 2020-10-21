@@ -38,6 +38,14 @@
             "type": "regular_bar",
             "title": "渐变柱形图",
             "image": "/img/icons/10_gardient_bar.png"
+          },
+          {
+            "name": "echarts.gardientLine",
+            "key": "gardientLine",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "渐变面积图",
+            "image": "/img/icons/10_gardient_bar.png"
           }
         ]
       }

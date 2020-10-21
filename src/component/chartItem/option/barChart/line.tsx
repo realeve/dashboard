@@ -40,7 +40,7 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-const handleData = ({ data }, { legend, x, y }) => {
+export const handleData = ({ data }, { legend, x, y }) => {
   let legendArr = lib.getUniqByIdx({ key: legend, data });
   let xArr = lib.getUniqByIdx({ key: x, data });
   let series = [];
@@ -146,6 +146,7 @@ export default ({
   smooth = true,
   legendAlign,
   legendPosition,
+  legendOrient, 
   chart1 = 'bar',
   chart2 = 'bar',
   chart3 = 'line',
@@ -244,7 +245,7 @@ export default ({
       },
       // top: 20,
       // left: 'center',
-      ...lib.getLegendPosition({ legendAlign, legendPosition }),
+      ...lib.getLegendPosition({ legendAlign, legendPosition, legendOrient }),
     },
     grid: {
       left: '3%',
