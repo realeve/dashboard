@@ -2,7 +2,6 @@ export const textColor = '#9aa8d4';
 
 export { default as radialBarChart } from './radialBarChart';
 export { default as percent } from './percent';
-export { default as pictorialBar } from './pictorialBar';
 
 // g2
 import * as waffle from './g2/waffle';
@@ -69,3 +68,12 @@ export { gardient_bar };
 // 11.渐变面积图
 import * as gardientLine from './echarts/gardientLine';
 export { gardientLine };
+
+/*
+    时间：2020-10-21 21:22:01
+    类型: echarts
+    序号：12
+    名称：你的图表名称
+*/ 
+import * as pictorial_bar from './echarts/pictorial_bar';
+export { pictorial_bar }; 

@@ -124,11 +124,11 @@ export let mock: IChartMock = {
   let str = `
   import React from 'react';
   import * as lib from '../lib';
-  import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+  import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
   import { handleData } from '@/component/chartItem/option/echarts/line';
   ${mockStr}
   
-  export const config = [
+  export const config: IChartConfig[]  = [
     {
       key: 'legend',
       defaultValue: 0,
@@ -312,7 +312,7 @@ export let mock: IChartMock = {
             min: 0
         }
     });
-    
+
     chart
     .line()
     .position('\${x}*\${y}')
@@ -338,7 +338,7 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-export const config = [];
+export const config: IChartConfig[] = [];
 
 export const apiConfig: IApiConfig = {
   show: true,

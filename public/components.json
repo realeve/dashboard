@@ -38,6 +38,14 @@
             "type": "regular_bar",
             "title": "渐变柱形图",
             "image": "/img/icons/10_gardient_bar.png"
+          },
+          {
+            "name": "echarts.pictorial_bar",
+            "key": "pictorial_bar",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "间隔柱状图",
+            "image": "/img/icons/12_pictorial_bar.png"
           }
         ]
       },

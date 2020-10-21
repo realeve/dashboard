@@ -87,15 +87,7 @@ let chartList = [
   {
     name: '百分比',
     type: 'percent',
-  },
-  {
-    name: '间隔柱状图',
-    type: 'pictorial',
-  },
-  // {
-  //   name: '渐变堆叠曲线图',
-  //   type: 'gardientLine',
-  // },
+  }, 
   {
     name: '扇形图',
     type: 'g2rose',

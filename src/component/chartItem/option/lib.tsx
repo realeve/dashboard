@@ -4,6 +4,7 @@ import { EChartsSeriesType } from 'echarts';
 import * as Position from '@/component/field/Align/iconPosition';
 import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
+import { IChartConfig } from '@/component/chartItem/interface';
 
 export interface IChart {
   key?: string;
@@ -743,7 +744,10 @@ export const getChartType = (type: string, opacity = 1) => {
 };
 
 // 文字配置
-export const getFontConfig = (fontSize = 18, color = '#f2f2f2') => [
+export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[] = (
+  fontSize = 18,
+  color = '#f2f2f2',
+) => [
   {
     type: 'divider',
     title: '文字样式',

@@ -1,5 +1,9 @@
-import { getMax } from './radialBarChart';
-import { textColor } from './index';
+import React from 'react';
+import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import { getMax } from '../radialBarChart';
+import { textColor } from '../index';
+import * as lib from '@/component/chartItem/option/lib';
+
 import * as R from 'ramda';
 let bgImg =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNS4zNiAzODIiPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZD0iTTMxLjExIDM3Ni40NUg0LjI1QTQuMjUgNC4yNSAwIDAxMCAzNzIuMTlWMzY3YTQuMjUgNC4yNSAwIDAxNC4yNS00LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAxNC4yNSA0LjI1djUuMTlhNC4yNSA0LjI1IDAgMDEtNC4yNSA0LjI2em00LjI1LTIzLjM0di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAzNDcuOTF2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMzI4LjgyVjMzNGE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMzA5LjczdjUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDI5MC42M3Y1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI0em0wLTE5LjA5di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAyNzEuNTR2NS4xOUE0LjI1IDQuMjUgMCAwMDQuMjUgMjgxaDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI3em0wLTE5LjA5di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAyNTIuNDV2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMjMzLjM2djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI5SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDIxNC4yN3Y1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAxOTUuMTd2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNHptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMTc2LjA4djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDlWMTU3YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAxNTd2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNnptMC0xOS4wOXYtNS4yMmE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMTM3Ljl2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4yM2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMTE4Ljh2NS4yYTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjIzYTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCA5OS43MXY1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjIzYTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCA4MC42MnY1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjIzYTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCA2MS41M3Y1LjE5QTQuMjUgNC4yNSAwIDAwNC4yNSA3MWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yOHptMC0xOS4wOXYtNS4yM2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgNDIuNDR2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4yNGE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMjMuMzR2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNHptMC0xOS4wOVY0LjI1QTQuMjUgNC4yNSAwIDAwMzEuMTEgMEg0LjI1QTQuMjUgNC4yNSAwIDAwMCA0LjI1djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjZoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjZ6IiBmaWxsPSJub25lIi8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIiBmaWxsPSIjYTdiYmMzIj48cGF0aCBkPSJNMCAwaDM1LjM2djEzLjdIMHpNMCAxOS4wOWgzNS4zNnYxMy43SDB6TTAgMzguMThoMzUuMzZ2MTMuN0gwek0wIDU3LjI4aDM1LjM2djEzLjdIMHpNMCA3Ni4zN2gzNS4zNnYxMy43SDB6TTAgOTUuNDZoMzUuMzZ2MTMuN0gwek0wIDExNC41NWgzNS4zNnYxMy43SDB6TTAgMTMzLjY0aDM1LjM2djEzLjdIMHpNMCAxNTIuNzRoMzUuMzZ2MTMuN0gwek0wIDE3MS44M2gzNS4zNnYxMy43SDB6bTAgMTkuMDloMzUuMzZ2MTMuN0gwem0wIDE5LjA5aDM1LjM2djEzLjdIMHptMCAxOS4xaDM1LjM2djEzLjdIMHptMCAxOS4wOWgzNS4zNnYxMy43SDB6bTAgMTkuMDloMzUuMzZ2MTMuN0gwek0wIDI4Ni4zOGgzNS4zNnYxMy43SDB6bTAgMTkuMDloMzUuMzZ2MTMuN0gwem0wIDE5LjFoMzUuMzZ2MTMuN0gwem0wIDE5LjA5aDM1LjM2djEzLjdIMHptMCAxOS4wOWgzNS4zNnYxMy43SDB6Ii8+PC9nPjwvc3ZnPg==';
@@ -7,13 +11,85 @@ let bgImg =
 let fillImg =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNS4zNiAzODIiPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcC1wYXRoIj48cGF0aCBpZD0iU1ZHSUQiIGQ9Ik0zMS4xMSAzNzYuNDVINC4yNUE0LjI1IDQuMjUgMCAwMTAgMzcyLjE5VjM2N2E0LjI1IDQuMjUgMCAwMTQuMjUtNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMTQuMjUgNC4yNXY1LjE5YTQuMjUgNC4yNSAwIDAxLTQuMjUgNC4yNnptNC4yNS0yMy4zNHYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMzQ3LjkxdjUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDMyOC44MlYzMzRhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDMwOS43M3Y1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yNUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAyOTAuNjN2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNHptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMjcxLjU0djUuMTlBNC4yNSA0LjI1IDAgMDA0LjI1IDI4MWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yN3ptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMjUyLjQ1djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDIzMy4zNnY1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5di01LjE5YTQuMjUgNC4yNSAwIDAwLTQuMjUtNC4yOUg0LjI1QTQuMjUgNC4yNSAwIDAwMCAyMTQuMjd2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4xOWE0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMTk1LjE3djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjR6bTAtMTkuMDl2LTUuMTlhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDE3Ni4wOHY1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI1aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI1em0wLTE5LjA5VjE1N2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgMTU3djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjZ6bTAtMTkuMDl2LTUuMjJhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDEzNy45djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMjNhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDExOC44djUuMmE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4yM2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgOTkuNzF2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4yM2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgODAuNjJ2NS4xOWE0LjI1IDQuMjUgMCAwMDQuMjUgNC4yNWgyNi44NmE0LjI1IDQuMjUgMCAwMDQuMjUtNC4yNXptMC0xOS4wOXYtNS4yM2E0LjI1IDQuMjUgMCAwMC00LjI1LTQuMjVINC4yNUE0LjI1IDQuMjUgMCAwMDAgNjEuNTN2NS4xOUE0LjI1IDQuMjUgMCAwMDQuMjUgNzFoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjh6bTAtMTkuMDl2LTUuMjNhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDQyLjQ0djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjV6bTAtMTkuMDl2LTUuMjRhNC4yNSA0LjI1IDAgMDAtNC4yNS00LjI1SDQuMjVBNC4yNSA0LjI1IDAgMDAwIDIzLjM0djUuMTlhNC4yNSA0LjI1IDAgMDA0LjI1IDQuMjVoMjYuODZhNC4yNSA0LjI1IDAgMDA0LjI1LTQuMjR6bTAtMTkuMDlWNC4yNUE0LjI1IDQuMjUgMCAwMDMxLjExIDBINC4yNUE0LjI1IDQuMjUgMCAwMDAgNC4yNXY1LjE5YTQuMjUgNC4yNSAwIDAwNC4yNSA0LjI2aDI2Ljg2YTQuMjUgNC4yNSAwIDAwNC4yNS00LjI2eiIgZmlsbD0ibm9uZSIvPjwvY2xpcFBhdGg+PHN0eWxlPi5jbHMtMzl7ZmlsbDojMzNkMGJkfS5jbHMtNDB7ZmlsbDojMzJjZmJlfTwvc3R5bGU+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwLXBhdGgpIj48cGF0aCBmaWxsPSIjNWJmNjhkIiBkPSJNMCAwaDM1LjM2djEzLjdIMHoiLz48cGF0aCBmaWxsPSIjNWFmNThlIiBkPSJNMCAxOS4wOWgzNS4zNnYxMy43SDB6Ii8+PHBhdGggZmlsbD0iIzU5ZjQ4ZiIgZD0iTTAgMzguMThoMzUuMzZ2MTMuN0gweiIvPjxwYXRoIGZpbGw9IiM1NmYxOTQiIGQ9Ik0wIDU3LjI4aDM1LjM2djEzLjdIMHoiLz48cGF0aCBmaWxsPSIjNTNlZTk3IiBkPSJNMCA3Ni4zN2gzNS4zNnYxMy43SDB6Ii8+PHBhdGggZmlsbD0iIzRjZTg5ZiIgZD0iTTAgOTUuNDZoMzUuMzZ2MTMuN0gweiIvPjxwYXRoIGZpbGw9IiM0N2UzYTUiIGQ9Ik0wIDExNC41NWgzNS4zNnYxMy43SDB6Ii8+PHBhdGggZmlsbD0iIzQxZGVhYyIgZD0iTTAgMTMzLjY0aDM1LjM2djEzLjdIMHoiLz48cGF0aCBmaWxsPSIjM2JkOGIzIiBkPSJNMCAxNTIuNzRoMzUuMzZ2MTMuN0gweiIvPjxwYXRoIGNsYXNzPSJjbHMtMzkiIGQ9Ik0wIDE3MS44M2gzNS4zNnYxMy43SDB6TTAgMTkwLjkyaDM1LjM2djEzLjdIMHpNMCAyMTAuMDFoMzUuMzZ2MTMuN0gwek0wIDIyOS4xMWgzNS4zNnYxMy43SDB6TTAgMjQ4LjJoMzUuMzZ2MTMuN0gwek0wIDI2Ny4yOWgzNS4zNnYxMy43SDB6Ii8+PHBhdGggY2xhc3M9ImNscy00MCIgZD0iTTAgMjg2LjM4aDM1LjM2djEzLjdIMHpNMCAzMDUuNDdoMzUuMzZ2MTMuN0gwek0wIDMyNC41N2gzNS4zNnYxMy43SDB6TTAgMzQzLjY2aDM1LjM2djEzLjdIMHpNMCAzNjIuNzVoMzUuMzZ2MTMuN0gweiIvPjwvZz48L3N2Zz4=';
 
-// let bgImg =
-// 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAF+CAYAAADNzDlVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAilJREFUeNrs1rENwjAURdEfC0pmQAwBDfuwE8wDDSULIGagTGEcFNHQpfPXseT0V0ryzrA/XzcRsWt3HX2fsd1XSRITc8O2JIn5RZVIdsr87mU54xT0TBL1/Sms2uPd7qPXivvp+PfKpfuGBAkStPxMf7muLXe43FiO5ViO5VjOsAoSxHIsx3Isx3Isx3KGVZAglmM5lmM5lmM5liMFQYJYjuVYjuVYjuVYTpAgQSzHcizHcizHcoZVkCCWYzmWYzmWYzmWM6yCBLEcy7Ecy7Ecy7GcIEGCWI7lWI7lWI7lDKsgQYJYjuVYjuVYjuUMqyBBLMdyLMdyLMdyLGdYBQliOZZjOZZjOZZjOUGCBLEcy7Ecy7EcyxlWQYJYjuVYjuVYjuVYzrAKEsRyLMdyLMdyLMdypCBIEMuxHMuxHMuxnGEVJEgQy7Ecy7Ecy7GcYRUkiOVYjuVYjuVYjuUMqyBBLMdyLMdyLMdyLCdIkCCWYzmWYzmWYznDKkgQy7Ecy7Ecy7EcyxlWQYJYjuVYjuVYjuVYjhQECWI5lmM5lmM5ljOsggQJYjmWYzmWYzmWM6yCBLEcy7Ecy7Ecy7GcYRUkiOVYjuVYjuVYjuUECRLEcizHcizHcixnWAUJYjmWYzmWYzmWYznDKkgQy7Ecy7Ecy7Ecy5GCIEEsx3Isx3Isx3IsJ0iQIJZjOZZjOZZjOcMqSBDLsRzLsRzL9Wy5odZqhwQJWn4+AgwApGqd0LftHcgAAAAASUVORK5CYII=';
+export let mock: IChartMock = {
+  data: [
+    ['通信', 2691],
+    ['网络', 4300],
+    ['能源', 3416],
+    ['建筑', 4666],
+  ],
+  title: '间隔柱状图_MOCK数据',
+  header: ['类型', '值'],
+  rows: 10,
+  hash: 'mockdata',
+};
 
-// let fillImg =
-// 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAF+CAYAAADNzDlVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABFhJREFUeNrs3U+O1DgUgHHblUFzhb7GCCHNtnfMFUasOA9HYEWfAQlpZq6AEOIIdPcFZgMVe5L6Q6pLzQjFLZK2fpZSKbVioQ8n9b68+Dnxz39fXYYYrkIIF+Fxt5the5kagQkHhtepEZhvUCk01tLh3Gul3aZQwovxSwMwn8cfhW74+Lul66jJawgQIEB1QJfDdj1s5ZFvI8NzLsfluByX43KAlmzjKRdyTkYIEJeb6XK5JC7H5bhchculmLmcOASoAqjPGyMEiMtVuFyMhctxOS5X4XKlRC4nDgECBIjLLeVyXSnpqhQux+W43FyXi/Jy4hCgKqC+74wQIC5XkZdLKcvLcTkuV+FyOScuJw4Bmt/MlwPE5WprH4LaBy7H5WpcbvjgcuIQIECAuByXe0iXy4eJtOONXilx2NJh238PIYbpmPP9qvpc7O5YU+r351/KB9hyAl7C3WPO9+vqs3O5hkZocrn9H+PJwdP3Y87h/n9sNX24HKBFgLaesQLiclUul9Q+yMvJy1Xl5bLaB3EIUE3biVzvGSsgLjfb5Yb7ci7H5bhchcvFWLicOAQIECAux+W43P1QXcmpuWuotbyc2gdxCFBF29c+FHk5QFzOfDl5OS63jMsFtQ/iECBAgLgcl+Ny34PqcoMrot+cFkzEWIbtuN9/H0/R/yuyWFGf2zR8vBiLIHa5hTsFE3FGkcWifT4Pey63fqDt9hemsOYWSylGaM2t++P6zWUjS7KNuZGX1pdbO5S83Mqb9eXEIUC1gfV4r2GEAP08IHk5LsfluNzkcsEzVnEIULXLFS4HiMvNdrnh+uFyXI7LVbhcTN7hJQ4BqnU5eTlAXG6+y/XbjstxOS5X4XJ93nA5cQhQrcupYwXE5Wa7XLRWMJfjclUuV6wVLA4BAgSIyy3ncl0p6aoULsfluNxcl4vRM1ZxCBAgQFxuybWC25ov1+Wc2nK543tOj/tpeYxpOz9mzX3GERpd7uI4PWZcGuO8Hf82vSr07n5FfW7TZrPlcuIQoAqgL19+NUKAuFyFyw1xyDPWVbtci9dQY/Pl+o7LiUOA5rdD7cPGCAHicubLcTkut4jLmS8nDgF6CJdT+wCIy3kfK5fjcsu43HA/xOXEIUCVLnffhAYjBIjL/ZjLZevLcTkuV+Vyyfpy4hCgKqCvX58YIUBcbr7Lxd8/vb1u6Gf7hstxuZ/tcp6xikOAAAHicubLPYz2BHk5LsfluJzA+tja7hlrr/YBEJeb63Lx2cd38nJcjstVuFyyvpw4BAgQIC7H5bgcl3u0Lpd77/AShwBVNGuSAOJylS739MNf7blcSv1+uFI+LFmbT5avzbv/gOmY8/2q+lzc+ZWbqvZPK76OS9duvrNfV5/2XG4YMS4nDgECBIjLcbmHdLmGzjh5OS7H5cShxoGsLweIy1W63G/v/+FyXI7LVbic+XLiECBAgLgcl+NyXI7LrcXlYilFHAIEaH77T4ABAKzsRPWz+TQ7AAAAAElFTkSuQmCCgg';
+export const config: IChartConfig[] = [
+  {
+    title: '样式',
+    type: 'radio',
+    key: 'theme',
+    defaultValue: 'round',
+    option: [
+      {
+        title: '矩形',
+        value: 'rect',
+      },
+      {
+        title: '圆角',
+        value: 'round',
+      },
+    ],
+  },
+  {
+    key: 'size',
+    defaultValue: 52,
+    title: '尺寸',
+    type: 'range',
+    min: 24,
+    max: 120,
+    step: 2,
+  },
+  {
+    key: 'yAxis',
+    defaultValue: true,
+    title: '显示y轴',
+    type: 'switch',
+  },
+  {
+    key: 'axisFontSize',
+    defaultValue: 16,
+    title: 'X/Y轴 字号',
+    step: 1,
+    type: 'range',
+    min: 12,
+    max: 60,
+  },
+  ...lib.getFontConfig(16, '#ffc72b'),
+];
 
-const getSeries = ({ data, scale = 1, theme = 'rect', size }) => {
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: 'http://localhost:8000/mock/12_pictorial_bar.json',
+  interval: 5,
+  config: [
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+  ],
+};
+
+const getSeries = ({ data, theme = 'rect', size, config }) => {
   let bgData = [];
   let itemData = [];
 
@@ -46,18 +122,15 @@ const getSeries = ({ data, scale = 1, theme = 'rect', size }) => {
     z: -1,
     silent: true,
     label: {
-      normal: {
-        show: true,
-        position: 'top',
-        distance: 5,
-        formatter: function(params) {
-          return data[params.dataIndex].value;
-        },
-        textStyle: {
-          color: '#ffc72b',
-          fontSize: 16 * scale,
-        },
+      show: true,
+      position: 'top',
+      distance: 5,
+      formatter: function(params) {
+        return data[params.dataIndex].value;
       },
+      color: config.fontColor || '#ffc72b',
+      fontSize: config.fontSize,
+      fontWeight: config.fontWeight,
     },
   };
   if (theme === 'rect') {
@@ -121,33 +194,38 @@ const getSeries = ({ data, scale = 1, theme = 'rect', size }) => {
 };
 
 export interface IPictorialBar {
-  data: (number | string)[][];
+  data: {
+    data: (number | string)[][];
+  };
   size?: number;
   x?: number;
   y?: number;
   yAxis?: boolean;
   theme?: 'rect' | 'round';
 }
+
 export default ({
-  data,
+  data: { data },
   size = 52,
   x = 0,
   y = 1,
   yAxis = false,
   theme = 'rect',
+  axisFontSize = 16,
+  ...config
 }: IPictorialBar) => {
   let chartData = data.map(item => ({ name: item[x], value: item[y] }));
 
-  // 字体 distance放大参数
-  let scale = 1;
-
   return {
     tooltip: {
-      formatter: '{b} : {c}',
+      formatter: params => {
+        let { name, value } = params[1].data;
+        return `${name}: ${value}`;
+      },
     },
     grid: {
       left: '3%',
-      top: 20 * scale,
+      top: 10 + (config.fontSize || 16),
       right: '1%',
       bottom: '1%',
       containLabel: true,
@@ -175,7 +253,7 @@ export default ({
         },
         axisLabel: {
           textStyle: {
-            fontSize: 14 * scale,
+            fontSize: axisFontSize,
             color: textColor,
           },
         },
@@ -193,7 +271,7 @@ export default ({
         axisTick: {
           show: yAxis,
           inside: true,
-          length: 10 * scale,
+          length: 10,
           lineStyle: {
             color: textColor,
           },
@@ -202,11 +280,11 @@ export default ({
           show: yAxis,
           textStyle: {
             color: textColor,
-            fontSize: 14 * scale,
+            fontSize: axisFontSize,
           },
         },
       },
     ],
-    series: getSeries({ data: chartData, scale, theme, size }),
+    series: getSeries({ data: chartData, theme, size, config }),
   };
 };
