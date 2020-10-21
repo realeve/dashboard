@@ -22,6 +22,7 @@ export interface IChartProps {
   data: IChartMock;
   legendPosition?: 'bottom' | 'top' | 'left' | 'right';
   legendAlign?: 'left' | 'center' | 'right';
+  legendOrient?: 'horizontal' | 'vertical';
   renderer: 'canvas' | 'svg';
   [key: string]: any;
 }

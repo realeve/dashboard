@@ -155,6 +155,7 @@ export default ({
   roundBorder = true,
   legendAlign = 'center',
   legendPosition = 'top',
+  legendShow = true,
   legendOrient,
   smooth = true,
 }: IChartProps) => {
@@ -171,6 +172,7 @@ export default ({
       },
     },
     legend: {
+      show:legendShow,
       icon: 'circle',
       textStyle: {
         color,

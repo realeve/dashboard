@@ -556,7 +556,7 @@ interface IPositionConfig {
   key?: string;
   defaultValue?: string | number | boolean;
   title: string;
-  type: 'radio' | 'range' | 'divider';
+  type: 'radio' | 'range' | 'divider' | 'switch';
   option?: {
     title: string | React.ReactNode;
     value: string | number | boolean;
@@ -567,6 +567,12 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
   {
     type: 'divider',
     title: '图例配置',
+  },
+  {
+    key: 'legendShow',
+    defaultValue: true,
+    type: 'switch',
+    title: '显示图例',
   },
   {
     key: 'legendAlign',

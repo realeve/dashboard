@@ -96,6 +96,7 @@ export default ({
   lineWidth = 2,
   area_opacity = 0.9,
   data,
+  legendShow = true,
   legendAlign = 'center',
   legendPosition = 'top',
   legendOrient = 'horizontal',
@@ -203,6 +204,7 @@ export default ({
     },
     tooltip: {},
     legend: {
+      show:legendShow,
       icon: 'circle',
       textStyle: { color: '#fff' },
       ...lib.getLegendPosition({ legendAlign, legendPosition, legendOrient }),

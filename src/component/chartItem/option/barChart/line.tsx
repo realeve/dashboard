@@ -144,9 +144,10 @@ export default ({
   y = 2,
   barWidth = 15,
   smooth = true,
+  legendShow = true,
   legendAlign,
   legendPosition,
-  legendOrient, 
+  legendOrient,
   chart1 = 'bar',
   chart2 = 'bar',
   chart3 = 'line',
@@ -239,12 +240,11 @@ export default ({
       },
     },
     legend: {
+      show: legendShow,
       icon: 'circle',
       textStyle: {
         color,
       },
-      // top: 20,
-      // left: 'center',
       ...lib.getLegendPosition({ legendAlign, legendPosition, legendOrient }),
     },
     grid: {
