@@ -1,7 +1,7 @@
 export const textColor = '#9aa8d4';
 
 export { default as radialBarChart } from './radialBarChart';
-export { default as percent } from './percent';
+export { default as percent } from './other/percent';
 
 // g2
 import * as waffle from './g2/waffle';
@@ -77,3 +77,12 @@ export { gardientLine };
 */ 
 import * as pictorial_bar from './echarts/pictorial_bar';
 export { pictorial_bar }; 
+
+/*
+    时间：2020-10-21 22:13:59
+    类型: other
+    序号：13
+    名称：你的图表名称
+*/ 
+import * as percent_circle from './other/percent_circle';
+export { percent_circle }; 

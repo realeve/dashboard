@@ -1,7 +1,6 @@
-export default ({ value, half = false }) => {
+export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7' }) => {
   let getItem = (percent, color = '#30c3a7') => ({
     //绿色刻度，蓝色刻度precent值是1
-    name: '脱贫人数占比',
     type: 'gauge',
     animation: true,
     radius: half ? '140%' : '95%',
@@ -20,10 +19,10 @@ export default ({ value, half = false }) => {
     splitNumber: 0.36 * percent,
     splitLine: {
       show: true,
-      length: '10%',
+      length: length + '%',
       lineStyle: {
         color,
-        width: 2,
+        width,
       },
     },
     axisLine: {
@@ -39,7 +38,7 @@ export default ({ value, half = false }) => {
 
   return {
     series: [
-      { ...getItem(value), z: 1 },
+      { ...getItem(value, color), z: 1 },
       { ...getItem(100, '#458'), z: 0 },
     ],
   };

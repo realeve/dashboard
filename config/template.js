@@ -326,10 +326,10 @@ export let mock: IChartMock = {
     return str;
   }
   str = `
-  import React from 'react';
+import React from 'react';
 // 此处导入你所需要的自定义组件
 import { ProgressBar } from '@/component/widget'; 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface'; 
+import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface'; 
 export let mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',

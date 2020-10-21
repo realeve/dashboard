@@ -84,10 +84,10 @@ let chartList = [
     name: '玉珏图',
     type: 'radialbar',
   },
-  {
-    name: '百分比',
-    type: 'percent',
-  }, 
+  // {
+  //   name: '百分比',
+  //   type: 'percent',
+  // }, 
   {
     name: '扇形图',
     type: 'g2rose',
