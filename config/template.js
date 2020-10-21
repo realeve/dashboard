@@ -305,25 +305,18 @@ export let mock: IChartMock = {
   };
   
   // g2 的默认组件需要2个参数，一是配置项，二是chart实例
-  export const onMount = ({ data: { data: data }, x = 0, y = 1 }: IChartProps, chart: Chart) => {
-    
+  export const onMount = ({ data: { data: data },legend=0, x = 1, y = 2 }: IChartProps, chart: Chart) => {    
     chart.data(data);
     chart.scale({
-        2: {
+        [y]: {
             min: 0
         }
     });
-
-    chart.tooltip({
-        showCrosshairs: true,
-        shared: true,
-    });
-
+    
     chart
     .line()
-    .position('1*2')
-    .color('0');
-
+    .position('\${x}*\${y}')
+    .color('\${legend}');
     chart.render();
   };
   

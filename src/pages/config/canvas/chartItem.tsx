@@ -24,6 +24,19 @@ const Item = ({
   title?: string;
   onLoad?: (e: string) => void;
 }) => {
+  if (!chartLib[config.key]) {
+    return (
+      <div style={{ color: '#ddd', fontSize: 30, lineHeight: 2 }}>
+        组件渲染出错：
+        <br />
+        @/component/chartItem/option 中 未导出函数 {config.key}，请仔细检查
+        <br />
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <img src="/img/no-data.svg" style={{ width: 200 }} />
+        </div>
+      </div>
+    );
+  }
   const { default: method, defaultOption = {}, ...lib } = chartLib[config.key];
   let api = config.api || {};
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
