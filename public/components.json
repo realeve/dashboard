@@ -1,139 +1,120 @@
-[
-  {
-    "title": "常规图表",
-    "icon": "icon-com-regular",
-    "list": [
-      {
-        "title": "柱形图",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_bar icon-com-regular",
-        "list": [
-          {
-            "name": "echarts.horizontal-positive-negative-bar-chart",
-            "key": "barChartPositiveNegative",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "水平正负柱状图",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
-          },
-          {
-            "name": "echarts.line-bar-chart",
-            "key": "barChartLine",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "折线柱图",
-            "image": "/img/icons/02_barChartLine.png"
-          },
-          {
-            "name": "g2.waterfall",
-            "key": "waterfall",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "瀑布图",
-            "image": "/img/icons/03_waterfall.png"
-          },
-          {
-            "name": "echarts.gardient_bar",
-            "key": "gardient_bar",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "渐变柱形图",
-            "image": "/img/icons/10_gardient_bar.png"
-          }
-        ]
-      },
-      {
-        "title": "折线图",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular",
-        "list": [
-          {
-            "name": "echarts.gardientLine",
-            "key": "gardientLine",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "渐变面积图",
-            "image": "/img/icons/11_gardient_line.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "饼图",
-    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
-    "list": [
-      {
-        "title": "百分比",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.dynamicPie",
-            "key": "dynamicPie",
-            "engine": "other",
-            "type": "regular_pie",
-            "title": "动态饼图",
-            "image": "/img/icons/07_dynamicpie.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "其它",
-    "icon": "icon-com-decorate",
-    "list": [
-      {
-        "title": "百分比",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.percent",
-            "key": "progressBar",
-            "engine": "other",
-            "type": "others",
-            "title": "进度条",
-            "image": "/img/icons/04_progress_bar.png"
-          },
-          {
-            "name": "other.water",
-            "key": "water",
-            "engine": "echarts",
-            "type": "others",
-            "title": "水球图",
-            "image": "/img/icons/05_water.png"
-          },
-          {
-            "name": "other.ringchart",
-            "key": "ringchart",
-            "engine": "echarts",
-            "type": "others",
-            "title": "百分比环图",
-            "image": "/img/icons/06_ringchart.png"
-          }
-        ]
-      },
-      {
-        "title": "列表",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.scrollBoard",
-            "key": "scrollBoard",
-            "engine": "other",
-            "type": "others",
-            "title": "滚动表单",
-            "image": "/img/icons/08_scroll_board.png"
-          },
-          {
-            "name": "other.rankingBoard",
-            "key": "rankingBoard",
-            "engine": "other",
-            "type": "others",
-            "title": "排名表",
-            "image": "/img/icons/09_ranking_board.png"
-          }
-        ]
-      }
-    ]
-  },
-  { "title": "收藏", "icon": "icon-com-favorite", "list": [] }
-]
+[{
+  "title": "常规图表",
+  "icon": "icon-com-regular",
+  "list": [{
+    "title": "柱形图",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_bar icon-com-regular",
+    "list": [{
+      "name": "echarts.horizontal-positive-negative-bar-chart",
+      "key": "barChartPositiveNegative",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "水平正负柱状图",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
+    }, {
+      "name": "echarts.line-bar-chart",
+      "key": "barChartLine",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "折线柱图",
+      "image": "/img/icons/02_barChartLine.png"
+    }, {
+      "name": "g2.waterfall",
+      "key": "waterfall",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "瀑布图",
+      "image": "/img/icons/03_waterfall.png"
+    }, {
+      "name": "echarts.gardient_bar",
+      "key": "gardient_bar",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "渐变柱形图",
+      "image": "/img/icons/10_gardient_bar.png"
+    }]
+  }, {
+    "title": "折线图",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular",
+    "list": [{
+      "name": "echarts.gardientLine",
+      "key": "gardientLine",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "渐变面积图",
+      "image": "/img/icons/11_gardient_line.png"
+    }]
+  }]
+}, {
+  "title": "饼图",
+  "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
+  "list": [{
+    "title": "百分比",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.dynamicPie",
+      "key": "dynamicPie",
+      "engine": "other",
+      "type": "regular_pie",
+      "title": "动态饼图",
+      "image": "/img/icons/07_dynamicpie.png"
+    }]
+  }]
+}, {
+  "title": "其它",
+  "icon": "icon-com-decorate",
+  "list": [{
+    "title": "百分比",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.percent",
+      "key": "progressBar",
+      "engine": "other",
+      "type": "others",
+      "title": "进度条",
+      "image": "/img/icons/04_progress_bar.png"
+    }, {
+      "name": "other.water",
+      "key": "water",
+      "engine": "echarts",
+      "type": "others",
+      "title": "水球图",
+      "image": "/img/icons/05_water.png"
+    }, {
+      "name": "other.ringchart",
+      "key": "ringchart",
+      "engine": "echarts",
+      "type": "others",
+      "title": "百分比环图",
+      "image": "/img/icons/06_ringchart.png"
+    }]
+  }, {
+    "title": "列表",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.scrollBoard",
+      "key": "scrollBoard",
+      "engine": "other",
+      "type": "others",
+      "title": "滚动表单",
+      "image": "/img/icons/08_scroll_board.png"
+    }, {
+      "name": "other.rankingBoard",
+      "key": "rankingBoard",
+      "engine": "other",
+      "type": "others",
+      "title": "排名表",
+      "image": "/img/icons/09_ranking_board.png"
+    }]
+  }]
+}, {
+  "title": "收藏",
+  "icon": "icon-com-decorate",
+  "list": [{
+    "title": "收藏",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      
+    }]
+  }]
+}]

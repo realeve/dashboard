@@ -26,11 +26,11 @@ export { rangeLine };
 // -------------    自定义接口配置项     ----------
 
 // 01.水平正负柱状图
-import * as barChartPositiveNegative from './barChart/positiveNegative';
+import * as barChartPositiveNegative from './echarts/positiveNegative';
 export { barChartPositiveNegative };
 
 // 02.折线柱图
-import * as barChartLine from './barChart/line';
+import * as barChartLine from './echarts/line';
 export { barChartLine };
 
 // 03.瀑布图
@@ -63,9 +63,9 @@ import * as rankingBoard from './other/rankingBoard';
 export { rankingBoard };
 
 // 10.渐变柱图
-import * as gardient_bar from './barChart/gardient_bar';
+import * as gardient_bar from './echarts/gardient_bar';
 export { gardient_bar };
 
 // 11.渐变面积图
-import * as gardientLine from './barChart/gardientLine';
+import * as gardientLine from './echarts/gardientLine';
 export { gardientLine };

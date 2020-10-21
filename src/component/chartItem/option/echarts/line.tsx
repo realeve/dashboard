@@ -84,8 +84,7 @@ export const config = [
     max: 40,
     step: 2,
   },
-  ...lib.getPositionConfig(),
-
+  ...lib.getPositionConfig(), 
   {
     type: 'divider',
     title: '系列图表类型',
