@@ -102,30 +102,31 @@ const handleComponents = () => {
 };
 
 const getTemplateFile = () => {
-  let str = `
-  import React from 'react';
-  import * as lib from '../lib';
-  import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
-  import { handleData } from '@/component/chartItem/option/echarts/line';
-  
-  export let mock: IChartMock = {
+  const mockStr = `
+export let mock: IChartMock = {
     data: [
-      ['类目1', '1月', 175],
-      ['类目2', '1月', 210],
-      ['类目1', '2月', 125],
-      ['类目2', '2月', 140],
-      ['类目1', '3月', 98],
-      ['类目2', '3月', 120],
-      ['类目1', '4月', 120],
-      ['类目2', '4月', 140],
-      ['类目1', '5月', 50],
-      ['类目2', '5月', 60],
+    ['类目1', '1月', 175],
+    ['类目2', '1月', 210],
+    ['类目1', '2月', 125],
+    ['类目2', '2月', 140],
+    ['类目1', '3月', 98],
+    ['类目2', '3月', 120],
+    ['类目1', '4月', 120],
+    ['类目2', '4月', 140],
+    ['类目1', '5月', 50],
+    ['类目2', '5月', 60],
     ],
     title: '某数据_MOCK数据',
     header: ['月份', '类型', '交易发生值'],
     rows: 10,
     hash: 'mockdata',
-  };
+};`;
+  let str = `
+  import React from 'react';
+  import * as lib from '../lib';
+  import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+  import { handleData } from '@/component/chartItem/option/echarts/line';
+  ${mockStr}
   
   export const config = [
     {
@@ -256,28 +257,10 @@ const getTemplateFile = () => {
   if (chartType === 'echarts') {
     return str;
   }
-  str = `import { Chart } from '@antv/g2';
-  import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
-  import { handleAxisStyle } from './waterfall';
-  
-  export let mock: IChartMock = {
-    header: ['类别', '数值'],
-    data: [
-      ['类目1', '1月', 175],
-      ['类目2', '1月', 210],
-      ['类目1', '2月', 125],
-      ['类目2', '2月', 140],
-      ['类目1', '3月', 98],
-      ['类目2', '3月', 120],
-      ['类目1', '4月', 120],
-      ['类目2', '4月', 140],
-      ['类目1', '5月', 50],
-      ['类目2', '5月', 60],
-    ],
-    title: '请添加你的数据_mock',
-    rows: 14,
-    hash: 'mockdata',
-  };
+  str = `
+  import { Chart } from '@antv/g2';
+  import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface'; 
+  ${mockStr}
   
   export const config: IChartConfig[] = [
     {
@@ -323,11 +306,24 @@ const getTemplateFile = () => {
   
   // g2 的默认组件需要2个参数，一是配置项，二是chart实例
   export const onMount = ({ data: { data: data }, x = 0, y = 1 }: IChartProps, chart: Chart) => {
+    
     chart.data(data);
-    handleAxisStyle(chart, { x, y });
-    chart.scale(y, { nice: true });
-    chart.legend(false);
-    chart.interval().position(\`${x}*${y}\`);
+    chart.scale({
+        2: {
+            min: 0
+        }
+    });
+
+    chart.tooltip({
+        showCrosshairs: true,
+        shared: true,
+    });
+
+    chart
+    .line()
+    .position('1*2')
+    .color('0');
+
     chart.render();
   };
   
