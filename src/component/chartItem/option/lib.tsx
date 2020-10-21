@@ -674,27 +674,42 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
   },
 ];
 
-export const getLegendPosition = ({
+/**
+ * 获取 ECharts legend 配置信息
+ * @param param0
+ */
+export const getLegendOption = ({
   legendAlign = 'center',
   legendPosition = 'top',
   legendOrient = 'horizontal',
+  legendShow = true,
 }) => {
+  let legend = {};
   if (['top', 'bottom'].includes(legendPosition)) {
-    return {
+    legend = {
       [legendPosition]: 15,
       left: legendAlign,
       orient: legendOrient,
     };
+  } else {
+    let position = {
+      left: 'top',
+      center: 'middle',
+      right: 'bottom',
+    };
+    legend = {
+      [legendPosition]: 15,
+      top: position[legendAlign],
+      orient: legendOrient,
+    };
   }
-  let position = {
-    left: 'top',
-    center: 'middle',
-    right: 'bottom',
-  };
   return {
-    [legendPosition]: 15,
-    top: position[legendAlign],
-    orient: legendOrient,
+    show: legendShow,
+    icon: 'circle',
+    textStyle: {
+      color: '#ddd',
+    },
+    ...legend,
   };
 };
 

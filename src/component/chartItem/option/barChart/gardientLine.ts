@@ -203,12 +203,7 @@ export default ({
       },
     },
     tooltip: {},
-    legend: {
-      show:legendShow,
-      icon: 'circle',
-      textStyle: { color: '#fff' },
-      ...lib.getLegendPosition({ legendAlign, legendPosition, legendOrient }),
-    },
+    legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     series,
   };
 };
