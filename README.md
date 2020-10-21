@@ -151,3 +151,14 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [ ] 不同尺寸屏幕的缩放
 - [ ] 缩略图显示
 - [ ] 文字、图片组件；图片动画
+
+
+--
+
+# 开发时，添加组件
+
+> npm run add your_chart_name echarts
+
+> npm run add your_chart_name g2
+
+> npm run add your_chart_name other
