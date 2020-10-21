@@ -128,7 +128,7 @@ const Index = ({
       <BorderItem
         name={page.border}
         style={{
-          background: page.chartBackground,
+          background: config.showBackground ? page.chartBackground : 'unset',
           width: '100%',
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
         }}

@@ -49,6 +49,7 @@ export interface IPanelConfig {
 
   showTitle?: boolean; // 显示标题
   showBorder?: boolean; // 显示边框
+  showBackground?: boolean; // 显示背景
   useGeneralStyle?: boolean; //使用全局设置
 
   componentConfig?: {
@@ -156,7 +157,7 @@ export default {
         general: panelGeneral,
         showTitle: true,
         showBorder: true,
-
+        showBackground: true,
         useGeneralStyle: true,
 
         // 自定义配置

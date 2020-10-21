@@ -28,7 +28,7 @@ export const config = [
     title: '柱状宽度',
     type: 'range',
     min: 10,
-    max: 40,
+    max: 60,
     step: 2,
   },
 ];
@@ -54,7 +54,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ data: _data, x = 0, y = 1, barWidth = 15 }) => {
+export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
   let xData = [],
     yData = [];
   let value = _data.data;
@@ -145,7 +145,9 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 15 }) => {
             height: 30,
             backgroundColor: 'rgba(0,160,221,0.1)',
             borderRadius: 200,
-            position: ['-8', '-60'],
+            // 此处位置X的设置: 增加一个参数barPosition,记录barWidth在10 20 30 40 50 60时的最佳位置，
+            // 在excel中添加曲线图，添加趋势线及公式，得到 positionX = 0.5 * barWidth - 16
+            position: [barWidth / 2 - 16, '-60'],
             distance: 1,
             formatter: ['    {d|●}', ' {a|{c}}     \n', '    {b|}'].join(','),
             rich: {

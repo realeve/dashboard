@@ -11,6 +11,7 @@ import { Tabs, Switch } from 'antd';
 import ComponentSetting from './componentSetting';
 import ApiSetting from './apiSetting';
 import InputRange from '@/component/field/InputRange';
+import { Divider } from 'antd';
 
 interface IPanel {
   selectedIdx: number;
@@ -132,30 +133,6 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 }}
               />
             </Field>
-            <Field title="显示标题">
-              <Switch
-                checked={panel[selectedIdx]?.showTitle}
-                onChange={showTitle => {
-                  updateAttrib({
-                    showTitle,
-                  });
-                }}
-                checkedChildren="显示"
-                unCheckedChildren="隐藏"
-              />
-            </Field>
-            <Field title="显示边框">
-              <Switch
-                checked={panel[selectedIdx]?.showBorder}
-                onChange={showBorder => {
-                  updateAttrib({
-                    showBorder,
-                  });
-                }}
-                checkedChildren="显示"
-                unCheckedChildren="隐藏"
-              />
-            </Field>
             <Field title="使用全局样式">
               <Switch
                 checked={panel[selectedIdx]?.useGeneralStyle}
@@ -173,6 +150,43 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 }}
                 checkedChildren="是"
                 unCheckedChildren="否"
+              />
+            </Field>
+            <Divider plain>显示设置</Divider>
+            <Field title="标题">
+              <Switch
+                checked={panel[selectedIdx]?.showTitle}
+                onChange={showTitle => {
+                  updateAttrib({
+                    showTitle,
+                  });
+                }}
+                checkedChildren="显示"
+                unCheckedChildren="隐藏"
+              />
+            </Field>
+            <Field title="边框">
+              <Switch
+                checked={panel[selectedIdx]?.showBorder}
+                onChange={showBorder => {
+                  updateAttrib({
+                    showBorder,
+                  });
+                }}
+                checkedChildren="显示"
+                unCheckedChildren="隐藏"
+              />
+            </Field>
+            <Field title="背景">
+              <Switch
+                checked={panel[selectedIdx]?.showBackground}
+                onChange={showBackground => {
+                  updateAttrib({
+                    showBackground,
+                  });
+                }}
+                checkedChildren="显示"
+                unCheckedChildren="隐藏"
               />
             </Field>
             {general && (
