@@ -48,7 +48,7 @@ export const onMount = (
 
   let view1 = chart.createView();
   view1.data(data);
-  console.log(rangeChartType);
+  // console.log(rangeChartType);
   view1[rangeChartType]()
     .position('x*y')
     .color('#1890ff')
@@ -89,10 +89,10 @@ export const onMount = (
       .point()
       .position('x*y')
       .label('y', {
-        textStyle: {
+        style: {
           fill: textColor,
         },
-      });
+      }).tooltip(false)
 
     view2.axis('x', {
       tickLine: {
