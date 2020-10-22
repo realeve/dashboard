@@ -1,10 +1,6 @@
 export const textColor = '#9aa8d4';
- 
-export { default as percent } from './other/percent';
 
-// g2
-import * as waffle from './g2/waffle';
-export { waffle };
+export { default as percent } from './other/percent';
 
 export { default as g2Rose } from './g2/g2_rose';
 

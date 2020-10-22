@@ -42,68 +42,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
-
-      case 'pictorial':
-        let theme: 'rect' | 'round' = Math.random() > 0.5 ? 'rect' : 'round';
-        return (
-          <Echarts
-            option={lib.pictorialBar({
-              data: [
-                ['通信', 2691],
-                ['网络', 4300],
-                ['能源', 3416],
-                ['建筑', 4666],
-              ],
-              size: 32,
-              yAxis: Math.random() > 0.5,
-              theme,
-            })}
-            renderer={theme === 'rect' ? 'svg' : 'canvas'}
-          />
-        );
-      // case 'gardientline':
-      //   return (
-      //     <Echarts
-      //       option={lib.gardientLine({
-      //         data: {
-      //           x: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      //           y: [
-      //             {
-      //               name: 'name1',
-      //               value: [320, 232, 101, 334, 244, 235, 332],
-      //             },
-      //             {
-      //               name: 'name2',
-      //               value: [148, 232, 254, 231, 176, 121, 232],
-      //             },
-      //             {
-      //               name: 'name3',
-      //               value: [148, 132, 154, 131, 176, 121, 132],
-      //             },
-      //           ],
-      //         },
-      //         yAxis: false,
-      //         smooth: false,
-      //       })}
-      //       renderer="svg"
-      //     />
-      //   );
-      case 'waffle':
-        return (
-          <G2
-            option={{
-              data: [
-                ['type 1', 32],
-                ['type 2', 65],
-                ['type 3', 30],
-                ['type 4', 42],
-              ],
-              ...lib.waffle,
-              height: 160,
-            }}
-            renderer="svg"
-          />
-        );
+ 
       case 'wind':
         var direction: 'horizontal' | 'vertical' = Math.random() > 0.5 ? 'horizontal' : 'vertical';
         return (

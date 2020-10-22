@@ -52,10 +52,6 @@ let chartList = [
     type: 'digitalscroll',
   },
   {
-    name: '玉珏图',
-    type: 'radialbar',
-  },
-  {
     name: '装饰挂件',
     type: 'decotation',
   },
@@ -88,11 +84,7 @@ let chartList = [
   {
     name: '雷达图',
     type: 'radar',
-  },
-  {
-    name: '华夫图',
-    type: 'waffle',
-  },
+  }, 
   {
     name: '扇形图',
     type: 'g2rose',
