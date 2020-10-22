@@ -40,6 +40,43 @@ const maxCols = 12;
 
 let chartList = [
   {
+    name: '旋风图',
+    type: 'wind',
+  },
+  {
+    name: '翻牌器',
+    type: 'flipboard',
+  },
+  {
+    name: '滚动翻牌器',
+    type: 'digitalscroll',
+  },
+  {
+    name: '玉珏图',
+    type: 'radialbar',
+  },
+  {
+    name: '装饰挂件',
+    type: 'decotation',
+  },
+  {
+    name: '分面图_纵向',
+    type: 'facet3',
+  },
+  {
+    name: '分面图_横向',
+    type: 'facet2',
+  },
+  {
+    name: '区间曲线图',
+    type: 'rangeline',
+  },
+  {
+    name: '分面图_饼图',
+    type: 'g2pielist',
+  },
+  // 以下图表报错
+  {
     name: '柱状图',
     type: 'bar',
     group: true,
@@ -53,41 +90,9 @@ let chartList = [
     type: 'radar',
   },
   {
-    name: '占位区域',
-    type: '_blank',
-  },
-  // {
-  //   name: '滚动表单',
-  //   type: 'scrollBoard',
-  // },
-  // {
-  //   name: '排名表',
-  //   type: 'rankingBoard',
-  // },
-  {
-    name: '翻牌器',
-    type: 'flipboard',
-  },
-  {
-    name: '滚动翻牌器',
-    type: 'digitalscroll',
-  }, 
-  // {
-  //   name: '渐变柱形图',
-  //   type: 'roundBar',
-  // }, 
-  {
     name: '华夫图',
     type: 'waffle',
   },
-  {
-    name: '玉珏图',
-    type: 'radialbar',
-  },
-  // {
-  //   name: '百分比',
-  //   type: 'percent',
-  // }, 
   {
     name: '扇形图',
     type: 'g2rose',
@@ -97,37 +102,9 @@ let chartList = [
     type: 'g2radialbar',
   },
   {
-    name: '旋风图',
-    type: 'wind',
-  },
-  {
-    name: '分面图_纵向',
-    type: 'facet3',
-  },
-  {
-    name: '分面图_横向',
-    type: 'facet2',
-  },
-  {
-    name: '分面图_饼图',
-    type: 'g2pielist',
-  },
-  {
     name: '带详情的饼图',
     type: 'g2pieother',
-  },
-  {
-    name: '蜘蛛布局饼图',
-    type: 'g2piespider',
-  },
-  {
-    name: '区间曲线图',
-    type: 'rangeline',
-  },
-  {
-    name: '装饰挂件',
-    type: 'decotation',
-  },
+  }, 
 ];
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };

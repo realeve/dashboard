@@ -39,14 +39,17 @@ export const onMount = (
   };
 
   let data = transform({ data: val, x, y, y2, y3 });
-  let view1 = chart.view();
-  view1.source(data);
 
+  let view1 = chart.createView();
+  view1.data(data);
+  console.log(rangeChartType);
   view1[rangeChartType]()
     .position('x*y')
     .color('#1890ff')
     .shape('smooth')
-    .opacity(showAverage ? 0.2 : 0.8)
+    .style({
+      opacity: showAverage ? 0.2 : 0.8,
+    })
     .tooltip('y', y => {
       return {
         name: '数据区间',
@@ -64,8 +67,8 @@ export const onMount = (
 
   if (showAverage) {
     let data2 = data.map(item => ({ x: item.x, y: item.y2 }));
-    let view2 = chart.view();
-    view2.source(data2);
+    let view2 = chart.createView();
+    view2.data(data2);
     view2
       .line()
       .position('x*y')
@@ -84,6 +87,7 @@ export const onMount = (
           fill: textColor,
         },
       });
+
     view2.axis('x', {
       tickLine: {
         visible: false,
@@ -92,21 +96,21 @@ export const onMount = (
     });
     view2.axis('y', yStyle);
 
-    chart.legend({
-      custom: true,
-      clickable: false,
-      items: [
-        { value: '极值', marker: { symbol: 'circle', fill: '#34a4', radius: 5 } },
-        { value: '均值', marker: { symbol: 'circle', fill: '#1890FF', radius: 5 } },
-      ],
-    });
+    // chart.legend({
+    //   custom: true,
+    //   clickable: false,
+    //   items: [
+    //     { value: '极值', marker: { symbol: 'circle', fill: '#34a4', radius: 5 } },
+    //     { value: '均值', marker: { symbol: 'circle', fill: '#1890FF', radius: 5 } },
+    //   ],
+    // });
 
     if (coord === 'polar') {
-      view1.coord(coord, {
+      view1.coordinate(coord, {
         innerRadius: 0.5,
       });
 
-      view2.coord(coord, {
+      view2.coordinate(coord, {
         innerRadius: 0.5,
       });
     }

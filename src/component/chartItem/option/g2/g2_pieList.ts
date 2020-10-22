@@ -1,7 +1,8 @@
 import insertCss from 'insert-css';
-import G2 from '@antv/g2';
 import { IG2Config } from './g2_wind';
 import { textColor } from '../index';
+import G2, { getTheme } from '@antv/g2';
+const defaultTheme = getTheme();
 
 export default (
   { data: val, header, title = '', x = 0, y = 1, max = 100, innerPercent = 75 }: IG2Config,
@@ -56,31 +57,35 @@ export default (
     eachView: function eachView(view, facet) {
       const data = facet.data;
       data.push({ type: '其他', value: max - data[0].value });
-      view.source(data);
-      view.coord('theta', {
+      view.data(data);
+      view.coordinate('theta', {
         radius: 1,
         innerRadius: innerPercent / 100,
       });
+      console.log(defaultTheme.colors10,facet)
       view
-        .interval().adjust('stack')
+        .interval()
+        .adjust('stack')
         .position('value')
-        .color('type', [G2.Global.colors[facet.colIndex], '#eceef133'])
-        .opacity(1)
+        .color('type', [defaultTheme.colors10[facet.columnIndex], '#eceef133'])
+        .style({
+          opacity: 1,
+        })
         .tooltip('type*value', (name, value) => {
           return {
             name: data[0].type,
             value: data[0].value,
           };
         });
-      view.guide().html({
-        position: ['50%', '50%'],
-        html: `
-        <div class="g2-guide-html">
-          <p class="title">${data[0].type}</p>
-          <p class="value">${data[0].value}%</p>
-        </div>
-      `,
-      });
+      // view.guide().html({
+      //   position: ['50%', '50%'],
+      //   html: `
+      //   <div class="g2-guide-html">
+      //     <p class="title">${data[0].type}</p>
+      //     <p class="value">${data[0].value}%</p>
+      //   </div>
+      // `,
+      // });
     },
   });
 

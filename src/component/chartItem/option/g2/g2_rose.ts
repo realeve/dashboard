@@ -1,4 +1,5 @@
-import G2 from '@antv/g2';
+import { getTheme } from '@antv/g2';
+const defaultTheme = getTheme();
 
 export default (
   {
@@ -19,7 +20,7 @@ export default (
   //别名
   chart.scale(header.map(alias => ({ alias })));
 
-  chart.coord('polar', {
+  chart.coordinate('polar', {
     innerRadius: innerPercent / 100,
     startAngle: startAngle === 0 ? 0 : Math.PI * (startAngle / 180), // 起始角度
     endAngle: endAngle === 0 ? 0 : Math.PI * (endAngle / 180), // 结束角度
@@ -39,7 +40,7 @@ export default (
     });
 
   if (color) {
-    interval.color(String(x), color === 'rainbow' ? G2.Global.colors_pie_16 : color);
+    interval.color(String(x), color === 'rainbow' ? defaultTheme.colors10 : color);
   }
 
   chart.legend(legend);

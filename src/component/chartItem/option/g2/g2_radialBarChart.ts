@@ -6,7 +6,7 @@ export default (
   chart,
 ) => {
   const ds = new DataSet();
-  const dv = ds.createView().source(data);
+  const dv = ds.createView().data(data);
   dv.transform({
     type: 'sort',
     callback(a, b) {
@@ -21,7 +21,7 @@ export default (
   //别名
   chart.scale(header.map(alias => ({ alias })));
 
-  chart.coord('theta', {
+  chart.coordinate('theta', {
     innerRadius: innerPercent / 100,
     endAngle: Math.PI,
   });

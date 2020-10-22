@@ -1,6 +1,9 @@
 import { textColor } from '../index';
-import G2 from '@antv/g2';
+import G2,{getTheme} from '@antv/g2'; 
 import { IG2Config } from './g2_wind';
+const defaultTheme = getTheme();
+ 
+
 export interface IFacet extends IG2Config {
   type: 'line' | 'bar' | 'column' | 'point';
 }
@@ -36,7 +39,7 @@ const lineNBar = (
   }
 
   const getColor = idx => {
-    let colors = G2.Global.colors;
+    let colors = defaultTheme.colors10;
     return colors[idx % colors.length];
   };
 
@@ -77,10 +80,12 @@ const lineNBar = (
 
       view.axis(y, false);
 
-      const color = type === 'point' ? G2.Global.colors : getColor(facet.rowIndex);
+      const color = type === 'point' ? defaultTheme.colors10 : getColor(facet.rowIndex);
       view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
-        .opacity(0.8)
+        .style({
+          opacity: 0.8,
+        })
         .position(`${x}*${y}`)
         .color(legend, color)
         .label(y, {
@@ -148,11 +153,11 @@ const column = (
     },
   });
 
-  chart.coord().transpose();
+  chart.coordinate().transpose();
   chart
     .interval()
     .position(`${x}*${y}`)
-    .color(legend, G2.Global.colors)
+    .color(legend, defaultTheme.colors10)
     .label(y, {
       textStyle: {
         fill: textColor,

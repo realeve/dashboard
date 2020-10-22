@@ -82,7 +82,7 @@ export default (
     : { showTitle: false };
 
   if (isVertical) {
-    chart.coord().transpose();
+    chart.coordinate().transpose();
   }
 
   chart.facet('mirror', {
@@ -93,7 +93,7 @@ export default (
     // 自动调整两侧间距
     padding: isVertical ? [10, 5 + 13 * Math.max(...xLen), 0, 0] : [0, 0, 30, 0],
     eachView: function eachView(view, facet) {
-      const facetIndex = facet[isVertical ? 'colIndex' : 'rowIndex'];
+      const facetIndex = facet[isVertical ? 'columnIndex' : 'rowIndex'];
       if ((isVertical && facetIndex === 0) || (!isVertical && facetIndex > 0)) {
         view.axis(x, false);
       }

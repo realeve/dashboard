@@ -10,7 +10,7 @@ export const transformer = ({ data: val, x, y }, chart) => {
   });
 
   let maxCount = 100;
-  const dv = new View().source(data).transform({
+  const dv = new View().data(data).transform({
     type: 'waffle',
     maxCount,
     rows: 5,

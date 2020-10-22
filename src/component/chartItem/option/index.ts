@@ -15,8 +15,7 @@ export { default as g2Facet2 } from './g2/g2_facet2';
 export { default as g2PieList } from './g2/g2_pieList';
 import * as g2PieOther from './g2/g2_pieOther';
 export { g2PieOther };
-
-export { default as g2PieSpider } from './g2/g2_pieSpider';
+ 
 
 // min-max-average区间图
 import * as rangeLine from './g2/rangeLine';

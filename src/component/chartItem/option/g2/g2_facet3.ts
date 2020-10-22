@@ -1,7 +1,8 @@
 import { textColor } from '../index';
 import * as R from 'ramda';
-import G2 from '@antv/g2';
+import G2, { getTheme } from '@antv/g2';
 import { chartType, IFacet } from './g2_facet2';
+let defaultTheme = getTheme();
 export default (
   { data, header, type = 'bar', legend = 0, x = 1, y = 2, showLegend = false }: IFacet,
   chart,
@@ -28,7 +29,7 @@ export default (
 
   let legendData = R.compose(R.uniq, R.pluck(legend))(data);
   const getColor = idx => {
-    let colors = G2.Global.colors;
+    let colors = defaultTheme.colors10;
     return colors[idx % colors.length];
   };
 
@@ -48,7 +49,7 @@ export default (
     : { showTitle: false };
 
   if (type === 'column') {
-    chart.coord().transpose();
+    chart.coordinate().transpose();
   } else if (['line', 'bar', 'point'].includes(type)) {
     let xLen = R.uniq(R.pluck(x, data)).length;
     chart.scale(x, {
@@ -64,7 +65,7 @@ export default (
     padding: [10, 0, 0, 5 + 13 * 4],
     cols: legendData.length > 4 ? 4 : legendData.length, // 超过4个换行
     eachView: function eachView(view, facet) {
-      if (['line', 'bar', 'point'].includes(type) || facet.colIndex === 0) {
+      if (['line', 'bar', 'point'].includes(type) || facet.columnIndex === 0) {
         view.axis(['line', 'bar', 'point'].includes(type) ? y : x, {
           label: {
             textStyle: {
@@ -86,18 +87,20 @@ export default (
       if (['line', 'bar', 'point'].includes(type)) {
         view.axis(x);
       } else {
-        if (facet.colIndex === 0) {
+        if (facet.columnIndex === 0) {
           view.axis(y, false);
         } else {
           view.axis(false);
         }
       }
 
-      const color = type === 'point' ? G2.Global.colors : getColor(facet.colIndex);
+      const color = type === 'point' ? defaultTheme.colors10 : getColor(facet.columnIndex);
 
       let chartView = view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
-        .opacity(0.8)
+        .style({
+          opacity: 0.8,
+        })
         .position(`${x}*${y}`)
         .color(legend, color);
 

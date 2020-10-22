@@ -42,7 +42,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
- 
+
       case 'radialbar':
         return (
           <Echarts
@@ -334,13 +334,10 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
           <G2
             option={{
               data: [
-                ['微博', 13.33],
-                ['微博1', 5.33],
-                ['微博2', 3.33],
-                ['微博3', 12.33],
-                ['微博4', 13.33],
-                ['微博5', 14.33],
-                ['微博6', 15.33],
+                ['微博1', 13.33],
+                ['微博2', 23.33],
+                ['微博3', 36.33],
+                ['微博4', 30.33],
                 ['论坛', 1.77],
                 ['网站', 1.44],
                 ['微信', 1.12],
@@ -352,35 +349,12 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
               ],
               header: ['类型', '数值'],
               innerPercent: 10,
-              pieItem: 7,
+              pieItem: 4,
               otherChart: 'bar',
               padding: [0, 30, 0, 0],
               ...lib.g2PieOther,
             }}
             renderer="svg"
-          />
-        );
-      case 'g2piespider':
-        return (
-          <G2
-            option={{
-              data: [
-                ['居住', 7140],
-                ['食品烟酒', 3875],
-                ['交通通信', 2267],
-                ['教育、文化、娱乐', 1853],
-                ['医疗保健', 1685],
-                ['衣着', 1179],
-                ['生活用品及服务', 1088],
-                ['其他用品及服务', 583],
-              ],
-              header: ['类型', '数值'],
-              innerPercent: 50,
-              color: null,
-              padding: [20, 0, 0, 0],
-              onMount: lib.g2PieSpider,
-            }}
-            // renderer="svg"
           />
         );
       case 'bar':
