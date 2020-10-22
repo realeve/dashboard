@@ -72,7 +72,7 @@ export { gardientLine };
     时间：2020-10-21 21:22:01
     类型: echarts
     序号：12
-    名称：你的图表名称
+    名称：间隔柱状图
 */ 
 import * as pictorial_bar from './echarts/pictorial_bar';
 export { pictorial_bar }; 
@@ -81,7 +81,7 @@ export { pictorial_bar };
     时间：2020-10-21 22:13:59
     类型: other
     序号：13
-    名称：你的图表名称
+    名称：百分比圆环
 */ 
 import * as percent_circle from './other/percent_circle';
 export { percent_circle }; 
