@@ -96,11 +96,7 @@ let chartList = [
   {
     name: '扇形图',
     type: 'g2rose',
-  },
-  {
-    name: '玉珏线图',
-    type: 'g2radialbar',
-  },
+  }, 
 ];
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };

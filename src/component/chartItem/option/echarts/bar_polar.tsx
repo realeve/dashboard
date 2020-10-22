@@ -4,6 +4,10 @@ import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/inte
 import { textColor } from '..';
 import jStat from 'jstat';
 
+import panel from '@/component/echarts/themeColor';
+
+let color = panel.COLOR_PLATE_16;
+
 export let mock: IChartMock = {
   data: [
     ['问题 1', 0.21],
@@ -32,6 +36,12 @@ export const config: IChartConfig[] = [
     step: 2,
   },
   {
+    key: 'roundCap',
+    defaultValue: true,
+    title: '圆角(需刷新)',
+    type: 'switch',
+  },
+  {
     key: 'fontSize',
     defaultValue: 16,
     title: '字号',
@@ -40,8 +50,22 @@ export const config: IChartConfig[] = [
     max: 60,
     step: 2,
   },
-  ...lib.getPositionConfig(),
-
+  {
+    key: 'colorType',
+    defaultValue: 'gardient',
+    title: '颜色模式',
+    type:'radio',
+    option: [
+      {
+        title: '渐变',
+        value: 'gardient',
+      },
+      {
+        title: '彩色',
+        value: 'palette',
+      },
+    ],
+  },
   {
     key: 'color1',
     defaultValue: '#BAE7FF',
@@ -78,29 +102,74 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
+export const defaultOption = {
+  renderer: 'svg',
+};
+
 export default ({
   data: _data,
   x = 0,
   y = 1,
-  legendShow = false,
-  legendAlign,
-  legendPosition,
-  legendOrient,
   barWidth = 20,
   fontSize = 16,
   color1 = '#BAE7FF',
   color2 = '#1150ff',
+  roundCap = true,
+  colorType = 'gardient',
 }) => {
   let xData = [],
     yData = [];
   let value = _data.data;
-  value.forEach(item => {
+  value.forEach((item) => {
     xData.push(item[x]);
     yData.push(item[y]);
   });
 
   let max = jStat.max(yData);
   let result = lib.handleMinMax({ min: 0, max });
+
+  let append =
+    colorType === 'gardient'
+      ? {
+          series: [
+            {
+              name,
+              data: yData,
+              type: 'bar',
+              coordinateSystem: 'polar',
+              barWidth,
+              roundCap,
+            },
+          ],
+          visualMap: {
+            min: 0,
+            max: max,
+            type: 'piecewise',
+            splitNumber: xData.length,
+            dimension: y,
+            show: false,
+            inRange: {
+              color: [color1, color2],
+            },
+          },
+        }
+      : {
+          series: [
+            {
+              name,
+              data: yData.map((value, idx) => ({
+                value,
+                itemStyle: {
+                  color: color[idx % color.length],
+                },
+              })),
+              type: 'bar',
+              coordinateSystem: 'polar',
+              barWidth,
+              roundCap,
+            },
+          ],
+        };
 
   return {
     tooltip: {
@@ -109,7 +178,7 @@ export default ({
         type: 'none',
       },
     },
-    legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    legend: { show: false },
     grid: {
       left: '3%',
       right: '4%',
@@ -129,31 +198,14 @@ export default ({
       },
       axisLine: { show: false },
       axisLabel: {
+        margin: 25,
+        align: 'right',
         interval: 0,
         color: textColor,
         fontSize,
       },
     },
     polar: {},
-    series: [
-      {
-        name,
-        data: yData,
-        type: 'bar',
-        coordinateSystem: 'polar',
-        barWidth,
-      },
-    ],
-    visualMap: {
-      min: 0,
-      max: max,
-      type: 'piecewise',
-      splitNumber: xData.length,
-      dimension: 1,
-      show: false,
-      inRange: {
-        color: [color1, color2],
-      },
-    },
+    ...append,
   };
 };

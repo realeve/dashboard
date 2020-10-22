@@ -43,24 +43,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
 
-      case 'radialbar':
-        return (
-          <Echarts
-            option={lib.radialBarChart({
-              data: [
-                ['周一', 15],
-                ['周张2二', 6],
-                ['周三', 17],
-                ['周四', 8],
-                ['周一2', 9],
-                ['周张2二2', 9],
-                ['周三2', 23],
-                ['周四2', 7],
-              ],
-            })}
-            renderer="svg"
-          />
-        );
       case 'pictorial':
         let theme: 'rect' | 'round' = Math.random() > 0.5 ? 'rect' : 'round';
         return (
@@ -118,32 +100,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
               ],
               ...lib.waffle,
               height: 160,
-            }}
-            renderer="svg"
-          />
-        );
-      case 'g2radialbar':
-        return (
-          <G2
-            option={{
-              data: [
-                ['Zombieland', 9],
-                ['Wieners', 8],
-                ['Toy Story', 8],
-                ['trashkannon', 7],
-                ['the GROWLERS', 6],
-                ['mudweiser', 6],
-                ['ThunderCats', 4],
-                ['The Taqwacores - Motion Picture', 4],
-                ['The Shawshank Redemption', 2],
-                ['The Olivia Experiment', 1],
-              ],
-              innerPercent: 20,
-              color: Math.random() > 0.3 ? '0' : Math.random() > 0.3 ? '1' : '#8543e0',
-              header: ['指标', '值'],
-              title: '这是一组标题',
-              padding: 5,
-              onMount: lib.g2RadialBarChart,
             }}
             renderer="svg"
           />
@@ -328,7 +284,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
             }}
             renderer="svg"
           />
-        ); 
+        );
       case 'bar':
         let stack = Math.random() > 0.5;
         let group = !stack;
@@ -475,7 +431,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         );
 
       default:
-        return <G2Plot config={config} onMockChange={result => onMockChange(result, idx)} />;
+        return <G2Plot config={config} onMockChange={(result) => onMockChange(result, idx)} />;
     }
   };
 

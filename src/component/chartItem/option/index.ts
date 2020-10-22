@@ -1,6 +1,5 @@
 export const textColor = '#9aa8d4';
-
-export { default as radialBarChart } from './radialBarChart';
+ 
 export { default as percent } from './other/percent';
 
 // g2
@@ -8,7 +7,7 @@ import * as waffle from './g2/waffle';
 export { waffle };
 
 export { default as g2Rose } from './g2/g2_rose';
-export { default as g2RadialBarChart } from './g2/g2_radialBarChart';
+
 export { default as g2Wind } from './g2/g2_wind';
 export { default as g2Facet3 } from './g2/g2_facet3';
 export { default as g2Facet2 } from './g2/g2_facet2';
@@ -89,7 +88,7 @@ export { percent_circle };
     时间：2020-10-22 11:08:00
     类型: g2
     序号：14
-    名称：你的图表名称
+    名称：带详情的饼图
 */
 
 import * as pie_detail from './g2/pie_detail';
@@ -99,7 +98,7 @@ export { pie_detail };
     时间：2020-10-22 11:49:04
     类型: echarts
     序号：15
-    名称：你的图表名称
+    名称：玉玦图
 */
 
 import * as bar_polar from './echarts/bar_polar';

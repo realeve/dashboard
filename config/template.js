@@ -171,6 +171,10 @@ export let mock: IChartMock = {
     ],
   };
   
+  export const defaultOption = {
+    renderer: 'svg',
+  };
+  
   export default ({
     data,
     legend = 0,
