@@ -13,9 +13,6 @@ export { default as g2Wind } from './g2/g2_wind';
 export { default as g2Facet3 } from './g2/g2_facet3';
 export { default as g2Facet2 } from './g2/g2_facet2';
 export { default as g2PieList } from './g2/g2_pieList';
-import * as g2PieOther from './g2/g2_pieOther';
-export { g2PieOther };
- 
 
 // min-max-average区间图
 import * as rangeLine from './g2/rangeLine';
@@ -73,15 +70,27 @@ export { gardientLine };
     类型: echarts
     序号：12
     名称：间隔柱状图
-*/ 
+*/
+
 import * as pictorial_bar from './echarts/pictorial_bar';
-export { pictorial_bar }; 
+export { pictorial_bar };
 
 /*
     时间：2020-10-21 22:13:59
     类型: other
     序号：13
     名称：百分比圆环
-*/ 
+*/
+
 import * as percent_circle from './other/percent_circle';
-export { percent_circle }; 
+export { percent_circle };
+
+/*
+    时间：2020-10-22 11:08:00
+    类型: g2
+    序号：14
+    名称：你的图表名称
+*/
+
+import * as pie_detail from './g2/pie_detail';
+export { pie_detail };

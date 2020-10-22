@@ -65,7 +65,17 @@
       "type": "regular_pie",
       "title": "动态饼图",
       "image": "/img/icons/07_dynamicpie.png"
-    }]
+    },
+    {
+      "name": "g2.pie_detail",
+      "key": "pie_detail",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "饼图_详情",
+      "image": "/img/icons/14_pie_detail.png"
+    }
+  
+  ]
   }]
 }, {
   "title": "其它",
@@ -94,16 +104,14 @@
       "type": "others",
       "title": "百分比环图",
       "image": "/img/icons/06_ringchart.png"
-    },
-    {
+    }, {
       "name": "other.percent_circle",
       "key": "percent_circle",
       "engine": "other",
       "type": "regular_bar",
       "title": "百分比圆环",
       "image": "/img/icons/13_percent_circle.png"
-    }
-  ]
+    }]
   }, {
     "title": "列表",
     "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",

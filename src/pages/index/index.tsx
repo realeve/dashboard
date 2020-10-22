@@ -101,10 +101,6 @@ let chartList = [
     name: '玉珏线图',
     type: 'g2radialbar',
   },
-  {
-    name: '带详情的饼图',
-    type: 'g2pieother',
-  }, 
 ];
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };

@@ -1,10 +1,111 @@
-import insertCss from 'insert-css'; 
+import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import { getTheme } from '@antv/g2';
 const defaultTheme = getTheme();
 import { IG2Config } from './g2_wind';
 import { textColor } from '../index';
 import * as R from 'ramda';
-export const transformer = ({ data: val, x, y, pieItem }, chart) => {
+import React from 'react';
+
+import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
+
+export let mock: IChartMock = {
+  data: [
+    ['微博1', 13.33],
+    ['微博2', 23.33],
+    ['微博3', 36.33],
+    ['微博4', 30.33],
+    ['论坛', 1.77],
+    ['网站', 1.44],
+    ['微信', 1.12],
+    ['客户端', 1.05],
+    ['新闻', 0.81],
+    ['视频', 0.39],
+    ['博客', 0.37],
+    ['报刊', 0.17],
+  ],
+  header: ['类型', '数值'],
+  title: '带详情的饼图_MOCK数据',
+  rows: 10,
+  hash: 'mockdata',
+};
+
+export const config: IChartConfig[] = [
+  {
+    type: 'divider',
+    title: '已知bug:属性设置后需要刷新页面查看效果',
+  },
+  {
+    key: 'otherChart',
+    title: '详情图表类型',
+    type: 'radio',
+    defaultValue: 'bar',
+    option: [
+      {
+        title: <PieChartOutlined style={{ color: '#fff' }} />,
+        value: 'pie',
+      },
+      {
+        title: <BarChartOutlined style={{ color: '#fff' }} />,
+        value: 'bar',
+      },
+    ],
+  },
+  {
+    key: 'pieItem',
+    defaultValue: 6,
+    title: '饼数量',
+    type: 'range',
+    min: 1,
+    max: 12,
+    step: 1,
+  },
+  {
+    key: 'innerPercent',
+    defaultValue: 10,
+    title: '内径比例',
+    type: 'range',
+    min: 0,
+    max: 95,
+    step: 1,
+  },
+  {
+    key: 'fontSize',
+    defaultValue: 22,
+    title: '字号',
+    type: 'range',
+    min: 10,
+    max: 60,
+    step: 2,
+  },
+];
+
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: 'http://localhost:8000/mock/14_pie_detail.json',
+  interval: 60,
+  config: [
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+  ],
+};
+
+export const defaultOption = {
+  padding: [0, 30, 0, 0],
+  renderer: 'svg',
+};
+
+export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
   let _data = R.map(item => ({ type: item[x], value: item[y] }))(val);
   _data = _data.sort((b, a) => a.value - b.value);
 
@@ -31,21 +132,19 @@ interface IPieOther extends IG2Config {
   pieItem?: number;
   otherChart?: 'pie' | 'bar';
 }
+
 export const onMount = (
-  { data: val, x = 0, y = 1, pieItem = 6, otherChart = 'pie', innerPercent = 0 }: IPieOther,
+  {
+    data: val,
+    x = 0,
+    y = 1,
+    pieItem = 6,
+    otherChart = 'pie',
+    innerPercent = 10,
+    fontSize = 20,
+  }: IPieOther,
   chart,
 ) => {
-  insertCss(`
-  .g2-label-item {
-    font-size: 12px;
-    color: #ffffff;
-    text-shadow: 0px 0px 2px #595959;
-  }
-  .g2-label {
-		width: 100px;
-  }
-`);
-
   let { data, other, otherOffsetAngle } = transformer({ data: val, x, y, pieItem }, chart);
 
   chart.legend(false);
@@ -88,6 +187,9 @@ export const onMount = (
     .label('value', function() {
       return {
         offset: -10,
+        style: {
+          fontSize,
+        },
         content: obj => {
           return obj.type + '\n' + (100 * obj.percent).toFixed(2) + '%';
         },
@@ -133,6 +235,7 @@ export const onMount = (
       offsetY: 10,
       style: {
         fill: textColor,
+        fontSize,
       },
       content: obj => {
         return obj.type + ' ' + (100 * obj.percent).toFixed(2) + '%';
@@ -204,3 +307,5 @@ export const onMount = (
     canvas.draw();
   }
 };
+
+export default onMount;
