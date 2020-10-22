@@ -20,6 +20,12 @@ export const onMount = (
     },
   });
 
+  chart.tooltip({
+    shared: true,
+    showMarkers: false,
+    showCrosshairs: true
+  });
+  
   let fieldColor = {
     label: {
       textStyle: {
