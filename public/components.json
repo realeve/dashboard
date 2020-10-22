@@ -39,16 +39,14 @@
       "type": "regular_bar",
       "title": "间隔柱状图",
       "image": "/img/icons/12_pictorial_bar.png"
-    },
-    {
+    }, {
       "name": "echarts.bar_polar",
       "key": "bar_polar",
       "engine": "echarts",
       "type": "regular_bar",
       "title": "弧形柱图",
       "image": "/img/icons/15_bar_polar.png"
-    }
-  ]
+    }]
   }, {
     "title": "折线图",
     "icon": "com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular",
@@ -81,6 +79,13 @@
       "type": "regular_bar",
       "title": "饼图_详情",
       "image": "/img/icons/14_pie_detail.png"
+    },{
+      "name": "g2.g2_pie_rose",
+      "key": "g2_pie_rose",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "16_g2_pie_rose",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
     }]
   }]
 }, {

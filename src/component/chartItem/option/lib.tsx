@@ -793,3 +793,17 @@ export const getMax = (val) => {
   let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
   return (Number(String(val)[0]) + 1) * pow;
 };
+
+/**
+ * 计算获取饼图百分比
+ * @param param0
+ */
+export const getPercent = ({ data, y: _y, header }) => {
+  let _data = R.clone(data);
+  let y = header[_y];
+  let sum = _data.reduce((a, b) => a + b[y], 0);
+  return _data.map((item) => {
+    item.percent = ((item[y] / sum) * 100).toFixed(2);
+    return item;
+  });
+};

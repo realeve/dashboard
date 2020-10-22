@@ -1,8 +1,7 @@
 export const textColor = '#9aa8d4';
 
 export { default as percent } from './other/percent';
-
-export { default as g2Rose } from './g2/g2_rose';
+ 
 
 export { default as g2Wind } from './g2/g2_wind';
 export { default as g2Facet3 } from './g2/g2_facet3';
@@ -99,3 +98,12 @@ export { pie_detail };
 
 import * as bar_polar from './echarts/bar_polar';
 export { bar_polar };
+
+/*
+    时间：2020-10-22 22:09:52
+    类型: g2
+    序号：16
+    名称：玫瑰图
+*/ 
+import * as g2_pie_rose from './g2/g2_pie_rose';
+export { g2_pie_rose }; 
