@@ -94,3 +94,13 @@ export { percent_circle };
 
 import * as pie_detail from './g2/pie_detail';
 export { pie_detail };
+
+/*
+    时间：2020-10-22 11:49:04
+    类型: echarts
+    序号：15
+    名称：你的图表名称
+*/
+
+import * as bar_polar from './echarts/bar_polar';
+export { bar_polar };
