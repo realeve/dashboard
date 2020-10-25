@@ -42,7 +42,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
         return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
- 
+
       case 'wind':
         var direction: 'horizontal' | 'vertical' = Math.random() > 0.5 ? 'horizontal' : 'vertical';
         return (
@@ -173,24 +173,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
             }}
             renderer="svg"
           />
-        ); 
-      case 'g2pielist':
-        return (
-          <G2
-            option={{
-              data: [
-                ['2A', 92.4],
-                ['3A', 88.6],
-                ['6T', 77.6],
-                ['7T', 78.6],
-              ],
-              header: ['品种', '好品率'],
-              innerPercent: 75,
-              padding: [0, 0, 0, 0],
-              onMount: lib.g2PieList,
-            }}
-            renderer="svg"
-          />
         );
       case 'bar':
         let stack = Math.random() > 0.5;
@@ -280,7 +262,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
           showLegend: false,
         });
 
-        return <AChart option={option} />;  
+        return <AChart option={option} />;
 
       default:
         return <G2Plot config={config} onMockChange={(result) => onMockChange(result, idx)} />;

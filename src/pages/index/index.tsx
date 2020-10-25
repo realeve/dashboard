@@ -62,15 +62,7 @@ let chartList = [
   {
     name: '分面图_横向',
     type: 'facet2',
-  },
-  {
-    name: '区间曲线图',
-    type: 'rangeline',
-  },
-  {
-    name: '分面图_饼图',
-    type: 'g2pielist',
-  },
+  }, 
   // 以下图表报错
   {
     name: '柱状图',

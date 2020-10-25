@@ -79,13 +79,20 @@
       "type": "regular_bar",
       "title": "饼图_详情",
       "image": "/img/icons/14_pie_detail.png"
-    },{
+    }, {
       "name": "g2.g2_pie_rose",
       "key": "g2_pie_rose",
       "engine": "g2",
       "type": "regular_bar",
       "title": "16_g2_pie_rose",
       "image": "/img/icons/01_barChartPositiveNegative.png"
+    },{
+      "name": "g2.facet_pie",
+      "key": "facet_pie",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "请设置图表名称",
+      "image": "/img/icons/17_facet_pie.png"
     }]
   }]
 }, {

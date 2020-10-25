@@ -5,8 +5,7 @@ export { default as percent } from './other/percent';
 
 export { default as g2Wind } from './g2/g2_wind';
 export { default as g2Facet3 } from './g2/g2_facet3';
-export { default as g2Facet2 } from './g2/g2_facet2';
-export { default as g2PieList } from './g2/g2_pieList';
+export { default as g2Facet2 } from './g2/g2_facet2'; 
 
 // min-max-average区间图
 import * as rangeLine from './g2/rangeLine';
@@ -107,3 +106,12 @@ export { bar_polar };
 */ 
 import * as g2_pie_rose from './g2/g2_pie_rose';
 export { g2_pie_rose }; 
+
+/*
+    时间：2020-10-25 22:34:36
+    类型: g2
+    序号：17
+    名称：分面饼图
+*/ 
+import * as facet_pie from './g2/facet_pie';
+export { facet_pie }; 
