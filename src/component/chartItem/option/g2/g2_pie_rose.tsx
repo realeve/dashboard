@@ -184,7 +184,7 @@ export const onMount = (
         fill: 'white',
         fontSize,
       },
-      content: (obj, e) => {
+      content: (obj) => {
         return obj[x] + '\n' + obj.percent + '%';
       },
     }))

@@ -1,37 +1,12 @@
-import insertCss from 'insert-css';
 import { IG2Config } from './g2_wind';
-import { textColor } from '../index';
-import G2, { getTheme } from '@antv/g2';
+import { getTheme } from '@antv/g2';
 const defaultTheme = getTheme();
 
 export default (
-  { data: val, header, title = '', x = 0, y = 1, max = 100, innerPercent = 75 }: IG2Config,
+  { data: val, header, x = 0, y = 1, max = 100, innerPercent = 75 }: IG2Config,
   chart,
 ) => {
-  const data = val.map(item => ({ type: item[x], value: item[y] }));
-
-  insertCss(`
-    .g2-guide-html {
-        width: 50px;
-        height: 50px;
-        vertical-align: middle;
-        text-align: center;
-        line-height: 0.1
-    }
-
-    .g2-guide-html .title {
-        font-size: 14px;
-        color: ${textColor};
-        font-weight: 300;
-    }
-
-    .g2-guide-html .value {
-        font-size: 20px;
-        color: #eee; 
-        margin-top: 20px;
-        font-weight: normal;
-    }
-`);
+  const data = val.map((item) => ({ type: item[x], value: item[y] }));
 
   chart.data(data);
   chart.legend(false);
@@ -45,14 +20,12 @@ export default (
     },
   });
 
-  chart.tooltip({
-    // itemTpl: '<li><strong>{name}</strong>: {value}</li>',
-    showTitle: false,
-  });
+  chart.tooltip(false);
 
-  chart.facet('rect', {
+  chart.facet('list', {
     fields: ['type'],
-    padding: 20,
+    padding: 5,
+    cols: 2,
     showTitle: false,
     eachView: function eachView(view, facet) {
       const data = facet.data;
@@ -62,30 +35,32 @@ export default (
         radius: 1,
         innerRadius: innerPercent / 100,
       });
-      console.log(defaultTheme.colors10,facet)
+
+      // list 模式下，需要手工计算行列
+      let idx = facet.rowIndex * facet.columnValuesLength + facet.columnIndex;
+
       view
         .interval()
         .adjust('stack')
         .position('value')
-        .color('type', [defaultTheme.colors10[facet.columnIndex], '#eceef133'])
+        .color('type', [defaultTheme.colors10[idx], '#eceef133'])
         .style({
           opacity: 1,
-        })
-        .tooltip('type*value', (name, value) => {
-          return {
-            name: data[0].type,
-            value: data[0].value,
-          };
         });
-      // view.guide().html({
-      //   position: ['50%', '50%'],
-      //   html: `
-      //   <div class="g2-guide-html">
-      //     <p class="title">${data[0].type}</p>
-      //     <p class="value">${data[0].value}%</p>
-      //   </div>
-      // `,
-      // });
+      view.interaction('element-active');
+
+      view.annotation().text({
+        position: ['50%', '50%'],
+        content: (obj) => {
+          return obj[0].type + '\n' + obj[0].value + '%';
+        },
+        style: {
+          fill: '#fff',
+          fontSize: 14,
+          shadowBlur: 0,
+          textAlign: 'center',
+        },
+      });
     },
   });
 

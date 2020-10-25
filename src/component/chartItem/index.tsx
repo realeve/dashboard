@@ -280,62 +280,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
           showLegend: false,
         });
 
-        return <AChart option={option} />;
-      case 'waterfall':
-        // g2 plot 的waterfall存在 Y轴样式的问题，暂时用g2实现
-        // option = g2PlotLib.waterfall({
-        //   header: ['类别', '数值'],
-        //   data: [
-        //     ['日用品', 120],
-        //     ['伙食费', 900],
-        //     ['交通费', 200],
-        //     ['水电费', 300],
-        //     ['房租', 1200],
-        //     ['商场消费', 1000],
-        //     ['应酬红包', -200],
-        //   ],
-        // });
-
-        // return <AChart option={option} />;
-
-        option = {
-          header: ['类别', '数值'],
-          data: [
-            ['日用品', 120],
-            ['伙食费', 900],
-            ['交通费', 200],
-            ['水电费', 300],
-            ['房租', 1200],
-            ['商场消费', 1000],
-            ['应酬红包', -200],
-          ],
-          padding: [20, 0, 30, 40],
-          ...lib.waterfall,
-        };
-
-        return <G2 option={option} renderer="svg" />;
-
-      case 'rangeline':
-        return (
-          <G2
-            option={{
-              header: ['类型', '最小值', '最大值', '均值'],
-              data: [
-                ['分类一', 76, 100, 85],
-                ['分类二', 56, 108, 77],
-                ['分类三', 38, 129, 103],
-                ['分类四', 58, 155, 98],
-                ['分类五', 45, 120, 83],
-                ['分类六', 23, 99, 62],
-                ['分类七', 18, 56, 44],
-                ['分类八', 18, 34, 23],
-              ],
-              padding: [20, 10, 30, 40],
-              rangeChart: Math.random() > 0.5 ? 'bar' : 'area',
-              ...lib.rangeLine,
-            }}
-          />
-        );
+        return <AChart option={option} />;  
 
       default:
         return <G2Plot config={config} onMockChange={(result) => onMockChange(result, idx)} />;
