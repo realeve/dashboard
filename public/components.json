@@ -85,7 +85,7 @@
       "engine": "g2",
       "type": "regular_bar",
       "title": "16_g2_pie_rose",
-      "image": "/img/icons/01_barChartPositiveNegative.png"
+      "image": "/img/icons/16_g2_pie_rose.png"
     },{
       "name": "g2.facet_pie",
       "key": "facet_pie",

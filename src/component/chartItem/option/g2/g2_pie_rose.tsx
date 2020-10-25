@@ -183,6 +183,7 @@ export const onMount = (
       style: {
         fill: 'white',
         fontSize,
+        strokeOpacity: 0,
       },
       content: (obj) => {
         return obj[x] + '\n' + obj.percent + '%';
