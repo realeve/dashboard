@@ -173,39 +173,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
             }}
             renderer="svg"
           />
-        );
-      case 'g2rose':
-        return (
-          <G2
-            option={{
-              data: [
-                ['2001', 41.8],
-                ['2002', 38],
-                ['2003', 33.7],
-                ['2004', 30.7],
-                ['2005', 25.8],
-                ['2006', 31.7],
-                ['2007', 33],
-                ['2008', 46],
-                ['2009', 38.3],
-              ],
-              header: ['年份', '指标'],
-              innerPercent: Math.random() > 0.5 ? 15 : 0,
-              color:
-                Math.random() > 0.3
-                  ? '#40a9ff-#0050b3'
-                  : Math.random() > 0.3
-                  ? '#1890FF'
-                  : 'rainbow',
-              startAngle: Math.random() > 0.5 ? 180 : 0,
-              endAngle: 360,
-              legend: true,
-              padding: [0, 0, 40, 0],
-              onMount: lib.g2Rose,
-            }}
-            renderer="canvas"
-          />
-        );
+        ); 
       case 'g2pielist':
         return (
           <G2

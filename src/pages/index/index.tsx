@@ -84,11 +84,7 @@ let chartList = [
   {
     name: '雷达图',
     type: 'radar',
-  }, 
-  {
-    name: '扇形图',
-    type: 'g2rose',
-  }, 
+  },  
 ];
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
