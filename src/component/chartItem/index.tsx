@@ -18,7 +18,11 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
     case 'decotation':
       return (
         <Decotation name="粉色蓝色透明圆形科技图标内容容器" {...props}>
-          <span>65%</span>
+          <div style={{ textAlign: 'center' }}>
+            <span>好品率</span>
+            <br />
+            <span>65%</span>
+          </div>
         </Decotation>
       );
   }

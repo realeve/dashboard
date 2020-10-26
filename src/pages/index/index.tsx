@@ -69,7 +69,7 @@ export default () => {
     background: '默认',
     header: '默认',
     footer: '默认',
-  }); 
+  });
 
   const addChart = (widgetType, type) => {
     const addItem = {

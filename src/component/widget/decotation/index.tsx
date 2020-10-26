@@ -12,19 +12,18 @@ export interface WidgetDecoration {
 export const borderNames = Object.keys(assets.borders);
 
 export default ({ name, children, style, className, ...props }: WidgetDecoration) => {
-  const { url, animate, node, ...img } = assets.pics[name] || {};
+  const { url, animate, node } = assets.pics[name] || {};
 
   return (
     <div
       style={{
-        // borderImageSource: `url(${url})`,
         ...style,
       }}
       {...props}
       className={classnames(styles.widgetDecotation, className)}
     >
       {name && url && <img src={url} className={classnames(styles.borderImg, styles[animate])} />}
-      {node && children}
+      {node || children}
     </div>
   );
 };

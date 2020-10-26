@@ -157,6 +157,15 @@ export { group_column };
     类型: other
     序号：23
     名称：datav饼图
-*/ 
+*/
 import * as datav_ring from './other/datav_ring/index';
-export { datav_ring }; 
+export { datav_ring };
+
+/*
+    时间：2020-10-26 23:31:19
+    类型: other
+    序号：24
+    名称：旋转svg素材
+*/
+import * as svg_rotate from './other/svg_rotate/';
+export { svg_rotate };

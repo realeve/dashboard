@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 212 212" xml:space="preserve">
-    <style type="text/css">
-	.st0{fill:#08ADE5;}
-	.st1{fill:#80BFE8;}
-	.st2{fill:#F890AB;}  
-</style>
-    <g>
-        <g>
-            <path class="st0" d="M26,148.8c0,0,0.1,0.1,0.2,0.3l0.6,1l0.9,1.6l0.6,1l0.7,1.1c0.5,0.8,1.1,1.7,1.7,2.7l2.2,3.1
+import React from 'react';
+
+export default ({
+  st0 = '#08ade5',
+  st1 = '#80bfe8',
+  st2 = '#f890ab',
+  speed0 = 10,
+  speed1 = 9,
+  speed2 = 40,
+}) => {
+  return (
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212">
+      <g>
+        <path
+          fill={st0}
+          d="M26,148.8c0,0,0.1,0.1,0.2,0.3l0.6,1l0.9,1.6l0.6,1l0.7,1.1c0.5,0.8,1.1,1.7,1.7,2.7l2.2,3.1
 			c0.8,1.1,1.8,2.3,2.8,3.5s2.1,2.5,3.3,3.8s2.5,2.7,4,4c0.7,0.7,1.4,1.4,2.2,2.1l2.4,2.1c3.6,3,7.3,5.7,11.3,8.2
 			c9.6,5.8,20.2,9.7,31.3,11.6c6.3,1.1,12.7,1.5,19.1,1.2c0.8,0,1.7-0.1,2.5-0.1l2.5-0.2c1.7-0.1,3.4-0.4,5.1-0.6s3.4-0.6,5.1-0.9
 			l2.5-0.6l1.3-0.3l1.3-0.4c14.3-3.9,27.5-11.3,38.3-21.5c11.6-10.9,20.1-24.6,24.6-39.8l0.8-2.9c0.3-1,0.5-2,0.7-3
@@ -26,10 +29,26 @@
 			l-1.4,0.3l-2.7,0.6c-1.8,0.4-3.7,0.7-5.5,1s-3.6,0.5-5.4,0.7l-2.7,0.2c-0.9,0.1-1.8,0.1-2.7,0.1c-6.9,0.3-13.8-0.2-20.6-1.3
 			c-11.9-2-23.3-6.3-33.7-12.5c-4.3-2.6-8.4-5.5-12.3-8.7l-2.6-2.2c-0.8-0.7-1.6-1.5-2.4-2.2c-1.6-1.4-2.9-3-4.3-4.4
 			s-2.5-2.8-3.6-4.1s-2.1-2.6-3-3.8s-1.7-2.4-2.4-3.4s-1.3-2-1.9-2.9l-0.8-1.2l-0.6-1.1l-1-1.7c-0.3-0.5-0.5-0.8-0.6-1.1
-			c-0.1-0.1-0.1-0.2-0.2-0.4L26,148.8z		">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="10s" fill="remove" from="360 106 106" repeatCount="indefinite" restart="always" to="0 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st1" d="M3.5,105.7c0,0,0,0.6,0,1.7c0,0.6,0,1.3,0.1,2.1c0,0.4,0,0.9,0,1.3s0.1,1,0.1,1.5c0.1,1.1,0.2,2.3,0.3,3.6
+			c-0.1-0.1-0.1-0.2-0.2-0.4L26,148.8z		"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed0}s`}
+            fill="remove"
+            from="360 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="0 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st1}
+          d="M3.5,105.7c0,0,0,0.6,0,1.7c0,0.6,0,1.3,0.1,2.1c0,0.4,0,0.9,0,1.3s0.1,1,0.1,1.5c0.1,1.1,0.2,2.3,0.3,3.6
 			s0.3,2.8,0.5,4.3c0.1,0.8,0.2,1.6,0.4,2.4s0.3,1.7,0.5,2.6s0.4,1.8,0.6,2.7c0.2,0.9,0.4,1.9,0.7,2.9c1.1,4.3,2.5,8.6,4.2,12.7
 			c2,4.9,4.3,9.6,7,14.2c10.2,17.2,25.2,31,43.1,39.8c6.9,3.4,14.3,6,21.8,7.7c44,10.3,89.6-9.6,112-48.9c1.2-2,2.2-4.1,3.3-6.1
 			c0.5-1,1-2.1,1.4-3.1l0.7-1.6l0.6-1.6l1.3-3.2l1.1-3.3c0.4-1.1,0.7-2.2,1-3.3s0.6-2.2,0.9-3.4c3.3-13.5,4-27.5,1.8-41.2
@@ -45,44 +64,139 @@
 			c-1.1,2.1-2.1,4.3-3.4,6.3c-23.2,40.6-70.3,61.2-115.8,50.5c-7.8-1.8-15.4-4.5-22.5-8c-18.5-9.1-34-23.4-44.5-41.2
 			c-2.8-4.7-5.2-9.6-7.2-14.6c-1.7-4.3-3.2-8.7-4.3-13.2c-0.2-1-0.5-2-0.7-3s-0.5-1.9-0.6-2.8s-0.3-1.8-0.5-2.7s-0.3-1.7-0.4-2.5
 			c-0.2-1.6-0.4-3.1-0.6-4.5s-0.2-2.6-0.3-3.7c0-0.6-0.1-1.1-0.1-1.6s0-0.9,0-1.4c0-0.8,0-1.6-0.1-2.1c0-1.2,0-1.8,0-1.8L3.5,105.7z
-					">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="9s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st2" d="M99.7,24.4l-0.9,0.1c-0.6,0-1.4,0.1-2.5,0.2c-3,0.3-5.9,0.8-8.8,1.5c-8.9,2-17.3,5.5-25,10.3
+					"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed1}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st2}
+          d="M99.7,24.4l-0.9,0.1c-0.6,0-1.4,0.1-2.5,0.2c-3,0.3-5.9,0.8-8.8,1.5c-8.9,2-17.3,5.5-25,10.3
 			c-4.1,2.6-7.9,5.5-11.5,8.8c-3.1,2.9-6,5.9-8.7,9.2c-0.6,0.7-1.1,1.4-1.7,2.1s-1,1.3-1.4,1.9s-0.9,1.2-1.2,1.7l-1,1.5
 			c-0.6,0.9-1.1,1.6-1.3,2.1l-0.5,0.8l-5.4-3.2c0,0,0.2-0.3,0.5-0.8s0.8-1.3,1.4-2.3l1-1.6c0.4-0.6,0.8-1.2,1.3-1.9s1-1.4,1.5-2.1
 			l1.8-2.3c2.9-3.5,6-6.8,9.4-9.9c3.9-3.5,8.1-6.7,12.5-9.4c8.3-5.2,17.4-8.9,26.9-11.1c3.1-0.7,6.3-1.3,9.5-1.6
-			c1.2-0.2,2.1-0.2,2.7-0.3l1-0.1L99.7,24.4z">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="40s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st2" d="M172.4,58.8c0,0-0.2-0.3-0.5-0.7s-0.8-1.2-1.5-2l-1.1-1.4l-0.6-0.8l-0.7-0.8l-1.6-1.8
+			c1.2-0.2,2.1-0.2,2.7-0.3l1-0.1L99.7,24.4z"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed2}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st2}
+          d="M172.4,58.8c0,0-0.2-0.3-0.5-0.7s-0.8-1.2-1.5-2l-1.1-1.4l-0.6-0.8l-0.7-0.8l-1.6-1.8
 			c-0.6-0.6-1.2-1.3-1.8-1.9c-2.9-3.1-6.1-5.9-9.4-8.4c-3.9-2.9-8-5.5-12.3-7.7c-4.3-2.2-8.8-4-13.4-5.4c-4-1.2-8.2-2.1-12.3-2.7
 			l-2.6-0.3c-0.8-0.1-1.7-0.1-2.4-0.2l-2.1-0.2h-1.8c-1.1,0-1.9-0.1-2.5-0.1h-0.9l-0.1-6.3h1c0.6,0,1.5,0,2.7,0.1h1.9l2.3,0.2
 			c0.8,0.1,1.7,0.1,2.6,0.2l2.8,0.4c9.7,1.3,19.1,4.3,27.8,8.8c4.6,2.4,9.1,5.2,13.2,8.3c3.6,2.8,7,5.8,10.1,9.1
-			c0.7,0.7,1.4,1.4,2,2.1l1.7,2l0.8,0.9l0.7,0.9l1.2,1.5c0.7,0.9,1.3,1.7,1.6,2.2l0.6,0.8L172.4,58.8z">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="40s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st2" d="M180.3,138.7c0,0,0.6-1.1,1.3-3.1l0.7-1.7c0.2-0.6,0.4-1.3,0.7-2s0.5-1.5,0.8-2.3l0.7-2.6
+			c0.7,0.7,1.4,1.4,2,2.1l1.7,2l0.8,0.9l0.7,0.9l1.2,1.5c0.7,0.9,1.3,1.7,1.6,2.2l0.6,0.8L172.4,58.8z"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed2}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st2}
+          d="M180.3,138.7c0,0,0.6-1.1,1.3-3.1l0.7-1.7c0.2-0.6,0.4-1.3,0.7-2s0.5-1.5,0.8-2.3l0.7-2.6
 			c1.1-4.1,1.9-8.2,2.4-12.4c0.5-4.8,0.6-9.7,0.3-14.5c-0.3-4.8-1.1-9.6-2.2-14.3c-1-4.1-2.4-8.1-4-12c-1.2-2.7-2.5-5.4-4-8
 			l-1.3-2.2c-0.3-0.5-0.5-0.8-0.5-0.8l5.4-3.3c0,0,0.2,0.3,0.5,0.8s0.8,1.3,1.3,2.3c1.6,2.8,3,5.7,4.3,8.6c1.8,4.2,3.2,8.5,4.3,12.9
 			c1.3,5.1,2.1,10.2,2.4,15.4c0.3,5.2,0.2,10.4-0.3,15.6c-0.5,4.5-1.3,9-2.5,13.4c-0.3,0.9-0.5,1.9-0.8,2.8s-0.6,1.7-0.8,2.4
-			s-0.5,1.5-0.7,2.1s-0.5,1.3-0.7,1.8c-0.4,1.1-0.7,2-1,2.5l-0.4,0.9L180.3,138.7z">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="40s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st2" d="M115.8,186.6l0.9-0.1c0.6-0.1,1.4-0.1,2.5-0.4c2.9-0.5,5.9-1.2,8.7-2c8.7-2.5,17-6.4,24.4-11.6
+			s-0.5,1.5-0.7,2.1s-0.5,1.3-0.7,1.8c-0.4,1.1-0.7,2-1,2.5l-0.4,0.9L180.3,138.7z"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed2}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st2}
+          d="M115.8,186.6l0.9-0.1c0.6-0.1,1.4-0.1,2.5-0.4c2.9-0.5,5.9-1.2,8.7-2c8.7-2.5,17-6.4,24.4-11.6
 			c4-2.8,7.7-5.9,11.1-9.3c3-3,5.7-6.2,8.2-9.6l1.5-2.2c0.5-0.7,0.9-1.4,1.3-2s0.8-1.2,1.1-1.8l0.9-1.6c0.5-0.9,1-1.7,1.2-2.2
 			l0.4-0.8l5.6,2.9l-0.4,0.9c-0.3,0.6-0.7,1.4-1.3,2.4l-1,1.7c-0.3,0.6-0.8,1.2-1.2,1.9s-0.9,1.4-1.4,2.2l-1.7,2.3
 			c-2.7,3.7-5.6,7.1-8.8,10.4c-3.7,3.7-7.7,7-12,10c-8,5.6-16.9,9.8-26.3,12.5c-3.1,0.9-6.2,1.6-9.4,2.1c-1.1,0.2-2,0.3-2.7,0.4
-			l-1,0.1L115.8,186.6z">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="40s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-            <path class="st2" d="M41.6,155.9l0.5,0.7c0.2,0.2,0.4,0.5,0.7,0.8l1,1.1c0.7,0.8,1.5,1.8,2.6,2.9l1.6,1.7c0.6,0.6,1.3,1.2,1.9,1.8
+			l-1,0.1L115.8,186.6z"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed2}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+        <path
+          fill={st2}
+          d="M41.6,155.9l0.5,0.7c0.2,0.2,0.4,0.5,0.7,0.8l1,1.1c0.7,0.8,1.5,1.8,2.6,2.9l1.6,1.7c0.6,0.6,1.3,1.2,1.9,1.8
 			c3.1,2.9,6.3,5.6,9.8,7.9c8,5.5,16.9,9.5,26.3,11.8c4.1,1,8.3,1.7,12.5,2.1l2.7,0.2c0.8,0.1,1.7,0.1,2.4,0.1h2.1h1.8l2.5-0.1
 			l0.9-0.1l0.4,6.3l-1,0.1l-2.7,0.1l-1.9,0.1l-2.3-0.1c-0.8,0-1.7,0-2.6-0.1l-2.8-0.2c-4.5-0.4-9-1.1-13.4-2.2
 			c-10.1-2.5-19.7-6.8-28.4-12.7c-3.8-2.6-7.3-5.4-10.6-8.6c-0.7-0.7-1.4-1.3-2.1-2l-1.8-1.9c-1.1-1.1-2-2.3-2.8-3.1l-1-1.2
-			l-0.7-0.9l-0.6-0.8L41.6,155.9z">
-                <animateTransform  accumulate="none" additive="replace" attributeName="transform" attributeType="xml" calcMode="linear" dur="40s" fill="remove" from="0 106 106" repeatCount="indefinite" restart="always" to="360 106 106" type="rotate"></animateTransform>
-            </path>
-        </g>
-    </g>
-</svg>
+			l-0.7-0.9l-0.6-0.8L41.6,155.9z"
+        >
+          <animateTransform
+            accumulate="none"
+            additive="replace"
+            attributeName="transform"
+            attributeType="xml"
+            calcMode="linear"
+            dur={`${speed2}s`}
+            fill="remove"
+            from="0 106 106"
+            repeatCount="indefinite"
+            restart="always"
+            to="360 106 106"
+            type="rotate"
+          />
+        </path>
+      </g>
+    </svg>
+  );
+};

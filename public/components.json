@@ -188,6 +188,14 @@
             "type": "regular_bar",
             "title": "百分比圆环",
             "image": "/img/icons/13_percent_circle.png"
+          },
+          {
+            "name": "other.svg_rotate",
+            "key": "svg_rotate",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "旋转圆环",
+            "image": "/img/icons/24_svg_rotate.png"
           }
         ]
       },

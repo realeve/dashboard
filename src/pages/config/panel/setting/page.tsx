@@ -74,7 +74,7 @@ export const ComponentConfig = ({
       title="边框"
       value={border}
       type="borders"
-      onChange={border => {
+      onChange={(border) => {
         updatePage({
           border,
         });
@@ -83,7 +83,7 @@ export const ComponentConfig = ({
     <Field title="背景" style={{ padding: 10 }}>
       <ColorPicker
         value={chartBackground}
-        onChange={chartBackground => {
+        onChange={(chartBackground) => {
           updatePage({
             chartBackground,
           });
@@ -99,7 +99,7 @@ export const ComponentConfig = ({
             className="data_input"
             step="1"
             defaultValue={head.fontSize}
-            onChange={e => {
+            onChange={(e) => {
               updatePage({
                 head: { ...head, fontSize: Number(e.target.value) },
               });
@@ -109,7 +109,7 @@ export const ComponentConfig = ({
         <Field title="文字颜色">
           <PureColor
             value={head.color}
-            onChange={color => {
+            onChange={(color) => {
               updatePage({
                 head: { ...head, color },
               });
@@ -119,26 +119,26 @@ export const ComponentConfig = ({
         <Field title="加粗">
           <Radio
             value={head.fontWeight}
-            onChange={fontWeight => {
+            onChange={(fontWeight) => {
               updatePage({
                 head: { ...head, fontWeight },
               });
             }}
             config={[
               {
-                title: '细',
+                title: <div style={{ fontWeight: 'lighter', fontSize: 20 }}>Aa</div>,
                 value: 'lighter',
               },
               {
-                title: '正常',
+                title: <div style={{ fontWeight: 'normal', fontSize: 20 }}>Aa</div>,
                 value: 'normal',
               },
               {
-                title: '加粗',
+                title: <div style={{ fontWeight: 'bold', fontSize: 20 }}>Aa</div>,
                 value: 'bold',
               },
               {
-                title: '极粗',
+                title: <div style={{ fontWeight: 'bolder', fontSize: 20 }}>Aa</div>,
                 value: 'bolder',
               },
             ]}
@@ -150,7 +150,7 @@ export const ComponentConfig = ({
             className="data_input"
             step="1"
             defaultValue={head.padding}
-            onChange={e => {
+            onChange={(e) => {
               updatePage({
                 head: { ...head, padding: Number(e.target.value) },
               });
@@ -160,7 +160,7 @@ export const ComponentConfig = ({
         <Field title="对齐">
           <Align
             value={head.textAlign}
-            onChange={textAlign => {
+            onChange={(textAlign) => {
               updatePage({
                 head: { ...head, textAlign },
               });
@@ -170,7 +170,7 @@ export const ComponentConfig = ({
         <Field title="背景色">
           <ColorPicker
             value={head.background}
-            onChange={background => {
+            onChange={(background) => {
               updatePage({
                 head: { ...head, background },
               });
@@ -188,7 +188,7 @@ interface IPageProps {
   dispatch: Dispatch;
 }
 export default ({ page, dispatch }: IPageProps) => {
-  const updatePage = page => {
+  const updatePage = (page) => {
     dispatch({
       type: 'common/updatePage',
       payload: {
@@ -208,7 +208,7 @@ export default ({ page, dispatch }: IPageProps) => {
               step="2"
               style={{ marginRight: 10 }}
               defaultValue={page.width}
-              onChange={e => {
+              onChange={(e) => {
                 updatePage({
                   width: e.target.value,
                 });
@@ -219,7 +219,7 @@ export default ({ page, dispatch }: IPageProps) => {
               className="data_input"
               step="2"
               defaultValue={page.height}
-              onChange={e => {
+              onChange={(e) => {
                 updatePage({
                   height: e.target.value,
                 });
@@ -231,7 +231,7 @@ export default ({ page, dispatch }: IPageProps) => {
           title="背景"
           value={page.background}
           type="backgrounds"
-          onChange={background => {
+          onChange={(background) => {
             updatePage({
               background,
             });
