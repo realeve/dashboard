@@ -8,7 +8,7 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
-import { BorderItem, DigitalScroll, Decotation, Blank } from '@/component/widget';
+import { BorderItem, Decotation, Blank } from '@/component/widget';
 import G2 from '@/component/g2';
 import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
@@ -28,8 +28,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
     switch (itemType) {
       case '_blank':
         return <Blank config={initState} onChange={onChange} />;
-      case 'digitalscroll':
-        return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
 
       case 'facet3':
         let seed = Math.random();

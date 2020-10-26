@@ -38,11 +38,7 @@ let zoom = initHeight / layoutCfg.rowHeight;
 
 const maxCols = 12;
 
-let chartList = [  
-  {
-    name: '滚动翻牌器',
-    type: 'digitalscroll',
-  },
+let chartList = [   
   {
     name: '装饰挂件',
     type: 'decotation',

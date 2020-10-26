@@ -1,10 +1,10 @@
-// import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { CountUpProps } from 'react-countup';
 import classnames from 'classnames';
 import { useInterval } from 'react-use';
 import { thouandsNum } from '@/utils/lib';
+import { textColor } from '@/component/chartItem/option';
 
 export interface ICountUp extends CountUpProps {
   title: string;
@@ -34,7 +34,6 @@ let numId = {
 };
 
 export default ({
-  title = '',
   value,
   prefix = null,
   suffix = null,
@@ -42,9 +41,10 @@ export default ({
   className,
   style,
   duration = 0.8,
-  scale = 1.2,
   theme = 'theme1',
-  // ...props
+  outlineColor = '#0f396b',
+  padding=15,
+  scale = 1.2,
 }: ICountUp) => {
   const [inited, setInited] = useState(false);
   const [val, setVal] = useState<string | number>(
@@ -75,29 +75,23 @@ export default ({
 
   return (
     <div className={classnames(styles.digitalScroll, className)} style={style}>
-      <div className={styles.title}>{title}</div>
       <div className={styles.counter}>
-        {prefix}
-        {thouandsNum(val, decimals)
+        <span>{prefix}</span>
+        {thouandsNum(Number(val), decimals)
           .split('')
           .map((num, idx) => {
-            // if (['.', ','].includes(num)) {
-            //   return (
-            //     <div className={styles.item} key={idx}>
-            //       {num}
-            //     </div>
-            //   );
-            // }parseInt(num)
             return (
-              <div
-                key={idx}
-                className={classnames(styles.num, styles[theme])}
-                style={{
-                  backgroundPosition: `0 ${-numId[num] * 61.1}px`, //58
-                  transitionDuration: `${duration} s`,
-                  transform: `scale(${scale})`,
-                }}
-              />
+              <div style={{ margin: `0 ${padding}px` }} key={idx}>
+                <div
+                  className={classnames(styles.num, styles[theme])}
+                  style={{
+                    backgroundPosition: `0 ${-numId[num] * 61.1}px`, //58
+                    transitionDuration: `${duration} s`,
+                    transform: `scale(${scale})`,
+                    outlineColor
+                  }}
+                />
+              </div>
             );
           })}
         <span>{suffix}</span>

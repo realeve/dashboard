@@ -123,7 +123,16 @@ export { whirlwind };
     时间：2020-10-26 10:46:18
     类型: other
     序号：19
-    名称：你的图表名称
+    名称：翻牌器
 */ 
 import * as flipboard from './other/flipboard';
 export { flipboard }; 
+
+/*
+    时间：2020-10-26 13:24:53
+    类型: other
+    序号：20
+    名称：滚动翻牌器
+*/ 
+import * as scroll_digit from './other/scroll_digit';
+export { scroll_digit }; 
