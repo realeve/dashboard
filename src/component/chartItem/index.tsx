@@ -29,14 +29,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
       case '_blank':
         return <Blank config={initState} onChange={onChange} />;
       case 'facet2':
-        let seed = Math.random();
-        let type = seed > 0.75 ? 'point' : seed > 0.5 ? 'line' : seed > 0.25 ? 'column' : 'bar';
-        let padding = {
-          line: [10, 20, 20, 0],
-          point: [20, 20, 20, 0],
-          bar: [10, 20, 20, 0],
-          column: [20, 90, 40, 80],
-        };
         return (
           <G2
             option={{
@@ -56,9 +48,8 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
               legend: 0,
               x: 1,
               y: 2,
-              padding: padding[type],
+              padding: [20, 90, 40, 80],
               onMount: lib.g2Facet2,
-              type,
             }}
             renderer="svg"
           />

@@ -170,6 +170,13 @@ export const onMount = (
     },
   });
 
+  chart.tooltip({
+    shared: true,
+    showMarkers: true,
+    showCrosshairs: true,
+    crosshairs: { type: 'x' },
+  });
+
   chart.legend(
     showLegend && {
       position: 'top',
@@ -262,6 +269,7 @@ export const onMount = (
       }
     },
   });
+  chart.interaction('element-active');
   chart.render();
 };
 
