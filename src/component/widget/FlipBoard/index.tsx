@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { thouandsNum } from '@/utils/lib';
 
 export interface ICountUp extends CountUpProps {
-  title: string;
+  // title: string;
   value: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -17,7 +17,7 @@ export interface ICountUp extends CountUpProps {
 }
 
 export default ({
-  title = '',
+  // title = '',
   value,
   prefix = null,
   suffix = null,
@@ -34,7 +34,7 @@ export default ({
 
   return (
     <div className={classnames(styles.flipBoard, className)} style={style}>
-      <div className={styles.title}>{title}</div>
+      {/* <div className={styles.title}>{title}</div> */}
       <div className={styles.counter}>
         {prefix}
         {thouandsNum(countUp as number, decimals)

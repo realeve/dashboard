@@ -383,8 +383,7 @@ const handleTemplate = () => {
   console.log('3.文件组件写入完成');
 };
 const init = () => {
-  handleOptionIndex();
-  return;
+  handleOptionIndex(); 
   handleComponents();
   handleTemplate();
   console.log(`模版${dirName}已创建`);

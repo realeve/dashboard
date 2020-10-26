@@ -118,3 +118,12 @@ export { facet_pie };
 */
 import * as whirlwind from './g2/whirlwind';
 export { whirlwind };
+
+/*
+    时间：2020-10-26 10:46:18
+    类型: other
+    序号：19
+    名称：你的图表名称
+*/ 
+import * as flipboard from './other/flipboard';
+export { flipboard }; 

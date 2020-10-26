@@ -46,7 +46,7 @@
       "type": "regular_bar",
       "title": "弧形柱图",
       "image": "/img/icons/15_bar_polar.png"
-    },{
+    }, {
       "name": "g2.whirlwind",
       "key": "whirlwind",
       "engine": "g2",
@@ -162,6 +162,13 @@
   "list": [{
     "title": "开发测试",
     "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-    "list": []
+    "list": [{
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "请设置图表名称",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
+    }]
   }]
 }]

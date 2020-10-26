@@ -8,14 +8,7 @@ import { CloseOutlined } from '@ant-design/icons';
 
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
-import {
-  BorderItem,
-  FlipBoard,
-  Percent,
-  DigitalScroll,
-  Decotation,
-  Blank,
-} from '@/component/widget';
+import { BorderItem, DigitalScroll, Decotation, Blank } from '@/component/widget';
 import G2 from '@/component/g2';
 import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
@@ -35,10 +28,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
     switch (itemType) {
       case '_blank':
         return <Blank config={initState} onChange={onChange} />;
-      case 'percent':
-        return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
-      case 'flipboard':
-        return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
 
