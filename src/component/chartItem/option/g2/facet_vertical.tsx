@@ -1,11 +1,9 @@
-import { getTheme, Chart } from '@antv/g2';
+import { Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
-import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
 
 import * as R from 'ramda';
-let defaultTheme = getTheme();
 
 export let chartType = {
   bar: 'interval',
@@ -55,10 +53,6 @@ export let mock: IChartMock = {
 
 export const config: IChartConfig[] = [
   {
-    type: 'divider',
-    title: '颜色设置',
-  },
-  {
     key: 'barWidth',
     defaultValue: 20,
     title: '柱状宽度',
@@ -81,10 +75,6 @@ export const config: IChartConfig[] = [
         value: 'bar',
       },
       {
-        title: '条形图',
-        value: 'column',
-      },
-      {
         title: '散点图',
         value: 'point',
       },
@@ -95,6 +85,25 @@ export const config: IChartConfig[] = [
     title: '显示图例',
     type: 'switch',
     defaultValue: false,
+  },
+  {
+    key: 'transpose',
+    title: '转换X/Y轴',
+    type: 'switch',
+    defaultValue: false,
+  },
+  {
+    type: 'label',
+    title: 'X/Y切换需要刷新页面查看效果',
+  },
+  {
+    key: 'cols',
+    defaultValue: 4,
+    title: '每行图表数量',
+    type: 'range',
+    min: 1,
+    max: 10,
+    step: 1,
   },
 ];
 
@@ -125,20 +134,24 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export const defaultOption = {
-  padding: [20, 20, 40, 40],
-  renderer: 'svg',
+export const defaultOption = (config) => {
+  return {
+    padding: config.transpose ? [20, 0, 0, 10] : [20, 20, 30, 0],
+    renderer: 'svg',
+  };
 };
 
 // g2 的默认组件需要2个参数，一是配置项，二是chart实例
 export const onMount = (
   {
-    data: { data, header },
+    data: { data },
     type = 'bar',
     legend = 0,
     x = 1,
     y = 2,
     showLegend = false,
+    transpose = true,
+    cols = 4,
   }: IChartProps,
   chart: Chart,
 ) => {
@@ -147,6 +160,7 @@ export const onMount = (
   y = String(y);
 
   chart.data(data);
+
   chart.scale({
     [legend]: {
       sync: type !== 'line',
@@ -162,13 +176,15 @@ export const onMount = (
     },
   );
 
-  let legendData = R.compose(R.uniq, R.pluck(legend))(data); 
+  let legendData = R.compose(R.uniq, R.pluck(legend))(data);
 
   let showTitle = !showLegend
     ? {
         title: {
           offsetY: 5,
           style: {
+            shadowBlur: 0,
+            stroke: null,
             strokeOpacity: 0,
             fontSize: 14,
             textAlign: 'center',
@@ -180,27 +196,23 @@ export const onMount = (
       }
     : { showTitle: false };
 
-  if (type === 'column') {
-    chart.coordinate().transpose();
-  } else if (['line', 'bar', 'point'].includes(type)) {
-    let xLen = R.uniq(R.pluck(x, data)).length;
-    chart.scale(x, {
-      range: [0, 1],
-      tickCount: xLen > 4 ? 4 : xLen,
-    });
-  }
-  
-  console.log(showTitle);
+  chart.scale(transpose ? y : x, {
+    range: [0, 1],
+  });
 
-  chart.facet(type === 'point' ? 'list' : 'rect', {
+  transpose && chart.coordinate().transpose();
+
+  chart.facet('list', {
     fields: [legend],
-    ...showTitle, 
+    ...showTitle,
     // 自动调整间距
-    padding: [10, 0, 0, 5 + 13 * 4],
-    cols: legendData.length > 4 ? 4 : legendData.length, // 超过4个换行
+    padding: [10, 0, transpose ? 0 : 30, 5 + 13 * 4],
+    cols: Math.min(legendData.length, cols), // 超过4个换行
     eachView: function eachView(view, facet) {
-      if (['line', 'bar', 'point'].includes(type) || facet.columnIndex === 0) {
-        view.axis(['line', 'bar', 'point'].includes(type) ? y : x, {
+      let coordinateAxis = ['line', 'bar', 'point'].includes(type);
+
+      if (coordinateAxis || facet.columnIndex === 0) {
+        view.axis(coordinateAxis ? y : x, {
           label: {
             style: {
               fill: textColor,
@@ -209,26 +221,18 @@ export const onMount = (
             },
           },
           tickLine: {
-            alignWithLabel: false,
+            alignTick: true,
             length: 0,
           },
           line: {
-            lineWidth: 0,
+            style: {
+              lineWidth: 0,
+            },
           },
           grid: null,
         });
       }
 
-      if (['line', 'bar', 'point'].includes(type)) {
-        view.axis(x);
-      } else {
-        if (facet.columnIndex === 0) {
-          view.axis(y, false);
-        } else {
-          view.axis(false);
-        }
-      }
- 
       let chartView = view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
         .style({
@@ -239,7 +243,7 @@ export const onMount = (
 
       if (type !== 'point') {
         chartView.label(y, function (value) {
-          const offset = ['line', 'bar', 'point'].includes(type) ? 10 : value < 25 ? 10 : -4;
+          const offset = ['line', 'bar'].includes(type) ? 10 : value < 25 ? 10 : -4;
           const fill = value < 25 ? textColor : '#ffffff';
           const textAlign = value < 25 ? 'start' : 'end';
           return {
@@ -262,10 +266,3 @@ export const onMount = (
 };
 
 export default onMount;
-
-let padding = {
-  line: [20, 20, 30, 0],
-  bar: [20, 20, 30, 0],
-  point: [20, 20, 30, 0],
-  column: [20, 0, 0, 10],
-};

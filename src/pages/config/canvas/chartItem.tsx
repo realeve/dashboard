@@ -62,6 +62,12 @@ const Item = ({
     return <Skeleton />;
   }
 
+  // defaultOption 可能为函数，由config计算得出
+  let appendConfig = { renderer: 'canvas' };
+  if (defaultOption) {
+    appendConfig = R.type(defaultOption) == 'Function' ? defaultOption(config) : defaultOption;
+  }
+
   if (config.engine === 'echarts') {
     return (
       <Echarts
@@ -69,7 +75,7 @@ const Item = ({
           data: valid ? data : mock,
           ...(config.componentConfig || {}),
         })}
-        renderer={defaultOption.renderer || 'canvas'}
+        renderer={appendConfig.renderer || 'canvas'}
         style={style}
       />
     );
@@ -81,7 +87,7 @@ const Item = ({
           onMount: method,
           ...(config.componentConfig || {}),
           transformer: lib.transformer || null,
-          ...defaultOption,
+          ...appendConfig,
         }}
         style={style}
       />
@@ -93,7 +99,7 @@ const Item = ({
         option={{
           data: valid ? data : mock,
           ...(config.componentConfig || {}),
-          ...defaultOption,
+          ...appendConfig,
         }}
         style={style}
       />

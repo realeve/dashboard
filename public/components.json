@@ -53,6 +53,13 @@
       "type": "regular_bar",
       "title": "旋风图",
       "image": "/img/icons/18_whirlwind.png"
+    },{
+      "name": "g2.facet_vertical",
+      "key": "facet_vertical",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "垂直分面图",
+      "image": "/img/icons/21_facet_vertical.png"
     }]
   }, {
     "title": "折线图",
@@ -180,13 +187,6 @@
   "list": [{
     "title": "开发测试",
     "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-    "list": [{
-      "name": "g2.facet_vertical",
-      "key": "facet_vertical",
-      "engine": "g2",
-      "type": "regular_bar",
-      "title": "请设置图表名称",
-      "image": "/img/icons/01_barChartPositiveNegative.png"
-    }]
+    "list": []
   }]
 }]
