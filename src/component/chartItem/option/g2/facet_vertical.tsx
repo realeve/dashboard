@@ -162,11 +162,7 @@ export const onMount = (
     },
   );
 
-  let legendData = R.compose(R.uniq, R.pluck(legend))(data);
-  const getColor = (idx) => {
-    let colors = defaultTheme.colors10;
-    return colors[idx % colors.length];
-  };
+  let legendData = R.compose(R.uniq, R.pluck(legend))(data); 
 
   let showTitle = !showLegend
     ? {
@@ -193,10 +189,12 @@ export const onMount = (
       tickCount: xLen > 4 ? 4 : xLen,
     });
   }
+  
+  console.log(showTitle);
 
   chart.facet(type === 'point' ? 'list' : 'rect', {
     fields: [legend],
-    ...showTitle,
+    ...showTitle, 
     // 自动调整间距
     padding: [10, 0, 0, 5 + 13 * 4],
     cols: legendData.length > 4 ? 4 : legendData.length, // 超过4个换行
@@ -230,16 +228,14 @@ export const onMount = (
           view.axis(false);
         }
       }
-
-      const color = type === 'point' ? defaultTheme.colors10 : getColor(facet.columnIndex);
-
+ 
       let chartView = view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
         .style({
           opacity: 0.8,
         })
         .position(`${x}*${y}`)
-        .color(legend, color);
+        .color(legend);
 
       if (type !== 'point') {
         chartView.label(y, function (value) {
