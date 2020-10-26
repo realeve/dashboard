@@ -39,9 +39,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
       case 'percent':
         return <Percent option={{ value: 45.3, title: '某指标', half: Math.random() > 0.5 }} />;
       case 'flipboard':
-        return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />;
-      case 'digitalscroll':
-        return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
+        return <FlipBoard title="某指标" value={1336.647} decimals={2} suffix="元" />; 
 
       case 'facet3':
         let seed = Math.random();

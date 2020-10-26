@@ -33,8 +33,8 @@ if (!dirName) {
 let dir = './src/component/chartItem/option/';
 const handleOptionIndex = () => {
   let str = fs.readFileSync(dir + 'index.ts', 'utf8');
-  let idx = str.match(/\d+/g);
-  nextIndex = Number(R.last(idx)) + 1;
+  let idx = str.match(/：\d+/g);
+  nextIndex = Number(R.last(idx).replace('：', '')) + 1;
 
   str = `${str}
 /*
@@ -384,6 +384,7 @@ const handleTemplate = () => {
 };
 const init = () => {
   handleOptionIndex();
+  return;
   handleComponents();
   handleTemplate();
   console.log(`模版${dirName}已创建`);
