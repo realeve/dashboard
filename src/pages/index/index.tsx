@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Layout, Button, Upload } from 'antd';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import * as R from 'ramda';
@@ -38,15 +38,15 @@ let zoom = initHeight / layoutCfg.rowHeight;
 
 const maxCols = 12;
 
-let chartList = [   
+let chartList = [
   {
     name: '装饰挂件',
     type: 'decotation',
-  }, 
+  },
   {
     name: '分面图_横向',
     type: 'facet2',
-  }, 
+  },
   // 以下图表报错
   {
     name: '柱状图',
@@ -60,7 +60,7 @@ let chartList = [
   {
     name: '雷达图',
     type: 'radar',
-  },  
+  },
 ];
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
@@ -102,7 +102,7 @@ export default () => {
     });
   };
 
-  const onRemoveItem = idx => {
+  const onRemoveItem = (idx) => {
     let widgets = R.clone(state.widgets).filter((item, index) => index !== idx);
     setState({
       widgets,
@@ -168,7 +168,7 @@ export default () => {
                 idx={idx}
                 initState={state}
                 onRemoveItem={onRemoveItem}
-                onChange={config => {
+                onChange={(config) => {
                   setState({
                     border: config.border,
                     background: config.background,
@@ -189,7 +189,7 @@ export default () => {
         />
       </Content>
       <Header className={styles.config}>
-        {chartList.map(item => (
+        {chartList.map((item) => (
           <Button
             key={item.type}
             style={{ marginRight: 7 }}
@@ -218,8 +218,8 @@ export default () => {
           showUploadList={false}
           accept=".dashboard"
           style={{ padding: 10 }}
-          beforeUpload={file => {
-            lib.loadDashboard(file).then(config => {
+          beforeUpload={(file) => {
+            lib.loadDashboard(file).then((config) => {
               let dashboard = loadLayout(config);
               setState(dashboard);
             });
