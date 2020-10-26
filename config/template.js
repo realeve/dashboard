@@ -122,10 +122,13 @@ export let mock: IChartMock = {
     hash: 'mockdata',
 };`;
   let str = `
-  import React from 'react';
-  import * as lib from '../lib';
+  import React from 'react'; 
   import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
   import { handleData } from '@/component/chartItem/option/echarts/line';
+  
+  import * as lib from '@/component/chartItem/option/lib';
+  import { textColor } from '@/component/chartItem/option';
+
   ${mockStr}
   
   export const config: IChartConfig[]  = [
@@ -264,6 +267,10 @@ export let mock: IChartMock = {
   str = `
   import { Chart } from '@antv/g2';
   import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface'; 
+  
+  import * as lib from '@/component/chartItem/option/lib';
+  import { textColor } from '@/component/chartItem/option';
+
   ${mockStr}
   
   export const config: IChartConfig[] = [
@@ -334,6 +341,10 @@ import React from 'react';
 // 此处导入你所需要的自定义组件
 import { ProgressBar } from '@/component/widget'; 
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface'; 
+
+import * as lib from '@/component/chartItem/option/lib';
+import { textColor } from '@/component/chartItem/option';
+
 export let mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
