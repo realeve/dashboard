@@ -2,7 +2,6 @@ export const textColor = '#9aa8d4';
 
 export { default as percent } from './other/percent';
 
-export { default as g2Facet3 } from './g2/g2_facet3';
 export { default as g2Facet2 } from './g2/g2_facet2';
 
 // -------------    自定义接口配置项     ----------
@@ -124,24 +123,24 @@ export { whirlwind };
     类型: other
     序号：19
     名称：翻牌器
-*/ 
+*/
 import * as flipboard from './other/flipboard';
-export { flipboard }; 
+export { flipboard };
 
 /*
     时间：2020-10-26 13:24:53
     类型: other
     序号：20
     名称：滚动翻牌器
-*/ 
+*/
 import * as scroll_digit from './other/scroll_digit';
-export { scroll_digit }; 
+export { scroll_digit };
 
 /*
     时间：2020-10-26 13:59:22
     类型: g2
     序号：21
     名称：纵向分面图
-*/ 
+*/
 import * as facet_vertical from './g2/facet_vertical';
-export { facet_vertical }; 
+export { facet_vertical };

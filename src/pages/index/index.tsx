@@ -42,11 +42,7 @@ let chartList = [
   {
     name: '装饰挂件',
     type: 'decotation',
-  },
-  {
-    name: '分面图_纵向',
-    type: 'facet3',
-  },
+  }, 
   {
     name: '分面图_横向',
     type: 'facet2',
