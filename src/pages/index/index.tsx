@@ -43,10 +43,6 @@ let chartList = [
     name: '装饰挂件',
     type: 'decotation',
   },
-  {
-    name: '分面图_横向',
-    type: 'facet2',
-  },
   // 以下图表报错
   {
     name: '柱状图',
@@ -73,14 +69,7 @@ export default () => {
     background: '默认',
     header: '默认',
     footer: '默认',
-  });
-
-  // console.log(state);
-  // 改由文件加载
-  // useEffect(() => {
-  //   let config = loadLayout();
-  //   setState(config);
-  // }, []);
+  }); 
 
   const addChart = (widgetType, type) => {
     const addItem = {

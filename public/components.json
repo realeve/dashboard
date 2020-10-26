@@ -53,13 +53,20 @@
       "type": "regular_bar",
       "title": "旋风图",
       "image": "/img/icons/18_whirlwind.png"
-    },{
+    }, {
       "name": "g2.facet_vertical",
       "key": "facet_vertical",
       "engine": "g2",
       "type": "regular_bar",
       "title": "垂直分面图",
       "image": "/img/icons/21_facet_vertical.png"
+    },{
+      "name": "g2.group_column",
+      "key": "group_column",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "分组条形图",
+      "image": "/img/icons/22_group_column.png"
     }]
   }, {
     "title": "折线图",

@@ -28,32 +28,7 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
     switch (itemType) {
       case '_blank':
         return <Blank config={initState} onChange={onChange} />;
-      case 'facet2':
-        return (
-          <G2
-            option={{
-              data: [
-                ['办公用品', '收纳', 340],
-                ['办公用品', '笔', 20760],
-                ['办公用品', '纸张', 28750],
-                ['技术', '配件', 4090],
-                ['技术', '电话', 9880],
-                ['技术', '复印机', 40988],
-                ['家具', '桌子', 14870],
-                ['家具', '椅子', 37098],
-                ['家具', '书架', 49099],
-              ],
-              header: ['类型', '国家', '数值'],
-              showLegend: true,
-              legend: 0,
-              x: 1,
-              y: 2,
-              padding: [20, 90, 40, 80],
-              onMount: lib.g2Facet2,
-            }}
-            renderer="svg"
-          />
-        );
+
       case 'bar':
         let stack = Math.random() > 0.5;
         let group = !stack;

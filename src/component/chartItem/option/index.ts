@@ -2,8 +2,6 @@ export const textColor = '#9aa8d4';
 
 export { default as percent } from './other/percent';
 
-export { default as g2Facet2 } from './g2/g2_facet2';
-
 // -------------    自定义接口配置项     ----------
 
 // 01.水平正负柱状图
@@ -144,3 +142,12 @@ export { scroll_digit };
 */
 import * as facet_vertical from './g2/facet_vertical';
 export { facet_vertical };
+
+/*
+    时间：2020-10-26 21:32:34
+    类型: g2
+    序号：22
+    名称：分组条形图
+*/
+import * as group_column from './g2/group_column';
+export { group_column };
