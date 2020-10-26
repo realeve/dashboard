@@ -89,7 +89,7 @@ export const config: IChartConfig[] = [
     type: 'switch',
   },
   {
-    type: 'divider',
+    type: 'label',
     title: '坐标系切换需刷新页面',
   },
   {

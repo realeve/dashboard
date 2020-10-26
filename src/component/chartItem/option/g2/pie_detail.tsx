@@ -31,7 +31,7 @@ export let mock: IChartMock = {
 
 export const config: IChartConfig[] = [
   {
-    type: 'divider',
+    type: 'label',
     title: '已知bug:属性设置后需要刷新页面查看效果',
   },
   {

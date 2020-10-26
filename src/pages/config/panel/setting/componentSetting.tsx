@@ -27,6 +27,12 @@ export const FormItem = ({
 }) => {
   if (type === 'divider') {
     return <Divider plain>{title}</Divider>;
+  } else if (type === 'label') {
+    return (
+      <Field style={style}>
+        <label style={{ color: '#6e7481' }}>{title}</label>
+      </Field>
+    );
   }
   let Item: null | React.ReactNode = null;
   switch (type) {
@@ -35,7 +41,7 @@ export const FormItem = ({
       Item = (
         <input
           type={valueType}
-          onChange={e => {
+          onChange={(e) => {
             onChange(valueType === 'number' ? Number(e.target.value) : e.target.value);
           }}
           className="data_input"
@@ -75,7 +81,7 @@ export const FormItem = ({
  */
 export const getDefaultState = (configs: IChartConfig[], componentConfig: {}) => {
   let res = {};
-  configs.forEach(item => {
+  configs.forEach((item) => {
     res[item.key] = typeof item.defaultValue === 'undefined' ? '' : item.defaultValue;
   });
   // 组件编辑后存储的状态优秀级更高，当为空时采用组件配置项中给出的默认值；
@@ -108,11 +114,11 @@ export default ({
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        {configs.map(config => (
+        {configs.map((config) => (
           <FormItem
             key={config.key}
             value={state[config.key]}
-            onChange={res => {
+            onChange={(res) => {
               let next = {
                 [config.key]: res,
               };
