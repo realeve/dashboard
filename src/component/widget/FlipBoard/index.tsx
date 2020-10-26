@@ -1,12 +1,11 @@
-// import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import React, { useEffect } from 'react';
 import styles from './index.less';
 import { useCountUp, CountUpProps } from 'react-countup';
 import classnames from 'classnames';
 import { thouandsNum } from '@/utils/lib';
+import { textColor } from '@/component/chartItem/option';
 
-export interface ICountUp extends CountUpProps {
-  // title: string;
+export interface ICountUp extends CountUpProps { 
   value: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -16,8 +15,7 @@ export interface ICountUp extends CountUpProps {
   [key: string]: any;
 }
 
-export default ({
-  // title = '',
+export default ({ 
   value,
   prefix = null,
   suffix = null,
@@ -25,25 +23,37 @@ export default ({
   className,
   style,
   duration = 1.5,
+  fontSize = 18,
+  fontWeight = 'normal',
+  backgroundColor = '#0f396b',
+  fontColor = textColor,
+  padding = 12,
   ...props
 }: ICountUp) => {
   const { countUp, update } = useCountUp({ end: Number(value), duration, decimals, ...props });
   useEffect(() => {
     update(Number(value));
-  }, [value]);
-
+  }, [value]); 
   return (
-    <div className={classnames(styles.flipBoard, className)} style={style}>
-      {/* <div className={styles.title}>{title}</div> */}
+    <div className={classnames(styles.flipBoard, className)} style={style}> 
       <div className={styles.counter}>
-        {prefix}
+        <span>{prefix}</span>
         {thouandsNum(countUp as number, decimals)
           .split('')
           .map((item, idx) => (
             <div
               className={styles.value}
               style={
-                [',', '.'].includes(item) ? { backgroundColor: 'transparent', padding: 0 } : null
+                [',', '.'].includes(item)
+                  ? { backgroundColor: 'transparent', padding: 0 }
+                  : {
+                      fontSize,
+                      fontWeight,
+                      color: fontColor,
+                      backgroundColor,
+                      paddingLeft: padding,
+                      paddingRight: padding,
+                    }
               }
               key={idx}
             >

@@ -2,6 +2,9 @@ import React from 'react';
 // 此处导入你所需要的自定义组件
 import { FlipBoard } from '@/component/widget';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import * as lib from '@/component/chartItem/option/lib';
+import { textColor } from '@/component/chartItem/option';
+
 export let mock: IChartMock = {
   data: [[1336.467]],
   title: '进度条_MOCK数据',
@@ -12,9 +15,9 @@ export let mock: IChartMock = {
 
 export const config: IChartConfig[] = [
   {
-    key: 'decimal',
+    key: 'decimals',
     title: '小数位数',
-    defaultValue: 0,
+    defaultValue: 2,
     min: 0,
     max: 4,
   },
@@ -23,6 +26,37 @@ export const config: IChartConfig[] = [
     title: '单位',
     defaultValue: '',
     valueType: 'text',
+  },
+  {
+    key: 'prefix',
+    title: '前缀',
+    defaultValue: '',
+    valueType: 'text',
+  },
+  {
+    key: 'duration',
+    defaultValue: 1.5,
+    title: '动画持续时长',
+    type: 'range',
+    min: 0.1,
+    max: 10,
+    step: 0.1,
+  },
+  ...lib.getFontConfig(18, textColor),
+  {
+    key: 'backgroundColor',
+    defaultValue: '#0f396b',
+    title: '背景',
+    type: 'purecolor',
+  },
+  {
+    key: 'padding',
+    defaultValue: 5,
+    title: '边距',
+    type: 'range',
+    min: 5,
+    max: 100,
+    step: 1,
   },
 ];
 
@@ -41,7 +75,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ option: { data, x = 0, decimal = 2, suffix = '' } }) => {
-  let value = data.data[0][x]; 
-  return <FlipBoard title="某指标" value={value} decimals={decimal} suffix={suffix} />;
+export default ({ option: { data, x = 0, ...props } }) => {
+  let value = data.data[0][x].toFixed(props.decimals || 2);
+  return <FlipBoard title="某指标" value={value} {...props} />;
 };

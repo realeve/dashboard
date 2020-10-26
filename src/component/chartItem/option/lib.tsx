@@ -750,7 +750,7 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     step: 1,
     type: 'range',
     min: 12,
-    max: 60,
+    max: 100,
   },
   {
     key: 'fontWeight',
