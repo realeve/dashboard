@@ -38,11 +38,7 @@ let zoom = initHeight / layoutCfg.rowHeight;
 
 const maxCols = 12;
 
-let chartList = [
-  {
-    name: '旋风图',
-    type: 'wind',
-  },
+let chartList = [ 
   {
     name: '翻牌器',
     type: 'flipboard',

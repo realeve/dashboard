@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // AVA 图表
 import G2Plot from '@/component/chart/chart';
 
@@ -16,7 +16,6 @@ import {
   Decotation,
   Blank,
 } from '@/component/widget';
-import Echarts from '@/component/echarts';
 import G2 from '@/component/g2';
 import * as lib from './option';
 import * as g2PlotLib from './option/g2plot';
