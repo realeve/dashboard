@@ -1,6 +1,6 @@
 import { textColor } from '../index';
 import G2,{getTheme} from '@antv/g2'; 
-import { IG2Config } from './g2_wind';
+import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 const defaultTheme = getTheme();
  
 

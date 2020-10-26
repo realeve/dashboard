@@ -116,7 +116,7 @@ export default ({
       <div className={styles['datav-gui']}>
         {configs.map((config) => (
           <FormItem
-            key={config.key}
+            key={config.key || Math.random().toString(16).slice(2, 8)}
             value={state[config.key]}
             onChange={(res) => {
               let next = {

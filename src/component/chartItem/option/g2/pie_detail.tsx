@@ -1,7 +1,7 @@
 import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import { getTheme } from '@antv/g2';
 const defaultTheme = getTheme();
-import { IG2Config } from './g2_wind';
+import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';
 import * as R from 'ramda';
 import React from 'react';
@@ -106,11 +106,11 @@ export const defaultOption = {
 };
 
 export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
-  let _data = R.map(item => ({ type: item[x], value: item[y] }))(val);
+  let _data = R.map((item) => ({ type: item[x], value: item[y] }))(val);
   _data = _data.sort((b, a) => a.value - b.value);
 
   let sum = _data.reduce((a, b) => a + b.value, 0);
-  _data = _data.map(item => {
+  _data = _data.map((item) => {
     item.percent = item.value / sum;
     return item;
   });
@@ -184,13 +184,13 @@ export const onMount = (
     .style({
       opacity: 1,
     })
-    .label('value', function() {
+    .label('value', function () {
       return {
         offset: -10,
         style: {
           fontSize,
         },
-        content: obj => {
+        content: (obj) => {
           return obj.type + '\n' + (100 * obj.percent).toFixed(2) + '%';
         },
       };
@@ -237,7 +237,7 @@ export const onMount = (
         fill: textColor,
         fontSize,
       },
-      content: obj => {
+      content: (obj) => {
         return obj.type + ' ' + (100 * obj.percent).toFixed(2) + '%';
       },
     });
@@ -246,7 +246,7 @@ export const onMount = (
 
   drawLinkArea();
 
-  chart.on('afterpaint', function() {
+  chart.on('afterpaint', function () {
     drawLinkArea();
   });
 

@@ -93,12 +93,12 @@ export default ({
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
         {[0, 1, 2].map(
-          i =>
+          (i) =>
             (i < 2 || state.show) && (
               <FormItem
                 key={appendConfig[i].key}
                 value={state[appendConfig[i].key]}
-                onChange={res => {
+                onChange={(res) => {
                   handleStateChange(res, appendConfig[i]);
                 }}
                 config={appendConfig[i]}
@@ -109,7 +109,7 @@ export default ({
           (state.api_type === 'url' ? (
             <FormItem
               value={state[appendConfig[3].key]}
-              onChange={res => {
+              onChange={(res) => {
                 handleStateChange(res, appendConfig[3]);
               }}
               config={appendConfig[3]}
@@ -117,7 +117,7 @@ export default ({
           ) : (
             <JsonViewer
               value={state.mock || JSON.stringify(res.mock || '')}
-              onChange={res => {
+              onChange={(res) => {
                 handleStateChange(res, { key: 'mock' });
               }}
             />
@@ -127,9 +127,9 @@ export default ({
           configs.config.map((config, idx) => (
             <FormItem
               style={{ paddingTop: idx == 0 ? 10 : 0 }}
-              key={config.key}
+              key={config.key || Math.random().toString(16).slice(2, 8)}
               value={state[config.key]}
-              onChange={res => {
+              onChange={(res) => {
                 handleStateChange(res, config, false);
               }}
               config={config}

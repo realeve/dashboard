@@ -1,15 +1,9 @@
 export const textColor = '#9aa8d4';
 
 export { default as percent } from './other/percent';
- 
 
-export { default as g2Wind } from './g2/g2_wind';
 export { default as g2Facet3 } from './g2/g2_facet3';
-export { default as g2Facet2 } from './g2/g2_facet2'; 
-
-// min-max-average区间图
-import * as rangeLine from './g2/rangeLine';
-export { rangeLine };
+export { default as g2Facet2 } from './g2/g2_facet2';
 
 // -------------    自定义接口配置项     ----------
 
@@ -103,15 +97,24 @@ export { bar_polar };
     类型: g2
     序号：16
     名称：玫瑰图
-*/ 
+*/
 import * as g2_pie_rose from './g2/g2_pie_rose';
-export { g2_pie_rose }; 
+export { g2_pie_rose };
 
 /*
     时间：2020-10-25 22:34:36
     类型: g2
     序号：17
     名称：分面饼图
-*/ 
+*/
 import * as facet_pie from './g2/facet_pie';
-export { facet_pie }; 
+export { facet_pie };
+
+/*
+    时间：2020-10-26 09:20:22
+    类型: g2
+    序号：18
+    名称：旋风图
+*/
+import * as whirlwind from './g2/whirlwind';
+export { whirlwind };

@@ -43,45 +43,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
       case 'digitalscroll':
         return <DigitalScroll title="活动参与人数" value={138248} theme="theme1" suffix="人" />;
 
-      case 'wind':
-        var direction: 'horizontal' | 'vertical' = Math.random() > 0.5 ? 'horizontal' : 'vertical';
-        return (
-          <G2
-            option={{
-              data: [
-                ['2016 年', '乌拉圭', 1.3],
-                ['2017 年', '乌拉圭', 1.8],
-                ['2016 年', '巴拉圭', 3.6],
-                ['2017 年', '巴拉圭', 5.5],
-                ['2016 年', '南非', 3.7],
-                ['2017 年', '南非', 12.1],
-                ['2016 年', '巴基斯坦', 2.9],
-                ['2017 年', '巴基斯坦', 22],
-                ['2016 年', '阿根廷', 23.8],
-                ['2017 年', '阿根廷', 38.6],
-                ['2016 年', '加拿大', 11.6],
-                ['2017 年', '加拿大', 46.9],
-                ['2016 年', '巴西', 49.1],
-                ['2017 年', '巴西', 73.2],
-                ['2016 年', '中国', 2.8],
-                ['2017 年', '中国', 108.4],
-                ['2016 年', '美国', 72.9],
-                ['2017 年', '美国', 165.2],
-                ['2016 年', '印度', 49.1],
-                ['2017 年', '印度', 175.4],
-              ],
-              header: ['类型', '国家', '数值'],
-              showLegend: true,
-              direction,
-              legend: 0,
-              x: 1,
-              y: 2,
-              padding: direction === 'horizontal' ? [20, 0, 10, 30] : [20, 0, 10, 0],
-              onMount: lib.g2Wind,
-            }}
-            renderer="svg"
-          />
-        );
       case 'facet3':
         let seed = Math.random();
         let type: 'line' | 'bar' | 'column' | 'point' =
