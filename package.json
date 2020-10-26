@@ -4,7 +4,7 @@
     "start": "umi dev",
     "build": "umi build",
     "test": "umi test",
-    "add":"node ./config/template.js"
+    "add": "node ./config/template.js"
   },
   "dependencies": {
     "@antv/chart-advisor": "^0.1.2-alpha.19",
@@ -15,6 +15,7 @@
     "@daybrush/utils": "^0.10.5",
     "@egjs/children-differ": "^1.0.0",
     "@egjs/component": "^2.1.2",
+    "@jiaminghi/charts": "^0.2.17", 
     "@scena/dragscroll": "^0.2.1",
     "@scena/react-guides": "^0.7.0",
     "@types/react-resizable": "^1.7.2",

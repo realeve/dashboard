@@ -151,3 +151,12 @@ export { facet_vertical };
 */
 import * as group_column from './g2/group_column';
 export { group_column };
+
+/*
+    时间：2020-10-26 22:18:20
+    类型: other
+    序号：23
+    名称：datav饼图
+*/ 
+import * as datav_ring from './other/datav_ring/index';
+export { datav_ring }; 

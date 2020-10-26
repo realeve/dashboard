@@ -9,8 +9,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import { BorderItem, Decotation, Blank } from '@/component/widget';
-import G2 from '@/component/g2';
-import * as lib from './option';
+
 import * as g2PlotLib from './option/g2plot';
 export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
   const itemType = (config.type || '').toLowerCase();
@@ -28,7 +27,6 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
     switch (itemType) {
       case '_blank':
         return <Blank config={initState} onChange={onChange} />;
-
       case 'bar':
         let stack = Math.random() > 0.5;
         let group = !stack;
