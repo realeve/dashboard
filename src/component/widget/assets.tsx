@@ -219,6 +219,10 @@ assets.borders = {
   },
 };
 assets.pics = {
+  旋转gif: {
+    url: require('./img-templet/02.gif'),
+    node: true,
+  },
   紫色圆形装饰动图gif: {
     url: require('./img-templet/pic-228-2cff2e714fff18e2.gif'),
     node: true,
@@ -1002,9 +1006,6 @@ assets.pics = {
   蓝色地球透明图标装饰: {
     url: require('./img-templet/pic-193-c6fe2f0bc2f7150b.svg'),
   },
-  白色透明百度云图标文字: {
-    url: require('./img-templet/pic-8.png'),
-  },
   紫色图标文件文档透明: {
     url: require('./img-templet/pic-4.png'),
   },
@@ -1057,9 +1058,6 @@ assets.backgrounds = {
   },
   透明: {
     url: require('./img-templet/background-4.png'),
-  },
-  深色白色线条隧道穿越科技: {
-    url: require('./img-templet/background-0-607ef3b181b1ba9a.jpg'),
   },
   深色蓝色地球科技: {
     url: require('./img-templet/background-1-41949a72a05e60d0.jpg'),
@@ -1141,52 +1139,5 @@ assets.footers = {
     url: require('./img-templet/footer_03.png'),
   },
 };
-assets.reportBackground = Object.assign(
-  {
-    'report-background-0-d3cd7acdef7eb9e6': {
-      url: require('./img-templet/report-background-0-d3cd7acdef7eb9e6.jpg'),
-    },
-    'report-background-7-facb9606e23a7991': {
-      url: require('./img-templet/report-background-7-facb9606e23a7991.jpg'),
-    },
-    'report-background-4-d2caa2423196efb8': {
-      url: require('./img-templet/report-background-4-d2caa2423196efb8.jpg'),
-    },
-    'report-background-3-8bc63b34eef4961c': {
-      url: require('./img-templet/report-background-3-8bc63b34eef4961c.jpg'),
-    },
-    'report-background-12-3fed03afa6446019': {
-      url: require('./img-templet/report-background-12-3fed03afa6446019.jpg'),
-    },
-    'report-background-11-8ff22c718b1de031': {
-      url: require('./img-templet/report-background-11-8ff22c718b1de031.jpg'),
-    },
-    'report-background-14-8ff13f3d5a883a2b': {
-      url: require('./img-templet/report-background-14-8ff13f3d5a883a2b.jpg'),
-    },
-    'report-background-13-8959a419ef0fb766': {
-      url: require('./img-templet/report-background-13-8959a419ef0fb766.jpg'),
-    },
-    'report-background-1-862420431fa4bdf4': {
-      url: require('./img-templet/report-background-1-862420431fa4bdf4.jpg'),
-    },
-    'report-background-2-76672ba25c655854': {
-      url: require('./img-templet/report-background-2-76672ba25c655854.jpg'),
-    },
-    'report-background-10-40051d20bf324f91': {
-      url: require('./img-templet/report-background-10-40051d20bf324f91.jpg'),
-    },
-    'report-background-5-d03e769de6ea30f2': {
-      url: require('./img-templet/report-background-5-d03e769de6ea30f2.png'),
-    },
-    'report-background-6-8ecd4a7e8d64edd9': {
-      url: require('./img-templet/report-background-6-8ecd4a7e8d64edd9.jpg'),
-    },
-    'report-background-8-f9dcdbc1e07c2fa3': {
-      url: require('./img-templet/report-background-8-f9dcdbc1e07c2fa3.jpg'),
-    },
-  },
-  assets.backgrounds,
-);
 
 export default assets;
