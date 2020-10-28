@@ -1,18 +1,10 @@
 import React from 'react';
 // 此处导入你所需要的自定义组件
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 import assets from '@/component/widget/assets';
 import classnames from 'classnames';
 import styles from './index.less';
-
-export let mock: IChartMock = {
-  data: [[45.7]],
-  title: '进度条_MOCK数据',
-  header: ['指标值'],
-  rows: 1,
-  hash: 'mockdata',
-};
 
 export const config: IChartConfig[] = [
   {
