@@ -169,3 +169,12 @@ export { datav_ring };
 */
 import * as svg_rotate from './other/svg_rotate/';
 export { svg_rotate };
+
+/*
+    时间：2020-10-28 13:36:54
+    类型: other
+    序号：25
+    名称：百分比饼图
+*/
+import * as percent_echarts from './other/percent_echarts';
+export { percent_echarts };

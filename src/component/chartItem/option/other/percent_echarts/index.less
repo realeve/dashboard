@@ -1,0 +1,39 @@
+.pie_charts {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .border {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    height: 90%;
+    width: 90%;
+  }
+}
+
+.demo {
+  transform: rotate(-90deg);
+  transition: stroke-dasharray 0.3s ease-in;
+}
+
+.tip {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .name {
+    font-size: 16px;
+    color: #fff;
+  }
+  .value {
+    font-size: 30px;
+    color: #30c3a7;
+  }
+}
