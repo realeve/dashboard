@@ -12,6 +12,7 @@ export interface IChartConfig {
     | 'select'
     | 'range'
     | 'divider'
+    | 'image'
     | 'label'; // 配置时的组件类型，默认为 input
   title?: string | React.ReactNode; // 配置时的标题信息，显示在左侧，当没有设置时将引用 key 作为标题，如本例中的x,y
   [key: string]: any; // 其余配置将全部注入到对应的组件中，如在input组件中可自行设置  min,max,step等
@@ -37,10 +38,10 @@ export interface IChartProps {
 }
 
 export interface IApiConfig {
-  show: boolean;
-  type: 'url' | 'mock';
+  show?: boolean;
+  type?: 'url' | 'mock';
   url?: string; // 默认地址
   data?: IChartMock;
-  config: IChartConfig[];
+  config?: IChartConfig[];
   interval?: number;
 }

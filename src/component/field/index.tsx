@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
+
+export { ImgSelector } from '@/pages/config/panel/setting/page';
+
 export default ({ title = null, children = null, style = {}, ...props }) => {
   return (
     <div className={styles.field} style={style}>

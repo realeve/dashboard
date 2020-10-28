@@ -154,7 +154,7 @@ export default {
         showTitle: true,
         showBorder: true,
         showBackground: true,
-
+        ajax: true,
         ...panelItem,
         id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,

@@ -269,7 +269,8 @@
             "type": "image.single",
             "showBorder": false,
             "showTitle": false,
-            "showBackground": false
+            "showBackground": false,
+            "ajax": false
           }
         ]
       }

@@ -90,7 +90,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                   step="2"
                   style={{ marginRight: 10 }}
                   value={size.width}
-                  onChange={e => {
+                  onChange={(e) => {
                     const style = { width: Number(e.target.value) };
                     setSize(style);
                     updateStyle(style);
@@ -100,7 +100,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                   type="number"
                   className="data_input"
                   step="2"
-                  onChange={e => {
+                  onChange={(e) => {
                     const style = { height: Number(e.target.value) };
                     setSize(style);
                     updateStyle(style);
@@ -118,7 +118,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 value={Math.floor(
                   panel[selectedIdx].style.transform?.rotate?.replace('deg', '') || '0',
                 )}
-                onChange={rotate => {
+                onChange={(rotate) => {
                   const style = R.clone(panel[selectedIdx].style || {});
                   const nextStyle = {
                     style: {
@@ -136,7 +136,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             <Field title="使用全局样式">
               <Switch
                 checked={panel[selectedIdx]?.useGeneralStyle}
-                onChange={useGeneralStyle => {
+                onChange={(useGeneralStyle) => {
                   if (useGeneralStyle) {
                     updateAttrib({
                       useGeneralStyle,
@@ -156,7 +156,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             <Field title="标题">
               <Switch
                 checked={panel[selectedIdx]?.showTitle}
-                onChange={showTitle => {
+                onChange={(showTitle) => {
                   updateAttrib({
                     showTitle,
                   });
@@ -168,7 +168,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             <Field title="边框">
               <Switch
                 checked={panel[selectedIdx]?.showBorder}
-                onChange={showBorder => {
+                onChange={(showBorder) => {
                   updateAttrib({
                     showBorder,
                   });
@@ -180,7 +180,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             <Field title="背景">
               <Switch
                 checked={panel[selectedIdx]?.showBackground}
-                onChange={showBackground => {
+                onChange={(showBackground) => {
                   updateAttrib({
                     showBackground,
                   });
@@ -193,7 +193,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
               <ComponentConfig
                 {...general}
                 showTitle={panel[selectedIdx].showTitle}
-                onChange={e => {
+                onChange={(e) => {
                   const next = {
                     ...general,
                     ...e,
@@ -208,20 +208,22 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
       </Tabs.TabPane>
       <Tabs.TabPane tab="组件配置" key="2">
         <ComponentSetting
-          onChange={componentConfig => {
+          onChange={(componentConfig) => {
             updateAttrib({ componentConfig });
           }}
           panel={panel[selectedIdx]}
         />
       </Tabs.TabPane>
-      <Tabs.TabPane tab="接口配置" key="3">
-        <ApiSetting
-          onChange={api => {
-            updateAttrib({ api });
-          }}
-          panel={panel[selectedIdx]}
-        />
-      </Tabs.TabPane>
+      {panel[selectedIdx].ajax && (
+        <Tabs.TabPane tab="接口配置" key="3">
+          <ApiSetting
+            onChange={(api) => {
+              updateAttrib({ api });
+            }}
+            panel={panel[selectedIdx]}
+          />
+        </Tabs.TabPane>
+      )}
     </Tabs>
   );
 };

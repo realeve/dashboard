@@ -10,6 +10,8 @@ import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import { Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
+import { ImgSelector } from '@/component/field';
+
 import { Divider } from 'antd';
 
 export const FormItem = ({
@@ -33,6 +35,8 @@ export const FormItem = ({
         <label style={{ color: '#6e7481' }}>{title}</label>
       </Field>
     );
+  } else if (type === 'image') {
+    return <ImgSelector onChange={onChange} value={value as string} title={title} {...config} />;
   }
   let Item: null | React.ReactNode = null;
   switch (type) {
@@ -79,7 +83,7 @@ export const FormItem = ({
  * @param configs 组件对外导出的配置项
  * @param componentConfig 组件默认存储的设置信息
  */
-export const getDefaultState = (configs: IChartConfig[], componentConfig: {}) => {
+export const getDefaultState = (configs: IChartConfig[] = [], componentConfig: {}) => {
   let res = {};
   configs.forEach((item) => {
     res[item.key] = typeof item.defaultValue === 'undefined' ? '' : item.defaultValue;

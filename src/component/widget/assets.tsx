@@ -2,7 +2,6 @@ let assets = {
   borders: {},
   pics: {},
   backgrounds: {},
-  reportBackground: {},
   headers: {},
   footers: {},
 };
@@ -221,6 +220,22 @@ assets.borders = {
   },
 };
 assets.pics = {
+  默认头图: {
+    url: require('./img-templet/header_03.png'),
+  },
+  淡蓝色: {
+    url: require('./img-templet/header_01.png'),
+  },
+  蓝色: {
+    url: require('./img-templet/header_02.png'),
+  },
+  蓝色2: {
+    url: require('./img-templet/header_04.png'),
+  },
+  蓝色底部: {
+    url: require('./img-templet/footer_03.png'),
+  },
+
   旋转gif: {
     url: require('./img-templet/02.gif'),
     node: true,
@@ -1117,11 +1132,8 @@ assets.backgrounds = {
   },
 };
 assets.headers = {
-  默认: {
+  默认头图: {
     url: require('./img-templet/header_03.png'),
-  },
-  无: {
-    url: null,
   },
   淡蓝色: {
     url: require('./img-templet/header_01.png'),

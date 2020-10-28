@@ -12,15 +12,15 @@ import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
 
-const ImgSelector = ({
+export const ImgSelector = ({
   title,
-  type = 'backgrounds',
+  imgtype = 'backgrounds',
   value,
   onChange,
   style = {},
 }: {
-  title: string;
-  type: 'backgrounds' | 'borders';
+  title: string | React.ReactNode;
+  imgtype?: 'backgrounds' | 'borders' | 'pics';
   value: string;
   onChange: (e: string) => void;
   style?: React.CSSProperties;
@@ -30,7 +30,7 @@ const ImgSelector = ({
     <Field title={title} style={{ ...style, height: 100 }}>
       <img
         className={styles.img}
-        src={assets[type][value].url}
+        src={assets[imgtype][value]?.url}
         onClick={() => {
           setShow(!show);
         }}
@@ -45,7 +45,7 @@ const ImgSelector = ({
             <SettingOutlined /> 设置{title}
           </div>
           <AssetItem
-            assetKey={type}
+            assetKey={imgtype}
             style={{ overflowY: 'auto', height: 'calc(100% - 30px)' }}
             value={value}
             onChange={onChange}
@@ -73,7 +73,7 @@ export const ComponentConfig = ({
     <ImgSelector
       title="边框"
       value={border}
-      type="borders"
+      imgtype="borders"
       onChange={(border) => {
         updatePage({
           border,
@@ -230,7 +230,7 @@ export default ({ page, dispatch }: IPageProps) => {
         <ImgSelector
           title="背景"
           value={page.background}
-          type="backgrounds"
+          imgtype="backgrounds"
           onChange={(background) => {
             updatePage({
               background,
