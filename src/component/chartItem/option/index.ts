@@ -178,3 +178,12 @@ export { svg_rotate };
 */
 import * as percent_echarts from './other/percent_echarts';
 export { percent_echarts };
+
+/*
+    时间：2020-10-28 18:07:03
+    类型: other
+    序号：26
+    名称：单张图片
+*/
+import * as image_single from './other/image_single';
+export { image_single };

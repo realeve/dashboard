@@ -264,9 +264,12 @@
           {
             "title": "单张图片",
             "engine": "other",
-            "key": "image.single",
+            "key": "image_single",
             "image": "/img/config/img_single.png",
-            "type": "image.single"
+            "type": "image.single",
+            "showBorder": false,
+            "showTitle": false,
+            "showBackground": false
           }
         ]
       }
@@ -279,7 +282,16 @@
       {
         "title": "开发测试",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": []
+        "list": [
+          {
+            "name": "other.image_single",
+            "key": "image_single",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "请设置图表名称",
+            "image": "/img/icons/01_barChartPositiveNegative.png"
+          }
+        ]
       }
     ]
   }

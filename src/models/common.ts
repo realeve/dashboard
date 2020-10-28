@@ -3,7 +3,7 @@ import * as db from '../services/db';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 
-const updatePanel = function*({ panel, call, put }) {
+const updatePanel = function* ({ panel, call, put }) {
   yield call(db.savePanel(), panel);
   yield put({
     type: 'setStore',
@@ -13,7 +13,7 @@ const updatePanel = function*({ panel, call, put }) {
   });
 };
 
-const updatePage = function*({ page, call, put }) {
+const updatePage = function* ({ page, call, put }) {
   yield call(db.savePanel('page'), page);
   yield put({
     type: 'setStore',
@@ -137,7 +137,7 @@ export default {
       });
     },
     *updatePage({ payload: { page } }, { put, call, select }) {
-      let prevPage = yield select(state => state[namespace].page);
+      let prevPage = yield select((state) => state[namespace].page);
       yield updatePage({
         page: {
           ...prevPage,
@@ -148,16 +148,17 @@ export default {
       });
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
-      let prevPanel = yield select(state => state[namespace].panel);
+      let prevPanel = yield select((state) => state[namespace].panel);
       let panelItem = R.clone(panel);
       panelItem = {
+        showTitle: true,
+        showBorder: true,
+        showBackground: true,
+
         ...panelItem,
         id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,
         general: panelGeneral,
-        showTitle: true,
-        showBorder: true,
-        showBackground: true,
         useGeneralStyle: true,
 
         // 自定义配置
@@ -180,8 +181,8 @@ export default {
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
-      let prevPanel = yield select(state => state[namespace].panel);
-      let nextPanel = R.reject(item => idx.includes(item.id))(prevPanel);
+      let prevPanel = yield select((state) => state[namespace].panel);
+      let nextPanel = R.reject((item) => idx.includes(item.id))(prevPanel);
       // 默认选中最新添加的面板
       yield put({
         type: 'setStore',
@@ -197,7 +198,7 @@ export default {
     },
     // 更新第I个面板的属性
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
-      let panel = yield select(state => state[namespace].panel);
+      let panel = yield select((state) => state[namespace].panel);
       let id = R.findIndex(R.propEq('id', idx))(panel);
       let _item = R.nth(id)(panel);
       _item = {
@@ -214,7 +215,7 @@ export default {
     },
     // 复制一份
     *copyPanel({ payload: { idx } }, { put, call, select }) {
-      let panel = yield select(state => state[namespace].panel);
+      let panel = yield select((state) => state[namespace].panel);
       let _panel = copyArray(idx, panel);
       yield updatePanel({
         panel: _panel,
