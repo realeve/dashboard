@@ -3,6 +3,7 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
+// import jStat from 'jstat';
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
@@ -20,9 +21,10 @@ export default ({
   ...props
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
+
   // let padding = {};
   // if (img) {
-  //   Object.keys(img).forEach(key => {
+  //   Object.keys(img).forEach((key) => {
   //     let keyName = key[0].toUpperCase() + key.slice(1);
   //     padding['padding' + keyName] = img[key];
   //   });
@@ -34,12 +36,15 @@ export default ({
       </div>
     );
   }
+  // let max = jStat.max([img.left, img.right, img.left, img.top]);
 
   return (
     <div
       style={{
         borderImageSource: `url(${url})`,
         ...style,
+        borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left}`,
+        borderWidth: 20,
       }}
       {...props}
       className={classnames(styles.widgetBorder, className)}

@@ -129,14 +129,14 @@ assets.borders = {
   边框17: {
     url: require('./img-templet/border-7718acec67f35819.png'),
     top: 37,
-    right: 120,
+    right: 70,
     bottom: 56,
     left: 37,
   },
   边框18: {
     url: require('./img-templet/border-234-21caaaed0d132596.gif'),
     top: 37,
-    right: 120,
+    right: 70,
     bottom: 56,
     left: 37,
   },
