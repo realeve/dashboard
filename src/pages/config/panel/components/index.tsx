@@ -81,7 +81,7 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
                       key={item.title}
                     >
                       <ul className={styles.menulist}>
-                        {item.list.map(panel => (
+                        {item.list.map((panel) => (
                           <li
                             title={panel.title}
                             key={panel.title}

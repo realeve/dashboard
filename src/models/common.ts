@@ -150,6 +150,7 @@ export default {
     *addPanel({ payload: { panel } }, { put, call, select }) {
       let prevPanel = yield select((state) => state[namespace].panel);
       let panelItem = R.clone(panel);
+      console.log(panel);
       panelItem = {
         showTitle: true,
         showBorder: true,
@@ -166,6 +167,7 @@ export default {
         api: {},
       };
       let nextPanel = [...prevPanel, panelItem];
+
       yield updatePanel({
         panel: nextPanel,
         call,
