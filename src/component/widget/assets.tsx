@@ -69,6 +69,7 @@ assets.borders = {
     right: 35,
     bottom: 35,
     left: 35,
+    borderWidth: 35,
   },
   边框9: {
     url: require('./img-templet/border-236-7ab7e7d6ce1bc4b5.gif'),
@@ -76,6 +77,7 @@ assets.borders = {
     right: 35,
     bottom: 35,
     left: 35,
+    borderWidth: 35,
   },
   边框10: {
     url: require('./img-templet/border-121-0f05f2ce15011b2a.png'),

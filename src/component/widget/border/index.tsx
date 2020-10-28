@@ -3,7 +3,7 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
-// import jStat from 'jstat';
+import jStat from 'jstat';
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
@@ -36,7 +36,7 @@ export default ({
       </div>
     );
   }
-  // let max = jStat.max([img.left, img.right, img.left, img.top]);
+  let max = jStat.max([img.left, img.right, img.left, img.top]);
 
   return (
     <div
@@ -44,7 +44,7 @@ export default ({
         borderImageSource: `url(${url})`,
         ...style,
         borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left}`,
-        borderWidth: 35,
+        borderWidth: img.borderWidth || Math.min(25, max),
       }}
       {...props}
       className={classnames(styles.widgetBorder, className)}
