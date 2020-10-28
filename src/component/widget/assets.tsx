@@ -68,7 +68,6 @@ assets.borders = {
     right: 35,
     bottom: 35,
     left: 35,
-    borderWidth: 35,
   },
   边框9: {
     url: require('./img-templet/border-236-7ab7e7d6ce1bc4b5.gif'),
@@ -76,7 +75,6 @@ assets.borders = {
     right: 35,
     bottom: 35,
     left: 35,
-    borderWidth: 35,
   },
   边框10: {
     url: require('./img-templet/border-121-0f05f2ce15011b2a.png'),
@@ -130,14 +128,14 @@ assets.borders = {
   边框17: {
     url: require('./img-templet/border-7718acec67f35819.png'),
     top: 37,
-    right: 70,
+    right: 120,
     bottom: 56,
     left: 37,
   },
   边框18: {
     url: require('./img-templet/border-234-21caaaed0d132596.gif'),
     top: 37,
-    right: 70,
+    right: 120,
     bottom: 56,
     left: 37,
   },

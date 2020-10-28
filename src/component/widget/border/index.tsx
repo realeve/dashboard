@@ -43,8 +43,9 @@ export default ({
       style={{
         borderImageSource: `url(${url})`,
         ...style,
-        borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left}`,
-        borderWidth: img.borderWidth || Math.min(25, max),
+        borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left} fill`,
+        borderWidth: `${img.top}px ${img.right}px ${img.bottom}px ${img.left}px`, //img.borderWidth || Math.min(25, max),
+        borderStyle: 'solid',
       }}
       {...props}
       className={classnames(styles.widgetBorder, className)}
