@@ -162,3 +162,13 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 > npm run add your_chart_name g2
 
 > npm run add your_chart_name other
+
+
+
+---
+
+# demo 更新
+
+https://web.raykite.com/square/play/2708cbb4b1d04b248537850459b80e9a/true
+
+https://web.raykite.com/square
