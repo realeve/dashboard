@@ -28,7 +28,7 @@ import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
 import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
-
+import * as R from 'ramda';
 import assets from '@/component/widget/assets';
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
 
@@ -138,6 +138,8 @@ export interface IEditorProps {
   // DOM变更时，hash值变更，重新计算偏移量
   domHash?: string;
 
+  lockedPanel: string[];
+
   // 缩放回调
   onZoom?: (e: number) => void;
 
@@ -163,6 +165,7 @@ export interface IEditorProps {
  * @param style 样式
  * @param domHash 页面变更hash值，该值变更时需要重新计算偏移;
  * @param zoom 缩放系数
+ * @param lockedPanel 被锁定的组件
  * @param onZoom 缩放回调
  * @param onSelect 选中元素
  * @param onRemove 移除元素
@@ -254,7 +257,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const prevVisible = this.state.guideVisible;
     horizontalGuides.current.loadGuides(prevVisible ? [] : this.state.horizontalGuides);
     verticalGuides.current.loadGuides(prevVisible ? [] : this.state.verticalGuides);
-    this.setState(preState => ({
+    this.setState((preState) => ({
       guideVisible: !preState.guideVisible,
     }));
   };
@@ -285,7 +288,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       lineColor: '#364152',
       textColor: '#808e9b',
       unit: 100,
-      dragPosFormat: e => e - 44,
+      dragPosFormat: (e) => e - 44,
     };
 
     return (
@@ -317,7 +320,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           displayDragPos={true}
           zoom={zoom}
           unit={unit}
-          dragPosFormat={e => e}
+          dragPosFormat={(e) => e}
           onChangeGuides={({ guides: h }) => {
             const next = { v: this.state.verticalGuides, h };
             guideDb.save(next);
@@ -337,7 +340,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           displayDragPos={true}
           zoom={zoom}
           unit={unit}
-          dragPosFormat={e => e}
+          dragPosFormat={(e) => e}
           onChangeGuides={({ guides: v }) => {
             const next = { h: this.state.horizontalGuides, v };
             guideDb.save(next);
@@ -357,7 +360,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           allowWheel={false}
           onZoom={this.props.onZoom}
           zoomRange={[0.3, 1.5]}
-          onAbortPinch={e => {
+          onAbortPinch={(e) => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
           onScroll={(e: OnScroll) => {
@@ -367,7 +370,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             verticalGuides.current!.scroll(e.scrollTop);
             verticalGuides.current!.scrollGuides(e.scrollLeft);
           }}
-          onPinch={e => {
+          onPinch={(e) => {
             this.setState({
               zoom: e.zoom,
             });
@@ -418,7 +421,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           //       }
           //     : undefined
           // }
-          onDragStart={e => {
+          onDragStart={(e) => {
             if (selectedMenu === 'hand') {
               return;
             }
@@ -429,7 +432,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (
               (inputEvent.type === 'touchstart' && e.isTrusted) ||
               moveableManager.current!.getMoveable().isMoveableElement(target) ||
-              state.selectedTargets.some(t => t === target || t.contains(target))
+              state.selectedTargets.some((t) => t === target || t.contains(target))
             ) {
               e.stop();
             }
@@ -464,6 +467,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             this.props?.onDrag?.(pos);
           }}
           onSelectEnd={({ isDragStart, selected, inputEvent }) => {
+            let _selected = R.clone(selected);
+
             if (selectedMenu === 'hand') {
               return;
             }
@@ -472,7 +477,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               inputEvent.preventDefault();
             }
 
-            this.setSelectedTargets(selected).then(() => {
+            this.setSelectedTargets(_selected).then(() => {
               if (!isDragStart) {
                 return;
               }
@@ -496,7 +501,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     eventBus.on('selectLayers', (e: any) => {
       const selected = e.selected as string[];
 
-      this.setSelectedTargets(selected.map(key => viewport.getInfo(key)!.el!));
+      this.setSelectedTargets(selected.map((key) => viewport.getInfo(key)!.el!));
     });
     eventBus.on('update', () => {
       this.forceUpdate();
@@ -508,7 +513,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['h'],
-      e => {
+      (e) => {
         handleSelectMode('hand');
       },
       '移动工具：移动屏幕位置',
@@ -516,7 +521,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['m'],
-      e => {
+      (e) => {
         this.infiniteViewer.current!.scrollCenter();
       },
       '画布居中',
@@ -524,7 +529,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['v'],
-      e => {
+      (e) => {
         handleSelectMode('MoveTool');
       },
       '选择工具：选择屏幕中的组件',
@@ -532,7 +537,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['left'],
-      e => {
+      (e) => {
         this.move(-10, 0);
         e.inputEvent.preventDefault();
       },
@@ -540,7 +545,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
     this.keyManager.keydown(
       ['up'],
-      e => {
+      (e) => {
         this.move(0, -10);
         e.inputEvent.preventDefault();
       },
@@ -548,7 +553,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
     this.keyManager.keydown(
       ['right'],
-      e => {
+      (e) => {
         this.move(10, 0);
         e.inputEvent.preventDefault();
       },
@@ -556,7 +561,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
     this.keyManager.keydown(
       ['down'],
-      e => {
+      (e) => {
         this.move(0, 10);
         e.inputEvent.preventDefault();
       },
@@ -586,7 +591,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.keyManager.keydown([isMacintosh ? 'meta' : 'ctrl', 'c'], () => {}, '复制');
     this.keyManager.keydown(
       [isMacintosh ? 'meta' : 'ctrl', 'shift', 'c'],
-      e => {
+      (e) => {
         this.clipboardManager.copyImage();
         e.inputEvent.preventDefault();
       },
@@ -609,8 +614,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
     this.keyManager.keydown(
       [isMacintosh ? 'meta' : 'ctrl', 'a'],
-      e => {
-        this.setSelectedTargets(this.getViewportInfos().map(info => info.el!));
+      (e) => {
+        this.setSelectedTargets(this.getViewportInfos().map((info) => info.el!));
         e.inputEvent.preventDefault();
       },
       '全选',
@@ -631,7 +636,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     window.removeEventListener('resize', this.onResize);
   }
   public promiseState(state: Partial<ScenaEditorState>) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.setState(state, () => {
         resolve();
       });
@@ -641,10 +646,16 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     return this.state.selectedTargets;
   }
   public setSelectedTargets(targets: Array<HTMLElement | SVGElement>, isRestore?: boolean) {
-    targets = targets.filter(target => {
-      return targets.every(parnetTarget => {
+    targets = targets.filter((target) => {
+      return targets.every((parnetTarget) => {
         return parnetTarget === target || !parnetTarget.contains(target);
       });
+    });
+
+    // 被锁定的面板不允许选择
+    targets = targets.filter((target) => {
+      let targetId = getIds([target])[0];
+      return !this.props.lockedPanel.includes(targetId);
     });
 
     return this.promiseState({
@@ -652,9 +663,12 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }).then(() => {
       if (!isRestore) {
         const prevs = getIds(this.moveableData.getSelectedTargets());
+
         const nexts = getIds(targets);
+
         if (prevs.length !== nexts.length || !prevs.every((prev, i) => nexts[i] === prev)) {
           // 被选中
+
           this.props?.onSelect?.(nexts);
           this.historyManager.addAction('selectTargets', {
             prevs,
@@ -670,7 +684,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
 
   public appendJSX(info: ElementInfo) {
-    return this.appendJSXs([info]).then(targets => targets[0]);
+    return this.appendJSXs([info]).then((targets) => targets[0]);
   }
   public append(
     jsx: ScenaJSXType,
@@ -685,7 +699,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         id,
         frame: config?.style || getDefaultStyle(),
       },
-    ]).then(targets => targets[0]);
+    ]).then((targets) => targets[0]);
   }
 
   // 待优化
@@ -739,9 +753,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
         info.children!.forEach(registerFrame);
         return info.el!;
       })
-      .filter(el => el);
+      .filter((el) => el);
 
-    return Promise.all(targets.map(target => checkImageLoaded(target))).then(() => {
+    return Promise.all(targets.map((target) => checkImageLoaded(target))).then(() => {
       this.setSelectedTargets(targets, true);
       return targets;
     });
@@ -766,7 +780,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       frameMap[info.id!] = moveableData.getFrame(target).get();
       moveableData.removeFrame(target);
 
-      info.children!.forEach(childInfo => {
+      info.children!.forEach((childInfo) => {
         removeFrame(childInfo.el!);
       });
     });
@@ -864,7 +878,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             jsx,
           };
         })
-        .filter(info => info) as ElementInfo[],
+        .filter((info) => info) as ElementInfo[],
     );
   }
   public saveTargets(targets: Array<HTMLElement | SVGElement>): SavedScenaData[] {
@@ -872,7 +886,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const moveableData = this.moveableData;
     this.console.log('save targets', targets);
     return targets
-      .map(target => viewport.getInfoByElement(target))
+      .map((target) => viewport.getInfoByElement(target))
       .map(function saveTarget(info): SavedScenaData {
         const target = info.el!;
         const isContentEditable = info.attrs!.contenteditable;
@@ -908,7 +922,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     return this.getViewport()
       .moves(movedInfos)
-      .then(result => this.moveComplete(result, frameMap, isRestore));
+      .then((result) => this.moveComplete(result, frameMap, isRestore));
   }
 
   private move(deltaX: number, deltaY: number) {

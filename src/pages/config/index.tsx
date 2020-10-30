@@ -27,7 +27,7 @@ export interface IPanelItem extends IChartConfig {
 }
 
 // 添加内容
-const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => { 
+const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => {
   editor?.current.append(
     <div style={style}>
       <ChartItem chartid={config.id} />
@@ -71,7 +71,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
     editor.current && setInstance(editor.current);
 
     // onMount,载入初始panel
-    panel.map(item => {
+    panel.map((item) => {
       addPanel(editor, item);
     });
 
@@ -138,7 +138,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
         <ComponentPanel
           setHide={setHide}
           hide={hide}
-          onAddPanel={panel => {
+          onAddPanel={(panel) => {
             const style = getDefaultStyle();
             const nextPanel = { ...panel, style };
             dispatch({
@@ -164,7 +164,8 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               background={page.background}
               width={page.width}
               height={page.height}
-              onSelect={panels => {
+              lockedPanel={panel.filter((item) => item.lock).map((item) => item.id)}
+              onSelect={(panels) => {
                 dispatch({
                   type: 'common/setStore',
                   payload: {
@@ -172,7 +173,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
                   },
                 });
               }}
-              onChange={panels => {
+              onChange={(panels) => {
                 panels.forEach(({ id: idx, next: style }) => {
                   dispatch({
                     type: 'common/updatePanelAttrib',

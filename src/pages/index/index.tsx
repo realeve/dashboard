@@ -129,7 +129,7 @@ export default () => {
       <Content
         className={styles.theme1}
         style={{
-          backgroundImage: `url('${assets.backgrounds[state.background].url}')`,
+          backgroundImage: `url('${assets.backgrounds[state.background]?.url}')`,
           backgroundSize: 'cover',
           ...backgroundStyle,
         }}
@@ -137,7 +137,7 @@ export default () => {
         <div
           className={styles.header}
           style={{
-            backgroundImage: `url('${assets.headers[state.header].url}')`,
+            backgroundImage: `url('${assets.headers[state.header]?.url}')`,
             ...backgroundStyle,
           }}
         >
