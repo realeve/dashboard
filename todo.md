@@ -12,3 +12,8 @@ https://cdn-service.datav.aliyun.com/datav-static/2.36.8_6/libs/browser_check.js
 https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/horizontal-positive-negative-bar-chart/0.2.2
 
 https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
+
+---
+
+- [ ] 增加组件锁定
+- [ ] 
