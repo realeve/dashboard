@@ -57,7 +57,7 @@ export default ({
 }) => {
   let url = assets.pics[imgname]?.url;
   return (
-    <div style={{ color: '#fff', fontSize: 30 }}>
+    <div className={styles.imgWrapper}>
       <img
         src={url}
         style={{
