@@ -3,6 +3,7 @@ import styles from './index.less';
 import { useToggle } from 'react-use';
 import { Modal, Steps } from 'antd';
 import { AssetItem } from './config';
+import assets from '@/component/widget/assets';
 const { Step } = Steps;
 
 export default ({ onChange, config }) => {
@@ -60,11 +61,11 @@ export default ({ onChange, config }) => {
         </Steps>
         <div className={styles.content}>
           {current === 0 && (
-            <AssetItem assetKey="backgrounds" value={background} onChange={setBackground} />
+            <AssetItem assets={assets.backgrounds} value={background} onChange={setBackground} />
           )}
-          {current === 1 && <AssetItem assetKey="borders" value={border} onChange={setBorder} />}
+          {/* {current === 1 && <AssetItem assetKey="borders" value={border} onChange={setBorder} />}
           {current === 2 && <AssetItem assetKey="headers" value={header} onChange={setHeader} />}
-          {current === 3 && <AssetItem assetKey="footers" value={footer} onChange={setFooter} />}
+          {current === 3 && <AssetItem assetKey="footers" value={footer} onChange={setFooter} />} */}
         </div>
       </Modal>
     </div>

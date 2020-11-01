@@ -43,6 +43,10 @@ let chartList = [
     name: '装饰挂件',
     type: 'decotation',
   },
+  {
+    name: '空组件',
+    type: '_blank',
+  },
   // 以下图表报错
   {
     name: '柱状图',

@@ -1,18 +1,11 @@
 import React from 'react';
-import { assets } from '@/component/widget';
 import styles from './index.less';
 import classnames from 'classnames';
 
-export default ({ value,style={}, onChange, assetKey = 'borders' }) => {
-  let keys = Object.keys(assets[assetKey]);
-
+export default ({ value, style = {}, onChange, assets }) => {
   return (
-    <div
-      className={styles[['headers', 'footers'].includes(assetKey) ? 'configList' : 'configGrid']}
-      style={style}
-    >
-      {keys.map((name, idx) => {
-        let val = assets[assetKey][name];
+    <div className={styles['configGrid']} style={style}>
+      {Object.entries(assets).map(([name, val]: [string, { url: string }]) => {
         return (
           <div
             key={name}

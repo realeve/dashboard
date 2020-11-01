@@ -7,10 +7,11 @@ import assets from '@/component/widget/assets';
 import { SettingOutlined } from '@ant-design/icons';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
-import { Divider } from 'antd';
+import { Divider, Tabs } from 'antd';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
+const TabPane = Tabs.TabPane;
 
 export const ImgSelector = ({
   title,
@@ -41,15 +42,30 @@ export const ImgSelector = ({
             setShow(false);
           }}
         >
-          <div style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
-            <SettingOutlined /> 设置{title}
-          </div>
-          <AssetItem
-            assetKey={imgtype}
-            style={{ overflowY: 'auto', height: 'calc(100% - 30px)' }}
-            value={value}
-            onChange={onChange}
-          />
+          {/* <div style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
+            <SettingOutlined /> 设置 {title}
+          </div> */}
+          {imgtype !== 'pics' ? (
+            <AssetItem
+              assets={assets[imgtype]}
+              style={{ overflowY: 'auto', height: 'calc(100% - 30px)' }}
+              value={value}
+              onChange={onChange}
+            />
+          ) : (
+            <Tabs>
+              {assets.picList.map((picItem) => (
+                <TabPane tab={picItem.title} key={picItem.title}>
+                  <AssetItem
+                    assets={picItem.data}
+                    style={{ overflowY: 'auto', height: 630, maxHeight: 830 }}
+                    value={value}
+                    onChange={onChange}
+                  />
+                </TabPane>
+              ))}
+            </Tabs>
+          )}
         </Popup>
       )}
     </Field>
