@@ -13,6 +13,13 @@ assets.borders = {
     bottom: 15,
     left: 10,
   },
+  边框: {
+    url: require('./img-templet/tech/border1.svg'),
+    top: 60,
+    right: 20,
+    bottom: 50,
+    left: 20,
+  },
   边框1: {
     url: require('./img-templet/border-1.png'),
     top: 10,
@@ -1044,6 +1051,30 @@ let picList = [
       },
       科技4: {
         url: require('./img-templet/tech/circle4.svg'),
+      },
+      科技5: {
+        url: require('./img-templet/tech/circle5.svg'),
+      },
+      科技6: {
+        url: require('./img-templet/tech/circle6.svg'),
+      },
+      科技7: {
+        url: require('./img-templet/tech/circle7.svg'),
+      },
+      科技8: {
+        url: require('./img-templet/tech/circle8.svg'),
+      },
+      科技9: {
+        url: require('./img-templet/tech/circle9.svg'),
+      },
+      科技10: {
+        url: require('./img-templet/tech/circle10.svg'),
+      },
+      科技11: {
+        url: require('./img-templet/tech/circle11.svg'),
+      },
+      科技12: {
+        url: require('./img-templet/tech/circle12.svg'),
       },
     },
   },
