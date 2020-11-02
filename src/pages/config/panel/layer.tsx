@@ -130,7 +130,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     setSelected(_selected);
   }, [selectedPanel.join('')]);
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -158,7 +158,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   };
 
   // 更新第idx个数据的属性
-  const updatePanelItem = (idx: string, attrib: {}) => { 
+  const updatePanelItem = (idx: string, attrib: {}) => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
@@ -342,7 +342,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                             payload: {
                               selectedPanel: [item.id],
                             },
-                          }); 
+                          });
                           // setSelected([idx]);
                         }}
                       >
@@ -350,7 +350,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           id={MENU_TYPE}
                           holdToDisplay={1000}
                           idx={idx}
-                          collect={props => props}
+                          collect={(props) => props}
                         >
                           {!isThumb ? (
                             <i className={item.icon} />
@@ -359,7 +359,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           )}
 
                           <div className={styles.text}>
-                            <span>{item.title}</span>
+                            <span>{item.componentConfig.imgname || item.title}</span>
                           </div>
                           <div
                             className={classnames({
@@ -389,19 +389,19 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
               payload: {
                 selectedPanel: [],
               },
-            }); 
+            });
           }}
         />
       </div>
 
       <ContextMenu
         id={MENU_TYPE}
-        onShow={e => {
+        onShow={(e) => {
           // 右键点击选中当前
           setSelected([e.detail.data.idx]);
         }}
       >
-        {MENU_LIST.map(item =>
+        {MENU_LIST.map((item) =>
           item.icon.includes('divider') ? (
             <div className="react-contextmenu-item--divider" key={item.icon} />
           ) : (
