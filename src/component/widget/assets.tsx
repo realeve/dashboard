@@ -13,11 +13,499 @@ assets.borders = {
     bottom: 15,
     left: 10,
   },
-  边框: {
-    url: require('./img-templet/tech/border1.svg'),
+  svg边框1: {
+    url: require('./img-templet/border/border1.svg'),
     top: 60,
     right: 20,
     bottom: 50,
+    left: 20,
+  },
+
+  svg边框2: {
+    url: require('./img-templet/border/border2.svg'),
+    top: 100,
+    right: 20,
+    bottom: 200,
+    left: 20,
+  },
+
+  svg边框3: {
+    url: require('./img-templet/border/border3.svg'),
+    top: 40,
+    right: 20,
+    bottom: 40,
+    left: 20,
+  },
+
+  svg边框4: {
+    url: require('./img-templet/border/border4.svg'),
+    top: 90,
+    right: 20,
+    bottom: 90,
+    left: 20,
+  },
+
+  svg边框5: {
+    url: require('./img-templet/border/border5.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框6: {
+    url: require('./img-templet/border/border6.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框7: {
+    url: require('./img-templet/border/border7.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框8: {
+    url: require('./img-templet/border/border8.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框9: {
+    url: require('./img-templet/border/border9.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框10: {
+    url: require('./img-templet/border/border10.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框11: {
+    url: require('./img-templet/border/border11.svg'),
+    top: 50,
+    right: 90,
+    bottom: 60,
+    left: 50,
+  },
+
+  svg边框12: {
+    url: require('./img-templet/border/border12.svg'),
+    top: 45,
+    right: 45,
+    bottom: 45,
+    left: 45,
+  },
+
+  svg边框13: {
+    url: require('./img-templet/border/border13.svg'),
+    top: 60,
+    right: 60,
+    bottom: 60,
+    left: 30,
+  },
+
+  svg边框14: {
+    url: require('./img-templet/border/border14.svg'),
+    top: 60,
+    right: 60,
+    bottom: 60,
+    left: 30,
+  },
+
+  svg边框15: {
+    url: require('./img-templet/border/border15.svg'),
+    top: 30,
+    right: 30,
+    bottom: 40,
+    left: 30,
+  },
+
+  svg边框16: {
+    url: require('./img-templet/border/border16.svg'),
+    top: 30,
+    right: 45,
+    bottom: 30,
+    left: 30,
+  },
+
+  svg边框17: {
+    url: require('./img-templet/border/border17.svg'),
+    top: 40,
+    right: 55,
+    bottom: 50,
+    left: 45,
+  },
+
+  svg边框18: {
+    url: require('./img-templet/border/border18.svg'),
+    top: 100,
+    right: 100,
+    bottom: 100,
+    left: 100,
+  },
+
+  svg边框19: {
+    url: require('./img-templet/border/border19.svg'),
+    top: 55,
+    right: 50,
+    bottom: 20,
+    left: 20,
+  },
+
+  svg边框20: {
+    url: require('./img-templet/border/border20.svg'),
+    top: 55,
+    right: 50,
+    bottom: 20,
+    left: 20,
+  },
+
+  svg边框21: {
+    url: require('./img-templet/border/border21.svg'),
+    top: 55,
+    right: 50,
+    bottom: 35,
+    left: 20,
+  },
+
+  svg边框22: {
+    url: require('./img-templet/border/border22.svg'),
+    top: 50,
+    right: 100,
+    bottom: 50,
+    left: 100,
+  },
+
+  svg边框23: {
+    url: require('./img-templet/border/border23.svg'),
+    top: 50,
+    right: 50,
+    bottom: 50,
+    left: 55,
+  },
+
+  svg边框24: {
+    url: require('./img-templet/border/border24.svg'),
+    top: 60,
+    right: 60,
+    bottom: 60,
+    left: 60,
+  },
+
+  svg边框25: {
+    url: require('./img-templet/border/border25.svg'),
+    top: 70,
+    right: 65,
+    bottom: 65,
+    left: 70,
+  },
+
+  svg边框26: {
+    url: require('./img-templet/border/border26.svg'),
+    top: 60,
+    right: 5,
+    bottom: 60,
+    left: 5,
+  },
+
+  svg边框27: {
+    url: require('./img-templet/border/border27.svg'),
+    top: 5,
+    right: 60,
+    bottom: 5,
+    left: 60,
+  },
+
+  svg边框28: {
+    url: require('./img-templet/border/border28.svg'),
+    top: 30,
+    right: 25,
+    bottom: 30,
+    left: 25,
+  },
+
+  svg边框29: {
+    url: require('./img-templet/border/border29.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框30: {
+    url: require('./img-templet/border/border30.svg'),
+    top: 120,
+    right: 80,
+    bottom: 80,
+    left: 80,
+  },
+
+  svg边框31: {
+    url: require('./img-templet/border/border31.svg'),
+    top: 120,
+    right: 80,
+    bottom: 80,
+    left: 80,
+  },
+
+  svg边框32: {
+    url: require('./img-templet/border/border32.svg'),
+    top: 80,
+    right: 80,
+    bottom: 80,
+    left: 80,
+  },
+
+  svg边框33: {
+    url: require('./img-templet/border/border33.svg'),
+    top: 100,
+    right: 40,
+    bottom: 100,
+    left: 25,
+  },
+
+  svg边框34: {
+    url: require('./img-templet/border/border34.svg'),
+    top: 100,
+    right: 40,
+    bottom: 100,
+    left: 25,
+  },
+
+  svg边框35: {
+    url: require('./img-templet/border/border35.svg'),
+    top: 150,
+    right: 40,
+    bottom: 150,
+    left: 40,
+  },
+
+  svg边框36: {
+    url: require('./img-templet/border/border36.svg'),
+    top: 80,
+    right: 30,
+    bottom: 80,
+    left: 60,
+  },
+
+  svg边框37: {
+    url: require('./img-templet/border/border37.svg'),
+    top: 100,
+    right: 30,
+    bottom: 100,
+    left: 100,
+  },
+
+  svg边框38: {
+    url: require('./img-templet/border/border38.svg'),
+    top: 50,
+    right: 30,
+    bottom: 40,
+    left: 60,
+  },
+
+  svg边框39: {
+    url: require('./img-templet/border/border39.svg'),
+    top: 50,
+    right: 30,
+    bottom: 40,
+    left: 60,
+  },
+
+  svg边框40: {
+    url: require('./img-templet/border/border40.svg'),
+    top: 30,
+    right: 30,
+    bottom: 50,
+    left: 60,
+  },
+
+  svg边框41: {
+    url: require('./img-templet/border/border41.svg'),
+    top: 60,
+    right: 60,
+    bottom: 60,
+    left: 60,
+  },
+
+  svg边框42: {
+    url: require('./img-templet/border/border42.svg'),
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+
+  svg边框43: {
+    url: require('./img-templet/border/border43.svg'),
+    top: 35,
+    right: 45,
+    bottom: 20,
+    left: 30,
+  },
+
+  svg边框44: {
+    url: require('./img-templet/border/border44.svg'),
+    top: 85,
+    right: 40,
+    bottom: 45,
+    left: 60,
+  },
+
+  svg边框45: {
+    url: require('./img-templet/border/border45.svg'),
+    top: 20,
+    right: 60,
+    bottom: 30,
+    left: 35,
+  },
+
+  svg边框46: {
+    url: require('./img-templet/border/border46.svg'),
+    top: 55,
+    right: 25,
+    bottom: 55,
+    left: 55,
+  },
+
+  svg边框47: {
+    url: require('./img-templet/border/border47.svg'),
+    top: 25,
+    right: 10,
+    bottom: 25,
+    left: 10,
+  },
+
+  svg边框48: {
+    url: require('./img-templet/border/border48.svg'),
+    top: 40,
+    right: 40,
+    bottom: 40,
+    left: 40,
+  },
+
+  svg边框49: {
+    url: require('./img-templet/border/border49.svg'),
+    top: 120,
+    right: 160,
+    bottom: 20,
+    left: 100,
+  },
+
+  svg边框50: {
+    url: require('./img-templet/border/border50.svg'),
+    top: 80,
+    right: 40,
+    bottom: 80,
+    left: 40,
+  },
+
+  svg边框51: {
+    url: require('./img-templet/border/border51.svg'),
+    top: 30,
+    right: 30,
+    bottom: 40,
+    left: 30,
+  },
+
+  svg边框52: {
+    url: require('./img-templet/border/border52.svg'),
+    top: 50,
+    right: 30,
+    bottom: 50,
+    left: 40,
+  },
+
+  svg边框53: {
+    url: require('./img-templet/border/border53.svg'),
+    top: 70,
+    right: 25,
+    bottom: 90,
+    left: 40,
+  },
+
+  svg边框54: {
+    url: require('./img-templet/border/border54.svg'),
+    top: 70,
+    right: 30,
+    bottom: 90,
+    left: 30,
+  },
+
+  svg边框55: {
+    url: require('./img-templet/border/border55.svg'),
+    top: 55,
+    right: 60,
+    bottom: 100,
+    left: 110,
+  },
+
+  svg边框56: {
+    url: require('./img-templet/border/border56.svg'),
+    top: 110,
+    right: 50,
+    bottom: 50,
+    left: 30,
+  },
+
+  svg边框57: {
+    url: require('./img-templet/border/border57.svg'),
+    top: 70,
+    right: 50,
+    bottom: 50,
+    left: 50,
+  },
+
+  svg边框58: {
+    url: require('./img-templet/border/border58.svg'),
+    top: 70,
+    right: 30,
+    bottom: 60,
+    left: 30,
+  },
+
+  svg边框59: {
+    url: require('./img-templet/border/border59.svg'),
+    top: 50,
+    right: 30,
+    bottom: 60,
+    left: 40,
+  },
+
+  svg边框60: {
+    url: require('./img-templet/border/border60.svg'),
+    top: 50,
+    right: 30,
+    bottom: 60,
+    left: 40,
+  },
+
+  svg边框61: {
+    url: require('./img-templet/border/border61.svg'),
+    top: 85,
+    right: 65,
+    bottom: 70,
+    left: 65,
+  },
+
+  svg边框62: {
+    url: require('./img-templet/border/border62.svg'),
+    top: 20,
+    right: 20,
+    bottom: 20,
     left: 20,
   },
   边框1: {
@@ -249,9 +737,6 @@ let picList = [
       紫色圆形装饰动图gif: {
         url: require('./img-templet/pic-228-2cff2e714fff18e2.gif'),
       },
-      蓝色频谱音频装饰动图gif: {
-        url: require('./img-templet/pic-230-1abf980f5d966f30.gif'),
-      },
       紫色圆形频谱音频装饰动图gif: {
         url: require('./img-templet/pic-232-f5b366790d3979f7.gif'),
       },
@@ -260,12 +745,6 @@ let picList = [
       },
       蓝色直线线条装饰动图gif: {
         url: require('./img-templet/pic-237-dc21156e2c9fe530.gif'),
-      },
-      蓝色橙色标尺装饰动图gif: {
-        url: require('./img-templet/pic-238-0e821128f121a815.gif'),
-      },
-      蓝色直线科技装饰动图gif: {
-        url: require('./img-templet/pic-239-ce970cb4d39a64db.gif'),
       },
       蓝色边框科技装饰动图gif: {
         url: require('./img-templet/pic-240-e9640eece337d0dc.gif'),
@@ -378,45 +857,7 @@ let picList = [
       蓝色网状抽象透明地图地球3D立体图标1: {
         url: require('./img-templet/pic-191-7c407a8169229334.svg'),
       },
-      蓝色透明科技直线边框装饰图标图形: {
-        url: require('./img-templet/pic-9DHkf6Cgsb7Th2Gr.svg'),
-      },
-      蓝色透明科技直线边框装饰图标图形3: {
-        url: require('./img-templet/pic-AWpRC9Qtdf8V6X4u.svg'),
-      },
-      蓝色透明科技直线边框装饰图标图形2: {
-        url: require('./img-templet/pic-d9rrvQa9PFo3Q4cH.svg'),
-      },
-      蓝色科技透明线条直线边框装饰图标图形: {
-        url: require('./img-templet/pic-NCEtF67c4xDDi4Bn.svg'),
-      },
-      蓝色透明科技直线线条边框图形装饰: {
-        url: require('./img-templet/pic-sgtd6Z3Yrc3MbTh8.svg'),
-      },
-      蓝色透明科技直线线条边框边角图形装饰: {
-        url: require('./img-templet/pic-vVX9D2Yc4F6gHDkk.svg'),
-      },
-      蓝色透明科技直线线条边框图形装饰2: {
-        url: require('./img-templet/pic-zCrpu94N77HVVzEj.svg'),
-      },
-      蓝色透明科技直线线条边框边角图形装饰1: {
-        url: require('./img-templet/pic-34-bb98078064cc875c.svg'),
-      },
-      蓝色透明科技直线线条边框边角图形装饰2: {
-        url: require('./img-templet/pic-38-b73017590f4c5f11.svg'),
-      },
-      蓝色黄色透明科技直线线条边框图形装饰: {
-        url: require('./img-templet/pic-50-31b8ee6aa9f8aadb.svg'),
-      },
-      蓝色透明科技圆弧线线条边框图形装饰: {
-        url: require('./img-templet/pic-52-83a06a6eaf7d2312.svg'),
-      },
-      蓝色黄色橙色透明科技直线线条刻度边框图形装饰: {
-        url: require('./img-templet/pic-221-b98b438e753c743b.svg'),
-      },
-      蓝色透明科技直线线条边框边角图形装饰3: {
-        url: require('./img-templet/pic-226-9ffbfc7b35d1f0cf.svg'),
-      },
+
       蓝色透明科技直线线条边框边角图形装饰4: {
         url: require('./img-templet/pic-1-0b9ab20a94567552.svg'),
       },
@@ -432,48 +873,7 @@ let picList = [
       蓝色透明科技线条边框图形装饰3: {
         url: require('./img-templet/pic-45-b48fc090a2874d62.svg'),
       },
-      白色透明电波频率脉动科技直线线条边框图形装饰: {
-        url: require('./img-templet/pic-132-9b13886b9c0b3372.svg'),
-      },
-      白色透明电波频率脉动科技直线线条边框图形装饰1: {
-        url: require('./img-templet/pic-137-2b4d97464e431f1b.svg'),
-      },
-      白色透明电波频率脉动科技直线线条边框图形装饰2: {
-        url: require('./img-templet/pic-138-8458be45afb4e2f5.svg'),
-      },
-      白色透明电波频率脉动科技直线线条边框图形装饰3: {
-        url: require('./img-templet/pic-140-6c1182b2c13aca2e.svg'),
-      },
-      白色透明电波频率脉动科技直线线条边框图形装饰4: {
-        url: require('./img-templet/pic-141-facc41f0f0e51831.svg'),
-      },
-      蓝色透明科技折线线条边框图形装饰: {
-        url: require('./img-templet/pic-179-508d36275fc64bd0.svg'),
-      },
-      蓝色透明科技折线线条边框图形装饰2: {
-        url: require('./img-templet/pic-180-8dae03bcaa6173b9.svg'),
-      },
-      灰色透明科技折线线条边框图形装饰: {
-        url: require('./img-templet/pic-186-f2da8e1f72ca9171.svg'),
-      },
-      灰色透明科技折线线条边框图形装饰1: {
-        url: require('./img-templet/pic-187-005708738902b64e.svg'),
-      },
-      蓝色透明科技折线线条边框图形装饰3: {
-        url: require('./img-templet/pic-199-9bad7c1391b74106.svg'),
-      },
-      蓝色透明科技折线线条边框图形装饰4: {
-        url: require('./img-templet/pic-1.png'),
-      },
-      蓝色透明科技折线线条边框图形装饰5: {
-        url: require('./img-templet/pic-2.png'),
-      },
-      蓝色渐变科技直线线条边框图形装饰: {
-        url: require('./img-templet/pic-3.png'),
-      },
-      灰色透明科技直线线条边框图形装饰: {
-        url: require('./img-templet/pic-9.png'),
-      },
+
       黄色金色科技电路电子透明装饰图标矢量: {
         url: require('./img-templet/pic-169-b8f8c4be0a2d53c7.svg'),
       },
@@ -1075,6 +1475,827 @@ let picList = [
       },
       科技12: {
         url: require('./img-templet/tech/circle12.svg'),
+      },
+      科技13: {
+        url: require('./img-templet/tech/circle13.svg'),
+      },
+
+      科技14: {
+        url: require('./img-templet/tech/circle14.svg'),
+      },
+
+      科技15: {
+        url: require('./img-templet/tech/circle15.svg'),
+      },
+
+      科技16: {
+        url: require('./img-templet/tech/circle16.svg'),
+      },
+
+      科技17: {
+        url: require('./img-templet/tech/circle17.svg'),
+      },
+
+      科技18: {
+        url: require('./img-templet/tech/circle18.svg'),
+      },
+
+      科技19: {
+        url: require('./img-templet/tech/circle19.svg'),
+      },
+
+      科技20: {
+        url: require('./img-templet/tech/circle20.svg'),
+      },
+
+      科技21: {
+        url: require('./img-templet/tech/circle21.svg'),
+      },
+
+      科技22: {
+        url: require('./img-templet/tech/circle22.svg'),
+      },
+
+      科技23: {
+        url: require('./img-templet/tech/circle23.svg'),
+      },
+
+      科技24: {
+        url: require('./img-templet/tech/circle24.svg'),
+      },
+
+      科技25: {
+        url: require('./img-templet/tech/circle25.svg'),
+      },
+
+      科技26: {
+        url: require('./img-templet/tech/circle26.svg'),
+      },
+
+      科技27: {
+        url: require('./img-templet/tech/circle27.svg'),
+      },
+
+      科技28: {
+        url: require('./img-templet/tech/circle28.svg'),
+      },
+
+      科技29: {
+        url: require('./img-templet/tech/circle29.svg'),
+      },
+
+      科技30: {
+        url: require('./img-templet/tech/circle30.svg'),
+      },
+
+      科技31: {
+        url: require('./img-templet/tech/circle31.svg'),
+      },
+
+      科技32: {
+        url: require('./img-templet/tech/circle32.svg'),
+      },
+
+      科技33: {
+        url: require('./img-templet/tech/circle33.svg'),
+      },
+
+      科技34: {
+        url: require('./img-templet/tech/circle34.svg'),
+      },
+
+      科技35: {
+        url: require('./img-templet/tech/circle35.svg'),
+      },
+
+      科技36: {
+        url: require('./img-templet/tech/circle36.svg'),
+      },
+
+      科技37: {
+        url: require('./img-templet/tech/circle37.svg'),
+      },
+
+      科技38: {
+        url: require('./img-templet/tech/circle38.svg'),
+      },
+
+      科技39: {
+        url: require('./img-templet/tech/circle39.svg'),
+      },
+
+      科技40: {
+        url: require('./img-templet/tech/circle40.svg'),
+      },
+
+      科技41: {
+        url: require('./img-templet/tech/circle41.svg'),
+      },
+
+      科技42: {
+        url: require('./img-templet/tech/circle42.svg'),
+      },
+
+      科技43: {
+        url: require('./img-templet/tech/circle43.svg'),
+      },
+
+      科技44: {
+        url: require('./img-templet/tech/circle44.svg'),
+      },
+
+      科技45: {
+        url: require('./img-templet/tech/circle45.svg'),
+      },
+
+      科技46: {
+        url: require('./img-templet/tech/circle46.svg'),
+      },
+
+      科技47: {
+        url: require('./img-templet/tech/circle47.svg'),
+      },
+
+      科技48: {
+        url: require('./img-templet/tech/circle48.svg'),
+      },
+
+      科技49: {
+        url: require('./img-templet/tech/circle49.svg'),
+      },
+
+      科技50: {
+        url: require('./img-templet/tech/circle50.svg'),
+      },
+
+      科技51: {
+        url: require('./img-templet/tech/circle51.svg'),
+      },
+
+      科技52: {
+        url: require('./img-templet/tech/circle52.svg'),
+      },
+
+      科技53: {
+        url: require('./img-templet/tech/circle53.svg'),
+      },
+
+      科技54: {
+        url: require('./img-templet/tech/circle54.svg'),
+      },
+
+      科技55: {
+        url: require('./img-templet/tech/circle55.svg'),
+      },
+
+      科技56: {
+        url: require('./img-templet/tech/circle56.svg'),
+      },
+
+      科技57: {
+        url: require('./img-templet/tech/circle57.svg'),
+      },
+
+      科技58: {
+        url: require('./img-templet/tech/circle58.svg'),
+      },
+
+      科技59: {
+        url: require('./img-templet/tech/circle59.svg'),
+      },
+
+      科技60: {
+        url: require('./img-templet/tech/circle60.svg'),
+      },
+
+      科技61: {
+        url: require('./img-templet/tech/circle61.svg'),
+      },
+
+      科技62: {
+        url: require('./img-templet/tech/circle62.svg'),
+      },
+
+      科技63: {
+        url: require('./img-templet/tech/circle63.svg'),
+      },
+
+      科技64: {
+        url: require('./img-templet/tech/circle64.svg'),
+      },
+
+      科技65: {
+        url: require('./img-templet/tech/circle65.svg'),
+      },
+
+      科技66: {
+        url: require('./img-templet/tech/circle66.svg'),
+      },
+
+      科技67: {
+        url: require('./img-templet/tech/circle67.svg'),
+      },
+
+      科技68: {
+        url: require('./img-templet/tech/circle68.svg'),
+      },
+
+      科技69: {
+        url: require('./img-templet/tech/circle69.svg'),
+      },
+
+      科技70: {
+        url: require('./img-templet/tech/circle70.svg'),
+      },
+
+      科技71: {
+        url: require('./img-templet/tech/circle71.svg'),
+      },
+
+      科技72: {
+        url: require('./img-templet/tech/circle72.svg'),
+      },
+
+      科技73: {
+        url: require('./img-templet/tech/circle73.svg'),
+      },
+
+      科技74: {
+        url: require('./img-templet/tech/circle74.svg'),
+      },
+
+      科技75: {
+        url: require('./img-templet/tech/circle75.svg'),
+      },
+
+      科技76: {
+        url: require('./img-templet/tech/circle76.svg'),
+      },
+
+      科技77: {
+        url: require('./img-templet/tech/circle77.svg'),
+      },
+
+      科技78: {
+        url: require('./img-templet/tech/circle78.svg'),
+      },
+
+      科技79: {
+        url: require('./img-templet/tech/circle79.svg'),
+      },
+
+      科技80: {
+        url: require('./img-templet/tech/circle80.svg'),
+      },
+
+      科技81: {
+        url: require('./img-templet/tech/circle81.svg'),
+      },
+
+      科技82: {
+        url: require('./img-templet/tech/circle82.svg'),
+      },
+
+      科技83: {
+        url: require('./img-templet/tech/circle83.svg'),
+      },
+
+      科技84: {
+        url: require('./img-templet/tech/circle84.svg'),
+      },
+
+      科技85: {
+        url: require('./img-templet/tech/circle85.svg'),
+      },
+
+      科技86: {
+        url: require('./img-templet/tech/circle86.svg'),
+      },
+
+      科技87: {
+        url: require('./img-templet/tech/circle87.svg'),
+      },
+
+      科技88: {
+        url: require('./img-templet/tech/circle88.svg'),
+      },
+
+      科技89: {
+        url: require('./img-templet/tech/circle89.svg'),
+      },
+
+      科技90: {
+        url: require('./img-templet/tech/circle90.svg'),
+      },
+
+      科技91: {
+        url: require('./img-templet/tech/circle91.svg'),
+      },
+
+      科技92: {
+        url: require('./img-templet/tech/circle92.svg'),
+      },
+
+      科技93: {
+        url: require('./img-templet/tech/circle93.svg'),
+      },
+
+      科技94: {
+        url: require('./img-templet/tech/circle94.svg'),
+      },
+
+      科技95: {
+        url: require('./img-templet/tech/circle95.svg'),
+      },
+
+      科技96: {
+        url: require('./img-templet/tech/circle96.svg'),
+      },
+
+      科技97: {
+        url: require('./img-templet/tech/circle97.svg'),
+      },
+
+      科技98: {
+        url: require('./img-templet/tech/circle98.svg'),
+      },
+
+      科技99: {
+        url: require('./img-templet/tech/circle99.svg'),
+      },
+
+      科技100: {
+        url: require('./img-templet/tech/circle100.svg'),
+      },
+
+      科技101: {
+        url: require('./img-templet/tech/circle101.svg'),
+      },
+
+      科技102: {
+        url: require('./img-templet/tech/circle102.svg'),
+      },
+
+      科技103: {
+        url: require('./img-templet/tech/circle103.svg'),
+      },
+
+      科技104: {
+        url: require('./img-templet/tech/circle104.svg'),
+      },
+
+      科技105: {
+        url: require('./img-templet/tech/circle105.svg'),
+      },
+
+      科技106: {
+        url: require('./img-templet/tech/circle106.svg'),
+      },
+
+      科技107: {
+        url: require('./img-templet/tech/circle107.svg'),
+      },
+
+      科技108: {
+        url: require('./img-templet/tech/circle108.svg'),
+      },
+
+      科技109: {
+        url: require('./img-templet/tech/circle109.svg'),
+      },
+
+      科技110: {
+        url: require('./img-templet/tech/circle110.svg'),
+      },
+
+      科技111: {
+        url: require('./img-templet/tech/circle111.svg'),
+      },
+
+      科技112: {
+        url: require('./img-templet/tech/circle112.svg'),
+      },
+
+      科技113: {
+        url: require('./img-templet/tech/circle113.svg'),
+      },
+
+      科技114: {
+        url: require('./img-templet/tech/circle114.svg'),
+      },
+
+      科技115: {
+        url: require('./img-templet/tech/circle115.svg'),
+      },
+
+      科技116: {
+        url: require('./img-templet/tech/circle116.svg'),
+      },
+
+      科技117: {
+        url: require('./img-templet/tech/circle117.svg'),
+      },
+
+      科技118: {
+        url: require('./img-templet/tech/circle118.svg'),
+      },
+
+      科技119: {
+        url: require('./img-templet/tech/circle119.svg'),
+      },
+    },
+  },
+  {
+    title: '分隔线',
+    data: {
+      蓝色频谱音频装饰动图gif: {
+        url: require('./img-templet/pic-230-1abf980f5d966f30.gif'),
+      },
+      蓝色直线科技装饰动图gif: {
+        url: require('./img-templet/pic-239-ce970cb4d39a64db.gif'),
+      },
+      蓝色橙色标尺装饰动图gif: {
+        url: require('./img-templet/pic-238-0e821128f121a815.gif'),
+      },
+      白色透明电波频率脉动科技直线线条边框图形装饰: {
+        url: require('./img-templet/pic-132-9b13886b9c0b3372.svg'),
+      },
+      白色透明电波频率脉动科技直线线条边框图形装饰1: {
+        url: require('./img-templet/pic-137-2b4d97464e431f1b.svg'),
+      },
+      白色透明电波频率脉动科技直线线条边框图形装饰2: {
+        url: require('./img-templet/pic-138-8458be45afb4e2f5.svg'),
+      },
+      白色透明电波频率脉动科技直线线条边框图形装饰3: {
+        url: require('./img-templet/pic-140-6c1182b2c13aca2e.svg'),
+      },
+      白色透明电波频率脉动科技直线线条边框图形装饰4: {
+        url: require('./img-templet/pic-141-facc41f0f0e51831.svg'),
+      },
+      蓝色透明科技折线线条边框图形装饰: {
+        url: require('./img-templet/pic-179-508d36275fc64bd0.svg'),
+      },
+      蓝色透明科技折线线条边框图形装饰2: {
+        url: require('./img-templet/pic-180-8dae03bcaa6173b9.svg'),
+      },
+      灰色透明科技折线线条边框图形装饰: {
+        url: require('./img-templet/pic-186-f2da8e1f72ca9171.svg'),
+      },
+      灰色透明科技折线线条边框图形装饰1: {
+        url: require('./img-templet/pic-187-005708738902b64e.svg'),
+      },
+      蓝色透明科技折线线条边框图形装饰3: {
+        url: require('./img-templet/pic-199-9bad7c1391b74106.svg'),
+      },
+      蓝色透明科技折线线条边框图形装饰4: {
+        url: require('./img-templet/pic-1.png'),
+      },
+      蓝色透明科技折线线条边框图形装饰5: {
+        url: require('./img-templet/pic-2.png'),
+      },
+      蓝色渐变科技直线线条边框图形装饰: {
+        url: require('./img-templet/pic-3.png'),
+      },
+      灰色透明科技直线线条边框图形装饰: {
+        url: require('./img-templet/pic-9.png'),
+      },
+      蓝色透明科技直线边框装饰图标图形: {
+        url: require('./img-templet/pic-9DHkf6Cgsb7Th2Gr.svg'),
+      },
+      蓝色透明科技直线边框装饰图标图形3: {
+        url: require('./img-templet/pic-AWpRC9Qtdf8V6X4u.svg'),
+      },
+      蓝色透明科技直线边框装饰图标图形2: {
+        url: require('./img-templet/pic-d9rrvQa9PFo3Q4cH.svg'),
+      },
+      蓝色科技透明线条直线边框装饰图标图形: {
+        url: require('./img-templet/pic-NCEtF67c4xDDi4Bn.svg'),
+      },
+      蓝色透明科技直线线条边框图形装饰: {
+        url: require('./img-templet/pic-sgtd6Z3Yrc3MbTh8.svg'),
+      },
+      蓝色透明科技直线线条边框边角图形装饰: {
+        url: require('./img-templet/pic-vVX9D2Yc4F6gHDkk.svg'),
+      },
+      蓝色透明科技直线线条边框图形装饰2: {
+        url: require('./img-templet/pic-zCrpu94N77HVVzEj.svg'),
+      },
+      蓝色透明科技直线线条边框边角图形装饰1: {
+        url: require('./img-templet/pic-34-bb98078064cc875c.svg'),
+      },
+      蓝色透明科技直线线条边框边角图形装饰2: {
+        url: require('./img-templet/pic-38-b73017590f4c5f11.svg'),
+      },
+      蓝色黄色透明科技直线线条边框图形装饰: {
+        url: require('./img-templet/pic-50-31b8ee6aa9f8aadb.svg'),
+      },
+      蓝色透明科技圆弧线线条边框图形装饰: {
+        url: require('./img-templet/pic-52-83a06a6eaf7d2312.svg'),
+      },
+      蓝色黄色橙色透明科技直线线条刻度边框图形装饰: {
+        url: require('./img-templet/pic-221-b98b438e753c743b.svg'),
+      },
+      蓝色透明科技直线线条边框边角图形装饰3: {
+        url: require('./img-templet/pic-226-9ffbfc7b35d1f0cf.svg'),
+      },
+      线条1: {
+        url: require('./img-templet/line/line1.svg'),
+      },
+
+      线条2: {
+        url: require('./img-templet/line/line2.svg'),
+      },
+
+      线条3: {
+        url: require('./img-templet/line/line3.svg'),
+      },
+
+      线条4: {
+        url: require('./img-templet/line/line4.svg'),
+      },
+
+      线条5: {
+        url: require('./img-templet/line/line5.svg'),
+      },
+
+      线条6: {
+        url: require('./img-templet/line/line6.svg'),
+      },
+
+      线条7: {
+        url: require('./img-templet/line/line7.svg'),
+      },
+
+      线条8: {
+        url: require('./img-templet/line/line8.svg'),
+      },
+
+      线条9: {
+        url: require('./img-templet/line/line9.svg'),
+      },
+
+      线条10: {
+        url: require('./img-templet/line/line10.svg'),
+      },
+
+      线条11: {
+        url: require('./img-templet/line/line11.svg'),
+      },
+
+      线条12: {
+        url: require('./img-templet/line/line12.svg'),
+      },
+
+      线条13: {
+        url: require('./img-templet/line/line13.svg'),
+      },
+
+      线条14: {
+        url: require('./img-templet/line/line14.svg'),
+      },
+
+      线条15: {
+        url: require('./img-templet/line/line15.svg'),
+      },
+
+      线条16: {
+        url: require('./img-templet/line/line16.svg'),
+      },
+
+      线条17: {
+        url: require('./img-templet/line/line17.svg'),
+      },
+
+      线条18: {
+        url: require('./img-templet/line/line18.svg'),
+      },
+
+      线条19: {
+        url: require('./img-templet/line/line19.svg'),
+      },
+
+      线条20: {
+        url: require('./img-templet/line/line20.svg'),
+      },
+    },
+  },
+  {
+    title: '形状',
+    data: {
+      手形: {
+        url: require('./img-templet/shape/hand.svg'),
+      },
+
+      标题1: {
+        url: require('./img-templet/shape/head1.svg'),
+      },
+
+      标题2: {
+        url: require('./img-templet/shape/head2.svg'),
+      },
+
+      标题3: {
+        url: require('./img-templet/shape/head3.svg'),
+      },
+
+      形状1: {
+        url: require('./img-templet/shape/shape1.svg'),
+      },
+
+      形状2: {
+        url: require('./img-templet/shape/shape2.svg'),
+      },
+
+      形状3: {
+        url: require('./img-templet/shape/shape3.svg'),
+      },
+
+      形状4: {
+        url: require('./img-templet/shape/shape4.svg'),
+      },
+
+      形状5: {
+        url: require('./img-templet/shape/shape5.svg'),
+      },
+
+      形状6: {
+        url: require('./img-templet/shape/shape6.svg'),
+      },
+
+      形状7: {
+        url: require('./img-templet/shape/shape7.svg'),
+      },
+
+      形状8: {
+        url: require('./img-templet/shape/shape8.svg'),
+      },
+
+      形状9: {
+        url: require('./img-templet/shape/shape9.svg'),
+      },
+
+      形状10: {
+        url: require('./img-templet/shape/shape10.svg'),
+      },
+
+      形状11: {
+        url: require('./img-templet/shape/shape11.svg'),
+      },
+
+      形状12: {
+        url: require('./img-templet/shape/shape12.svg'),
+      },
+
+      形状13: {
+        url: require('./img-templet/shape/shape13.svg'),
+      },
+
+      形状14: {
+        url: require('./img-templet/shape/shape14.svg'),
+      },
+
+      形状15: {
+        url: require('./img-templet/shape/shape15.svg'),
+      },
+
+      形状16: {
+        url: require('./img-templet/shape/shape16.svg'),
+      },
+
+      形状17: {
+        url: require('./img-templet/shape/shape17.svg'),
+      },
+
+      形状18: {
+        url: require('./img-templet/shape/shape18.svg'),
+      },
+
+      形状19: {
+        url: require('./img-templet/shape/shape19.svg'),
+      },
+
+      形状20: {
+        url: require('./img-templet/shape/shape20.svg'),
+      },
+
+      形状21: {
+        url: require('./img-templet/shape/shape21.svg'),
+      },
+
+      形状22: {
+        url: require('./img-templet/shape/shape22.svg'),
+      },
+
+      形状23: {
+        url: require('./img-templet/shape/shape23.svg'),
+      },
+
+      形状24: {
+        url: require('./img-templet/shape/shape24.svg'),
+      },
+
+      形状25: {
+        url: require('./img-templet/shape/shape25.svg'),
+      },
+
+      形状26: {
+        url: require('./img-templet/shape/shape26.svg'),
+      },
+
+      形状27: {
+        url: require('./img-templet/shape/shape27.svg'),
+      },
+
+      形状28: {
+        url: require('./img-templet/shape/shape28.svg'),
+      },
+
+      形状29: {
+        url: require('./img-templet/shape/shape29.svg'),
+      },
+
+      形状30: {
+        url: require('./img-templet/shape/shape30.svg'),
+      },
+
+      形状31: {
+        url: require('./img-templet/shape/shape31.svg'),
+      },
+
+      形状32: {
+        url: require('./img-templet/shape/shape32.svg'),
+      },
+
+      形状33: {
+        url: require('./img-templet/shape/shape33.svg'),
+      },
+
+      形状34: {
+        url: require('./img-templet/shape/shape34.svg'),
+      },
+
+      形状35: {
+        url: require('./img-templet/shape/shape35.svg'),
+      },
+
+      形状36: {
+        url: require('./img-templet/shape/shape36.svg'),
+      },
+
+      形状37: {
+        url: require('./img-templet/shape/shape37.svg'),
+      },
+
+      形状38: {
+        url: require('./img-templet/shape/shape38.svg'),
+      },
+
+      形状39: {
+        url: require('./img-templet/shape/shape39.svg'),
+      },
+
+      形状40: {
+        url: require('./img-templet/shape/shape40.svg'),
+      },
+
+      形状41: {
+        url: require('./img-templet/shape/shape41.svg'),
+      },
+
+      形状42: {
+        url: require('./img-templet/shape/shape42.svg'),
+      },
+
+      形状43: {
+        url: require('./img-templet/shape/shape43.svg'),
+      },
+
+      形状44: {
+        url: require('./img-templet/shape/shape44.svg'),
+      },
+
+      形状45: {
+        url: require('./img-templet/shape/shape45.svg'),
+      },
+
+      形状46: {
+        url: require('./img-templet/shape/shape46.svg'),
+      },
+
+      形状47: {
+        url: require('./img-templet/shape/shape47.svg'),
+      },
+
+      形状48: {
+        url: require('./img-templet/shape/shape48.svg'),
+      },
+
+      形状49: {
+        url: require('./img-templet/shape/shape49.svg'),
+      },
+
+      形状50: {
+        url: require('./img-templet/shape/shape50.svg'),
       },
     },
   },
