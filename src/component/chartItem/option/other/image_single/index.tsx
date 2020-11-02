@@ -26,9 +26,23 @@ export const config: IChartConfig[] = [
   },
   {
     key: 'reverse',
-    type: 'switch',
-    defaultValue: false,
-    title: '逆时针',
+    type: 'radio',
+    defaultValue: 'rotateZ',
+    title: '旋转方向',
+    option: [
+      {
+        title: '顺时针',
+        value: 'rotateZ',
+      },
+      {
+        title: '逆时针',
+        value: 'rotateZReverse',
+      },
+      {
+        title: '随机',
+        value: 'rotateCustom',
+      },
+    ],
   },
   {
     key: 'rotateTime',
@@ -64,7 +78,7 @@ export default ({
           width: '100%',
           opacity,
           animationDuration: rotateTime + 's',
-          animationName: rotate && (reverse ? 'rotateZReverse' : 'rotateZ'),
+          animationName: rotate ? reverse : '',
         }}
         className={classnames({ [styles.rotate]: rotate })}
       />
