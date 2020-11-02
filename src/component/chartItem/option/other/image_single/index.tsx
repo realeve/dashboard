@@ -67,7 +67,13 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {};
 
 export default ({
-  option: { imgname = '旋转gif', rotate = false, rotateTime = 20, reverse = true, opacity = 1 },
+  option: {
+    imgname = '旋转gif',
+    rotate = false,
+    rotateTime = 20,
+    reverse = 'rotateZ',
+    opacity = 1,
+  },
 }) => {
   let url = assets.pics[imgname]?.url;
   return (
@@ -78,7 +84,7 @@ export default ({
           width: '100%',
           opacity,
           animationDuration: rotateTime + 's',
-          animationName: rotate ? reverse : '',
+          animationName: rotate && reverse,
         }}
         className={classnames({ [styles.rotate]: rotate })}
       />
