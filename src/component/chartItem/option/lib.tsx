@@ -770,10 +770,10 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
         title: <div style={{ fontWeight: 'bold', fontSize: fontSize }}>Aa</div>,
         value: 'bold',
       },
-      {
-        title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
-        value: 'bolder',
-      },
+      // {
+      //   title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
+      //   value: 'bolder',
+      // },
     ],
   },
   {
@@ -781,6 +781,15 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     defaultValue: color,
     title: '颜色',
     type: 'purecolor',
+  },
+  {
+    key: 'letterSpacing',
+    defaultValue: 0,
+    title: '字间距',
+    step: 1,
+    type: 'range',
+    min: 0,
+    max: 100,
   },
 ];
 

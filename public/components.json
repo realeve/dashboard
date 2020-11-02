@@ -272,6 +272,18 @@
             "showTitle": false,
             "showBackground": false,
             "ajax": false
+          },
+          {
+            "name": "other.text_single",
+            "key": "text_single",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "文本",
+            "image": "/img/config/text.png",
+            "showBorder": false,
+            "showTitle": false,
+            "showBackground": false,
+            "ajax": false
           }
         ]
       }
