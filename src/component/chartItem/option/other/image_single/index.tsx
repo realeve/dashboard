@@ -22,25 +22,29 @@ export const config: IChartConfig[] = [
     key: 'rotate',
     type: 'switch',
     defaultValue: false,
-    title: '是否旋转',
+    title: '启用动画',
   },
   {
     key: 'reverse',
     type: 'radio',
     defaultValue: 'rotateZ',
-    title: '旋转方向',
+    title: '动画样式',
     option: [
       {
-        title: '顺时针',
+        title: '正向旋转',
         value: 'rotateZ',
       },
       {
-        title: '逆时针',
+        title: '逆向旋转',
         value: 'rotateZReverse',
       },
       {
-        title: '随机',
+        title: '随机旋转',
         value: 'rotateCustom',
+      },
+      {
+        title: '跳动',
+        value: 'heartBeat',
       },
     ],
   },
@@ -85,6 +89,7 @@ export default ({
           opacity,
           animationDuration: rotateTime + 's',
           animationName: rotate && reverse,
+          animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
         }}
         className={classnames({ [styles.rotate]: rotate })}
       />
