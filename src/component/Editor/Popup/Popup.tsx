@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { prefix } from '../utils/utils';
 import './Popup.less';
-import * as ReactDOM from 'react-dom'; 
+import * as ReactDOM from 'react-dom';
 export interface IPopup {
   container?: string;
   onClose: () => any;
+  style?: React.CSSProperties;
   children?: React.ReactNode;
 }
 
@@ -13,7 +14,7 @@ class Popup extends React.PureComponent<IPopup> {
   public render() {
     return (
       <div ref={this.overlayElement} className={prefix('overlay')} onClick={this.onClick}>
-        <div className={prefix('popup')}>
+        <div className={prefix('popup')} style={this.props.style}>
           <div className={prefix('close')} onClick={this.props.onClose} />
           {this.props.children}
         </div>
@@ -28,6 +29,6 @@ class Popup extends React.PureComponent<IPopup> {
   };
 }
 
-export default function({ container = 'body', ...props }: IPopup) {
+export default function ({ container = 'body', ...props }: IPopup) {
   return ReactDOM.createPortal(<Popup {...props} />, document.querySelector(container));
 }

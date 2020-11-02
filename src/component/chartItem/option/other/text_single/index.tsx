@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 // 此处导入你所需要的自定义组件
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-
 import * as lib from '@/component/chartItem/option/lib';
-import { textColor } from '@/component/chartItem/option';
 import styles from './index.less';
+
+import { connect } from 'dva';
+
+import Popup from '@/component/Editor/Popup/Popup';
 
 export let mock: IChartMock = {
   data: [[45.7]],
@@ -68,8 +70,9 @@ export const config: IChartConfig[] = [
 
 export const apiConfig: IApiConfig = {};
 
-export default ({
-  option: {
+const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
+  const [show, setShow] = useState(false);
+  let {
     fontSize = 25,
     fontColor = '#27e2e6',
     letterSpacing = 0,
@@ -80,9 +83,8 @@ export default ({
     textShadowOffsetX = 0,
     textShadowOffsetY = 0,
     content = '这里输入文字',
-    onChange,
-  },
-}) => {
+  } = componentConfig;
+
   // 此处像正常的react组件处理，返回对应的信息即可
   let textShadow =
     textShadowBlur == 0
@@ -90,20 +92,55 @@ export default ({
       : {
           textShadow: `${textShadowOffsetX}px ${textShadowOffsetY}px ${textShadowBlur}px ${textShadowColor}`,
         };
-  console.log(onChange);
+
+  const updateContent = (content = '') => {
+    dispatch({
+      type: 'common/updatePanelAttrib',
+      payload: {
+        idx: chartid,
+        attrib: { componentConfig: { ...componentConfig, content } },
+      },
+    });
+  };
+
   return (
-    <div
-      className={styles.text}
-      style={{
-        fontSize,
-        fontWeight,
-        color: fontColor,
-        opacity,
-        letterSpacing,
-        ...textShadow,
-      }}
-    >
-      {content}
-    </div>
+    <>
+      <div
+        className={styles.text}
+        style={{
+          fontSize,
+          fontWeight,
+          color: fontColor,
+          opacity,
+          letterSpacing,
+          ...textShadow,
+        }}
+        onDoubleClick={() => {
+          setShow(true);
+        }}
+      >
+        {content}
+      </div>
+      {show && (
+        <Popup
+          onClose={() => {
+            setShow(false);
+          }}
+          style={{ height: 225, width: 600 }}
+        >
+          <p style={{ color: '#fff' }}>编辑内容</p>
+          <textarea
+            value={content}
+            style={{ width: '100%', height: 'auto' }}
+            className="data_input"
+            rows={4}
+            onChange={(e) => {
+              updateContent(e.target.value);
+            }}
+          />
+        </Popup>
+      )}
+    </>
   );
 };
+export default connect()(Index);

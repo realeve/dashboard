@@ -18,10 +18,12 @@ const Item = ({
   title,
   style = {},
   onLoad,
+  chartid,
 }: {
   config: IPanelConfig;
   style?: React.CSSProperties;
   title?: string;
+  chartid?: string;
   onLoad?: (e: string) => void;
 }) => {
   if (!chartLib[config.key]) {
@@ -101,6 +103,7 @@ const Item = ({
           ...(config.componentConfig || {}),
           ...appendConfig,
         }}
+        chartid={chartid}
         style={style}
       />
     );
@@ -153,7 +156,7 @@ const Index = ({
         }}
         showBorder={config.showBorder}
       >
-        <Item config={config} title={title} onLoad={setTitle} />
+        <Item config={config} title={title} onLoad={setTitle} chartid={chartid} />
       </BorderItem>
     </ErrorBoundary>
   );
