@@ -25,6 +25,12 @@ export const config: IChartConfig[] = [
     title: '启用动画',
   },
   {
+    key: 'autoHeight',
+    type: 'switch',
+    defaultValue: false,
+    title: '自适应高度',
+  },
+  {
     key: 'reverse',
     type: 'radio',
     defaultValue: 'rotateZ',
@@ -77,19 +83,26 @@ export default ({
     rotateTime = 20,
     reverse = 'rotateZ',
     opacity = 1,
+    autoHeight = true,
   },
 }) => {
   let url = assets.pics[imgname]?.url;
+  let animation = !rotate
+    ? {}
+    : {
+        animationDuration: rotateTime + 's',
+        animationName: reverse,
+        animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
+      };
   return (
     <div className={styles.imgWrapper}>
       <img
         src={url}
         style={{
           width: '100%',
+          height: autoHeight ? 'auto' : '100%',
           opacity,
-          animationDuration: rotateTime + 's',
-          animationName: rotate && reverse,
-          animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
+          ...animation,
         }}
         className={classnames({ [styles.rotate]: rotate })}
       />

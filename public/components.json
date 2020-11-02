@@ -202,7 +202,7 @@
             "key": "percent_echarts",
             "engine": "other",
             "type": "regular_bar",
-            "title": "百分比环图",
+            "title": "百分比环图2",
             "image": "/img/icons/25_circle_percent.png"
           }
         ]
