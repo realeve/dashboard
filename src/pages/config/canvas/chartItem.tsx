@@ -32,10 +32,10 @@ const Item = ({
         组件渲染出错：
         <br />
         @/component/chartItem/option 中 未导出函数 {config.key}，请仔细检查
-        <br />
+        {/* <br />
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <img src="/img/no-data.svg" style={{ width: 200 }} />
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -143,7 +143,9 @@ const Index = ({
       }
     }
   }, [config?.api?.api_type]);
-
+  if (config.hide) {
+    return null;
+  }
   return (
     <ErrorBoundary>
       {config.showTitle && <div style={page.head}>{title}</div>}

@@ -164,7 +164,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               background={page.background}
               width={page.width}
               height={page.height}
-              lockedPanel={panel.filter((item) => item.lock).map((item) => item.id)}
+              lockedPanel={panel.filter((item) => item.lock || item.hide).map((item) => item.id)}
               onSelect={(panels) => {
                 dispatch({
                   type: 'common/setStore',

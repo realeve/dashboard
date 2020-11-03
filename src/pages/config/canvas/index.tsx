@@ -24,7 +24,7 @@ interface ICanvasProp {
 }
 
 const Index = ({ canvasSize, zoom, guides, panel, dispatch }: ICanvasProp) => {
-  const onResize = (idx: number) => e => {
+  const onResize = (idx: number) => (e) => {
     let prevItem = R.clone(panel);
     let prevStyle = prevItem[idx].style;
 
@@ -56,7 +56,7 @@ const Index = ({ canvasSize, zoom, guides, panel, dispatch }: ICanvasProp) => {
     <div
       className={styles['canvas-panel']}
       style={{ ...canvasSize, transform: `scale(${zoom}) translate(0px, 0px)` }}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
         setResizable(false);
       }}
