@@ -191,7 +191,7 @@ export default {
       yield put({
         type: 'setStore',
         payload: {
-          selectedPanel: [panelItem.id, ...panel],
+          selectedPanel: [panelItem.id],
         },
       });
     },

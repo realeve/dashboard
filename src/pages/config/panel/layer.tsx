@@ -412,6 +412,9 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                               ? [...selectedPanel, item.id]
                               : selectedPanel.filter((panelItem) => panelItem !== item.id);
                             // setPanelList(nextPanel);
+
+                            // 需处理分组的逻辑，存在互斥；
+
                             dispatch({
                               type: 'common/setStore',
                               payload: {

@@ -148,7 +148,7 @@
         }
       }
       &:hover {
-        background: var(--datav-item-hover-color);
+        background-color: var(--datav-item-hover-color);
       }
 
       // .extra {
@@ -176,8 +176,12 @@
     .selected {
       background: var(--datav-sub-main-color);
       color: #fff;
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: var(--datav-sub-main-color);
+        border: none;
+        box-shadow: none;
+        outline: none;
       }
     }
     .thumbnail {
@@ -249,7 +253,8 @@
         width: 100%;
         background-color: var(--datav-context-menu-line);
       }
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: var(--datav-context-menu-hover);
         color: var(--datav-main-color);
         border-left: 2px solid var(--datav-main-color);
