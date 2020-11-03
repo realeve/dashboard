@@ -5,7 +5,7 @@ import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
-import { ICommon } from '@/models/common';
+import { ICommon, IPanelConfig } from '@/models/common';
 
 // contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
@@ -48,6 +48,8 @@ export enum MENU_ACTIONS {
   COPY,
   REMOVE,
   FAVORITE,
+  GROUP,
+  UN_GROUP,
 }
 
 const MENU_LIST = [
@@ -73,6 +75,19 @@ const MENU_LIST = [
   },
   {
     icon: 'divider1',
+  },
+  {
+    title: '编组',
+    action: MENU_ACTIONS.GROUP,
+    icon: 'icon-group',
+  },
+  {
+    title: '取消编组',
+    action: MENU_ACTIONS.UN_GROUP,
+    icon: 'icon-ungroup',
+  },
+  {
+    icon: 'divider0',
   },
   {
     title: '锁定/解锁',
@@ -117,16 +132,20 @@ const MENU_TYPE = 'CONTEXT_MENU';
 const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<number[]>([]);
 
-  useEffect(() => {
+  const getSelectedIdx = (selectedPanel) => {
     let _selected = [];
     panel.forEach((item, idx) => {
       if (selectedPanel.includes(item.id)) {
         _selected.push(idx);
       }
     });
-    // console.log(_selected, selectedPanel);
+    return _selected;
+  };
+
+  useEffect(() => {
+    let _selected = getSelectedIdx(selectedPanel);
     setSelected(_selected);
   }, [selectedPanel.join('')]);
 
@@ -153,7 +172,6 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         panel: items,
       },
     });
-    console.log(items);
     setSelected([to]);
   };
 
@@ -173,11 +191,21 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     let idx = data.idx;
     handleAction(action, idx);
   };
-  const handleAction = (action, idx) => {
-    if (typeof idx === 'undefined') {
-      idx = selected;
+  const handleAction = (action, arr: number[]) => {
+    if (typeof arr === 'undefined') {
+      return;
+    } else if (typeof arr === 'number') {
+      contextMenuHandler(action, arr);
+      return;
     }
-    let item = R.nth(idx, panel);
+    arr.forEach((idx) => {
+      contextMenuHandler(action, idx);
+    });
+  };
+
+  const contextMenuHandler = (action, idx: number) => {
+    let item = R.nth<IPanelConfig>(idx, panel);
+    console.log(item, idx);
     switch (action) {
       case MENU_ACTIONS.TOP:
         idx > 0 && moveLayerItem(idx, 0);
@@ -225,6 +253,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
     }
   };
+
+  // const [panelList, setPanelList] = useState([]);
 
   return (
     <div
@@ -336,15 +366,50 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           [styles.selected]: selected.includes(idx),
                           [styles.dragging]: snapshot.isDragging,
                         })}
-                        onClick={() => {
+                        onClick={(e) => {
+                          const CTRL_CLICK = e.ctrlKey,
+                            SHIFT_CLICK = e.shiftKey;
+                          if (CTRL_CLICK) {
+                            let nextPanel = !selectedPanel.includes(item.id)
+                              ? [...selectedPanel, item.id]
+                              : selectedPanel.filter((panelItem) => panelItem !== item.id);
+                            // setPanelList(nextPanel);
+                            dispatch({
+                              type: 'common/setStore',
+                              payload: {
+                                selectedPanel: nextPanel,
+                              },
+                            });
+                            // let _selected = getSelectedIdx(nextPanel);
+                            // setSelected(_selected);
+                            return;
+                          }
+                          if (SHIFT_CLICK) {
+                            console.log('shift被按下');
+                            return;
+                          }
+
                           dispatch({
                             type: 'common/setStore',
                             payload: {
                               selectedPanel: [item.id],
                             },
                           });
-                          // setSelected([idx]);
                         }}
+                        // onKeyUp={(e) => {
+                        //   const CTRL_CLICK = e.key === 'Control',
+                        //     SHIFT_CLICK = e.key === 'Shift';
+                        //   if (CTRL_CLICK) {
+                        //     // dispatch({
+                        //     //   type: 'common/setStore',
+                        //     //   payload: {
+                        //     //     selectedPanel: panelList,
+                        //     //   },
+                        //     // });
+                        //     setPanelList([]);
+                        //   } else if (SHIFT_CLICK) {
+                        //   }
+                        // }}
                       >
                         <ContextMenuTrigger
                           id={MENU_TYPE}
@@ -413,12 +478,12 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         )}
       </ContextMenu>
       <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
-        {/* <i
+        <i
           className={classnames('datav-icon datav-font icon-group', {
-            enable: selected > -1,
+            enable: selected.length > 0,
           })}
           title="成组"
-        /> */}
+        />
         <i
           className={classnames('datav-icon datav-font icon-delete', {
             enable: selected.length > 0,

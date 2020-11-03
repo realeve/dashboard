@@ -1,7 +1,7 @@
 import React from 'react';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
-import { textColor } from '@/component/chartItem/option';
+// import { textColor } from '@/component/chartItem/option';
 import { getTheme } from '@antv/g2';
 import Charts from './chart';
 import * as R from 'ramda';
