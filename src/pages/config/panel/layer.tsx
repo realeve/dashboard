@@ -131,16 +131,20 @@ const MENU_TYPE = 'CONTEXT_MENU';
 
 const LayerItem = ({ isThumb, item }) => {
   // let type = lib.getType(item);
-
+  let IS_GROUP = item.key === 'group_rect';
+  // console.log(item);
   return (
     <>
-      {!isThumb ? (
+      {!isThumb || IS_GROUP ? (
         <i className={item.icon} />
       ) : (
         <img src={item.image} alt={item.title} className={styles.img} />
       )}
+      {IS_GROUP && (
+        <i className="datav-font icon-group layer-item-icon" style={{ marginLeft: 5 }} />
+      )}
       <div className={styles.text}>
-        <span>{item.componentConfig.imgname || item.title}</span>
+        <span>{item?.componentConfig?.imgname || item.title}</span>
       </div>
       <div
         className={classnames({
@@ -230,7 +234,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
 
   const contextMenuHandler = (action, idx: number) => {
     let item = R.nth<IPanelConfig>(idx, panel);
-    console.log(item, idx);
+    // console.log(item, idx);
     switch (action) {
       case MENU_ACTIONS.TOP:
         idx > 0 && moveLayerItem(idx, 0);
@@ -274,12 +278,20 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       case MENU_ACTIONS.FAVORITE:
         console.log('该功能待添加');
         break;
+
+      case MENU_ACTIONS.GROUP:
+        dispatch({
+          type: 'common/addGroupPanel',
+          payload: {
+            panel: selectedPanel,
+          },
+        });
+        // console.log(selectedPanel);
+        break;
       default:
         break;
     }
   };
-
-  // const [panelList, setPanelList] = useState([]);
 
   return (
     <div
@@ -390,6 +402,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           [styles.hided]: item.hide,
                           [styles.selected]: selected.includes(idx),
                           [styles.dragging]: snapshot.isDragging,
+                          [styles.group_item]: item.group,
                         })}
                         onClick={(e) => {
                           const CTRL_CLICK = e.ctrlKey,
@@ -458,7 +471,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         id={MENU_TYPE}
         onShow={(e) => {
           // 右键点击选中当前
-          setSelected([e.detail.data.idx]);
+          // 2020-11-03 由于有多选功能，该项取消
+          // setSelected([e.detail.data.idx]);
         }}
       >
         {MENU_LIST.map((item) =>
@@ -477,7 +491,10 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           className={classnames('datav-icon datav-font icon-group', {
             enable: selected.length > 0,
           })}
-          title="成组"
+          title="编组"
+          onClick={() => {
+            handleAction(MENU_ACTIONS.GROUP, selected);
+          }}
         />
         <i
           className={classnames('datav-icon datav-font icon-delete', {

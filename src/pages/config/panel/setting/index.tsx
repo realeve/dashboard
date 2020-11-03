@@ -6,11 +6,16 @@ import { connect } from 'dva';
 import { ICommon } from '@/models/common';
 import Config from './config';
 
-const getSelectedPanelConfig = (panel, selected) => panel.findIndex(item => selected == item.id);
+const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
 const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }) => {
-  const pageChart = selectedPanel.length == 1;
- 
+  let pageChart = selectedPanel.length == 1;
+
+  if (pageChart) {
+    let config = panel.find((item) => item.id == selectedPanel[0]);
+    pageChart = config.key !== 'group_rect';
+  }
+
   return (
     <div
       className={classnames(styles['config-panel-wp'], {

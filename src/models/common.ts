@@ -30,6 +30,17 @@ const copyArray = (idx, array) => {
   return [...arr.slice(0, idx), newItem, ...arr.slice(idx, arr.length)];
 };
 
+const getGroupRect = () => {
+  let id = lib.noncer();
+  return {
+    id,
+    icon: 'datav-font fold-toggle-btn icon-right',
+    key: 'group_rect',
+    title: '组',
+    engine: 'other',
+  };
+};
+
 const namespace = 'common';
 export interface IPanelStyle {
   width: number;
@@ -145,6 +156,43 @@ export default {
         },
         call,
         put,
+      });
+    },
+    *addGroupPanel(
+      { payload: { panel } }: { payload: { panel: string[] } },
+      { put, call, select },
+    ) {
+      // 只有一项时无需分组；
+      if (panel.length < 2) {
+        return;
+      }
+      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      let panelItem = getGroupRect();
+
+      let idx = R.findIndex<IPanelConfig>((item) => item.id === panel[0])(prevPanel);
+
+      let nextPanel = R.insert(idx - 1, panelItem, prevPanel);
+
+      // 设置panel中的id列表的父一级;
+      nextPanel = nextPanel.map((item) => {
+        if (panel.includes(item.id)) {
+          item.group = panelItem.id;
+        }
+        return item;
+      });
+
+      console.log(nextPanel);
+
+      yield updatePanel({
+        panel: nextPanel,
+        call,
+        put,
+      });
+      yield put({
+        type: 'setStore',
+        payload: {
+          selectedPanel: [panelItem.id, ...panel],
+        },
       });
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
