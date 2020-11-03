@@ -50,15 +50,26 @@ export const _commonData = {
 // 导出数据，随机时长
 export type MockFn = <T>(path: T, time?: number) => Promise<T>;
 export const mock: MockFn = (path, time = Math.random() * 1000) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(() => {
       resolve(path);
     }, time);
   });
 
-export const getType: (data: any) => string = data => R.type(data).toLowerCase();
+type TypeList =
+  | 'object'
+  | 'number'
+  | 'boolean'
+  | 'string'
+  | 'null'
+  | 'array'
+  | 'regexp'
+  | 'function'
+  | 'undefined'
+  | 'symbol';
+export const getType: (data: any) => TypeList = (data) => R.type(data).toLowerCase() as TypeList;
 
-export const loadUserInfo = user => {
+export const loadUserInfo = (user) => {
   if (user == null) {
     window.g_axios.token = refreshNoncer;
     saveToken();
@@ -97,7 +108,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError = error => {
+export const handleError = (error) => {
   let config = error.config || {};
   let str = config.params || config.data || {};
   let { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -161,7 +172,7 @@ export const handleData = ({ data }) => {
   return data;
 };
 
-export const handleUrl = option => {
+export const handleUrl = (option) => {
   if (option.url && option.url[0] === '.') {
     option.url = window.location.origin + option.url.slice(1);
   }
@@ -169,7 +180,7 @@ export const handleUrl = option => {
 };
 
 // 自动处理token更新，data 序列化等
-export let axios = option => {
+export let axios = (option) => {
   window.g_axios = window.g_axios || {
     host,
     token: '',
@@ -194,7 +205,7 @@ export let axios = option => {
       baseURL: host,
       timeout: 30 * 1000,
       transformRequest: [
-        function(data) {
+        function (data) {
           let dataType = getType(data);
           switch (dataType) {
             case 'object':

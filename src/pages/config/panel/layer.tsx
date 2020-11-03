@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon, IPanelConfig } from '@/models/common';
-
+import * as lib from '@/utils/lib';
 // contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
@@ -128,6 +128,31 @@ const MENU_LIST = [
 ];
 
 const MENU_TYPE = 'CONTEXT_MENU';
+
+const LayerItem = ({ isThumb, item }) => {
+  // let type = lib.getType(item);
+
+  return (
+    <>
+      {!isThumb ? (
+        <i className={item.icon} />
+      ) : (
+        <img src={item.image} alt={item.title} className={styles.img} />
+      )}
+      <div className={styles.text}>
+        <span>{item.componentConfig.imgname || item.title}</span>
+      </div>
+      <div
+        className={classnames({
+          [styles['layer-thumbail-item']]: item.lock || !item.show,
+        })}
+      >
+        {item.hide && <i className="lock-toggle-btn datav-font icon-hide" />}
+        {item.lock && <i className="lock-toggle-btn datav-font icon-lock" />}
+      </div>
+    </>
+  );
+};
 
 const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
@@ -396,20 +421,6 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                             },
                           });
                         }}
-                        // onKeyUp={(e) => {
-                        //   const CTRL_CLICK = e.key === 'Control',
-                        //     SHIFT_CLICK = e.key === 'Shift';
-                        //   if (CTRL_CLICK) {
-                        //     // dispatch({
-                        //     //   type: 'common/setStore',
-                        //     //   payload: {
-                        //     //     selectedPanel: panelList,
-                        //     //   },
-                        //     // });
-                        //     setPanelList([]);
-                        //   } else if (SHIFT_CLICK) {
-                        //   }
-                        // }}
                       >
                         <ContextMenuTrigger
                           id={MENU_TYPE}
@@ -417,23 +428,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           idx={idx}
                           collect={(props) => props}
                         >
-                          {!isThumb ? (
-                            <i className={item.icon} />
-                          ) : (
-                            <img src={item.image} alt={item.title} className={styles.img} />
-                          )}
-
-                          <div className={styles.text}>
-                            <span>{item.componentConfig.imgname || item.title}</span>
-                          </div>
-                          <div
-                            className={classnames({
-                              [styles['layer-thumbail-item']]: item.lock || !item.show,
-                            })}
-                          >
-                            {item.hide && <i className="lock-toggle-btn datav-font icon-hide" />}
-                            {item.lock && <i className="lock-toggle-btn datav-font icon-lock" />}
-                          </div>
+                          <LayerItem item={item} isThumb={isThumb} />
                         </ContextMenuTrigger>
                       </li>
                     )}
