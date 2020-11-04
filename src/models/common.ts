@@ -2,6 +2,7 @@ import { setStore } from '@/utils/lib';
 import * as db from '../services/db';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
+import { TQuickTool } from '@/component/Editor/types';
 
 const updatePanel = function* ({ panel, call, put }) {
   yield call(db.savePanel(), panel);
@@ -104,6 +105,7 @@ export interface ICommon {
   panel: IPanelConfig[];
   selectedPanel: string[];
   page: Partial<IPage>;
+  curTool: TQuickTool; // 当前的工具
 }
 const defaultState: ICommon = {
   panel: [],
@@ -114,6 +116,7 @@ const defaultState: ICommon = {
     background: '默认',
     ...panelGeneral,
   },
+  curTool: 'MoveTool',
 };
 
 export default {

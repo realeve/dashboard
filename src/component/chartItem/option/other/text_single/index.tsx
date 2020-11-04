@@ -1,12 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 // 此处导入你所需要的自定义组件
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import styles from './index.less';
 
 import { connect } from 'dva';
-
-import Popup from '@/component/Editor/Popup/Popup';
 
 import ContentEditable from 'react-contenteditable';
 
@@ -73,7 +71,6 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {};
 
 const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
-  const [show, setShow] = useState(false);
   let {
     fontSize = 25,
     fontColor = '#27e2e6',
@@ -111,7 +108,14 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
     text.current = e.target.value;
   };
   const handleBlur = () => {
-    console.log(text.current);
+    updateContent(text.current);
+    // 文本编辑结束 ，重新回到选择工具
+    dispatch({
+      type: 'common/setStore',
+      payload: {
+        curTool: 'MoveTool',
+      },
+    });
   };
 
   return (
@@ -131,45 +135,5 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
       suppressContentEditableWarning={true}
     />
   );
-
-  // return (
-  //   <>
-  //     <div
-  //       className={styles.text}
-  //       style={{
-  //         fontSize,
-  //         fontWeight,
-  //         color: fontColor,
-  //         opacity,
-  //         letterSpacing,
-  //         ...textShadow,
-  //       }}
-  //       onDoubleClick={() => {
-  //         setShow(true);
-  //       }}
-  //     >
-  //       {content}
-  //     </div>
-  //     {show && (
-  //       <Popup
-  //         onClose={() => {
-  //           setShow(false);
-  //         }}
-  //         style={{ height: 225, width: 600 }}
-  //       >
-  //         <p style={{ color: '#fff' }}>编辑内容</p>
-  //         <textarea
-  //           value={content}
-  //           style={{ width: '100%', height: 'auto' }}
-  //           className="data_input"
-  //           rows={4}
-  //           onChange={(e) => {
-  //             updateContent(e.target.value);
-  //           }}
-  //         />
-  //       </Popup>
-  //     )}
-  //   </>
-  // );
 };
 export default connect()(Index);

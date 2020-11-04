@@ -45,7 +45,7 @@ const initState = {
   filter: true,
 };
 
-const Index = ({ dispatch, panel, selectedPanel, page }) => {
+const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
 
@@ -110,8 +110,15 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
     );
   }, [selectedPanel.join(',')]);
 
-  // 当前的菜单
-  const [curTool, setCurTool] = useState<TQuickTool>('MoveTool');
+  // 更新当前的菜单
+  const setCurTool = (curTool: TQuickTool) => {
+    dispatch({
+      type: 'common/setStore',
+      payload: {
+        curTool,
+      },
+    });
+  };
 
   // 拖动的相对距离
   const [dragPercent, setDragPercent] = useState({ x: 0, y: 0 });
@@ -158,6 +165,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               zoom={zoom}
               onZoom={setZoom}
               domHash={hash}
+              selectMenu={setCurTool}
               curTool={curTool}
               setCurTool={setCurTool}
               onRemove={removePanel}
@@ -231,8 +239,4 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
     </div>
   );
 };
-export default connect(({ common }: { common: ICommon }) => ({
-  panel: common.panel,
-  selectedPanel: common.selectedPanel,
-  page: common.page,
-}))(Index);
+export default connect(({ common }: { common: ICommon }) => common)(Index);

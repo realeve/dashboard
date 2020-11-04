@@ -10,18 +10,18 @@ import Debugger from './utils/Debugger';
 import * as React from 'react';
 import { IGuideProps } from './utils/utils';
 
-export type TQuickTool = 'MoveTool' | 'hand';
+export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
 
 export interface ScenaEditorState {
   selectedTargets: Array<SVGElement | HTMLElement>;
   horizontalGuides: number[];
   verticalGuides: number[];
-  zoom: number; 
+  zoom: number;
   rectOffset: {
     x: number;
     y: number;
   };
-  guideVisible?: boolean; 
+  guideVisible?: boolean;
 }
 
 export interface TagAppendInfo {

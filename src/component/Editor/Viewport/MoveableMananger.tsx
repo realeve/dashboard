@@ -131,8 +131,7 @@ export default class MoveableManager extends React.PureComponent<{
         throttleResize={1}
         clippable={false}
         dragArea={selectedTargets.length > 1}
-        // checkInput={true}
-        // passDragArea={selectedMenu === 'Text'}
+        passDragArea={selectedMenu === 'Text'}
         checkInput={selectedMenu === 'Text'}
         throttleDragRotate={isShift ? 45 : 15}
         keepRatio={isShift}
@@ -177,12 +176,11 @@ export default class MoveableManager extends React.PureComponent<{
         onDragOrigin={moveableData.onDragOrigin}
         onRound={moveableData.onRound}
         onClick={(e) => {
-          console.log(e);
+          // 双击时编辑文字
           const target = e.inputTarget as any;
           if (e.isDouble && target.isContentEditable) {
             editor.selectMenu('Text');
             const el = getContentElement(target);
-            console.log(el);
             if (el) {
               el.focus();
             }
