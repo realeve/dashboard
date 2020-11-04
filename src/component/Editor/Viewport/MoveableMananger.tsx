@@ -133,7 +133,7 @@ export default class MoveableManager extends React.PureComponent<{
         dragArea={selectedTargets.length > 1}
         passDragArea={selectedMenu === 'Text'}
         checkInput={selectedMenu === 'Text'}
-        throttleDragRotate={isShift ? 45 : 15}
+        throttleDragRotate={isShift ? 45 : 0}
         keepRatio={isShift}
         rotatable={true}
         snappable={true}
