@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './layer.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
@@ -9,6 +9,8 @@ import { ICommon, IPanelConfig } from '@/models/common';
 // import * as lib from '@/utils/lib';
 // contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+
+import ContentEditable from 'react-contenteditable';
 
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
@@ -44,7 +46,6 @@ export enum MENU_ACTIONS {
   MOVE_NEXT,
   LOCK,
   HIDE,
-  RENAME,
   COPY,
   REMOVE,
   FAVORITE,
@@ -103,11 +104,6 @@ const MENU_LIST = [
     icon: 'divider2',
   },
   {
-    title: '重命名',
-    action: MENU_ACTIONS.RENAME,
-    icon: 'icon-edit',
-  },
-  {
     title: '复制',
     action: MENU_ACTIONS.COPY,
     icon: 'icon-copy',
@@ -132,6 +128,29 @@ const MENU_TYPE = 'CONTEXT_MENU';
 const LayerItem = ({ isThumb, item, dispatch }) => {
   // let type = lib.getType(item);
   let IS_GROUP = item.key === 'group_rect';
+
+  const text = useRef(item?.componentConfig?.imgname || item.title);
+
+  const handleChange = (e) => {
+    text.current = e.target.value;
+  };
+
+  const handleBlur = () => {
+    updateAttrib({
+      title: text.current,
+    });
+  };
+
+  const updateAttrib = (attrib) => {
+    dispatch({
+      type: 'common/updatePanelAttrib',
+      payload: {
+        idx: item.id,
+        attrib,
+      },
+    });
+  };
+
   // console.log(item);
   return (
     <>
@@ -142,13 +161,7 @@ const LayerItem = ({ isThumb, item, dispatch }) => {
           })}
           style={{ marginRight: 5 }}
           onClick={() => {
-            dispatch({
-              type: 'common/updatePanelAttrib',
-              payload: {
-                idx: item.id,
-                attrib: { fold: !item.fold },
-              },
-            });
+            updateAttrib({ fold: !item.fold });
           }}
         />
       )}
@@ -158,7 +171,12 @@ const LayerItem = ({ isThumb, item, dispatch }) => {
         <img src={item.image} alt={item.title} className={styles.img} />
       )}
       <div className={styles.text}>
-        <span>{item?.componentConfig?.imgname || item.title}</span>
+        <ContentEditable
+          tagName="span"
+          html={text.current}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
       </div>
       <div
         className={classnames({
@@ -280,9 +298,6 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       case MENU_ACTIONS.HIDE:
         let hide = item.hide || false;
         updatePanelItem(item.id, { hide: !hide });
-        break;
-      case MENU_ACTIONS.RENAME:
-        console.log('该功能待添加');
         break;
       case MENU_ACTIONS.COPY:
         dispatch({

@@ -124,6 +124,11 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          &[contenteditable]:focus {
+            outline: none;
+            padding: 0 10px 3px 0;
+            border-bottom: 1px solid #fff;
+          }
         }
       }
       .img {
