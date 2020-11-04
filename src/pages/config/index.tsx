@@ -72,7 +72,7 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
 
     // onMount,载入初始panel
     panel.map((item) => {
-      addPanel(editor, item);
+      item.key != 'group_rect' && addPanel(editor, item);
     });
 
     // setting selected panel.
@@ -165,11 +165,13 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               width={page.width}
               height={page.height}
               lockedPanel={panel.filter((item) => item.lock || item.hide).map((item) => item.id)}
-              onSelect={(panels) => {
+              onSelect={(selectedPanel) => {
+                // 此处处理多个组件共同选择的问题；
+
                 dispatch({
                   type: 'common/setStore',
                   payload: {
-                    selectedPanel: panels,
+                    selectedPanel,
                   },
                 });
               }}

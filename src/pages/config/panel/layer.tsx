@@ -407,33 +407,29 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                         onClick={(e) => {
                           const CTRL_CLICK = e.ctrlKey,
                             SHIFT_CLICK = e.shiftKey;
+                          let nextPanel = [item.id];
+
                           if (CTRL_CLICK) {
-                            let nextPanel = !selectedPanel.includes(item.id)
+                            nextPanel = !selectedPanel.includes(item.id)
                               ? [...selectedPanel, item.id]
                               : selectedPanel.filter((panelItem) => panelItem !== item.id);
-                            // setPanelList(nextPanel);
-
-                            // 需处理分组的逻辑，存在互斥；
-
-                            dispatch({
-                              type: 'common/setStore',
-                              payload: {
-                                selectedPanel: nextPanel,
-                              },
-                            });
-                            // let _selected = getSelectedIdx(nextPanel);
-                            // setSelected(_selected);
-                            return;
-                          }
-                          if (SHIFT_CLICK) {
+                          } else if (SHIFT_CLICK) {
                             console.log('shift被按下');
                             return;
+                          }
+
+                          // 需处理分组的逻辑，存在互斥；
+                          if (item.key == 'group_rect') {
+                            let childrenPanel = panel
+                              .filter((panelItem) => panelItem.group == item.id)
+                              .map((panelItem) => panelItem.id);
+                            nextPanel = R.uniq([...nextPanel, ...childrenPanel]);
                           }
 
                           dispatch({
                             type: 'common/setStore',
                             payload: {
-                              selectedPanel: [item.id],
+                              selectedPanel: nextPanel,
                             },
                           });
                         }}
