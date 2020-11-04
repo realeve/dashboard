@@ -34,10 +34,11 @@ const getGroupRect = () => {
   let id = lib.noncer();
   return {
     id,
-    icon: 'datav-font fold-toggle-btn icon-right',
+    icon: 'datav-font icon-group layer-item-icon',
     key: 'group_rect',
     title: '组',
     engine: 'other',
+    fold: true,
   };
 };
 
@@ -57,6 +58,9 @@ export interface IPanelConfig {
   style?: IPanelStyle;
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
+
+  group?: boolean; // 父组件
+  fold?: boolean; // 是否折叠
 
   showTitle?: boolean; // 显示标题
   showBorder?: boolean; // 显示边框

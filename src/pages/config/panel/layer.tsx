@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon, IPanelConfig } from '@/models/common';
-import * as lib from '@/utils/lib';
+// import * as lib from '@/utils/lib';
 // contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
@@ -129,19 +129,33 @@ const MENU_LIST = [
 
 const MENU_TYPE = 'CONTEXT_MENU';
 
-const LayerItem = ({ isThumb, item }) => {
+const LayerItem = ({ isThumb, item, dispatch }) => {
   // let type = lib.getType(item);
   let IS_GROUP = item.key === 'group_rect';
   // console.log(item);
   return (
     <>
+      {IS_GROUP && (
+        <i
+          className={classnames('datav-font fold-toggle-btn icon-right', {
+            'icon-fold': item.fold,
+          })}
+          style={{ marginRight: 5 }}
+          onClick={() => {
+            dispatch({
+              type: 'common/updatePanelAttrib',
+              payload: {
+                idx: item.id,
+                attrib: { fold: !item.fold },
+              },
+            });
+          }}
+        />
+      )}
       {!isThumb || IS_GROUP ? (
         <i className={item.icon} />
       ) : (
         <img src={item.image} alt={item.title} className={styles.img} />
-      )}
-      {IS_GROUP && (
-        <i className="datav-font icon-group layer-item-icon" style={{ marginLeft: 5 }} />
       )}
       <div className={styles.text}>
         <span>{item?.componentConfig?.imgname || item.title}</span>
@@ -172,6 +186,13 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     });
     return _selected;
   };
+
+  const [showPanel, setShowPanel] = useState([]);
+  useEffect(() => {
+    let folds = R.compose(R.pluck('id'), R.filter(R.propEq('fold', true)))(panel);
+    let nextPanel = R.reject((item) => folds.includes(item.group))(panel);
+    setShowPanel(nextPanel);
+  }, [panel]);
 
   useEffect(() => {
     let _selected = getSelectedIdx(selectedPanel);
@@ -389,7 +410,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                 // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
                 ref={provided.innerRef}
               >
-                {panel.map((item, idx) => (
+                {showPanel.map((item, idx) => (
                   <Draggable key={item.id} draggableId={item.id} index={idx}>
                     {(provided, snapshot) => (
                       <li
@@ -400,7 +421,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           [styles.thumbnail]: isThumb,
                           [styles.locked]: item.lock,
                           [styles.hided]: item.hide,
-                          [styles.selected]: selected.includes(idx),
+                          [styles.selected]: selectedPanel.includes(item.id),
                           [styles.dragging]: snapshot.isDragging,
                           [styles.group_item]: item.group,
                         })}
@@ -440,7 +461,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           idx={idx}
                           collect={(props) => props}
                         >
-                          <LayerItem item={item} isThumb={isThumb} />
+                          <LayerItem item={item} isThumb={isThumb} dispatch={dispatch} />
                         </ContextMenuTrigger>
                       </li>
                     )}
