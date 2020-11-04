@@ -168,10 +168,21 @@ const Index = ({ dispatch, panel, selectedPanel, page }) => {
               onSelect={(selectedPanel) => {
                 // 此处处理多个组件共同选择的问题；
 
+                let nextPanel = selectedPanel;
+                if (selectedPanel.length > 0) {
+                  panel.filter((item) => {
+                    if (selectedPanel.includes(item.id) && item.group) {
+                      let groupPanel = panel.filter((p) => p.group == item.group).map((p) => p.id);
+                      nextPanel = [...nextPanel, ...groupPanel];
+                    }
+                  });
+                  nextPanel = R.uniq(nextPanel);
+                }
+
                 dispatch({
                   type: 'common/setStore',
                   payload: {
-                    selectedPanel,
+                    selectedPanel: nextPanel,
                   },
                 });
               }}

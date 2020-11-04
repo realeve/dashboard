@@ -47,7 +47,7 @@ export interface IFetchProps<T> {
 const useFetch = <T extends {} | void>({
   param,
   initData,
-  callback = e => e,
+  callback = (e) => e,
   interval = 0,
   valid = (e?: any) => true,
   refreshOnWindowFocus = true,
@@ -90,7 +90,7 @@ const useFetch = <T extends {} | void>({
 
     // 加载时，data置为空
     // setData(null);
- 
+
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
       setData(null);
@@ -101,7 +101,7 @@ const useFetch = <T extends {} | void>({
 
     // 数据mock
     if (initData) {
-      mock<T>(initData).then(v => {
+      mock<T>(initData).then((v) => {
         // 如果为空就不再进行设置
         // if (v.length === 0) {
         //   return;
@@ -147,7 +147,7 @@ const useFetch = <T extends {} | void>({
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
     setInnerTrigger(+new Date());
-    console.log('即将刷新:', new Date());
+    // console.log('即将刷新:', new Date());
   };
 
   const limitRefresh = limit(reFetch, focusTimespan * 1000);
@@ -167,7 +167,7 @@ const useFetch = <T extends {} | void>({
     }
     setUnscribe(next);
     return () => {
-      unscribe.forEach(s => {
+      unscribe.forEach((s) => {
         s();
       });
     };
