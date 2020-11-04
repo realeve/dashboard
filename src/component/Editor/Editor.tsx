@@ -157,6 +157,8 @@ export interface IEditorProps {
 
   // 画面拖动
   onDrag?: (e: { x: number; y: number }) => void;
+
+  selectMenu?: React.Dispatch<React.SetStateAction<TQuickTool>>;
 }
 /**
  * @param width 画布宽度
@@ -171,6 +173,7 @@ export interface IEditorProps {
  * @param onRemove 移除元素
  * @param onChange 元素属性变更
  * @param onDrag 拖动画布
+ * @param selectMenu 选择菜单
  */
 class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>> {
   public state: ScenaEditorState = {
@@ -261,6 +264,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       guideVisible: !preState.guideVisible,
     }));
   };
+
+  public selectMenu(menu: TQuickTool) {
+    this.props.selectMenu(menu);
+  }
 
   public render() {
     const {
@@ -395,6 +402,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               horizontalGuidelines={horizontalSnapGuides}
               editor={this}
               onChange={this.props.onChange}
+              selectedMenu={this.props.curTool}
             />
           </Viewport>
         </InfiniteViewer>

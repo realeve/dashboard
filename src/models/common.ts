@@ -254,7 +254,7 @@ export default {
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
       let panel = yield select((state) => state[namespace].panel);
       let id = R.findIndex(R.propEq('id', idx))(panel);
-      let _item = R.nth(id)(panel);
+      let _item: {} = R.nth(id)(panel);
       _item = {
         ..._item,
         ...attrib,

@@ -9,8 +9,9 @@ import { TQuickTool } from '../types';
 import KeyboardIcon from './KeyboardIcon';
 import HandIcon from './HandIcon';
 import CenterIcon from './CenterIcon';
+import TextIcon from './TextIcon';
 
-const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, CenterIcon, KeyboardIcon];
+const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, CenterIcon, TextIcon, KeyboardIcon];
 export default class Menu extends React.PureComponent<{
   editor: Editor;
   onSelect?: (id: string) => any;
@@ -59,6 +60,6 @@ export default class Menu extends React.PureComponent<{
   };
   public getSelected(): typeof Icon | undefined {
     const selected = this.state.selected;
-    return MENUS.filter(m => m.id === selected)[0];
+    return MENUS.filter((m) => m.id === selected)[0];
   }
 }

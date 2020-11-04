@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Moveable, { MoveableManagerInterface } from 'react-moveable';
-import { connectEditorProps, getId } from '../utils/utils';
+import { getContentElement, connectEditorProps, getId } from '../utils/utils';
 import Editor from '../Editor';
 import { EditorInterface } from '../types';
 import { IObject } from '@daybrush/utils';
@@ -26,7 +26,7 @@ function restoreRender(id: string, state: IObject<any>, prevState: IObject<any>,
   const result = diff(Object.keys(prevState), Object.keys(state));
   const { removed, prevList } = result;
 
-  removed.forEach(index => {
+  removed.forEach((index) => {
     el.style.removeProperty(prevList[index]);
   });
   moveableData.render(el);
@@ -93,6 +93,7 @@ const DimensionViewable = {
 export default class MoveableManager extends React.PureComponent<{
   editor: Editor;
   selectedTargets: Array<HTMLElement | SVGElement>;
+  selectedMenu: string;
   verticalGuidelines: number[];
   horizontalGuidelines: number[];
   onChange?: (name: { id: string; next: {} }[]) => void;
@@ -102,13 +103,19 @@ export default class MoveableManager extends React.PureComponent<{
     return this.moveable.current!;
   }
   public render() {
-    const { editor, verticalGuidelines, horizontalGuidelines, selectedTargets } = this.props;
+    const {
+      editor,
+      verticalGuidelines,
+      horizontalGuidelines,
+      selectedTargets,
+      selectedMenu,
+    } = this.props;
 
     if (!selectedTargets.length) {
       return this.renderViewportMoveable();
     }
     const { moveableData, keyManager, eventBus, selecto, memory } = editor;
-    const elementGuidelines = [...moveableData.getTargets()].filter(el => {
+    const elementGuidelines = [...moveableData.getTargets()].filter((el) => {
       return selectedTargets.indexOf(el) === -1;
     });
     const isShift = keyManager.shiftKey;
@@ -124,7 +131,9 @@ export default class MoveableManager extends React.PureComponent<{
         throttleResize={1}
         clippable={false}
         dragArea={selectedTargets.length > 1}
-        checkInput={false}
+        // checkInput={true}
+        // passDragArea={selectedMenu === 'Text'}
+        checkInput={selectedMenu === 'Text'}
         throttleDragRotate={isShift ? 45 : 15}
         keepRatio={isShift}
         rotatable={true}
@@ -149,7 +158,7 @@ export default class MoveableManager extends React.PureComponent<{
         onResizeGroupStart={moveableData.onResizeGroupStart}
         onResizeGroup={moveableData.onResizeGroup}
         onRotateStart={moveableData.onRotateStart}
-        onRotate={e => {
+        onRotate={(e) => {
           moveableData.onRotate({
             ...e,
             beforeRotate:
@@ -167,17 +176,29 @@ export default class MoveableManager extends React.PureComponent<{
         onDragOriginStart={moveableData.onDragOriginStart}
         onDragOrigin={moveableData.onDragOrigin}
         onRound={moveableData.onRound}
-        onClickGroup={e => {
+        onClick={(e) => {
+          console.log(e);
+          const target = e.inputTarget as any;
+          if (e.isDouble && target.isContentEditable) {
+            editor.selectMenu('Text');
+            const el = getContentElement(target);
+            console.log(el);
+            if (el) {
+              el.focus();
+            }
+          }
+        }}
+        onClickGroup={(e) => {
           selecto.current!.clickTarget(e.inputEvent, e.inputTarget);
         }}
-        onRenderStart={e => {
+        onRenderStart={(e) => {
           e.datas.prevData = moveableData.getFrame(e.target).get();
         }}
-        onRender={e => {
+        onRender={(e) => {
           e.datas.isRender = true;
           eventBus.requestTrigger('render');
         }}
-        onRenderEnd={e => {
+        onRenderEnd={(e) => {
           eventBus.requestTrigger('render');
 
           if (!e.datas.isRender) {
@@ -196,14 +217,14 @@ export default class MoveableManager extends React.PureComponent<{
             prev: e.datas.prevData,
           });
         }}
-        onRenderGroupStart={e => {
-          e.datas.prevDatas = e.targets.map(target => moveableData.getFrame(target).get());
+        onRenderGroupStart={(e) => {
+          e.datas.prevDatas = e.targets.map((target) => moveableData.getFrame(target).get());
         }}
-        onRenderGroup={e => {
+        onRenderGroup={(e) => {
           eventBus.requestTrigger('renderGroup', e);
           e.datas.isRender = true;
         }}
-        onRenderGroupEnd={e => {
+        onRenderGroupEnd={(e) => {
           eventBus.requestTrigger('renderGroup', e);
 
           if (!e.datas.isRender) {
