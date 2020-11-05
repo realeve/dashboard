@@ -6,11 +6,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
-// import * as lib from '@/utils/lib';
-// contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-
 import ContentEditable from 'react-contenteditable';
+
+import { message } from 'antd';
 
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
@@ -336,6 +335,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       return;
     }
 
+    let index = showPanel[idx]?.id;
+
     // console.log(item, idx);
     switch (action) {
       case MENU_ACTIONS.TOP:
@@ -363,8 +364,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         updatePanelItem(item.id, { hide: !hide });
         break;
       case MENU_ACTIONS.COPY:
-        let id = showPanel[idx].id;
-        let prevIndex = R.findIndex(R.propEq('id', id))(panel);
+        let prevIndex = R.findIndex(R.propEq('id', index))(panel);
         dispatch({
           type: 'common/copyPanel',
           payload: {
@@ -374,10 +374,11 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
       case MENU_ACTIONS.REMOVE:
         // 全局状态在父组件中更新；
-        onRemove?.([showPanel[idx]?.id]);
+        onRemove?.([index]);
         break;
+      // TODO
       case MENU_ACTIONS.FAVORITE:
-        console.log('该功能待添加');
+        message.success('该功能待添加。id:' + index);
         break;
 
       case MENU_ACTIONS.GROUP:
@@ -387,7 +388,14 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
             panel: selectedPanel,
           },
         });
-        // console.log(selectedPanel);
+        break;
+      case MENU_ACTIONS.UN_GROUP:
+        dispatch({
+          type: 'common/unGroup',
+          payload: {
+            id: index,
+          },
+        });
         break;
       default:
         break;
@@ -547,6 +555,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                               ? [...selectedPanel, item.id]
                               : selectedPanel.filter((panelItem) => panelItem !== item.id);
                           } else if (SHIFT_CLICK) {
+                            // TODO shift 连续选择的场景
                             console.log('shift被按下');
                             return;
                           }

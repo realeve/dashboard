@@ -57,7 +57,7 @@ export interface IPanelConfig {
   type: string; //类型
   title: string; //标题
   image: string; // 缩略图
-  id?: string; // 自动生成的ID
+  id: string; // 自动生成的ID
   icon?: string; // 图标
   style?: IPanelStyle;
   lock?: boolean; //锁定
@@ -203,6 +203,25 @@ export default {
         type: 'setStore',
         payload: {
           selectedPanel: [panelItem.id],
+        },
+      });
+    },
+    *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
+      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      let unpackPanel = R.reject(R.propEq('id', id))(prevPanel);
+      unpackPanel = R.map<IPanelConfig>(({ group, ...item }) =>
+        group === id ? item : { group, ...item },
+      )(unpackPanel);
+      yield updatePanel({
+        panel: unpackPanel,
+        call,
+        put,
+      });
+
+      yield put({
+        type: 'setStore',
+        payload: {
+          selectedPanel: [],
         },
       });
     },
