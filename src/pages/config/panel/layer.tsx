@@ -233,7 +233,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
 
   const getSelectedIdx = (selectedPanel) => {
     let _selected = [];
-    panel.forEach((item, idx) => {
+    showPanel.forEach((item, idx) => {
       if (selectedPanel.includes(item.id)) {
         _selected.push(idx);
       }
@@ -251,7 +251,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   useEffect(() => {
     let _selected = getSelectedIdx(selectedPanel);
     setSelected(_selected);
-  }, [selectedPanel.join('')]);
+  }, [selectedPanel.join(''), showPanel.join(',')]);
 
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -312,7 +312,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     });
   };
 
-  const handleClick = (_, data) => {
+  const handleClick = (data) => {
     let action = data.action;
     let idx = data.idx;
     handleAction(action, idx);
@@ -330,14 +330,19 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   };
 
   const contextMenuHandler = (action, idx: number) => {
-    let item = R.nth<IPanelConfig>(idx, panel);
+    let item = R.nth<IPanelConfig>(idx, showPanel);
+
+    if (item.key === GROUP_COMPONENT_KEY && action === MENU_ACTIONS.GROUP) {
+      return;
+    }
+
     // console.log(item, idx);
     switch (action) {
       case MENU_ACTIONS.TOP:
         idx > 0 && moveLayerItem(idx, 0);
         break;
       case MENU_ACTIONS.BOTTOM:
-        idx >= 0 && idx < panel.length - 1 && moveLayerItem(idx, panel.length - 1);
+        idx >= 0 && idx < showPanel.length - 1 && moveLayerItem(idx, showPanel.length - 1);
         break;
       case MENU_ACTIONS.MOVE_PREV:
         if (idx > 0) {
@@ -345,7 +350,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         }
         break;
       case MENU_ACTIONS.MOVE_NEXT:
-        if (idx >= 0 && idx < panel.length - 1) {
+        if (idx >= 0 && idx < showPanel.length - 1) {
           moveLayerItem(idx, idx + 1);
         }
         break;
@@ -358,16 +363,18 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         updatePanelItem(item.id, { hide: !hide });
         break;
       case MENU_ACTIONS.COPY:
+        let id = showPanel[idx].id;
+        let prevIndex = R.findIndex(R.propEq('id', id))(panel);
         dispatch({
           type: 'common/copyPanel',
           payload: {
-            idx,
+            idx: prevIndex,
           },
         });
         break;
       case MENU_ACTIONS.REMOVE:
         // 全局状态在父组件中更新；
-        onRemove?.([panel[idx]?.id]);
+        onRemove?.([showPanel[idx]?.id]);
         break;
       case MENU_ACTIONS.FAVORITE:
         console.log('该功能待添加');
@@ -386,6 +393,38 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
     }
   };
+
+  const getDisabled = (item) => {
+    let choosedItem: IPanelConfig;
+    switch (item.action) {
+      case MENU_ACTIONS.GROUP:
+        return selected.length <= 1;
+      case MENU_ACTIONS.UN_GROUP:
+        // 当前选择项
+        if (selected.length !== 1) {
+          return true;
+        }
+        choosedItem = showPanel[selected[0]];
+
+        return choosedItem.key !== GROUP_COMPONENT_KEY;
+      case MENU_ACTIONS.TOP:
+      case MENU_ACTIONS.MOVE_PREV:
+        if (selected.length == 0) {
+          return true;
+        }
+        return selected[0] == 0;
+
+      case MENU_ACTIONS.BOTTOM:
+      case MENU_ACTIONS.MOVE_NEXT:
+        if (selected.length == 0) {
+          return true;
+        }
+        return R.last(selected) == showPanel.length - 1;
+    }
+    return false;
+  };
+
+  // console.log(selectedPanel, selected, showPanel);
 
   return (
     <div
@@ -570,15 +609,28 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         id={MENU_TYPE}
         onShow={(e) => {
           // 右键点击选中当前
-          // 2020-11-03 由于有多选功能，该项取消
-          // setSelected([e.detail.data.idx]);
+          let id = e.detail.data.idx;
+          setSelected([id]);
+          dispatch({
+            type: 'common/setStore',
+            payload: {
+              selectedPanel: [showPanel[id].id],
+            },
+          });
         }}
       >
         {MENU_LIST.map((item) =>
           item.icon.includes('divider') ? (
             <div className="react-contextmenu-item--divider" key={item.icon} />
           ) : (
-            <MenuItem key={item.icon} onClick={handleClick} data={{ action: item.action }}>
+            <MenuItem
+              className={classnames({ disabled: getDisabled(item) })}
+              key={item.icon}
+              onClick={(_, data) => {
+                handleClick(data);
+              }}
+              data={{ action: item.action }}
+            >
               <i className={`datav-icon datav-font ${item.icon}`} />
               {item.title}
             </MenuItem>
@@ -588,11 +640,11 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
         <i
           className={classnames('datav-icon datav-font icon-group', {
-            enable: selected.length > 0,
+            enable: selected.length > 1,
           })}
           title="编组"
           onClick={() => {
-            handleAction(MENU_ACTIONS.GROUP, selected);
+            selected.length > 1 && handleAction(MENU_ACTIONS.GROUP, selected);
           }}
         />
         <i
@@ -601,7 +653,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           })}
           title="删除"
           onClick={() => {
-            handleAction(MENU_ACTIONS.REMOVE, selected);
+            selected.length > 0 && handleAction(MENU_ACTIONS.REMOVE, selected);
           }}
         />
         <i
@@ -610,7 +662,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           })}
           title="锁定"
           onClick={() => {
-            handleAction(MENU_ACTIONS.LOCK, selected);
+            selected.length > 0 && handleAction(MENU_ACTIONS.LOCK, selected);
           }}
         />
         <i
@@ -619,7 +671,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           })}
           title="隐藏"
           onClick={() => {
-            handleAction(MENU_ACTIONS.HIDE, selected);
+            selected.length > 0 && handleAction(MENU_ACTIONS.HIDE, selected);
           }}
         />
       </div>
