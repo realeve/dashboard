@@ -371,7 +371,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         // 全局状态在父组件中更新；
         onRemove?.([index]);
         break;
-      // TODO
+
+      // TODO 组件收藏功能
       case MENU_ACTIONS.FAVORITE:
         message.success('该功能待添加。id:' + index);
         break;
@@ -555,9 +556,21 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                               ? [...selectedPanel, item.id]
                               : selectedPanel.filter((panelItem) => panelItem !== item.id);
                           } else if (SHIFT_CLICK) {
-                            // TODO shift 连续选择的场景
-                            console.log('shift被按下');
-                            return;
+                            // DONE shift 连续选择的场景
+                            console.log('shift被按下', selectedPanel);
+                            if (selectedPanel.length === 0) {
+                              message.error('请先选中一个组件');
+                              return;
+                            }
+                            let id = R.findIndex(R.propEq('id', selectedPanel[0]))(showPanel);
+                            let nextId = R.findIndex(R.propEq('id', item.id))(showPanel);
+                            if (id === nextId) {
+                              return;
+                            }
+
+                            let idList = [id, nextId].sort();
+                            let idx = R.range(idList[0], idList[1] + 1);
+                            nextPanel = R.compose(R.pluck('id'), R.values, R.pick(idx))(showPanel);
                           }
 
                           // 需处理分组的逻辑，存在互斥；

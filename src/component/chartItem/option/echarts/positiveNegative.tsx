@@ -5,7 +5,7 @@ import jStat from 'jstat';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 /**
- * // TODO 自定义组件文档说明 更新自2020-08-31
+ * // 自定义组件文档说明 更新自2020-08-31
  *
  * 组件按以下规则的约定来完成：
  * 一、默认导出部分
@@ -62,8 +62,8 @@ const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   let series = [];
   legendArr.map((name, idx) => {
     let arr = [];
-    xArr.forEach(xItem => {
-      let item = data.find(item => item[legend] == name && item[x] == xItem);
+    xArr.forEach((xItem) => {
+      let item = data.find((item) => item[legend] == name && item[x] == xItem);
       arr.push(item ? Number(item[y]) * (idx === 0 ? -1 : 1) : '-');
     });
     series.push({
@@ -228,7 +228,7 @@ export default ({
         label: {
           show: true,
           position: 'left',
-          formatter: e => Math.abs(e.value),
+          formatter: (e) => Math.abs(e.value),
           color: '#ff3e8b',
         },
         smooth,
