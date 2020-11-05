@@ -325,11 +325,20 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   };
 
   // 更新第idx个数据的属性
-  const updatePanelItem = (idx: string, attrib: {}) => {
+  const updatePanelItem = (idx: string, attrib: {}, isGroup) => {
+    // 处理整组数据的更新;
+    let idxList = [idx];
+    if (isGroup) {
+      idxList = R.compose(
+        R.pluck('id'),
+        R.filter((item) => [item.id, item.group].includes(idx)),
+      )(panel);
+    }
+
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
-        idx,
+        idx: idxList,
         attrib,
       },
     });
@@ -376,11 +385,11 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
       case MENU_ACTIONS.LOCK:
         let lock = item.lock || false;
-        updatePanelItem(item.id, { lock: !lock });
+        updatePanelItem(item.id, { lock: !lock }, item.key === GROUP_COMPONENT_KEY);
         break;
       case MENU_ACTIONS.HIDE:
         let hide = item.hide || false;
-        updatePanelItem(item.id, { hide: !hide });
+        updatePanelItem(item.id, { hide: !hide }, item.key === GROUP_COMPONENT_KEY);
         break;
       case MENU_ACTIONS.COPY:
         let prevIndex = R.findIndex(R.propEq('id', index))(panel);

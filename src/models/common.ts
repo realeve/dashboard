@@ -295,13 +295,25 @@ export default {
     // 更新第I个面板的属性
     *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
       let panel = yield select((state) => state[namespace].panel);
-      let id = R.findIndex(R.propEq('id', idx))(panel);
-      let _item: {} = R.nth(id)(panel);
-      _item = {
-        ..._item,
-        ...attrib,
-      };
-      let _panel = R.update(id, _item, panel);
+      let _panel = R.clone(panel);
+
+      if (typeof idx === 'string') {
+        let id = R.findIndex(R.propEq('id', idx))(panel);
+        let _item: {} = R.nth(id)(panel);
+        _item = {
+          ..._item,
+          ...attrib,
+        };
+        _panel = R.update(id, _item, panel);
+      } else {
+        // 更新一组id的属性
+        _panel = _panel.map((item) => {
+          if (idx.includes(item.id)) {
+            return { ...item, ...attrib };
+          }
+          return item;
+        });
+      }
 
       yield updatePanel({
         panel: _panel,
