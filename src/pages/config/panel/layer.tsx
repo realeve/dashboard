@@ -5,7 +5,7 @@ import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
-import { ICommon, IPanelConfig } from '@/models/common';
+import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
 // import * as lib from '@/utils/lib';
 // contextmenu 右键菜单
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
@@ -127,7 +127,9 @@ const MENU_TYPE = 'CONTEXT_MENU';
 
 const LayerItem = ({ isThumb, item, dispatch }) => {
   // let type = lib.getType(item);
-  let IS_GROUP = item.key === 'group_rect';
+  let IS_GROUP = item.key === GROUP_COMPONENT_KEY;
+
+  const [disableEdit, setDisableEdit] = useState(true);
 
   const text = useRef(item?.componentConfig?.imgname || item.title);
 
@@ -139,6 +141,7 @@ const LayerItem = ({ isThumb, item, dispatch }) => {
     updateAttrib({
       title: text.current,
     });
+    setDisableEdit(true);
   };
 
   const updateAttrib = (attrib) => {
@@ -151,7 +154,19 @@ const LayerItem = ({ isThumb, item, dispatch }) => {
     });
   };
 
-  // console.log(item);
+  const ref = useRef(null);
+  useEffect(() => {
+    // 允许编辑时获取焦点
+    if (disableEdit) {
+      return;
+    }
+
+    ref.current.focus();
+    let range = window.getSelection(); //创建range
+    range.selectAllChildren(ref.current); //range 选择obj下所有子内容
+    range.collapseToEnd(); //光标移至最后
+  }, [disableEdit]);
+
   return (
     <>
       {IS_GROUP && (
@@ -170,12 +185,19 @@ const LayerItem = ({ isThumb, item, dispatch }) => {
       ) : (
         <img src={item.image} alt={item.title} className={styles.img} />
       )}
-      <div className={styles.text}>
+      <div
+        className={styles.text}
+        onDoubleClick={() => {
+          setDisableEdit(false);
+        }}
+      >
         <ContentEditable
+          innerRef={ref}
           tagName="span"
           html={text.current}
           onBlur={handleBlur}
           onChange={handleChange}
+          disabled={disableEdit}
         />
       </div>
       <div
@@ -233,11 +255,28 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
    * @param to 结束索引
    */
   const moveLayerItem = (from: number, to: number) => {
-    const items = reorder(panel, from, to);
+    const items: { key: string; id: string; group: string }[] = reorder(panel, from, to);
+
+    // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
+    let groupPanels = R.compose(
+      R.pluck('id'),
+      R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
+    )(items);
+    let _panel = R.reject((item) => groupPanels.includes(item.group))(items);
+    let _nextPanel = [];
+    _panel.forEach((item: { key: string; id: string }) => {
+      if (item.key === GROUP_COMPONENT_KEY) {
+        let childrenPanel = R.filter(R.propEq('group', item.id))(items);
+        _nextPanel = [..._nextPanel, item, ...childrenPanel];
+      } else {
+        _nextPanel.push(item);
+      }
+    });
+
     dispatch({
       type: 'common/updatePanel',
       payload: {
-        panel: items,
+        panel: _nextPanel,
       },
     });
     setSelected([to]);
@@ -455,7 +494,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                           }
 
                           // 需处理分组的逻辑，存在互斥；
-                          if (item.key == 'group_rect') {
+                          if (item.key == GROUP_COMPONENT_KEY) {
                             let childrenPanel = panel
                               .filter((panelItem) => panelItem.group == item.id)
                               .map((panelItem) => panelItem.id);

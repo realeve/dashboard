@@ -31,12 +31,15 @@ const copyArray = (idx, array) => {
   return [...arr.slice(0, idx), newItem, ...arr.slice(idx, arr.length)];
 };
 
+// 分组组件的key
+export const GROUP_COMPONENT_KEY = 'group_rect';
+
 const getGroupRect = () => {
   let id = lib.noncer();
   return {
     id,
     icon: 'datav-font icon-group layer-item-icon',
-    key: 'group_rect',
+    key: GROUP_COMPONENT_KEY,
     title: '组',
     engine: 'other',
     fold: true,
@@ -195,6 +198,7 @@ export default {
         call,
         put,
       });
+
       yield put({
         type: 'setStore',
         payload: {

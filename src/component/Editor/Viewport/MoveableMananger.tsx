@@ -181,9 +181,7 @@ export default class MoveableManager extends React.PureComponent<{
           if (e.isDouble && target.isContentEditable) {
             editor.selectMenu('Text');
             const el = getContentElement(target);
-            if (el) {
-              el.focus();
-            }
+            el?.focus();
           }
         }}
         onClickGroup={(e) => {

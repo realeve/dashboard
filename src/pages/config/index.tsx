@@ -17,7 +17,7 @@ import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Edi
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
-import { ICommon } from '@/models/common';
+import { ICommon, GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
 
 export interface IPanelItem extends IChartConfig {
@@ -72,7 +72,7 @@ const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
 
     // onMount,载入初始panel
     panel.map((item) => {
-      item.key != 'group_rect' && addPanel(editor, item);
+      item.key != GROUP_COMPONENT_KEY && addPanel(editor, item);
     });
 
     // setting selected panel.

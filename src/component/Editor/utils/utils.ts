@@ -15,10 +15,10 @@ export function prefix(...classNames: string[]) {
   return prefixNames(PREFIX, ...classNames);
 }
 export function getContentElement(el: HTMLElement): HTMLElement | null {
-  if (el.contentEditable === 'inherit') {
+  if (el?.contentEditable === 'inherit') {
     return getContentElement(el.parentElement!);
   }
-  if (el.contentEditable === 'true') {
+  if (el?.contentEditable === 'true') {
     return el;
   }
   return null;
@@ -27,13 +27,13 @@ export function getContentElement(el: HTMLElement): HTMLElement | null {
 export function connectEditorProps(component: any) {
   const prototype = component.prototype;
   Object.defineProperty(prototype, 'editor', {
-    get: function() {
+    get: function () {
       return this.props.editor;
     },
   });
-  EDITOR_PROPERTIES.forEach(name => {
+  EDITOR_PROPERTIES.forEach((name) => {
     Object.defineProperty(prototype, name, {
-      get: function() {
+      get: function () {
         return this.props.editor[name];
       },
     });
@@ -47,7 +47,7 @@ export function getId(el: HTMLElement | SVGElement) {
   return el.getAttribute(DATA_SCENA_ELEMENT_ID)!;
 }
 export function getIds(els: Array<HTMLElement | SVGElement>): string[] {
-  return els.map(el => getId(el));
+  return els.map((el) => getId(el));
 }
 
 export function checkInput(target: HTMLElement | SVGElement) {
@@ -57,9 +57,9 @@ export function checkInput(target: HTMLElement | SVGElement) {
 }
 export function checkImageLoaded(el: HTMLElement | SVGElement): Promise<any> {
   if (el.tagName.toLowerCase() !== 'img') {
-    return Promise.all([].slice.call(el.querySelectorAll('img')).map(el => checkImageLoaded(el)));
+    return Promise.all([].slice.call(el.querySelectorAll('img')).map((el) => checkImageLoaded(el)));
   }
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if ((el as HTMLImageElement).complete) {
       resolve();
     } else {
@@ -125,18 +125,15 @@ export function isNumber(value: any): value is number {
   return typeof value === 'number';
 }
 
-export const generateId: () => string = () =>
-  Math.random()
-    .toString(16)
-    .slice(7);
+export const generateId: () => string = () => Math.random().toString(16).slice(7);
 
 const key = 'datav_guide';
 export const guideDb = {
-  save: e => {
-    let res = { h: e.h.filter(item => item > -100), v: e.v.filter(item => item > -100) };
+  save: (e) => {
+    let res = { h: e.h.filter((item) => item > -100), v: e.v.filter((item) => item > -100) };
     window.localStorage.setItem(key, JSON.stringify(res));
   },
-  load: canvasSize =>
+  load: (canvasSize) =>
     JSON.parse(
       window.localStorage.getItem(key) ||
         `{v:[${canvasSize.width / 2 + 44}],h:[${canvasSize.height / 2 + 44}]}`,

@@ -3,7 +3,7 @@ import styles from './index.less';
 import classnames from 'classnames';
 import Page from './page';
 import { connect } from 'dva';
-import { ICommon } from '@/models/common';
+import { ICommon, GROUP_COMPONENT_KEY } from '@/models/common';
 import Config from './config';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
@@ -13,7 +13,7 @@ const Index = ({ setHide, hide, selectedPanel, panel, onChange, page, dispatch }
 
   if (pageChart) {
     let config = panel.find((item) => item.id == selectedPanel[0]);
-    pageChart = config.key !== 'group_rect';
+    pageChart = config.key !== GROUP_COMPONENT_KEY;
   }
 
   return (
