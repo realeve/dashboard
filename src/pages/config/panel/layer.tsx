@@ -274,16 +274,15 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
    */
   const moveLayerItem = (from: number, to: number) => {
     const items: { key: string; id: string; group: string }[] = reorder(showPanel, from, to);
-
     // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
     let groupPanels = R.compose(
       R.pluck('id'),
       R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
     )(items);
 
-    let isFold = false,
-      groupId = null,
-      needUpdate = items[to].id;
+    let groupId = null,
+      needUpdate = items[to].id,
+      groupItem = items[to].group;
     // 处理将图层拖入分组的场景；
     if (to > 1) {
       let prevItem = items[to - 1];
@@ -302,18 +301,15 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         item.group = groupId;
       }
       if (item.key === GROUP_COMPONENT_KEY) {
-        let childrenPanel = R.filter(R.propEq('group', item.id))(panel) as {}[];
+        // 处理组内移动
+        let childrenPanel = R.filter(R.propEq('group', item.id))(
+          groupItem == item.id ? items : panel,
+        ) as {}[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
       } else {
         _nextPanel.push(item);
       }
     });
-
-    // 如果被合并了，目标要变更
-    // if (isFold) {
-    //   let _showedPanel = getShowedPanel(_nextPanel);
-    //   to = R.findIndex(R.propEq('id', groupId))(_showedPanel);
-    // }
 
     dispatch({
       type: 'common/updatePanel',
