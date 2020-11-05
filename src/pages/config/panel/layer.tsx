@@ -331,13 +331,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   const contextMenuHandler = (action, idx: number) => {
     let item = R.nth<IPanelConfig>(idx, showPanel);
 
-    if (item.key === GROUP_COMPONENT_KEY && action === MENU_ACTIONS.GROUP) {
-      return;
-    }
-
     let index = showPanel[idx]?.id;
 
-    // console.log(item, idx);
     switch (action) {
       case MENU_ACTIONS.TOP:
         idx > 0 && moveLayerItem(idx, 0);
@@ -382,6 +377,11 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         break;
 
       case MENU_ACTIONS.GROUP:
+        // 暂不允许多重编组
+        if (item.key === GROUP_COMPONENT_KEY) {
+          return;
+        }
+
         dispatch({
           type: 'common/addGroupPanel',
           payload: {
@@ -619,6 +619,12 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         onShow={(e) => {
           // 右键点击选中当前
           let id = e.detail.data.idx;
+
+          // 当选中多个时或在当前选中项点击右键，不执行后续操作；
+          if (selected.length > 1 || selected.join(',') == id) {
+            return;
+          }
+
           setSelected([id]);
           dispatch({
             type: 'common/setStore',

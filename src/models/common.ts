@@ -172,6 +172,7 @@ export default {
       { payload: { panel } }: { payload: { panel: string[] } },
       { put, call, select },
     ) {
+      console.log(panel);
       // 只有一项时无需分组；
       if (panel.length < 2) {
         return;
@@ -182,6 +183,8 @@ export default {
       let idx = R.findIndex<IPanelConfig>((item) => item.id === panel[0])(prevPanel);
 
       let nextPanel = R.insert(idx - 1, panelItem, prevPanel);
+
+      console.log(nextPanel);
 
       // 设置panel中的id列表的父一级;
       nextPanel = nextPanel.map((item) => {
