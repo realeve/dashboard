@@ -206,10 +206,28 @@ export default {
     },
     *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
       let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      let unpackPanel = R.reject(R.propEq('id', id))(prevPanel);
+      let item = R.find(R.propEq('id', id))(prevPanel);
+      const isGroupComponent = item.key === GROUP_COMPONENT_KEY;
+
+      // 当前的groupId,测试是否有空组
+      let groupId = item.group;
+
+      let unpackPanel = isGroupComponent ? R.reject(R.propEq('id', id))(prevPanel) : prevPanel;
+
+      // 支持将组内的数据清除
       unpackPanel = R.map<IPanelConfig>(({ group, ...item }) =>
-        group === id ? item : { group, ...item },
+        group === id || (!isGroupComponent && item.id === id) ? item : { group, ...item },
       )(unpackPanel);
+
+      // 判断从组内item取消时，是否有空组;
+      if (!isGroupComponent) {
+        let unpackItem = R.find(R.propEq('group', groupId))(unpackPanel);
+        if (!unpackItem) {
+          // 如果存在空组,删除group;
+          unpackPanel = R.reject(R.propEq('id', groupId))(unpackPanel);
+        }
+      }
+
       yield updatePanel({
         panel: unpackPanel,
         call,

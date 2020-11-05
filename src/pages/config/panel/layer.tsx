@@ -225,6 +225,11 @@ const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction }) => {
   );
 };
 
+const getShowedPanel = (panel) => {
+  let folds = R.compose(R.pluck('id'), R.filter(R.propEq('fold', true)))(panel);
+  return R.reject((item) => folds.includes(item.group))(panel);
+};
+
 const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...props }) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
@@ -241,9 +246,9 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
   };
 
   const [showPanel, setShowPanel] = useState([]);
+
   useEffect(() => {
-    let folds = R.compose(R.pluck('id'), R.filter(R.propEq('fold', true)))(panel);
-    let nextPanel = R.reject((item) => folds.includes(item.group))(panel);
+    let nextPanel = getShowedPanel(panel);
     setShowPanel(nextPanel);
   }, [panel]);
 
@@ -276,6 +281,16 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
     )(items);
 
+    let isFold = false,
+      groupId = null,
+      needUpdate = items[to].id;
+    // 处理将图层拖入分组的场景；
+    if (to > 1) {
+      let prevItem = items[to - 1];
+      // 更新groupId
+      groupId = prevItem.key === GROUP_COMPONENT_KEY ? prevItem.id : prevItem.group || null;
+    }
+
     // 不包含子元素的列表
     let _panel = R.reject((item) => groupPanels.includes(item.group))(items);
 
@@ -283,6 +298,9 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     let _nextPanel: {}[] = [];
 
     _panel.forEach((item: { key: string; id: string }) => {
+      if (needUpdate == item.id && groupId) {
+        item.group = groupId;
+      }
       if (item.key === GROUP_COMPONENT_KEY) {
         let childrenPanel = R.filter(R.propEq('group', item.id))(panel) as {}[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
@@ -290,6 +308,12 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
         _nextPanel.push(item);
       }
     });
+
+    // 如果被合并了，目标要变更
+    // if (isFold) {
+    //   let _showedPanel = getShowedPanel(_nextPanel);
+    //   to = R.findIndex(R.propEq('id', groupId))(_showedPanel);
+    // }
 
     dispatch({
       type: 'common/updatePanel',
@@ -414,8 +438,10 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
           return true;
         }
         choosedItem = showPanel[selected[0]];
-
-        return choosedItem.key !== GROUP_COMPONENT_KEY;
+        if (choosedItem.key == GROUP_COMPONENT_KEY) {
+          return false;
+        }
+        return typeof choosedItem.group !== 'string';
       case MENU_ACTIONS.TOP:
       case MENU_ACTIONS.MOVE_PREV:
         if (selected.length == 0) {
