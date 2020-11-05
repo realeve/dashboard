@@ -168,18 +168,23 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
    * @param to 结束索引
    */
   const moveLayerItem = (from: number, to: number) => {
-    const items: { key: string; id: string; group: string }[] = reorder(panel, from, to);
+    const items: { key: string; id: string; group: string }[] = reorder(showPanel, from, to);
 
     // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
     let groupPanels = R.compose(
       R.pluck('id'),
       R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
     )(items);
+
+    // 不包含子元素的列表
     let _panel = R.reject((item) => groupPanels.includes(item.group))(items);
-    let _nextPanel = [];
+
+    // 最终结果
+    let _nextPanel: {}[] = [];
+
     _panel.forEach((item: { key: string; id: string }) => {
       if (item.key === GROUP_COMPONENT_KEY) {
-        let childrenPanel = R.filter(R.propEq('group', item.id))(items);
+        let childrenPanel = R.filter(R.propEq('group', item.id))(panel) as {}[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
       } else {
         _nextPanel.push(item);
