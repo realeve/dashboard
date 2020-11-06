@@ -27,8 +27,23 @@ const updatePage = function* ({ page, call, put }) {
 const copyArray = (idx, array) => {
   let arr = R.clone(array);
   let newItem = R.nth(idx, array);
+
+  // 处理成组组件复制的问题
+  let childrenArr = [],
+    isGroup = newItem.key === GROUP_COMPONENT_KEY;
+  if (isGroup) {
+    childrenArr = R.filter(R.propEq('group', newItem.id))(R.clone(array));
+  }
   newItem.id = lib.noncer();
-  return [...arr.slice(0, idx), newItem, ...arr.slice(idx, arr.length)];
+  if (isGroup) {
+    childrenArr = R.map((item) => {
+      item.group = newItem.id;
+      item.id = lib.noncer();
+      return item;
+    })(childrenArr);
+  }
+
+  return [...arr, newItem, ...childrenArr];
 };
 
 // 分组组件的key
@@ -278,7 +293,12 @@ export default {
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
       let prevPanel = yield select((state) => state[namespace].panel);
-      let nextPanel = R.reject((item) => idx.includes(item.id))(prevPanel);
+
+      // 移除打包组件需要考虑一并移除子组件
+      let nextPanel = R.filter((item) => !idx.includes(item.id) && !idx.includes(item.group))(
+        prevPanel,
+      );
+
       // 默认选中最新添加的面板
       yield put({
         type: 'setStore',
