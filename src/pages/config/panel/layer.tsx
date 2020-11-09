@@ -273,8 +273,24 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
    * @param to 结束索引
    */
   const moveLayerItem = (from: number, to: number) => {
-    const items: { key: string; id: string; group: string }[] = reorder(showPanel, from, to);
     // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
+    // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
+    if (showPanel[to].group) {
+      let _nextPanel = R.clone(panel);
+      _nextPanel[from].group = _nextPanel[to].group;
+      let distPanel = reorder(_nextPanel, from, to);
+
+      dispatch({
+        type: 'common/updatePanel',
+        payload: {
+          panel: distPanel,
+        },
+      });
+      return;
+    }
+
+    const items: { key: string; id: string; group: string }[] = reorder(showPanel, from, to);
+
     let groupPanels = R.compose(
       R.pluck('id'),
       R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
