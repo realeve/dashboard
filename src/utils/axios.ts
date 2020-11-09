@@ -180,7 +180,7 @@ export const handleUrl = (option) => {
 };
 
 // 自动处理token更新，data 序列化等
-export let axios = (option) => {
+export let axios = ({ baseURL = host, ...option }) => {
   window.g_axios = window.g_axios || {
     host,
     token: '',
@@ -202,7 +202,7 @@ export let axios = (option) => {
 
   return http
     .create({
-      baseURL: host,
+      baseURL,
       timeout: 30 * 1000,
       transformRequest: [
         function (data) {

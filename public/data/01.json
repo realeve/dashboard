@@ -1,0 +1,400 @@
+{
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "默认",
+    "border": "svg边框9",
+    "chartBackground": "rgba(26,24,61,0.32)",
+    "head": {
+      "background": "transparent",
+      "fontSize": 26,
+      "color": "rgba(56,186,255,1)",
+      "textAlign": "left",
+      "padding": 10,
+      "fontWeight": "lighter"
+    }
+  },
+  "panel": [
+    {
+      "id": "7af1e04d603f5",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "组测试",
+      "engine": "other",
+      "fold": true,
+      "hide": false,
+      "lock": false
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": true,
+      "name": "other.dynamicPie",
+      "key": "dynamicPie",
+      "engine": "other",
+      "type": "regular_pie",
+      "title": "动态饼图",
+      "image": "/img/icons/07_dynamicpie.png",
+      "id": "eb33c96749d63",
+      "style": {
+        "transform": {
+          "translate": "995.4349935746382px,100.85789062741574px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "276px",
+        "height": "222px"
+      },
+      "icon": "com-font icon-com-regular_pie",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {},
+      "api": { "x": 0, "y": 1, "show": true, "api_type": "mock" },
+      "hide": false,
+      "group": "7af1e04d603f5",
+      "lock": false
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "name": "other.image_single",
+      "key": "image_single",
+      "engine": "other",
+      "title": "科技14",
+      "image": "/img/config/img_single.png",
+      "type": "image.single",
+      "id": "f43970ba722ce",
+      "style": {
+        "transform": {
+          "translate": "915.2861585942262px,-15.385719110146113px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "438px",
+        "height": "455px"
+      },
+      "icon": "com-font icon-com-image.single",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "imgname": "科技14",
+        "undefined": "",
+        "rotate": true,
+        "autoHeight": true,
+        "reverse": "rotateCustom",
+        "rotateTime": 8,
+        "opacity": 0.2
+      },
+      "api": {},
+      "hide": false,
+      "group": "7af1e04d603f5",
+      "lock": false
+    },
+    {
+      "id": "66a13f4ae728e",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "组内文本1",
+      "engine": "other",
+      "fold": true,
+      "hide": false
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "name": "other.text_single",
+      "key": "text_single",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "文本3",
+      "image": "/img/config/text.png",
+      "id": "1ea22c2590a21",
+      "style": {
+        "transform": {
+          "translate": "334.1570731289778px,427.8873828405733px",
+          "rotate": "0.3045496614404327deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "419px",
+        "height": "124px"
+      },
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "opacity": 1,
+        "content": "公告：这是 三 sdfjhsasdf",
+        "undefined": "",
+        "fontSize": 25,
+        "fontWeight": "normal",
+        "fontColor": "rgba(213,234,235,1)",
+        "letterSpacing": 0,
+        "textShadowBlur": 0,
+        "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+        "textShadowOffsetX": 0,
+        "textShadowOffsetY": 0
+      },
+      "api": {},
+      "hide": false,
+      "group": "66a13f4ae728e"
+    },
+    {
+      "showTitle": true,
+      "showBorder": true,
+      "showBackground": true,
+      "ajax": true,
+      "name": "other.datav_ring",
+      "key": "datav_ring",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "datav饼图",
+      "image": "/img/icons/23_datav_ring.png",
+      "id": "e67ad21d2cd99",
+      "style": {
+        "transform": {
+          "translate": "409.5901229469098px,-4.014999958462965px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "281px",
+        "height": "399px"
+      },
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {},
+      "api": {},
+      "hide": false,
+      "lock": false,
+      "group": "66a13f4ae728e"
+    },
+    {
+      "id": "8307f9aa46a79",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "组内文本2",
+      "engine": "other",
+      "fold": false,
+      "hide": false
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "name": "other.text_single",
+      "key": "text_single",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "文本1<br>",
+      "image": "/img/config/text.png",
+      "id": "160c99dec80bb",
+      "style": {
+        "transform": {
+          "translate": "1105.9835503016443px,569.0686071415482px",
+          "rotate": "0.3045496614404327deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "419px",
+        "height": "124px"
+      },
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "opacity": 1,
+        "content": "公告：这是 三 sdfjh",
+        "undefined": "",
+        "fontSize": 25,
+        "fontWeight": "normal",
+        "fontColor": "rgba(213,234,235,1)",
+        "letterSpacing": 0,
+        "textShadowBlur": 0,
+        "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+        "textShadowOffsetX": 0,
+        "textShadowOffsetY": 0
+      },
+      "api": {},
+      "hide": false,
+      "group": "8307f9aa46a79"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "name": "other.text_single",
+      "key": "text_single",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "文本4",
+      "image": "/img/config/text.png",
+      "id": "fa36eed636f75",
+      "style": {
+        "transform": {
+          "translate": "498.5281503016442px,712.8874051265481px",
+          "rotate": "0.3045496614404327deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "419px",
+        "height": "124px"
+      },
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "opacity": 1,
+        "content": "公告：这是 三 sdfjh",
+        "undefined": "",
+        "fontSize": 25,
+        "fontWeight": "normal",
+        "fontColor": "rgba(213,234,235,1)",
+        "letterSpacing": 0,
+        "textShadowBlur": 0,
+        "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+        "textShadowOffsetX": 0,
+        "textShadowOffsetY": 0
+      },
+      "api": {},
+      "hide": false,
+      "group": "8307f9aa46a79"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "name": "other.text_single",
+      "key": "text_single",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "文本2",
+      "image": "/img/config/text.png",
+      "id": "1eb32c2590a21",
+      "style": {
+        "transform": {
+          "translate": "93.15707312897783px,712.7500848555733px",
+          "rotate": "0.3045496614404327deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "419px",
+        "height": "124px"
+      },
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "opacity": 1,
+        "content": "公告：这是 三 sdfjhsasdf",
+        "undefined": "",
+        "fontSize": 25,
+        "fontWeight": "normal",
+        "fontColor": "rgba(213,234,235,1)",
+        "letterSpacing": 0,
+        "textShadowBlur": 0,
+        "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+        "textShadowOffsetX": 0,
+        "textShadowOffsetY": 0
+      },
+      "api": {},
+      "hide": false,
+      "group": "8307f9aa46a79"
+    }
+  ]
+}
