@@ -69,6 +69,12 @@ export const config: IChartConfig[] = [
     min: 10,
     max: 200,
   },
+  {
+    key: 'MOUSE_TRACK',
+    defaultValue: true,
+    title: '鼠标跟随',
+    type: 'switch',
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -103,6 +109,7 @@ export default ({
     SEPARATION = 200,
     MAXSIZE = 20,
     WAVESIZE = 100,
+    MOUSE_TRACK = true,
   },
 }) => {
   const [domRef, { width, height }] = useMeasure();
@@ -155,7 +162,6 @@ export default ({
           scene.add(particle);
         }
       }
-      console.log(scene);
     }
 
     let offset_camera = 0;
@@ -169,8 +175,9 @@ export default ({
 
     let ANIMATE_ID = null;
     function render() {
-      scene.position.x += 0.005 * (offset_camera - scene.position.x);
-      scene.position.y = 364;
+      MOUSE_TRACK && (scene.position.x += 0.005 * (offset_camera - scene.position.x));
+      // scene.position.y = 364;
+      scene.matrixWorldNeedsUpdate = true;
 
       camera.lookAt(scene.position);
 
@@ -223,7 +230,25 @@ export default ({
     canvas?.stopAnimate();
     canvas?.reset();
     refresh();
-  }, [speed, blue_offset, width, height, AMOUNT, AMOUNT_Y, SEPARATION, MAXSIZE, WAVESIZE]);
+  }, [
+    speed,
+    blue_offset,
+    width,
+    height,
+    AMOUNT,
+    AMOUNT_Y,
+    SEPARATION,
+    MAXSIZE,
+    WAVESIZE,
+    MOUSE_TRACK,
+  ]);
+
+  // useEffect(() => {
+  //   if (width * height == 0) {
+  //     return;
+  //   }
+  //   canvas?.onresize();
+  // }, [width, height]);
 
   return <div ref={domRef} style={{ width: '100%', height: '100%' }} />;
 };
