@@ -250,6 +250,28 @@
             "image": "/img/icons/20_scroll_digit.png"
           }
         ]
+      },
+      {
+        "title": "粒子效果",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+        "list": [
+          {
+            "name": "other.wave_effect",
+            "key": "wave_effect",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "粒子效果",
+            "image": "/img/icons/26_wave_effect.png",
+            "showBorder": false,
+            "showTitle": false,
+            "showBackground": false,
+            "ajax": false,
+            "style": {
+              "width": "1920px",
+              "height": "150px"
+            }
+          }
+        ]
       }
     ]
   },

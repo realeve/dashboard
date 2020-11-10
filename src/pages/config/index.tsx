@@ -147,7 +147,7 @@ const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
           hide={hide}
           onAddPanel={(panel) => {
             const style = getDefaultStyle();
-            const nextPanel = { ...panel, style };
+            const nextPanel = { style, ...panel };
             dispatch({
               type: 'common/addPanel',
               payload: { panel: nextPanel },

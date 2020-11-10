@@ -196,3 +196,12 @@ export { image_single };
 */
 import * as text_single from './other/text_single';
 export { text_single };
+
+/*
+    时间：2020-11-09 22:37:23
+    类型: other
+    序号：28
+    名称：粒子效果
+*/
+import * as wave_effect from './other/wave_effect';
+export { wave_effect };

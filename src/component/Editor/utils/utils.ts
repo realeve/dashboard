@@ -136,7 +136,7 @@ export const guideDb = {
   load: (canvasSize) =>
     JSON.parse(
       window.localStorage.getItem(key) ||
-        `{v:[${canvasSize.width / 2 + 44}],h:[${canvasSize.height / 2 + 44}]}`,
+        `{"v":[${canvasSize.width / 2 + 44}],"h":[${canvasSize.height / 2 + 44}]}`,
     ),
 };
 
