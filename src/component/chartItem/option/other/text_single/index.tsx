@@ -133,6 +133,7 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
       onBlur={handleBlur}
       onChange={handleChange}
       suppressContentEditableWarning={true}
+      disabled={window.location.pathname == '/'}
     />
   );
 };

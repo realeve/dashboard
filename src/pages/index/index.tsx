@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import { connect } from 'dva';
-import { axios } from '@/utils/axios';
 import DNA from './dna';
-
-const getConfig = async (url) => {
-  if (url) {
-    let option: { url: string; [key: string]: string } = { url };
-    if (['./data/', '/data/'].includes(url.slice(0, 6))) {
-      option = {
-        ...option,
-        baseURL: window.location.origin,
-      };
-    }
-    return axios(option).then((config) => ({ type: 'online', ...config }));
-  }
-  let { panel, page } = window.localStorage;
-  if (!panel || !page) {
-    return { type: 'error' };
-  }
-  return { type: 'local', page, panel };
-};
+import styles from './index.less';
+import assets from '@/component/widget/assets';
+import { getConfig, backgroundStyle } from './lib';
+import { GROUP_COMPONENT_KEY } from '@/models/common';
+import { ChartItem } from '@/pages/config/canvas/chartItem';
 
 const Index = ({ location }) => {
   const [config, setConfig] = useState(null);
@@ -29,9 +14,41 @@ const Index = ({ location }) => {
     getConfig(location.query.id).then(setConfig);
   }, [location.query.id]);
 
-  return <DNA />;
+  if (!config) {
+    return <DNA />;
+  }
+  let { page, panel } = config;
+  console.log(config);
 
-  return <div>dashboard</div>;
+  return (
+    <div
+      className={styles.dashboard}
+      style={{
+        width: `${page.width}px`,
+        height: `${page.height}px`,
+        backgroundImage: page.background
+          ? `url('${assets.backgrounds[page.background].url}')`
+          : 'url(/img/panel/panelbg.png)',
+        backgroundSize: 'cover',
+        ...backgroundStyle,
+      }}
+    >
+      {panel.map(
+        (item) =>
+          item.key !== GROUP_COMPONENT_KEY && (
+            <div
+              style={{
+                ...item.style,
+                transform: `translate(${item?.style?.transform?.translate}) rotate(${item?.style?.transform?.rotate}) scale(${item?.style?.transform?.scale})`,
+              }}
+              key={item.id}
+            >
+              <ChartItem config={item} page={page} />
+            </div>
+          ),
+      )}
+    </div>
+  );
 };
 
 export default connect()(Index);

@@ -123,14 +123,24 @@ const Index = ({
 }) => {
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
   let config = R.find<IPanelConfig[]>(R.propEq('id', chartid))(panel) as IPanelConfig;
-  if (!config) {
-    return null;
-  }
+
   let page = R.clone(_page);
   if (config.useGeneralStyle) {
     page = { ...config.general, ...page };
   } else {
     page = { ...page, ...config.general };
+  }
+  return <ChartItem page={page} config={config} />;
+};
+
+export default connect(({ common }: { common: ICommon }) => ({
+  page: common.page,
+  panel: common.panel,
+}))(Index);
+
+export const ChartItem = ({ page, config }) => {
+  if (!config) {
+    return null;
   }
 
   const [title, setTitle] = useState(config.title);
@@ -160,13 +170,8 @@ const Index = ({
         }}
         showBorder={config.showBorder}
       >
-        <Item config={config} title={title} onLoad={setTitle} chartid={chartid} />
+        <Item config={config} title={title} onLoad={setTitle} chartid={config.id} />
       </BorderItem>
     </ErrorBoundary>
   );
 };
-
-export default connect(({ common }: { common: ICommon }) => ({
-  page: common.page,
-  panel: common.panel,
-}))(Index);
