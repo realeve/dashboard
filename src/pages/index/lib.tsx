@@ -17,4 +17,20 @@ export const getConfig = async (url) => {
   return { type: 'local', page: JSON.parse(page), panel: JSON.parse(panel) };
 };
 
-export const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
+/**
+ * 计算主页渲染的样式
+ * @param style 在config中配置的样式，计算为主页渲染所需的样式
+ */
+export const getStyle = ({ style, page }) => {
+  console.log(style);
+  if (!style) {
+    return {};
+  }
+
+  // TODO 1.将transform中的translate部分转换为left和top
+  // TODO 2.根据 page 的宽高和当前 window 的宽高做尺寸转换
+  return {
+    ...style,
+    transform: `translate(${style?.transform?.translate}) rotate(${style?.transform?.rotate}) scale(${style?.transform?.scale})`,
+  };
+};

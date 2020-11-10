@@ -30,7 +30,17 @@ import { generateId, guideDb } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
 import assets from '@/component/widget/assets';
+
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
+export const getDashboardStyle = (props) => ({
+  width: `${props.width}px`,
+  height: `${props.height}px`,
+  backgroundImage: props.background
+    ? `url('${assets.backgrounds[props.background].url}')`
+    : 'url(/img/panel/panelbg.png)',
+  backgroundSize: 'cover',
+  ...backgroundStyle,
+});
 
 const edgeConfig = {
   zoom60: 50,
@@ -383,18 +393,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             });
           }}
         >
-          <Viewport
-            ref={viewport}
-            style={{
-              width: `${width}px`,
-              height: `${height}px`,
-              backgroundImage: this.props.background
-                ? `url('${assets.backgrounds[this.props.background].url}')`
-                : 'url(/img/panel/panelbg.png)',
-              backgroundSize: 'cover',
-              ...backgroundStyle,
-            }}
-          >
+          <Viewport ref={viewport} style={getDashboardStyle(this.props)}>
             <MoveableManager
               ref={moveableManager}
               selectedTargets={selectedTargets}
