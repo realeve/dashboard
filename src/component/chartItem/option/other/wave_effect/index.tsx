@@ -123,8 +123,6 @@ export default ({
       return;
     }
 
-    console.log({ width, height });
-
     let camera = null;
     camera = new THREE.PerspectiveCamera(35, width / 2 / (height / 2), 1, 10000);
     camera.position.y = 1000;
@@ -177,7 +175,7 @@ export default ({
     function render() {
       MOUSE_TRACK && (scene.position.x += 0.005 * (offset_camera - scene.position.x));
       // scene.position.y = 364;
-      scene.matrixWorldNeedsUpdate = true;
+      // scene.matrixWorldNeedsUpdate = true;
 
       camera.lookAt(scene.position);
 

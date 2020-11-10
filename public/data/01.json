@@ -21,51 +21,8 @@
       "key": "group_rect",
       "title": "组测试",
       "engine": "other",
-      "fold": true,
+      "fold": false,
       "hide": false,
-      "lock": false
-    },
-    {
-      "showTitle": false,
-      "showBorder": false,
-      "showBackground": false,
-      "ajax": true,
-      "name": "other.dynamicPie",
-      "key": "dynamicPie",
-      "engine": "other",
-      "type": "regular_pie",
-      "title": "动态饼图",
-      "image": "/img/icons/07_dynamicpie.png",
-      "id": "eb33c96749d63",
-      "style": {
-        "transform": {
-          "translate": "995.4349935746382px,100.85789062741574px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "top": "80px",
-        "left": "80px",
-        "position": "absolute",
-        "width": "276px",
-        "height": "222px"
-      },
-      "icon": "com-font icon-com-regular_pie",
-      "general": {
-        "border": "边框29",
-        "chartBackground": "rgba(3,11,31,0.8)",
-        "head": {
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
-          "fontSize": 20,
-          "color": "#aec1f9",
-          "textAlign": "left",
-          "padding": 10
-        }
-      },
-      "useGeneralStyle": true,
-      "componentConfig": {},
-      "api": { "x": 0, "y": 1, "show": true, "api_type": "mock" },
-      "hide": false,
-      "group": "7af1e04d603f5",
       "lock": false
     },
     {
@@ -73,25 +30,25 @@
       "showBorder": false,
       "showBackground": false,
       "ajax": false,
-      "name": "other.image_single",
-      "key": "image_single",
-      "engine": "other",
-      "title": "科技14",
-      "image": "/img/config/img_single.png",
-      "type": "image.single",
-      "id": "f43970ba722ce",
       "style": {
         "transform": {
-          "translate": "915.2861585942262px,-15.385719110146113px",
+          "translate": "904.8000000000002px,12.607142857143003px",
           "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
         "left": "80px",
         "position": "absolute",
-        "width": "438px",
-        "height": "455px"
+        "width": "318px",
+        "height": "360px"
       },
+      "name": "other.image_single",
+      "key": "image_single",
+      "engine": "other",
+      "title": "单张图片",
+      "image": "/img/config/img_single.png",
+      "type": "image.single",
+      "id": "4d17f877e47ee",
       "icon": "com-font icon-com-image.single",
       "general": {
         "border": "边框29",
@@ -111,10 +68,56 @@
         "rotate": true,
         "autoHeight": true,
         "reverse": "rotateCustom",
-        "rotateTime": 8,
-        "opacity": 0.2
+        "rotateTime": 20,
+        "opacity": 0.3
       },
       "api": {},
+      "group": "7af1e04d603f5"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": true,
+      "name": "other.dynamicPie",
+      "key": "dynamicPie",
+      "engine": "other",
+      "type": "regular_pie",
+      "title": "动态饼图",
+      "image": "/img/icons/07_dynamicpie.png",
+      "id": "eb33c96749d63",
+      "style": {
+        "transform": {
+          "translate": "945.8310685026563px,97.97653196449613px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "top": "80px",
+        "left": "80px",
+        "position": "absolute",
+        "width": "243px",
+        "height": "197px"
+      },
+      "icon": "com-font icon-com-regular_pie",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "circlePos": "inner",
+        "roseType": false,
+        "valueFontSize": 22,
+        "titleFontSize": 14
+      },
+      "api": { "x": 0, "y": 1, "show": true, "api_type": "mock" },
       "hide": false,
       "group": "7af1e04d603f5",
       "lock": false
@@ -125,7 +128,7 @@
       "key": "group_rect",
       "title": "组内文本1",
       "engine": "other",
-      "fold": true,
+      "fold": false,
       "hide": false
     },
     {
@@ -142,15 +145,15 @@
       "id": "1ea22c2590a21",
       "style": {
         "transform": {
-          "translate": "334.1570731289778px,427.8873828405733px",
+          "translate": "3.0331945706463657px,94.86134332307326px",
           "rotate": "0.3045496614404327deg",
           "scale": "1,1"
         },
         "top": "80px",
         "left": "80px",
         "position": "absolute",
-        "width": "419px",
-        "height": "124px"
+        "width": "471px",
+        "height": "64px"
       },
       "icon": "com-font icon-com-regular_bar",
       "general": {
@@ -167,7 +170,7 @@
       "useGeneralStyle": true,
       "componentConfig": {
         "opacity": 1,
-        "content": "公告：这是 三 sdfjhsasdf",
+        "content": "这里的文字与下方绑定，可任意调整。",
         "undefined": "",
         "fontSize": 25,
         "fontWeight": "normal",
@@ -196,14 +199,14 @@
       "id": "e67ad21d2cd99",
       "style": {
         "transform": {
-          "translate": "409.5901229469098px,-4.014999958462965px",
+          "translate": "9.000408661195706px,154.9640561768942px",
           "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
         "left": "80px",
         "position": "absolute",
-        "width": "281px",
+        "width": "526px",
         "height": "399px"
       },
       "icon": "com-font icon-com-regular_bar",
@@ -248,7 +251,7 @@
       "id": "160c99dec80bb",
       "style": {
         "transform": {
-          "translate": "1105.9835503016443px,569.0686071415482px",
+          "translate": "609.4579074445012px,503.41317857011984px",
           "rotate": "0.3045496614404327deg",
           "scale": "1,1"
         },
@@ -302,7 +305,7 @@
       "id": "fa36eed636f75",
       "style": {
         "transform": {
-          "translate": "498.5281503016442px,712.8874051265481px",
+          "translate": "974.8596503016449px,655.8034051265483px",
           "rotate": "0.3045496614404327deg",
           "scale": "1,1"
         },
@@ -356,7 +359,7 @@
       "id": "1eb32c2590a21",
       "style": {
         "transform": {
-          "translate": "93.15707312897783px,712.7500848555733px",
+          "translate": "569.4885731289779px,655.6660848555731px",
           "rotate": "0.3045496614404327deg",
           "scale": "1,1"
         },
@@ -395,6 +398,53 @@
       "api": {},
       "hide": false,
       "group": "8307f9aa46a79"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "style": {
+        "transform": {
+          "translate": "-0.00002857142885659414px,989.9998571428572px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "1920px",
+        "height": "90px"
+      },
+      "name": "other.wave_effect",
+      "key": "wave_effect",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "粒子效果",
+      "image": "/img/icons/26_wave_effect.png",
+      "id": "fe7e0718edd4b",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "边框29",
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "componentConfig": {
+        "speed": 10,
+        "blue_offset": 109,
+        "AMOUNT": 118,
+        "AMOUNT_Y": 18,
+        "SEPARATION": 285,
+        "MAXSIZE": 30,
+        "WAVESIZE": 84,
+        "MOUSE_TRACK": false
+      },
+      "api": {},
+      "lock": true
     }
   ]
 }

@@ -78,12 +78,16 @@ const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
     // setting selected panel.
     if (panel.length > 0) {
       let lastPanel = R.last(panel);
-      dispatch({
-        type: 'common/setStore',
-        payload: {
-          selectedPanel: [lastPanel.id],
-        },
-      });
+      let inValid = lastPanel.lock || lastPanel.hide;
+
+      // 如果锁定了或者隐藏，不允许选择
+      !inValid &&
+        dispatch({
+          type: 'common/setStore',
+          payload: {
+            selectedPanel: [lastPanel.id],
+          },
+        });
     }
   }, [editor]);
 
