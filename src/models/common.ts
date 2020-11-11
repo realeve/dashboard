@@ -78,7 +78,7 @@ export interface IPanelConfig {
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
 
-  group?: boolean; // 父组件
+  group?: string; // 父组件
   fold?: boolean; // 是否折叠
 
   showTitle?: boolean; // 显示标题

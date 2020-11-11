@@ -146,7 +146,7 @@ const useFetch = <T extends {} | void>({
 
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
-    console.log('即将刷新:', new Date());
+    // console.log('即将刷新:', new Date());
     setInnerTrigger(+new Date());
   };
 

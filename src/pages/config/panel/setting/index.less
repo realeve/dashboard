@@ -9,6 +9,9 @@
   transition: width 0.25s ease-in-out;
   overflow: hidden;
   box-shadow: -1px 0 #000;
+  display: flex;
+  flex-direction: column;
+
   .head {
     width: 100%;
     height: 30px;
@@ -22,8 +25,9 @@
   .body {
     width: 100%;
     // height: calc(100% - 60px);
-    // height: 100%;
+    height: 100%;
     padding: 0 10px;
+    flex: 1;
     .pageconfig {
       height: 100%;
       overflow-y: scroll;
@@ -75,6 +79,8 @@
     .head;
     background: var(--datav-main-color);
     cursor: pointer;
+    width: calc(100% - 20px);
+    margin: 0px 10px 10px 10px;
   }
   .btn {
     .head;
