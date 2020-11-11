@@ -74,6 +74,7 @@ const Index = ({
     setShouldSave(true);
   }, [selectedPanel.length]);
 
+  // TODO 此处需要弹出面板，选择一级/二级列表，设置业务名称
   const saveComponents = (panels: IPanelConfig[]) => {
     if (panels.length === 0) {
       message.error('业务保存需要确保组件在同一个分组内');
@@ -91,6 +92,8 @@ const Index = ({
       creator: '管理员',
       useage_times: 0,
       update_time: create_time,
+      category_main: '生产',
+      category_sub: '综合',
     };
     console.log(option);
   };
