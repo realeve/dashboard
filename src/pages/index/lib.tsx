@@ -1,5 +1,32 @@
 import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
+import * as R from 'ramda';
+
+export enum EResizeType {
+  NONE = 'none',
+  SCALE = 'scale',
+  COMPONENT = 'component',
+}
+
+/**
+ * 获取缩放模式
+ * @param autoresize 地址栏参数
+ */
+export const getResizeType = (autoresize) => {
+  let type: EResizeType;
+  switch (autoresize) {
+    case 'scale':
+      type = EResizeType.SCALE;
+      break;
+    case 'component':
+      type = EResizeType.COMPONENT;
+      break;
+    default:
+      type = EResizeType.NONE;
+      break;
+  }
+  return type;
+};
 
 export const getConfig = async (url) => {
   if (url) {
@@ -35,7 +62,7 @@ const parseStyle = (style: string, unit = 'px') => {
  * @param page 页面宽高配置
  * @param autoResize 是否启动自动调整页面大小
  */
-export const getStyle = ({ style, page, autoSize = false }) => {
+export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
   if (!style) {
     return {};
   }
@@ -66,10 +93,20 @@ export const getStyle = ({ style, page, autoSize = false }) => {
     _transform = (rotate + scale).length > 0 ? { transform: rotate + scale } : {};
   }
 
+  // 处理组件尺寸和位置缩放
+  let width = parseStyle(style.width),
+    height = parseStyle(style.height);
+  if (resizeType === EResizeType.COMPONENT) {
+    let { scaleX, scaleY } = getScale(page);
+    (top *= scaleY), (width *= scaleX), (left *= scaleX), (height *= scaleY);
+  }
+
   return {
     ...style,
     left,
     top,
+    width,
+    height,
     ..._transform,
     position: 'absolute',
   };
@@ -94,7 +131,7 @@ export let getBackground = (page) => {
  * @param page 页面基础配置
  * @param autosize 是否自动调整大小
  */
-export const getAutoSizeStyle = (page, autosize = false) => {
+export const getAutoSizeStyle = (page) => {
   let { width: styleWidth, height: styleHeight } = getDashboardStyle(page);
   let { width, height } = page;
   let { innerWidth, innerHeight } = window;
