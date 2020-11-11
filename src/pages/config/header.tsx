@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './header.less';
 import classnames from 'classnames';
 
-export default ({ setHide, hide }) => {
+import { IHideProps, TFnHide } from './panel/setting';
+
+export default ({ setHide, hide }: { hide: IHideProps; setHide: TFnHide }) => {
   return (
     <div className={styles.header}>
       <div className={styles['datav-edit-header']}>

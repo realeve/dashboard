@@ -65,7 +65,7 @@ const namespace = 'common';
 export interface IPanelStyle {
   width: number;
   height: number;
-  rotate: number;
+  // rotate: number | string;
   transform: string;
 }
 export interface IPanelConfig {

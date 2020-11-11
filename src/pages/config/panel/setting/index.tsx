@@ -11,9 +11,23 @@ import { Dispatch } from 'redux';
 import { message } from 'antd';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
-interface ISettingProps {
-  setHide: React.Dispatch<React.SetStateAction<boolean>>;
-  hide: boolean;
+
+export interface IHideProps {
+  beauty: boolean;
+  components: boolean;
+  config: boolean;
+  filter: boolean;
+  layer: boolean;
+  toolbox: boolean;
+}
+
+export type TFnHide = (
+  patch: Partial<IHideProps> | ((prevState: IHideProps) => Partial<IHideProps>),
+) => void;
+
+export interface ISettingProps {
+  setHide: TFnHide;
+  hide: IHideProps;
   selectedPanel: string[];
   panel: IPanelConfig[];
   onChange: (e: any, type: string) => void;

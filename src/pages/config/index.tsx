@@ -8,18 +8,19 @@ import LayerPanel from './panel/layer';
 import BeautyPanel from './panel/beauty';
 import FilterPanel from './panel/filterManager';
 // import Ruler from './ruler';
-import Setting from './panel/setting';
+import Setting, { IHideProps } from './panel/setting';
 import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
-// import CanvasComponent from './canvas';
+
 import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
-import { ICommon, GROUP_COMPONENT_KEY } from '@/models/common';
+import { ICommon, GROUP_COMPONENT_KEY, IPage, IPanelConfig } from '@/models/common';
 import * as R from 'ramda';
 
+import { Dispatch } from 'redux';
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
@@ -27,7 +28,7 @@ export interface IPanelItem extends IChartConfig {
 }
 
 // 添加内容
-const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelItem) => {
+const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelConfig) => {
   editor?.current.append(
     <div style={style}>
       <ChartItem chartid={config.id} />
@@ -36,7 +37,7 @@ const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: 
   );
 };
 
-const initState = {
+const initState: IHideProps = {
   layer: true,
   components: false,
   toolbox: true,
@@ -45,7 +46,19 @@ const initState = {
   filter: true,
 };
 
-const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
+const Index = ({
+  dispatch,
+  panel,
+  selectedPanel,
+  page,
+  curTool,
+}: {
+  dispatch: Dispatch;
+  panel: IPanelConfig[];
+  page: IPage;
+  selectedPanel: string[];
+  curTool: TQuickTool;
+}) => {
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
 
@@ -77,7 +90,7 @@ const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
 
     // setting selected panel.
     if (panel.length > 0) {
-      let lastPanel = R.last(panel);
+      let lastPanel = R.last<IPanelConfig>(panel);
       let inValid = lastPanel.lock || lastPanel.hide;
 
       // 如果锁定了或者隐藏，不允许选择

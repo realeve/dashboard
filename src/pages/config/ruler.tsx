@@ -4,19 +4,20 @@ import styles from './ruler.less';
 
 import Guides from '@/component/react-guides';
 import { useSetState, useToggle } from 'react-use';
+import { GuidesInterface } from '@/component/react-guides/types';
 
 const style = {
   backgroundColor: '#0e1013',
   lineColor: '#364152',
   textColor: '#808e9b',
   unit: 100,
-  dragPosFormat: e => e - 44,
+  dragPosFormat: (e) => e - 44,
 };
 
 const key = 'datav_guide';
 const guideDb = {
-  save: e => window.localStorage.setItem(key, JSON.stringify(e)),
-  load: canvasSize =>
+  save: (e) => window.localStorage.setItem(key, JSON.stringify(e)),
+  load: (canvasSize) =>
     JSON.parse(
       window.localStorage.getItem(key) ||
         `{v:[${canvasSize.width / 2 + 44}],h:[${canvasSize.height / 2 + 44}]}`,
@@ -29,6 +30,7 @@ export interface IRulerProps {
     width: number;
     height: number;
   };
+  onGuidesChange: (e: IGuideProps) => void;
 }
 
 interface IGuideProps {
@@ -36,9 +38,9 @@ interface IGuideProps {
   v: number[];
 }
 
-export default ({ zoom = 1, canvasSize,  ...props}: IRulerProps) => {
-  const hRuler = useRef();
-  const vRuler = useRef();
+export default ({ zoom = 1, canvasSize, ...props }: IRulerProps) => {
+  const hRuler = useRef<GuidesInterface>();
+  const vRuler = useRef<GuidesInterface>();
 
   const [guides, setGuides] = useSetState<IGuideProps>({
     v: [canvasSize.width / 2 + 40],
@@ -80,7 +82,7 @@ export default ({ zoom = 1, canvasSize,  ...props}: IRulerProps) => {
           onChangeGuides={({ guides: h }) => {
             guideDb.save({ ...guides, h });
             setGuides({ h });
-            onGuidesChange({ ...guides, h });
+            props?.onGuidesChange({ ...guides, h });
           }}
         />
       </div>
@@ -94,7 +96,7 @@ export default ({ zoom = 1, canvasSize,  ...props}: IRulerProps) => {
           onChangeGuides={({ guides: v }) => {
             setGuides({ v });
             guideDb.save({ ...guides, v });
-            onGuidesChange({ ...guides, v });
+            props?.onGuidesChange({ ...guides, v });
           }}
         />
       </div>
