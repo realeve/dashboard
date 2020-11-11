@@ -14,6 +14,8 @@ import { getDashboardStyle } from '@/component/Editor/Editor';
 import { GROUP_COMPONENT_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 
+import { useWindowSize } from 'react-use';
+
 const ScaleBackground = ({
   resizeType,
   page,
@@ -51,6 +53,9 @@ const ScaleBackground = ({
 // DEMO:  http://localhost:8000/?id=/data/01.json&autoresize=component
 const Index = ({ location }) => {
   const [config, setConfig] = useState(null);
+
+  const { width, height } = useWindowSize();
+
   useEffect(() => {
     setConfig(null);
     getConfig(location?.query.id).then(setConfig);
@@ -62,6 +67,13 @@ const Index = ({ location }) => {
     autoSize = location?.query?.autoresize;
 
   let resizeType = getResizeType(autoSize);
+
+  // const [resizeType, setResizeType] = useState(EResizeType.NONE);
+  // useEffect(() => {
+  //   let _resizeType = getResizeType(autoSize);
+  //   setResizeType(_resizeType);
+  // }, [width, height]);
+  console.log(width, height, resizeType);
 
   return (
     <ScaleBackground resizeType={resizeType} page={page}>
