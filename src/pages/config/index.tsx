@@ -179,16 +179,25 @@ const Index = ({ dispatch, panel, selectedPanel, page, curTool }) => {
               lockedPanel={panel.filter((item) => item.lock || item.hide).map((item) => item.id)}
               onSelect={(selectedPanel) => {
                 // 此处处理多个组件共同选择的问题；
-
                 let nextPanel = selectedPanel;
                 if (selectedPanel.length > 0) {
+                  // 2020-11-11 group所在ID的组件需要一并被选择
+                  let groupIds: string[] = [];
+
                   panel.filter((item) => {
                     if (selectedPanel.includes(item.id) && item.group) {
-                      let groupPanel = panel.filter((p) => p.group == item.group).map((p) => p.id);
+                      let items = panel.filter((p) => p.group == item.group);
+                      let groupPanel = items.map((p) => p.id);
+                      let groupId = items.map((p) => p.group);
                       nextPanel = [...nextPanel, ...groupPanel];
+                      groupIds = [...groupIds, ...groupId];
                     }
                   });
                   nextPanel = R.uniq(nextPanel);
+                  groupIds = R.uniq(groupIds).filter((item) => item);
+                  if (groupIds.length === 1) {
+                    nextPanel = [...groupIds, ...nextPanel];
+                  }
                 }
 
                 dispatch({
