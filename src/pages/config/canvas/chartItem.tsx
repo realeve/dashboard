@@ -44,7 +44,7 @@ const Item = ({
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   let valid = api?.api_type === 'url' && api?.url?.length > 0;
 
-  let { data, loading, error } = useFetch({
+  let { data, loading } = useFetch({
     param: { url: api?.api_type === 'url' ? api?.url : null },
     valid: () => valid,
     interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),
@@ -56,9 +56,10 @@ const Item = ({
     },
   });
 
-  if (api?.api_type === 'mock' && mock && mock.title) {
-    onLoad(mock.title);
-  }
+  // 在callback中会触发该效果，无需再次调用
+  // if (api?.api_type === 'mock' && mock && mock.title) {
+  //   onLoad(mock.title);
+  // }
 
   if (valid && (loading || !data)) {
     return <Skeleton />;

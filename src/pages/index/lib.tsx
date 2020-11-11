@@ -1,11 +1,11 @@
 import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
-import * as R from 'ramda';
 
 export enum EResizeType {
-  NONE = 'none',
-  SCALE = 'scale',
-  COMPONENT = 'component',
+  NONE = 'none', // 不缩放
+  SCALE = 'scale', // 横纵向拉伸
+  COMPONENT = 'component', // 只缩放组件尺寸和位置，不处理文字大小
+  MOVIE = 'movie', //电影模式，上下或左右留黑边
 }
 
 /**
@@ -20,6 +20,9 @@ export const getResizeType = (autoresize) => {
       break;
     case 'component':
       type = EResizeType.COMPONENT;
+      break;
+    case 'movie':
+      type = EResizeType.MOVIE;
       break;
     default:
       type = EResizeType.NONE;
@@ -97,7 +100,7 @@ export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
   let width = parseStyle(style.width),
     height = parseStyle(style.height);
   if (resizeType === EResizeType.COMPONENT) {
-    let { scaleX, scaleY } = getScale(page);
+    let { scaleX, scaleY } = getScale(page, resizeType);
     (top *= scaleY), (width *= scaleX), (left *= scaleX), (height *= scaleY);
   }
 
@@ -113,12 +116,20 @@ export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
 };
 
 // 获取缩放系数
-let getScale = (page) => {
+let getScale = (page, resizeType: EResizeType) => {
   let { width, height } = page;
   let { innerWidth, innerHeight } = window;
   let scaleX = innerWidth / width,
     scaleY = innerHeight / height;
-  return { scaleX, scaleY };
+
+  if (resizeType === EResizeType.MOVIE) {
+    scaleX = scaleY = Math.min(scaleX, scaleY);
+  }
+
+  // 原画布比例
+  let ratio = width / height;
+
+  return { scaleX, scaleY, ratio };
 };
 
 // 获取背景
@@ -131,11 +142,11 @@ export let getBackground = (page) => {
  * @param page 页面基础配置
  * @param autosize 是否自动调整大小
  */
-export const getAutoSizeStyle = (page) => {
+export const getAutoSizeStyle = (page, resizeType: EResizeType) => {
   let { width: styleWidth, height: styleHeight } = getDashboardStyle(page);
   let { width, height } = page;
   let { innerWidth, innerHeight } = window;
-  let { scaleX, scaleY } = getScale(page);
+  let { scaleX, scaleY } = getScale(page, resizeType);
 
   let scale = ` scale(${scaleX},${scaleY})`;
   let translate = `translate(${(innerWidth - width) / 2}px,${(innerHeight - height) / 2}px)`;

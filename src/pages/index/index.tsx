@@ -26,10 +26,23 @@ const ScaleBackground = ({
   children: React.ReactNode;
 }) => {
   // 直接缩放
-  if (resizeType === EResizeType.SCALE) {
+  if ([EResizeType.SCALE].includes(resizeType)) {
     return (
       <div className={styles.dashboard} style={getBackground(page)}>
-        <div style={getAutoSizeStyle(page)}>{children}</div>
+        <div style={getAutoSizeStyle(page, resizeType)}>{children}</div>
+      </div>
+    );
+  } else if (resizeType === EResizeType.MOVIE) {
+    let autosize = getAutoSizeStyle(page, resizeType);
+    let bg = getBackground(page);
+    return (
+      <div
+        style={{ backgroundImage: bg.backgroundImage, backgroundRepeat: 'repeat' }}
+        className={styles.movieDashboard}
+      >
+        <div className={styles.dashboard} style={{ ...bg, ...autosize }}>
+          <div style={{ width: '100%', height: '100%' }}>{children}</div>
+        </div>
       </div>
     );
   } else if (resizeType === EResizeType.COMPONENT) {
@@ -48,7 +61,10 @@ const ScaleBackground = ({
 };
 /**
  *
- * @param autoresize scale(横纵向缩放),component:(只缩放组件的尺寸和位置),不设置或其它(不缩放)
+ * @enum autoresize=scale(横纵向缩放)
+ * @enum autoresize=component:(只缩放组件的尺寸和位置)
+ * @enum 不设置或其它(不缩放)
+ * @enum autoresize=movie(电影一样留出左右两边)
  */
 // DEMO:  http://localhost:8000/?id=/data/01.json&autoresize=component
 const Index = ({ location }) => {
@@ -67,13 +83,6 @@ const Index = ({ location }) => {
     autoSize = location?.query?.autoresize;
 
   let resizeType = getResizeType(autoSize);
-
-  // const [resizeType, setResizeType] = useState(EResizeType.NONE);
-  // useEffect(() => {
-  //   let _resizeType = getResizeType(autoSize);
-  //   setResizeType(_resizeType);
-  // }, [width, height]);
-  console.log(width, height, resizeType);
 
   return (
     <ScaleBackground resizeType={resizeType} page={page}>

@@ -11,7 +11,7 @@ export default ({
 }) => {
   const [sum, setSum] = useState(null);
   useEffect(() => {
-    let count = R.sum(data.data.map(item => item[y]));
+    let count = R.sum(data.data.map((item) => item[y]));
     setSum(count || 1);
     setVal({
       start: 0,
@@ -36,7 +36,7 @@ export default ({
         })}
         toggleItem={toggleItem}
         renderer="svg"
-        setToggleIdx={idx => {
+        setToggleIdx={(idx) => {
           let start = val.end;
           setVal({
             start,
