@@ -3,11 +3,12 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import jStat from 'jstat';
+import { ScenaJSXElement } from '@/component/Editor';
+
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
-  children: React.ReactNode;
+  children: ScenaJSXElement;
   [key: string]: any;
 }
 export const borderNames = Object.keys(assets.borders);
@@ -17,18 +18,16 @@ export default ({
   children,
   style,
   showBorder = true,
+  showBackground = true,
   className,
   ...props
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
 
-  // let padding = {};
-  // if (img) {
-  //   Object.keys(img).forEach((key) => {
-  //     let keyName = key[0].toUpperCase() + key.slice(1);
-  //     padding['padding' + keyName] = img[key];
-  //   });
-  // }
+  if (!showBorder && !showBackground) {
+    return children;
+  }
+
   if (R.isNil(url) || !showBorder) {
     return (
       <div style={style} className={className} {...props}>
@@ -36,7 +35,6 @@ export default ({
       </div>
     );
   }
-  let max = jStat.max([img.left, img.right, img.left, img.top]);
 
   return (
     <div

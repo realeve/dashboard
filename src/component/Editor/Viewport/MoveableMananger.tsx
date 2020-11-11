@@ -158,14 +158,17 @@ export default class MoveableManager extends React.PureComponent<{
         onResizeGroup={moveableData.onResizeGroup}
         onRotateStart={moveableData.onRotateStart}
         onRotate={(e) => {
+          let rotate =
+            (Math.floor(
+              (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
+            ) *
+              ROTATE_DEGREE) %
+            360;
+
           moveableData.onRotate({
             ...e,
-            beforeRotate:
-              (Math.floor(
-                (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
-              ) *
-                ROTATE_DEGREE) %
-              360,
+            rotate,
+            beforeRotate: rotate,
           });
         }}
         onRotateGroupStart={moveableData.onRotateGroupStart}

@@ -168,6 +168,7 @@ export const ChartItem = ({ page, config }) => {
           width: '100%',
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
         }}
+        showBackground={config.showBackground}
         showBorder={config.showBorder}
       >
         <Item config={config} title={title} onLoad={setTitle} chartid={config.id} />

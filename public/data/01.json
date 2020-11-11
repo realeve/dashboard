@@ -146,7 +146,7 @@
       "style": {
         "transform": {
           "translate": "3.0331945706463657px,94.86134332307326px",
-          "rotate": "0.3045496614404327deg",
+          "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
@@ -252,7 +252,7 @@
       "style": {
         "transform": {
           "translate": "609.4579074445012px,503.41317857011984px",
-          "rotate": "0.3045496614404327deg",
+          "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
@@ -306,7 +306,7 @@
       "style": {
         "transform": {
           "translate": "974.8596503016449px,655.8034051265483px",
-          "rotate": "0.3045496614404327deg",
+          "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
@@ -360,7 +360,7 @@
       "style": {
         "transform": {
           "translate": "569.4885731289779px,655.6660848555731px",
-          "rotate": "0.3045496614404327deg",
+          "rotate": "0deg",
           "scale": "1,1"
         },
         "top": "80px",
