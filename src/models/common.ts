@@ -49,7 +49,7 @@ const copyArray = (idx, array) => {
 // 分组组件的key
 export const GROUP_COMPONENT_KEY = 'group_rect';
 
-const getGroupRect = () => {
+export const getGroupRect = () => {
   let id = lib.noncer();
   return {
     id,

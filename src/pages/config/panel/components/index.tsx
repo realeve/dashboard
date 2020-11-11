@@ -19,7 +19,7 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
     <div
       className={classnames(styles['component-panel-wp'], {
         [styles.hide]: hide.components,
-        [styles.shrink]: !hide.beauty,
+        // [styles.shrink]: !hide.beauty,
       })}
     >
       <div className={styles['component-panel']}>

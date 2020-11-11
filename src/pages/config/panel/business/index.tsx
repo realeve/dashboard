@@ -21,15 +21,9 @@ export default ({ setHide, hide, onAddPanel, ...props }) => {
         [styles.hide]: hide.beauty,
       })}
     >
-      <div className={panelStyle['component-panel']} style={{ width: 328 }}>
+      <div className={panelStyle['component-panel']} style={{ width: 433 }}>
         <div className={panelStyle.panelTitle}>
-          <span>
-            组件列表
-            <i
-              className={classnames(panelStyle.refreshBtn, 'datav-icon datav-font icon-refresh')}
-              title="刷新"
-            />
-          </span>
+          <span>业务组件</span>
           <i
             className={classnames('datav-icon datav-font icon-back', panelStyle.closeBtn)}
             onClick={() => {

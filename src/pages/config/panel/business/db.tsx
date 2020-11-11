@@ -1,6 +1,6 @@
 import { axios, DEV } from '@/utils/axios';
 import * as R from 'ramda';
-
+import * as lib from '@/utils/lib';
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // TODO 业务组件数据结构定义
 export interface IBusinessProps {
@@ -8,7 +8,7 @@ export interface IBusinessProps {
   title: string;
   category_main: string; // 一级分类
   category_sub: string; // 二级分类
-  thumbnail: string; //缩略图
+  image: string; //缩略图
   config: string; // json配置项
   creator: string;
   create_time: string;
