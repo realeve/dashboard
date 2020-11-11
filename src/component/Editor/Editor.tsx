@@ -4,7 +4,7 @@ import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
 
 import Guides from '@/component/react-guides';
 
-import Selecto, { OnDragEvent } from './react-selecto';
+import Selecto from './react-selecto';
 import './Editor.less';
 import Viewport, { ElementInfo, MovedInfo, MovedResult } from './Viewport/Viewport';
 import { prefix, getIds, checkImageLoaded, getScenaAttrs, IGuideProps } from './utils/utils';

@@ -5,6 +5,8 @@ import { notification } from 'antd';
 import router from 'umi/router';
 // import router from './router';
 import * as R from 'ramda';
+export { DEV } from './setting';
+
 export interface GlobalAxios {
   host: string;
   token: string;

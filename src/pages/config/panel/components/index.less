@@ -9,47 +9,49 @@
   transition: width 0.3s ease;
   overflow: hidden;
   box-shadow: 1px 0 #000;
-  .component-panel {
-    width: 233px;
-    transition: 0.3s ease;
-    height: 100%;
+}
+
+.component-panel {
+  width: 233px;
+  transition: 0.3s ease;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  .panelTitle {
     display: flex;
-    overflow: hidden;
-    flex-direction: column;
-    .panelTitle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 30px;
-      background: var(--datav-panel-title-bg);
-      color: #bcc9d4;
-      padding: 10px;
-      user-select: none;
-      .refreshBtn {
-        margin-left: 5px;
-        cursor: pointer;
-        transition: 0.2s;
-        &:hover {
-          color: var(--datav-main-color);
-        }
-      }
-      .closeBtn {
-        cursor: pointer;
-        transition: color 0.2s;
-        &:hover {
-          color: var(--datav-main-color);
-        }
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    background: var(--datav-panel-title-bg);
+    color: #bcc9d4;
+    padding: 10px;
+    user-select: none;
+    .refreshBtn {
+      margin-left: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      &:hover {
+        color: var(--datav-main-color);
       }
     }
-    &-wrapper {
-      flex: 1;
-      display: flex;
-      position: relative;
-      flex-direction: column;
-      overflow: hidden;
+    .closeBtn {
+      cursor: pointer;
+      transition: color 0.2s;
+      &:hover {
+        color: var(--datav-main-color);
+      }
     }
   }
+  &-wrapper {
+    flex: 1;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
+
 .shrink {
   width: 128px;
 }

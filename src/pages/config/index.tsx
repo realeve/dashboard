@@ -6,6 +6,7 @@ import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
 import BeautyPanel from './panel/beauty';
+import BusinessPanel from './panel/business';
 import FilterPanel from './panel/filterManager';
 // import Ruler from './ruler';
 import Setting, { IHideProps } from './panel/setting';
@@ -157,7 +158,13 @@ const Index = ({
       <HeaderComponent setHide={setHide} hide={hide} />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
-        <BeautyPanel setHide={setHide} hide={hide} />
+        <BusinessPanel
+          setHide={setHide}
+          hide={hide}
+          onAddPanel={(panel) => {
+            console.log(panel);
+          }}
+        />
         <FilterPanel setHide={setHide} hide={hide} />
         <ComponentPanel
           setHide={setHide}
