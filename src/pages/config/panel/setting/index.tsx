@@ -55,6 +55,7 @@ const Index = ({
 
   if (pageChart) {
     let config = panel.find((item) => item.id == selectedPanel[0]);
+
     pageChart = config.key !== GROUP_COMPONENT_KEY;
   }
 

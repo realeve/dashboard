@@ -5,10 +5,10 @@ import { useSetState } from 'react-use';
 import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
-import BeautyPanel from './panel/beauty';
+
 import BusinessPanel from './panel/business';
 import FilterPanel from './panel/filterManager';
-// import Ruler from './ruler';
+
 import Setting, { IHideProps } from './panel/setting';
 import Thumbnail from './thumbnail';
 import Toolbox from './toolbox';
@@ -22,6 +22,9 @@ import { ICommon, GROUP_COMPONENT_KEY, IPage, IPanelConfig } from '@/models/comm
 import * as R from 'ramda';
 
 import { Dispatch } from 'redux';
+
+import localforage from 'localforage';
+
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
@@ -65,11 +68,9 @@ const Index = ({
 
   useEffect(() => {
     // 存储
-    let res = window.localStorage.getItem('panel_show');
-    if (!res) {
-      return;
-    }
-    setHide(JSON.parse(res));
+    localforage.getItem<IHideProps>('panel_show').then((res) => {
+      res && setHide(res);
+    });
   }, []);
 
   const [hash, setHash] = useState(generateId());
@@ -113,7 +114,7 @@ const Index = ({
     }, 310);
 
     // 存储
-    window.localStorage.setItem('panel_show', JSON.stringify(hide));
+    localforage.setItem('panel_show', hide);
 
     return () => {
       window.clearTimeout(tid);

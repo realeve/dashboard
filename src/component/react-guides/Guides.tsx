@@ -11,7 +11,8 @@ import './guides.less';
 
 const GuidesElement = styled('div', GUIDES_CSS);
 
-export default class Guides extends React.PureComponent<GuidesProps, GuidesState>
+export default class Guides
+  extends React.PureComponent<GuidesProps, GuidesState>
   implements GuidesInterface {
   public static defaultProps: GuidesProps = {
     className: '',
@@ -23,7 +24,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
     snaps: [],
     onChangeGuides: () => {},
     displayDragPos: false,
-    dragPosFormat: v => v,
+    dragPosFormat: (v) => v,
   };
   public state: GuidesState = {
     guides: [],
@@ -111,7 +112,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
   public componentDidMount() {
     this.dragger = new Dragger(this.manager.getElement(), {
       container: document.body,
-      dragstart: e => {
+      dragstart: (e) => {
         const target = e.inputEvent.target;
         const datas = e.datas;
 
@@ -215,7 +216,7 @@ export default class Guides extends React.PureComponent<GuidesProps, GuidesState
       const displayPos = type === 'horizontal' ? [-40, nextPos] : [nextPos - 32, 0];
 
       this.displayElement.style.cssText += `transform:translate(${displayPos
-        .map(v => `${v}px`)
+        .map((v) => `${v}px`)
         .join(', ')})`;
 
       //   this.displayElement.innerHTML = `${dragPosFormat!(guidePos)}`;

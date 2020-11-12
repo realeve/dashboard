@@ -3,15 +3,15 @@ import * as db from '../services/db';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 import { TQuickTool } from '@/component/Editor/types';
-
 import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 
-const updatePanel = function* ({ panel, call, put }) {
+const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
   yield put({
     type: 'setStore',
     payload: {
       panel,
+      ...props,
     },
   });
 };
@@ -231,13 +231,7 @@ export default {
         panel: nextPanel,
         call,
         put,
-      });
-
-      yield put({
-        type: 'setStore',
-        payload: {
-          selectedPanel: [panelItem.id],
-        },
+        selectedPanel: [panelItem.id],
       });
     },
     *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
@@ -270,19 +264,13 @@ export default {
         panel: unpackPanel,
         call,
         put,
-      });
-
-      yield put({
-        type: 'setStore',
-        payload: {
-          selectedPanel: [],
-        },
+        selectedPanel: [],
       });
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
       let prevPanel = yield select((state) => state[namespace].panel);
       let panelItem = R.clone(panel);
-      console.log(panel);
+      // console.log(panel);
       panelItem = {
         showTitle: true,
         showBorder: true,
@@ -304,14 +292,8 @@ export default {
         panel: nextPanel,
         call,
         put,
-      });
-
-      // 默认选中最新添加的面板
-      yield put({
-        type: 'setStore',
-        payload: {
-          selectedPanel: [panel.id],
-        },
+        // 默认选中最新添加的面板
+        selectedPanel: [panel.id],
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {

@@ -37,6 +37,7 @@
     "js-beautify": "^1.13.0",
     "jstat": "^1.9.3",
     "keycon": "^0.8.0",
+    "localforage": "^1.9.0",
     "monaco-editor": "^0.20.0",
     "moveable": "^0.18.5",
     "moveable-helper": "^0.3.0",

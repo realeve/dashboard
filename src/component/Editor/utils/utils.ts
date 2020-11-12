@@ -11,6 +11,8 @@ import {
 import { IObject } from '@daybrush/utils';
 import { isFunction, isObject } from 'util';
 
+import localforage from 'localforage';
+
 export function prefix(...classNames: string[]) {
   return prefixNames(PREFIX, ...classNames);
 }
@@ -131,13 +133,12 @@ const key = 'datav_guide';
 export const guideDb = {
   save: (e) => {
     let res = { h: e.h.filter((item) => item > -100), v: e.v.filter((item) => item > -100) };
-    window.localStorage.setItem(key, JSON.stringify(res));
+    localforage.setItem(key, res);
   },
   load: (canvasSize) =>
-    JSON.parse(
-      window.localStorage.getItem(key) ||
-        `{"v":[${canvasSize.width / 2 + 44}],"h":[${canvasSize.height / 2 + 44}]}`,
-    ),
+    localforage
+      .getItem<IGuideProps>(key)
+      .then((res) => res || { v: [canvasSize.width / 2 + 44], h: [canvasSize.height / 2 + 44] }),
 };
 
 export interface IGuideProps {

@@ -1,8 +1,5 @@
-export const loadPanel = (key = 'panel') => {
-  let obj = JSON.parse(window.localStorage.getItem(key) || `[]`);
-  return obj;
-};
+import localforage from 'localforage';
 
-export const savePanel = (key = 'panel') => (panel) => {
-  window.localStorage.setItem(key, JSON.stringify(panel));
-};
+export const loadPanel: (key?: string) => Promise<unknown> = (key = 'panel') =>
+  localforage.getItem(key).then((res) => res || []);
+export const savePanel = (key = 'panel') => (panel) => localforage.setItem(key, panel);

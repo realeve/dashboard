@@ -1,6 +1,8 @@
 import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
 
+import localforage from 'localforage';
+
 export enum EResizeType {
   NONE = 'none', // 不缩放
   SCALE = 'scale', // 横纵向拉伸
@@ -42,11 +44,13 @@ export const getConfig = async (url) => {
     }
     return axios(option).then((config) => ({ type: 'online', ...config }));
   }
-  let { panel, page } = window.localStorage;
+  let panel = await localforage.getItem('panel'),
+    page = await localforage.getItem('page');
+
   if (!panel || !page) {
     return { type: 'error' };
   }
-  return { type: 'local', page: JSON.parse(page), panel: JSON.parse(panel) };
+  return { type: 'local', page, panel };
 };
 
 /**

@@ -245,13 +245,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
 
   componentWillMount() {
-    setTimeout(() => {
-      let initGuides: IGuideProps = guideDb.load({
+    setTimeout(async () => {
+      let initGuides: IGuideProps = await guideDb.load({
         width: this.props.width,
         height: this.props.height,
       });
-
-      // console.log(initGuides);
 
       this.setState({
         horizontalGuides: initGuides.h,
@@ -292,8 +290,18 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const { selectedTargets, zoom, guideVisible } = state;
 
     const { curTool: selectedMenu, width, height } = this.props;
-    const horizontalSnapGuides = [0, Number(height), Number(height) / 2, ...state.horizontalGuides];
-    const verticalSnapGuides = [0, Number(width), Number(width) / 2, ...state.verticalGuides];
+    const horizontalSnapGuides = [
+      0,
+      Number(height),
+      Number(height) / 2,
+      ...(state.horizontalGuides || []),
+    ];
+    const verticalSnapGuides = [
+      0,
+      Number(width),
+      Number(width) / 2,
+      ...(state.verticalGuides || []),
+    ];
     let unit = 50;
 
     if (zoom < 0.8) {

@@ -10,6 +10,8 @@ import {
 
 import { message } from 'antd';
 
+import localforage from 'localforage';
+
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // TODO 业务组件数据结构定义
 export interface IBusinessProps {
@@ -28,7 +30,7 @@ export interface IBusinessProps {
 const BUSINESS_KEY = 'business_list';
 
 const getLocalBusiness = async () => {
-  let data = JSON.parse(window.localStorage.getItem(BUSINESS_KEY) || '[]');
+  let data = await localforage.getItem<IBusinessProps[]>(BUSINESS_KEY).then((res) => res || []);
   return {
     rows: data.length,
     data,
@@ -43,10 +45,9 @@ const addLocaleBusiness = async (params: IBusinessProps) => {
   let { data, rows } = await getLocalBusiness();
   let startId = rows + 1;
   let nextParams = [...data, { id: startId, ...params }];
-  window.localStorage.setItem(BUSINESS_KEY, JSON.stringify(nextParams));
-  return {
+  return localforage.setItem(BUSINESS_KEY, JSON.stringify(nextParams)).then((e) => ({
     data: [{ affected_rows: 1 }],
-  };
+  }));
 };
 
 /**

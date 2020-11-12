@@ -6,7 +6,7 @@ import router from 'umi/router';
 // import router from './router';
 import * as R from 'ramda';
 export { DEV } from './setting';
-
+import localforage from 'localforage';
 export interface GlobalAxios {
   host: string;
   token: string;
@@ -80,12 +80,8 @@ export const loadUserInfo = (user) => {
     };
   }
 
-  user = JSON.parse(user);
   window.g_axios.token = user.token;
   return { token: user.token };
-
-  // let extraInfo: string = atob(user.token.split('.')[1]);
-  // userInfo.uid = JSON.parse(extraInfo).extra.uid;
 };
 
 // let refreshNoncer = () => {
@@ -96,12 +92,9 @@ export const loadUserInfo = (user) => {
 // };
 
 const saveToken = () => {
-  window.localStorage.setItem(
-    'user',
-    JSON.stringify({
-      token: window.g_axios.token,
-    }),
-  );
+  localforage.setItem('user', {
+    token: window.g_axios.token,
+  });
 };
 export interface AxiosError {
   message: string;
@@ -189,8 +182,7 @@ export let axios = ({ baseURL = host, ...option }) => {
   };
   // token为空时自动获取
   if (window.g_axios.token === '') {
-    let user: null | string = window.localStorage.getItem('user');
-    loadUserInfo(user);
+    localforage.getItem('user').then(loadUserInfo);
   }
 
   option = handleUrl(option);
