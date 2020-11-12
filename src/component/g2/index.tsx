@@ -6,15 +6,7 @@ import elementResizeEvent from 'element-resize-event';
 export default ({
   className = '',
   style = {},
-  option: {
-    data,
-    padding = [20, 20, 20, 20],
-    renderer = 'canvas',
-    onMount,
-    onConfigChange,
-    transformer,
-    ...props
-  },
+  option: { data, padding = [20, 20, 20, 20], renderer = 'canvas', onMount, transformer, ...props },
 }) => {
   const ref = useRef(null);
   const [chart, setChart] = useState(null);

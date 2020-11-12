@@ -1,6 +1,10 @@
 import { axios, DEV } from '@/utils/axios';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
+import { GROUP_COMPONENT_KEY, IPanelConfig, getGroupRect } from '@/models/common';
+
+import { message } from 'antd';
+
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // TODO 业务组件数据结构定义
 export interface IBusinessProps {
@@ -58,4 +62,79 @@ export const getTblBusiness = async () => {
     return getLocalBusiness();
   }
   // TODO 读取业务组件
+};
+
+// 获取基础配置：缩略图、标题
+export const getImage = (panels: IPanelConfig[]) => {
+  if (panels.length == 1) {
+    return { image: panels[0].image, title: panels[0].title };
+  }
+  let item =
+    panels.find(
+      (item) => ![GROUP_COMPONENT_KEY, 'text_single', 'image_single'].includes(item.key),
+    ) || R.last(panels);
+
+  return { title: item.title, image: item.image };
+};
+
+export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfig[]) => {
+  if (selectedPanel.length === 0) {
+    return [];
+  }
+
+  let panels = R.filter<IPanelConfig>((item) => selectedPanel.includes(item.id))(panel);
+  // 只选中了一个组件的导出
+  if (panels.length === 1) {
+    return panels;
+  }
+
+  // 选中多个组件时
+  let groups: string[] = R.pluck<string, IPanelConfig>('group', panels).filter(
+    (item: string | undefined) => item,
+  ) as string[];
+  groups = R.uniq(groups);
+
+  // 选中多个组件，未分组,需要手工将组件合并
+  if (groups.length === 0) {
+    let groupItem = getGroupRect();
+    let _panel = R.map((item: IPanelConfig) => ({ group: groupItem.id, ...item }))(panels);
+    return [groupItem, ..._panel];
+  }
+
+  // 选中多个分组的组件
+  if (groups.length > 1) {
+    return [];
+  }
+
+  // 组件在同一个分组中
+  if (selectedPanel.includes(groups[0])) {
+    return panels;
+  }
+
+  let groupPanel = R.find<IPanelConfig>(R.propEq('id', groups[0]))(panel);
+  return [groupPanel, ...panels];
+};
+
+// TODO 此处需要弹出面板，选择一级/二级列表，设置业务名称
+export const saveComponents = (panels: IPanelConfig[]) => {
+  if (panels.length === 0) {
+    message.error('业务保存需要确保组件在同一个分组内');
+    return;
+  }
+  let { title, image } = getImage(panels);
+  let config = JSON.stringify(panels);
+  let create_time = lib.now();
+
+  let option = {
+    config,
+    title,
+    image,
+    create_time,
+    creator: '管理员',
+    useage_times: 0,
+    update_time: create_time,
+    category_main: '生产',
+    category_sub: '综合',
+  };
+  console.log(option);
 };

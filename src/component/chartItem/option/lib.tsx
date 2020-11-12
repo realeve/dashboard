@@ -5,6 +5,7 @@ import * as Position from '@/component/field/Align/iconPosition';
 import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
 import { IChartConfig } from '@/component/chartItem/interface';
+import { tRender } from '@/component/echarts/';
 
 export interface IChart {
   key?: string;
@@ -438,7 +439,6 @@ export type tGl =
   | EChartsSeriesType;
 export let chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
 
-export type tRender = 'canvas' | 'svg';
 export let getRenderer: (params: {
   render?: tRender;
   type: string;

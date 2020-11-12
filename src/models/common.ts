@@ -24,19 +24,22 @@ const updatePage = function* ({ page, call, put }) {
   });
 };
 
-const copyArray = (idx, array) => {
+const copyArray = (idx: number, array: IPanelConfig[]) => {
   let arr = R.clone(array);
   let newItem = R.nth(idx, array);
+  let _arr = R.clone(array);
 
   // 处理成组组件复制的问题
   let childrenArr = [],
     isGroup = newItem.key === GROUP_COMPONENT_KEY;
   if (isGroup) {
-    childrenArr = R.filter(R.propEq('group', newItem.id))(R.clone(array));
+    childrenArr = R.filter<IPanelConfig>(R.propEq<string>('group', newItem.id))(
+      _arr,
+    ) as IPanelConfig[];
   }
   newItem.id = lib.noncer();
   if (isGroup) {
-    childrenArr = R.map((item) => {
+    childrenArr = R.map<IPanelConfig, IPanelConfig>((item) => {
       item.group = newItem.id;
       item.id = lib.noncer();
       return item;
@@ -49,7 +52,7 @@ const copyArray = (idx, array) => {
 // 分组组件的key
 export const GROUP_COMPONENT_KEY = 'group_rect';
 
-export const getGroupRect = () => {
+export const getGroupRect: () => IPanelConfig = () => {
   let id = lib.noncer();
   return {
     id,
@@ -69,9 +72,9 @@ export interface IPanelStyle {
   transform: string;
 }
 export interface IPanelConfig {
-  type: string; //类型
+  type?: string; //类型
   title: string; //标题
-  image: string; // 缩略图
+  image?: string; // 缩略图
   id: string; // 自动生成的ID
   icon?: string; // 图标
   style?: IPanelStyle;
@@ -221,22 +224,24 @@ export default {
     },
     *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
       let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      let item = R.find(R.propEq('id', id))(prevPanel);
+      let item = R.find<IPanelConfig>(R.propEq('id', id))(prevPanel);
       const isGroupComponent = item.key === GROUP_COMPONENT_KEY;
 
       // 当前的groupId,测试是否有空组
       let groupId = item.group;
 
-      let unpackPanel = isGroupComponent ? R.reject(R.propEq('id', id))(prevPanel) : prevPanel;
+      let unpackPanel = isGroupComponent
+        ? R.reject(R.propEq<string>('id', id))(prevPanel)
+        : prevPanel;
 
       // 支持将组内的数据清除
-      unpackPanel = R.map<IPanelConfig>(({ group, ...item }) =>
+      unpackPanel = R.map(({ group, ...item }: IPanelConfig) =>
         group === id || (!isGroupComponent && item.id === id) ? item : { group, ...item },
       )(unpackPanel);
 
       // 判断从组内item取消时，是否有空组;
       if (!isGroupComponent) {
-        let unpackItem = R.find(R.propEq('group', groupId))(unpackPanel);
+        let unpackItem = R.find(R.propEq<string>('group', groupId))(unpackPanel);
         if (!unpackItem) {
           // 如果存在空组,删除group;
           unpackPanel = R.reject(R.propEq('id', groupId))(unpackPanel);
@@ -295,9 +300,9 @@ export default {
       let prevPanel = yield select((state) => state[namespace].panel);
 
       // 移除打包组件需要考虑一并移除子组件
-      let nextPanel = R.filter((item) => !idx.includes(item.id) && !idx.includes(item.group))(
-        prevPanel,
-      );
+      let nextPanel = R.filter<IPanelConfig>(
+        (item) => !idx.includes(item.id) && !idx.includes(item.group),
+      )(prevPanel);
 
       // 默认选中最新添加的面板
       yield put({

@@ -1,6 +1,7 @@
 import React from 'react';
 // 此处导入你所需要的自定义组件
 import { DigitalScroll } from '@/component/widget';
+import { ICountUp } from '@/component/widget/DigitalScroll';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {
@@ -101,7 +102,11 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ option: { data, x = 0, ...props } }) => {
+interface IScrollConfig extends ICountUp {
+  data: { data: any[][] };
+  x: number;
+}
+export default ({ option: { data, x = 0, ...props } }: { option: IScrollConfig }) => {
   let value = Number(data.data[0][x]);
   return <DigitalScroll value={value} {...props} />;
 };

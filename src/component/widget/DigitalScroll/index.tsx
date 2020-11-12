@@ -4,13 +4,11 @@ import { CountUpProps } from 'react-countup';
 import classnames from 'classnames';
 import { useInterval } from 'react-use';
 import { thouandsNum } from '@/utils/lib';
-import { textColor } from '@/component/chartItem/option';
-
 export interface ICountUp extends CountUpProps {
   title: string;
   value: number;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+  prefix?: string;
+  suffix?: string;
   decimals?: number;
   className?: string;
   style?: React.CSSProperties;
@@ -43,7 +41,7 @@ export default ({
   duration = 0.8,
   theme = 'theme1',
   outlineColor = '#0f396b',
-  padding=15,
+  padding = 15,
   scale = 1.2,
 }: ICountUp) => {
   const [inited, setInited] = useState(false);
@@ -88,7 +86,7 @@ export default ({
                     backgroundPosition: `0 ${-numId[num] * 61.1}px`, //58
                     transitionDuration: `${duration} s`,
                     transform: `scale(${scale})`,
-                    outlineColor
+                    outlineColor,
                   }}
                 />
               </div>

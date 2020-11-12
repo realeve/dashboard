@@ -10,7 +10,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { BorderItem } from '@/component/widget';
 import { Skeleton } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
-
+import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
 
 const Item = ({
@@ -66,7 +66,7 @@ const Item = ({
   }
 
   // defaultOption 可能为函数，由config计算得出
-  let appendConfig = { renderer: 'canvas' };
+  let appendConfig: { renderer: tRender } = { renderer: 'canvas' };
   if (defaultOption) {
     appendConfig = R.type(defaultOption) == 'Function' ? defaultOption(config) : defaultOption;
   }
@@ -120,10 +120,10 @@ const Index = ({
 }: {
   chartid: string;
   page: IPage;
-  panel: IPanelConfig;
+  panel: IPanelConfig[];
 }) => {
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
-  let config = R.find<IPanelConfig[]>(R.propEq('id', chartid))(panel) as IPanelConfig;
+  let config = R.find<IPanelConfig>(R.propEq<string>('id', chartid))(panel);
 
   let page = R.clone(_page);
   if (config.useGeneralStyle) {

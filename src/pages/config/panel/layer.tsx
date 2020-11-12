@@ -9,7 +9,10 @@ import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import ContentEditable from 'react-contenteditable';
 
+import { IHideProps, TFnHide } from './setting';
+
 import { message } from 'antd';
+import { Dispatch } from 'redux';
 
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
@@ -225,12 +228,21 @@ const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction }) => {
   );
 };
 
-const getShowedPanel = (panel) => {
-  let folds = R.compose(R.pluck('id'), R.filter(R.propEq('fold', true)))(panel);
-  return R.reject((item) => folds.includes(item.group))(panel);
+const getShowedPanel = (panel: IPanelConfig[]) => {
+  let foldPanel = R.filter(R.propEq<string>('fold', true))(panel);
+  let folds = R.pluck('id', foldPanel);
+  return R.reject<IPanelConfig>((item) => folds.includes(item.group))(panel);
 };
 
-const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...props }) => {
+interface ILayerProps {
+  hide: IHideProps;
+  setHide: TFnHide;
+  panel: IPanelConfig[];
+  selectedPanel: string[];
+  onRemove: (e: string[]) => void;
+  dispatch: Dispatch;
+}
+const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILayerProps) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState<number[]>([]);
@@ -245,7 +257,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     return _selected;
   };
 
-  const [showPanel, setShowPanel] = useState([]);
+  const [showPanel, setShowPanel] = useState<IPanelConfig[]>([]);
 
   useEffect(() => {
     let nextPanel = getShowedPanel(panel);
@@ -289,12 +301,9 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
       return;
     }
 
-    const items: { key: string; id: string; group: string }[] = reorder(showPanel, from, to);
-
-    let groupPanels = R.compose(
-      R.pluck('id'),
-      R.filter(R.propEq('key', GROUP_COMPONENT_KEY)),
-    )(items);
+    const items: IPanelConfig[] = reorder(showPanel, from, to);
+    let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
+    let groupPanels = R.pluck('id', _groupPanel);
 
     let groupId = null,
       needUpdate = items[to].id,
@@ -307,18 +316,18 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     }
 
     // 不包含子元素的列表
-    let _panel = R.reject((item) => groupPanels.includes(item.group))(items);
+    let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
 
     // 最终结果
     let _nextPanel: {}[] = [];
 
-    _panel.forEach((item: { key: string; id: string }) => {
+    _panel.forEach((item: IPanelConfig) => {
       if (needUpdate == item.id && groupId) {
         item.group = groupId;
       }
       if (item.key === GROUP_COMPONENT_KEY) {
         // 处理组内移动
-        let childrenPanel = R.filter(R.propEq('group', item.id))(
+        let childrenPanel = R.filter(R.propEq<string>('group', item.id))(
           groupItem == item.id ? items : panel,
         ) as {}[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
@@ -341,10 +350,10 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
     // 处理整组数据的更新;
     let idxList = [idx];
     if (isGroup) {
-      idxList = R.compose(
-        R.pluck('id'),
-        R.filter((item) => [item.id, item.group].includes(idx)),
-      )(panel);
+      let childrenPanel = R.filter<IPanelConfig>((item) => [item.id, item.group].includes(idx))(
+        panel,
+      );
+      idxList = R.pluck('id', childrenPanel);
     }
 
     dispatch({
@@ -616,8 +625,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch, ...pro
                             }
 
                             let idList = [id, nextId].sort();
-                            let idx = R.range(idList[0], idList[1] + 1);
-                            nextPanel = R.compose(R.pluck('id'), R.values, R.pick(idx))(showPanel);
+                            let _panels = R.slice(idList[0], idList[1] + 1)(showPanel);
+                            nextPanel = R.pluck('id', _panels);
                           }
 
                           // 需处理分组的逻辑，存在互斥；
