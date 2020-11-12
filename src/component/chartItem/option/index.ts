@@ -205,3 +205,12 @@ export { text_single };
 */
 import * as wave_effect from './other/wave_effect';
 export { wave_effect };
+
+/*
+    时间：2020-11-12 14:49:22
+    类型: other
+    序号：29
+    名称：全屏
+*/
+import * as fullscreen from './other/fullscreen';
+export { fullscreen }; 
