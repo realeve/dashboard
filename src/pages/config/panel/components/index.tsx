@@ -5,7 +5,7 @@ import TabComponent from './TabComponent';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 
-export default ({ setHide, hide, onAddPanel }) => {
+export default ({ setHide, hide, onAddPanel, onAddBusiness }) => {
   return (
     <div
       className={classnames(styles['component-panel-wp'], {

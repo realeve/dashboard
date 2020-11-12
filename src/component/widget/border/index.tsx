@@ -24,7 +24,9 @@ export default ({
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
 
-  if (!showBorder && !showBackground) {
+  // 11-12
+  // 只在首页直接显示，在config配置页需要显示父层div，否则无法编辑
+  if (!showBorder && !showBackground && window.location.pathname == '/') {
     return children;
   }
 
