@@ -4,12 +4,11 @@ import classnames from 'classnames';
 
 export { ImgSelector } from '@/pages/config/panel/setting/page';
 
-export default ({ title = null, children = null, style = {} }) => {
+export default ({ title = null, children = null, style = {}, titleWidth = 100 }) => {
   return (
     <div className={styles.field} style={style}>
       {title && (
-        <div title={title} className={styles.title}>
-          <i className="datav-gui-field-show-placeholder" />
+        <div title={title} className={styles.title} style={{ width: titleWidth }}>
           {title}
         </div>
       )}

@@ -121,9 +121,10 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
 };
 
 // TODO 此处需要弹出面板，选择一级/二级列表，设置业务名称
-export const getSaveOption: (panel: IPanelConfig[]) => IBusinessProps | null = (
-  panels: IPanelConfig[],
-) => {
+export const getSaveOption: (
+  panel: IPanelConfig[],
+  business: IBusinessCategory | null,
+) => IBusinessProps | null = (panels: IPanelConfig[], business) => {
   if (panels.length === 0) {
     message.error('业务保存需要确保组件在同一个分组内');
     return null;
@@ -140,8 +141,8 @@ export const getSaveOption: (panel: IPanelConfig[]) => IBusinessProps | null = (
     creator: '管理员',
     useage_times: 0,
     update_time: create_time,
-    category_main: '生产',
-    category_sub: '综合',
+    category_main: business?.title,
+    category_sub: business?.list?.[0],
   };
   return option;
 };

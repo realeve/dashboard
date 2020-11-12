@@ -19,22 +19,19 @@
   background: var(--datav-gui-background-color-front);
 
   .title {
-    flex: 1;
-    // height: var(--datav-gui-component-height);
     line-height: var(--datav-gui-component-height);
+    width: 100px;
     padding-right: 5px;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    // display: flex;
-    // align-items: center;
   }
   .notitle {
     width: 100% !important;
   }
   .container {
-    width: var(--datav-gui-component-container-width);
+    // width: var(--datav-gui-component-container-width);
+    flex: 1;
     .component {
       width: 100%;
       min-height: var(--datav-gui-component-height);
