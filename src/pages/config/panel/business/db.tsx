@@ -45,7 +45,7 @@ const addLocaleBusiness = async (params: IBusinessProps) => {
   let { data, rows } = await getLocalBusiness();
   let startId = rows + 1;
   let nextParams = [...data, { id: startId, ...params }];
-  return localforage.setItem(BUSINESS_KEY, JSON.stringify(nextParams)).then((e) => ({
+  return localforage.setItem(BUSINESS_KEY, nextParams).then((e) => ({
     data: [{ affected_rows: 1 }],
   }));
 };

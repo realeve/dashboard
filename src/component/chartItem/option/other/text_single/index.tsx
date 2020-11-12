@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 // 此处导入你所需要的自定义组件
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
@@ -117,6 +117,12 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
       },
     });
   };
+
+  useEffect(() => {
+    if (text.current !== content) {
+      text.current = content;
+    }
+  }, [content]);
 
   return (
     <ContentEditable
