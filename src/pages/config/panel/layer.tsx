@@ -288,6 +288,11 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
     // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
     // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
     if (showPanel[to].group) {
+      // 2020-11-12 此处需要判断对应的类型是否为分组，暂时不支持多层分组；取消此处即可打开，但需要处理点击页面时父组件的选择；
+      if (panel[from].key !== GROUP_COMPONENT_KEY) {
+        return;
+      }
+
       let _nextPanel = R.clone(panel);
       _nextPanel[from].group = _nextPanel[to].group;
       let distPanel = reorder(_nextPanel, from, to);

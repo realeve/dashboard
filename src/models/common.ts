@@ -216,6 +216,10 @@ export default {
       let panelItem = getGroupRect();
 
       let idx = R.findIndex<IPanelConfig>((item) => item.id === panel[0])(prevPanel);
+      // :bug: 当只有1项时，idx-1 ==0，在最前方添加组
+      if (idx == 0) {
+        idx = 1;
+      }
 
       let nextPanel = R.insert(idx - 1, panelItem, prevPanel);
 
