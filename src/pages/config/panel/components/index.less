@@ -18,31 +18,37 @@
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  .panelTitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 30px;
-    background: var(--datav-panel-title-bg);
-    color: #bcc9d4;
-    padding: 10px;
-    user-select: none;
-    .refreshBtn {
-      margin-left: 5px;
-      cursor: pointer;
-      transition: 0.2s;
-      &:hover {
-        color: var(--datav-main-color);
-      }
+  position: relative;
+
+  :global {
+    .ant-tabs-nav-wrap {
+      background: var(--datav-panel-title-bg);
     }
-    .closeBtn {
-      cursor: pointer;
-      transition: color 0.2s;
-      &:hover {
-        color: var(--datav-main-color);
+    .ant-tabs-tab {
+      padding: 0;
+      margin: 0 4px;
+      user-select: none;
+      &-btn {
+        color: #bcc9d4;
+        font-size: 14px;
+        padding: 4px 5px;
       }
     }
   }
+
+  .closeBtn {
+    cursor: pointer;
+    transition: color 0.2s;
+    &:hover {
+      color: var(--datav-main-color);
+    }
+    position: absolute;
+    right: 5px;
+    z-index: 1;
+    top: 3px;
+    color: #ddd;
+  }
+
   &-wrapper {
     flex: 1;
     display: flex;

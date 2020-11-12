@@ -17,7 +17,6 @@ import SavePanel from '../business/SavePanel';
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
 export interface IHideProps {
-  beauty: boolean;
   components: boolean;
   config: boolean;
   filter: boolean;
