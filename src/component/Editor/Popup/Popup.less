@@ -10,6 +10,21 @@
     transform: translateZ(15px);
     background: rgba(0, 0, 0, 0.2);
   }
+  .ant-btn {
+    min-width: 90px;
+  }
+  .ant-btn-primary {
+    background: var(--datav-main-hover-color);
+  }
+  .ant-btn-ghost {
+    border: 1px solid var(--datav-main-color);
+    color: var(--datav-main-color);
+    &:hover {
+      background: var(--datav-main-hover-color);
+      border-color: var(--datav-main-hover-color);
+      color: #fff;
+    }
+  }
 
   .scena-popup {
     position: absolute;
@@ -130,5 +145,20 @@
     border: 1px solid #fff;
     vertical-align: top;
     margin: 0px 5px;
+  }
+  .scena-footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    position: relative;
+  }
+  .scena-footer-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 1px;
+    width: 100%;
+    border-top: 1px solid #3a4659;
   }
 }

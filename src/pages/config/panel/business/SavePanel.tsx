@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import Popup from '@/component/Editor/Popup/Popup';
+import Popup, { PopupFooter } from '@/component/Editor/Popup/Popup';
 import FieldComponent from '@/component/field';
 import Radio, { Select } from '@/component/field/Radio';
 import styles from './SavePanel.less';
-import { getSaveOption, getSelectedComponent, IBusinessProps } from './db';
+import { getSaveOption, getSelectedComponent, IBusinessProps, addTblBusiness } from './db';
 import { IPanelConfig, IBusinessCategory } from '@/models/common';
 import { useSetState } from 'react-use';
-import { Button, Spin } from 'antd';
+import { Button, message, Spin } from 'antd';
 import * as R from 'ramda';
 
 const FieldStyle = { background: 'unset' };
@@ -50,7 +50,19 @@ export default ({ show, onClose, selectedPanel, panel, businessCategory }: ISave
   useEffect(onLoad, [show]);
 
   const saveComponent = () => {
-    console.log(option);
+    addTblBusiness(option)
+      .then(({ data: [{ affected_rows }] }) => {
+        if (affected_rows > 0) {
+          reset();
+          message.success('业务组件保存成功');
+        }
+      })
+      .catch((e) => {
+        message.warn('业务组件保存失败');
+      });
+  };
+
+  const reset = () => {
     setCateIdx(0);
     onClose();
     setThumb([]);
@@ -118,13 +130,14 @@ export default ({ show, onClose, selectedPanel, panel, businessCategory }: ISave
               />
             </Field>
 
-            <div
-              style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}
-            >
-              <Button type="primary" style={{ width: 120 }} onClick={saveComponent}>
+            <PopupFooter>
+              <Button type="ghost" onClick={reset}>
+                取消
+              </Button>
+              <Button type="primary" style={{ width: 120, marginLeft: 20 }} onClick={saveComponent}>
                 保存
               </Button>
-            </div>
+            </PopupFooter>
           </div>
         )}
       </Popup>
