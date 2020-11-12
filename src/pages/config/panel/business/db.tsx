@@ -1,7 +1,12 @@
 import { axios, DEV } from '@/utils/axios';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
-import { GROUP_COMPONENT_KEY, IPanelConfig, getGroupRect } from '@/models/common';
+import {
+  GROUP_COMPONENT_KEY,
+  IPanelConfig,
+  getGroupRect,
+  IBusinessCategory,
+} from '@/models/common';
 
 import { message } from 'antd';
 
@@ -116,10 +121,12 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
 };
 
 // TODO 此处需要弹出面板，选择一级/二级列表，设置业务名称
-export const saveComponents = (panels: IPanelConfig[]) => {
+export const getSaveOption: (panel: IPanelConfig[]) => IBusinessProps | null = (
+  panels: IPanelConfig[],
+) => {
   if (panels.length === 0) {
     message.error('业务保存需要确保组件在同一个分组内');
-    return;
+    return null;
   }
   let { title, image } = getImage(panels);
   let config = JSON.stringify(panels);
@@ -136,5 +143,13 @@ export const saveComponents = (panels: IPanelConfig[]) => {
     category_main: '生产',
     category_sub: '综合',
   };
-  console.log(option);
+  return option;
 };
+
+/**
+ * 读取业务列表
+ */
+export const getTblBusinessCategory: () => Promise<IBusinessCategory[]> = () =>
+  axios({
+    url: window.location.origin + '/business_category.json',
+  });

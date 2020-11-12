@@ -24,15 +24,16 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 # 2020-11-03讨论
 
 ---
-1.新增业务路由（原有增加） business，用于业务组件配置成dashboard
-差异在于：
+~~1.新增业务路由（原有增加） business，用于业务组件配置成dashboard~~
+~~差异在于：~~
 接口不允许 设置
 组件列表用业务列表代替，可首字母检索
-基于config路由的代码来渲染
+~~基于config路由的代码来渲染~~
 
 2.config增加
 (1)入库保存业务组件的功能；
 开发时考虑到mock数据；
+
 表1：（id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 
 表2：使用dashboard/业务id
@@ -40,7 +41,8 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
 
  
-(3)多个组件编组保存 
+~~(3)多个组件编组保存~~
+
 (4)增加预览功能
 
 （５）调试错误处理
@@ -50,10 +52,13 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 －－－
 
-4.渲染（index路由）
-（1）有参数时加载json，加载完毕json文件后，列出有多少业务id
-（2）自适应 left/top/宽/高 相对于1920*1080来讲;例如把style缩放至3840*2160;
-（3）预览功能；无参数时预览，读取本机localstorage  / panel 数据
+~~4.渲染（index路由）~~
+~~（1）有参数时加载json，加载完毕json文件后，列出有多少业务id~~
+
+~~（2）自适应 left/top/宽/高 相对于1920*1080来讲;例如把style缩放至3840*2160;~~
+
+~~（3）预览功能；无参数时预览，读取本机localstorage  / panel 数据~~
+
 (4)多个大屏切换
  a.单个大屏，直接渲染
  b.数组: Tab/轮询
@@ -102,4 +107,4 @@ id/最近发送时间，时长；
 
 ---
 
-左右横屏，上下留边;
+~~左右横屏，上下留边;~~

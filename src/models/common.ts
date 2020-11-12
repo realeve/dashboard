@@ -4,6 +4,8 @@ import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 import { TQuickTool } from '@/component/Editor/types';
 
+import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
+
 const updatePanel = function* ({ panel, call, put }) {
   yield call(db.savePanel(), panel);
   yield put({
@@ -122,11 +124,17 @@ const panelGeneral: ICommonConfig = {
   },
 };
 
+export interface IBusinessCategory {
+  title: string;
+  icon: string;
+  list: string[];
+}
 export interface ICommon {
-  panel: IPanelConfig[];
-  selectedPanel: string[];
-  page: Partial<IPage>;
+  panel: IPanelConfig[]; // 配置页面中面板列表
+  selectedPanel: string[]; // 当前选中面板
+  page: Partial<IPage>; // 当前页面设置
   curTool: TQuickTool; // 当前的工具
+  businessCategory: IBusinessCategory[]; //业务组件两级分类
 }
 const defaultState: ICommon = {
   panel: [],
@@ -138,6 +146,7 @@ const defaultState: ICommon = {
     ...panelGeneral,
   },
   curTool: 'MoveTool',
+  businessCategory: [],
 };
 
 export default {
@@ -147,6 +156,15 @@ export default {
     setStore,
   },
   effects: {
+    *loadBusinessCategory({}, { put, call }) {
+      let businessCategory = yield call(getTblBusinessCategory);
+      yield put({
+        type: 'setStore',
+        payload: {
+          businessCategory,
+        },
+      });
+    },
     *loadPanel({}, { put, call }) {
       let panel = yield call(db.loadPanel);
       yield put({
@@ -360,14 +378,19 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      dispatch({
-        type: 'loadPanel',
-      });
-      dispatch({
-        type: 'loadPage',
-      });
-      return history.listen(() => {
-        // 地址变更
+      return history.listen(({ pathname }) => {
+        // 配置页时才加载信息，首页不加载
+        if (['/config'].includes(pathname)) {
+          dispatch({
+            type: 'loadPanel',
+          });
+          dispatch({
+            type: 'loadPage',
+          });
+          dispatch({
+            type: 'loadBusinessCategory',
+          });
+        }
       });
     },
   },

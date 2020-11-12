@@ -3,6 +3,6 @@ export const loadPanel = (key = 'panel') => {
   return obj;
 };
 
-export const savePanel = (key = 'panel') => panel => {
+export const savePanel = (key = 'panel') => (panel) => {
   window.localStorage.setItem(key, JSON.stringify(panel));
 };

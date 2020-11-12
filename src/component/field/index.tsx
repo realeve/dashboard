@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 export { ImgSelector } from '@/pages/config/panel/setting/page';
 
-export default ({ title = null, children = null, style = {}, ...props }) => {
+export default ({ title = null, children = null, style = {} }) => {
   return (
     <div className={styles.field} style={style}>
       {title && (

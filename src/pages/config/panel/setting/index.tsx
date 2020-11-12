@@ -3,11 +3,16 @@ import styles from './index.less';
 import classnames from 'classnames';
 import Page from './page';
 import { connect } from 'dva';
-import { ICommon, GROUP_COMPONENT_KEY, IPanelConfig, IPage, getGroupRect } from '@/models/common';
+import {
+  ICommon,
+  GROUP_COMPONENT_KEY,
+  IPanelConfig,
+  IPage,
+  IBusinessCategory,
+} from '@/models/common';
 import Config from './config';
 import { Dispatch } from 'redux';
-
-import { saveComponents, getSelectedComponent } from '../business/db';
+import SavePanel from '../business/SavePanel';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
@@ -32,6 +37,7 @@ export interface ISettingProps {
   onChange: (e: any, type: string) => void;
   page: IPage;
   dispatch: Dispatch;
+  businessCategory: IBusinessCategory[];
 }
 const Index = ({
   setHide,
@@ -40,8 +46,11 @@ const Index = ({
   panel,
   onChange,
   page,
+  businessCategory,
   dispatch,
 }: ISettingProps) => {
+  const [show, setShow] = useState<boolean>(false);
+
   let pageChart = selectedPanel.length == 1;
 
   if (pageChart) {
@@ -59,11 +68,6 @@ const Index = ({
     }
     setShouldSave(true);
   }, [selectedPanel.length]);
-
-  const onSaveComponent = () => {
-    let panels = getSelectedComponent(selectedPanel, panel);
-    saveComponents(panels);
-  };
 
   return (
     <div
@@ -83,10 +87,22 @@ const Index = ({
           <Page dispatch={dispatch} page={page} />
         )}
       </div>
+
+      {/* 保存组件面板 */}
+      <SavePanel
+        show={show}
+        onClose={() => {
+          setShow(false);
+        }}
+        panel={panel}
+        selectedPanel={selectedPanel}
+        businessCategory={businessCategory}
+      />
+
       {shouldSave && (
         <div
           className={styles.bottom}
-          onClick={onSaveComponent}
+          onClick={() => setShow(true)}
           style={{ outline: '1px solid #aaa', background: 'transparent' }}
         >
           保存为业务组件
@@ -106,8 +122,4 @@ const Index = ({
   );
 };
 
-export default connect(({ common }: { common: ICommon }) => ({
-  panel: common.panel,
-  selectedPanel: common.selectedPanel,
-  page: common.page,
-}))(Index);
+export default connect(({ common }: { common: ICommon }) => common)(Index);

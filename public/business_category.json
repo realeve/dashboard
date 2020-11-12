@@ -1,0 +1,22 @@
+[
+  {
+    "title": "印刷",
+    "icon": "icon-com-regular",
+    "list": ["胶印", "凹印", "印码", "丝印", "检封", "综合管理", "生产", "质量"]
+  },
+  {
+    "title": "纸张",
+    "icon": "datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
+    "list": ["工艺", "机检", "抄造", "成品"]
+  },
+  {
+    "title": "综合管理",
+    "icon": "icon-com-media",
+    "list": ["绩效指标", "成本"]
+  },
+  {
+    "title": "其它",
+    "icon": "icon-com-decorate",
+    "list": ["能源", "设备"]
+  }
+]
