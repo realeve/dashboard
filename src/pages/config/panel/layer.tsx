@@ -115,11 +115,11 @@ const MENU_LIST = [
     action: MENU_ACTIONS.REMOVE,
     icon: 'icon-delete',
   },
-  {
-    title: '收藏',
-    action: MENU_ACTIONS.FAVORITE,
-    icon: 'icon-favorite',
-  },
+  // {
+  //   title: '收藏',
+  //   action: MENU_ACTIONS.FAVORITE,
+  //   icon: 'icon-favorite',
+  // },
   {
     icon: 'divider3',
   },
@@ -431,10 +431,10 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
         onRemove?.([index]);
         break;
 
-      // TODO 组件收藏功能
-      case MENU_ACTIONS.FAVORITE:
-        message.success('该功能待添加。id:' + index);
-        break;
+      // TODO 组件收藏功能（暂时不做）
+      // case MENU_ACTIONS.FAVORITE:
+      //   message.success('该功能待添加。id:' + index);
+      //   break;
 
       case MENU_ACTIONS.GROUP:
         // 暂不允许多重编组
@@ -467,6 +467,8 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
     switch (item.action) {
       case MENU_ACTIONS.GROUP:
         return selected.length <= 1;
+
+      // TODO 已知BUG，取消编组功能目前出错
       case MENU_ACTIONS.UN_GROUP:
         // 当前选择项
         if (selected.length !== 1) {

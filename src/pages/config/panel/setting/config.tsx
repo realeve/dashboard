@@ -214,7 +214,9 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
           panel={panel[selectedIdx]}
         />
       </Tabs.TabPane>
-      {panel[selectedIdx].ajax && (
+
+      {/* 业务组件不允许设置ajax，此处新增字段需要与不发起ajax做区分 */}
+      {panel[selectedIdx].ajax && !panel[selectedIdx].business && (
         <Tabs.TabPane tab="接口配置" key="3">
           <ApiSetting
             onChange={(api) => {

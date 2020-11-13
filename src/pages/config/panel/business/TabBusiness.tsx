@@ -31,9 +31,12 @@ const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (busi
 
   // 只有一项时，无分组信息，直接修改id即可;
   if (items.length === 1) {
-    items[0].id = groupId;
-    // 更新标题为业务组件标题
-    items[0].title = business.title;
+    items[0] = {
+      ...items[0],
+      id: groupId,
+      title: business.title,
+      business: true,
+    };
     return items;
   }
 
@@ -45,6 +48,7 @@ const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (busi
     ...items[groupIdx],
     title: business.title,
     id: groupId,
+    business: true,
   };
 
   items = items.map((item) => {
@@ -53,6 +57,7 @@ const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (busi
       item.group = groupId;
       // 子项的Id也需要更新
       item.id = lib.noncer();
+      item.business = true;
     }
     return item;
   });

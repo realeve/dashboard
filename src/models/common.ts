@@ -83,6 +83,8 @@ export interface IPanelConfig {
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
 
+  business?: boolean; // 是否为业务组件，业务组件不允许调节ajax信息
+
   group?: string; // 父组件
   fold?: boolean; // 是否折叠
 

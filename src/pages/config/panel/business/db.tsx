@@ -13,7 +13,7 @@ import { message } from 'antd';
 import localforage from 'localforage';
 
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
-// TODO 业务组件数据结构定义
+// [ x ] 业务组件数据结构定义
 export interface IBusinessProps {
   id?: string; // 服务端 生成
   title: string; // 标题(弹出面板)
@@ -67,7 +67,7 @@ export const getTblBusiness = async () => {
   if (DEV) {
     return getLocalBusiness();
   }
-  // TODO 读取业务组件
+  // TODO 从数据库读取业务组件
 };
 
 // 获取基础配置：缩略图、标题
@@ -121,7 +121,7 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
   return [groupPanel, ...panels];
 };
 
-// TODO 此处需要弹出面板，选择一级/二级列表，设置业务名称
+// [ x ] 此处需要弹出面板，选择一级/二级列表，设置业务名称
 export const getSaveOption: (
   panel: IPanelConfig[],
   business: IBusinessCategory | null,
