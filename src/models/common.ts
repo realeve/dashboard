@@ -121,6 +121,7 @@ export interface IPage extends ICommonConfig {
   screen_y: number; // 屏幕数量，Y轴
   screen_edge_width: number; //屏幕拼接边缘宽度
   showEdgeTag: boolean; //是否显示拼接位置标签
+  showEdge: boolean; //显示拼接区域
 }
 
 /**
@@ -172,6 +173,7 @@ const defaultState: ICommon = {
     screen_x: 4, // 横向4块屏
     screen_y: 4, // 纵向4块屏
     showEdgeTag: true, // 默认显示拼接标签
+    showEdge: true, //是否显示拼接区域
     ...panelGeneral,
   },
   curTool: 'MoveTool',

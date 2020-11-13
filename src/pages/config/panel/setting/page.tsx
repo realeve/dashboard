@@ -227,6 +227,18 @@ export const ComponentConfig = ({
             unCheckedChildren="隐藏"
           />
         </Field>
+        <Field title="拼接线">
+          <Switch
+            checked={page.showEdge}
+            onChange={(showEdge) => {
+              updatePage({
+                showEdge,
+              });
+            }}
+            checkedChildren="显示"
+            unCheckedChildren="隐藏"
+          />
+        </Field>
       </Panel>
     )}
     <Panel header="组件" key="组件">

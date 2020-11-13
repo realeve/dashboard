@@ -415,7 +415,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               onChange={this.props.onChange}
               selectedMenu={this.props.curTool}
             />
-            <ScreenEdge page={this.props.page} />
+            {this.props.page.showEdge && <ScreenEdge page={this.props.page} />}
           </Viewport>
         </InfiniteViewer>
         <Selecto
