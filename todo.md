@@ -27,7 +27,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 ~~1.新增业务路由（原有增加） business，用于业务组件配置成dashboard~~
 ~~差异在于：~~
 ~~接口不允许 设置~~
-组件列表用业务列表代替，可首字母检索
+- [ ] 组件列表用业务列表代替，可首字母检索
 ~~基于config路由的代码来渲染~~
 
 2.config增加
@@ -36,9 +36,9 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 ~~表1：（id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间~~
 
-表2：使用dashboard/业务id
+- [ ] 表2：使用dashboard/业务id
 
-(2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
+- [ ] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
 
  
 ~~(3)多个组件编组保存~~
@@ -59,7 +59,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 ~~（3）预览功能；无参数时预览，读取本机localstorage  / panel 数据~~
 
-(4)多个大屏切换
+- [ ] (4)多个大屏切换
  a.单个大屏，直接渲染
  b.数组: Tab/轮询
   c.json = [{
@@ -71,19 +71,19 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
  }]
 
 5.组件
-(1)增加当前 时间／全屏功能按钮；
-(2)tab组件
+- [ ] (1)增加当前 时间／全屏功能按钮；
+(- [ ] 2)tab组件
 
-标题/dashboard1/dashboard2
-（3）公告；滚动文字
+- [ ] 标题/dashboard1/dashboard2
+- [ ] （3）公告；滚动文字
 
-6.dashboard 管理列表
+- [ ] 6.dashboard 管理列表
 
 ~~7.预警功能：(在后台业务实现，前台不处理预警)~~
 ~~（1）业务组件，定义需要观测某列指标，阈值。超阈值向指定的用户发送预警信息（预警能力：短信、腾讯通推送、当前页面警告）~~
 ---
 
-（2）后台进程：node轮询；
+- [ ] （2）后台进程：node轮询；
 
 function xxx(data,config){
   // 预警处理逻辑

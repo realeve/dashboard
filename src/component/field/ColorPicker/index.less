@@ -5,8 +5,8 @@
       background: transparent;
       color: #fff;
       border-color: var(--datav-gui-primary-color);
-      padding:0 10px;
-      
+      padding: 0 10px;
+
       &-checked,
       &:before {
         background: var(--datav-gui-primary-color);
@@ -59,15 +59,6 @@
   }
 }
 
-.head {
-  height: 30px;
-  width: 178px;
-  margin-top: 5px;
-  color: #fff;
-  text-align: center;
-  cursor: crosshair;
-}
-
 .arrayTop {
   width: 0;
   height: 0;
@@ -76,4 +67,63 @@
   border-bottom: @toolsize / 3 solid #e02774;
   font-size: 0;
   line-height: 0;
+}
+
+.colorItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.colorPanel {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-top: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    .rectPop {
+      display: flex;
+    }
+  }
+  .rectPop {
+    position: absolute;
+    width: var(--datav-gui-component-container-width);
+    background: var(--datav-gui-background-color-back);
+    box-sizing: border-box;
+    border: 1px solid var(--datav-gui-primary-color);
+    color: var(--datav-gui-font-color-base);
+    box-shadow: var(--datav-gui-popover-shadow);
+    display: none;
+    padding: 5px 4px 5px 6px;
+    flex-wrap: wrap;
+    height: 120px;
+    top: 36px;
+    z-index: 1;
+    transition: all ease 0.2s;
+    span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 3px;
+      margin-top: 3px;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+      &:hover {
+        transform: scale(1.5);
+        outline: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.head {
+  height: 30px;
+  width: 140px;
+  line-height: 30px;
+  margin-top: 5px;
+  color: #fff;
+  text-align: center;
+  cursor: crosshair;
 }

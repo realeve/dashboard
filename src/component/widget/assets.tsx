@@ -734,6 +734,9 @@ let picList = [
       旋转gif: {
         url: require('./img-templet/02.gif'),
       },
+      旋转gif2: {
+        url: require('./img-templet/01.gif'),
+      },
       紫色圆形装饰动图gif: {
         url: require('./img-templet/pic-228-2cff2e714fff18e2.gif'),
       },
