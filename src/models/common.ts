@@ -4,6 +4,7 @@ import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 import { TQuickTool } from '@/component/Editor/types';
 import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
+import { reorderPanel } from '@/pages/config/panel/layer';
 
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
@@ -262,6 +263,9 @@ export default {
         }
         return item;
       });
+
+      // 重新排序
+      nextPanel = reorderPanel(nextPanel);
 
       yield updatePanel({
         panel: nextPanel,

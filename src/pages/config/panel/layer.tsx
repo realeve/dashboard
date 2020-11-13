@@ -234,6 +234,33 @@ const getShowedPanel = (panel: IPanelConfig[]) => {
   return R.reject<IPanelConfig>((item) => folds.includes(item.group))(panel);
 };
 
+/**
+ * 面板重新自动排序
+ * @param panel 面板列表
+ */
+export const reorderPanel = (panel: IPanelConfig[]) => {
+  let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(panel);
+  let groupPanels = R.pluck('id', _groupPanel);
+  groupPanels = R.uniq(groupPanels);
+
+  // 不包含子元素的列表
+  let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(panel);
+
+  // 最终结果
+  let _nextPanel: IPanelConfig[] = [];
+
+  _panel.forEach((item: IPanelConfig) => {
+    if (item.key === GROUP_COMPONENT_KEY) {
+      // 处理组内移动
+      let childrenPanel = R.filter(R.propEq<string>('group', item.id))(panel) as IPanelConfig[];
+      _nextPanel = [..._nextPanel, item, ...childrenPanel];
+    } else {
+      _nextPanel.push(item);
+    }
+  });
+  return _nextPanel;
+};
+
 interface ILayerProps {
   hide: IHideProps;
   setHide: TFnHide;
@@ -278,33 +305,6 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
   };
 
   /**
-   * 面板重新自动排序
-   * @param panel 面板列表
-   */
-  const reorderPanel = (panel: IPanelConfig[]) => {
-    let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(panel);
-    let groupPanels = R.pluck('id', _groupPanel);
-    groupPanels = R.uniq(groupPanels);
-
-    // 不包含子元素的列表
-    let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(panel);
-
-    // 最终结果
-    let _nextPanel: {}[] = [];
-
-    _panel.forEach((item: IPanelConfig) => {
-      if (item.key === GROUP_COMPONENT_KEY) {
-        // 处理组内移动
-        let childrenPanel = R.filter(R.propEq<string>('group', item.id))(panel) as {}[];
-        _nextPanel = [..._nextPanel, item, ...childrenPanel];
-      } else {
-        _nextPanel.push(item);
-      }
-    });
-    return _nextPanel;
-  };
-
-  /**
    *
    * 移动图层元素
    *
@@ -314,12 +314,16 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
   const moveLayerItem = (from: number, to: number) => {
     // 需要对被分组且被展开的组件排序，保证组名在上，其次才是里面的内容；
     // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
+
+    // 拖动分组组件
+    let isDragingGroupRect = showPanel[from].key == GROUP_COMPONENT_KEY;
+    // console.log(JSON.stringify(showPanel[from]), JSON.stringify(showPanel[to]));
     if (showPanel[to].group) {
       // 2020-11-12 此处需要判断对应的类型是否为分组，暂时不支持多层分组；取消此处即可打开，但需要处理点击页面时父组件的选择；
-      if (panel[from].key == GROUP_COMPONENT_KEY) {
+      if (isDragingGroupRect) {
         return;
       }
-      console.log(panel[from]);
+      // console.log(panel[from]);
       let _nextPanel = R.clone(panel);
       _nextPanel[from].group = _nextPanel[to].group;
       let distPanel = reorder(_nextPanel, from, to);
@@ -338,7 +342,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
     let groupPanels = R.pluck('id', _groupPanel);
 
     let groupId = null,
-      needUpdate = items[to].id,
+      distId = items[to].id,
       groupItem = items[to].group;
     // 处理将图层拖入分组的场景；
     if (to > 1) {
@@ -351,17 +355,17 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
     let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
 
     // 最终结果
-    let _nextPanel: {}[] = [];
+    let _nextPanel: IPanelConfig[] = [];
 
     _panel.forEach((item: IPanelConfig) => {
-      if (needUpdate == item.id && groupId) {
+      if (distId == item.id && groupId && item.key != GROUP_COMPONENT_KEY) {
         item.group = groupId;
       }
       if (item.key === GROUP_COMPONENT_KEY) {
         // 处理组内移动
-        let childrenPanel = R.filter(R.propEq<string>('group', item.id))(
+        let childrenPanel: IPanelConfig[] = R.filter(R.propEq<string>('group', item.id))(
           groupItem == item.id ? items : panel,
-        ) as {}[];
+        ) as IPanelConfig[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
       } else {
         _nextPanel.push(item);
@@ -498,7 +502,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
       // TODO 已知BUG，取消编组功能目前出错
       case MENU_ACTIONS.UN_GROUP:
         // 当前选择项
-        if (selected.length !== 1) {
+        if (selected.length == 0) {
           return true;
         }
         choosedItem = showPanel[selected[0]];
@@ -647,7 +651,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
                               : selectedPanel.filter((panelItem) => panelItem !== item.id);
                           } else if (SHIFT_CLICK) {
                             // DONE shift 连续选择的场景
-                            console.log('shift被按下', selectedPanel);
+                            // console.log('shift被按下', selectedPanel);
                             if (selectedPanel.length === 0) {
                               message.error('请先选中一个组件');
                               return;
