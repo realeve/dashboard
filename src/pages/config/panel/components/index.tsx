@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import TabComponent from './TabComponent';
+import TabBusiness from '../business/TabBusiness';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 
@@ -27,7 +28,7 @@ export default ({ setHide, hide, onAddPanel, onAddBusiness }) => {
             <TabComponent onAddPanel={onAddPanel} />
           </TabPane>
           <TabPane tab="业务组件" key="2">
-            业务组件
+            <TabBusiness onAddPanel={onAddBusiness} />
           </TabPane>
         </Tabs>
       </div>

@@ -170,6 +170,17 @@ const Index = ({
             });
             addPanel(editor, nextPanel);
           }}
+          onAddBusiness={(business) => {
+            // 添加一组panel
+            dispatch({
+              type: 'common/updatePanel',
+              payload: { panel: [...panel, ...business] },
+            });
+            business.forEach((nextPanel) => {
+              if (nextPanel.key === GROUP_COMPONENT_KEY) return;
+              addPanel(editor, nextPanel);
+            });
+          }}
         />
 
         <div className={styles['right-edit-main']}>
