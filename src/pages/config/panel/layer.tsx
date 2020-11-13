@@ -278,6 +278,33 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
   };
 
   /**
+   * 面板重新自动排序
+   * @param panel 面板列表
+   */
+  const reorderPanel = (panel: IPanelConfig[]) => {
+    let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(panel);
+    let groupPanels = R.pluck('id', _groupPanel);
+    groupPanels = R.uniq(groupPanels);
+
+    // 不包含子元素的列表
+    let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(panel);
+
+    // 最终结果
+    let _nextPanel: {}[] = [];
+
+    _panel.forEach((item: IPanelConfig) => {
+      if (item.key === GROUP_COMPONENT_KEY) {
+        // 处理组内移动
+        let childrenPanel = R.filter(R.propEq<string>('group', item.id))(panel) as {}[];
+        _nextPanel = [..._nextPanel, item, ...childrenPanel];
+      } else {
+        _nextPanel.push(item);
+      }
+    });
+    return _nextPanel;
+  };
+
+  /**
    *
    * 移动图层元素
    *
@@ -289,10 +316,10 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
     // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
     if (showPanel[to].group) {
       // 2020-11-12 此处需要判断对应的类型是否为分组，暂时不支持多层分组；取消此处即可打开，但需要处理点击页面时父组件的选择；
-      if (panel[from].key !== GROUP_COMPONENT_KEY) {
+      if (panel[from].key == GROUP_COMPONENT_KEY) {
         return;
       }
-
+      console.log(panel[from]);
       let _nextPanel = R.clone(panel);
       _nextPanel[from].group = _nextPanel[to].group;
       let distPanel = reorder(_nextPanel, from, to);
@@ -729,6 +756,22 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
         )}
       </ContextMenu>
       <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
+        <i
+          className={classnames('datav-icon datav-font icon-refresh refresh-btn', {
+            enable: panel.length > 1,
+          })}
+          title="整理面板"
+          onClick={() => {
+            let nextPanel = reorderPanel(panel);
+            dispatch({
+              type: 'common/updatePanel',
+              payload: {
+                panel: nextPanel,
+              },
+            });
+          }}
+        />
+
         <i
           className={classnames('datav-icon datav-font icon-group', {
             enable: selected.length > 1,
