@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { ComponentList } from '../components/TabComponent';
 import { getTblBusiness, IBusinessProps } from './db';
 import { connect } from 'dva';
-import { ICommon, IBusinessCategory } from '@/models/common';
+import { ICommon, IBusinessCategory, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
+import * as lib from '@/utils/lib';
 
 interface IBusinessState {
   list: {
@@ -14,9 +15,50 @@ interface IBusinessState {
   icon: string;
 }
 interface IBusinessTabProps {
-  onAddPanel: (e: string) => void;
+  onAddPanel: (e: IPanelConfig[]) => void;
   businessCategory: IBusinessCategory[];
 }
+
+/**
+ * 处理业务组件列表中每个子项的id;
+ * 当一个页面中添加两个同一业务组件时，会因为id冲突造成后续处理中的系列问题
+ * @param business 业务组件列表
+ */
+const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (business) => {
+  let items = JSON.parse(business.config) as IPanelConfig[];
+
+  let groupId = lib.noncer();
+
+  // 只有一项时，无分组信息，直接修改id即可;
+  if (items.length === 1) {
+    items[0].id = groupId;
+    // 更新标题为业务组件标题
+    items[0].title = business.title;
+    return items;
+  }
+
+  // 有分组的场景。目前分组是将多个组件添加到一个分组中
+
+  // 更新group项的标题和ID
+  let groupIdx = R.findIndex<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
+  items[groupIdx] = {
+    ...items[groupIdx],
+    title: business.title,
+    id: groupId,
+  };
+
+  items = items.map((item) => {
+    if (item.group) {
+      // 更新子项的groupId
+      item.group = groupId;
+      // 子项的Id也需要更新
+      item.id = lib.noncer();
+    }
+    return item;
+  });
+
+  return items;
+};
 
 const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
   const [loading, setLoading] = useState(true);
@@ -64,12 +106,13 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [businessCategory]);
+  }, [JSON.stringify(businessCategory)]);
 
   return (
     <ComponentList
-      onAdd={(panel) => {
-        let item = JSON.parse(panel.config);
+      onAdd={(panel: IBusinessProps) => {
+        let item = handleBusinessItemId(panel);
+        console.log({ panel, item });
         onAddPanel(item);
       }}
       state={itemList}

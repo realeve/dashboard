@@ -4,9 +4,23 @@ import classnames from 'classnames';
 import TabComponent from './TabComponent';
 import TabBusiness from '../business/TabBusiness';
 import { Tabs } from 'antd';
+import { IPanelConfig } from '@/models/common';
+
+import { IHideProps, TFnHide } from '../setting';
+
 const { TabPane } = Tabs;
 
-export default ({ setHide, hide, onAddPanel, onAddBusiness }) => {
+export default ({
+  setHide,
+  hide,
+  onAddPanel,
+  onAddBusiness,
+}: {
+  hide: IHideProps;
+  setHide: TFnHide;
+  onAddBusiness: (e: IPanelConfig[]) => void;
+  onAddPanel: (e: IPanelConfig) => void;
+}) => {
   return (
     <div
       className={classnames(styles['component-panel-wp'], {

@@ -175,8 +175,9 @@ export default {
       });
     },
     *updatePanel({ payload: { panel } }, { put, call }) {
+      let nextPanel = R.uniq(panel);
       yield updatePanel({
-        panel,
+        panel: nextPanel,
         call,
         put,
       });
