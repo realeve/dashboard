@@ -18,18 +18,43 @@ export default ({
 }) => {
   const percent = props.value / props.max;
   return (
-    <div className={styles.range}>
+    <div className={styles.rangeWrapper}>
       {showValue && <span>{props.value}</span>}
-      <input
-        type="range"
-        className={classnames(styles['input-range'], {
-          [styles.disabled]: props.disabled,
-        })}
-        {...props}
-        onChange={e => onChange(Number(e.target.value))}
-        style={{
-          background: `linear-gradient(to right, rgb(0, 251, 255), rgb(0, 176, 255) ${percent}%, rgb(38, 42, 53) ${percent *
-            100}%, rgb(38, 42, 53))`,
+      <i
+        className="datav-icon datav-font icon-zoom-out slider-icon zoom-out "
+        onClick={(e) => {
+          let nextVal =
+            typeof props.min !== 'undefined'
+              ? Math.max(props.min, props.value - props.step)
+              : props.value - props.step;
+          nextVal = Number(nextVal.toFixed(1));
+          onChange(nextVal);
+        }}
+      />
+      <div className={styles.range}>
+        <input
+          type="range"
+          className={classnames(styles['input-range'], {
+            [styles.disabled]: props.disabled,
+          })}
+          {...props}
+          onChange={(e) => onChange(Number(e.target.value))}
+          style={{
+            background: `linear-gradient(to right, rgb(0, 251, 255), rgb(0, 176, 255) ${percent}%, rgb(38, 42, 53) ${
+              percent * 100
+            }%, rgb(38, 42, 53))`,
+          }}
+        />
+      </div>
+      <i
+        className="datav-icon datav-font icon-zoom-in slider-icon zoom-in"
+        onClick={(e) => {
+          let nextVal =
+            typeof props.max !== 'undefined'
+              ? Math.min(props.max, props.value + props.step)
+              : props.value + props.step;
+          nextVal = Number(nextVal.toFixed(1));
+          onChange(nextVal);
         }}
       />
     </div>

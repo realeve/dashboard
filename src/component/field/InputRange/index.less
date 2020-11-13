@@ -14,7 +14,7 @@
   }
 }
 
-.disabled{
+.disabled {
   cursor: not-allowed;
   opacity: 0.9;
 }
@@ -22,9 +22,30 @@
 .range {
   display: flex;
   align-items: center;
-  // width: 100%;
-  flex:1;
+  flex: 1;
+}
+.rangeWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   span {
     margin-right: 5px;
+  }
+  :global {
+    .icon {
+      width: 30px;
+      height: 30px;
+    }
+    .zoom-out {
+      cursor: zoom-out;
+    }
+    .zoom-in {
+      cursor: zoom-in;
+    }
+    .slider-icon {
+      color: #bcc9d4;
+      font-size: 15px;
+      margin: 0 8px;
+    }
   }
 }
