@@ -395,6 +395,8 @@ export default {
         call,
         put,
       });
+      // 页面需要刷新,使用 Editor 添加失败
+      window.location.reload();
     },
   },
 

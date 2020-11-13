@@ -33,6 +33,8 @@ import assets from '@/component/widget/assets';
 import ScreenEdge from './ScreenEdge';
 import { IPage } from '@/models/common';
 
+import { Dispatch } from 'redux';
+
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => ({
   width: `${page.width}px`,
@@ -142,6 +144,8 @@ export interface IEditorProps {
   debug?: boolean;
   style?: React.CSSProperties;
 
+  dispatch: Dispatch;
+
   // 缩放系数
   zoom?: number;
 
@@ -170,6 +174,9 @@ export interface IEditorProps {
 
   // 画面拖动
   onDrag?: (e: { x: number; y: number }) => void;
+
+  // 粘贴
+  onPaste: (e: string[]) => void;
 
   selectMenu?: React.Dispatch<React.SetStateAction<TQuickTool>>;
 }
@@ -872,34 +879,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.eventBus.requestTrigger('render');
   }
 
+  // 处理粘贴
   public loadDatas(datas: SavedScenaData[]) {
-    const viewport = this.getViewport();
-    return this.appendJSXs(
-      datas
-        .map(function loadData(data): any {
-          const { componentId, jsxId, children } = data;
-
-          let jsx!: ScenaJSXElement;
-
-          if (jsxId) {
-            jsx = viewport.getJSX(jsxId);
-          }
-          if (!jsx && componentId) {
-            const Component = viewport.getComponent(componentId);
-
-            jsx = <Component />;
-          }
-          if (!jsx) {
-            jsx = React.createElement(data.tagName);
-          }
-          return {
-            ...data,
-            children: children.map(loadData),
-            jsx,
-          };
-        })
-        .filter((info) => info) as ElementInfo[],
-    );
+    let ids = datas.map((item) => item.jsxId);
+    this.props.onPaste(ids);
   }
   public saveTargets(targets: Array<HTMLElement | SVGElement>): SavedScenaData[] {
     const viewport = this.getViewport();

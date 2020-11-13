@@ -21,6 +21,7 @@ import { ICommon, GROUP_COMPONENT_KEY, IPage, IPanelConfig } from '@/models/comm
 import * as R from 'ramda';
 
 import { Dispatch } from 'redux';
+import * as lib from '@/utils/lib';
 
 import localforage from 'localforage';
 
@@ -31,7 +32,10 @@ export interface IPanelItem extends IChartConfig {
 }
 
 // 添加内容
-const addPanel = (editor: React.MutableRefObject<Editor>, { style, ...config }: IPanelConfig) => {
+export const addPanel = (
+  editor: React.MutableRefObject<Editor>,
+  { style, ...config }: IPanelConfig,
+) => {
   editor?.current.append(
     <div style={style}>
       <ChartItem chartid={config.id} />
@@ -152,6 +156,27 @@ const Index = ({
     });
   };
 
+  /**
+   * 面板中复制组件
+   * @param ids id列表
+   */
+  const onPaste = (ids: string[]) => {
+    // 粘贴添加组件
+    let newPanel: IPanelConfig[] = [];
+    ids.forEach((id) => {
+      let item = R.find<IPanelConfig>(R.propEq<string>('id', id))(panel);
+      let _item = { ...item, id: lib.noncer() };
+      addPanel(editor, _item);
+      newPanel.push(_item);
+    });
+    dispatch({
+      type: 'common/updatePanel',
+      payload: {
+        panel: [...panel, ...newPanel],
+      },
+    });
+  };
+
   return (
     <div className={styles.editor}>
       <HeaderComponent setHide={setHide} hide={hide} title={page.title} author={page.author} />
@@ -188,6 +213,7 @@ const Index = ({
           <div className={styles['editor-panel-wp']}>
             <Editor
               ref={editor}
+              dispatch={dispatch}
               debug={true}
               zoom={zoom}
               onZoom={setZoom}
@@ -196,6 +222,7 @@ const Index = ({
               curTool={curTool}
               setCurTool={setCurTool}
               onRemove={removePanel}
+              onPaste={onPaste}
               // background={page.background}
               // width={page.width}
               // height={page.height}
