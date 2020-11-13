@@ -12,6 +12,7 @@ import { IObject } from '@daybrush/utils';
 import { isFunction, isObject } from 'util';
 
 import localforage from 'localforage';
+import { IPage } from '@/models/common';
 
 export function prefix(...classNames: string[]) {
   return prefixNames(PREFIX, ...classNames);
@@ -130,15 +131,27 @@ export function isNumber(value: any): value is number {
 export const generateId: () => string = () => Math.random().toString(16).slice(7);
 
 const key = 'datav_guide';
+
+const GUIDE_OFFSET = 0; //44;
 export const guideDb = {
   save: (e) => {
-    let res = { h: e.h.filter((item) => item > -100), v: e.v.filter((item) => item > -100) };
+    let res = { h: e.h.filter((item) => item > -50), v: e.v.filter((item) => item > -50) };
     localforage.setItem(key, res);
   },
-  load: (canvasSize) =>
+  load: ({ width, height }: IPage) =>
     localforage
       .getItem<IGuideProps>(key)
-      .then((res) => res || { v: [canvasSize.width / 2 + 44], h: [canvasSize.height / 2 + 44] }),
+      .then(
+        (res) =>
+          res || { v: [Number(width) / 2 + GUIDE_OFFSET], h: [Number(height) / 2 + GUIDE_OFFSET] },
+      ),
+};
+
+export const calcDefaultGuidline = ({ width, height, padding }: IPage) => {
+  return {
+    v: [0, padding, Number(width) / 2, Number(width) - padding, Number(width)], //.map(item=>item+GUIDE_OFFSET),
+    h: [0, padding, Number(height) / 2, Number(height) - padding, Number(height)],
+  };
 };
 
 export interface IGuideProps {

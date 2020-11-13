@@ -26,17 +26,19 @@ import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
 import ClipboardManager from './utils/ClipboardManager';
-import { generateId, guideDb } from './utils/utils';
+import { generateId, guideDb, calcDefaultGuidline } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
 import assets from '@/component/widget/assets';
 
+import { IPage } from '@/models/common';
+
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
-export const getDashboardStyle = (props) => ({
-  width: `${props.width}px`,
-  height: `${props.height}px`,
-  backgroundImage: props.background
-    ? `url('${assets.backgrounds[props.background].url}')`
+export const getDashboardStyle = (page: IPage) => ({
+  width: `${page.width}px`,
+  height: `${page.height}px`,
+  backgroundImage: page.background
+    ? `url('${assets.backgrounds[page.background].url}')`
     : 'url(/img/panel/panelbg.png)',
   backgroundSize: 'cover',
   ...backgroundStyle,
@@ -133,11 +135,12 @@ export const calcDragPos = (
 };
 
 export interface IEditorProps {
-  width: string;
-  height: string;
+  // width: string;
+  // height: string;
+  // background?: string;
+  page: IPage;
   debug?: boolean;
   style?: React.CSSProperties;
-  background?: string;
 
   // 缩放系数
   zoom?: number;
@@ -171,8 +174,7 @@ export interface IEditorProps {
   selectMenu?: React.Dispatch<React.SetStateAction<TQuickTool>>;
 }
 /**
- * @param width 画布宽度
- * @param height 画布高度
+ * @param page 全局page设置
  * @param debug 调试模式
  * @param style 样式
  * @param domHash 页面变更hash值，该值变更时需要重新计算偏移;
@@ -246,11 +248,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
   componentWillMount() {
     setTimeout(async () => {
-      let initGuides: IGuideProps = await guideDb.load({
-        width: this.props.width,
-        height: this.props.height,
-      });
-
+      // 载入辅助线
+      let initGuides: IGuideProps = await guideDb.load(this.props.page);
       this.setState({
         horizontalGuides: initGuides.h,
         verticalGuides: initGuides.v,
@@ -289,17 +288,22 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     } = this;
     const { selectedTargets, zoom, guideVisible } = state;
 
-    const { curTool: selectedMenu, width, height } = this.props;
+    const defaultGuides = calcDefaultGuidline(this.props.page);
+
+    const { curTool: selectedMenu } = this.props;
+    const { width, height } = this.props.page;
     const horizontalSnapGuides = [
-      0,
-      Number(height),
-      Number(height) / 2,
+      // 0,
+      // Number(height),
+      // Number(height) / 2,
+      ...defaultGuides.h,
       ...(state.horizontalGuides || []),
     ];
     const verticalSnapGuides = [
-      0,
-      Number(width),
-      Number(width) / 2,
+      // 0,
+      // Number(width),
+      // Number(width) / 2,
+      ...defaultGuides.v,
       ...(state.verticalGuides || []),
     ];
     let unit = 50;
@@ -401,7 +405,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             });
           }}
         >
-          <Viewport ref={viewport} style={getDashboardStyle(this.props)}>
+          <Viewport ref={viewport} style={getDashboardStyle(this.props.page)}>
             <MoveableManager
               ref={moveableManager}
               selectedTargets={selectedTargets}
@@ -469,8 +473,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               top = infiniteViewer.current!.getScrollTop();
 
             let pos = calcDragPos(left, top, {
-              width: this.props.width,
-              height: this.props.height,
+              width: this.props.page.width,
+              height: this.props.page.height,
             });
             let zoomKey = 'zoom' + Math.floor(zoom * 100);
             let maxPos = edgeConfig[zoomKey] || 50;

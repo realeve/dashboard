@@ -196,9 +196,10 @@ const Index = ({
               curTool={curTool}
               setCurTool={setCurTool}
               onRemove={removePanel}
-              background={page.background}
-              width={page.width}
-              height={page.height}
+              // background={page.background}
+              // width={page.width}
+              // height={page.height}
+              page={page}
               lockedPanel={panel.filter((item) => item.lock || item.hide).map((item) => item.id)}
               onSelect={(selectedPanel) => {
                 // 此处处理多个组件共同选择的问题；
