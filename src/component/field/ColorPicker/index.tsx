@@ -127,7 +127,7 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value = '', onChange }) => {
+export const PureColor = ({ value = '', onChange, position = 'top' }) => {
   if (!value) {
     return null;
   }
@@ -136,7 +136,7 @@ export const PureColor = ({ value = '', onChange }) => {
   return (
     <div className={styles.colorItem}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>
-        <div className={styles.rectPop}>
+        <div className={styles.rectPop} style={{ top: position === 'bottom' ? 36 : -115 }}>
           {paletteList.map((backgroundColor) => (
             <span
               style={{ backgroundColor }}

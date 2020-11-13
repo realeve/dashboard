@@ -218,6 +218,7 @@ export const ComponentConfig = ({
                 head: { ...head, color },
               });
             }}
+            position="bottom"
           />
         </Field>
         <Field title="加粗">
