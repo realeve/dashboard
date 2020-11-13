@@ -18,7 +18,8 @@
     line-height: 30px;
     background: var(--datav-panel-title-bg);
     color: #bcc9d4;
-    text-align: center;
+    text-align: left;
+    padding-left: 10px;
     user-select: none;
     font-size: 12px;
   }
@@ -26,12 +27,36 @@
     width: 100%;
     // height: calc(100% - 60px);
     height: 100%;
-    padding: 0 10px;
     flex: 1;
+
+    :global {
+      .ant-tabs-nav-wrap {
+        background: var(--datav-panel-title-bg);
+      }
+      .ant-tabs-tab {
+        padding: 0;
+        margin: 0 4px;
+        user-select: none;
+        &-btn {
+          color: #bcc9d4;
+          font-size: 14px;
+          padding: 4px 5px;
+        }
+      }
+      .ant-tabs {
+        color: #fff;
+        height: 100%;
+        &-content {
+          height: 100%;
+        }
+      }
+    }
+
     .pageconfig {
       height: 100%;
       overflow-y: scroll;
       position: relative;
+      padding: 0 10px;
       .datav-gui {
         height: auto;
         font-style: normal;
@@ -63,15 +88,6 @@
         top: 5px;
         padding: 5px;
         cursor: pointer;
-      }
-    }
-    :global {
-      .ant-tabs {
-        color: #fff;
-        height: 100%;
-        &-content {
-          height: 100%;
-        }
       }
     }
   }
