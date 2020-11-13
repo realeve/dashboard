@@ -6,11 +6,11 @@ import { Dispatch } from 'redux';
 import assets from '@/component/widget/assets';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
-import { Tabs } from 'antd';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
 
+import { Tabs, Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 const { Panel } = Collapse;
@@ -103,7 +103,6 @@ export const ComponentConfig = ({
               type="number"
               className="data_input"
               step="2"
-              style={{ marginRight: 10 }}
               defaultValue={page.width}
               onChange={(e) => {
                 updatePage({
@@ -111,6 +110,7 @@ export const ComponentConfig = ({
                 });
               }}
             />
+            <span style={{ margin: '0 8px' }}>x</span>
             <input
               type="number"
               className="data_input"
@@ -169,6 +169,62 @@ export const ComponentConfig = ({
             }}
             min={0}
             max={30}
+          />
+        </Field>
+        <Field title="屏幕拼接数量">
+          <div className="alignRow">
+            <input
+              type="number"
+              className="data_input"
+              step="1"
+              min={1}
+              max={10}
+              defaultValue={page.screen_x}
+              onChange={(e) => {
+                updatePage({
+                  screen_x: e.target.value,
+                });
+              }}
+            />
+            <span style={{ margin: '0 8px' }}>x</span>
+            <input
+              type="number"
+              className="data_input"
+              step="1"
+              min={1}
+              max={10}
+              defaultValue={page.screen_y}
+              onChange={(e) => {
+                updatePage({
+                  screen_y: e.target.value,
+                });
+              }}
+            />
+          </div>
+        </Field>
+        <Field title="拼接边距">
+          <InputRange
+            step={1}
+            value={page.screen_edge_width}
+            onChange={(screen_edge_width) => {
+              updatePage({
+                screen_edge_width,
+              });
+            }}
+            min={0}
+            max={30}
+          />
+        </Field>
+        <Field title="拼接线标签">
+          <Switch
+            checked={page.showEdgeTag}
+            onChange={(showEdgeTag) => {
+              updatePage({
+                showEdgeTag,
+              });
+            }}
+            checkedChildren="显示"
+            unCheckedChildren="隐藏"
           />
         </Field>
       </Panel>

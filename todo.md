@@ -38,7 +38,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 - [ ] 表2：使用dashboard/业务id
 
-- [ ] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
+- [ x ] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
 
  
 ~~(3)多个组件编组保存~~

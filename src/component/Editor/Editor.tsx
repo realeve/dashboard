@@ -30,11 +30,11 @@ import { generateId, guideDb, calcDefaultGuidline } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
 import assets from '@/component/widget/assets';
-
+import ScreenEdge from './ScreenEdge';
 import { IPage } from '@/models/common';
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
-export const getDashboardStyle = (page: IPage) => ({
+export const getDashboardStyle = (page: { width: string; height: string; background: string }) => ({
   width: `${page.width}px`,
   height: `${page.height}px`,
   backgroundImage: page.background
@@ -415,6 +415,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               onChange={this.props.onChange}
               selectedMenu={this.props.curTool}
             />
+            <ScreenEdge page={this.props.page} />
           </Viewport>
         </InfiniteViewer>
         <Selecto

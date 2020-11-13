@@ -116,6 +116,11 @@ export interface IPage extends ICommonConfig {
   author: string; // 作者
   title: string; // 业务名称
   padding: number; // 辅助线边距
+
+  screen_x: number; //屏幕数量，X轴
+  screen_y: number; // 屏幕数量，Y轴
+  screen_edge_width: number; //屏幕拼接边缘宽度
+  showEdgeTag: boolean; //是否显示拼接位置标签
 }
 
 /**
@@ -163,6 +168,10 @@ const defaultState: ICommon = {
     author: '管理员',
     title: '仪表盘',
     padding: 15, //边距
+    screen_edge_width: 6, //拼接边距
+    screen_x: 4, // 横向4块屏
+    screen_y: 4, // 纵向4块屏
+    showEdgeTag: true, // 默认显示拼接标签
     ...panelGeneral,
   },
   curTool: 'MoveTool',
