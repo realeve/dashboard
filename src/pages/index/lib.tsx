@@ -37,7 +37,7 @@ export const getResizeType = (autoresize) => {
  * 读取本地配置，用于预览
  */
 export const getLocalConfig = async () => {
-  let panel = await localforage.getItem('panel'),
+  let panel = JSON.parse(localStorage.getItem('panel') || '[]'),
     page = await localforage.getItem('page');
 
   if (!panel || !page) {
