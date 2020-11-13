@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../ColorPicker/index.less';
 import classnames from 'classnames';
 export interface IRadioProps {
-  value: string;
+  value: string | number;
   onChange: (e: string) => void;
   config: { title: string | React.ReactNode; value: string }[];
   className?: string;

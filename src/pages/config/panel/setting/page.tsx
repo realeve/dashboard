@@ -4,13 +4,17 @@ import Field from '@/component/field';
 import { IPage, ICommonConfig } from '@/models/common';
 import { Dispatch } from 'redux';
 import assets from '@/component/widget/assets';
-import { SettingOutlined } from '@ant-design/icons';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
-import { Divider, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
+
+import InputRange from '@/component/field/InputRange';
+import Collapse from '@/component/collapse';
+const { Panel } = Collapse;
+
 const TabPane = Tabs.TabPane;
 
 export const ImgSelector = ({
@@ -76,6 +80,9 @@ export const ImgSelector = ({
 export interface IComponentConfig extends ICommonConfig {
   showTitle?: boolean;
   onChange: (e: {}) => void;
+  defaultKey?: string;
+  isPage?: boolean;
+  page?: IPage;
 }
 export const ComponentConfig = ({
   border,
@@ -83,32 +90,113 @@ export const ComponentConfig = ({
   head,
   showTitle = true,
   onChange: updatePage,
+  isPage = false,
+  page,
+  defaultKey = '组件',
 }: IComponentConfig) => (
-  <>
-    <Divider plain>组件</Divider>
-    <ImgSelector
-      title="边框"
-      value={border}
-      imgtype="borders"
-      onChange={(border) => {
-        updatePage({
-          border,
-        });
-      }}
-    />
-    <Field title="背景" style={{ padding: 10 }}>
-      <ColorPicker
-        value={chartBackground}
-        onChange={(chartBackground) => {
+  <Collapse defaultActiveKey={defaultKey}>
+    {isPage && (
+      <Panel header="画布" key="画布">
+        <Field title="屏幕大小">
+          <div className="alignRow">
+            <input
+              type="number"
+              className="data_input"
+              step="2"
+              style={{ marginRight: 10 }}
+              defaultValue={page.width}
+              onChange={(e) => {
+                updatePage({
+                  width: e.target.value,
+                });
+              }}
+            />
+            <input
+              type="number"
+              className="data_input"
+              step="2"
+              defaultValue={page.height}
+              onChange={(e) => {
+                updatePage({
+                  height: e.target.value,
+                });
+              }}
+            />
+          </div>
+        </Field>
+        <ImgSelector
+          title="背景"
+          value={page.background}
+          imgtype="backgrounds"
+          onChange={(background) => {
+            updatePage({
+              background,
+            });
+          }}
+        />
+        <Field title="作者">
+          <input
+            type="string"
+            className="data_input"
+            defaultValue={page.author}
+            onChange={(e) => {
+              updatePage({
+                author: e.target.value,
+              });
+            }}
+          />
+        </Field>
+        <Field title="标题">
+          <input
+            type="string"
+            className="data_input"
+            defaultValue={page.title}
+            onChange={(e) => {
+              updatePage({
+                title: e.target.value,
+              });
+            }}
+          />
+        </Field>
+        <Field title="安全边距">
+          <InputRange
+            step={1}
+            value={page.padding}
+            onChange={(padding) => {
+              updatePage({
+                padding,
+              });
+            }}
+            min={0}
+            max={15}
+          />
+        </Field>
+      </Panel>
+    )}
+    <Panel header="组件" key="组件">
+      <ImgSelector
+        title="边框"
+        value={border}
+        imgtype="borders"
+        onChange={(border) => {
           updatePage({
-            chartBackground,
+            border,
           });
         }}
       />
-    </Field>
+      <Field title="背景" style={{ padding: 10 }}>
+        <ColorPicker
+          value={chartBackground}
+          onChange={(chartBackground) => {
+            updatePage({
+              chartBackground,
+            });
+          }}
+        />
+      </Field>
+    </Panel>
     {showTitle && (
-      <>
-        <Divider plain>标题</Divider>
+      <Panel header="标题" key="标题">
         <Field title="字号">
           <input
             type="number"
@@ -193,9 +281,9 @@ export const ComponentConfig = ({
             }}
           />
         </Field>
-      </>
+      </Panel>
     )}
-  </>
+  </Collapse>
 );
 
 // 页面配置
@@ -216,48 +304,14 @@ export default ({ page, dispatch }: IPageProps) => {
   return (
     <div className={styles.pageconfig}>
       <div className={styles['datav-gui']}>
-        <Field title="屏幕大小">
-          <div className="alignRow">
-            <input
-              type="number"
-              className="data_input"
-              step="2"
-              style={{ marginRight: 10 }}
-              defaultValue={page.width}
-              onChange={(e) => {
-                updatePage({
-                  width: e.target.value,
-                });
-              }}
-            />
-            <input
-              type="number"
-              className="data_input"
-              step="2"
-              defaultValue={page.height}
-              onChange={(e) => {
-                updatePage({
-                  height: e.target.value,
-                });
-              }}
-            />
-          </div>
-        </Field>
-        <ImgSelector
-          title="背景"
-          value={page.background}
-          imgtype="backgrounds"
-          onChange={(background) => {
-            updatePage({
-              background,
-            });
-          }}
-        />
         <ComponentConfig
           onChange={updatePage}
+          page={page}
           border={page.border}
           chartBackground={page.chartBackground}
           head={page.head}
+          defaultKey="画布"
+          isPage={true}
         />
       </div>
     </div>

@@ -154,7 +154,7 @@ const Index = ({
 
   return (
     <div className={styles.editor}>
-      <HeaderComponent setHide={setHide} hide={hide} />
+      <HeaderComponent setHide={setHide} hide={hide} title={page.title} author={page.author} />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
         <FilterPanel setHide={setHide} hide={hide} />

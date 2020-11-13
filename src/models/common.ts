@@ -115,6 +115,7 @@ export interface IPage extends ICommonConfig {
 
   author: string; // 作者
   title: string; // 业务名称
+  padding: number; // 辅助线边距
 }
 
 /**
@@ -159,6 +160,9 @@ const defaultState: ICommon = {
     width: '1920',
     height: '1080',
     background: '默认',
+    author: '管理员',
+    title: '仪表盘',
+    padding: 5, //边距
     ...panelGeneral,
   },
   curTool: 'MoveTool',

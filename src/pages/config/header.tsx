@@ -24,7 +24,17 @@ const onPreview = async () => {
   router.push('/');
 };
 
-export default ({ setHide, hide }: { hide: IHideProps; setHide: TFnHide }) => {
+export default ({
+  setHide,
+  hide,
+  title = '默认工作空间',
+  author = '未知作者',
+}: {
+  hide: IHideProps;
+  setHide: TFnHide;
+  title: string;
+  author: string;
+}) => {
   const [show, setShow] = useState(false);
   const onSave = async () => {
     let props = await getLocalConfig();
@@ -146,7 +156,9 @@ export default ({ setHide, hide }: { hide: IHideProps; setHide: TFnHide }) => {
           <i
             className={classnames('datav-icon datav-font icon-workspace', styles['workspace-icon'])}
           />
-          <span className="v-md">默认工作空间</span>
+          <span className="v-md">
+            {title}-({author})
+          </span>
         </div>
         <div className={styles['global-actions']}>
           <Tooltip title="发布" placement="bottom">
