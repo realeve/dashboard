@@ -132,10 +132,13 @@ export const generateId: () => string = () => Math.random().toString(16).slice(7
 
 const key = 'datav_guide';
 
-const GUIDE_OFFSET = 0; //44;
+const GUIDE_OFFSET = 0;
 export const guideDb = {
   save: (e) => {
-    let res = { h: e.h.filter((item) => item > -50), v: e.v.filter((item) => item > -50) };
+    let res = {
+      h: e.h.filter((item) => item > -50),
+      v: e.v.filter((item) => item > -50),
+    };
     localforage.setItem(key, res);
   },
   load: ({ width, height }: IPage) =>
@@ -149,7 +152,7 @@ export const guideDb = {
 
 export const calcDefaultGuidline = ({ width, height, padding }: IPage) => {
   return {
-    v: [0, padding, Number(width) / 2, Number(width) - padding, Number(width)], //.map(item=>item+GUIDE_OFFSET),
+    v: [0, padding, Number(width) / 2, Number(width) - padding, Number(width)],
     h: [0, padding, Number(height) / 2, Number(height) - padding, Number(height)],
   };
 };

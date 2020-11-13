@@ -162,7 +162,7 @@ const defaultState: ICommon = {
     background: '默认',
     author: '管理员',
     title: '仪表盘',
-    padding: 5, //边距
+    padding: 15, //边距
     ...panelGeneral,
   },
   curTool: 'MoveTool',
