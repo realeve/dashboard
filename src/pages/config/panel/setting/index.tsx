@@ -66,7 +66,11 @@ const Index = ({
       setShouldSave(false);
       return;
     }
-    setShouldSave(true);
+
+    // 业务组件自身不允许被选取；
+    // TODO 此处需讨论是否开放，这样可在多个业务组件之间组合成新组件
+    const haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
+    setShouldSave(!haseBusiness);
   }, [selectedPanel.length]);
 
   return (
@@ -94,6 +98,7 @@ const Index = ({
         onClose={() => {
           setShow(false);
         }}
+        dispatch={dispatch}
         panel={panel}
         selectedPanel={selectedPanel}
         businessCategory={businessCategory}

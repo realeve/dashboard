@@ -9,6 +9,7 @@ import { IPanelConfig, IBusinessCategory } from '@/models/common';
 import { useSetState } from 'react-use';
 import { Button, message, Spin } from 'antd';
 import * as R from 'ramda';
+import { Dispatch } from 'redux';
 
 const FieldStyle = { background: 'unset' };
 const Field = ({ children, ...props }) => (
@@ -23,8 +24,16 @@ interface ISavePanelProps {
   selectedPanel: string[];
   panel: IPanelConfig[];
   businessCategory: IBusinessCategory[];
+  dispatch: Dispatch;
 }
-export default ({ show, onClose, selectedPanel, panel, businessCategory }: ISavePanelProps) => {
+export default ({
+  show,
+  onClose,
+  selectedPanel,
+  panel,
+  businessCategory,
+  dispatch,
+}: ISavePanelProps) => {
   const [option, setOption] = useSetState<IBusinessProps | null>(null);
 
   const [cateIdx, setCateIdx] = useState(0);
@@ -55,6 +64,11 @@ export default ({ show, onClose, selectedPanel, panel, businessCategory }: ISave
         if (affected_rows > 0) {
           reset();
           message.success('业务组件保存成功');
+
+          // 保存成功后需要重新刷新业务组件列表
+          dispatch({
+            type: 'common/loadBusinessCategory',
+          });
         }
       })
       .catch((e) => {
