@@ -1,6 +1,6 @@
 import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
-
+import { message } from 'antd';
 import localforage from 'localforage';
 
 export enum EResizeType {
@@ -41,7 +41,8 @@ export const getLocalConfig = async () => {
     page = await localforage.getItem('page');
 
   if (!panel || !page) {
-    return { type: 'error' };
+    message.error('当前页面未配置任何组件，预览失败');
+    return null;
   }
   return { type: 'local', page, panel };
 };

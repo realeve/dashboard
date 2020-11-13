@@ -34,7 +34,15 @@ export default function ({ container = 'body', ...props }: IPopup) {
 }
 
 export const PopupFooter = ({ children, ...props }) => (
-  <div className="scena-footer" {...props}>
+  <div
+    className="scena-footer"
+    {...props}
+    style={{
+      justifyContent: { left: 'flex-start', center: 'center', right: 'flex-end' }[
+        props.align || 'right'
+      ],
+    }}
+  >
     <div className="scena-footer-line" />
     {children}
   </div>

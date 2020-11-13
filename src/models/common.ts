@@ -110,6 +110,20 @@ export interface IPage extends ICommonConfig {
   width: string; // 页面宽
   height: string; // 页面高
   background: string; // 页面背景
+
+  author: string; // 作者
+  title: string; // 业务名称
+}
+
+/**
+ * page:页面配置
+ * panel:面板配置
+ * rec_time:创建时间
+ */
+export interface IDashboard {
+  page: IPage;
+  panel: IPanelConfig[];
+  rec_time?: string;
 }
 
 const panelGeneral: ICommonConfig = {
