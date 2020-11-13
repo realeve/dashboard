@@ -33,6 +33,19 @@ export const getResizeType = (autoresize) => {
   return type;
 };
 
+/**
+ * 读取本地配置，用于预览
+ */
+export const getLocalConfig = async () => {
+  let panel = await localforage.getItem('panel'),
+    page = await localforage.getItem('page');
+
+  if (!panel || !page) {
+    return { type: 'error' };
+  }
+  return { type: 'local', page, panel };
+};
+
 export const getConfig = async (url) => {
   if (url) {
     let option: { url: string; [key: string]: string } = { url };
@@ -44,13 +57,7 @@ export const getConfig = async (url) => {
     }
     return axios(option).then((config) => ({ type: 'online', ...config }));
   }
-  let panel = await localforage.getItem('panel'),
-    page = await localforage.getItem('page');
-
-  if (!panel || !page) {
-    return { type: 'error' };
-  }
-  return { type: 'local', page, panel };
+  return getLocalConfig();
 };
 
 /**

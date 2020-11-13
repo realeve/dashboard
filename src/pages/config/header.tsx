@@ -1,8 +1,19 @@
 import React from 'react';
 import styles from './header.less';
 import classnames from 'classnames';
-import { Tooltip } from 'antd';
+import { message, Tooltip } from 'antd';
 import { IHideProps, TFnHide } from './panel/setting';
+import { router } from 'umi';
+import { getLocalConfig } from '@/pages/index/lib';
+
+const onPreview = async () => {
+  let { type } = await getLocalConfig();
+  if (type === 'error') {
+    message.error('当前页面未配置任何组件，预览失败');
+    return;
+  }
+  router.push('/');
+};
 
 export default ({ setHide, hide }: { hide: IHideProps; setHide: TFnHide }) => {
   return (
@@ -94,7 +105,7 @@ export default ({ setHide, hide }: { hide: IHideProps; setHide: TFnHide }) => {
             </div>
           </Tooltip>
           <Tooltip title="预览" placement="bottom">
-            <div className={classnames(styles['header-button'], styles.ml4)}>
+            <div className={classnames(styles['header-button'], styles.ml4)} onClick={onPreview}>
               <i className="datav-icon datav-font icon-preview header-button-icon" />
             </div>
           </Tooltip>
