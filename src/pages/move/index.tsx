@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div
       className={styles.container}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
         if (resizable) {
           setResizable(false);
@@ -45,7 +45,7 @@ export default function App() {
       <div
         className={styles.target}
         ref={ref}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           if (!resizable) {
@@ -57,16 +57,26 @@ export default function App() {
       </div>
       <Moveable
         target={ref?.current}
-        resizable={resizable}
-        rotatable={resizable}
-        draggable={resizable}
-        origin={resizable}
-        snappable={resizable}
+        originDraggable={true}
+        originRelative={true}
+        origin={true}
+        onDragOriginStart={({ dragStart }) => {
+          dragStart && dragStart.set(frame.translate);
+        }}
+        onDragOrigin={({ target, drag, transformOrigin }) => {
+          frame.translate = drag.beforeTranslate;
+          frame.transformOrigin = transformOrigin;
+        }}
+        draggable={true}
+        resizable={true}
         throttleDrag={0}
         startDragRotate={0}
         throttleDragRotate={0}
-        throttleRotate={0}
+        zoom={1}
         padding={{ left: 0, top: 0, right: 0, bottom: 0 }}
+        rotatable={true}
+        throttleRotate={0}
+        rotationPosition={'top'}
         onDragStart={({ set }) => {
           set(frame.translate);
         }}
@@ -79,11 +89,6 @@ export default function App() {
         onRotate={({ beforeRotate }) => {
           frame.rotate = beforeRotate;
         }}
-        onRender={({ target }) => {
-          const { translate, rotate } = frame;
-          target.style.transform =
-            `translate(${translate[0]}px, ${translate[1]}px)` + ` rotate(${rotate}deg)`;
-        }}
         onResizeStart={({ dragStart }) => {
           dragStart && dragStart.set(frame.translate);
         }}
@@ -94,6 +99,12 @@ export default function App() {
           target.style.width = `${width}px`;
           target.style.height = `${height}px`;
           target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+        }}
+        onRender={({ target }) => {
+          const { translate, rotate, transformOrigin } = frame;
+          target.style.transformOrigin = transformOrigin;
+          target.style.transform =
+            `translate(${translate[0]}px, ${translate[1]}px)` + ` rotate(${rotate}deg)`;
         }}
       />
     </div>

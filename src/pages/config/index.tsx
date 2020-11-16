@@ -274,7 +274,7 @@ const Index = ({
               // }}
               onDrag={setDragPercent}
             />
-            <Thumbnail visible={thumbVisible} zoom={zoom} dragPercent={dragPercent} />
+            <Thumbnail page={page} visible={thumbVisible} zoom={zoom} dragPercent={dragPercent} />
           </div>
           <EditSlider
             zoom={zoom}
