@@ -2,6 +2,7 @@ import * as React from 'react';
 import { prefix } from '../utils/utils';
 import './Popup.less';
 import * as ReactDOM from 'react-dom';
+import { Spin, Button } from 'Antd';
 export interface IPopup {
   container?: string;
   onClose: () => any;
@@ -47,3 +48,41 @@ export const PopupFooter = ({ children, ...props }) => (
     {children}
   </div>
 );
+
+export interface IConfirmProps {
+  children: React.ReactNode;
+  title: React.ReactNode;
+  spinning?: boolean;
+  onOk?: () => void;
+  onCancel?: () => void;
+  okText?: string;
+  cancelText?: string;
+  style?: React.CSSProperties;
+  container?: string;
+}
+
+export const Confirm = ({
+  children,
+  title = null,
+  spinning = false,
+  onOk = () => {},
+  onCancel = () => {},
+  okText = '确定',
+  cancelText = '取消',
+  ...props
+}: IConfirmProps) => {
+  return (
+    <Popup onClose={onCancel} {...props}>
+      <h2>{title}</h2>
+      {spinning ? <Spin spinning /> : children}
+      <PopupFooter>
+        <Button type="ghost" onClick={onCancel}>
+          {cancelText}
+        </Button>
+        <Button type="primary" style={{ width: 120, marginLeft: 20 }} onClick={onOk}>
+          {okText}
+        </Button>
+      </PopupFooter>
+    </Popup>
+  );
+};

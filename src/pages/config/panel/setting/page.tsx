@@ -46,9 +46,6 @@ export const ImgSelector = ({
             setShow(false);
           }}
         >
-          {/* <div style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10 }}>
-            <SettingOutlined /> 设置 {title}
-          </div> */}
           {imgtype !== 'pics' ? (
             <AssetItem
               assets={assets[imgtype]}

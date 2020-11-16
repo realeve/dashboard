@@ -8,7 +8,7 @@ import { getLocalConfig } from '@/pages/index/lib';
 import * as lib from '@/utils/lib';
 import beautify from 'js-beautify';
 import { saveAs } from 'file-saver';
-import Popup, { PopupFooter } from '@/component/Editor/Popup/Popup';
+import { Confirm } from '@/component/Editor/Popup/Popup';
 
 const beautyOption = {
   indent_size: 2,
@@ -53,30 +53,22 @@ export default ({
   return (
     <div className={styles.header}>
       {show && (
-        <Popup
+        <Confirm
+          title="仪表盘配置文件保存成功"
           style={{ width: 400, minHeight: 230, height: 'auto' }}
-          onClose={() => {
+          onCancel={() => {
+            setShow(false);
+          }}
+          onOk={() => {
             setShow(false);
           }}
         >
-          <h2>仪表盘配置文件保存成功</h2>
           <div style={{ height: 200, paddingTop: 20 }}>
             <p>请按以下步骤完成剩余操作：</p>
             <p>1.将下载后的json文件上传到服务器的 /data/ 目录下;</p>
             <p>2.浏览 {window.location.origin}?id=/data/仪表盘文件.json&autoresize=movie</p>
           </div>
-          <PopupFooter align="center">
-            <Button
-              type="primary"
-              style={{ width: 200, height: 40 }}
-              onClick={() => {
-                setShow(false);
-              }}
-            >
-              确定
-            </Button>
-          </PopupFooter>
-        </Popup>
+        </Confirm>
       )}
       <div className={styles['datav-edit-header']}>
         <div className={styles['editor-header-wp']}>

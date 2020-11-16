@@ -89,8 +89,6 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
     return <div style={{ color: '#ddd' }}>{error}</div>;
   }
 
-  console.log(state);
-
   return (
     <Spin spinning={loading}>
       <div className={styles['component-panel-wrapper']}>

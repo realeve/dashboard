@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-import Popup, { PopupFooter } from '@/component/Editor/Popup/Popup';
+import { Confirm } from '@/component/Editor/Popup/Popup';
 import FieldComponent from '@/component/field';
 import Radio, { Select } from '@/component/field/Radio';
 import styles from './SavePanel.less';
 import { getSaveOption, getSelectedComponent, IBusinessProps, addTblBusiness } from './db';
 import { IPanelConfig, IBusinessCategory } from '@/models/common';
 import { useSetState } from 'react-use';
-import { Button, message, Spin } from 'antd';
+import { message } from 'antd';
 import * as R from 'ramda';
 import { Dispatch } from 'redux';
 
@@ -84,11 +84,14 @@ export default ({
 
   return (
     show && (
-      <Popup style={{ width: 400, minHeight: 330, height: 'auto' }} onClose={onClose}>
-        <h2>保存业务组件</h2>
-        {!option ? (
-          <Spin spinning />
-        ) : (
+      <Confirm
+        title="保存业务组件"
+        spinning={!option}
+        style={{ width: 400, minHeight: 330, height: 'auto' }}
+        onCancel={onClose}
+        onOk={saveComponent}
+      >
+        {option && (
           <div className={styles.popContainer}>
             <Field title="业务名称">
               <input
@@ -143,18 +146,9 @@ export default ({
                 }))}
               />
             </Field>
-
-            <PopupFooter>
-              <Button type="ghost" onClick={reset}>
-                取消
-              </Button>
-              <Button type="primary" style={{ width: 120, marginLeft: 20 }} onClick={saveComponent}>
-                保存
-              </Button>
-            </PopupFooter>
           </div>
         )}
-      </Popup>
+      </Confirm>
     )
   );
 };
