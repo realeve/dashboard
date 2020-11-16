@@ -6,7 +6,7 @@ import './keyboard.less';
 
 export default class KeyboardIcon extends Icon {
   public static id = '快捷键';
-  public keys = ['s'];
+  // public keys = ['s'];
   public state = {
     show: false,
   };
@@ -33,7 +33,7 @@ export default class KeyboardIcon extends Icon {
                     <p className={prefix('key-description')}>
                       {description}
                       <strong>
-                        {keys.map(key => (
+                        {keys.map((key) => (
                           <span key={key}>{key}</span>
                         ))}
                       </strong>

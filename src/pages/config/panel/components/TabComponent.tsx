@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-import { Tooltip, Spin } from 'antd';
+import { Drawer, Tooltip, Spin } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
 import { IComponentItem, IComponent } from './db';
 import * as lib from '@/utils/lib';
+import SearchPanel, { ISearchState } from './SearchPanel';
+import pinyin from '@/utils/pinyin.js';
+import { IBusinessState } from '../business/TabBusiness';
 
 const { Panel } = Collapse;
 
@@ -32,15 +35,62 @@ const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | s
 interface IComponentList {
   onAdd: (e) => void;
   loading: boolean;
-  state: any[];
+  state: (IComponent | IBusinessState)[];
   error: null | string;
 }
 
 export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) => {
   const [tab, setTab] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [val, setVal] = useState('');
+  const onClose = () => {
+    setVal('');
+    setVisible(false);
+  };
+
+  const [list, setList] = useState<ISearchState[]>([]);
+
+  useEffect(() => {
+    let arr: ISearchState[] = [];
+    state.forEach(({ title, list }) =>
+      list.forEach((row) => {
+        if (row.title == '全部') {
+          return;
+        }
+        let category = `${title} / ${row.title} /`;
+        row.list.forEach(({ title, image, ...panel }) => {
+          arr.push({
+            category,
+            title,
+            image,
+            panel: { title, image, ...panel },
+            key: panel.key || panel.create_time,
+            title_simple: pinyin.toPinYin(title).toLowerCase(),
+            title_full: pinyin.toPinYinFull(title).toLowerCase(),
+          });
+        });
+      }),
+    );
+    setList(arr);
+  }, [state]);
+
+  useEffect(() => {
+    if (val.trim().length == 0) {
+      setVisible(false);
+      return;
+    }
+
+    !visible && setVisible(true);
+  }, [val]);
+
+  const inputRef = useRef(null);
+
   if (error) {
     return <div style={{ color: '#ddd' }}>{error}</div>;
   }
+
+  console.log(state);
+
   return (
     <Spin spinning={loading}>
       <div className={styles['component-panel-wrapper']}>
@@ -57,7 +107,7 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
                   }}
                   key={item.title}
                 >
-                  <Tooltip placement="left" trigger="hover" key={item.icon} title={item.title}>
+                  <Tooltip placement="left" trigger="hover" title={item.title}>
                     <i
                       className={classnames('com-font', item.icon, {
                         'icon-active': idx == tab,
@@ -87,7 +137,7 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
                       {item.list.map((panel) => (
                         <li
                           title={panel.title}
-                          key={panel.title}
+                          key={panel.key || panel.title}
                           style={{ border: 0 }}
                           onClick={() => {
                             onAdd && onAdd(panel);
@@ -110,6 +160,68 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
               )}
             </Collapse>
           </div>
+
+          <Drawer
+            title={
+              <>
+                <span className="search-title">
+                  "{val}" 搜索结果 ({list.length})
+                </span>
+                <div className="close-btn" onClick={onClose}>
+                  <i className="datav-icon datav-font icon-close close-btn-icon" />
+                </div>
+              </>
+            }
+            placement="right"
+            width="233"
+            closable={false}
+            onClose={onClose}
+            visible={visible}
+            getContainer={false}
+            style={{ position: 'absolute' }}
+            bodyStyle={{ background: `var(--datav-panel-color)`, padding: 10 }}
+            headerStyle={{
+              background: `var(--datav-panel-color)`,
+              borderBottom: '1px solid rgba(255,255,255,0.15)',
+              padding: 5,
+            }}
+          >
+            {visible && (
+              <SearchPanel
+                data={list.filter(
+                  (item) =>
+                    item.title.includes(val.trim()) ||
+                    item.title_simple.includes(val.trim()) ||
+                    item.title_full.includes(val.trim()),
+                )}
+                onAdd={onAdd}
+              />
+            )}
+          </Drawer>
+        </div>
+        <div className={styles['component-search-wp']}>
+          <input
+            className={classnames('data_input', styles['search-ipt'])}
+            placeholder="搜索组件,支持拼音检索"
+            value={val}
+            onChange={(e) => {
+              setVal(e.target.value);
+            }}
+            autoComplete="false"
+            onBlur={(e) => {
+              // drawer弹出时会获得焦点，此时Input失去焦点，需要hack重新获取焦点
+              if (val.trim().length == 1) {
+                inputRef?.current?.focus();
+              }
+            }}
+            ref={inputRef}
+          />
+          <i
+            className={classnames('datav-icon datav-font icon-close', styles['clear-search-text'])}
+            onClick={() => {
+              setVal('');
+            }}
+          />
         </div>
       </div>
     </Spin>

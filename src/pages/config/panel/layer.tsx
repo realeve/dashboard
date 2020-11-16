@@ -499,7 +499,6 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
       case MENU_ACTIONS.GROUP:
         return selected.length <= 1;
 
-      // TODO 已知BUG，取消编组功能目前出错
       case MENU_ACTIONS.UN_GROUP:
         // 当前选择项
         if (selected.length == 0) {

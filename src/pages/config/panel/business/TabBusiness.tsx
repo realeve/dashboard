@@ -6,7 +6,7 @@ import { ICommon, IBusinessCategory, IPanelConfig, GROUP_COMPONENT_KEY } from '@
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 
-interface IBusinessState {
+export interface IBusinessState {
   list: {
     title: string;
     list: IBusinessProps[];
@@ -117,7 +117,6 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
     <ComponentList
       onAdd={(panel: IBusinessProps) => {
         let item = handleBusinessItemId(panel);
-        console.log({ panel, item });
         onAddPanel(item);
       }}
       state={itemList}
