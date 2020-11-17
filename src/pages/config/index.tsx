@@ -182,9 +182,17 @@ const Index = ({
     });
   };
 
+  const getThumbnail = () => editor.current.getThumbnail(0.2 / zoom);
+
   return (
     <div className={styles.editor}>
-      <HeaderComponent setHide={setHide} hide={hide} title={page.title} author={page.author} />
+      <HeaderComponent
+        getThumbnail={getThumbnail}
+        setHide={setHide}
+        hide={hide}
+        title={page.title}
+        author={page.author}
+      />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
         <FilterPanel setHide={setHide} hide={hide} />

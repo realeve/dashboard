@@ -2,6 +2,7 @@ import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
 import { message } from 'antd';
 import localforage from 'localforage';
+import { IPage, IPanelConfig } from '@/models/common';
 
 export enum EResizeType {
   NONE = 'none', // 不缩放
@@ -36,9 +37,13 @@ export const getResizeType = (autoresize) => {
 /**
  * 读取本地配置，用于预览
  */
-export const getLocalConfig = async () => {
-  let panel = JSON.parse(localStorage.getItem('panel') || '[]'),
-    page = await localforage.getItem('page');
+export const getLocalConfig: () => Promise<null | {
+  type: string;
+  page: IPage;
+  panel: IPanelConfig[];
+}> = async () => {
+  let panel = JSON.parse(localStorage.getItem('panel') || '[]') as IPanelConfig[],
+    page = (await localforage.getItem('page')) as IPage;
 
   if (!panel || !page) {
     message.error('当前页面未配置任何组件，预览失败');

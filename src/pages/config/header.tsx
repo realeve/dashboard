@@ -29,11 +29,13 @@ export default ({
   hide,
   title = '默认工作空间',
   author = '未知作者',
+  getThumbnail,
 }: {
   hide: IHideProps;
   setHide: TFnHide;
   title: string;
   author: string;
+  getThumbnail: () => Promise<string>;
 }) => {
   const [show, setShow] = useState(false);
   const onSave = async () => {
@@ -42,8 +44,18 @@ export default ({
       return;
     }
     let { page, panel } = props;
-    // 面板文件
-    let dashboard = { page, panel, rec_time: lib.now() };
+    // 面板文件,用于在面板列表中显示
+    // TODO，可考虑将此处的图片下载为同名文件.png，与json文件一并保存，以实现图片和json配置信息分离
+    let thumbnail = await getThumbnail();
+
+    let dashboard = {
+      rec_time: lib.now(),
+      panel,
+      page: {
+        ...page,
+        thumbnail,
+      },
+    };
     let json = beautify(JSON.stringify(dashboard), beautyOption);
     let blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
     saveAs(blob, '主题面板.json');
