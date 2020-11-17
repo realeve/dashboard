@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './thumbnail.less';
 import classnames from 'classnames';
-// import { rangeCfg } from './EditSlider';
 
 import Moveable from 'react-moveable';
 
@@ -20,7 +19,25 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
   const thumbnailSize = { width: Number(page.width) / 10, height: Number(page.height) / 10 };
   // 缩放比
   // const scale = rangeCfg.min / zoom;
+
   let offset = 1.5;
+  let moveParam = 2 / 3;
+  if (zoom < 0.7) {
+    offset = 1;
+    moveParam = 2 / 3;
+  } else if (zoom < 0.8) {
+    offset = 1.5;
+    moveParam = 1;
+  } else if (zoom < 1.0) {
+    offset = 2;
+    moveParam = 1.16;
+  } else if (zoom < 1.2) {
+    offset = 2.25;
+    moveParam = 1.22;
+  } else if (zoom <= 1.6) {
+    offset = 2.5;
+    moveParam = 1.26;
+  }
   const [frame, setFrame] = useSetState({
     translate: [0, 0],
     transformOrigin: '50% 50%',
@@ -37,7 +54,7 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
       translate: beforeTranslate,
     });
     ref.current.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
-  }, [dragPercent]);
+  }, [dragPercent, offset]);
 
   console.log(frame.translate, dragPercent);
   return (
@@ -58,7 +75,12 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
         <Moveable
           target={ref?.current}
           snappable={true}
-          bounds={{ left: 0, top: 0, right: thumbnailSize.width, bottom: thumbnailSize.height }}
+          bounds={{
+            left: 0,
+            top: 0,
+            right: thumbnailSize.width * moveParam,
+            bottom: thumbnailSize.height * moveParam,
+          }}
           draggable={true}
           origin={false}
           onDragStart={({ set }) => {
