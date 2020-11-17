@@ -33,7 +33,7 @@
     "element-resize-event": "^3.0.3",
     "file-saver": "^2.0.2",
     "framework-utils": "^0.3.4",
-    "html2canvas": "^1.0.0-rc.5",
+    "html2canvas": "^1.0.0-rc.7",
     "js-beautify": "^1.13.0",
     "jstat": "^1.9.3",
     "keycon": "^0.8.0",

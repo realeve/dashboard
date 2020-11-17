@@ -81,7 +81,12 @@ export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps)
       className={classnames(styles.thumbnail, styles[`thumbnail-${visible ? 'show' : 'hide'}`])}
       style={thumbnailSize}
     >
-      <div className={styles['datav-thumbnail']}>
+      <div
+        className={styles['datav-thumbnail']}
+        style={{
+          backgroundImage: page.thumbnail.length > 0 ? `url(${page.thumbnail})` : null,
+        }}
+      >
         <span
           className={styles['select-span']}
           style={{
@@ -110,10 +115,11 @@ export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps)
             target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
 
             // 左上角滚动的位置
-            onScroll({
-              x: beforeTranslate[0] * SCALE_PARAM * (zoom - 0.15) - 100,
-              y: beforeTranslate[1] * SCALE_PARAM * (zoom - 0.15) - 100,
-            });
+            onScroll &&
+              onScroll({
+                x: beforeTranslate[0] * SCALE_PARAM * (zoom - 0.15) - 100,
+                y: beforeTranslate[1] * SCALE_PARAM * (zoom - 0.15) - 100,
+              });
           }}
         />
       </div>

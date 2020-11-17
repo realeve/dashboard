@@ -32,7 +32,7 @@ import * as R from 'ramda';
 import assets from '@/component/widget/assets';
 import ScreenEdge from './ScreenEdge';
 import { IPage } from '@/models/common';
-
+import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
@@ -283,6 +283,30 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.props.selectMenu(menu);
   }
 
+  public async getThumbnail(scale: number) {
+    let canvasEl = this.viewport.current.viewport.el;
+    return html2canvas(canvasEl, {
+      backgroundColor: null,
+      scale,
+    }).then((canvas) => canvas.toDataURL());
+  }
+
+  // 更新缩略图
+  public updateThumbnail = () => {
+    this.getThumbnail(0.1 / this.state.zoom).then((thumbnail) => {
+      // 更新缩略图
+      this.props.dispatch({
+        type: 'common/setStore',
+        payload: {
+          page: {
+            ...this.props.page,
+            thumbnail,
+          },
+        },
+      });
+    });
+  };
+
   public render() {
     const {
       horizontalGuides,
@@ -419,7 +443,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               verticalGuidelines={verticalSnapGuides}
               horizontalGuidelines={horizontalSnapGuides}
               editor={this}
-              onChange={this.props.onChange}
+              onChange={(e) => {
+                this.props.onChange(e);
+                this.updateThumbnail();
+              }}
               selectedMenu={this.props.curTool}
             />
             {this.props.page.showEdge && <ScreenEdge page={this.props.page} />}
