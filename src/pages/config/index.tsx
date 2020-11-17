@@ -280,7 +280,9 @@ const Index = ({
               onDrag={setDragPercent}
             />
             <Thumbnail
-              onScroll={editor?.current?.scrollTo}
+              onScroll={(e) => {
+                editor?.current?.scrollTo(e);
+              }}
               page={page}
               visible={thumbVisible}
               zoom={zoom}
