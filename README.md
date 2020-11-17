@@ -149,7 +149,7 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [ ] 视频背景
 - [ ] 作废率报表解析上传
 - [ x ] 不同尺寸屏幕的缩放
-- [ ] 缩略图显示
+- [ x ] 缩略图显示
 - [ x ] 文字、图片组件；图片动画
 
 
