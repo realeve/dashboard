@@ -8,36 +8,56 @@ import { IPage } from '@/models/common';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
 
+/**
+ * 获取缩略图的宽度及可用的最大边距，推导过程见  /public/缩略图推导.png
+ * @param x 序号
+ * @returns x:尺寸缩放系数
+ * @returns y:边框缩放系数
+ */
+const getThumbnailParam = (x: number) => {
+  return {
+    x: (x + 1) / 2,
+    y: (5 * x - 1) / (3 * x + 3),
+  };
+};
+
+// 缩略图缩放系数
+const SCALE_PARAM = 10;
+
 // TODO 拖动缩略图
 interface IThumbnailProps {
   visible: boolean;
   zoom: number;
   dragPercent: { x: number; y: number };
   page: IPage;
+  onScroll: (e: { x: number; y: number }) => void;
 }
-export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
-  const thumbnailSize = { width: Number(page.width) / 10, height: Number(page.height) / 10 };
+export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps) => {
+  const thumbnailSize = {
+    width: Number(page.width) / SCALE_PARAM,
+    height: Number(page.height) / SCALE_PARAM,
+  };
   // 缩放比
   // const scale = rangeCfg.min / zoom;
 
-  let offset = 1.5;
-  let moveParam = 2 / 3;
+  let offset, moveParam, res;
   if (zoom < 0.7) {
-    offset = 1;
-    moveParam = 2 / 3;
+    res = getThumbnailParam(1);
+    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 0.8) {
-    offset = 1.5;
-    moveParam = 1;
+    res = getThumbnailParam(2);
+    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 1.0) {
-    offset = 2;
-    moveParam = 1.16;
+    res = getThumbnailParam(3);
+    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 1.2) {
-    offset = 2.25;
-    moveParam = 1.22;
+    res = getThumbnailParam(4);
+    (offset = res.x), (moveParam = res.y);
   } else if (zoom <= 1.6) {
-    offset = 2.5;
-    moveParam = 1.26;
+    res = getThumbnailParam(5);
+    (offset = res.x), (moveParam = res.y);
   }
+
   const [frame, setFrame] = useSetState({
     translate: [0, 0],
     transformOrigin: '50% 50%',
@@ -56,7 +76,6 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
     ref.current.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
   }, [dragPercent, offset]);
 
-  console.log(frame.translate, dragPercent);
   return (
     <div
       className={classnames(styles.thumbnail, styles[`thumbnail-${visible ? 'show' : 'hide'}`])}
@@ -89,6 +108,13 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
           onDrag={({ target, beforeTranslate }) => {
             setFrame({ translate: beforeTranslate });
             target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+
+            let scale = zoom <= 1 ? zoom : zoom - 0.15;
+            // 左上角滚动的位置
+            onScroll({
+              x: beforeTranslate[0] * SCALE_PARAM * scale - 100,
+              y: beforeTranslate[1] * SCALE_PARAM * scale - 100,
+            });
           }}
         />
       </div>

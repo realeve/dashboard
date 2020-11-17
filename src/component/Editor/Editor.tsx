@@ -465,7 +465,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             }
           }}
           onDrag={(e: { deltaX: number; deltaY: number }) => {
-            if (selectedMenu === 'MoveTool') {
+            if (selectedMenu !== 'hand') {
               return;
             }
             const { offsetWidth, offsetHeight } = infiniteViewer.current.getContainer();
@@ -494,12 +494,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             this.props?.onDrag?.(pos);
           }}
           onSelectEnd={({ isDragStart, selected, inputEvent }) => {
-            let _selected = R.clone(selected);
-
             if (selectedMenu === 'hand') {
               return;
             }
-
+            let _selected = R.clone(selected);
             if (isDragStart) {
               inputEvent.preventDefault();
             }
@@ -669,6 +667,15 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       });
     });
   }
+
+  /**
+   * 滚动editor到相对位置
+   * @param x/y 相对坐标
+   */
+  public scrollTo({ x, y }) {
+    this.infiniteViewer.current!.scrollTo(x, y);
+  }
+
   public getSelectedTargets() {
     return this.state.selectedTargets;
   }

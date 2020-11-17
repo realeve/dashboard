@@ -133,10 +133,15 @@ const Index = ({
 
   // 更新当前的菜单
   const setCurTool = (curTool: TQuickTool) => {
+    let append = {};
+    if (curTool == 'hand') {
+      append = { selectedPanel: [] };
+    }
     dispatch({
       type: 'common/setStore',
       payload: {
         curTool,
+        ...append,
       },
     });
   };
@@ -274,7 +279,16 @@ const Index = ({
               // }}
               onDrag={setDragPercent}
             />
-            <Thumbnail page={page} visible={thumbVisible} zoom={zoom} dragPercent={dragPercent} />
+            <Thumbnail
+              onScroll={({ x, y }: { x: number; y: number }) => {
+                console.log({ x, y });
+                editor.current.scrollTo({ x, y });
+              }}
+              page={page}
+              visible={thumbVisible}
+              zoom={zoom}
+              dragPercent={dragPercent}
+            />
           </div>
           <EditSlider
             zoom={zoom}
