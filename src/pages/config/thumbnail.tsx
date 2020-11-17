@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './thumbnail.less';
 import classnames from 'classnames';
-import { rangeCfg } from './EditSlider';
+// import { rangeCfg } from './EditSlider';
 
 import Moveable from 'react-moveable';
 
@@ -20,7 +20,7 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
   const thumbnailSize = { width: Number(page.width) / 10, height: Number(page.height) / 10 };
   // 缩放比
   // const scale = rangeCfg.min / zoom;
-
+  let offset = 1.5;
   const [frame, setFrame] = useSetState({
     translate: [0, 0],
     transformOrigin: '50% 50%',
@@ -28,9 +28,10 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
   const ref = React.useRef(null);
 
   useEffect(() => {
+    let maxOffset = 100 * (1 - 1 / offset);
     let beforeTranslate = [
-      (R.clamp(0, 50, dragPercent.x) * thumbnailSize.width) / 100,
-      (R.clamp(0, 50, dragPercent.y) * thumbnailSize.height) / 100,
+      (R.clamp(0, maxOffset, dragPercent.x) * thumbnailSize.width) / 100,
+      (R.clamp(0, maxOffset, dragPercent.y) * thumbnailSize.height) / 100,
     ];
     setFrame({
       translate: beforeTranslate,
@@ -49,8 +50,8 @@ export default ({ zoom, dragPercent, visible, page }: IThumbnailProps) => {
           className={styles['select-span']}
           style={{
             transform: `translate(${frame.translate[0]}px, ${frame.translate[1]}px)`,
-            width: thumbnailSize.width / 2,
-            height: thumbnailSize.height / 2,
+            width: thumbnailSize.width / offset,
+            height: thumbnailSize.height / offset,
           }}
           ref={ref}
         />
