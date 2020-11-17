@@ -109,11 +109,10 @@ export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps)
             setFrame({ translate: beforeTranslate });
             target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
 
-            let scale = zoom <= 1 ? zoom : zoom - 0.15;
             // 左上角滚动的位置
             onScroll({
-              x: beforeTranslate[0] * SCALE_PARAM * scale - 100,
-              y: beforeTranslate[1] * SCALE_PARAM * scale - 100,
+              x: beforeTranslate[0] * SCALE_PARAM * (zoom - 0.15) - 100,
+              y: beforeTranslate[1] * SCALE_PARAM * (zoom - 0.15) - 100,
             });
           }}
         />
