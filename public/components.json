@@ -326,6 +326,24 @@
       {
         "title": "开发测试",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+        "list": [
+          {
+            "name": "other.time_chart",
+            "key": "time_chart",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "时钟",
+            "image": "/img/config/text.png",
+            "showBorder": false,
+            "showTitle": false,
+            "showBackground": false,
+            "ajax": false
+          }
+        ]
+      },
+      {
+        "title": "开发测试",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
         "list": []
       }
     ]
