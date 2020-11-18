@@ -7,8 +7,8 @@ export default {
   animationDuration: 1500,
   // animationEasing: 'elasticOut',
   // animationEasingUpdate: 'elasticOut',
-  animationDelay: idx => idx * 100,
-  animationDelayUpdate: idx => idx * 100,
+  animationDelay: (idx) => idx * 100,
+  animationDelayUpdate: (idx) => idx * 100,
   singleAxis: {
     top: 50,
     bottom: 50,
@@ -59,12 +59,12 @@ export default {
     left: 'right',
   },
   tooltip: {
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    extraCssText:
-      'padding:20px;color:#999;border-radius:5px;box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);',
-    textStyle: {
-      color: '#333',
-    },
+    // backgroundColor: 'rgba(255,255,255,0.95)',
+    // extraCssText:
+    //   'padding:20px;color:#999;border-radius:5px;box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);',
+    // textStyle: {
+    //   color: '#333',
+    // },
     trigger: 'axis',
     axisPointer: {
       type: 'cross',

@@ -40,21 +40,36 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-export const handleData = ({ data }, { legend, x, y }) => {
-  let legendArr = lib.getUniqByIdx({ key: legend, data });
+export const handleData = (
+  { data },
+  { legend, x, y }: { legend?: number | string; x: number | string; y: number | string },
+) => {
   let xArr = lib.getUniqByIdx({ key: x, data });
   let series = [];
-  legendArr.map((name, idx) => {
+  if (typeof legend == 'undefined') {
     let arr = [];
-    xArr.forEach(xItem => {
-      let item = data.find(item => item[legend] == name && item[x] == xItem);
+    xArr.forEach((xItem) => {
+      let item = data.find((item) => item[x] == xItem);
       arr.push(item ? item[y] : '-');
     });
     series.push({
       name,
       arr,
     });
-  });
+  } else {
+    let legendArr = lib.getUniqByIdx({ key: legend, data });
+    legendArr.map((name, idx) => {
+      let arr = [];
+      xArr.forEach((xItem) => {
+        let item = data.find((item) => item[legend] == name && item[x] == xItem);
+        arr.push(item ? item[y] : '-');
+      });
+      series.push({
+        name,
+        arr,
+      });
+    });
+  }
 
   return {
     xArr,
@@ -84,7 +99,7 @@ export const config = [
     max: 40,
     step: 2,
   },
-  ...lib.getPositionConfig(), 
+  ...lib.getPositionConfig(),
   {
     type: 'divider',
     title: '系列图表类型',

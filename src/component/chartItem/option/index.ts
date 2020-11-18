@@ -214,3 +214,12 @@ export { wave_effect };
 */
 import * as fullscreen from './other/fullscreen';
 export { fullscreen }; 
+
+/*
+    时间：2020-11-18 09:11:24
+    类型: echarts
+    序号：30
+    名称：你的图表名称
+*/ 
+import * as bar_2d from './echarts/bar_2d';
+export { bar_2d }; 
