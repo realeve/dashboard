@@ -223,3 +223,12 @@ export { fullscreen };
 */ 
 import * as bar_2d from './echarts/bar_2d';
 export { bar_2d }; 
+
+/*
+    时间：2020-11-12 16:22:07
+    类型: other
+    序号：31
+    名称：时钟
+*/ 
+import * as time_chart from './other/time_chart';
+export { time_chart }; 
