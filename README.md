@@ -104,39 +104,39 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 
 ## todo:
 
-- [ x ] 全局 
-- [ x ] 背景设置
-- [ x ] header设置
-- [ x ] footer设置
+- [x] 全局 
+- [x] 背景设置
+- [x] header设置
+- [x] footer设置
 
 --- 
 
-- [ x ] 图表项
-- [ x ] step条
-- [ x ] 边框
-- [ x ] 标题样式/主题
-- [ x ] 图表类型
-- [ x ] 数据源：Mock/接口/参数
-- [ x ] 数据刷新时长
-- [ x ] 主要参数配置
-- [ x ] 实时预览
-- [ x ] 存储图表项内容
+- [x] 图表项
+- [x] step条
+- [x] 边框
+- [x] 标题样式/主题
+- [x] 图表类型
+- [x] 数据源：Mock/接口/参数
+- [x] 数据刷新时长
+- [x] 主要参数配置
+- [x] 实时预览
+- [x] 存储图表项内容
 
 --- 
 
-- [ x ] dashboard
-- [ x ] 图表项配置/初始化参考AVA做实现
-- [ x ] 支持复制图表项配置
-- [ x ] 支持粘贴图表项配置，实时生效
+- [x] dashboard
+- [x] 图表项配置/初始化参考AVA做实现
+- [x] 支持复制图表项配置
+- [x] 支持粘贴图表项配置，实时生效
 
 ---  
 
-- [ x ] widgets
-- [ x ] 翻牌器
-- [ x ] 表单滚动
+- [x] widgets
+- [x] 翻牌器
+- [x] 表单滚动
 - [ ] g2 plot中 柱状图/曲线图
-- [ x ] echarts中借鉴借鉴的图表适配
-- [ x ] 主题配色提取
+- [x] echarts中借鉴借鉴的图表适配
+- [x] 主题配色提取
 
 
 ---
@@ -148,9 +148,9 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 ## todo 2
 - [ ] 视频背景
 - [ ] 作废率报表解析上传
-- [ x ] 不同尺寸屏幕的缩放
-- [ x ] 缩略图显示
-- [ x ] 文字、图片组件；图片动画
+- [x] 不同尺寸屏幕的缩放
+- [x] 缩略图显示
+- [x] 文字、图片组件；图片动画
 
 
 --

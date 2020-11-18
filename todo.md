@@ -15,9 +15,9 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 ---
 
-- [ x ] 增加组件锁定
+- [x] 增加组件锁定
 - [ ] 增加操作历史记录，X次可设置。点击之后重新渲染dashboard；每一步记录具体的操作；
-- [ x ] 业务组件管理
+- [x] 业务组件管理
 
 -----
 
@@ -27,7 +27,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 ~~1.新增业务路由（原有增加） business，用于业务组件配置成dashboard~~
 ~~差异在于：~~
 ~~接口不允许 设置~~
-- [ x ] 组件列表用业务列表代替，可首字母检索
+- [x] 组件列表用业务列表代替，可首字母检索
 ~~基于config路由的代码来渲染~~
 
 2.config增加
@@ -38,7 +38,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 - [ ] 表2：使用dashboard/业务id
 
-- [ x ] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
+- [x] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
 
  
 ~~(3)多个组件编组保存~~
@@ -106,4 +106,4 @@ id/最近发送时间，时长；
 
 ---
 
-- [ x ] 已知bug，分组内容移动时，只有第一项内容的位置变更，其它内容不变动，导致相对位置异常。
+- [x] 已知bug，分组内容移动时，只有第一项内容的位置变更，其它内容不变动，导致相对位置异常。
