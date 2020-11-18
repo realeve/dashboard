@@ -124,7 +124,6 @@ export default ({ data, x = 0, y = 1, showSplit = true }) => {
       data: sideData,
     });
     series.push({
-      name: 'b',
       tooltip: {
         show: false,
       },
@@ -139,7 +138,8 @@ export default ({ data, x = 0, y = 1, showSplit = true }) => {
       symbolOffset: ['0', '-11'],
       symbolRotate: -5,
       symbolPosition: 'end',
-      data: data,
+      data,
+      label: { show: true, position: 'top', color: '#ddd', offset: [0, 15], rotate: -5 },
       z: 3,
     });
   });
