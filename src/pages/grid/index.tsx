@@ -14,7 +14,6 @@ import { VerticalAlignTopOutlined, VerticalAlignBottomOutlined } from '@ant-desi
 import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import './index.less';
-import { getNonce } from '@/component/chart/lib';
 
 import styles from './index.less';
 import classNames from 'classnames';
@@ -81,7 +80,7 @@ export default () => {
       y: Infinity, // puts it at the bottom
       w: 3,
       h: 2 * zoom,
-      i: getNonce(),
+      i: lib.noncer(),
     };
     let widgets = [
       ...state.widgets,

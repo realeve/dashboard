@@ -4,11 +4,12 @@ import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
 import { ScenaJSXElement } from '@/component/Editor';
-
+import { TChartEngine } from '@/models/common';
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
   children: ScenaJSXElement;
+  engine?: TChartEngine;
   [key: string]: any;
 }
 export const borderNames = Object.keys(assets.borders);
@@ -20,13 +21,14 @@ export default ({
   showBorder = true,
   showBackground = true,
   className,
+  engine = 'other',
   ...props
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
 
   // 11-12
   // 只在首页直接显示，在config配置页需要显示父层div，否则无法编辑
-  if (!showBorder && !showBackground && window.location.pathname == '/') {
+  if (!showBorder && ((!showBackground && window.location.pathname == '/') || engine !== 'other')) {
     return children;
   }
 

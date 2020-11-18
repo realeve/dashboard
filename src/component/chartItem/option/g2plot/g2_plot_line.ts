@@ -19,15 +19,6 @@ export let mock: IChartMock = {
 
 export const config = [
   {
-    key: 'appendPadding',
-    defaultValue: 30,
-    title: '边距(需刷新)',
-    type: 'range',
-    min: 10,
-    max: 80,
-    step: 2,
-  },
-  {
     key: 'smooth',
     defaultValue: false,
     title: '平滑曲线',
@@ -56,12 +47,10 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ data: { data }, x = 0, y = 1, appendPadding = 30, smooth = false }) => {
+export default ({ data: { data }, x = 0, y = 1, smooth = false }) => {
   return {
     chartType: 'line',
     renderer: 'svg',
-    autoFit: true,
-    appendPadding,
     smooth,
     data: data,
     xField: x,

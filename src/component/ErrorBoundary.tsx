@@ -40,7 +40,7 @@ class ErrorBoundary extends React.Component<any> {
     if (this.state.hasError) {
       return this.renderError(this.state.error!);
     }
-    return <div style={{ position: 'relative', height: '100%' }}>{this.props.children}</div>;
+    return this.props.children;
   }
 }
 

@@ -22,15 +22,6 @@ export let mock: IChartMock = {
 
 export const config = [
   {
-    key: 'appendPadding',
-    defaultValue: 30,
-    title: '边距(需刷新)',
-    type: 'range',
-    min: 10,
-    max: 80,
-    step: 2,
-  },
-  {
     key: 'smooth',
     defaultValue: false,
     title: '平滑曲线',
@@ -58,13 +49,16 @@ export const apiConfig: IApiConfig = {
     },
   ],
 };
+export const defaultOption = { renderer: 'svg' };
 
-export default ({ data: { data }, x = 0, y = 1, appendPadding = 30 }) => {
+/**
+ * 玉珏图，参照 https://antv-g2plot.gitee.io/zh/examples/radial-bar/basic#line
+ * 目前版本的 g2 plot渲染结果同官方不一致
+ */
+export default ({ data: { data }, x = 0, y = 1 }) => {
   return {
     renderer: 'svg',
     chartType: 'radial_bar',
-    autoFit: true,
-    appendPadding,
     data: data,
     xField: x,
     yField: y,
@@ -74,16 +68,5 @@ export default ({ data: { data }, x = 0, y = 1, appendPadding = 30 }) => {
       showMarkers: true,
     },
     type: 'line',
-    annotations: [
-      {
-        type: 'text',
-        position: ['50%', '50%'],
-        content: 'Music',
-        style: {
-          textAlign: 'center',
-          fontSize: 24,
-        },
-      },
-    ],
   };
 };

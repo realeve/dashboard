@@ -68,6 +68,7 @@ const Item = ({
 
   // defaultOption 可能为函数，由config计算得出
   let appendConfig: { renderer: tRender } = { renderer: 'canvas' };
+
   if (defaultOption) {
     appendConfig = R.type(defaultOption) == 'Function' ? defaultOption(config) : defaultOption;
   }
@@ -84,14 +85,20 @@ const Item = ({
       />
     );
   } else if (config.engine === 'g2plot') {
+    let option = method({
+      data: valid ? data : mock,
+      ...(config.componentConfig || {}),
+      autoFit: true,
+    });
+
+    let appendPadding = config.showBorder ? 30 : 0;
+
     return (
       <G2Plot
-        option={method({
-          data: valid ? data : mock,
-          ...(config.componentConfig || {}),
-        })}
+        option={{ ...option, appendPadding }}
         renderer={appendConfig.renderer || 'canvas'}
         style={{ height: '100%', ...style }}
+        // style={style}
       />
     );
   } else if (config.engine === 'g2') {
@@ -153,7 +160,11 @@ export default connect(({ common }: { common: ICommon }) => ({
   panel: common.panel,
 }))(Index);
 
-export const ChartItem = ({ page, config }) => {
+interface IChartItemProps {
+  page: IPage;
+  config: IPanelConfig;
+}
+export const ChartItem = ({ page, config }: IChartItemProps) => {
   if (!config) {
     return null;
   }
@@ -177,6 +188,7 @@ export const ChartItem = ({ page, config }) => {
     <ErrorBoundary>
       {config.showTitle && <div style={page.head}>{title}</div>}
       <BorderItem
+        engine={config.engine}
         name={page.border}
         style={{
           background: config.showBackground ? page.chartBackground : 'unset',

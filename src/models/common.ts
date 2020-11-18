@@ -74,7 +74,11 @@ export interface IPanelStyle {
   // rotate: number | string;
   transform: string;
 }
+
+// 渲染引擎
+export type TChartEngine = 'echarts' | 'g2' | 'g2plot' | 'other';
 export interface IPanelConfig {
+  engine?: TChartEngine;
   type?: string; //类型
   title: string; //标题
   image?: string; // 缩略图
