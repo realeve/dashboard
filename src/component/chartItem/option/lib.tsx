@@ -770,10 +770,10 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
         title: <div style={{ fontWeight: 'bold', fontSize: fontSize }}>Aa</div>,
         value: 'bold',
       },
-      // {
-      //   title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
-      //   value: 'bolder',
-      // },
+      {
+        title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
+        value: 'bolder',
+      },
     ],
   },
   {

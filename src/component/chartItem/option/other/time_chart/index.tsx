@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import moment, { Moment } from 'moment';
+import React, { useState } from 'react';
+import moment from 'dayjs';
 import styles from './index.less';
 
 import { IChartConfig } from '@/component/chartItem/interface';
@@ -8,8 +8,6 @@ import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
 
 import { useInterval } from 'react-use';
-
-moment.locale('zh-cn');
 
 const dateFormat = [
   {
@@ -44,7 +42,7 @@ export const config: IChartConfig[] = [
     key: 'datetype',
     defaultValue: 'YYYY-MM-DD HH:mm:ss',
     title: '日期格式',
-    type: 'radio',
+    type: 'select',
     option: dateFormat,
   },
   {
@@ -62,12 +60,13 @@ export const config: IChartConfig[] = [
 ];
 interface ITimeChartProps {
   fontSize: number;
-  fontWeight: string | number;
+  fontWeight: number | 'bold' | 'normal' | 'bolder' | 'lighter';
   fontColor: string;
   letterSpacing: number;
   showWeekday: boolean;
   datetype: string;
   flexDirection: boolean;
+  breakWeekday: boolean;
 }
 
 export default ({
@@ -83,15 +82,12 @@ export default ({
 }: {
   option: ITimeChartProps;
 }) => {
-  const [time, setTime] = useState(moment().month(2));
-
   const [now, setNow] = useState<string>(moment().format(datetype));
-
   const [week, setWeek] = useState(moment().format('dddd'));
 
   useInterval(() => {
     setNow(moment().format(datetype));
-    setWeek(moment().format('dddd'));
+    showWeekday && setWeek(moment().format('dddd'));
   }, 1000);
 
   return (
@@ -108,7 +104,7 @@ export default ({
       <span className={styles.mock_guide}>{now}</span>
       {showWeekday && (
         <span className={styles.mock_guide} style={{ marginLeft: breakWeekday ? 0 : 10 }}>
-          {week}{' '}
+          {week}
         </span>
       )}
     </div>
