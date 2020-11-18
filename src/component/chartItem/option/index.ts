@@ -213,22 +213,31 @@ export { wave_effect };
     名称：全屏
 */
 import * as fullscreen from './other/fullscreen';
-export { fullscreen }; 
+export { fullscreen };
 
 /*
     时间：2020-11-18 09:11:24
     类型: echarts
     序号：30
-    名称：你的图表名称
-*/ 
+    名称：仿二维柱状图
+*/
 import * as bar_2d from './echarts/bar_2d';
-export { bar_2d }; 
+export { bar_2d };
 
 /*
     时间：2020-11-12 16:22:07
     类型: other
     序号：31
     名称：时钟
-*/ 
+*/
 import * as time_chart from './other/time_chart';
-export { time_chart }; 
+export { time_chart };
+
+/*
+    时间：2020-11-12 16:22:07
+    类型: other
+    序号：31
+    名称：时钟
+*/
+import * as g2plot_line from './g2plot/g2_plot_line';
+export { g2plot_line };

@@ -338,7 +338,16 @@
       {
         "title": "开发测试",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": []
+        "list": [
+          {
+            "name": "g2plot.g2plot_line",
+            "key": "g2plot_line",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "时钟",
+            "image": "/img/icons/31_time_clock.png"
+          }
+        ]
       }
     ]
   }

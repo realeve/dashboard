@@ -12,6 +12,7 @@ import { Skeleton } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
 import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
+import G2Plot from '@/component/g2plot';
 
 const Item = ({
   config,
@@ -80,6 +81,17 @@ const Item = ({
         })}
         renderer={appendConfig.renderer || 'canvas'}
         style={style}
+      />
+    );
+  } else if (config.engine === 'g2plot') {
+    return (
+      <G2Plot
+        option={method({
+          data: valid ? data : mock,
+          ...(config.componentConfig || {}),
+        })}
+        renderer={appendConfig.renderer || 'canvas'}
+        style={{ height: '100%', ...style }}
       />
     );
   } else if (config.engine === 'g2') {

@@ -41,7 +41,6 @@ export default function App() {
     >
       <G2Plot
         option={{
-          renderer: 'svg',
           autoFit: true,
           appendPadding: 10,
           type: 'line',
