@@ -241,3 +241,12 @@ export { time_chart };
 */
 import * as g2plot_line from './g2plot/g2_plot_line';
 export { g2plot_line };
+
+/*
+    时间：2020-11-18 17:06:06
+    类型: g2plot
+    序号：32
+    名称：你的图表名称
+*/ 
+import * as radial_bar from './g2plot/radial_bar';
+export { radial_bar }; 

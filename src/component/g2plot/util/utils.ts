@@ -2,8 +2,7 @@
  * 下划线转驼峰命名
  */
 export const camelCase = (name: string) =>
-  name.charAt(0).toUpperCase() + name.slice(1).replace(/-(\w)/g, (_, n) => n.toUpperCase());
-
+  name.charAt(0).toUpperCase() + name.slice(1).replace(/-|_(\w)/g, (_, n) => n.toUpperCase());
 /**
  * 获取对象差异
  * @param {source} object 原始对象

@@ -3,13 +3,16 @@ import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {
   data: [
-    ['1851', 54],
-    ['1852', 57],
-    ['1853', 59],
-    ['1854', 69],
-    ['1855', 71],
-    ['1856', 76],
-    ['1857', 77],
+    ['Zombieland', 9],
+    ['Wieners', 8],
+    ['Toy Story', 8],
+    ['trashkannon', 7],
+    ['the GROWLERS', 6],
+    ['mudweiser', 6],
+    ['ThunderCats', 4],
+    ['The Taqwacores - Motion Picture', 4],
+    ['The Shawshank Redemption', 2],
+    ['The Olivia Experiment', 1],
   ],
   title: '拆线柱图_MOCK数据',
   header: ['year', 'value'],
@@ -56,25 +59,31 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default ({ data: { data }, x = 0, y = 1, appendPadding = 30, smooth = false }) => {
+export default ({ data: { data }, x = 0, y = 1, appendPadding = 30 }) => {
   return {
-    chartType: 'line',
     renderer: 'svg',
+    chartType: 'radial_bar',
     autoFit: true,
     appendPadding,
-    smooth,
     data: data,
     xField: x,
     yField: y,
-    xAxis: { type: 'category' },
-    yAxis: {
-      label: {
-        formatter: function formatter(v) {
-          return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
-            return ''.concat(s, ',');
-          });
+    radius: 0.8,
+    innerRadius: 0.2,
+    tooltip: {
+      showMarkers: true,
+    },
+    type: 'line',
+    annotations: [
+      {
+        type: 'text',
+        position: ['50%', '50%'],
+        content: 'Music',
+        style: {
+          textAlign: 'center',
+          fontSize: 24,
         },
       },
-    },
+    ],
   };
 };

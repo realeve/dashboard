@@ -8,7 +8,7 @@ import ChartLoading from './util/createLoading';
 
 export interface ChartConfig extends Options {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
-  readonly type: TChartType;
+  readonly chartType: TChartType;
 }
 
 export interface G2PlotChartProps extends ContainerProps {
@@ -29,13 +29,15 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
     loading,
     loadingTemplate,
     errorTemplate,
-    option: { type = 'Area', ...option },
+    option: { chartType = 'Area', ...option },
     renderer = 'canvas',
   } = props;
-  if (!lib[utils.camelCase(type)]) {
+  const chartInstance = lib[utils.camelCase(chartType)];
+  if (!chartInstance) {
     return <h5>图表类型无效</h5>;
   }
-  const { chart, container } = useChart<Base, Options>(lib[utils.camelCase(type)], {
+
+  const { chart, container } = useChart<Base, Options>(chartInstance, {
     ...option,
     renderer,
   });
