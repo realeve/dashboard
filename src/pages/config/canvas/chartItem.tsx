@@ -6,7 +6,7 @@ import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '@/component/ErrorBoundary';
 import { BorderItem } from '@/component/widget';
 import { Skeleton } from 'antd';
 import useFetch from '@/component/hooks/useFetch';

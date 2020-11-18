@@ -2,6 +2,17 @@ import * as React from 'react';
 import Moveable, { OnDrag, OnResize } from 'react-moveable';
 import styles from './index.less';
 import Echarts from '@/component/echarts';
+import G2Plot from '@/component/g2plot';
+
+var data = [
+  { year: '1851', value: 54 },
+  { year: '1852', value: 57 },
+  { year: '1853', value: 59 },
+  { year: '1854', value: 69 },
+  { year: '1855', value: 71 },
+  { year: '1856', value: 76 },
+  { year: '1857', value: 77 },
+];
 
 export default function App() {
   const [frame, setFrame] = React.useState({
@@ -28,6 +39,27 @@ export default function App() {
         }
       }}
     >
+      <G2Plot
+        option={{
+          renderer: 'svg',
+          autoFit: true,
+          appendPadding: 10,
+          type: 'line',
+          data: data,
+          xField: 'year',
+          yField: 'value',
+          xAxis: { type: 'category' },
+          yAxis: {
+            label: {
+              formatter: function formatter(v) {
+                return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
+                  return ''.concat(s, ',');
+                });
+              },
+            },
+          },
+        }}
+      />
       <Echarts
         option={{
           xAxis: { type: 'category', data: 'abcde'.split('') },

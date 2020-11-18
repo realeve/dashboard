@@ -1,6 +1,4 @@
 import React from 'react';
-// AVA 图表
-import G2Plot from '@/component/chart/chart';
 
 import { AChart } from '@/component/chart/g2plot';
 
@@ -121,8 +119,8 @@ export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, 
 
         return <AChart option={option} />;
 
-      default:
-        return <G2Plot config={config} onMockChange={(result) => onMockChange(result, idx)} />;
+      // default:
+      // return <G2Plot config={config} onMockChange={(result) => onMockChange(result, idx)} />;
     }
   };
 

@@ -7,10 +7,19 @@ export type tRender = 'canvas' | 'svg';
 interface IProp {
   renderer?: tRender;
   option: any;
+  /** 是否轮询切换显示项，用于动态饼图 */
   toggleItem?: boolean;
+
+  /** 设置切换项 */
+  setToggleIdx?: (e: number) => void;
   [key: string]: any;
 }
 
+/**
+ * 将第idx个项目设为选中状态
+ * @param option 配置项
+ * @param idx 序号
+ */
 let toggleSeriesItem = (option, idx) => {
   let len = option.series[0].data.length;
   option.series[0].data = option.series[0].data.map((item, i) => {

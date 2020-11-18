@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AChart } from './ava';
+
 // g2 plot 原生
 // import { AChart  as AutoChart  } from './g2plot';
 
