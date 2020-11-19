@@ -27,6 +27,14 @@ export const config = [
     title: '平滑曲线',
     type: 'switch',
   },
+  {
+    key: 'color',
+    defaultValue: '#096dd9',
+    title: '颜色',
+    type: 'purecolor',
+    position: 'bottom',
+    style: { marginBottom: 115 },
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -55,7 +63,7 @@ export const defaultOption = { renderer: 'svg' };
  * 玉珏图，参照 https://antv-g2plot.gitee.io/zh/examples/radial-bar/basic#line
  * 目前版本的 g2 plot渲染结果同官方不一致
  */
-export default ({ data: { data }, x = 0, y = 1 }) => {
+export default ({ data: { data }, color = '#096dd9', x = 0, y = 1 }) => {
   return {
     renderer: 'svg',
     chartType: 'radial_bar',
@@ -64,6 +72,7 @@ export default ({ data: { data }, x = 0, y = 1 }) => {
     yField: y,
     radius: 0.8,
     innerRadius: 0.2,
+    color,
     tooltip: {
       showMarkers: true,
     },
