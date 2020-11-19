@@ -95,7 +95,7 @@ const Item = ({
 
     return (
       <G2Plot
-        option={{ ...option, appendPadding }}
+        option={{ appendPadding, ...option }}
         renderer={appendConfig.renderer || 'canvas'}
         style={{ height: '100%', ...style }}
         // style={style}

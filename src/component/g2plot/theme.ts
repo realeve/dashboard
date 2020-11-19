@@ -71,9 +71,21 @@ const themeObject: LooseObject = {
 };
 const cbpcTheme = deepMix({}, defaultTheme, themeObject);
 
-// console.log(cbpcTheme);
+/**
+ * 堆叠柱状图区域连通
+ *
+ * 注册action可参考 https://github.com/antvis/G2Plot/blob/master/src/plots/scatter/interaction/index.ts
+ * G2 Plot interactions定义：https://github.com/antvis/G2Plot/blob/master/src/types/interaction.ts
+ */
+G2.registerInteraction('element-link', {
+  start: [{ trigger: 'interval:mouseenter', action: 'element-link-by-color:link' }],
+  end: [{ trigger: 'interval:mouseleave', action: 'element-link-by-color:unlink' }],
+});
 
 /**
  * 注册自定义样式
  */
 G2.registerTheme('cbpc', cbpcTheme);
+// console.log(cbpcTheme);
+
+export default cbpcTheme;
