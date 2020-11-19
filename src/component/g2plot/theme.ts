@@ -11,7 +11,7 @@ import { deepMix } from '@antv/util';
 
 const defaultTheme = createThemeByStylesheet(antvDark);
 let labelColor = '#E0E0E3';
-
+let lineColor = '#ccc';
 let fontFamily =
   '"Unica One","-apple-system", "Segoe UI", Roboto, "Helvetica Neue", Arial,\n  "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","Noto Color Emoji"';
 
@@ -59,12 +59,19 @@ const themeObject: LooseObject = {
           fontFamily,
         },
       },
+      crosshairs: {
+        line: {
+          style: {
+            stroke: lineColor,
+          },
+        },
+      },
     },
   },
 };
 const cbpcTheme = deepMix({}, defaultTheme, themeObject);
 
-console.log(cbpcTheme);
+// console.log(cbpcTheme);
 
 /**
  * 注册自定义样式

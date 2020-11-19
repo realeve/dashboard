@@ -97,20 +97,7 @@ export const config: IChartConfig[] = [
     defaultValue: 'polar',
     title: '坐标系',
     type: 'radio',
-    option: [
-      {
-        title: 'polar',
-        value: 'polar',
-      },
-      {
-        title: 'theta',
-        value: 'theta',
-      },
-      {
-        title: 'rect',
-        value: 'rect',
-      },
-    ],
+    option: ['polar', 'theta', 'rect'],
   },
 ];
 

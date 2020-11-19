@@ -1,5 +1,6 @@
 import React from 'react';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import * as lib from '@/component/chartItem/option/lib';
 
 export let mock: IChartMock = {
   data: [
@@ -4138,10 +4139,77 @@ export let mock: IChartMock = {
 export const config = [
   {
     key: 'smooth',
+    defaultValue: true,
+    title: '曲线类型',
+    type: 'radio',
+    option: [
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-smooth-line datav-gui-icon" />,
+        value: true,
+      },
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-poly-line datav-gui-icon" />,
+        value: false,
+      },
+    ],
+  },
+  {
+    key: 'isStack',
     defaultValue: false,
-    title: '平滑曲线',
+    title: '堆叠',
     type: 'switch',
   },
+  {
+    key: 'lineWidth',
+    defaultValue: 2,
+    title: '线宽',
+    type: 'range',
+    step: 1,
+    min: 1,
+    max: 20,
+  },
+  {
+    key: 'connectNulls',
+    defaultValue: true,
+    title: '连接空数据',
+    type: 'switch',
+  },
+  {
+    key: 'stepType',
+    default: '无',
+    title: '阶梯样式',
+    type: 'radio',
+    option: '无,hv,vh,hvh,vhv',
+  },
+  {
+    type: 'divider',
+    title: '数据点样式',
+  },
+  {
+    key: 'pointSize',
+    defaultValue: 0,
+    title: '大小',
+    type: 'range',
+    step: 1,
+    min: 0,
+    max: 20,
+  },
+  {
+    key: 'pointColor',
+    defaultValue: '#ffffff',
+    title: '颜色',
+    type: 'purecolor',
+    position: 'top',
+  },
+  {
+    key: 'pointShape',
+    defaultValue: 'hollow-circle',
+    title: '形状',
+    type: 'select',
+    option:
+      'hollow-circle,hollow-square,hollow-bowtie,hollow-diamond,hollow-hexagon,hollow-triangle,hollow-triangle-down,circle,square,bowtie,diamond,hexagon,triangle,triangle-down,cross,tick,plus,hyphen,line',
+  },
+  ...lib.getLegendConfig(),
 ];
 
 export const apiConfig: IApiConfig = {
@@ -4172,18 +4240,46 @@ export const apiConfig: IApiConfig = {
 };
 
 // export const defaultOption = { renderer: 'svg' };
-export default ({ data: { data, header }, x = 0, y = 1, legend = 2, smooth = false }) => {
+export default ({
+  data: { data, header },
+  x = 0,
+  y = 1,
+  legend = 2,
+  isStack = false,
+  smooth = false,
+  connectNulls = true,
+  lineWidth = 2,
+  pointSize = 0,
+  pointColor = '#fff',
+  pointShape = 'hollow-circle',
+  stepType = '',
+  legendShow = true,
+  legendAlign = 'center',
+  legendPosition = 'top',
+  legendOrient = 'horizontal',
+}) => {
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
       : {
           seriesField: header[legend],
         };
+  let stepOption = stepType == '无' ? { smooth } : { stepType, smooth: false };
+
   return {
     chartType: 'line',
     renderer: 'svg',
-    smooth,
-    data: data,
+    ...stepOption,
+    ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    isStack,
+    connectNulls,
+    lineStyle: { lineWidth },
+    point: {
+      size: pointSize,
+      color: pointColor,
+      shape: pointShape,
+    },
+    data: data.slice(0, 300),
     xField: header[x],
     yField: header[y],
     ...seriesField,

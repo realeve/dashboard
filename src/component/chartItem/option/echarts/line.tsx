@@ -253,7 +253,7 @@ export default ({
         type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
       },
     },
-    legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    ...lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {
       left: '3%',
       right: '4%',

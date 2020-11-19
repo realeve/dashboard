@@ -555,7 +555,7 @@ interface IPositionConfig {
   }[];
 }
 
-export const getPositionConfig: () => IPositionConfig[] = () => [
+export const getLegendConfig: () => IPositionConfig[] = () => [
   {
     type: 'divider',
     title: '图例配置',
@@ -626,6 +626,10 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
       },
     ],
   },
+];
+
+export const getPositionConfig: () => IPositionConfig[] = () => [
+  ...getLegendConfig(),
   {
     type: 'divider',
     title: '拆线图样式',
@@ -665,6 +669,32 @@ export const getPositionConfig: () => IPositionConfig[] = () => [
     step: 1,
   },
 ];
+
+export const getG2LegendOption = ({
+  legendAlign = 'center',
+  legendPosition = 'top',
+  legendOrient = 'horizontal',
+  legendShow = true,
+}) => {
+  if (!legendShow) {
+    return { legend: false };
+  }
+  // position：top | top-left | top-right | right | right-top | right-bottom | left | left-top | left-bottom | bottom | bottom-left | bottom-right
+  let position = '';
+  if (['top', 'bottom'].includes(legendPosition)) {
+    let vPos = legendAlign == 'center' ? '' : `-${legendAlign}`;
+    position = legendPosition + vPos;
+  } else {
+    let vPos = legendPosition == 'center' ? '' : `${legendPosition}`;
+    position = vPos + { left: '-top', right: '-bottom', center: '' }[legendAlign];
+  }
+  return {
+    legend: {
+      layout: legendOrient,
+      position,
+    },
+  };
+};
 
 /**
  * 获取 ECharts legend 配置信息
