@@ -13,6 +13,7 @@ import useFetch from '@/component/hooks/useFetch';
 import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
 import G2Plot from '@/component/g2plot';
+import { isArray } from '@antv/util';
 
 const Item = ({
   config,
@@ -93,9 +94,15 @@ const Item = ({
 
     let appendPadding = config.showBorder ? 30 : 0;
 
+    // 处理边距
+    if (option.appendPadding) {
+      appendPadding = isArray(option.appendPadding)
+        ? option.appendPadding.map((item) => item + appendPadding)
+        : appendPadding + option.appendPadding;
+    }
     return (
       <G2Plot
-        option={{ appendPadding, ...option }}
+        option={{ ...option, appendPadding }}
         renderer={appendConfig.renderer || 'canvas'}
         style={{ height: '100%', ...style }}
         // style={style}

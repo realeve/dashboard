@@ -170,7 +170,6 @@ export default ({
   theme = 'cbpc',
   chartType = 'line',
   fillOpacity = 0.4,
-  appendPadding,
 }) => {
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
@@ -217,10 +216,6 @@ export default ({
     : {
         annotations: annotationsOption,
       };
-
-  console.log(appendPadding);
-
-  // TODO 处理appendPadding边框的场景
 
   return {
     appendPadding: [0, endLabel ? 100 : 0, 0, 0],
