@@ -100,14 +100,6 @@
             "type": "regular_bar",
             "title": "渐变面积图",
             "image": "/img/icons/11_gardient_line.png"
-          },
-          {
-            "name": "g2plot.g2plot_line",
-            "key": "g2plot_line",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "g2曲线图",
-            "image": "/img/icons/31_time_clock.png"
           }
         ]
       }
@@ -292,6 +284,34 @@
     ]
   },
   {
+    "title": "G2Plot",
+    "icon": "icon-com-material",
+    "list": [
+      {
+        "title": "g2图表",
+        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
+        "list": [
+          {
+            "name": "g2plot.g2plot_line",
+            "key": "g2plot_line",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "g2曲线图",
+            "image": "/img/icons/32_g2_plotline.png"
+          },
+          {
+            "name": "g2plot.radial_bar",
+            "key": "radial_bar",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "G2玉珏图",
+            "image": "/img/icons/33_radial_bar.png"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "媒体",
     "icon": "icon-com-media",
     "list": [
@@ -346,16 +366,7 @@
       {
         "title": "开发测试",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "g2plot.radial_bar",
-            "key": "radial_bar",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "请设置图表名称",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
-          }
-        ]
+        "list": []
       }
     ]
   }

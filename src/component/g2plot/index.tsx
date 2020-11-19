@@ -5,18 +5,7 @@ import { getChart, utils } from './util';
 import { ChartRefOptions, TChartType } from './interface';
 import { ErrorBoundary } from './base';
 import ChartLoading from './util/createLoading';
-// import { antvDark } from '@antv/g2/lib/theme/style-sheet/dark';
-
-// 主题注册，暂时不生效，需要查看g2源码
-// G2.registerTheme('_dark', { ...antvDark, brandColor: '#f23' });
-
-import { G2 } from '@antv/g2plot';
-const { registerTheme } = G2;
-registerTheme('_dk', {
-  colors10: ['#FACDAA', '#F4A49E', '#EE7B91', '#E85285', '#BE408C', '#BE408C'],
-  /** 20色板 */
-  colors20: ['#FACDAA', '#F4A49E', '#EE7B91', '#E85285', '#BE408C', '#BE408C', '#942D93'],
-});
+import './theme';
 export interface ChartConfig extends Options {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
   readonly chartType: TChartType;
@@ -51,7 +40,7 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
   const { chart, container } = useChart<Base, Options>(chartInstance, {
     ...option,
     renderer,
-    theme: '_dk',
+    theme: 'cbpc',
   });
 
   useEffect(() => {

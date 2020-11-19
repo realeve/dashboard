@@ -236,8 +236,8 @@ export { time_chart };
 /*
     时间：2020-11-12 16:22:07
     类型: other
-    序号：31
-    名称：时钟
+    序号：32
+    名称：G2线型图
 */
 import * as g2plot_line from './g2plot/g2_plot_line';
 export { g2plot_line };
@@ -245,8 +245,8 @@ export { g2plot_line };
 /*
     时间：2020-11-18 17:06:06
     类型: g2plot
-    序号：32
+    序号：33
     名称：你的图表名称
-*/ 
+*/
 import * as radial_bar from './g2plot/radial_bar';
-export { radial_bar }; 
+export { radial_bar };
