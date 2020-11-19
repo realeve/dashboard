@@ -8,7 +8,7 @@ import { useSetState } from 'react-use';
 import { IPanelConfig } from '@/models/common';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio, { Select } from '@/component/field/Radio';
-import AntSelect from '@/component/field/Selete';
+import AntSelect from '@/component/field/Select';
 import { Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import { ImgSelector } from '@/component/field';
