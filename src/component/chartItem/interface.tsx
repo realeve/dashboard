@@ -10,6 +10,7 @@ export interface IChartConfig {
     | 'color'
     | 'radio'
     | 'select'
+    | 'antselect'
     | 'range'
     | 'divider'
     | 'image'

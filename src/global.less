@@ -80,3 +80,21 @@ body,
 //   background: rgba(48, 54, 64, 0.8);
 //   backdrop-filter: saturate(180%) blur(20px);
 // }
+
+:global {
+  .ant-select-dropdown {
+    background-color: rgb(52, 52, 53, 54%) !important;
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled),
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: #2483ff !important;
+  }
+  .ant-select-item {
+    color: #ddd !important;
+  }
+  .ant-select-selector {
+    background-color: #1c1f25 !important;
+    color: #ddd;
+  }
+}

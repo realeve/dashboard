@@ -2,7 +2,7 @@ import { Radio } from 'antd';
 import React from 'react';
 import styles from '../ColorPicker/index.less';
 import classnames from 'classnames';
-import { isObject, isString, isArray } from '@antv/util';
+import { isString } from '@antv/util';
 import * as R from 'ramda';
 export interface IRadioProps {
   value: string | number;

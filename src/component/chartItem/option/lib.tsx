@@ -6,7 +6,7 @@ import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
 import { IChartConfig } from '@/component/chartItem/interface';
 import { tRender } from '@/component/echarts/';
-
+import { palette } from '@/component/g2plot';
 export interface IChart {
   key?: string;
   title: string;
@@ -822,6 +822,22 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     max: 100,
   },
 ];
+
+export const getAntThemePanel = () => ({
+  key: 'theme',
+  defaultValue: 'cbpc',
+  title: '主题色',
+  type: 'antselect',
+  option: palette.map((item, idx) => {
+    if (idx == palette.length - 1) {
+      return item;
+    }
+    return {
+      ...item,
+      title: <img src={item.title} style={{ height: 30 }} />,
+    };
+  }),
+});
 
 export const getBarMax = (data, y = 1) => {
   let item = R.last(data)[y];

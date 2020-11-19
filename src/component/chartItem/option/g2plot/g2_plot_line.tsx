@@ -1,6 +1,7 @@
 import React from 'react';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
+import { palette } from '@/component/g2plot';
 
 export let mock: IChartMock = {
   data: [
@@ -4137,6 +4138,7 @@ export let mock: IChartMock = {
 };
 
 export const config = [
+  lib.getAntThemePanel(),
   {
     key: 'smooth',
     defaultValue: true,
@@ -4257,6 +4259,7 @@ export default ({
   legendAlign = 'center',
   legendPosition = 'top',
   legendOrient = 'horizontal',
+  theme = 'cbpc',
 }) => {
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
@@ -4283,6 +4286,9 @@ export default ({
     xField: header[x],
     yField: header[y],
     ...seriesField,
+
+    // 主题配置色
+    theme: palette[theme].theme,
     xAxis: { type: 'category' },
     yAxis: {
       label: {
