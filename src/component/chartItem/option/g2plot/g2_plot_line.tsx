@@ -4156,9 +4156,31 @@ export const config = [
     ],
   },
   {
+    key: 'chartType',
+    defaultValue: 'line',
+    title: '图表类型(需刷新)',
+    type: 'radio',
+    option: [
+      {
+        title: '曲线图',
+        value: 'line',
+      },
+      {
+        title: '面积图',
+        value: 'area',
+      },
+    ],
+  },
+  {
     key: 'isStack',
     defaultValue: false,
     title: '堆叠',
+    type: 'switch',
+  },
+  {
+    key: 'showSlider',
+    defaultValue: false,
+    title: '显示滑块',
     type: 'switch',
   },
   {
@@ -4256,10 +4278,12 @@ export default ({
   pointShape = 'hollow-circle',
   stepType = '',
   legendShow = true,
+  showSlider = false,
   legendAlign = 'center',
   legendPosition = 'top',
   legendOrient = 'horizontal',
   theme = 'cbpc',
+  chartType = 'line',
 }) => {
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
@@ -4269,9 +4293,18 @@ export default ({
         };
   let stepOption = stepType == '无' ? { smooth } : { stepType, smooth: false };
 
+  let slider = showSlider
+    ? {
+        slider: {
+          start: 0.1,
+          end: 0.5,
+        },
+      }
+    : {};
+
   return {
-    chartType: 'line',
-    renderer: 'svg',
+    // renderer: 'svg',
+    chartType,
     ...stepOption,
     ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     isStack,
@@ -4286,7 +4319,7 @@ export default ({
     xField: header[x],
     yField: header[y],
     ...seriesField,
-
+    ...slider,
     // 主题配置色
     theme: palette[theme].theme,
     xAxis: { type: 'category' },
