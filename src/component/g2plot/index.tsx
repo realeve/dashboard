@@ -36,12 +36,13 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
     option: { chartType = 'Area', ...option },
     renderer = 'canvas',
   } = props;
-  const chartInstance = lib[utils.camelCase(chartType)];
-  if (!chartInstance) {
+
+  let instance = lib[utils.camelCase(chartType)];
+  if (!instance) {
     return <h5>图表类型无效</h5>;
   }
 
-  const { chart, container } = useChart<Base, Options>(chartInstance, {
+  const { chart, container } = useChart<Base, Options>(instance, {
     renderer,
     theme: 'cbpc',
     ...option,

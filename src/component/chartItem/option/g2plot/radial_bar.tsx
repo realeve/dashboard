@@ -87,7 +87,6 @@ export const config = [
     title: '颜色',
     type: 'purecolor',
     position: 'top',
-    style: { marginBottom: 115 },
   },
 ];
 

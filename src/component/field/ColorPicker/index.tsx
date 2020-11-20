@@ -127,7 +127,7 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value = '', onChange, position = 'top', style = {} }) => {
+export const PureColor = ({ value = '', onChange, position = 'top' }) => {
   if (!value) {
     return null;
   }
@@ -135,7 +135,7 @@ export const PureColor = ({ value = '', onChange, position = 'top', style = {} }
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
   return (
-    <div className={styles.colorItem} style={style}>
+    <div className={styles.colorItem}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>
         <div className={styles.rectPop} style={{ top: position === 'bottom' ? 36 : -115 }}>
           {paletteList.map((backgroundColor) => (

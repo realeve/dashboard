@@ -1,0 +1,16 @@
+{
+  "data": [
+    { "type": "分类一", "min": 76, "max": 100 },
+    { "type": "分类二", "min": 56, "max": 108 },
+    { "type": "分类三", "min": 38, "max": 129 },
+    { "type": "分类四", "min": 58, "max": 155 },
+    { "type": "分类五", "min": 45, "max": 120 },
+    { "type": "分类六", "min": 23, "max": 99 },
+    { "type": "分类七", "min": 18, "max": 56 },
+    { "type": "分类八", "min": 18, "max": 34 }
+  ],
+  "title": "拆线柱图_MOCK数据",
+  "header": ["type", "min", "max"],
+  "rows": 36,
+  "hash": "mockdata"
+}

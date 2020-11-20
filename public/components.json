@@ -322,6 +322,14 @@
             "type": "regular_bar",
             "title": "双向条形图",
             "image": "/img/icons/35_bi_direct.png"
+          },
+          {
+            "name": "g2plot.range",
+            "key": "range",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "区间柱状图",
+            "image": "/img/icons/36_range.png"
           }
         ]
       }

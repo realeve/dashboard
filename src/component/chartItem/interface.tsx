@@ -51,6 +51,7 @@ export interface IApiConfig {
 export interface IG2PlotProps {
   data: IChartMock;
   chartType?: string;
+  renderer?: 'svg' | 'canvas';
   theme?: string | number;
   legendShow: boolean;
   legendAlign: 'left' | 'center' | 'right';

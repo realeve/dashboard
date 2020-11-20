@@ -264,7 +264,16 @@ export { base_line };
     时间：2020-11-20 15:42:35
     类型: g2plot
     序号：35
-    名称：你的图表名称
-*/ 
+    名称：双向条形柱图
+*/
 import * as bi_direct_bar from './g2plot/bi_direct_bar';
-export { bi_direct_bar }; 
+export { bi_direct_bar };
+
+/*
+    时间：2020-11-20 21:23:09
+    类型: g2plot
+    序号：36
+    名称：区间柱状图
+*/
+import * as range from './g2plot/range';
+export { range };

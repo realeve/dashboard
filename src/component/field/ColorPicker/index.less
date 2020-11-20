@@ -72,8 +72,15 @@
 .colorItem {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
+  transition-duration: 0.5s;
+  transition-property: height;
+  transition-timing-function: ease;
+  height: 30px;
+  &:hover {
+    height: 150px;
+  }
 }
 .colorPanel {
   width: 30px;
