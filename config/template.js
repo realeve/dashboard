@@ -380,86 +380,87 @@ export default ({ option: { data, x = 0 }, style }) => {
     return str;
   }
 
-  str = `import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
-  import * as lib from '@/component/chartItem/option/lib';
-  import { getTheme } from './lib';
-  
-  export let mock: IChartMock = {
-    data: [
-      ['1851', 54],
-      ['1852', 57],
-      ['1853', 59],
-      ['1854', 69],
-      ['1855', 71],
-      ['1856', 76],
-      ['1857', 77],
-    ],
-    title: '拆线柱图_MOCK数据',
-    header: ['year', 'value'],
-    rows: 36,
-    hash: 'mockdata',
-  };
-  
-  export const config = [
+  str = `
+import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import * as lib from '@/component/chartItem/option/lib';
+import { getTheme } from './lib';
+
+export let mock: IChartMock = {
+  data: [
+    ['1851', 54],
+    ['1852', 57],
+    ['1853', 59],
+    ['1854', 69],
+    ['1855', 71],
+    ['1856', 76],
+    ['1857', 77],
+  ],
+  title: '拆线柱图_MOCK数据',
+  header: ['year', 'value'],
+  rows: 36,
+  hash: 'mockdata',
+};
+
+export const config = [
+  {
+    key: 'renderer',
+    defaultValue: 'svg',
+    title: '图表引擎',
+    type: 'radio',
+    option: 'canvas,svg',
+  },
+  lib.getAntThemePanel(),
+  ...lib.getLegendConfig(),
+];
+
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: 'http://localhost:8000/mock/02_linebar.json',
+  interval: 5,
+  config: [
     {
-      key: 'renderer',
-      defaultValue: 'svg',
-      title: '图表引擎',
-      type: 'radio',
-      option: 'canvas,svg',
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
     },
-    lib.getAntThemePanel(),
-    ...lib.getLegendConfig(),
-  ];
-  
-  export const apiConfig: IApiConfig = {
-    show: true,
-    type: 'url',
-    url: 'http://localhost:8000/mock/02_linebar.json',
-    interval: 5,
-    config: [
-      {
-        key: 'x',
-        title: 'x 字段',
-        defaultValue: 0,
-        min: 0,
-      },
-      {
-        key: 'y',
-        title: 'y 字段',
-        defaultValue: 1,
-        min: 0,
-      },
-    ],
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+  ],
+};
+
+interface IG2Plot extends IG2PlotProps {
+  [key: string]: any;
+}
+
+export default ({
+  data: { data },
+  x = 0,
+  y = 1,
+
+  renderer = 'svg',
+  theme = 18,
+  legendShow = true,
+  legendAlign,
+  legendPosition,
+  legendOrient,
+}: IG2Plot) => {
+  return {
+    chartType: 'line',
+    ...getTheme(theme),
+    renderer,
+    ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    data,
+    xField: x,
+    yField: y,
+    xAxis: { type: 'category' },
   };
-  
-  interface IG2Plot extends IG2PlotProps {
-    [key: string]: any;
-  }
-  
-  export default ({
-    data: { data },
-    x = 0,
-    y = 1,
-  
-    renderer = 'svg',
-    theme = 18,
-    legendShow = true,
-    legendAlign,
-    legendPosition,
-    legendOrient,
-  }: IG2Plot) => {
-    return {
-      chartType: 'line',
-      ...getTheme(theme),
-      renderer,
-      ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
-      data,
-      xField: x,
-      yField: y,
-      xAxis: { type: 'category' },
-    };
-  };`;
+};`;
   if (chartType == 'g2plot') {
     return str;
   }

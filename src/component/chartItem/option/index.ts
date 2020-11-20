@@ -277,3 +277,12 @@ export { bi_direct_bar };
 */
 import * as range from './g2plot/range';
 export { range };
+
+/*
+    时间：2020-11-20 22:50:39
+    类型: g2plot
+    序号：37
+    名称：你的图表名称
+*/ 
+import * as histogram from './g2plot/histogram';
+export { histogram }; 

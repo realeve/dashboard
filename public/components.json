@@ -330,6 +330,14 @@
             "type": "regular_bar",
             "title": "区间柱状图",
             "image": "/img/icons/36_range.png"
+          },
+          {
+            "name": "g2plot.histogram",
+            "key": "histogram",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "直方图",
+            "image": "/img/icons/37_histogram.png"
           }
         ]
       }
