@@ -2,7 +2,7 @@
   "background": "transparent",
   "defaultColor": "#5B8FF9",
   "padding": "auto",
-  "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
+  "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
   "columnWidthRatio": 0.5,
   "maxColumnWidth": null,
   "minColumnWidth": null,
@@ -79,48 +79,27 @@
       },
       "hollow-rect": {
         "default": {
-          "style": {
-            "fill": "#000",
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": "#000", "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "stroke": "#FFFFFF", "lineWidth": 2 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 } }
       },
       "line": {
         "default": {
-          "style": {
-            "fill": "#000",
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": "#000", "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "stroke": "#FFFFFF", "lineWidth": 2 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 } }
       },
       "tick": {
         "default": {
-          "style": {
-            "fill": "#000",
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": "#000", "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "stroke": "#FFFFFF", "lineWidth": 2 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 } }
       },
       "funnel": {
         "default": { "style": { "fill": "#5B8FF9", "fillOpacity": 0.95 } },
@@ -370,9 +349,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-square": {
         "default": {
@@ -386,9 +363,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-bowtie": {
         "default": {
@@ -402,9 +377,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-diamond": {
         "default": {
@@ -418,9 +391,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-hexagon": {
         "default": {
@@ -434,9 +405,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-triangle": {
         "default": {
@@ -450,9 +419,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hollow-triangle-down": {
         "default": {
@@ -466,9 +433,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "cross": {
         "default": {
@@ -482,9 +447,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "tick": {
         "default": {
@@ -498,9 +461,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "plus": {
         "default": {
@@ -514,9 +475,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "hyphen": {
         "default": {
@@ -530,9 +489,7 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       },
       "line": {
         "default": {
@@ -546,36 +503,25 @@
         },
         "active": { "style": { "stroke": "#FFFFFF", "strokeOpacity": 1 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "lineWidth": 2, "stroke": "#FFFFFF", "strokeOpacity": 1 } }
       }
     },
     "area": {
       "area": {
-        "default": {
-          "style": { "fill": "#5B8FF9", "fillOpacity": 0.25, "stroke": null }
-        },
+        "default": { "style": { "fill": "#5B8FF9", "fillOpacity": 0.25, "stroke": null } },
         "active": { "style": { "fillOpacity": 0.5 } },
         "inactive": { "style": { "fillOpacity": 0.3 } },
         "selected": { "style": { "fillOpacity": 0.5 } }
       },
       "smooth": {
-        "default": {
-          "style": { "fill": "#5B8FF9", "fillOpacity": 0.25, "stroke": null }
-        },
+        "default": { "style": { "fill": "#5B8FF9", "fillOpacity": 0.25, "stroke": null } },
         "active": { "style": { "fillOpacity": 0.5 } },
         "inactive": { "style": { "fillOpacity": 0.3 } },
         "selected": { "style": { "fillOpacity": 0.5 } }
       },
       "line": {
         "default": {
-          "style": {
-            "fill": null,
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": null, "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "fill": null, "lineWidth": 3 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
@@ -583,12 +529,7 @@
       },
       "smooth-line": {
         "default": {
-          "style": {
-            "fill": null,
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": null, "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "fill": null, "lineWidth": 3 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
@@ -598,33 +539,19 @@
     "schema": {
       "candle": {
         "default": {
-          "style": {
-            "fill": "#000",
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": "#000", "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "stroke": "#FFFFFF", "lineWidth": 2 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 } }
       },
       "box": {
         "default": {
-          "style": {
-            "fill": "#000",
-            "stroke": "#5B8FF9",
-            "lineWidth": 2,
-            "strokeOpacity": 1
-          }
+          "style": { "fill": "#000", "stroke": "#5B8FF9", "lineWidth": 2, "strokeOpacity": 1 }
         },
         "active": { "style": { "stroke": "#FFFFFF", "lineWidth": 2 } },
         "inactive": { "style": { "strokeOpacity": 0.3 } },
-        "selected": {
-          "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 }
-        }
+        "selected": { "style": { "stroke": "#FFFFFF", "lineWidth": 3, "strokeOpacity": 1 } }
       }
     },
     "edge": {
@@ -696,11 +623,11 @@
           "autoHide": true,
           "offset": 16,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": { "style": { "lineWidth": 0.5, "stroke": "#404040" } },
@@ -723,11 +650,11 @@
           "autoHide": true,
           "offset": 16,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": { "style": { "lineWidth": 0.5, "stroke": "#404040" } },
@@ -750,11 +677,11 @@
           "autoHide": true,
           "offset": 8,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": null,
@@ -780,11 +707,11 @@
           "autoHide": true,
           "offset": 8,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": null,
@@ -810,11 +737,11 @@
           "autoHide": true,
           "offset": 8,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": { "style": { "lineWidth": 0.5, "stroke": "#404040" } },
@@ -842,11 +769,11 @@
           "autoHide": true,
           "offset": 8,
           "style": {
-            "fill": "#ccc",
+            "fill": "#E0E0E3",
             "fontSize": 12,
             "lineHeight": 12,
             "textBaseline": "middle",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\""
           }
         },
         "line": { "style": { "lineWidth": 0.5, "stroke": "#404040" } },
@@ -870,15 +797,12 @@
     "legend": {
       "right": {
         "title": null,
-        "marker": {
-          "symbol": "circle",
-          "style": { "r": 4, "fill": "#5B8FF9" }
-        },
+        "marker": { "symbol": "circle", "style": { "r": 4, "fill": "#5B8FF9" } },
         "itemName": {
           "spacing": 5,
           "style": {
-            "fill": "#ccc",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+            "fill": "#E0E0E3",
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
             "fontSize": 12,
             "lineHeight": 12,
             "fontWeight": "normal",
@@ -893,15 +817,12 @@
       },
       "left": {
         "title": null,
-        "marker": {
-          "symbol": "circle",
-          "style": { "r": 4, "fill": "#5B8FF9" }
-        },
+        "marker": { "symbol": "circle", "style": { "r": 4, "fill": "#5B8FF9" } },
         "itemName": {
           "spacing": 5,
           "style": {
-            "fill": "#ccc",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+            "fill": "#E0E0E3",
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
             "fontSize": 12,
             "lineHeight": 12,
             "fontWeight": "normal",
@@ -916,15 +837,12 @@
       },
       "top": {
         "title": null,
-        "marker": {
-          "symbol": "circle",
-          "style": { "r": 4, "fill": "#5B8FF9" }
-        },
+        "marker": { "symbol": "circle", "style": { "r": 4, "fill": "#5B8FF9" } },
         "itemName": {
           "spacing": 5,
           "style": {
-            "fill": "#ccc",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+            "fill": "#E0E0E3",
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
             "fontSize": 12,
             "lineHeight": 12,
             "fontWeight": "normal",
@@ -939,15 +857,12 @@
       },
       "bottom": {
         "title": null,
-        "marker": {
-          "symbol": "circle",
-          "style": { "r": 4, "fill": "#5B8FF9" }
-        },
+        "marker": { "symbol": "circle", "style": { "r": 4, "fill": "#5B8FF9" } },
         "itemName": {
           "spacing": 5,
           "style": {
-            "fill": "#ccc",
-            "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+            "fill": "#E0E0E3",
+            "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
             "fontSize": 12,
             "lineHeight": 12,
             "fontWeight": "normal",
@@ -982,10 +897,7 @@
             "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\""
           }
         },
-        "handler": {
-          "size": 10,
-          "style": { "fill": "#F0F0F0", "stroke": "#BFBFBF" }
-        },
+        "handler": { "size": 10, "style": { "fill": "#F0F0F0", "stroke": "#BFBFBF" } },
         "slidable": true
       },
       "margin": [0, 0, 0, 0]
@@ -1009,15 +921,11 @@
         "r": 4
       },
       "crosshairs": {
-        "line": { "style": { "stroke": "#404040", "lineWidth": 0.5 } },
+        "line": { "style": { "stroke": "#ccc", "lineWidth": 0.5 } },
         "text": null,
         "textBackground": {
           "padding": 2,
-          "style": {
-            "fill": "rgba(0, 0, 0, 0.25)",
-            "lineWidth": 0,
-            "stroke": null
-          }
+          "style": { "fill": "rgba(0, 0, 0, 0.25)", "lineWidth": 0, "stroke": null }
         },
         "follow": false
       },
@@ -1031,20 +939,16 @@
           "opacity": 0.95,
           "boxShadow": "0px 2px 4px rgba(0,0,0,.5)",
           "borderRadius": "3px",
-          "color": "#ccc",
+          "color": "#E0E0E3",
           "fontSize": "12px",
-          "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+          "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
           "lineHeight": "12px",
           "padding": "0 12px 0 12px",
           "background": "rgba(48, 54, 64, 0.8)",
           "backdropFilter": "saturate(180%) blur(20px)"
         },
         "g2-tooltip-title": { "marginBottom": "12px", "marginTop": "12px" },
-        "g2-tooltip-list": {
-          "margin": 0,
-          "listStyleType": "none",
-          "padding": 0
-        },
+        "g2-tooltip-list": { "margin": 0, "listStyleType": "none", "padding": 0 },
         "g2-tooltip-list-item": {
           "listStyleType": "none",
           "padding": 0,
@@ -1060,18 +964,11 @@
           "display": "inline-block",
           "marginRight": "8px"
         },
-        "g2-tooltip-value": {
-          "display": "inline-block",
-          "float": "right",
-          "marginLeft": "30px"
-        }
+        "g2-tooltip-value": { "display": "inline-block", "float": "right", "marginLeft": "30px" }
       }
     },
     "annotation": {
-      "arc": {
-        "style": { "stroke": "#262626", "lineWidth": 0.5 },
-        "animate": true
-      },
+      "arc": { "style": { "stroke": "#262626", "lineWidth": 0.5 }, "animate": true },
       "line": {
         "style": { "stroke": "#404040", "lineDash": null, "lineWidth": 0.5 },
         "text": {
@@ -1103,22 +1000,14 @@
       },
       "region": {
         "top": false,
-        "style": {
-          "lineWidth": 0,
-          "stroke": null,
-          "fill": "#FFFFFF",
-          "fillOpacity": 0.06
-        },
+        "style": { "lineWidth": 0, "stroke": null, "fill": "#FFFFFF", "fillOpacity": 0.06 },
         "animate": true
       },
       "image": { "top": false, "animate": true },
       "dataMarker": {
         "top": true,
         "point": { "style": { "r": 3, "stroke": "#5B8FF9", "lineWidth": 2 } },
-        "line": {
-          "style": { "stroke": "#404040", "lineWidth": 0.5 },
-          "length": 16
-        },
+        "line": { "style": { "stroke": "#404040", "lineWidth": 0.5 }, "length": 16 },
         "text": {
           "style": {
             "textAlign": "start",
@@ -1153,9 +1042,9 @@
   "labels": {
     "offset": 12,
     "style": {
-      "fill": "#ccc",
+      "fill": "#E0E0E3",
       "fontSize": 12,
-      "fontFamily": "\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\n  \"Noto Color Emoji\"",
+      "fontFamily": "\"Unica One\",\"-apple-system\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial,\n  \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\",\"Noto Color Emoji\"",
       "stroke": null,
       "lineWidth": 0
     },

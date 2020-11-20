@@ -9,7 +9,7 @@ import './theme';
 export { palette } from './palette';
 import styles from './index.less';
 import classnames from 'classnames';
-console.log(lib);
+
 export interface ChartConfig extends Options {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
   readonly chartType: TChartType;

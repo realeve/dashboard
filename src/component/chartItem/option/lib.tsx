@@ -17,12 +17,12 @@ export interface IChart {
 
 export type TChartConfig = Array<IChart>;
 
-let uniq: <T>(arr: Array<T>) => Array<T> = arr => R.uniq(arr);
+let uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
 
 export const tooltipFormatter = (p, unit, axisName, append = false) => {
   let title: boolean | string = false;
   let str = '';
-  p = p.filter(item => typeof item.value !== 'undefined');
+  p = p.filter((item) => typeof item.value !== 'undefined');
 
   if (p.length === 0) {
     return;
@@ -59,7 +59,7 @@ export const tooltipFormatter = (p, unit, axisName, append = false) => {
   return `${title}${str}${drillTipText}` || false;
 };
 
-export const getTooltipUnit = title => {
+export const getTooltipUnit = (title) => {
   let unit: boolean | string = false;
   if (!title) {
     return unit;
@@ -136,7 +136,7 @@ let handleDefaultOption = (option, config, showDateRange = true) => {
       axisPointer: {
         type: axisPointerType,
       },
-      formatter: p => tooltipFormatter(p, unit, axisName),
+      formatter: (p) => tooltipFormatter(p, unit, axisName),
     };
 
     if (config.histogram) {
@@ -215,7 +215,7 @@ export const handleSimpleMode = (option, config) => {
 };
 
 // 字符串转日期
-export let str2Date: (str: string) => string = str => {
+export let str2Date: (str: string) => string = (str) => {
   str = String(str);
   let needConvert: boolean = /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(0[1-9]|1[0-2])$/.test(
     str,
@@ -231,7 +231,7 @@ export let str2Date: (str: string) => string = str => {
   return dates.join('-');
 };
 
-export let str2Num: (str: string) => number | string = str => {
+export let str2Num: (str: string) => number | string = (str) => {
   if (/^(|\-)[0-9]+.[0-9]+$/.test(str)) {
     return parseFloat(parseFloat(str).toFixed(3));
   }
@@ -241,13 +241,13 @@ export let str2Num: (str: string) => number | string = str => {
   return str;
 };
 
-export let isDate: (dateStr: string) => boolean = dateStr => {
+export let isDate: (dateStr: string) => boolean = (dateStr) => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/.test(
     dateStr,
   );
 };
 
-export let needConvertDate: (dateStr: string) => boolean = dateStr => {
+export let needConvertDate: (dateStr: string) => boolean = (dateStr) => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(-|)(0[1-9]|1[0-2])$/.test(
     dateStr,
   );
@@ -406,23 +406,14 @@ export function hex2rgb(hexVal: string): string {
 }
 
 export type arrRgb = Array<string>;
-export const rgb2hex = str => {
+export const rgb2hex = (str) => {
   if (str[0] === '#') {
     return str;
   }
   let val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
   let alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
   val[3] = alpha;
-  return (
-    '#' +
-    val
-      .map(item =>
-        Number(item)
-          .toString(16)
-          .padStart(2, '0'),
-      )
-      .join('')
-  );
+  return '#' + val.map((item) => Number(item).toString(16).padStart(2, '0')).join('');
 };
 
 export let getLegendData: <T>(
@@ -430,8 +421,8 @@ export let getLegendData: <T>(
 ) => Array<{
   icon: string;
   name: T;
-}> = legendData =>
-  legendData.map(name => ({
+}> = (legendData) =>
+  legendData.map((name) => ({
     name,
     icon: 'circle',
   }));
@@ -452,7 +443,7 @@ export let getRenderer: (params: {
   render?: tRender;
   type: string;
   histogram?: string;
-}) => tRender = params =>
+}) => tRender = (params) =>
   params.render ||
   (['paralell', ...chartGL].includes(params.type) || params.histogram ? 'canvas' : 'svg');
 
@@ -853,11 +844,23 @@ export const getBarMax = (data, y = 1) => {
   return getMax(item);
 };
 
-export const getMax = val => {
+/**
+ * 获取指定值的最佳轴长度
+ * @param val 数值
+ */
+export const getMax = (val) => {
   let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
   return (Number(String(val)[0]) + 1) * pow;
 };
 
+/**
+ * 获取指定值的最低轴长度
+ * @param val 数值
+ */
+export const getMin = (val) => {
+  let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
+  return (Number(String(val)[0]) - 1) * pow;
+};
 /**
  * 计算获取饼图百分比
  * @param param0
@@ -866,7 +869,7 @@ export const getPercent = ({ data, y: _y, header }) => {
   let _data = R.clone(data);
   let y = header[_y];
   let sum = _data.reduce((a, b) => a + b[y], 0);
-  return _data.map(item => {
+  return _data.map((item) => {
     item.percent = ((item[y] / sum) * 100).toFixed(2);
     return item;
   });

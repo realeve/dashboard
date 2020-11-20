@@ -31,6 +31,7 @@ export type TChartType =
   | 'stock'
   | 'radial_bar'
   | 'gauge'
+  | 'bidirectional_bar'
   | 'Area'
   | 'Bar'
   | 'Box'
@@ -56,4 +57,5 @@ export type TChartType =
   | 'DualAxes'
   | 'Stock'
   | 'RadialBar'
-  | 'Gauge';
+  | 'Gauge'
+  | 'BidirectionalBar';

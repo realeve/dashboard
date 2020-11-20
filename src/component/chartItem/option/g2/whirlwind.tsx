@@ -36,7 +36,7 @@ export const config: IChartConfig[] = [
   { type: 'label', title: '切换方向需要刷新页面' },
   {
     key: 'direction',
-    title: '详情图表类型',
+    title: '图表布局',
     type: 'radio',
     defaultValue: 'vertical',
     option: [

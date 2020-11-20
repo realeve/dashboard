@@ -439,14 +439,11 @@ export default ({ option: { data, x = 0 }, style }) => {
     ],
   };
   
-  export default ({ data: { data }, x = 0, y = 1, appendPadding = 30, smooth = false }) => {
-    return {
-      renderer: 'svg',
-      autoFit: true,
-      appendPadding,
+  export default ({ data: { data }, x = 0, y = 1,  smooth = false }) => {
+    return { 
       smooth,
-      type: 'line',
-      data: data,
+      chartType: 'line',
+      data,
       xField: x,
       yField: y,
       xAxis: { type: 'category' },

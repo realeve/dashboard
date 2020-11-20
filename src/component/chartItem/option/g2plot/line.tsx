@@ -193,7 +193,7 @@ export default ({
   legendAlign = 'center',
   legendPosition = 'top',
   legendOrient = 'horizontal',
-  theme = 'cbpc',
+  theme = 18,
   chartType = 'line',
   fillOpacity = 0.4,
   renderer = 'canvas',
@@ -328,6 +328,10 @@ export default ({
     ...label,
     // 百分比
     ...percentConfig,
+    tooltip: {
+      showMarkers: true,
+      shared: true,
+    },
   };
   // console.log(config);
   return config;
