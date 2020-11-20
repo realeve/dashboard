@@ -1,5 +1,8 @@
 import { uniq, isNumber, isDate } from '@antv/util';
 
+import defaultTheme from '@/component/g2plot/theme';
+import { palette } from '@/component/g2plot';
+
 const dict = {
   周一: 1,
   周二: 2,
@@ -149,4 +152,10 @@ export const handleStackPosition = (annotations, isArea) => {
     ...item,
     position: position[idx],
   }));
+};
+
+export const getTheme = (theme: number | string) => {
+  const isDefaultTheme = theme === 'cbpc';
+  let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
+  return isDefaultTheme ? {} : { theme: themeCfg };
 };

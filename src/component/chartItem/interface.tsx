@@ -47,3 +47,14 @@ export interface IApiConfig {
   config?: IChartConfig[];
   interval?: number;
 }
+
+export interface IG2PlotProps {
+  data: IChartMock;
+  chartType?: string;
+  theme?: string | number;
+  legendShow: boolean;
+  legendAlign: 'left' | 'center' | 'right';
+  legendPosition: 'top' | 'center' | 'bottom';
+  legendOrient: 'vertical' | 'horizontal';
+  [key: string]: any;
+}

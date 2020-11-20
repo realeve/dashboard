@@ -1,5 +1,5 @@
 import React from 'react';
-import { IApiConfig } from '@/component/chartItem/interface';
+import { IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { palette } from '@/component/g2plot';
 export { mock } from './mock';
@@ -173,6 +173,22 @@ export const apiConfig: IApiConfig = {
 };
 
 // export const defaultOption = { renderer: 'svg' };
+interface IG2Plot extends IG2PlotProps {
+  x: number;
+  y: number;
+  legend: number;
+  isStack: boolean;
+  isPercent: boolean;
+  smooth: boolean;
+  connectNulls: boolean;
+  endLabel: boolean;
+  lineWidth: number;
+  pointSize: number;
+  pointColor: string;
+  pointShape: string;
+  stepType: string;
+}
+
 export default ({
   data: { data, header },
   x = 0,
@@ -197,7 +213,7 @@ export default ({
   chartType = 'line',
   fillOpacity = 0.4,
   renderer = 'canvas',
-}) => {
+}: IG2Plot) => {
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
 

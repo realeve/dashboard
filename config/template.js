@@ -380,9 +380,9 @@ export default ({ option: { data, x = 0 }, style }) => {
     return str;
   }
 
-  str = `
-  import React from 'react';
-  import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+  str = `import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+  import * as lib from '@/component/chartItem/option/lib';
+  import { getTheme } from './lib';
   
   export let mock: IChartMock = {
     data: [
@@ -402,20 +402,14 @@ export default ({ option: { data, x = 0 }, style }) => {
   
   export const config = [
     {
-      key: 'appendPadding',
-      defaultValue: 30,
-      title: '边距(需刷新)',
-      type: 'range',
-      min: 10,
-      max: 80,
-      step: 2,
+      key: 'renderer',
+      defaultValue: 'svg',
+      title: '图表引擎',
+      type: 'radio',
+      option: 'canvas,svg',
     },
-    {
-      key: 'smooth',
-      defaultValue: false,
-      title: '平滑曲线',
-      type: 'switch',
-    },
+    lib.getAntThemePanel(),
+    ...lib.getLegendConfig(),
   ];
   
   export const apiConfig: IApiConfig = {
@@ -439,26 +433,33 @@ export default ({ option: { data, x = 0 }, style }) => {
     ],
   };
   
-  export default ({ data: { data }, x = 0, y = 1,  smooth = false }) => {
-    return { 
-      smooth,
+  interface IG2Plot extends IG2PlotProps {
+    [key: string]: any;
+  }
+  
+  export default ({
+    data: { data },
+    x = 0,
+    y = 1,
+  
+    renderer = 'svg',
+    theme = 18,
+    legendShow = true,
+    legendAlign,
+    legendPosition,
+    legendOrient,
+  }: IG2Plot) => {
+    return {
       chartType: 'line',
+      ...getTheme(theme),
+      renderer,
+      ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
       data,
       xField: x,
       yField: y,
       xAxis: { type: 'category' },
-      yAxis: {
-        label: {
-          formatter: function formatter(v) {
-            return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
-              return ''.concat(s, ',');
-            });
-          },
-        },
-      },
     };
-  }; 
-  `;
+  };`;
   if (chartType == 'g2plot') {
     return str;
   }

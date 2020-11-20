@@ -1,13 +1,7 @@
-import React from 'react';
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import jstat from 'jstat';
-import {
-  getMax,
-  getAntThemePanel,
-  getG2LegendOption,
-  getLegendConfig,
-} from '@/component/chartItem/option/lib';
+import * as lib from '@/component/chartItem/option/lib';
 import defaultTheme from '@/component/g2plot/theme';
 import { palette } from '@/component/g2plot';
 
@@ -37,7 +31,7 @@ export const config = [
     type: 'radio',
     option: 'canvas,svg',
   },
-  getAntThemePanel(),
+  lib.getAntThemePanel(),
   {
     key: 'direction',
     title: '图表布局',
@@ -45,16 +39,16 @@ export const config = [
     defaultValue: 'vertical',
     option: [
       {
-        title: '纵向',
+        title: '横向',
         value: 'vertical',
       },
       {
-        title: '横向',
+        title: '纵向',
         value: 'horizontal',
       },
     ],
   },
-  ...getLegendConfig(),
+  ...lib.getLegendConfig(),
   {
     type: 'label',
     title: 'Y轴最大值变更需刷新页面',
@@ -114,7 +108,7 @@ export const getMaxByKey = (data, key) => {
 export const getMaxByKeys = (data, keys) => {
   let arr = keys.map((key) => getMaxByKey(data, key));
   let max = jstat.max(arr);
-  let val = getMax(max);
+  let val = lib.getMax(max);
   let yAxis = {};
   keys.forEach((key) => {
     yAxis[key] = {
@@ -126,16 +120,12 @@ export const getMaxByKeys = (data, keys) => {
   return { yAxis };
 };
 
-export interface IBidirectionalBar {
-  data: IChartMock;
+export interface IBidirectionalBar extends IG2PlotProps {
   x: number;
   y: number;
   y2: number;
   direction: 'horizontal' | 'vertical';
-  renderer: 'svg' | 'canvas';
   limitYaxis?: boolean;
-  theme?: string | number;
-  [key: string]: any;
 }
 export default ({
   data: { data, header },
@@ -165,7 +155,7 @@ export default ({
     data,
     xField: header[x],
     yField,
-    ...getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     xAxis: {
       position: 'bottom',
     },
