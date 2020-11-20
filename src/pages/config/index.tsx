@@ -91,7 +91,9 @@ const Index = ({
       return;
     }
 
-    localforage.getItem('zoom').then(setZoom);
+    localforage.getItem('zoom').then((e) => {
+      setZoom(e || 0.7);
+    });
 
     editor.current && setInstance(editor.current);
 

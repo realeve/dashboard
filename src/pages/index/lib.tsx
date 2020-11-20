@@ -43,7 +43,7 @@ export const getLocalConfig: () => Promise<null | {
   panel: IPanelConfig[];
 }> = async () => {
   let panel = JSON.parse(localStorage.getItem('panel') || '[]') as IPanelConfig[],
-    page = (await localforage.getItem('page')) as IPage;
+    page = JSON.parse(localStorage.getItem('page') || '[]') as IPage;
 
   if (!panel || !page) {
     message.error('当前页面未配置任何组件，预览失败');
