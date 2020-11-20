@@ -296,10 +296,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.getThumbnail(0.1 / this.state.zoom).then((thumbnail) => {
       // 更新缩略图
       this.props.dispatch({
-        type: 'common/setStore',
+        type: 'common/updatePage',
         payload: {
           page: {
-            ...this.props.page,
             thumbnail,
           },
         },

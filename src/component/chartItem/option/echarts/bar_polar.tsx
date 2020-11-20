@@ -36,9 +36,13 @@ export const config: IChartConfig[] = [
     step: 2,
   },
   {
+    type: 'label',
+    title: '圆角参数需刷新页面',
+  },
+  {
     key: 'roundCap',
     defaultValue: true,
-    title: '圆角(需刷新)',
+    title: '圆角',
     type: 'switch',
   },
   {
@@ -54,7 +58,7 @@ export const config: IChartConfig[] = [
     key: 'colorType',
     defaultValue: 'gardient',
     title: '颜色模式',
-    type:'radio',
+    type: 'radio',
     option: [
       {
         title: '渐变',

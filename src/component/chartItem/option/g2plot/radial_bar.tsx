@@ -22,9 +22,63 @@ export let mock: IChartMock = {
 
 export const config = [
   {
-    key: 'smooth',
+    key: 'maxAngle',
+    type: 'range',
+    title: '最大旋转角度',
+    min: 10,
+    max: 360,
+    step: 10,
+    defaultValue: 240,
+  },
+  {
+    key: 'intervalType',
+    type: 'radio',
+    title: '样式',
+    option: [
+      {
+        title: '柱形',
+        value: 'interval',
+      },
+      {
+        title: '线条',
+        value: 'line',
+      },
+    ],
+    defaultValue: 'line',
+  },
+  {
+    key: 'innerRadius',
+    defaultValue: 0.2,
+    title: '圆环大小',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.1,
+  },
+  {
+    key: 'radius',
+    defaultValue: 0.8,
+    title: '外径',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.8,
+  },
+  {
+    type: 'label',
+    title: '坐标系切换需刷新页面',
+  },
+  {
+    key: 'coordinate',
+    defaultValue: 'polar',
+    title: '坐标系',
+    type: 'radio',
+    option: ['polar', 'rect'],
+  },
+  {
+    key: 'transpose',
     defaultValue: false,
-    title: '平滑曲线',
+    title: 'X/Y轴互换',
     type: 'switch',
   },
   {
@@ -32,7 +86,7 @@ export const config = [
     defaultValue: '#096dd9',
     title: '颜色',
     type: 'purecolor',
-    position: 'bottom',
+    position: 'top',
     style: { marginBottom: 115 },
   },
 ];
@@ -40,7 +94,7 @@ export const config = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/02_linebar.json',
+  url: 'http://localhost:8000/mock/32_radial_bar.json',
   interval: 5,
   config: [
     {
@@ -57,25 +111,37 @@ export const apiConfig: IApiConfig = {
     },
   ],
 };
-export const defaultOption = { renderer: 'svg' };
 
 /**
  * 玉珏图，参照 https://antv-g2plot.gitee.io/zh/examples/radial-bar/basic#line
- * 目前版本的 g2 plot渲染结果同官方不一致
+ * 根据官方源码进行修改
  */
-export default ({ data: { data }, color = '#096dd9', x = 0, y = 1 }) => {
+export default ({
+  data: { data },
+  color = '#096dd9',
+  x = 0,
+  y = 1,
+  maxAngle = 240,
+  intervalType: type,
+  innerRadius = 0.2,
+  radius = 0.8,
+  coordinate = 'polar',
+  transpose = true,
+}) => {
   return {
-    renderer: 'svg',
-    chartType: 'radial_bar',
-    data: data,
+    chartType: 'cbpc_radial_bar',
+    data,
+    coordinate,
+    transpose,
     xField: x,
     yField: y,
-    radius: 0.8,
-    innerRadius: 0.2,
+    radius,
+    innerRadius,
+    maxAngle,
     color,
     tooltip: {
       showMarkers: true,
     },
-    type: 'line',
+    type,
   };
 };
