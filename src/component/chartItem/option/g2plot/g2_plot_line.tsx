@@ -32,9 +32,13 @@ export const config = [
     ],
   },
   {
+    type: 'label',
+    title: '图表类型切换需刷新页面',
+  },
+  {
     key: 'chartType',
     defaultValue: 'line',
-    title: '图表类型(需刷新)',
+    title: '图表类型',
     type: 'radio',
     option: [
       {

@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
-import * as lib from '@antv/g2plot';
+import lib from './plot';
 import useChart, { ContainerProps, Base, Options } from './hooks/useChart';
 import { getChart, utils } from './util';
 import { ChartRefOptions, TChartType } from './interface';
@@ -9,6 +9,7 @@ import './theme';
 export { palette } from './palette';
 import styles from './index.less';
 import classnames from 'classnames';
+console.log(lib);
 export interface ChartConfig extends Options {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
   readonly chartType: TChartType;
@@ -52,8 +53,6 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
   useImperativeHandle(ref, () => ({
     getChart: () => chart.current,
   }));
-
-  console.log(option);
 
   return (
     <ErrorBoundary errorTemplate={errorTemplate}>
