@@ -308,6 +308,8 @@ export default ({
     data,
     xAxis: { type: 'category' },
     ...label,
+    // 百分比
+    ...percentConfig,
   };
   console.log(config);
   return config;
