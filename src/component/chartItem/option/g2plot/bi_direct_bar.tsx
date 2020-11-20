@@ -5,7 +5,7 @@ import jstat from 'jstat';
 import {
   getMax,
   getAntThemePanel,
-  getLegendOption,
+  getG2LegendOption,
   getLegendConfig,
 } from '@/component/chartItem/option/lib';
 import defaultTheme from '@/component/g2plot/theme';
@@ -165,7 +165,7 @@ export default ({
     data,
     xField: header[x],
     yField,
-    ...getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    ...getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     xAxis: {
       position: 'bottom',
     },

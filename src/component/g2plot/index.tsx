@@ -46,7 +46,6 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
     theme: 'cbpc',
     ...option,
   });
-
   useEffect(() => {
     getChart(chartRef, chart.current);
   }, [chart.current]);
