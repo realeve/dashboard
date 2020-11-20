@@ -73,14 +73,15 @@ const cbpcTheme = deepMix({}, defaultTheme, themeObject);
 
 /**
  * 堆叠柱状图区域连通
+ * 2020-11-20 官方已经支持，无需自行处理
  *
  * 注册action可参考 https://github.com/antvis/G2Plot/blob/master/src/plots/scatter/interaction/index.ts
  * G2 Plot interactions定义：https://github.com/antvis/G2Plot/blob/master/src/types/interaction.ts
  */
-G2.registerInteraction('element-link', {
-  start: [{ trigger: 'interval:mouseenter', action: 'element-link-by-color:link' }],
-  end: [{ trigger: 'interval:mouseleave', action: 'element-link-by-color:unlink' }],
-});
+// G2.registerInteraction('element-link', {
+//   start: [{ trigger: 'interval:mouseenter', action: 'element-link-by-color:link' }],
+//   end: [{ trigger: 'interval:mouseleave', action: 'element-link-by-color:unlink' }],
+// });
 
 /**
  * 注册自定义样式

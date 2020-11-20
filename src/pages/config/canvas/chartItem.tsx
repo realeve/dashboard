@@ -92,7 +92,7 @@ const Item = ({
       autoFit: true,
     });
 
-    let appendPadding = config.showBorder ? 30 : 0;
+    let appendPadding = config.showBorder ? 20 : 0;
 
     // 处理边距
     if (option.appendPadding) {

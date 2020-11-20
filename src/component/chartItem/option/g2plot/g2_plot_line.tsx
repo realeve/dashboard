@@ -58,6 +58,12 @@ export const config = [
     type: 'switch',
   },
   {
+    key: 'isPercent',
+    defaultValue: false,
+    title: '百分比',
+    type: 'switch',
+  },
+  {
     key: 'showSlider',
     defaultValue: false,
     title: '显示滑块',
@@ -165,7 +171,7 @@ export default ({
   y = 1,
   legend = 2,
   isStack = false,
-  // isGroup = true,
+  isPercent = false,
   smooth = false,
   connectNulls = true,
   endLabel = true,
@@ -241,18 +247,31 @@ export default ({
 
   let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
 
-  let interactions = isBarChart
-    ? {
-        interactions: [
-          {
-            type: isStack && 'element-link',
-          },
+  let interactions =
+    isBarChart && isStack
+      ? [
           {
             type: 'element-highlight-by-color',
           },
-        ],
-      }
-    : {};
+        ]
+      : [
+          {
+            type: 'element-highlight-by-color',
+          },
+        ];
+
+  const percentConfig = !isPercent
+    ? {}
+    : {
+        isPercent,
+        yAxis: {
+          label: {
+            formatter: (value) => {
+              return value * 100;
+            },
+          },
+        },
+      };
 
   let config = {
     chartType,
@@ -270,7 +289,10 @@ export default ({
     //缩略图滑动条
     ...slider,
     // 交互
-    ...interactions,
+    interactions,
+    connectedArea: {
+      trigger: 'hover',
+    },
     // 主题配置色
     ...distTheme,
     isStack,
