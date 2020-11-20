@@ -78,6 +78,12 @@ export const config = [
     type: 'switch',
   },
   {
+    key: 'showLabel',
+    defaultValue: true,
+    title: '显示数据标签',
+    type: 'switch',
+  },
+  {
     key: 'endLabel',
     defaultValue: false,
     title: '尾部标签跟随',
@@ -177,6 +183,7 @@ interface IG2Plot extends IG2PlotProps {
   x: number;
   y: number;
   legend: number;
+  showLabel: boolean;
   isStack: boolean;
   isPercent: boolean;
   smooth: boolean;
@@ -194,6 +201,7 @@ export default ({
   x = 0,
   y = 1,
   legend = 2,
+  showLabel = true,
   isStack = false,
   isPercent = false,
   smooth = false,
@@ -272,15 +280,16 @@ export default ({
         };
   // 百分比显示数据
   let formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
-  let label = !isBarChart
-    ? {}
-    : {
-        // 可手动配置 label 数据标签位置
-        label: {
-          position: isStack ? 'middle' : reverseXY ? 'right' : 'top', // 'top', 'middle', 'bottom'
-          ...formatter,
-        },
-      };
+  let label =
+    !isBarChart || !showLabel
+      ? {}
+      : {
+          // 可手动配置 label 数据标签位置
+          label: {
+            position: isStack ? 'middle' : reverseXY ? 'right' : 'top', // 'top', 'middle', 'bottom'
+            ...formatter,
+          },
+        };
 
   let interactions =
     isBarChart && isStack
