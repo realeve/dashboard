@@ -196,6 +196,8 @@ export default ({
 }) => {
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
+  let axisKeyName = reverseXY ? 'xAxis' : 'yAxis';
+
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
@@ -221,8 +223,6 @@ export default ({
     yField: header[reverseXY ? x : y],
     ...seriesField,
   };
-
-  console.log(reverseXY, seriesCfg);
 
   // 尾部跟随
   let annotationsOption =
@@ -281,7 +281,7 @@ export default ({
     ? {}
     : {
         isPercent,
-        yAxis: {
+        [axisKeyName]: {
           label: {
             formatter: (value) => value * 100,
           },
@@ -319,11 +319,11 @@ export default ({
     },
     areaStyle: { fillOpacity },
     data,
-    [reverseXY ? 'yAxis' : 'xAxis']: { type: 'category' },
+    [axisKeyName]: { type: 'category' },
     ...label,
     // 百分比
     ...percentConfig,
   };
-  console.log(config);
+  // console.log(config);
   return config;
 };
