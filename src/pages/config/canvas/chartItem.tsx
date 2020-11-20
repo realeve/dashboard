@@ -104,8 +104,7 @@ const Item = ({
       <G2Plot
         option={{ ...option, appendPadding }}
         renderer={appendConfig.renderer || 'canvas'}
-        style={{ height: '100%', ...style }}
-        // style={style}
+        style={style}
       />
     );
   } else if (config.engine === 'g2') {

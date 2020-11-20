@@ -196,7 +196,6 @@ export default ({
 }) => {
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
-  let axisKeyName = reverseXY ? 'xAxis' : 'yAxis';
 
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
@@ -206,14 +205,15 @@ export default ({
         };
   let stepOption = stepType == '无' || stepType == '' ? { smooth } : { stepType, smooth: false };
 
-  let slider = showSlider
-    ? {
-        slider: {
-          start: 0.1,
-          end: 0.5,
-        },
-      }
-    : {};
+  let slider =
+    !reverseXY && showSlider
+      ? {
+          slider: {
+            start: 0.1,
+            end: 0.5,
+          },
+        }
+      : {};
 
   const isDefaultTheme = theme === 'cbpc';
   let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
@@ -281,7 +281,7 @@ export default ({
     ? {}
     : {
         isPercent,
-        [axisKeyName]: {
+        [reverseXY ? 'xAxis' : 'yAxis']: {
           label: {
             formatter: (value) => value * 100,
           },
@@ -292,6 +292,8 @@ export default ({
     chartType,
     renderer,
     appendPadding: [0, endLabel && !isBarChart ? 100 : 0, 0, 0],
+
+    // 数据系列配置
     ...seriesCfg,
     // 尾部跟随
     ...annotations,
@@ -319,7 +321,7 @@ export default ({
     },
     areaStyle: { fillOpacity },
     data,
-    [axisKeyName]: { type: 'category' },
+    [!reverseXY ? 'xAxis' : 'yAxis']: { type: 'category' },
     ...label,
     // 百分比
     ...percentConfig,

@@ -28,6 +28,15 @@ export const config = [
     type: 'switch',
   },
   {
+    key: 'maxAngel',
+    type: 'range',
+    title: '最大旋转角度',
+    min: 10,
+    max: 360,
+    step: 10,
+    defaultValue: 360,
+  },
+  {
     key: 'color',
     defaultValue: '#096dd9',
     title: '颜色',
@@ -57,21 +66,20 @@ export const apiConfig: IApiConfig = {
     },
   ],
 };
-export const defaultOption = { renderer: 'svg' };
 
 /**
  * 玉珏图，参照 https://antv-g2plot.gitee.io/zh/examples/radial-bar/basic#line
  * 目前版本的 g2 plot渲染结果同官方不一致
  */
-export default ({ data: { data }, color = '#096dd9', x = 0, y = 1 }) => {
+export default ({ data: { data }, color = '#096dd9', x = 0, y = 1, maxAngel = 360 }) => {
   return {
-    renderer: 'svg',
     chartType: 'radial_bar',
     data: data,
     xField: x,
     yField: y,
     radius: 0.8,
     innerRadius: 0.2,
+    maxAngel,
     color,
     tooltip: {
       showMarkers: true,
