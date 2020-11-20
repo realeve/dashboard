@@ -79,12 +79,20 @@ const Index = ({
 
   const [zoom, setZoom] = useState(0.7);
 
+  const updateZoom = (zoom: number) => {
+    localforage.setItem('zoom', zoom);
+    setZoom(zoom);
+  };
+
   const editor = React.useRef<Editor>(null);
   const [instance, setInstance] = React.useState<Editor | null>(null);
   useEffect(() => {
     if (instance) {
       return;
     }
+
+    localforage.getItem('zoom').then(setZoom);
+
     editor.current && setInstance(editor.current);
 
     // onMount,载入初始panel
@@ -229,7 +237,7 @@ const Index = ({
               dispatch={dispatch}
               debug={true}
               zoom={zoom}
-              onZoom={setZoom}
+              onZoom={updateZoom}
               domHash={hash}
               selectMenu={setCurTool}
               curTool={curTool}
@@ -299,7 +307,7 @@ const Index = ({
           </div>
           <EditSlider
             zoom={zoom}
-            onZoom={setZoom}
+            onZoom={updateZoom}
             editor={instance}
             onMenuChange={setCurTool}
             curTool={curTool}

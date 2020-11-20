@@ -10,7 +10,7 @@
     "@antv/chart-advisor": "^0.1.2-alpha.19",
     "@antv/data-set": "^0.10.2",
     "@antv/g2": "^4.0.15",
-    "@antv/g2plot": "^2.0.9",
+    "@antv/g2plot": "^2.0.10",
     "@daybrush/drag": "^0.19.1",
     "@daybrush/utils": "^0.10.5",
     "@egjs/children-differ": "^1.0.0",

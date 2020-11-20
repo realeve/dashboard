@@ -9,7 +9,7 @@ import defaultTheme from '@/component/g2plot/theme';
 export const config = [
   {
     key: 'renderer',
-    defaultValue: 'svg',
+    defaultValue: 'canvas',
     title: '图表引擎',
     type: 'radio',
     option: 'canvas,svg',
@@ -48,6 +48,10 @@ export const config = [
       {
         title: '柱状图',
         value: 'column',
+      },
+      {
+        title: '条形图',
+        value: 'bar',
       },
     ],
   },
@@ -188,9 +192,10 @@ export default ({
   theme = 'cbpc',
   chartType = 'line',
   fillOpacity = 0.4,
-  renderer = 'svg',
+  renderer = 'canvas',
 }) => {
-  const isBarChart = ['column'].includes(chartType);
+  const isBarChart = ['column', 'bar'].includes(chartType);
+  const reverseXY = chartType == 'bar';
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
@@ -211,24 +216,32 @@ export default ({
   const isDefaultTheme = theme === 'cbpc';
   let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
 
-  let option = {
-    xField: header[x],
-    yField: header[y],
+  let seriesCfg = {
+    xField: header[reverseXY ? y : x],
+    yField: header[reverseXY ? x : y],
     ...seriesField,
-    color: themeCfg.colors10,
   };
+
+  console.log(reverseXY, seriesCfg);
 
   // 尾部跟随
   let annotationsOption =
     !isBarChart && endLabel
-      ? getAnnotations(data, option, {
-          offsetX: 8,
-          needSort: false,
-          isStack,
-          isArea: chartType == 'area',
-          xAxisOffset: 0,
-          maxLabelLength: 15,
-        })
+      ? getAnnotations(
+          data,
+          {
+            ...seriesCfg,
+            color: themeCfg.colors10,
+          },
+          {
+            offsetX: 8,
+            needSort: false,
+            isStack,
+            isArea: chartType == 'area',
+            xAxisOffset: 0,
+            maxLabelLength: 15,
+          },
+        )
       : null;
   let annotations =
     !endLabel || isBarChart || !annotationsOption
@@ -236,12 +249,15 @@ export default ({
       : {
           annotations: annotationsOption,
         };
+  // 百分比显示数据
+  let formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
   let label = !isBarChart
     ? {}
     : {
         // 可手动配置 label 数据标签位置
         label: {
-          position: isStack ? 'middle' : 'top', // 'top', 'middle', 'bottom'
+          position: isStack ? 'middle' : reverseXY ? 'right' : 'top', // 'top', 'middle', 'bottom'
+          ...formatter,
         },
       };
 
@@ -250,6 +266,7 @@ export default ({
   let interactions =
     isBarChart && isStack
       ? [
+          // { type: 'element-link' },
           {
             type: 'element-highlight-by-color',
           },
@@ -266,9 +283,7 @@ export default ({
         isPercent,
         yAxis: {
           label: {
-            formatter: (value) => {
-              return value * 100;
-            },
+            formatter: (value) => value * 100,
           },
         },
       };
@@ -277,9 +292,7 @@ export default ({
     chartType,
     renderer,
     appendPadding: [0, endLabel && !isBarChart ? 100 : 0, 0, 0],
-    xField: header[x],
-    yField: header[y],
-    ...seriesField,
+    ...seriesCfg,
     // 尾部跟随
     ...annotations,
     // 阶梯图
@@ -306,7 +319,7 @@ export default ({
     },
     areaStyle: { fillOpacity },
     data,
-    xAxis: { type: 'category' },
+    [reverseXY ? 'yAxis' : 'xAxis']: { type: 'category' },
     ...label,
     // 百分比
     ...percentConfig,
