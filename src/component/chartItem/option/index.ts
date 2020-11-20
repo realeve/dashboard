@@ -239,14 +239,14 @@ export { time_chart };
     序号：32
     名称：G2线型图
 */
-import * as g2plot_line from './g2plot/g2_plot_line';
+import * as g2plot_line from './g2plot/line';
 export { g2plot_line };
 
 /*
     时间：2020-11-18 17:06:06
     类型: g2plot
     序号：33
-    名称：你的图表名称
+    名称：自定义玉珏图
 */
 import * as radial_bar from './g2plot/radial_bar';
 export { radial_bar };
@@ -255,7 +255,7 @@ export { radial_bar };
     时间：2020-11-20 10:42:14
     类型: echarts
     序号：34
-    名称：你的图表名称
-*/ 
+    名称：echarts基础图表
+*/
 import * as base_line from './echarts/base_line';
-export { base_line }; 
+export { base_line };

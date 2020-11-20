@@ -221,6 +221,7 @@ export default ({
 
   const isDefaultTheme = theme === 'cbpc';
   let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
+  let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
 
   let seriesCfg = {
     xField: header[reverseXY ? y : x],
@@ -264,8 +265,6 @@ export default ({
           ...formatter,
         },
       };
-
-  let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
 
   let interactions =
     isBarChart && isStack
