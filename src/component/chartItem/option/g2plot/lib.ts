@@ -112,7 +112,7 @@ export const getAnnotations = (
       style: {
         fill: color[idx],
         textAlign: xAxisOffset > 0 ? 'center' : 'left',
-        textBaseling: 'middle',
+        textBaseline: 'middle',
       },
       offsetX,
     };
@@ -145,7 +145,6 @@ export const handleStackPosition = (annotations, isArea) => {
       return [item.position[0], val];
     })
     .reverse();
-
   return annotations.map((item, idx) => ({
     ...item,
     position: position[idx],

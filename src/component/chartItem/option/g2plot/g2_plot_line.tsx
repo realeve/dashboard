@@ -7,6 +7,13 @@ import { getAnnotations } from './lib';
 import defaultTheme from '@/component/g2plot/theme';
 
 export const config = [
+  {
+    key: 'renderer',
+    defaultValue: 'svg',
+    title: '图表引擎',
+    type: 'radio',
+    option: 'canvas,svg',
+  },
   lib.getAntThemePanel(),
   {
     key: 'smooth',
@@ -37,6 +44,10 @@ export const config = [
       {
         title: '面积图',
         value: 'area',
+      },
+      {
+        title: '柱状图',
+        value: 'column',
       },
     ],
   },
@@ -154,12 +165,13 @@ export default ({
   y = 1,
   legend = 2,
   isStack = false,
+  // isGroup = true,
   smooth = false,
   connectNulls = true,
   endLabel = true,
   lineWidth = 2,
   pointSize = 0,
-  pointColor = '#fff',
+  pointColor = '#ffffff',
   pointShape = 'hollow-circle',
   stepType = '',
   legendShow = true,
@@ -170,14 +182,16 @@ export default ({
   theme = 'cbpc',
   chartType = 'line',
   fillOpacity = 0.4,
+  renderer = 'svg',
 }) => {
+  const isBarChart = ['column'].includes(chartType);
   let seriesField =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
       : {
           seriesField: header[legend],
         };
-  let stepOption = stepType == '无' ? { smooth } : { stepType, smooth: false };
+  let stepOption = stepType == '无' || stepType == '' ? { smooth } : { stepType, smooth: false };
 
   let slider = showSlider
     ? {
@@ -188,10 +202,8 @@ export default ({
       }
     : {};
 
-  let themeCfg = palette[theme].theme;
-  if (themeCfg === 'cbpc') {
-    themeCfg = defaultTheme;
-  }
+  const isDefaultTheme = theme === 'cbpc';
+  let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
 
   let option = {
     xField: header[x],
@@ -201,33 +213,68 @@ export default ({
   };
 
   // 尾部跟随
-  let annotationsOption = endLabel
-    ? getAnnotations(data, option, {
-        offsetX: 8,
-        needSort: false,
-        isStack,
-        isArea: chartType == 'area',
-        xAxisOffset: 0,
-        maxLabelLength: 15,
-      })
-    : {};
-  let annotations = !endLabel
+  let annotationsOption =
+    !isBarChart && endLabel
+      ? getAnnotations(data, option, {
+          offsetX: 8,
+          needSort: false,
+          isStack,
+          isArea: chartType == 'area',
+          xAxisOffset: 0,
+          maxLabelLength: 15,
+        })
+      : null;
+  let annotations =
+    !endLabel || isBarChart || !annotationsOption
+      ? {}
+      : {
+          annotations: annotationsOption,
+        };
+  let label = !isBarChart
     ? {}
     : {
-        annotations: annotationsOption,
+        // 可手动配置 label 数据标签位置
+        label: {
+          position: isStack ? 'middle' : 'top', // 'top', 'middle', 'bottom'
+        },
       };
 
-  return {
-    appendPadding: [0, endLabel ? 100 : 0, 0, 0],
-    ...annotations,
+  let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
+
+  let interactions = isBarChart
+    ? {
+        interactions: [
+          {
+            type: isStack && 'element-link',
+          },
+          {
+            type: 'element-highlight-by-color',
+          },
+        ],
+      }
+    : {};
+
+  let config = {
     chartType,
+    renderer,
+    appendPadding: [0, endLabel && !isBarChart ? 100 : 0, 0, 0],
     xField: header[x],
     yField: header[y],
     ...seriesField,
+    // 尾部跟随
+    ...annotations,
+    // 阶梯图
     ...stepOption,
+    // 图例位置
     ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
+    //缩略图滑动条
     ...slider,
+    // 交互
+    ...interactions,
+    // 主题配置色
+    ...distTheme,
     isStack,
+    isGroup: !isStack,
     connectNulls,
     lineStyle: { lineWidth },
     point: {
@@ -237,17 +284,9 @@ export default ({
     },
     areaStyle: { fillOpacity },
     data,
-    // 主题配置色
-    theme: palette[theme].theme,
     xAxis: { type: 'category' },
-    yAxis: {
-      label: {
-        formatter: function formatter(v) {
-          return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
-            return ''.concat(s, ',');
-          });
-        },
-      },
-    },
+    ...label,
   };
+  console.log(config);
+  return config;
 };
