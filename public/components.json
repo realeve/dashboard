@@ -338,6 +338,14 @@
             "type": "regular_bar",
             "title": "直方图",
             "image": "/img/icons/37_histogram.png"
+          },
+          {
+            "name": "g2plot.bullet",
+            "key": "bullet",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "子弹图",
+            "image": "/img/icons/38_bullet.png"
           }
         ]
       }

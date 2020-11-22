@@ -282,7 +282,16 @@ export { range };
     时间：2020-11-20 22:50:39
     类型: g2plot
     序号：37
-    名称：你的图表名称
-*/ 
+    名称：直方图
+*/
 import * as histogram from './g2plot/histogram';
-export { histogram }; 
+export { histogram };
+
+/*
+    时间：2020-11-22 15:33:15
+    类型: g2plot
+    序号：38
+    名称：子弹图
+*/
+import * as bullet from './g2plot/bullet';
+export { bullet };
