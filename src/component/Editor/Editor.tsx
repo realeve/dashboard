@@ -283,12 +283,12 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.props.selectMenu(menu);
   }
 
-  public async getThumbnail(scale: number) {
+  public async getThumbnail(scale: number, quality = 0.8) {
     let canvasEl = this.viewport.current.viewport.el;
     return html2canvas(canvasEl, {
       backgroundColor: null,
       scale,
-    }).then((canvas) => canvas.toDataURL());
+    }).then((canvas) => canvas.toDataURL('image/jpeg', quality));
   }
 
   // 更新缩略图

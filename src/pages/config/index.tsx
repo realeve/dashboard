@@ -92,7 +92,7 @@ const Index = ({
     }
 
     localforage.getItem('zoom').then((e) => {
-      setZoom(e || 0.7);
+      setZoom(e || 1);
     });
 
     editor.current && setInstance(editor.current);
@@ -192,7 +192,7 @@ const Index = ({
     });
   };
 
-  const getThumbnail = () => editor.current.getThumbnail(0.2 / zoom);
+  const getThumbnail = (scale: number = 0.2) => editor.current.getThumbnail(scale / zoom);
 
   return (
     <div className={styles.editor}>
