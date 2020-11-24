@@ -346,6 +346,14 @@
             "type": "regular_bar",
             "title": "子弹图",
             "image": "/img/icons/38_bullet.png"
+          },
+          {
+            "name": "other.trend_card",
+            "key": "trend_card",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "指标卡趋势图",
+            "image": "/img/icons/39_trend_card.png"
           }
         ]
       }

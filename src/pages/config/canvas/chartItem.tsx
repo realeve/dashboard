@@ -100,7 +100,6 @@ const Item = ({
         ? option.appendPadding.map((item) => item + appendPadding)
         : appendPadding + option.appendPadding;
     }
-
     return (
       <G2Plot
         option={{ ...option, appendPadding }}

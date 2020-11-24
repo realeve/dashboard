@@ -2,7 +2,7 @@ import React from 'react';
 import { IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { palette } from '@/component/g2plot';
-export { mock } from './mock';
+export { mock } from '../other/trend_card/mock';
 import { getAnnotations } from './lib';
 import defaultTheme from '@/component/g2plot/theme';
 

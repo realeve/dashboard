@@ -2,8 +2,7 @@ import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/inte
 import * as R from 'ramda';
 import jstat from 'jstat';
 import * as lib from '@/component/chartItem/option/lib';
-import defaultTheme from '@/component/g2plot/theme';
-import { palette } from '@/component/g2plot';
+import { getTheme } from './lib';
 
 export let mock: IChartMock = {
   data: [
@@ -144,9 +143,7 @@ export default ({
   let yField = [header[y], header[y2]];
   let yAxis = limitYaxis ? getMaxByKeys(data, yField) : {};
 
-  const isDefaultTheme = theme === 'cbpc';
-  let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
-  let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
+  let distTheme = getTheme(theme);
 
   return {
     ...distTheme,

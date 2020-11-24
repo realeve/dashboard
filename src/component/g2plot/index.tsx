@@ -50,6 +50,7 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
   useEffect(() => {
     getChart(chartRef, chart.current);
   }, [chart.current]);
+
   useImperativeHandle(ref, () => ({
     getChart: () => chart.current,
   }));

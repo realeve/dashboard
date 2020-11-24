@@ -1,9 +1,9 @@
 import { ReactNode, useRef, useEffect } from 'react';
 import { isEqual } from '@antv/util';
 import { utils } from '../util';
-import { Plot, Options as G2PlotConfig, Tooltip as G2PlotTooltip } from '@antv/g2plot';
+import { Plot, Options as G2PlotConfig } from '@antv/g2plot'; //, Tooltip as G2PlotTooltip
 import createNode from '../util/createNode';
-
+import { TooltipOptions } from '@antv/g2plot/lib/types/tooltip';
 export interface ContainerProps {
   style?: React.CSSProperties;
   className?: string;
@@ -11,13 +11,14 @@ export interface ContainerProps {
   loadingTemplate?: React.ReactElement;
   errorTemplate?: (e: Error) => React.ReactNode;
 }
-export interface Tooltip extends Omit<G2PlotTooltip, 'customContent'> {
+
+export interface Tooltip extends Omit<TooltipOptions, 'customContent' | 'container'> {
   customContent?: (title: string, data: any[]) => ReactNode | string | void;
   container?: ReactNode;
 }
 
 export interface Options extends Omit<G2PlotConfig, 'tooltip' | 'data' | 'yAxis'> {
-  tooltip?: boolean | Tooltip;
+  tooltip?: false | Tooltip;
   data?: any;
   yAxis?: G2PlotConfig['yAxis'] | G2PlotConfig['yAxis'][];
   [key: string]: any;
