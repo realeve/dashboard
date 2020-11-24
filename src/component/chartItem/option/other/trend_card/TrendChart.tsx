@@ -71,35 +71,35 @@ export default ({
     });
   }, []);
 
-  const changeActiveSeries = (activeSeries: string) => {
-    const { activeTooltipTitle, activeSeriesList } = state;
-    let newList = [];
-    if (!activeSeriesList.includes(activeSeries)) {
-      newList = [...activeSeriesList, activeSeries];
-    } else {
-      newList = activeSeriesList.filter((s) => s !== activeSeries);
-    }
-    setState({ activeSeriesList: newList });
+  // const changeActiveSeries = (activeSeries: string) => {
+  //   const { activeTooltipTitle, activeSeriesList } = state;
+  //   let newList = [];
+  //   if (!activeSeriesList.includes(activeSeries)) {
+  //     newList = [...activeSeriesList, activeSeries];
+  //   } else {
+  //     newList = activeSeriesList.filter((s) => s !== activeSeries);
+  //   }
+  //   setState({ activeSeriesList: newList });
 
-    // @ts-ignore
-    let chart = chartRef?.current?.getChart();
-    if (!chart || !activeSeries) {
-      return;
-    }
-
-    chart.filter('category', (series) => {
-      return newList.includes(series) ? false : true;
-    });
-    chart.render(true);
-    chart.geometries
-      .find((geom) => geom.type === 'point')
-      .elements.forEach((ele) => {
-        const item = ele.getModel().data;
-        if (item[x] === activeTooltipTitle && item[legend] === activeSeries) {
-          ele.setState('active', true);
-        }
-      });
-  };
+  //   // @ts-ignore
+  //   let chart = chartRef?.current?.getChart();
+  //   if (!chart || !activeSeries) {
+  //     return;
+  //   }
+  //   console.log(chart);
+  //   chart.filter(legend, (series) => {
+  //     return newList.includes(series) ? false : true;
+  //   });
+  //   chart.render(true);
+  //   chart.geometries
+  //     .find((geom) => geom.type === 'point')
+  //     .elements.forEach((ele) => {
+  //       const item = ele.getModel().data;
+  //       if (item[x] === activeTooltipTitle && item[legend] === activeSeries) {
+  //         ele.setState('active', true);
+  //       }
+  //     });
+  // };
 
   const CustomTooltip = () => {
     // @ts-ignore
@@ -122,7 +122,7 @@ export default ({
                 className={`g2-tooltip-item tooltip-${item[legend]} ${
                   activeSeriesList.includes(item[legend]) ? 'inactive' : ''
                 }`}
-                onClick={() => changeActiveSeries(item[legend])}
+                // onClick={() => changeActiveSeries(item[legend])}
               >
                 <div className="g2-tooltip-item-marker" style={{ background: colors10[idx] }} />
                 <div className="g2-tooltip-item-label">{item[legend]}</div>
