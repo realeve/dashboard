@@ -354,6 +354,14 @@
             "type": "regular_bar",
             "title": "指标卡趋势图",
             "image": "/img/icons/39_trend_card.png"
+          },
+          {
+            "name": "g2plot.pie",
+            "key": "g2pie",
+            "engine": "g2plot",
+            "type": "regular_bar",
+            "title": "饼图",
+            "image": "/img/icons/40_pie.png"
           }
         ]
       }

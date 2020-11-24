@@ -38,7 +38,23 @@ let legend = {};
     },
   };
 });
-
+export const tooltip = {
+  domStyles: {
+    'g2-tooltip': {
+      background: 'rgba(48, 54, 64, 0.8)',
+      backdropFilter: 'saturate(180%) blur(20px)',
+      color: labelColor,
+      fontFamily,
+    },
+  },
+  crosshairs: {
+    line: {
+      style: {
+        stroke: lineColor,
+      },
+    },
+  },
+};
 const themeObject: LooseObject = {
   background: 'transparent',
   labels: {
@@ -64,23 +80,7 @@ const themeObject: LooseObject = {
   components: {
     axis,
     legend,
-    tooltip: {
-      domStyles: {
-        'g2-tooltip': {
-          background: 'rgba(48, 54, 64, 0.8)',
-          backdropFilter: 'saturate(180%) blur(20px)',
-          color: labelColor,
-          fontFamily,
-        },
-      },
-      crosshairs: {
-        line: {
-          style: {
-            stroke: lineColor,
-          },
-        },
-      },
-    },
+    tooltip,
   },
 };
 const cbpcTheme = deepMix({}, defaultTheme, themeObject);
