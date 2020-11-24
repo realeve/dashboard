@@ -59,47 +59,48 @@ export default ({
     // });
     line.on('tooltip:change', (evt) => {
       const { title: activeTooltipTitle, items } = evt.data;
-      //   const tooltipItems = data.filter((d) => d[x] === activeTooltipTitle);
-      const tooltipItems = items.map((item) => {
-        let val = _.clone(item.data);
-        val[y] = item.value;
-        return val;
-      });
+
+      const tooltipItems = !config.isPercent
+        ? data.filter((d) => d[x] === activeTooltipTitle)
+        : items.map((item) => {
+            let val = _.clone(item.data);
+            val[y] = item.value;
+            return val;
+          });
       // TODO 由官方示例 https://g2plot.antv.vision/zh/examples/case/statistical-scenario#trend 所得
       // 此处在渲染state的时候有性能问题，此处已修复
       setState({ tooltipItems, activeTooltipTitle });
     });
   }, []);
 
-  // const changeActiveSeries = (activeSeries: string) => {
-  //   const { activeTooltipTitle, activeSeriesList } = state;
-  //   let newList = [];
-  //   if (!activeSeriesList.includes(activeSeries)) {
-  //     newList = [...activeSeriesList, activeSeries];
-  //   } else {
-  //     newList = activeSeriesList.filter((s) => s !== activeSeries);
-  //   }
-  //   setState({ activeSeriesList: newList });
+  const changeActiveSeries = (activeSeries: string) => {
+    const { activeTooltipTitle, activeSeriesList } = state;
+    let newList = [];
+    if (!activeSeriesList.includes(activeSeries)) {
+      newList = [...activeSeriesList, activeSeries];
+    } else {
+      newList = activeSeriesList.filter((s) => s !== activeSeries);
+    }
+    setState({ activeSeriesList: newList });
 
-  //   // @ts-ignore
-  //   let chart = chartRef?.current?.getChart();
-  //   if (!chart || !activeSeries) {
-  //     return;
-  //   }
-  //   console.log(chart);
-  //   chart.filter(legend, (series) => {
-  //     return newList.includes(series) ? false : true;
-  //   });
-  //   chart.render(true);
-  //   chart.geometries
-  //     .find((geom) => geom.type === 'point')
-  //     .elements.forEach((ele) => {
-  //       const item = ele.getModel().data;
-  //       if (item[x] === activeTooltipTitle && item[legend] === activeSeries) {
-  //         ele.setState('active', true);
-  //       }
-  //     });
-  // };
+    // @ts-ignore
+    let chart = chartRef?.current?.getChart()?.chart;
+    if (!chart || !activeSeries) {
+      return;
+    }
+    chart.filter(legend, (series) => {
+      return newList.includes(series) ? false : true;
+    });
+    chart.render(true);
+    chart.geometries
+      .find((geom) => geom.type === 'point')
+      .elements.forEach((ele) => {
+        const item = ele.getModel().data;
+        if (item[x] === activeTooltipTitle && item[legend] === activeSeries) {
+          ele.setState('active', true);
+        }
+      });
+  };
 
   const CustomTooltip = () => {
     // @ts-ignore
@@ -122,7 +123,7 @@ export default ({
                 className={`g2-tooltip-item tooltip-${item[legend]} ${
                   activeSeriesList.includes(item[legend]) ? 'inactive' : ''
                 }`}
-                // onClick={() => changeActiveSeries(item[legend])}
+                onClick={() => changeActiveSeries(item[legend])}
               >
                 <div className="g2-tooltip-item-marker" style={{ background: colors10[idx] }} />
                 <div className="g2-tooltip-item-label">{item[legend]}</div>
