@@ -16,16 +16,13 @@ export interface IRadioProps {
  * @param config 处理配置列表
  */
 const handleConfig = (config) => {
-  let arr = R.clone(config);
-  if (isString(config)) {
-    arr = config.split(',');
-  }
-  return arr.map((title) => {
-    if (isString(title)) {
-      return { title, value: title };
+  if (isString(config[0])) {
+    if (isString(config)) {
+      config = config.split(',');
     }
-    return title;
-  });
+    return config.map((title) => ({ title, value: title }));
+  }
+  return config;
 };
 
 export default ({ value, onChange, config = [], className }: IRadioProps) => {

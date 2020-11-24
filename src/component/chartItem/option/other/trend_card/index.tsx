@@ -54,7 +54,7 @@ export const config: IChartConfig = [
 ];
 
 export default ({ option }: { option: IG2Plot }) => {
-  let { theme, ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
+  let { ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
   let props = _.pick<{
     data: IChartMock;
     x: number;
@@ -73,31 +73,15 @@ export default ({ option }: { option: IG2Plot }) => {
             line: false,
           },
         },
-        theme: {
-          ...theme,
-          geometries: {
-            point: {
-              circle: {
-                active: {
-                  style: {
-                    r: 6,
-                    fillOpacity: 1,
-                    stroke: '#000',
-                    lineWidth: 2,
-                  },
-                },
-              },
-            },
-          },
-        },
         point: {
           size: 0,
         },
         tooltip: {
-          showMarkers: false,
+          showMarkers: true,
           follow: false,
           showContent: false,
           showTitle: false,
+          marker: { lineWidth: 2, r: 6 },
         },
         interactions: [{ type: 'marker-active' }],
       }}
