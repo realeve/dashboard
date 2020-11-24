@@ -47,6 +47,20 @@ const themeObject: LooseObject = {
       fontFamily,
     },
   },
+  geometries: {
+    point: {
+      circle: {
+        active: {
+          style: {
+            r: 4,
+            fillOpacity: 1,
+            stroke: '#ddd',
+            lineWidth: 2,
+          },
+        },
+      },
+    },
+  },
   components: {
     axis,
     legend,

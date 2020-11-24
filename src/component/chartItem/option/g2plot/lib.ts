@@ -69,6 +69,20 @@ const sort = (a, b) => {
   }
 };
 
+const handlePercent = (annotations, isPercent = false) => {
+  if (!isPercent) {
+    return annotations;
+  }
+  let sum = 0;
+  annotations.forEach((item) => (sum += item.position[1]));
+  if (sum == 0) {
+    return annotations;
+  }
+  return annotations.map((item) => {
+    item.position = [item.position[0], item.position[1] / sum];
+  });
+};
+
 /**
  * 获取 annotations 配置项
  * @param data {Array} 原始数据，建议传入的数据自行处理对x轴数据的排序，此处只处理月份/星期/日期类型/数值型几种场景。

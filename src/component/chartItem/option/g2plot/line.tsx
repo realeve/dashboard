@@ -6,7 +6,7 @@ export { mock } from '../other/trend_card/mock';
 import { getAnnotations } from './lib';
 import defaultTheme from '@/component/g2plot/theme';
 
-export const config = [
+export const lineConfig = [
   {
     key: 'renderer',
     defaultValue: 'canvas',
@@ -16,59 +16,9 @@ export const config = [
   },
   lib.getAntThemePanel(),
   {
-    key: 'smooth',
-    defaultValue: true,
-    title: '曲线类型',
-    type: 'radio',
-    option: [
-      {
-        title: <i className="datav-icon gui-icons datav-gui-icon-smooth-line datav-gui-icon" />,
-        value: true,
-      },
-      {
-        title: <i className="datav-icon gui-icons datav-gui-icon-poly-line datav-gui-icon" />,
-        value: false,
-      },
-    ],
-  },
-  {
-    type: 'label',
-    title: '图表类型切换需刷新页面',
-  },
-  {
-    key: 'chartType',
-    defaultValue: 'line',
-    title: '图表类型',
-    type: 'radio',
-    option: [
-      {
-        title: '曲线图',
-        value: 'line',
-      },
-      {
-        title: '面积图',
-        value: 'area',
-      },
-      {
-        title: '柱状图',
-        value: 'column',
-      },
-      {
-        title: '条形图',
-        value: 'bar',
-      },
-    ],
-  },
-  {
     key: 'isStack',
     defaultValue: false,
     title: '堆叠',
-    type: 'switch',
-  },
-  {
-    key: 'isPercent',
-    defaultValue: false,
-    title: '百分比',
     type: 'switch',
   },
   {
@@ -151,6 +101,60 @@ export const config = [
   ...lib.getLegendConfig(),
 ];
 
+export const config = [
+  {
+    type: 'label',
+    title: '图表类型切换需刷新页面',
+  },
+  {
+    key: 'chartType',
+    defaultValue: 'line',
+    title: '图表类型',
+    type: 'radio',
+    option: [
+      {
+        title: '曲线图',
+        value: 'line',
+      },
+      {
+        title: '面积图',
+        value: 'area',
+      },
+      {
+        title: '柱状图',
+        value: 'column',
+      },
+      {
+        title: '条形图',
+        value: 'bar',
+      },
+    ],
+  },
+  {
+    key: 'isPercent',
+    defaultValue: false,
+    title: '百分比',
+    type: 'switch',
+  },
+  {
+    key: 'smooth',
+    defaultValue: true,
+    title: '曲线类型',
+    type: 'radio',
+    option: [
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-smooth-line datav-gui-icon" />,
+        value: true,
+      },
+      {
+        title: <i className="datav-icon gui-icons datav-gui-icon-poly-line datav-gui-icon" />,
+        value: false,
+      },
+    ],
+  },
+  ...lineConfig,
+];
+
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
@@ -179,7 +183,7 @@ export const apiConfig: IApiConfig = {
 };
 
 // export const defaultOption = { renderer: 'svg' };
-interface IG2Plot extends IG2PlotProps {
+export interface IG2Plot extends IG2PlotProps {
   x: number;
   y: number;
   legend: number;
@@ -196,31 +200,31 @@ interface IG2Plot extends IG2PlotProps {
   stepType: string;
 }
 
-export default ({
+export const getLineConfig = ({
   data: { data, header },
-  x = 0,
-  y = 1,
-  legend = 2,
-  showLabel = true,
-  isStack = false,
-  isPercent = false,
-  smooth = false,
-  connectNulls = true,
-  endLabel = true,
-  lineWidth = 2,
-  pointSize = 0,
-  pointColor = '#ffffff',
-  pointShape = 'hollow-circle',
-  stepType = '',
-  legendShow = true,
-  showSlider = false,
-  legendAlign = 'center',
-  legendPosition = 'top',
-  legendOrient = 'horizontal',
-  theme = 18,
-  chartType = 'line',
-  fillOpacity = 0.4,
-  renderer = 'canvas',
+  x,
+  y,
+  legend,
+  showLabel,
+  isStack,
+  isPercent,
+  smooth,
+  connectNulls,
+  endLabel,
+  lineWidth,
+  pointSize,
+  pointColor,
+  pointShape,
+  stepType,
+  legendShow,
+  showSlider,
+  legendAlign,
+  legendPosition,
+  legendOrient,
+  theme,
+  chartType,
+  fillOpacity,
+  renderer,
 }: IG2Plot) => {
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
@@ -255,7 +259,7 @@ export default ({
 
   // 尾部跟随
   let annotationsOption =
-    !isBarChart && endLabel
+    !isBarChart && endLabel && !isPercent
       ? getAnnotations(
           data,
           {
@@ -269,6 +273,7 @@ export default ({
             isArea: chartType == 'area',
             xAxisOffset: 0,
             maxLabelLength: 15,
+            isPercent,
           },
         )
       : null;
@@ -319,7 +324,7 @@ export default ({
   let config = {
     chartType,
     renderer,
-    appendPadding: [0, endLabel && !isBarChart ? 100 : 0, 0, 0],
+    appendPadding: [0, endLabel && !isBarChart && !isPercent ? 100 : 0, 0, 0],
 
     // 数据系列配置
     ...seriesCfg,
@@ -349,7 +354,12 @@ export default ({
     },
     areaStyle: { fillOpacity },
     data,
-    [!reverseXY ? 'xAxis' : 'yAxis']: { type: 'category' },
+    [!reverseXY ? 'xAxis' : 'yAxis']: {
+      type: 'category',
+      label: {
+        autoRotate: false,
+      },
+    },
     ...label,
     // 百分比
     ...percentConfig,
@@ -358,6 +368,8 @@ export default ({
       shared: true,
     },
   };
-  // console.log(config);
+
   return config;
 };
+
+export default getLineConfig;

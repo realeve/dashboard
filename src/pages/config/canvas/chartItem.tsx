@@ -14,7 +14,13 @@ import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
 import G2Plot from '@/component/g2plot';
 import { isArray } from '@antv/util';
-
+const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
+  let obj = {};
+  arr.forEach((item) => {
+    item.key && (obj[item.key] = item.defaultValue);
+  });
+  return obj;
+};
 const Item = ({
   config,
   title,
@@ -42,9 +48,17 @@ const Item = ({
     );
   }
   const { default: method, defaultOption = {}, ...lib } = chartLib[config.key];
+
   let api = config.api || {};
+  /**
+   * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
+   */
+  let objComponent = getDefaultValue(lib?.config);
+  let objApi = getDefaultValue(lib?.apiConfig?.config);
+  api = { ...objApi, ...api };
+
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
-  let valid = api?.api_type === 'url' && api?.url?.length > 0;
+  let valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
 
   let { data, loading } = useFetch({
     param: { url: api?.api_type === 'url' ? api?.url : null },
@@ -74,21 +88,25 @@ const Item = ({
     appendConfig = R.type(defaultOption) == 'Function' ? defaultOption(config) : defaultOption;
   }
 
+  // 合并后的属性
+  const injectProps = {
+    data: valid ? data : mock,
+    ...objComponent,
+    ...(config.componentConfig || {}),
+    ...api,
+  };
+
   if (config.engine === 'echarts') {
     return (
       <Echarts
-        option={method({
-          data: valid ? data : mock,
-          ...(config.componentConfig || {}),
-        })}
+        option={method(injectProps)}
         renderer={appendConfig.renderer || 'canvas'}
         style={style}
       />
     );
   } else if (config.engine === 'g2plot') {
     let option = method({
-      data: valid ? data : mock,
-      ...(config.componentConfig || {}),
+      ...injectProps,
       autoFit: true,
     });
 
@@ -111,28 +129,16 @@ const Item = ({
     return (
       <G2
         option={{
-          data: valid ? data : mock,
           onMount: method,
-          ...(config.componentConfig || {}),
           transformer: lib.transformer || null,
-          ...appendConfig,
+          ...injectProps,
         }}
         style={style}
       />
     );
   } else if (config.engine === 'other') {
     const Item = method;
-    return (
-      <Item
-        option={{
-          data: valid ? data : mock,
-          ...(config.componentConfig || {}),
-          ...appendConfig,
-        }}
-        chartid={chartid}
-        style={style}
-      />
-    );
+    return <Item option={injectProps} chartid={chartid} style={style} />;
   }
 
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;

@@ -1,30 +1,106 @@
 import React from 'react';
-
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import { IChartConfig, IChartMock } from '@/component/chartItem/interface';
 export { mock } from './mock';
-
-import * as lib from '@/component/chartItem/option/lib';
-import { textColor } from '@/component/chartItem/option';
-
+import { lineConfig, IG2Plot, getLineConfig } from '../../g2plot/line';
+import { ChartConfig } from '@/component/g2plot';
+import * as _ from '@antv/util';
 import TrendChart from './TrendChart';
 
-export const config: IChartConfig[] = [];
+export { apiConfig } from '../../g2plot/line';
+export const config: IChartConfig = [
+  {
+    key: 'cardPosition',
+    defaultValue: 'left',
+    title: '指标卡位置',
+    type: 'radio',
+    option: [
+      {
+        title: '左',
+        value: 'left',
+      },
+      {
+        title: '右',
+        value: 'right',
+      },
+    ],
+  },
+  {
+    type: 'label',
+    title: '图表类型切换需刷新页面',
+  },
+  {
+    key: 'chartType',
+    defaultValue: 'line',
+    title: '图表类型',
+    type: 'radio',
+    option: [
+      {
+        title: '曲线图',
+        value: 'line',
+      },
+      {
+        title: '面积图',
+        value: 'area',
+      },
+    ],
+  },
+  {
+    key: 'isPercent',
+    defaultValue: false,
+    title: '百分比',
+    type: 'switch',
+  },
+  ...lineConfig,
+];
 
-export const apiConfig: IApiConfig = {
-  show: true,
-  type: 'url',
-  url: 'http://localhost:8000/mock/39_trend_card.json',
-  interval: 5,
-  config: [
-    {
-      key: 'x',
-      title: 'x 字段',
-      defaultValue: 0,
-      min: 0,
-    },
-  ],
-};
-
-export default ({ option: { data, x = 0 }, style }) => {
-  return <TrendChart data={data} />;
+export default ({ option }: { option: IG2Plot }) => {
+  let { theme, ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
+  let props = _.pick<{
+    data: IChartMock;
+    x: number;
+    y: number;
+    legend: number;
+  }>(option, ['data', 'x', 'y', 'legend']);
+  return (
+    <TrendChart
+      {...props}
+      cardPosition={option.cardPosition}
+      config={{
+        ...config,
+        legend: false,
+        yAxis: {
+          grid: {
+            line: false,
+          },
+        },
+        theme: {
+          ...theme,
+          geometries: {
+            point: {
+              circle: {
+                active: {
+                  style: {
+                    r: 6,
+                    fillOpacity: 1,
+                    stroke: '#000',
+                    lineWidth: 2,
+                  },
+                },
+              },
+            },
+          },
+        },
+        point: {
+          size: 0,
+        },
+        tooltip: {
+          showMarkers: false,
+          follow: false,
+          showContent: false,
+          showTitle: false,
+        },
+        interactions: [{ type: 'marker-active' }],
+      }}
+    />
+  );
 };
