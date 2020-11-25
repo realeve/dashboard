@@ -21,6 +21,22 @@ export let mock: IChartMock = {
 
 export const config = [
   {
+    key: 'chartType',
+    defaultValue: 'pie',
+    title: '图表类型',
+    type: 'radio',
+    option: [
+      {
+        title: '饼图',
+        value: 'pie',
+      },
+      {
+        title: '玫瑰图',
+        value: 'rose',
+      },
+    ],
+  },
+  {
     key: 'renderer',
     defaultValue: 'svg',
     title: '图表引擎',
@@ -92,7 +108,8 @@ interface IG2Plot extends IG2PlotProps {
 }
 
 export default ({
-  data: { data, header, title },
+  data: { data, header },
+  chartType,
   x: _x = 0,
   y: _y = 1,
   innerRadius,
@@ -107,27 +124,38 @@ export default ({
 }: IG2Plot) => {
   let x = header[_x],
     y = header[_y];
+  let isPie = chartType == 'pie',
+    innerLabel = labelPosition == 'inner';
+
+  let label = !isPie
+    ? innerLabel
+      ? { label: { offset: -15 } }
+      : {}
+    : {
+        label: {
+          type: labelPosition,
+          offset: innerLabel ? '-30%' : '10%',
+          content: innerLabel ? '{name} {percentage}' : '{name}\n{percentage}',
+          style: {
+            fontSize: 12,
+            textAlign: 'center',
+            fill: textColor,
+          },
+        },
+      };
+
   return {
-    chartType: 'pie',
+    chartType,
     ...getTheme(theme),
     renderer,
     ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     data,
-    angleField: y,
-    colorField: x,
+    [isPie ? 'colorField' : 'xField']: x,
+    [isPie ? 'angleField' : 'yField']: y,
+    seriesField: x,
     radius: 0.95,
     innerRadius,
-    label: {
-      type: labelPosition,
-      offset: labelPosition == 'inner' ? '-30%' : '10%',
-      // content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
-      content: labelPosition == 'inner' ? '{name} {percentage}' : '{name}\n{percentage}',
-      style: {
-        fontSize: 12,
-        textAlign: 'center',
-        fill: textColor,
-      },
-    },
+    ...label,
     state: {
       active: {
         style: {
@@ -138,24 +166,25 @@ export default ({
     },
     tooltip,
     interactions: [{ type: 'pie-legend-active' }, { type: 'element-active' }],
-    statistic: showStatistic && {
-      title: {
-        offsetY: '-10',
-        style: {
-          fill: textColor,
+    statistic: isPie &&
+      showStatistic && {
+        title: {
+          offsetY: '-10',
+          style: {
+            fill: textColor,
+          },
+        },
+        content: {
+          offsetY: 16,
+          style: {
+            whiteSpace: 'pre-wrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            color: textColor,
+            fontWeight: 'normal',
+            fontSize: 20,
+          },
         },
       },
-      content: {
-        offsetY: 16,
-        style: {
-          whiteSpace: 'pre-wrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          color: textColor,
-          fontWeight: 'normal',
-          fontSize: 20,
-        },
-      },
-    },
   };
 };
