@@ -44,6 +44,7 @@ const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
 
   const { chart, container } = useChart<Base, Options>(instance, {
     renderer,
+    chartType,
     theme: 'cbpc',
     ...option,
   });

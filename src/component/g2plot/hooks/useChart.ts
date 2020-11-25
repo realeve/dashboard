@@ -28,7 +28,10 @@ export interface Base extends Plot<any> {
   __proto__?: any;
 }
 
-export default function useInit<T extends Base, U extends Options>(ChartClass: any, config: U) {
+export default function useInit<T extends Base, U extends Options>(
+  ChartClass: any,
+  { chartType, ...config }: U,
+) {
   const chart = useRef<T>();
   const chartOptions = useRef<U>();
   const container = useRef<HTMLDivElement>(null);
@@ -110,6 +113,15 @@ export default function useInit<T extends Base, U extends Options>(ChartClass: a
     }
   };
 
+  // 图表类型改变时，重新渲染
+  useEffect(() => {
+    if (!chart.current) {
+      return;
+    }
+    chart.current.destroy();
+    init();
+  }, [chartType]);
+
   useEffect(() => {
     if (chart.current && !isEqual(chartOptions.current, config)) {
       let changeData = false;
@@ -147,10 +159,7 @@ export default function useInit<T extends Base, U extends Options>(ChartClass: a
     }
   }, [config]);
 
-  useEffect(() => {
-    if (!container.current) {
-      return () => null;
-    }
+  const init = () => {
     processConfig();
     const chartInstance: T = new (ChartClass as any)(container.current, {
       ...config,
@@ -174,6 +183,12 @@ export default function useInit<T extends Base, U extends Options>(ChartClass: a
     return () => {
       chartInstance.destroy();
     };
+  };
+  useEffect(() => {
+    if (!container.current) {
+      return () => null;
+    }
+    init();
   }, []);
 
   return {
