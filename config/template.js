@@ -270,10 +270,18 @@ export let mock: IChartMock = {
   
   import * as lib from '@/component/chartItem/option/lib';
   import { textColor } from '@/component/chartItem/option';
+  import { getColors, getAntThemePanel } from '../g2plot/lib';
 
   ${mockStr}
   
-  export const config: IChartConfig[] = [
+  export const config: IChartConfig[] = [  
+    getAntThemePanel(),
+    {
+      key: 'needRerverse',
+      defaultValue: false,
+      title: '翻转颜色表',
+      type: 'switch',
+    },
     {
       type: 'divider',
       title: '颜色设置',
@@ -316,7 +324,11 @@ export let mock: IChartMock = {
   };
   
   // g2 的默认组件需要2个参数，一是配置项，二是chart实例
-  export const onMount = ({ data: { data: data },legend=0, x = 1, y = 2 }: IChartProps, chart: Chart) => {    
+  export const onMount = ({ data: { data: data },legend:_legend=0, x:_x = 1, y:_y = 2 }: IChartProps, chart: Chart) => {    
+    
+  let colors = getColors(theme, needRerverse);
+  let x = header[_x], y = header[_y], legend = header[legend];
+
     chart.data(data);
     chart.scale({
         [y]: {
@@ -327,7 +339,7 @@ export let mock: IChartMock = {
     chart
     .line()
     .position(\`\${x}*\${y}\`)
-    .color(\`\${legend}\`);
+    .color(\`\${legend}\`,colors);
     chart.render();
   };
   
