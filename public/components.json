@@ -302,6 +302,18 @@
               "width": "1920px",
               "height": "150px"
             }
+          },
+          {
+            "name": "other.fullscreen",
+            "key": "fullscreen",
+            "engine": "other",
+            "type": "fullscreen",
+            "title": "全屏组件",
+            "image": "/img/icons/20_scroll_digit.png",
+            "showBorder": false,
+            "showTitle": false,
+            "showBackground": false,
+            "ajax": false
           }
         ]
       }

@@ -319,15 +319,15 @@ export { g2pie };
     类型: g2
     序号：41
     名称：你的图表名称
-*/ 
+*/
 import * as rangeLine from './g2/rangeLine';
-export { rangeLine }; 
+export { rangeLine };
 
 /*
     时间：2020-11-26 23:15:00
     类型: g2
     序号：42
     名称：你的图表名称
-*/ 
+*/
 import * as treemap from './g2/treemap';
-export { treemap }; 
+export { treemap };
