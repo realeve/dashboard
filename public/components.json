@@ -1,429 +1,365 @@
-[
-  {
-    "title": "常规图表",
-    "icon": "icon-com-regular",
-    "list": [
-      {
-        "title": "柱形图",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_bar icon-com-regular",
-        "list": [
-          {
-            "name": "echarts.base_line",
-            "key": "base_line",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "echarts基础图表",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
-          },
-          {
-            "name": "echarts.horizontal-positive-negative-bar-chart",
-            "key": "barChartPositiveNegative",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "水平正负柱状图",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
-          },
-          {
-            "name": "echarts.line-bar-chart",
-            "key": "barChartLine",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "折线柱图",
-            "image": "/img/icons/02_barChartLine.png"
-          },
-          {
-            "name": "g2.waterfall",
-            "key": "waterfall",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "瀑布图",
-            "image": "/img/icons/03_waterfall.png"
-          },
-          {
-            "name": "echarts.gardient_bar",
-            "key": "gardient_bar",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "渐变柱形图",
-            "image": "/img/icons/10_gardient_bar.png"
-          },
-          {
-            "name": "echarts.pictorial_bar",
-            "key": "pictorial_bar",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "间隔柱状图",
-            "image": "/img/icons/12_pictorial_bar.png"
-          },
-          {
-            "name": "echarts.bar_polar",
-            "key": "bar_polar",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "弧形柱图",
-            "image": "/img/icons/15_bar_polar.png"
-          },
-          {
-            "name": "g2.whirlwind",
-            "key": "whirlwind",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "旋风图",
-            "image": "/img/icons/18_whirlwind.png"
-          },
-          {
-            "name": "g2.facet_vertical",
-            "key": "facet_vertical",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "垂直分面图",
-            "image": "/img/icons/21_facet_vertical.png"
-          },
-          {
-            "name": "g2.group_column",
-            "key": "group_column",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "分组条形图",
-            "image": "/img/icons/22_group_column.png"
-          },
-          {
-            "name": "echarts.bar_2d",
-            "key": "bar_2d",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "模拟三维柱状图",
-            "image": "/img/icons/30_2d_bar.png"
-          }
-        ]
-      },
-      {
-        "title": "折线图",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular",
-        "list": [
-          {
-            "name": "echarts.gardientLine",
-            "key": "gardientLine",
-            "engine": "echarts",
-            "type": "regular_bar",
-            "title": "渐变面积图",
-            "image": "/img/icons/11_gardient_line.png"
-          }
-        ]
+[{
+  "title": "常规图表",
+  "icon": "icon-com-regular",
+  "list": [{
+    "title": "柱形图",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_bar icon-com-regular",
+    "list": [{
+      "name": "echarts.base_line",
+      "key": "base_line",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "echarts基础图表",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
+    }, {
+      "name": "echarts.horizontal-positive-negative-bar-chart",
+      "key": "barChartPositiveNegative",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "水平正负柱状图",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
+    }, {
+      "name": "echarts.line-bar-chart",
+      "key": "barChartLine",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "折线柱图",
+      "image": "/img/icons/02_barChartLine.png"
+    }, {
+      "name": "g2.waterfall",
+      "key": "waterfall",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "瀑布图",
+      "image": "/img/icons/03_waterfall.png"
+    }, {
+      "name": "echarts.gardient_bar",
+      "key": "gardient_bar",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "渐变柱形图",
+      "image": "/img/icons/10_gardient_bar.png"
+    }, {
+      "name": "echarts.pictorial_bar",
+      "key": "pictorial_bar",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "间隔柱状图",
+      "image": "/img/icons/12_pictorial_bar.png"
+    }, {
+      "name": "echarts.bar_polar",
+      "key": "bar_polar",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "弧形柱图",
+      "image": "/img/icons/15_bar_polar.png"
+    }, {
+      "name": "g2.whirlwind",
+      "key": "whirlwind",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "旋风图",
+      "image": "/img/icons/18_whirlwind.png"
+    }, {
+      "name": "g2.facet_vertical",
+      "key": "facet_vertical",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "垂直分面图",
+      "image": "/img/icons/21_facet_vertical.png"
+    }, {
+      "name": "g2.group_column",
+      "key": "group_column",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "分组条形图",
+      "image": "/img/icons/22_group_column.png"
+    }, {
+      "name": "echarts.bar_2d",
+      "key": "bar_2d",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "模拟三维柱状图",
+      "image": "/img/icons/30_2d_bar.png"
+    }]
+  }, {
+    "title": "折线图",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-regular_line icon-com-regular",
+    "list": [{
+      "name": "echarts.gardientLine",
+      "key": "gardientLine",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "渐变面积图",
+      "image": "/img/icons/11_gardient_line.png"
+    }]
+  }]
+}, {
+  "title": "饼图",
+  "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
+  "list": [{
+    "title": "百分比",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.dynamicPie",
+      "key": "dynamicPie",
+      "engine": "other",
+      "type": "regular_pie",
+      "title": "动态饼图",
+      "image": "/img/icons/07_dynamicpie.png"
+    }, {
+      "name": "g2.pie_detail",
+      "key": "pie_detail",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "饼图_详情",
+      "image": "/img/icons/14_pie_detail.png"
+    }, {
+      "name": "g2.g2_pie_rose",
+      "key": "g2_pie_rose",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "可调节角度饼图",
+      "image": "/img/icons/16_g2_pie_rose.png"
+    }, {
+      "name": "g2.facet_pie",
+      "key": "facet_pie",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "分面饼图",
+      "image": "/img/icons/17_facet_pie.png"
+    }, {
+      "name": "other.datav_ring",
+      "key": "datav_ring",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "datav饼图",
+      "image": "/img/icons/23_datav_ring.png"
+    }]
+  }]
+}, {
+  "title": "其它",
+  "icon": "icon-com-decorate",
+  "list": [{
+    "title": "百分比",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.percent",
+      "key": "progressBar",
+      "engine": "other",
+      "type": "others",
+      "title": "进度条",
+      "image": "/img/icons/04_progress_bar.png"
+    }, {
+      "name": "other.water",
+      "key": "water",
+      "engine": "echarts",
+      "type": "others",
+      "title": "水球图",
+      "image": "/img/icons/05_water.png"
+    }, {
+      "name": "other.ringchart",
+      "key": "ringchart",
+      "engine": "echarts",
+      "type": "others",
+      "title": "百分比环图",
+      "image": "/img/icons/06_ringchart.png"
+    }, {
+      "name": "other.percent_circle",
+      "key": "percent_circle",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "百分比圆环",
+      "image": "/img/icons/13_percent_circle.png"
+    }, {
+      "name": "other.svg_rotate",
+      "key": "svg_rotate",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "旋转圆环",
+      "image": "/img/icons/24_svg_rotate.png"
+    }, {
+      "name": "other.percent_echarts",
+      "key": "percent_echarts",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "百分比环图2",
+      "image": "/img/icons/25_circle_percent.png"
+    }]
+  }, {
+    "title": "列表",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.scrollBoard",
+      "key": "scrollBoard",
+      "engine": "other",
+      "type": "others",
+      "title": "滚动表单",
+      "image": "/img/icons/08_scroll_board.png"
+    }, {
+      "name": "other.rankingBoard",
+      "key": "rankingBoard",
+      "engine": "other",
+      "type": "others",
+      "title": "排名表",
+      "image": "/img/icons/09_ranking_board.png"
+    }]
+  }, {
+    "title": "翻牌器",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png"
+    }, {
+      "name": "other.scroll_digit",
+      "key": "scroll_digit",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "滚动翻牌器",
+      "image": "/img/icons/20_scroll_digit.png"
+    }]
+  }, {
+    "title": "粒子效果",
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "other.wave_effect",
+      "key": "wave_effect",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "粒子效果",
+      "image": "/img/icons/26_wave_effect.png",
+      "showBorder": false,
+      "showTitle": false,
+      "showBackground": false,
+      "ajax": false,
+      "style": {
+        "width": "1920px",
+        "height": "150px"
       }
-    ]
-  },
-  {
-    "title": "饼图",
+    }]
+  }]
+}, {
+  "title": "G2Plot",
+  "icon": "icon-com-material",
+  "list": [{
+    "title": "g2图表",
     "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
-    "list": [
-      {
-        "title": "百分比",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.dynamicPie",
-            "key": "dynamicPie",
-            "engine": "other",
-            "type": "regular_pie",
-            "title": "动态饼图",
-            "image": "/img/icons/07_dynamicpie.png"
-          },
-          {
-            "name": "g2.pie_detail",
-            "key": "pie_detail",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "饼图_详情",
-            "image": "/img/icons/14_pie_detail.png"
-          },
-          {
-            "name": "g2.g2_pie_rose",
-            "key": "g2_pie_rose",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "可调节角度饼图",
-            "image": "/img/icons/16_g2_pie_rose.png"
-          },
-          {
-            "name": "g2.facet_pie",
-            "key": "facet_pie",
-            "engine": "g2",
-            "type": "regular_bar",
-            "title": "分面饼图",
-            "image": "/img/icons/17_facet_pie.png"
-          },
-          {
-            "name": "other.datav_ring",
-            "key": "datav_ring",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "datav饼图",
-            "image": "/img/icons/23_datav_ring.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "其它",
-    "icon": "icon-com-decorate",
-    "list": [
-      {
-        "title": "百分比",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.percent",
-            "key": "progressBar",
-            "engine": "other",
-            "type": "others",
-            "title": "进度条",
-            "image": "/img/icons/04_progress_bar.png"
-          },
-          {
-            "name": "other.water",
-            "key": "water",
-            "engine": "echarts",
-            "type": "others",
-            "title": "水球图",
-            "image": "/img/icons/05_water.png"
-          },
-          {
-            "name": "other.ringchart",
-            "key": "ringchart",
-            "engine": "echarts",
-            "type": "others",
-            "title": "百分比环图",
-            "image": "/img/icons/06_ringchart.png"
-          },
-          {
-            "name": "other.percent_circle",
-            "key": "percent_circle",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "百分比圆环",
-            "image": "/img/icons/13_percent_circle.png"
-          },
-          {
-            "name": "other.svg_rotate",
-            "key": "svg_rotate",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "旋转圆环",
-            "image": "/img/icons/24_svg_rotate.png"
-          },
-          {
-            "name": "other.percent_echarts",
-            "key": "percent_echarts",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "百分比环图2",
-            "image": "/img/icons/25_circle_percent.png"
-          }
-        ]
-      },
-      {
-        "title": "列表",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.scrollBoard",
-            "key": "scrollBoard",
-            "engine": "other",
-            "type": "others",
-            "title": "滚动表单",
-            "image": "/img/icons/08_scroll_board.png"
-          },
-          {
-            "name": "other.rankingBoard",
-            "key": "rankingBoard",
-            "engine": "other",
-            "type": "others",
-            "title": "排名表",
-            "image": "/img/icons/09_ranking_board.png"
-          }
-        ]
-      },
-      {
-        "title": "翻牌器",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.flipboard",
-            "key": "flipboard",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "翻牌器",
-            "image": "/img/icons/19_flipboard.png"
-          },
-          {
-            "name": "other.scroll_digit",
-            "key": "scroll_digit",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "滚动翻牌器",
-            "image": "/img/icons/20_scroll_digit.png"
-          }
-        ]
-      },
-      {
-        "title": "粒子效果",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": [
-          {
-            "name": "other.wave_effect",
-            "key": "wave_effect",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "粒子效果",
-            "image": "/img/icons/26_wave_effect.png",
-            "showBorder": false,
-            "showTitle": false,
-            "showBackground": false,
-            "ajax": false,
-            "style": {
-              "width": "1920px",
-              "height": "150px"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "G2Plot",
-    "icon": "icon-com-material",
-    "list": [
-      {
-        "title": "g2图表",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-regular_pie icon-com-regular",
-        "list": [
-          {
-            "name": "g2plot.g2plot_line",
-            "key": "g2plot_line",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "g2曲线图",
-            "image": "/img/icons/32_g2_plotline.png"
-          },
-          {
-            "name": "g2plot.radial_bar",
-            "key": "radial_bar",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "G2玉珏图",
-            "image": "/img/icons/33_radial_bar.png"
-          },
-          {
-            "name": "g2plot.bi_direct_bar",
-            "key": "bi_direct_bar",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "双向条形图",
-            "image": "/img/icons/35_bi_direct.png"
-          },
-          {
-            "name": "g2plot.range",
-            "key": "range",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "区间柱状图",
-            "image": "/img/icons/36_range.png"
-          },
-          {
-            "name": "g2plot.histogram",
-            "key": "histogram",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "直方图",
-            "image": "/img/icons/37_histogram.png"
-          },
-          {
-            "name": "g2plot.bullet",
-            "key": "bullet",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "子弹图",
-            "image": "/img/icons/38_bullet.png"
-          },
-          {
-            "name": "other.trend_card",
-            "key": "trend_card",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "指标卡趋势图",
-            "image": "/img/icons/39_trend_card.png"
-          },
-          {
-            "name": "g2plot.pie",
-            "key": "g2pie",
-            "engine": "g2plot",
-            "type": "regular_bar",
-            "title": "饼图",
-            "image": "/img/icons/40_pie.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "媒体",
-    "icon": "icon-com-media",
-    "list": [
-      {
-        "title": "图片",
-        "icon": "com-font icon-com-media_image",
-        "list": [
-          {
-            "name": "other.image_single",
-            "key": "image_single",
-            "engine": "other",
-            "title": "单张图片",
-            "image": "/img/config/img_single.png",
-            "type": "image.single",
-            "showBorder": false,
-            "showTitle": false,
-            "showBackground": false,
-            "ajax": false
-          },
-          {
-            "name": "other.text_single",
-            "key": "text_single",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "文本",
-            "image": "/img/config/text.png",
-            "showBorder": false,
-            "showTitle": false,
-            "showBackground": false,
-            "ajax": false
-          },
-          {
-            "name": "other.time_chart",
-            "key": "time_chart",
-            "engine": "other",
-            "type": "regular_bar",
-            "title": "时钟",
-            "image": "/img/icons/31_time_clock.png",
-            "showBorder": false,
-            "showTitle": false,
-            "showBackground": false,
-            "ajax": false
-          }
-        ]
-      }
-    ]
-  },
-  {
+    "list": [{
+      "name": "g2plot.g2plot_line",
+      "key": "g2plot_line",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "g2曲线图",
+      "image": "/img/icons/32_g2_plotline.png"
+    }, {
+      "name": "g2plot.radial_bar",
+      "key": "radial_bar",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "G2玉珏图",
+      "image": "/img/icons/33_radial_bar.png"
+    }, {
+      "name": "g2plot.bi_direct_bar",
+      "key": "bi_direct_bar",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "双向条形图",
+      "image": "/img/icons/35_bi_direct.png"
+    }, {
+      "name": "g2plot.range",
+      "key": "range",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "区间柱状图",
+      "image": "/img/icons/36_range.png"
+    }, {
+      "name": "g2plot.histogram",
+      "key": "histogram",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "直方图",
+      "image": "/img/icons/37_histogram.png"
+    }, {
+      "name": "g2plot.bullet",
+      "key": "bullet",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "子弹图",
+      "image": "/img/icons/38_bullet.png"
+    }, {
+      "name": "other.trend_card",
+      "key": "trend_card",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "指标卡趋势图",
+      "image": "/img/icons/39_trend_card.png"
+    }, {
+      "name": "g2plot.pie",
+      "key": "g2pie",
+      "engine": "g2plot",
+      "type": "regular_bar",
+      "title": "饼图",
+      "image": "/img/icons/40_pie.png"
+    }]
+  }]
+}, {
+  "title": "媒体",
+  "icon": "icon-com-media",
+  "list": [{
+    "title": "图片",
+    "icon": "com-font icon-com-media_image",
+    "list": [{
+      "name": "other.image_single",
+      "key": "image_single",
+      "engine": "other",
+      "title": "单张图片",
+      "image": "/img/config/img_single.png",
+      "type": "image.single",
+      "showBorder": false,
+      "showTitle": false,
+      "showBackground": false,
+      "ajax": false
+    }, {
+      "name": "other.text_single",
+      "key": "text_single",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "文本",
+      "image": "/img/config/text.png",
+      "showBorder": false,
+      "showTitle": false,
+      "showBackground": false,
+      "ajax": false
+    }, {
+      "name": "other.time_chart",
+      "key": "time_chart",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "时钟",
+      "image": "/img/icons/31_time_clock.png",
+      "showBorder": false,
+      "showTitle": false,
+      "showBackground": false,
+      "ajax": false
+    }]
+  }]
+}, {
+  "title": "开发测试",
+  "icon": "icon-com-network",
+  "list": [{
     "title": "开发测试",
-    "icon": "icon-com-network",
-    "list": [
-      {
-        "title": "开发测试",
-        "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": []
-      }
-    ]
-  }
-]
+    "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
+    "list": [{
+      "name": "g2.rangeLine",
+      "key": "rangeLine",
+      "engine": "g2",
+      "type": "regular_bar",
+      "title": "请设置图表名称",
+      "image": "/img/icons/01_barChartPositiveNegative.png"
+    }]
+  }]
+}]

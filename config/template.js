@@ -326,8 +326,8 @@ export let mock: IChartMock = {
 
     chart
     .line()
-    .position('\${x}*\${y}')
-    .color('\${legend}');
+    .position(\`\${x}*\${y}\`)
+    .color(\`\${legend}\`);
     chart.render();
   };
   
