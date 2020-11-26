@@ -1,10 +1,8 @@
-import { getTheme } from '@antv/g2';
 import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { ShapeAttrs } from '@antv/g-base/lib/types';
-
-const defaultTheme = getTheme();
 
 export let mock: IChartMock = {
   data: [
@@ -35,6 +33,13 @@ export const config: IChartConfig[] = [
         value: 'list',
       },
     ],
+  },
+  getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
   },
   {
     key: 'outterPercent',
@@ -106,6 +111,8 @@ export const onMount = (
     fontSize = 16,
     fontWeight = 'normal',
     fontColor = '#ffffff',
+    theme = 'cbpc',
+    needRerverse,
   },
   chart,
 ) => {
@@ -124,7 +131,7 @@ export const onMount = (
   });
 
   chart.tooltip(false);
-
+  let colors = getColors(theme, needRerverse);
   chart.facet(facet, {
     fields: ['type'],
     cols,
@@ -145,7 +152,7 @@ export const onMount = (
         .interval()
         .adjust('stack')
         .position('value')
-        .color('type', [defaultTheme.colors10[idx], '#eceef133'])
+        .color('type', [colors[idx], '#eceef133'])
         .style({
           opacity: 1,
         });
@@ -160,7 +167,7 @@ export const onMount = (
           fill: fontColor,
           fontSize,
           fontWeight,
-          strokeOpacity: 0,
+          stroke: null,
           textAlign: 'center',
         } as ShapeAttrs,
       });

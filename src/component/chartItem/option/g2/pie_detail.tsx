@@ -1,10 +1,9 @@
 import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
-import { getTheme } from '@antv/g2';
-const defaultTheme = getTheme();
 import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';
 import * as R from 'ramda';
 import React from 'react';
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
 
@@ -50,6 +49,13 @@ export const config: IChartConfig[] = [
       },
     ],
   },
+  getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
   {
     key: 'pieItem',
     defaultValue: 6,
@@ -70,7 +76,7 @@ export const config: IChartConfig[] = [
   },
   {
     key: 'fontSize',
-    defaultValue: 22,
+    defaultValue: 14,
     title: '字号',
     type: 'range',
     min: 10,
@@ -131,6 +137,8 @@ export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
 interface IPieOther extends IG2Config {
   pieItem?: number;
   otherChart?: 'pie' | 'bar';
+  theme: string | number;
+  [key: string]: any;
 }
 
 export const onMount = (
@@ -142,6 +150,8 @@ export const onMount = (
     otherChart = 'pie',
     innerPercent = 10,
     fontSize = 20,
+    theme = 'cbpc',
+    needRerverse,
   }: IPieOther,
   chart,
 ) => {
@@ -174,7 +184,7 @@ export const onMount = (
   view1.data(data);
   view1.interaction('element-highlight');
 
-  let color = R.clone(defaultTheme.colors10);
+  let color = getColors(theme, needRerverse);
   let startColor = R.nth((data.length - 1) % 10)(color);
   view1
     .interval()

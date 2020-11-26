@@ -1,6 +1,7 @@
-import { Chart, getTheme, Util } from '@antv/g2';
+import { Chart, Util } from '@antv/g2'; // getTheme,
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
-const defaultTheme = getTheme();
+
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { getPercent } from '../lib';
 
 // 注意：该图形只支持 object的data项，不支持数组，在饼图下渲染异常
@@ -53,26 +54,33 @@ export const config: IChartConfig[] = [
     title: '显示legend',
     type: 'switch',
   },
+  getAntThemePanel(),
   {
-    key: 'color',
-    defaultValue: 'gardient',
-    title: '颜色模式',
-    type: 'radio',
-    option: [
-      {
-        title: '渐变',
-        value: '#40a9ff-#0050b3',
-      },
-      {
-        title: '彩色',
-        value: 'rainbow',
-      },
-      {
-        title: '纯色',
-        value: '#1890FF',
-      },
-    ],
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
   },
+  // {
+  //   key: 'color',
+  //   defaultValue: 'gardient',
+  //   title: '颜色模式',
+  //   type: 'radio',
+  //   option: [
+  //     {
+  //       title: '渐变',
+  //       value: '#40a9ff-#0050b3',
+  //     },
+  //     {
+  //       title: '彩色',
+  //       value: 'rainbow',
+  //     },
+  //     {
+  //       title: '纯色',
+  //       value: '#1890FF',
+  //     },
+  //   ],
+  // },
   {
     key: 'fontSize',
     defaultValue: 16,
@@ -97,7 +105,7 @@ export const config: IChartConfig[] = [
     defaultValue: 'polar',
     title: '坐标系',
     type: 'radio',
-    option: ['polar', 'theta', 'rect'],
+    option: ['polar', 'theta'],
   },
 ];
 
@@ -137,7 +145,9 @@ export const onMount = (
     startAngle = 180,
     endAngle = 360,
     legend = true,
-    color = 'rainbow',
+    // color = 'rainbow',
+    theme = 'cbpc',
+    needRerverse,
     intervalData = true,
     coordinate = 'polar',
     fontSize = 16,
@@ -170,7 +180,7 @@ export const onMount = (
       style: {
         fill: 'white',
         fontSize,
-        strokeOpacity: 0,
+        stroke: null,
       },
       content: (obj) => {
         return obj[x] + '\n' + obj.percent + '%';
@@ -195,7 +205,8 @@ export const onMount = (
     interval.adjust('stack');
   }
 
-  interval.color(String(x), color === 'rainbow' ? defaultTheme.colors10 : color);
+  let color = getColors(theme, needRerverse);
+  interval.color(String(x), color);
 
   chart.tooltip({
     showTitle: false,

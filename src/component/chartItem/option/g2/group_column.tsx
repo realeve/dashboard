@@ -2,6 +2,7 @@ import { Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { textColor } from '@/component/chartItem/option';
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 export let mock: IChartMock = {
   data: [
     ['办公用品', '收纳', 340],
@@ -20,7 +21,15 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-export const config: IChartConfig[] = [];
+export const config: IChartConfig[] = [
+  getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
+];
 
 export const apiConfig: IApiConfig = {
   show: true,
@@ -50,7 +59,14 @@ export const defaultOption = {
 
 // g2 的默认组件需要2个参数，一是配置项，二是chart实例
 export const onMount = (
-  { data: { data, header }, legend: _legend = 0, x: _x = 1, y: _y = 2 },
+  {
+    data: { data, header },
+    legend: _legend = 0,
+    x: _x = 1,
+    y: _y = 2,
+    theme = 'cbpc',
+    needRerverse,
+  },
   chart: Chart,
 ) => {
   let legend = String(_legend);
@@ -103,11 +119,12 @@ export const onMount = (
     },
   });
 
+  let color = getColors(theme, needRerverse);
   chart.coordinate().transpose();
   chart
     .interval()
     .position(`${x}*${y}`)
-    .color(legend)
+    .color(legend, color)
     .label(y, (text) => {
       return {
         style: {

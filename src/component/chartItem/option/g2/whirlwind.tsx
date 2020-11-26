@@ -2,6 +2,7 @@ import { Chart } from '@antv/g2';
 import { textColor } from '../index';
 import * as R from 'ramda';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 export let mock: IChartMock = {
   data: [
@@ -56,6 +57,13 @@ export const config: IChartConfig[] = [
     type: 'switch',
     defaultValue: false,
   },
+  getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -99,6 +107,8 @@ export const onMount = (
     y = 2,
     showLegend = false,
     direction = 'vertical',
+    theme = 'cbpc',
+    needRerverse,
   }: IChartProps,
   chart: Chart,
 ) => {
@@ -169,7 +179,7 @@ export const onMount = (
         title: {
           offsetY: 5,
           style: {
-            strokeOpacity: 0,
+            stroke: null,
             fontSize: 14,
             textAlign: 'center',
             fontWeight: 300,
@@ -184,6 +194,7 @@ export const onMount = (
     chart.coordinate().transpose();
   }
 
+  let color = getColors(theme, needRerverse);
   chart.facet('mirror', {
     fields: [legend],
     transpose: isVertical,
@@ -196,7 +207,7 @@ export const onMount = (
       view
         .interval()
         .position(`${x}*${y}`)
-        .color(legend)
+        .color(legend, color)
         .label(y, function (val, a) {
           if (!isVertical) {
             return {

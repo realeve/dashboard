@@ -2,6 +2,7 @@ import { Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 import { textColor } from '@/component/chartItem/option';
+import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 import * as R from 'ramda';
 
@@ -105,6 +106,13 @@ export const config: IChartConfig[] = [
     max: 10,
     step: 1,
   },
+  getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -152,6 +160,8 @@ export const onMount = (
     showLegend = false,
     transpose = true,
     cols = 4,
+    theme = 'cbpc',
+    needRerverse,
   }: IChartProps,
   chart: Chart,
 ) => {
@@ -192,7 +202,7 @@ export const onMount = (
           style: {
             shadowBlur: 0,
             stroke: null,
-            strokeOpacity: 0,
+            stroke: null,
             fontSize: 14,
             textAlign: 'center',
             fontWeight: 300,
@@ -207,6 +217,7 @@ export const onMount = (
     range: [0, 1],
   });
 
+  let color = getColors(theme, needRerverse);
   transpose && chart.coordinate().transpose();
 
   chart.facet('list', {
@@ -224,7 +235,7 @@ export const onMount = (
             style: {
               fill: textColor,
               fontSize: 12,
-              strokeOpacity: 0,
+              stroke: null,
             },
           },
           tickLine: {
@@ -246,7 +257,7 @@ export const onMount = (
           opacity: 0.8,
         })
         .position(`${x}*${y}`)
-        .color(legend);
+        .color(legend, color);
 
       if (type !== 'point') {
         chartView.label(y, function (value) {
@@ -259,7 +270,7 @@ export const onMount = (
               fill,
               textAlign,
               fontSize: 12,
-              strokeOpacity: 0,
+              stroke: null,
               fontWeight: 300,
               shadowBlur: 2,
               shadowColor: 'rgba(0, 0, 0, .45)',
