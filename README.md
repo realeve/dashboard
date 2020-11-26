@@ -8,6 +8,7 @@
 ## chartcube
 [http://localhost:8000/chartcube](http://localhost:8000/chartcube)
 
+[react-use 文档](https://github.com/zenghongtu/react-use-chinese/blob/master/docs/useFullscreen.md)
 ## 添加图表步骤：
 1.当前ChartItem的边框、标题样式，边框可为空，如果为空直接确定插入。
  
@@ -175,3 +176,6 @@ https://web.raykite.com/square
 
 
 -- todo
+
+
+[react-use 文档](https://github.com/zenghongtu/react-use-chinese/blob/master/docs/useFullscreen.md)

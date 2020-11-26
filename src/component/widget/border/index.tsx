@@ -5,6 +5,10 @@ import classnames from 'classnames';
 import * as R from 'ramda';
 import { ScenaJSXElement } from '@/component/Editor';
 import { TChartEngine } from '@/models/common';
+
+import { connect } from 'dva';
+import { ICommon } from '@/models/common';
+
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
@@ -14,7 +18,7 @@ export interface WidgetBorder {
 }
 export const borderNames = Object.keys(assets.borders);
 
-export default ({
+const BorderItem = ({
   name,
   children,
   style,
@@ -22,13 +26,14 @@ export default ({
   showBackground = true,
   className,
   engine = 'other',
+  pathname,
   ...props
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
 
   // 11-12
   // 只在首页直接显示，在config配置页需要显示父层div，否则无法编辑
-  if (!showBorder && ((!showBackground && window.location.pathname == '/') || engine !== 'other')) {
+  if (!showBorder && ((!showBackground && pathname == '/') || engine !== 'other')) {
     return children;
   }
 
@@ -56,3 +61,7 @@ export default ({
     </div>
   );
 };
+
+export default connect(({ common: { pathname } }: { common: ICommon }) => ({
+  pathname,
+}))(BorderItem);

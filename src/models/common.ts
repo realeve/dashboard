@@ -165,8 +165,10 @@ export interface ICommon {
   page: Partial<IPage>; // 当前页面设置
   curTool: TQuickTool; // 当前的工具
   businessCategory: IBusinessCategory[]; //业务组件两级分类
+  pathname: string;
 }
 const defaultState: ICommon = {
+  pathname: '',
   panel: [],
   selectedPanel: [],
   page: {
@@ -422,6 +424,10 @@ export default {
             type: 'loadBusinessCategory',
           });
         }
+        dispatch({
+          type: 'setStore',
+          pathname,
+        });
       });
     },
   },

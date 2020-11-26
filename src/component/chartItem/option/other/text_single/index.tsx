@@ -7,6 +7,7 @@ import styles from './index.less';
 import { connect } from 'dva';
 
 import ContentEditable from 'react-contenteditable';
+import { ICommon } from '@/models/common';
 
 export let mock: IChartMock = {
   data: [[45.7]],
@@ -70,7 +71,7 @@ export const config: IChartConfig[] = [
 
 export const apiConfig: IApiConfig = {};
 
-const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
+const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathname }) => {
   let {
     fontSize = 25,
     fontColor = '#27e2e6',
@@ -139,8 +140,10 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
       onBlur={handleBlur}
       onChange={handleChange}
       suppressContentEditableWarning={true}
-      disabled={window.location.pathname == '/'}
+      disabled={pathname == '/'}
     />
   );
 };
-export default connect()(Index);
+export default connect(({ common: { pathname } }: { common: ICommon }) => ({
+  pathname,
+}))(Index);
