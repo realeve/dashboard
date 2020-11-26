@@ -217,24 +217,18 @@ export const onMount = (
   if (smooth && !isBar) {
     instance1.shape('smooth');
   }
-
+  let axis = {
+    line: null,
+    tickLine: null,
+    grid: null,
+  };
   if (coord === 'polar') {
     v1.coordinate(coord, {
       innerRadius,
     });
-    // let axis = {
-    //   line: null,
-    //   tickLine: null,
-    //   grid: {
-    //     line: {
-    //       style: {
-    //         lineDash: null,
-    //       },
-    //     },
-    //   },
-    // };
-    // chart.axis('x', axis);
-    // chart.axis('y', axis);
+    v1.axis('x', axis);
+  } else {
+    v1.axis('y', axis);
   }
   let v2 = null;
   if (showAverage) {
