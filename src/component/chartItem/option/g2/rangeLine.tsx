@@ -1,11 +1,6 @@
 import { Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
-
 import * as R from 'ramda';
-
-import * as lib from '@/component/chartItem/option/lib';
-import { textColor } from '@/component/chartItem/option';
-
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 export let mock: IChartMock = {
@@ -71,11 +66,6 @@ export const config: IChartConfig[] = [
     defaultValue: false,
     title: '翻转颜色表',
     type: 'switch',
-  },
-
-  {
-    type: 'divider',
-    title: '颜色设置',
   },
   {
     key: 'lineWidth',
@@ -262,11 +252,11 @@ export const onMount = (
     if (smooth) {
       instance2.shape('smooth');
     }
-    if (coord == 'polar') {
-      v2.coordinate(coord, {
-        innerRadius: 0.5,
-      });
-    }
+    // if (coord == 'polar') {
+    //   v2.coordinate(coord, {
+    //     innerRadius,
+    //   });
+    // }
   }
 
   chart.render();

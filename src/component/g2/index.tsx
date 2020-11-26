@@ -50,7 +50,7 @@ export default ({
 
     // 数据转换器
     let { data: dv } = transformer
-      ? transformer({ data: _data, ...props }, chart)
+      ? transformer({ data: _data, header: data.header, ...props }, chart)
       : { data: _data };
 
     chart.changeData(dv);

@@ -102,6 +102,14 @@
             "type": "regular_bar",
             "title": "范围曲线图",
             "image": "/img/icons/41_rangeline.png"
+          },
+          {
+            "name": "g2.treemap",
+            "key": "treemap",
+            "engine": "g2",
+            "type": "regular_bar",
+            "title": "基础树形图",
+            "image": "/img/icons/42_treemap.png"
           }
         ]
       },
