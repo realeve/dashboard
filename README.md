@@ -179,3 +179,6 @@ https://web.raykite.com/square
 
 
 [react-use 文档](https://github.com/zenghongtu/react-use-chinese/blob/master/docs/useFullscreen.md)
+
+
+[弃用方案简单演示](https://gridstackjs.com/)

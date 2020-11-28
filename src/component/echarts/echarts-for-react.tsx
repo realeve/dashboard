@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import elementResizeEvent from 'element-resize-event';
 import theme from './theme';
 
-import echarts from 'echarts';
+import echarts from 'echarts'; 
 import 'echarts-gl';
 import 'echarts-liquidfill';
 
 const R = require('ramda');
 const isEqual = (a, b) => R.equals(a, b);
-
+console.log(echarts)
 interface IChartProps {
   option: any; // eslint-disable-line react/forbid-prop-types
   echarts?: any; // eslint-disable-line react/forbid-prop-types
@@ -168,7 +168,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
       if (typeof eventName === 'string' && typeof func === 'function') {
         // binding event
         // instance.off(eventName); // 已经 dispose 在重建，所以无需 off 操作
-        instance.on(eventName, param => {
+        instance.on(eventName, (param) => {
           func(param, instance);
         });
       }
@@ -213,7 +213,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
     // for render
     return (
       <div
-        ref={e => {
+        ref={(e) => {
           this.echartsElement = e;
         }}
         style={newStyle}
