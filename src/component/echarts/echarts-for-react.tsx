@@ -206,7 +206,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
   render() {
     const { style = {}, className } = this.props;
     const newStyle = {
-      // height: '100%',
+      height: '100%',
       width: '100%',
       flex: 1,
       ...style,
