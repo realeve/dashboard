@@ -26,7 +26,7 @@
     "css-styled": "^0.2.1",
     "dayjs": "^1.8.19",
     "dva": "^2.6.0-beta.6",
-    "echarts": "^5.0.0-rc.1",
+    "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.15-beta.1",
     "echarts-gl": "^1.1.1",
     "echarts-liquidfill": "^2.0.5",
@@ -61,6 +61,7 @@
     "three": "^0.122.0"
   },
   "devDependencies": {
+    "@types/element-resize-event": "^2.0.0",
     "@types/jest": "^23.3.12",
     "@types/ramda": "^0.27.29",
     "@types/react": "^16.7.18",

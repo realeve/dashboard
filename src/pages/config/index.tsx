@@ -37,7 +37,7 @@ export const addPanel = (
   { style, ...config }: IPanelConfig,
 ) => {
   editor?.current.append(
-    <div style={style}>
+    <div style={style} className={styles.chartWrapper}>
       <ChartItem chartid={config.id} />
     </div>,
     { id: config.id, name: config.title, style },
