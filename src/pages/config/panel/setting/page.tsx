@@ -263,14 +263,14 @@ export const ComponentConfig = ({
     {showTitle && (
       <Panel header="标题" key="标题">
         <Field title="字号">
-          <input
-            type="number"
-            className="data_input"
-            step="1"
-            defaultValue={head.fontSize}
-            onChange={(e) => {
+          <InputRange
+            step={1}
+            min={10}
+            max={50}
+            value={+head.fontSize}
+            onChange={(fontSize) => {
               updatePage({
-                head: { ...head, fontSize: Number(e.target.value) },
+                head: { ...head, fontSize },
               });
             }}
           />
@@ -315,14 +315,14 @@ export const ComponentConfig = ({
           />
         </Field>
         <Field title="边距">
-          <input
-            type="number"
-            className="data_input"
-            step="1"
-            defaultValue={head.padding}
-            onChange={(e) => {
+          <InputRange
+            step={1}
+            min={0}
+            max={50}
+            value={+head.padding}
+            onChange={(padding) => {
               updatePage({
-                head: { ...head, padding: Number(e.target.value) },
+                head: { ...head, padding },
               });
             }}
           />

@@ -103,6 +103,46 @@ export const config: IChartConfig[] = [
     title: '交换XY轴',
   },
   {
+    key: 'showMarkpoint',
+    defaultValue: false,
+    type: 'radio',
+    title: '显示标记点',
+    option: [
+      {
+        title: '最大值',
+        value: 'max',
+      },
+      {
+        title: '最小值',
+        value: 'min',
+      },
+      {
+        title: '同时显示',
+        value: 'minmax',
+      },
+      {
+        title: '不显示',
+        value: false,
+      },
+    ],
+  },
+  {
+    key: 'showMarkline',
+    defaultValue: false,
+    type: 'radio',
+    title: '显示标记线',
+    option: [
+      {
+        title: '平均值',
+        value: 'average',
+      },
+      {
+        title: '不显示',
+        value: false,
+      },
+    ],
+  },
+  {
     type: 'divider',
     title: '数据点标记设置(曲线图有效)',
   },
@@ -160,7 +200,6 @@ export const config: IChartConfig[] = [
     type: 'switch',
     title: '极坐标柱形圆弧效果',
   },
-
   { type: 'label' },
 ];
 
@@ -218,6 +257,8 @@ export default ({
   smooth = true,
   isReverse = false,
   legendShow = true,
+  showMarkpoint,
+  showMarkline,
   showBackground,
   barBackgroundColor,
   showLabel,
@@ -249,6 +290,54 @@ export default ({
       width: lineWidth,
     },
     ...(isArea ? { areaStyle: { opacity: area_opacity } } : {}),
+    ...(showMarkpoint
+      ? {
+          markPoint: {
+            data:
+              showMarkpoint == 'minmax'
+                ? [
+                    {
+                      name: '最大值',
+                      type: 'max',
+                    },
+                    {
+                      name: '最小值',
+                      type: 'min',
+                    },
+                  ]
+                : showMarkpoint == 'max'
+                ? [
+                    {
+                      name: '最大值',
+                      type: 'max',
+                    },
+                  ]
+                : [
+                    {
+                      name: '最小值',
+                      type: 'min',
+                    },
+                  ],
+          },
+        }
+      : {}),
+    ...(!showMarkline
+      ? {}
+      : {
+          markLine: {
+            data: [
+              {
+                name: '平均值',
+                type: 'average',
+                label: { formatter: '{b}\n{c}', distance: -10 },
+              },
+            ],
+            symbol: 'none',
+            lineStyle: {
+              opacity: 0.4,
+            },
+          },
+        }),
     barWidth,
     symbol,
     symbolSize,
