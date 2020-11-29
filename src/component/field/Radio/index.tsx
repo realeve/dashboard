@@ -29,7 +29,7 @@ export default ({ value, onChange, config = [], className }: IRadioProps) => {
     <div className={classnames(styles.fields, className)}>
       <Radio.Group size="middle" value={value} onChange={(e) => onChange(e.target.value)}>
         {handleConfig(config).map(({ title, value }) => (
-          <Radio.Button key={value} value={value}>
+          <Radio.Button key={value + title} value={value}>
             {title}
           </Radio.Button>
         ))}

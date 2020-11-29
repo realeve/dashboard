@@ -10,6 +10,7 @@ import { deepMix } from '@antv/util';
 // https://github.com/antvis/G2/blob/master/src/theme/index.ts
 
 const defaultTheme = createThemeByStylesheet(antvDark);
+
 let labelColor = '#E0E0E3';
 let lineColor = '#ccc';
 let fontFamily =

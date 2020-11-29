@@ -3,6 +3,7 @@ import { uniq, isNumber, isDate } from '@antv/util';
 import defaultTheme from '@/component/g2plot/theme';
 import { palette } from '@/component/g2plot';
 export { getAntThemePanel } from '@/component/chartItem/option/lib';
+import * as R from 'ramda';
 
 const dict = {
   周一: 1,
@@ -178,6 +179,9 @@ export const getTheme = (theme: number | string) => {
 // 获取默认主题色列表
 export const getColors = (theme: number | string, needReverse = false) => {
   let color = getTheme(theme);
-  let colors = theme === 'cbpc' ? defaultTheme.colors10 : color.colors10 || color.theme.colors10;
-  return needReverse ? colors.reverse() : colors;
+  let colors = [theme, color?.theme].includes('cbpc')
+    ? defaultTheme.colors10
+    : color.colors10 || color.theme.colors10;
+
+  return needReverse ? R.clone(colors).reverse() : colors;
 };
