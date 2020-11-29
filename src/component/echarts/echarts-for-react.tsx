@@ -9,7 +9,7 @@ import 'echarts-liquidfill';
 
 const R = require('ramda');
 const isEqual = (a, b) => R.equals(a, b);
-console.log(echarts);
+// console.log(echarts);
 interface IChartProps {
   option: any; // eslint-disable-line react/forbid-prop-types
   echarts?: any; // eslint-disable-line react/forbid-prop-types

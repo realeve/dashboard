@@ -1,6 +1,5 @@
 import echarts from 'echarts';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
-
 export let mock: IChartMock = {
   data: [[45.7]],
   title: '百分比环图_MOCK数据',

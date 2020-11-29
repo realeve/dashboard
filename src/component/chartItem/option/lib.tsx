@@ -7,6 +7,11 @@ import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-des
 import { IChartConfig } from '@/component/chartItem/interface';
 import { tRender } from '@/component/echarts/';
 import { palette } from '@/component/g2plot';
+
+// 获取最佳轴长度
+import { nice, quantity } from 'echarts/lib/util/number';
+import * as zrUtil from 'zrender/lib/core/util';
+
 export interface IChart {
   key?: string;
   title: string;
@@ -17,7 +22,7 @@ export interface IChart {
 
 export type TChartConfig = Array<IChart>;
 
-let uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
+export let uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
 
 export const tooltipFormatter = (p, unit, axisName, append = false) => {
   let title: boolean | string = false;
@@ -264,8 +269,8 @@ export let getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, da
     }),
   );
 
-export let getDataByKeys = ({ keys, data }) => {
-  let _data = R.project(keys)(data);
+export let getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
+  let _data: {}[] = R.project(keys)(data);
   return R.map(R.values)(_data);
 };
 
@@ -404,6 +409,12 @@ export function hex2rgb(hexVal: string): string {
   }
   return result;
 }
+// 将数值从 0-255 转换成16进制字符串
+const toHex = (value: number): string => {
+  const x16Value = Math.round(value).toString(16);
+
+  return x16Value.length === 1 ? `0${x16Value}` : x16Value;
+};
 
 export type arrRgb = Array<string>;
 export const rgb2hex = (str) => {
@@ -413,7 +424,7 @@ export const rgb2hex = (str) => {
   let val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
   let alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
   val[3] = alpha;
-  return '#' + val.map((item) => Number(item).toString(16).padStart(2, '0')).join('');
+  return '#' + val.map(toHex).join('');
 };
 
 export let getLegendData: <T>(
@@ -483,16 +494,20 @@ export let handleMinMax: (params: {
   min: number;
   max: number;
 } = ({ min, max }) => {
-  let exLength: number = String(Math.floor(max)).length - 1;
-  if (max > 10) {
-    return {
-      max: Math.ceil(max / 10 ** exLength) * 10 ** exLength,
-      min: min - (min % 10 ** exLength),
-    };
-  }
+  // let exLength: number = String(Math.floor(max)).length - 1;
+  // if (max > 10) {
+  //   return {
+  //     max: Math.ceil(max / 10 ** exLength) * 10 ** exLength,
+  //     min: min - (min % 10 ** exLength),
+  //   };
+  // }
+  // return {
+  //   max: Math.ceil(max / 1) * 1,
+  //   min: min > 0 ? min - (min % 1) : Math.floor(min / 1) * 1,
+  // };
   return {
-    max: Math.ceil(max / 1) * 1,
-    min: min > 0 ? min - (min % 1) : Math.floor(min / 1) * 1,
+    min: getMin(min),
+    max: getMax(max),
   };
 };
 
@@ -536,7 +551,7 @@ export let getAxis: (
   let xAxisType: axis = lib.isNumOrFloat(xAxis[0]) ? 'value' : 'category';
 
   if (xAxisType === 'value') {
-    xAxis = R.sort((a, b) => a - b)(xAxis);
+    xAxis = R.sort<number>((a, b) => a - b)(xAxis);
   }
   return {
     xAxis,
@@ -845,32 +860,116 @@ export const getBarMax = (data, y = 1) => {
 };
 
 /**
- * 获取指定值的最佳轴长度
+ * 获取指定值的最佳轴长度,用于根据数值手工计算Y轴最大值用于渲染
+ * 参考：https://github.com/apache/incubator-echarts/blob/master/src/util/number.ts
  * @param val 数值
  */
-export const getMax = (val) => {
-  let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
-  return (Number(String(val)[0]) + 1) * pow;
+export const getMax = (val: number | string) => {
+  val = Number(val);
+  if (val < 0) {
+    return -getMin(-val);
+  }
+  // let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
+  // return (Number(String(val)[0]) + 1) * pow;
+  return nice(val);
 };
 
 /**
- * 获取指定值的最低轴长度
+ * 获取指定值的最低轴长度,用于根据数值手工计算Y轴最小值用于渲染
  * @param val 数值
  */
-export const getMin = (val) => {
-  let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
-  return (Number(String(val)[0]) - 1) * pow;
+export const getMin = (val: number | string) => {
+  val = Number(val);
+  if (val < 0) {
+    return -getMax(-val);
+  } else if (val < 10) {
+    return 0;
+  }
+  return val - (val % quantity(val));
+  // let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
+  // return (Number(String(val)[0]) - 1) * pow;
 };
+
 /**
  * 计算获取饼图百分比
  * @param param0
  */
 export const getPercent = ({ data, y: _y, header }) => {
   let _data = R.clone(data);
-  let y = header[_y];
-  let sum = _data.reduce((a, b) => a + b[y], 0);
-  return _data.map((item) => {
-    item.percent = ((item[y] / sum) * 100).toFixed(2);
+  let isArray = 'Array' == R.type(_data[0]);
+  let arr: number[] = R.pluck(isArray ? _y : header[_y], _data);
+  // let y = header[_y];
+  // let sum = _data.reduce((a, b) => a + b[y], 0);
+  // return _data.map((item) => {
+  //   item.percent = ((item[y] / sum) * 100).toFixed(2);
+  //   return item;
+  // });
+  let percent = getPercentWithPrecision(arr, 2);
+  return _data.map((item, i) => {
+    item.percent = percent[i];
     return item;
   });
 };
+
+/** Get a data of given precision, assuring the sum of percentages
+ * in valueList is 1.
+ * The largest remainer method is used.
+ * https://en.wikipedia.org/wiki/Largest_remainder_method
+ *(最大余额法)
+ * https://github.com/apache/incubator-echarts/blob/master/src/util/number.ts#L215
+ */
+
+export function getPercentWithPrecision(valueList: number[], precision: number = 2): number[] {
+  const sum = zrUtil.reduce(
+    valueList,
+    function (acc, val) {
+      return acc + (isNaN(val) ? 0 : val);
+    },
+    0,
+  );
+  if (sum === 0) {
+    return valueList.map((item) => 0);
+  }
+
+  const digits = Math.pow(10, precision);
+  const votesPerQuota = zrUtil.map(valueList, function (val) {
+    return ((isNaN(val) ? 0 : val) / sum) * digits * 100;
+  });
+  const targetSeats = digits * 100;
+
+  const seats = zrUtil.map(votesPerQuota, function (votes) {
+    // Assign automatic seats.
+    return Math.floor(votes);
+  });
+  let currentSum = zrUtil.reduce(
+    seats,
+    function (acc, val) {
+      return acc + val;
+    },
+    0,
+  );
+
+  const remainder = zrUtil.map(votesPerQuota, function (votes, idx) {
+    return votes - seats[idx];
+  });
+
+  // Has remainding votes.
+  while (currentSum < targetSeats) {
+    // Find next largest remainder.
+    let max = Number.NEGATIVE_INFINITY;
+    let maxId = null;
+    for (let i = 0, len = remainder.length; i < len; ++i) {
+      if (remainder[i] > max) {
+        max = remainder[i];
+        maxId = i;
+      }
+    }
+
+    // Add a vote to max remainder.
+    ++seats[maxId];
+    remainder[maxId] = 0;
+    ++currentSum;
+  }
+
+  return seats.map((item) => item / digits);
+}
