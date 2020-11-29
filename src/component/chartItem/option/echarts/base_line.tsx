@@ -49,6 +49,12 @@ export const config: IChartConfig[] = [
     ],
   },
   {
+    key: 'isPolar',
+    defaultValue: false,
+    type: 'switch',
+    title: '极坐标系',
+  },
+  {
     key: 'isArea',
     defaultValue: false,
     type: 'switch',
@@ -148,6 +154,13 @@ export const config: IChartConfig[] = [
     type: 'purecolor',
     title: '背景颜色',
   },
+  {
+    key: 'roundCap',
+    defaultValue: false,
+    type: 'switch',
+    title: '极坐标柱形圆弧效果',
+  },
+
   { type: 'label' },
 ];
 
@@ -182,6 +195,14 @@ export const defaultOption = {
   renderer: 'svg',
 };
 
+const getAxisName = ({ isReverse, isPolar, type = 'x' }) => {
+  let arr = ['xAxis', 'yAxis', 'angleAxis', 'radiusAxis'];
+  if (!isPolar) {
+    return isReverse ? (type == 'x' ? arr[0] : arr[1]) : type == 'x' ? arr[1] : arr[0];
+  }
+  return isReverse ? (type == 'x' ? arr[2] : arr[3]) : type == 'x' ? arr[3] : arr[2];
+};
+
 export default ({
   data,
   legend = 0,
@@ -192,6 +213,7 @@ export default ({
   chartType,
   isArea,
   isStep = false,
+  isPolar,
   isStack,
   smooth = true,
   isReverse = false,
@@ -208,6 +230,7 @@ export default ({
   showSymbol,
   symbol,
   symbolSize,
+  roundCap,
 }) => {
   if (String(legend) == '') {
     return {};
@@ -216,6 +239,7 @@ export default ({
 
   let series = res.series.map(({ name, arr: data }) => ({
     name,
+    coordinateSystem: isPolar ? 'polar' : 'cartesian2d',
     data: isReverse ? data.reverse() : data,
     stack: isStack,
     type: chartType,
@@ -238,6 +262,7 @@ export default ({
     backgroundStyle: {
       color: barBackgroundColor,
     },
+    roundCap,
   }));
 
   let color = getColors(theme, needRerverse);
@@ -257,7 +282,10 @@ export default ({
       bottom: '3%',
       containLabel: true,
     },
-    [`${isReverse ? 'x' : 'y'}Axis`]: [
+
+    // 极坐标系必须设置polar
+    ...(isPolar ? { polar: {} } : {}),
+    [getAxisName({ isPolar, isReverse, type: 'x' })]: [
       {
         type: 'value',
         splitLine: {
@@ -277,7 +305,7 @@ export default ({
         },
       },
     ],
-    [`${!isReverse ? 'x' : 'y'}Axis`]: [
+    [getAxisName({ isPolar, isReverse, type: 'y' })]: [
       {
         type: 'category',
         axisTick: {
