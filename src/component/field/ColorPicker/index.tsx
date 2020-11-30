@@ -7,6 +7,7 @@ import { hex2rgb, rgb2hex } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
 import Draggable from 'react-draggable';
 import paletteList from './palette';
+import classnames from 'classnames';
 
 enum EColorType {
   NONE = '0',
@@ -127,7 +128,7 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value = '', onChange, position = 'top' }) => {
+export const PureColor = ({ value = '', onChange, position = 'top', noAnimation = false }) => {
   if (!value) {
     return null;
   }
@@ -135,7 +136,7 @@ export const PureColor = ({ value = '', onChange, position = 'top' }) => {
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
   return (
-    <div className={styles.colorItem}>
+    <div className={classnames(styles.colorItem, { [styles.noAnimation]: noAnimation })}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>
         <div className={styles.rectPop} style={{ top: position === 'bottom' ? 36 : -115 }}>
           {paletteList.map((backgroundColor) => (

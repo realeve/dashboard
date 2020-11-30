@@ -6,7 +6,16 @@ import 'react-resizable/css/styles.css';
 import 'react-grid-layout/css/styles.css';
 import { BorderItem, Decotation, Blank } from '@/component/widget';
 
-export default ({ config, initState, onChange, onMockChange, onRemoveItem, idx, ...props }) => {
+export default ({
+  config,
+  initState,
+  onChange,
+  onMockChange,
+  onRemoveItem,
+  idx,
+  dispatch,
+  ...props
+}) => {
   const itemType = (config.type || '').toLowerCase();
 
   switch (itemType) {

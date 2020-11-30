@@ -9,9 +9,9 @@ import { IPanelConfig } from '@/models/common';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio, { Select } from '@/component/field/Radio';
 import AntSelect from '@/component/field/Select';
-import { Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import { ImgSelector } from '@/component/field';
+import { Switch } from 'antd';
 
 import { Divider } from 'antd';
 
@@ -76,6 +76,33 @@ export const FormItem = ({
       break;
     case 'purecolor':
       Item = <PureColor value={value} onChange={onChange} {...config} />;
+      break;
+    case 'slider':
+      Item = (
+        <div className="alignRow">
+          <input
+            type="number"
+            className="data_input"
+            value={value[0] || 0}
+            onChange={(e) => {
+              let val = Number(e.target.value);
+              onChange([val, value[1]]);
+            }}
+            {...config}
+          />
+          <span style={{ margin: '0 8px' }}> {config.split || '~'} </span>
+          <input
+            type="number"
+            className="data_input"
+            onChange={(e) => {
+              let val = Number(e.target.value);
+              onChange([value[0], val]);
+            }}
+            value={value[1] || 0}
+            {...config}
+          />
+        </div>
+      );
       break;
   }
   return (
