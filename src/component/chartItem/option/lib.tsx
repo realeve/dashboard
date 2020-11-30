@@ -838,7 +838,7 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
   },
 ];
 
-export const getAntThemePanel = () => ({
+export const getAntThemePanel: () => IChartConfig = () => ({
   key: 'theme',
   defaultValue: 'cbpc',
   title: '主题色',

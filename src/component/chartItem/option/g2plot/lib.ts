@@ -102,7 +102,7 @@ const handlePercent = (annotations, isPercent = false) => {
  */
 export const getAnnotations = (
   data,
-  { xField, yField, seriesField, color = [] },
+  { xField, yField, seriesField = null, color = [] },
   {
     offsetX = 16,
     maxLabelLength = 15,
@@ -112,6 +112,10 @@ export const getAnnotations = (
     isArea = false,
   },
 ) => {
+  // 不存在序列，只有X/Y轴，无需annotations
+  if (!seriesField) {
+    return [];
+  }
   // 获取legend项，根据seriesField字段去重
   let legend = uniq(data.map((item) => item[seriesField]));
 
@@ -170,9 +174,13 @@ export const handleStackPosition = (annotations, isArea) => {
   }));
 };
 
-export const getTheme = (theme: number | string) => {
+export const getTheme: (theme: number | string) => { theme?: { colors10: string[] } | 'cbpc' } = (
+  theme: number | string,
+) => {
   const isDefaultTheme = theme === 'cbpc';
-  let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
+  let themeCfg: { colors10: string[] } | 'cbpc' = isDefaultTheme
+    ? defaultTheme
+    : palette[theme].theme;
   return isDefaultTheme ? {} : { theme: themeCfg };
 };
 
@@ -181,7 +189,7 @@ export const getColors = (theme: number | string, needReverse = false) => {
   let color = getTheme(theme);
   let colors = [theme, color?.theme].includes('cbpc')
     ? defaultTheme.colors10
-    : color.colors10 || color.theme.colors10;
+    : color?.colors10 || color?.theme?.colors10;
 
   return needReverse ? R.clone(colors).reverse() : colors;
 };

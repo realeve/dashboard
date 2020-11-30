@@ -229,7 +229,7 @@ export const getLineConfig = ({
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
 
-  let seriesField =
+  let seriesField: { seriesField?: string } =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
       : {
@@ -273,7 +273,6 @@ export const getLineConfig = ({
             isArea: chartType == 'area',
             xAxisOffset: 0,
             maxLabelLength: 15,
-            isPercent,
           },
         )
       : null;

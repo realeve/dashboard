@@ -202,7 +202,6 @@ export const onMount = (
           style: {
             shadowBlur: 0,
             stroke: null,
-            stroke: null,
             fontSize: 14,
             textAlign: 'center',
             fontWeight: 300,

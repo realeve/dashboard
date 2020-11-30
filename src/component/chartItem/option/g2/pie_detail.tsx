@@ -1,5 +1,5 @@
 import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
-import { IG2Config } from '@/component/chartItem/option/g2plot/config';
+// import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';
 import * as R from 'ramda';
 import React from 'react';
@@ -112,7 +112,7 @@ export const defaultOption = {
 };
 
 export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
-  let _data = R.map((item) => ({ type: item[x], value: item[y] }))(val);
+  let _data = R.map((item) => ({ type: item[x], value: item[y], percent: 0 }))(val);
   _data = _data.sort((b, a) => a.value - b.value);
 
   let sum = _data.reduce((a, b) => a + b.value, 0);
@@ -134,7 +134,7 @@ export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
   return { data, other, otherOffsetAngle };
 };
 
-interface IPieOther extends IG2Config {
+interface IPieOther {
   pieItem?: number;
   otherChart?: 'pie' | 'bar';
   theme: string | number;

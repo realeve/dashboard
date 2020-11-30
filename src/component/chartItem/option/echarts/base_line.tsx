@@ -4,6 +4,7 @@ import { handleData } from '@/component/chartItem/option/echarts/line';
 
 import * as lib from '@/component/chartItem/option/lib';
 import { getColors } from '../g2plot/lib';
+import * as R from 'ramda';
 
 export let mock: IChartMock = {
   data: [
@@ -65,6 +66,12 @@ export const config: IChartConfig[] = [
     defaultValue: false,
     type: 'switch',
     title: '堆叠',
+  },
+  {
+    key: 'isPercent',
+    defaultValue: false,
+    type: 'switch',
+    title: '百分比图',
   },
   {
     key: 'isStep',
@@ -234,12 +241,78 @@ export const defaultOption = {
   renderer: 'svg',
 };
 
+/**
+ * 获取坐标轴名称
+ * @param param0
+ */
 const getAxisName = ({ isReverse, isPolar, type = 'x' }) => {
   let arr = ['xAxis', 'yAxis', 'angleAxis', 'radiusAxis'];
   if (!isPolar) {
     return isReverse ? (type == 'x' ? arr[0] : arr[1]) : type == 'x' ? arr[1] : arr[0];
   }
   return isReverse ? (type == 'x' ? arr[2] : arr[3]) : type == 'x' ? arr[3] : arr[2];
+};
+
+/**
+ * 处理百分比逻辑
+ * @param series 数据系列
+ */
+interface ISeries {
+  name: string;
+  coordinateSystem: string;
+  data: (number | string)[];
+  stack: boolean;
+  type: string;
+  step: boolean;
+  smooth: boolean;
+  lineStyle: {
+    width: number;
+  };
+  areaStyle: {
+    opacity: number;
+  };
+  markPoint: {
+    silent: boolean;
+    data: {
+      name: string;
+      type: string;
+    }[];
+  };
+  barWidth: number;
+  symbol: string;
+  symbolSize: number;
+  showSymbol: boolean;
+  label: {
+    show: boolean;
+    position: string;
+    color: string;
+  };
+  showBackground: boolean;
+  backgroundStyle: {
+    color: string;
+  };
+  roundCap: boolean;
+}
+export const handlePercent = (series: ISeries[]) => {
+  let arrSum: number[] = [];
+  series.forEach(({ data }, idx: number) => {
+    if (idx > 0) {
+      data.forEach((td, i: number) => {
+        arrSum[i] += Number(td) || 0;
+      });
+    } else {
+      data.forEach((td, i: number) => {
+        arrSum[i] = Number(td) || 0;
+      });
+    }
+  });
+
+  return R.map((item) => {
+    item.data = item.data.map((td, i) =>
+      arrSum[i] == 0 ? 0 : Number(((100 * +td) / arrSum[i]).toFixed(2)),
+    );
+    return item;
+  }, series);
 };
 
 export default ({
@@ -254,6 +327,7 @@ export default ({
   isStep = false,
   isPolar,
   isStack,
+  isPercent,
   smooth = true,
   isReverse = false,
   legendShow = true,
@@ -278,7 +352,7 @@ export default ({
   }
   let res = handleData(data, { legend, x, y });
 
-  let series = res.series.map(({ name, arr: data }) => ({
+  let series: ISeries[] = res.series.map(({ name, arr: data }) => ({
     name,
     coordinateSystem: isPolar ? 'polar' : 'cartesian2d',
     data: isReverse ? data.reverse() : data,
@@ -354,7 +428,12 @@ export default ({
       color: barBackgroundColor,
     },
     roundCap,
-  }));
+  })) as ISeries[];
+
+  // 处理百分比图
+  if (isPercent) {
+    series = handlePercent(series);
+  }
 
   let color = getColors(theme, needRerverse);
 
