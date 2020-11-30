@@ -293,6 +293,7 @@ export default ({
     ...(showMarkpoint
       ? {
           markPoint: {
+            silent: true,
             data:
               showMarkpoint == 'minmax'
                 ? [
@@ -325,6 +326,7 @@ export default ({
       ? {}
       : {
           markLine: {
+            silent: true,
             data: [
               {
                 name: '平均值',
