@@ -16,6 +16,7 @@ export const saveDashboard = (layout) => {
   const code: string = beautify(JSON.stringify(layout), beautyOption);
   const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
   if (process.env.NODE_ENV !== 'test') {
+    // saveas 会依赖于canvas,在单元测试时会报canvas相关的错误
     saveAs(blob, '仪表盘_' + now() + '.dashboard');
   }
   return true;
@@ -51,7 +52,7 @@ export let loadDataFile: (file: File | Blob) => Promise<null | Blob> = async (fi
 export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
 export const loadDashboard = async (file: File | Blob) => {
-  let str = await loadDataFile(file).then((buffer) => buffer || '[]');
+  let str = (await loadDataFile(file)) as Proimse<string>;
   return JSON.parse(str as string);
 };
 

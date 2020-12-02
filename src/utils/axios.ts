@@ -103,7 +103,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError = (error) => {
+export const handleError = async (error) => {
   let config = error.config || {};
   let str = config.params || config.data || {};
   let { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -128,6 +128,7 @@ export const handleError = (error) => {
       // });
       router.push('/unlogin');
     }
+    console.log({ status }, codeMessage[status]);
 
     const errortext = (codeMessage[status] || '') + (data.msg || '');
     notification.error({

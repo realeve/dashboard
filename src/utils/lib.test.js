@@ -13,13 +13,13 @@ test('千分位格式，用于金额显示', () => {
   expect(lib.thouandsNum(23)).toBe('23');
   expect(lib.thouandsNum(2311)).toBe('2,311');
   expect(lib.thouandsNum(2311, 0)).toBe('2,311');
-  expect(lib.thouandsNum(2311.337, 2)).toBe('2,311.337');
+  expect(lib.thouandsNum(2311, 2)).toBe('2,311.00');
   expect(lib.thouandsNum(2311.4)).toBe('2,311.4');
   expect(lib.thouandsNum('')).toBe('');
 });
 
 test('noncer 随机字符串生成', () => {
-  expect(lib.noncer()).toHaveLength(13);
+  expect(lib.noncer().length).toBeGreaterThan(10);
 });
 
 test('公共函数', () => {
@@ -54,6 +54,7 @@ test('文件读写', async () => {
   let testResult = '{"a":1}';
   let blob = new Blob([testResult], { type: 'text/plain;charset=utf-8' });
   let res = await lib.loadDashboard(blob);
+  expect(lib.loadDashboard()).toMatchObject({});
   expect(res).toMatchObject(JSON.parse(testResult));
 
   expect(lib.saveDashboard({ a: 1 })).toBeTruthy();
