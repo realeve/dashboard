@@ -7,7 +7,7 @@ import * as R from 'ramda';
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
 
-export const saveDashboard = layout => {
+export const saveDashboard = (layout) => {
   const beautyOption = {
     indent_size: 2,
     wrap_line_length: 80,
@@ -15,7 +15,10 @@ export const saveDashboard = layout => {
   };
   const code: string = beautify(JSON.stringify(layout), beautyOption);
   const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
-  saveAs(blob, '仪表盘_' + now() + '.dashboard');
+  if (process.env.NODE_ENV !== 'test') {
+    saveAs(blob, '仪表盘_' + now() + '.dashboard');
+  }
+  return true;
 };
 
 /**
@@ -24,10 +27,10 @@ export const saveDashboard = layout => {
  * @param {回调函数} callback
  * @desc 将file图像文件对象转换为BASE64
  */
-export let loadDataFile: (file: File) => Promise<null | Blob> = async (file: File) => {
-  if (typeof FileReader === 'undefined') {
-    return Promise.resolve(null);
-  }
+export let loadDataFile: (file: File | Blob) => Promise<null | Blob> = async (file: File) => {
+  // if (typeof FileReader === 'undefined') {
+  //   return Promise.resolve(null);
+  // }
 
   let reader: FileReader = new FileReader();
 
@@ -37,20 +40,18 @@ export let loadDataFile: (file: File) => Promise<null | Blob> = async (file: Fil
 
   reader.readAsText(file);
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     reader.onload = ({ target: { result } }: { target: { result: Blob } }) => {
       resolve(result);
     };
   });
 };
 
-
 // 数字
-export const isNumOrFloat = str =>
-  /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
+export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
-export const loadDashboard = async file => {
-  let str = await loadDataFile(file).then(buffer => buffer || '[]');
+export const loadDashboard = async (file: File | Blob) => {
+  let str = await loadDataFile(file).then((buffer) => buffer || '[]');
   return JSON.parse(str as string);
 };
 
@@ -80,10 +81,7 @@ export const thouandsNum: {
   return numStr + '.' + ''.padEnd(decimalLength, '0');
 };
 
-export const noncer = () =>
-  Math.random()
-    .toString(16)
-    .slice(2);
+export const noncer = () => Math.random().toString(16).slice(2);
 
 export const getType = axios.getType;
 
@@ -97,7 +95,7 @@ export const setStore = (state, store: Store) => {
     // throw new Error('需要更新的数据请设置在payload中');
   }
   let nextState = R.clone(state);
-  Object.keys(payload).forEach(key => {
+  Object.keys(payload).forEach((key) => {
     let val = payload[key];
     if (getType(val) == 'object') {
       nextState[key] = Object.assign({}, nextState[key], val);
