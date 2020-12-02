@@ -169,6 +169,8 @@ const Index = ({
         idx,
       },
     });
+    // 更新缩略图
+    editor?.current.updateThumbnail();
   };
 
   /**
