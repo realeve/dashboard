@@ -6,7 +6,7 @@ import {
   legend,
   annotation,
 } from '@antv/g2plot/lib/adaptor/common';
-import { Params } from '@antv/g2plot/lib/core/adaptor';
+import { Params } from '@antv/g2plot';
 import { flow, deepAssign } from '@antv/g2plot/lib/utils';
 import { interval } from '@antv/g2plot/lib/adaptor/geometries';
 import { RadialBarOptions } from './types';

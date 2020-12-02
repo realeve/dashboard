@@ -26,27 +26,7 @@ export let config = {
       user: 'http://10.8.1.25:100/674/d2b665340b',
     },
   },
-  kunshan: {
-    company: '昆山钞票纸业有限公司',
-    api: 'http://10.56.37.153:100/',
-    host: 'http://10.56.37.153',
-    footer: '昆山钞票纸业有限公司 企划信息部',
-    systemName: '通用报表管理系统',
-    uploadHost: 'http://10.56.37.153:100/upload/',
-    org: 'KSCZ',
-    uap: {
-      active: true && !DEV, // 使用代理身份认证登录
-      // login: 'http://10.8.1.27:4040/api/login', // 登录URL
-      login: '//10.8.1.25:100/675/25d3d1010c',
-      // dept: 'http://10.8.1.27:4040/api/depts', // 部门列表
-      dept: 'http://10.8.1.25:100/673/46efae99d7',
-      // user: 'http://10.8.1.27:4040/api/users', //用户列表
-      user: 'http://10.8.1.25:100/674/d2b665340b',
-    },
-  },
 };
-
-// export const CUR_COMPANY = 'kunshan';
 
 export const CUR_COMPANY = 'chengdu';
 

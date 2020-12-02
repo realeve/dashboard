@@ -5,7 +5,7 @@ import * as R from 'ramda';
 /**
  * 获取标记区域配置项
  * @param num 数量
- * @param step 步长
+ * @param step 默认步长
  * @param split 分隔符号
  */
 export const getMarkArea: (num: number, step?: number, split?: string) => IChartConfig[] = (

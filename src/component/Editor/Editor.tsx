@@ -34,6 +34,7 @@ import ScreenEdge from './ScreenEdge';
 import { IPage } from '@/models/common';
 import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
+import fileSaver from 'file-saver';
 
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => ({
@@ -283,12 +284,24 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.props.selectMenu(menu);
   }
 
-  public async getThumbnail(scale: number, quality = 0.8) {
+  public async getThumbnail(scale: number, quality = 0.8, filename = null) {
     let canvasEl = this.viewport.current.viewport.el;
     return html2canvas(canvasEl, {
       backgroundColor: null,
       scale,
-    }).then((canvas) => canvas.toDataURL('image/jpeg', quality));
+    }).then((canvas) => {
+      /* canvas.toBlob 对于各个浏览器有兼容问题. ie会报错没有toBlob对象
+       * 解决方式：引入canvas-toBlob.js（https://github.com/eligrey/canvas-toBlob.js/blob/master/canvas-toBlob.js）
+       * */
+      if (filename) {
+        canvas.toBlob(function (blob) {
+          fileSaver.saveAs(blob, filename + '.jpg');
+        });
+        return;
+      }
+
+      return canvas.toDataURL('image/jpeg', quality);
+    });
   }
 
   // 更新缩略图

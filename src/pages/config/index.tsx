@@ -194,7 +194,8 @@ const Index = ({
     });
   };
 
-  const getThumbnail = (scale: number = 0.2) => editor.current.getThumbnail(scale / zoom);
+  const getThumbnail = (scale: number = 0.2, filename) =>
+    editor.current.getThumbnail(scale / zoom, 0.8, filename);
 
   return (
     <div className={styles.editor}>

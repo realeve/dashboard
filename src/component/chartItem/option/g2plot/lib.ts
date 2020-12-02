@@ -61,7 +61,7 @@ const dict = {
 let monthOrWeekKeys = Object.keys(dict);
 
 // 数组排序
-const sort = (a, b) => {
+export const sort = (a, b) => {
   if (isNumber(a)) {
     return a - b;
   } else if (isDate(a)) {
@@ -71,19 +71,19 @@ const sort = (a, b) => {
   }
 };
 
-const handlePercent = (annotations, isPercent = false) => {
-  if (!isPercent) {
-    return annotations;
-  }
-  let sum = 0;
-  annotations.forEach((item) => (sum += item.position[1]));
-  if (sum == 0) {
-    return annotations;
-  }
-  return annotations.map((item) => {
-    item.position = [item.position[0], item.position[1] / sum];
-  });
-};
+// export const handlePercent = (annotations, isPercent = false) => {
+//   if (!isPercent) {
+//     return annotations;
+//   }
+//   let sum = 0;
+//   annotations.forEach((item) => (sum += item.position[1]));
+//   if (sum == 0) {
+//     return annotations;
+//   }
+//   return annotations.map((item) => {
+//     item.position = [item.position[0], item.position[1] / sum];
+//   });
+// };
 
 /**
  * 获取 annotations 配置项

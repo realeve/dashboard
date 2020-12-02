@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './header.less';
 import classnames from 'classnames';
-import { Tooltip, Button } from 'antd';
+import { Tooltip } from 'antd';
 import { IHideProps, TFnHide } from './panel/setting';
 import { router } from 'umi';
 import { getLocalConfig } from '@/pages/index/lib';
@@ -24,6 +24,19 @@ const onPreview = async () => {
   router.push('/');
 };
 
+const saveBat = (title) => {
+  let str = `@echo on
+  rem 拷贝文件
+  copy .\${title}.* \\目标主机\e$\wamp\dashboard\data\
+  rem 打开网站
+  start ${window.location.origin}?id=/data/${title}.json&autoresize=movie
+  rem 移除本地文件
+  del .\${title}.*
+  pause`;
+  let blob = new Blob([str], { type: 'text/plain;charset=utf-8' });
+  saveAs(blob, title + '_部署脚本.bat');
+};
+
 export default ({
   setHide,
   hide,
@@ -35,7 +48,7 @@ export default ({
   setHide: TFnHide;
   title: string;
   author: string;
-  getThumbnail: () => Promise<string>;
+  getThumbnail: (scale: number, filename: string | null) => Promise<string | void>;
 }) => {
   const [show, setShow] = useState(false);
   const onSave = async () => {
@@ -43,24 +56,30 @@ export default ({
     if (!props) {
       return;
     }
+
     let { page, panel } = props;
     // 面板文件,用于在面板列表中显示
-    // TODO，可考虑将此处的图片下载为同名文件.png，与json文件一并保存，以实现图片和json配置信息分离
-    let thumbnail = await getThumbnail();
+    // 可考虑将此处的图片下载为同名文件.png，与json文件一并保存，以实现图片和json配置信息分离
+    getThumbnail(0.2, title);
 
     let dashboard = {
       rec_time: lib.now(),
       panel,
       page: {
         ...page,
-        thumbnail,
+        thumbnail: `./${title}.jpg`,
       },
     };
+
     let json = beautify(JSON.stringify(dashboard), beautyOption);
     let blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
-    saveAs(blob, '主题面板.json');
+    saveAs(blob, title + '.json');
     setShow(true);
+
+    saveBat(title);
   };
+
+  // todo 增加批处理文件的生成
 
   return (
     <div className={styles.header}>
@@ -77,8 +96,19 @@ export default ({
         >
           <div style={{ height: 200, paddingTop: 20 }}>
             <p>请按以下步骤完成剩余操作：</p>
-            <p>1.将下载后的json文件上传到服务器的 /data/ 目录下;</p>
-            <p>2.浏览 {window.location.origin}?id=/data/仪表盘文件.json&autoresize=movie</p>
+            <p>
+              1.将下载后的json和缩略图文件(路径:%userprofile%/downloads/)上传到服务器的 /data/
+              目录下;
+            </p>
+            <p>
+              2.
+              <a
+                href={`${window.location.origin}?id=/data/${title}.json&autoresize=movie`}
+                target="_blank"
+              >
+                浏览这个链接查看线上版本
+              </a>
+            </p>
           </div>
         </Confirm>
       )}
