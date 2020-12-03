@@ -24,8 +24,8 @@ const config = {
 };
 
 // umi test ./src/component/g2plot/index.test.js
-describe('useChart', () => {
-  it('初始化以及销毁', async () => {
+describe('g2plot', () => {
+  test('初始化以及销毁', async () => {
     const ref = React.createRef();
     mount(<G2Plot option={config} ref={ref} />);
     expect(ref.current).not.toBeNull();
@@ -36,5 +36,20 @@ describe('useChart', () => {
     const a = chart.getChartSize();
     expect(a).toMatchObject({ width: 400, height: 400 });
     expect(chart.toDataURL()).toBeNull();
+  });
+  test('g2plot loading', () => {
+    const wrapper = mount(<G2Plot option={config} loading />);
+    expect(wrapper.find('svg')).toHaveLength(1);
+  });
+
+  test('g2plot default chartType', () => {
+    const { chartType, ...option } = config;
+    const ref = React.createRef();
+    mount(<G2Plot option={option} ref={ref} loading />);
+    const chart = ref.current.getChart();
+    expect(chart.getDefaultOptions().isStack).toBeTruthy();
+
+    const wrapper = mount(<G2Plot option={{ chartType: 'unknown', ...option }} loading />);
+    expect(wrapper.find('h5').text()).toContain('图表类型无效');
   });
 });
