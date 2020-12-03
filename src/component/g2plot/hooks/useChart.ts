@@ -175,7 +175,9 @@ export default function useInit<T extends Base, U extends Options>(
     ) => {
       return downloadImage(name, type, encoderOptions);
     };
-    chartInstance.render();
+    if (process.env.NODE_ENV !== 'test') {
+      chartInstance.render();
+    }
     if (!chartOptions.current) {
       chartOptions.current = config;
     }
