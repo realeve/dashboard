@@ -187,3 +187,10 @@ https://web.raykite.com/square
 --
 
 初始化：  ./public/tbl_business.sql
+
+---
+
+# 单元测试资料
+[jest](https://jestjs.io/)
+ 
+[enzyme](https://enzymejs.github.io/enzyme/docs/installation/index.html)
