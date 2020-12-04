@@ -28,6 +28,7 @@ test('getMax', () => {
 });
 
 test('getMin', () => {
+  expect(lib.getMin(-4)).toBe(-10);
   expect(lib.getMin(5)).toBe(0);
   expect(lib.getMin(4)).toBe(0);
   expect(lib.getMin(15)).toBe(10);
@@ -41,6 +42,7 @@ test('getMin', () => {
 test('getPercentWithPrecision', () => {
   let arr = lib.getPercentWithPrecision([11, 21, 31, 41], 2);
   expect(arr).toEqual([10.58, 20.19, 29.81, 39.42]);
+  expect(lib.getPercentWithPrecision([1, 2, -1, -2], 2)).toEqual([0, 0, 0, 0]);
 });
 
 test('getPercent', () => {
@@ -149,32 +151,69 @@ test('处理单位', () => {
 test('echarts 配置项', () => {
   expect(lib.handleSimpleMode(1, { simple: false })).toBe(1);
 
-  console.log(
+  expect(
     lib.handleSimpleMode(
       {
+        title: ['1'],
         xAxis: { name: '1', a: '2' },
         yAxis: { name: 2, a: '1' },
       },
       { simple: 1 },
     ),
-  );
+  ).toMatchObject({
+    title: '1',
+    xAxis: { a: '2', axisLine: { show: false }, axisTick: { show: false } },
+    yAxis: { a: '1' },
+  });
 
-  console.log(
+  expect(
     lib.handleSimpleMode(
       {
+        title: ['1'],
         xAxis: { name: '1', a: '2' },
         yAxis: { name: 2, a: '1' },
       },
       { simple: 2 },
     ),
-  );
+  ).toMatchObject({
+    title: {},
+    xAxis: { a: '2', axisLine: { show: false }, axisTick: { show: false } },
+    yAxis: { a: '1' },
+    toolbox: {},
+    grid: { left: 35, right: 10, top: 10, bottom: 20 },
+  });
 
-  console.log(
+  expect(
     lib.handleSimpleMode(
       {
+        title: ['1'],
         xAxis: { name: '1', a: '2' },
+        yAxis: { a: '1' },
       },
       { simple: 3 },
     ),
-  );
+  ).toMatchObject({
+    title: '1',
+    xAxis: { a: '2', axisLine: { show: false }, axisTick: { show: false } },
+    yAxis: { a: '1' },
+    toolbox: {},
+    grid: { left: 35, right: 10, top: 45, bottom: 20 },
+  });
+
+  expect(
+    lib.handleSimpleMode(
+      {
+        title: ['1'],
+        yAxis: { name: '1', a: '2' },
+        xAxis: { a: '1' },
+      },
+      { simple: 3 },
+    ),
+  ).toMatchObject({
+    title: '1',
+    yAxis: { a: '2' },
+    xAxis: { a: '1' },
+    toolbox: {},
+    grid: { left: 35, right: 10, top: 45, bottom: 20 },
+  });
 });
