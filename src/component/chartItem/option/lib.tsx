@@ -88,84 +88,84 @@ export const getTooltipUnit = (title) => {
   return unit;
 };
 
-let handleDefaultOption = (option, config, showDateRange = true) => {
-  let renderer = getRenderer(config);
-  let toolbox = option.toolbox || {
-    feature: {
-      dataZoom: {},
-      magicType: {
-        type: ['line', 'bar', 'stack', 'tiled'],
-      },
-    },
-  };
-  toolbox = Object.assign(toolbox, {
-    feature: {
-      saveAsImage: {
-        type: renderer === 'svg' ? 'svg' : 'png',
-      },
-    },
-  });
+// let handleDefaultOption = (option, config, showDateRange = true) => {
+//   let renderer = getRenderer(config);
+//   let toolbox = option.toolbox || {
+//     feature: {
+//       dataZoom: {},
+//       magicType: {
+//         type: ['line', 'bar', 'stack', 'tiled'],
+//       },
+//     },
+//   };
+//   toolbox = Object.assign(toolbox, {
+//     feature: {
+//       saveAsImage: {
+//         type: renderer === 'svg' ? 'svg' : 'png',
+//       },
+//     },
+//   });
 
-  let defaultLegend = {
-    type: 'scroll',
-    width: 500,
-    align: 'right',
-    textStyle: {
-      color: '#666',
-    },
-  };
+//   let defaultLegend = {
+//     type: 'scroll',
+//     width: 500,
+//     align: 'right',
+//     textStyle: {
+//       color: '#666',
+//     },
+//   };
 
-  if (R.isNil(option.legend)) {
-    option.legend = defaultLegend;
-  }
+//   if (R.isNil(option.legend)) {
+//     option.legend = defaultLegend;
+//   }
 
-  option = Object.assign(
-    {
-      toolbox,
-      tooltip: {},
-      legend: defaultLegend,
-    },
-    option,
-  );
+//   option = Object.assign(
+//     {
+//       toolbox,
+//       tooltip: {},
+//       legend: defaultLegend,
+//     },
+//     option,
+//   );
 
-  if (['bar', 'line'].includes(config.type)) {
-    let axisPointerType: 'shadow' | 'cross' = 'shadow';
-    let tooltipTrigger: string = 'axis';
-    switch (config.type) {
-      case 'bar':
-        axisPointerType = 'shadow';
-        break;
-      case 'line':
-      default:
-        axisPointerType = 'cross';
-        break;
-    }
+//   if (['bar', 'line'].includes(config.type)) {
+//     let axisPointerType: 'shadow' | 'cross' = 'shadow';
+//     let tooltipTrigger: string = 'axis';
+//     switch (config.type) {
+//       case 'bar':
+//         axisPointerType = 'shadow';
+//         break;
+//       case 'line':
+//       default:
+//         axisPointerType = 'cross';
+//         break;
+//     }
 
-    /**
-     * 该语法可代替
-     * let axisName = option&&option.yAxis&&option.yAxis.name;
-     */
-    let axisName = option?.yAxis?.name;
-    let unit = getTooltipUnit(config?.data?.title);
+//     /**
+//      * 该语法可代替
+//      * let axisName = option&&option.yAxis&&option.yAxis.name;
+//      */
+//     let axisName = option?.yAxis?.name;
+//     let unit = getTooltipUnit(config?.data?.title);
 
-    option.tooltip = {
-      trigger: tooltipTrigger,
-      axisPointer: {
-        type: axisPointerType,
-      },
-      formatter: (p) => tooltipFormatter({ series: p, unit, axisName }),
-    };
+//     option.tooltip = {
+//       trigger: tooltipTrigger,
+//       axisPointer: {
+//         type: axisPointerType,
+//       },
+//       formatter: (p) => tooltipFormatter({ series: p, unit, axisName }),
+//     };
 
-    if (config.histogram) {
-      option.tooltip = {};
-      // Reflect.deleteProperty(option, 'dataZoom');
-    }
-  }
+//     if (config.histogram) {
+//       option.tooltip = {};
+//       // Reflect.deleteProperty(option, 'dataZoom');
+//     }
+//   }
 
-  //全局处理
-  option = handleSimpleMode(option, config);
-  return option;
-};
+//   //全局处理
+//   option = handleSimpleMode(option, config);
+//   return option;
+// };
 
 /**
  *  @param HIDE_DESC 隐藏说明文字

@@ -119,10 +119,62 @@ test('tooltipFormatter', () => {
   expect(
     lib.tooltipFormatter({
       ...config,
+      series: [
+        {
+          name: 'name',
+          value: 1,
+          seriesName: 'seriesName1',
+          color: '#f00',
+        },
+        {
+          name: 'name',
+          value: 2,
+          seriesName: 'seriesName2',
+          color: '#f00',
+        },
+      ],
       append: true,
       shouldDrill: true,
     }),
-  ).toBe(
-    '<div style="font-weight:bold;font-size:20px;height:30px;">name</div>unit<div class="ex_tooltip"><div class="icon" style="background-color:#f00;"></div><span>seriesName：1 </span></div><div class="ex_tooltip_append">undefined</div><div style="color:#e23;">( 点击查看详情 )</div>',
+  ).toContain('<div style="color:#e23;">( 点击查看详情 )</div>');
+});
+
+test('处理单位', () => {
+  expect(lib.getTooltipUnit(false)).toBeFalsy();
+  expect(lib.getTooltipUnit('23(元)')).toBe(
+    `<div style="margin-bottom:5px;display:block;">(单位:元)</div>`,
+  );
+});
+
+test('echarts 配置项', () => {
+  expect(lib.handleSimpleMode(1, { simple: false })).toBe(1);
+
+  console.log(
+    lib.handleSimpleMode(
+      {
+        xAxis: { name: '1', a: '2' },
+        yAxis: { name: 2, a: '1' },
+      },
+      { simple: 1 },
+    ),
+  );
+
+  console.log(
+    lib.handleSimpleMode(
+      {
+        xAxis: { name: '1', a: '2' },
+        yAxis: { name: 2, a: '1' },
+      },
+      { simple: 2 },
+    ),
+  );
+
+  console.log(
+    lib.handleSimpleMode(
+      {
+        xAxis: { name: '1', a: '2' },
+      },
+      { simple: 3 },
+    ),
   );
 });
