@@ -73,3 +73,41 @@ test('color', () => {
   expect(lib.hex2rgb('#ffffff')).toBe('255,255,255');
   expect(lib.hex2rgb('#fff')).toBe('255,255,255');
 });
+
+test('uniq', () => {
+  expect(lib.uniq([1, 1])).toMatchObject([1]);
+});
+
+test('tooltipFormatter', () => {
+  // 数据为空
+  expect(
+    lib.tooltipFormatter({ series: [], unit: '', axisName: '', append: false, shouldDrill: false }),
+  ).toBeFalsy();
+  const config = {
+    series: [
+      {
+        name: 'name',
+        value: 1,
+        seriesName: 'seriesName',
+        color: '#f00',
+      },
+    ],
+    unit: 'unit',
+    axisName: 'axisName',
+    append: false,
+    shouldDrill: false,
+  };
+  expect(lib.tooltipFormatter(config)).toBe(
+    '<div style="font-weight:bold;font-size:20px;height:30px;">name</div>unit<div class="ex_tooltip"><div class="icon" style="background-color:#f00;"></div><span>seriesName：1 </span></div>',
+  );
+
+  expect(
+    lib.tooltipFormatter({
+      ...config,
+      append: true,
+      shouldDrill: true,
+    }),
+  ).toBe(
+    '<div style="font-weight:bold;font-size:20px;height:30px;">name</div>unit<div class="ex_tooltip"><div class="icon" style="background-color:#f00;"></div><span>seriesName：1 </span></div><div class="ex_tooltip_append">undefined</div><div style="color:#e23;">( 点击查看详情 )</div>',
+  );
+});

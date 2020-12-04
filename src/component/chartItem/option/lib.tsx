@@ -23,17 +23,29 @@ export interface IChart {
 export type TChartConfig = Array<IChart>;
 
 export let uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
-
-export const tooltipFormatter = (p, unit, axisName, append = false) => {
+export interface ITooltipFormatter {
+  series: { name: string; value: string | number; seriesName: string; color: string }[];
+  unit: string | boolean;
+  axisName: string;
+  append?: boolean;
+  shouldDrill?: boolean;
+}
+export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
+  series,
+  unit,
+  axisName,
+  append = false,
+  shouldDrill = false,
+}) => {
   let title: boolean | string = false;
   let str = '';
-  p = p.filter((item) => typeof item.value !== 'undefined');
+  let p = series.filter((item) => typeof item.value !== 'undefined');
 
   if (p.length === 0) {
-    return;
+    return false;
   }
 
-  let shouldDrill = window.location.hash.includes('dr0_id=');
+  // let shouldDrill = window.location.hash.includes('dr0_id=');
   let drillTipText = shouldDrill ? '<div style="color:#e23;">( 点击查看详情 )</div>' : '';
 
   p.forEach((item, idx) => {
@@ -141,7 +153,7 @@ let handleDefaultOption = (option, config, showDateRange = true) => {
       axisPointer: {
         type: axisPointerType,
       },
-      formatter: (p) => tooltipFormatter(p, unit, axisName),
+      formatter: (p) => tooltipFormatter({ series: p, unit, axisName }),
     };
 
     if (config.histogram) {
