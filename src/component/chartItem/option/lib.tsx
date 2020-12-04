@@ -866,7 +866,7 @@ export const getAntThemePanel: () => IChartConfig = () => ({
   }),
 });
 
-export const getBarMax = (data, y = 1) => {
+export const getBarMax = (data, y: number | string = 1) => {
   let item = R.last(data)[y];
   return getMax(item);
 };

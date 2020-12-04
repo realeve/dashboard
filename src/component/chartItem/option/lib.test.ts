@@ -10,6 +10,21 @@ test('getMax', () => {
   expect(lib.getMax(955)).toBe(1000);
   expect(lib.getMax(-25)).toBe(-20);
   expect(lib.getMax(-155)).toBe(-100);
+  expect(
+    lib.getBarMax(
+      [
+        { a: 0, b: 1 },
+        { a: 2, b: 3 },
+      ],
+      'a',
+    ),
+  ).toBe(3);
+  expect(
+    lib.getBarMax([
+      [0, 11],
+      [2, 13],
+    ]),
+  ).toBe(20);
 });
 
 test('getMin', () => {
