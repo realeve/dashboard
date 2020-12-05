@@ -52,9 +52,11 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
     if (!title) {
       title = item.name;
     }
-    if (title !== item.name) {
-      return;
-    }
+
+    // 该分支永远不会进入
+    // if (title !== item.name) {
+    //   return;
+    // }
 
     if (typeof item.value !== 'undefined' && item.value !== '-') {
       str +=
@@ -73,7 +75,7 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
     title = `<div style="font-weight:bold;font-size:20px;height:30px;">${title}</div>`;
   }
 
-  return `${title}${str}${drillTipText}` || false;
+  return `${title}${str}${drillTipText}`;
 };
 
 export const getTooltipUnit = (title) => {
@@ -397,28 +399,6 @@ export interface Iparams {
   size?: number;
 }
 
-export type chartHeightFun = (params: Iparams, data: any) => string;
-
-export let getChartHeight: chartHeightFun = (params: Iparams, option) => {
-  if (params.height) {
-    return params.height + 'px';
-  }
-  // , ...chartGL
-  let height: string = ['sunburst', 'sankey', 'paralell'].includes(params.type)
-    ? '900px'
-    : chartGL.includes(params.type)
-    ? '700px'
-    : '500px';
-  if (params.type === 'calendar') {
-    if (!R.isNil(option.series)) {
-      height = 100 + option.series.length * (6 * params.size + 70) + 'px';
-    } else {
-      height = '800px';
-    }
-  }
-  return height;
-};
-
 // 处理minmax值至最佳刻度，需要考虑 >10 及 <10 两种场景以及负数的情况
 export let handleMinMax: (params: {
   min: number;
@@ -441,54 +421,6 @@ export let handleMinMax: (params: {
   return {
     min: getMin(min),
     max: getMax(max),
-  };
-};
-
-export let getLegend: (
-  params: any,
-  selectedMode?: string,
-) => {
-  show?: boolean;
-  selectedMode?: string;
-  data?: any;
-} = ({ data, legend }, selectedMode = 'single') => {
-  if (R.isNil(legend)) {
-    return {
-      show: false,
-    };
-  }
-  let key: string = data.header[legend];
-  let legendData = getUniqByIdx({
-    key,
-    data: data.data,
-  });
-  return {
-    selectedMode,
-    data: getLegendData(legendData),
-  };
-};
-
-export type axis = 'value' | 'category';
-// 获取指定key对应的轴数据
-export let getAxis: (
-  param: { data: any; header: string[] },
-  key: string,
-) => {
-  xAxis: Array<string | number>;
-  xAxisType: axis;
-} = ({ data, header }, key) => {
-  let xAxis = getUniqByIdx({
-    key: header[key],
-    data,
-  });
-  let xAxisType: axis = lib.isNumOrFloat(xAxis[0]) ? 'value' : 'category';
-
-  if (xAxisType === 'value') {
-    xAxis = R.sort<number>((a, b) => a - b)(xAxis);
-  }
-  return {
-    xAxis,
-    xAxisType,
   };
 };
 
@@ -815,7 +747,8 @@ export const getMin = (val: number | string) => {
   val = Number(val);
   if (val < 0) {
     return -getMax(-val);
-  } else if (val < 10) {
+  }
+  if (val < 10) {
     return 0;
   }
   return val - (val % quantity(val));
@@ -829,14 +762,16 @@ export const getMin = (val: number | string) => {
  */
 export const getPercent = ({ data, y: _y, header }) => {
   let _data = R.clone(data);
-  let isArray = 'Array' == R.type(_data[0]);
-  let arr: number[] = R.pluck(isArray ? _y : header[_y], _data);
-  // let y = header[_y];
-  // let sum = _data.reduce((a, b) => a + b[y], 0);
-  // return _data.map((item) => {
-  //   item.percent = ((item[y] / sum) * 100).toFixed(2);
-  //   return item;
-  // });
+
+  /**
+   * 2020-12-05 写单元测试时做以下调整：
+   * 此处返回值是增加一项 percent存储数据的百分比，数据结构只能为对象，
+   * 不能为数组，故此处无需判断是否为array;
+   */
+  // let isArray = 'Array' == R.type(_data[0]);
+  // let arr: number[] = R.pluck(isArray ? _y : header[_y], _data);
+  let arr: number[] = R.pluck(header[_y], _data);
+
   let percent = getPercentWithPrecision(arr, 2);
   return _data.map((item, i) => {
     item.percent = percent[i];
@@ -852,7 +787,10 @@ export const getPercent = ({ data, y: _y, header }) => {
  * https://github.com/apache/incubator-echarts/blob/master/src/util/number.ts#L215
  */
 
-export function getPercentWithPrecision(valueList: number[], precision: number = 2): number[] {
+export function getPercentWithPrecision(
+  valueList: (number | '-')[],
+  precision: number = 2,
+): number[] {
   const sum = zrUtil.reduce(
     valueList,
     function (acc, val) {
