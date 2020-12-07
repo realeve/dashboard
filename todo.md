@@ -7,7 +7,7 @@
 https://cdn-service.datav.aliyun.com/datav-static/2.36.8_6/libs/browser_check.js
 
 
-- [ ] 2.echarts ———— datav 样式
+- [x] 2.echarts ———— datav 样式
 
 https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/horizontal-positive-negative-bar-chart/0.2.2
 
@@ -36,7 +36,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 ~~表1：（id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间~~
 
-- [ ] 表2：使用dashboard/业务id
+- [x] 表2：使用dashboard/业务id
 
 - [x] (2)画布配置：大小（目前是1920*1080）；增加一组n*m分屏黑线;边距线（整个dashboard，美观使用）；
 
@@ -71,7 +71,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
  }]
 
 5.组件
-- [ ] (1)增加当前 时间／全屏功能按钮；
+- [x] (1)增加当前 时间／全屏功能按钮；
 (- [ ] 2)tab组件
 
 - [ ] 标题/dashboard1/dashboard2
@@ -83,7 +83,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 ~~（1）业务组件，定义需要观测某列指标，阈值。超阈值向指定的用户发送预警信息（预警能力：短信、腾讯通推送、当前页面警告）~~
 ---
 
-- [ ] （2）后台进程：node轮询；
+~~- [ ] （2）后台进程：node轮询；~~
 
 function xxx(data,config){
   // 预警处理逻辑

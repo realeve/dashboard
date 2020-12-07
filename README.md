@@ -142,7 +142,7 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 
 ---
 
-- [ ] 单元测试
+- [x] 单元测试
 
 
 

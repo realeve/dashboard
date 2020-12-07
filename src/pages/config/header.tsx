@@ -10,8 +10,10 @@ import beautify from 'js-beautify';
 import { saveAs } from 'file-saver';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { api } from '@/utils/setting';
+import { addDashboardList } from '@/pages/config/panel/business/db';
 
 import pinyin from '@/utils/pinyin.js';
+import { message } from 'antd';
 
 const beautyOption = {
   indent_size: 2,
@@ -27,7 +29,7 @@ const onPreview = async () => {
   router.push('/');
 };
 
-// TODO 此处保存完毕后为utf-8格式编码，需要转换为ANSI
+// 此处保存完毕后为utf-8格式编码，需要转换为ANSI(结论：暂时无解)
 const saveBat = (title) => {
   let str = `@echo on
 rem move file
@@ -85,6 +87,15 @@ export default ({
     setShow(true);
 
     saveBat(title);
+
+    // 向大屏中添加列表项
+    addDashboardList({
+      title: _title,
+      file: title + '.json',
+      img: title + '.jpg',
+    }).then((success) => {
+      message[success ? 'success' : 'error'](`添加组件${success ? '成功' : '失败'}`);
+    });
   };
 
   // todo 增加批处理文件的生成

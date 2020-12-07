@@ -46,6 +46,29 @@ export const getDashboardBusiness: () => Promise<IAxiosState> = () =>
     url: api.getDashboardBusiness,
   });
 
+/**
+ *   @database: { 接口管理 }
+ *   @desc:     { 添加大屏 }
+ */
+export const addDashboardList: (params: {
+  title: string;
+  img: string;
+  file: string;
+}) => Promise<boolean> = (params) =>
+  axios({
+    url: api.addDashboardList,
+    params,
+  }).then(({ data: [{ affected_rows }] }: IAxiosState) => (affected_rows as number) > 0);
+
+/**
+ *   @database: { 接口管理 }
+ *   @desc:     { 大屏列表 }
+ */
+export const getDashboardList: () => Promise<IAxiosState> = () =>
+  axios({
+    url: api.getDashboardList,
+  });
+
 const BUSINESS_KEY = 'business_list';
 
 const getLocalBusiness = async () => {
@@ -56,22 +79,6 @@ const getLocalBusiness = async () => {
   };
 };
 
-/**
-   添加业务组件 
-SELECT
-a.title,
-a.category_main,
-a.category_sub,
-a.image,
-a.config,
-a.creator, 
-a.useage_times 
-FROM
-tbl_dashboard_business AS a  
-
-业务组件列表
-SELECT * FROM tbl_dashboard_business a
- */
 /**
  * 将业务组件存储到本地 localStorage
  * @param params 业务组件
@@ -95,7 +102,7 @@ export const addTblBusiness = async (params: IBusinessProps) => {
     return addLocaleBusiness(params);
   }
   // TODO 业务组件入库
-  console.log(params);
+  // console.log(params);
   return addDashboardBusiness(params);
 };
 

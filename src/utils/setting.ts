@@ -1,6 +1,6 @@
 export let themeName = 'dashboard';
 
-export let DEV: boolean = process.env.NODE_ENV === 'test'; // || process.env.NODE_ENV === 'development';
+export let DEV: boolean = false; //process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development';
 
 // 前台资源部署域名，默认头像图片资源调用域名
 export let config = {
@@ -50,8 +50,37 @@ if (DEV) {
   host = 'http://localhost:90/api/';
 }
 
+host = 'http://localhost:90/api/';
+
 export { domain, host };
 
+/** 
+添加业务组件 
+SELECT
+a.title,
+a.category_main,
+a.category_sub,
+a.image,
+a.config,
+a.creator, 
+a.useage_times 
+FROM
+tbl_dashboard_business AS a  
+
+业务组件列表
+SELECT * FROM tbl_dashboard_business a 
+
+添加大屏
+SELECT
+a.title,
+a.file,
+a.img
+FROM
+tbl_dashboard_list AS a 
+
+大屏列表	
+select * from tbl_dashboard_list as a 
+ */
 export const api = {
   // 添加业务组件
   addDashboardBusiness: '/10/663d99e189.json',
@@ -60,4 +89,7 @@ export const api = {
 
   // 业务部署路径，自动化脚本使用
   deployDir: DEV ? '.\\test' : `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
+
+  addDashboardList: '/12/08c544a6a4',
+  getDashboardList: '/13/b7fa279932',
 };
