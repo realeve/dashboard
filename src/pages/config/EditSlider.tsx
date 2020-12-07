@@ -8,7 +8,7 @@ export default ({ editor, onMenuChange, curTool, zoom, onZoom, onToggleThumb }) 
   return (
     <div className={styles['edit-slider']}>
       {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}
-      <span style={{ color: '#bcc9d4', width: 43, fontSize: 12, textAlign: 'right' }}>
+      <span style={{ color: '#bcc9d4', width: 50, fontSize: 12, textAlign: 'right' }}>
         {Math.floor(zoom * 100)} %
       </span>
       <InputRange {...rangeCfg} value={zoom} onChange={onZoom} showValue={false} />

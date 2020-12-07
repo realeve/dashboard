@@ -57,4 +57,7 @@ export const api = {
   addDashboardBusiness: '/10/663d99e189.json',
   // 业务组件列表
   getDashboardBusiness: '/11/bd60f6312a.json',
+
+  // 业务部署路径，自动化脚本使用
+  deployDir: `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
 };

@@ -9,6 +9,7 @@ import * as lib from '@/utils/lib';
 import beautify from 'js-beautify';
 import { saveAs } from 'file-saver';
 import { Confirm } from '@/component/Editor/Popup/Popup';
+import { api } from '@/utils/setting';
 
 const beautyOption = {
   indent_size: 2,
@@ -26,14 +27,15 @@ const onPreview = async () => {
 
 const saveBat = (title) => {
   let str = `@echo on
-  rem 拷贝文件
-  copy .\${title}.* \\目标主机\e$\wamp\dashboard\data\
-  rem 打开网站
-  start ${window.location.origin}?id=/data/${title}.json&autoresize=movie
-  rem 移除本地文件
-  del .\${title}.*
-  pause`;
-  let blob = new Blob([str], { type: 'text/plain;charset=utf-8' });
+rem 拷贝文件
+copy .\\${title}.* ${api.deployDir}
+rem 打开网站
+start ${window.location.origin}?id=/data/${title}.json&autoresize=movie
+rem 移除本地文件
+del .\\${title}.*
+del .\\${title}_部署脚本.bat
+pause`;
+  let blob = new Blob([str], { type: 'text/plain;charset=windows-1252' });
   saveAs(blob, title + '_部署脚本.bat');
 };
 
