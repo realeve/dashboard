@@ -1,4 +1,4 @@
-CREATE TABLE `tbl_business`  (
+CREATE TABLE `tbl_dashboard_business`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标题',
   `category_main` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '一级分类',
@@ -13,20 +13,20 @@ CREATE TABLE `tbl_business`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Triggers structure for table tbl_business
+-- Triggers structure for table tbl_dashboard_business
 -- ----------------------------
 DROP TRIGGER IF EXISTS `onadd`;
 delimiter ;;
-CREATE TRIGGER `onadd` BEFORE INSERT ON `tbl_business` FOR EACH ROW set new.create_time=CURRENT_TIMESTAMP,new.update_time = CURRENT_TIMESTAMP
+CREATE TRIGGER `onadd` BEFORE INSERT ON `tbl_dashboard_business` FOR EACH ROW set new.create_time=CURRENT_TIMESTAMP,new.update_time = CURRENT_TIMESTAMP
 ;;
 delimiter ;
 
 -- ----------------------------
--- Triggers structure for table tbl_business
+-- Triggers structure for table tbl_dashboard_business
 -- ----------------------------
 DROP TRIGGER IF EXISTS `onupdate`;
 delimiter ;;
-CREATE TRIGGER `onupdate` BEFORE UPDATE ON `tbl_business` FOR EACH ROW SET new.update_time = CURRENT_TIMESTAMP
+CREATE TRIGGER `onupdate` BEFORE UPDATE ON `tbl_dashboard_business` FOR EACH ROW SET new.update_time = CURRENT_TIMESTAMP
 ;;
 delimiter ;
  

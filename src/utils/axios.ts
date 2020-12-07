@@ -12,6 +12,32 @@ export interface GlobalAxios {
   token: string;
 }
 
+/**
+ * @param title:标题
+ * @param rows 数据行
+ * @param data 数据
+ * @param header 字段列表，报表头
+ * @param ip IP地址
+ * @param date 请求日期
+ * @param source 数据来源:某数据库
+ * @param time 当前时间
+ * @param serverTime 服务器时间
+ * @param hash 当前数据的hash值，数据变更时hash变更
+ */
+export interface IAxiosState {
+  title: string;
+  rows: number;
+  data: ({ [key: string]: any } | [])[];
+  header: string[];
+  ip: string;
+  date: string[];
+  source: string;
+  time: number;
+  serverTime: string;
+  hash: string;
+  [key: string]: any;
+}
+
 declare global {
   interface Window {
     g_axios: GlobalAxios;

@@ -1,5 +1,6 @@
-import { axios, DEV } from '@/utils/axios';
+import { axios, IAxiosState, AxiosError, DEV, mock, _commonData } from '@/utils/axios';
 import * as R from 'ramda';
+import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
 import {
   GROUP_COMPONENT_KEY,
@@ -27,6 +28,24 @@ export interface IBusinessProps {
   update_time: string;
 }
 
+/**
+ *   @database: { 微信开发 }
+ *   @desc:     { 添加业务组件 }
+ */
+export const addDashboardBusiness: (params: IBusinessProps) => Promise<IAxiosState> = (params) =>
+  axios({
+    url: DEV ? _commonData : api.addDashboardBusiness,
+    params,
+  });
+/**
+ *   @database: { 微信开发 }
+ *   @desc:     { 业务组件列表 }
+ */
+export const getDashboardBusiness: () => Promise<IAxiosState> = () =>
+  axios({
+    url: api.getDashboardBusiness,
+  });
+
 const BUSINESS_KEY = 'business_list';
 
 const getLocalBusiness = async () => {
@@ -37,6 +56,22 @@ const getLocalBusiness = async () => {
   };
 };
 
+/**
+   添加业务组件 
+SELECT
+a.title,
+a.category_main,
+a.category_sub,
+a.image,
+a.config,
+a.creator, 
+a.useage_times 
+FROM
+tbl_dashboard_business AS a  
+
+业务组件列表
+SELECT * FROM tbl_dashboard_business a
+ */
 /**
  * 将业务组件存储到本地 localStorage
  * @param params 业务组件
@@ -61,6 +96,7 @@ export const addTblBusiness = async (params: IBusinessProps) => {
   }
   // TODO 业务组件入库
   console.log(params);
+  return addDashboardBusiness(params);
 };
 
 export const getTblBusiness = async () => {
@@ -68,6 +104,7 @@ export const getTblBusiness = async () => {
     return getLocalBusiness();
   }
   // TODO 从数据库读取业务组件
+  return getDashboardBusiness();
 };
 
 // 获取基础配置：缩略图、标题

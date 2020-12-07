@@ -1,6 +1,6 @@
 export let themeName = 'dashboard';
 
-export let DEV: boolean = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development';
+export let DEV: boolean = process.env.NODE_ENV === 'test'; // || process.env.NODE_ENV === 'development';
 
 // 前台资源部署域名，默认头像图片资源调用域名
 export let config = {
@@ -51,3 +51,10 @@ if (DEV) {
 }
 
 export { domain, host };
+
+export const api = {
+  // 添加业务组件
+  addDashboardBusiness: '/10/663d99e189.json',
+  // 业务组件列表
+  getDashboardBusiness: '/11/bd60f6312a.json',
+};
