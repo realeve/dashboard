@@ -1,4 +1,4 @@
-import ColorPicker from 'rc-color-picker';
+import ColorPicker from '@/component/rc-color-picker';
 import { Radio } from 'antd';
 import React, { useState, useEffect } from 'react';
 import 'rc-color-picker/assets/index.css';
@@ -8,6 +8,7 @@ import * as R from 'ramda';
 import Draggable from 'react-draggable';
 import paletteList from './palette';
 import classnames from 'classnames';
+import * as colorLib from '@/utils/colors/lib';
 
 enum EColorType {
   NONE = '0',
@@ -34,7 +35,7 @@ const ColorItem = ({ value = '', onChange, position }) => {
     <ColorPicker
       color={rgb2hex(value).slice(0, 7)}
       alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
-      onChange={(e) => {
+      onMouseUp={(e) => {
         let color = hex2rgb(e.color);
         onChange(`rgba(${color},${e.alpha / 100})`);
       }}
@@ -129,20 +130,17 @@ const GardientPicker = ({ value, onChange }) => {
 };
 
 export const PureColor = ({ value = '', onChange, position = 'top', noAnimation = false }) => {
-  if (!value) {
-    return null;
-  }
-
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
   return (
     <div className={classnames(styles.colorItem, { [styles.noAnimation]: noAnimation })}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>
         <div className={styles.rectPop} style={{ top: position === 'bottom' ? 36 : -115 }}>
-          {paletteList.map((backgroundColor) => (
+          {paletteList.map(({ color: backgroundColor, title }) => (
             <span
               style={{ backgroundColor }}
               key={backgroundColor}
+              title={title}
               onClick={() => {
                 onChange(backgroundColor.replace(')', ',1)').replace('rgb', 'rgba'));
               }}
@@ -151,16 +149,16 @@ export const PureColor = ({ value = '', onChange, position = 'top', noAnimation 
         </div>
       </div>
       <ColorPicker
-        color={rgb2hex(value).slice(0, 7)}
+        defaultColor={rgb2hex(value).slice(0, 7)}
         alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
-        onChange={(e) => {
+        onMouseUp={(e) => {
           let color = hex2rgb(e.color);
           onChange(`rgba(${color},${e.alpha / 100})`);
         }}
         placement="bottomRight"
       >
         <div className={styles.head} style={{ backgroundColor: value }}>
-          点击设置颜色
+          {colorLib.getColorName(value).title}
           <img
             style={{ width: 30, height: 30, marginLeft: 10 }}
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABO1BMVEVHcExjsb/uTqzhymrlZp7Rjox7w57FwYJNm+aw6VX+m0/6Soe611x2urJkoNbks2r0aG2Du6v/MJhIm+r/MZj/MZj/QWj/c03+m1D/TlCSxZTktWH7zFSg3XBxr7y/u4A7kvo5lPn/Kqz/N4Rnodb/gk3+sU//dE7/0VL/J8X/Jb6FyZJ6psNaqs2z61LAzmP6Mb/Sl4Lgd5OXsar9pFBImez/S01vua//OX7+jk7+Ykz+bkz/LaH/V0z5ML3/QGn/JMH+eU3/L5z/Rlj/PXOR04Cyu5P9uU/+g03/JrhZqs2j4GeFyo+Cqrz8y1L20Fe35lM8lfX/M43/KK//QmBvpMtRo9qRsK70P7TBymLXj4bLrHX9w1DUxnWitqHcf4/tz2DQnX7+OYeb2nPgdJXGumzsV6H5sVH/MZea7IfDAAAANHRSTlMA/fz9/iH9/v/+/jr9Nv02VFTz2dmB0MPZ7IGB0Mv9w76Bvr7Zgb7YVFTYx77H2dnH2MfYBQ7XUQAAAelJREFUSMft1VlbgkAUBuBUlCnFpX192ve9RNxAU3Oh0BYETcUlxf7/L+gMWHoxqPf1eXveM2eAGWdm/vN3417aX5yfX9xbck9V7l/OhMNvb6n4+3vh7HRiuXNZTvyCZFK4cU6YZk2WE4kRINjHzuUOhdLpBCzRwaAAoGIfJ5xrGMBMmR9Qqdh1ynqqlSjPA8G76KTihYIAC1BU987y+URNkB4COwZNvwU4jsVMIsvhMAAYSIfyj49bcr3vIWYIPFTGBNC/CaDtI4LD/AMEDB+Cob7igqDj8natVtsgbzmfzxsAhAEqVBe6A+htE8FqBGKiaCj9ldIp3L3Xq1ar10QwFzEDJMbzHb3bbJvlVY+HCIJz+DdIEKo8Lz+ZJY8UHEnf8zQ7zBURHPX7/RykXi+WGnRZ5FyPj5+fTzhbRLCRG5QXSy06qyAb9/w8IOvkF1c3ikstR4PWVIQUkTMIIIb8qjeLRQwcDppWJcQqCse5XJhsWXxLJ9C95YD+WU0CgJBoM0nA6nPdxKBB05omlRHLIlE0wLn1AcLt6WxWVcsYsIpow2uMOda+xgh4hV1gwIw71D4o1zRVKnsBvMKDEm3MhGtmG4A0BJfOiTdT4F6VJK+XBcAuBKa6+5j1iwMvWtjZZf7/Nv5wvgHGFpB5+rlLRwAAAABJRU5ErkJggg=="

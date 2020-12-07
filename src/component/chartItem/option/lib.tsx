@@ -691,6 +691,7 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     defaultValue: color,
     title: '颜色',
     type: 'purecolor',
+    noAnimation: true,
   },
   {
     key: 'letterSpacing',

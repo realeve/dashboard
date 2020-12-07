@@ -48,6 +48,7 @@ export const config: IChartConfig[] = [
     defaultValue: 'rgba(39 ,228, 247 , 0.85)',
     title: '阴影颜色',
     type: 'purecolor',
+    noAnimation: true,
   },
   {
     key: 'textShadowOffsetX',

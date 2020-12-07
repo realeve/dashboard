@@ -1,4 +1,7 @@
-export default [
+import * as colorLib from '@/utils/colors/lib';
+import list from '@/utils/colors/list';
+
+const colors = [
   'rgb(255, 255, 255)',
   'rgb(250, 250, 250)',
   'rgb(245, 245, 245)',
@@ -60,3 +63,12 @@ export default [
   'rgb(105, 35, 152)',
   'rgb(74, 28, 138)',
 ];
+
+let res = colors.map((color) => {
+  return { color, title: colorLib.getColorName(color).title };
+});
+let appendList = list
+  .map((item) => ({ title: item.title, color: `rgb(${item.color.join(',')})` }))
+  .reverse();
+
+export default [...res, ...appendList];

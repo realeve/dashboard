@@ -10,6 +10,7 @@ import beautify from 'js-beautify';
 import { saveAs } from 'file-saver';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { api } from '@/utils/setting';
+import iconv from 'iconv-lite';
 
 const beautyOption = {
   indent_size: 2,
@@ -25,6 +26,7 @@ const onPreview = async () => {
   router.push('/');
 };
 
+// TODO 此处保存完毕后为utf-8格式编码，需要转换为ANSI
 const saveBat = (title) => {
   let str = `@echo on
 rem 拷贝文件
@@ -35,7 +37,7 @@ rem 移除本地文件
 del .\\${title}.*
 del .\\${title}_部署脚本.bat
 pause`;
-  let blob = new Blob([str], { type: 'text/plain;charset=windows-1252' });
+  let blob = new Blob([str], { type: 'text/plain;charset=ansi' });
   saveAs(blob, title + '_部署脚本.bat');
 };
 

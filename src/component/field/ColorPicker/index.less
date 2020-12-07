@@ -97,11 +97,12 @@
   &:hover {
     .rectPop {
       display: flex;
+      overflow-y: scroll;
     }
   }
   .rectPop {
     position: absolute;
-    width: var(--datav-gui-component-container-width);
+    width: calc(4px + var(--datav-gui-component-container-width));
     background: var(--datav-gui-background-color-back);
     box-sizing: border-box;
     border: 1px solid var(--datav-gui-primary-color);
