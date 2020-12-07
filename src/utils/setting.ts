@@ -59,5 +59,5 @@ export const api = {
   getDashboardBusiness: '/11/bd60f6312a.json',
 
   // 业务部署路径，自动化脚本使用
-  deployDir: `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
+  deployDir: DEV ? '.\\test' : `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
 };

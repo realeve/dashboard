@@ -75,8 +75,11 @@ const Index = ({ location }) => {
   if (!config) {
     return <DNA />;
   }
-  let { page, panel } = config,
+  let { page, panel, type } = config,
     autoSize = location?.query?.autoresize;
+  if (type == 'notExist') {
+    return <DNA title={`文件${location.query.id}加载失败，请检查是否上传!`} />;
+  }
 
   let resizeType = getResizeType(autoSize);
 

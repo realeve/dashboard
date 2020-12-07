@@ -10,7 +10,8 @@ import beautify from 'js-beautify';
 import { saveAs } from 'file-saver';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { api } from '@/utils/setting';
-import iconv from 'iconv-lite';
+
+import pinyin from '@/utils/pinyin.js';
 
 const beautyOption = {
   indent_size: 2,
@@ -29,22 +30,23 @@ const onPreview = async () => {
 // TODO 此处保存完毕后为utf-8格式编码，需要转换为ANSI
 const saveBat = (title) => {
   let str = `@echo on
-rem 拷贝文件
+rem move file
 copy .\\${title}.* ${api.deployDir}
-rem 打开网站
+rem open website
 start ${window.location.origin}?id=/data/${title}.json&autoresize=movie
-rem 移除本地文件
+rem remove temp files
 del .\\${title}.*
-del .\\${title}_部署脚本.bat
+del .\\${title}_deploy.bat
 pause`;
+
   let blob = new Blob([str], { type: 'text/plain;charset=ansi' });
-  saveAs(blob, title + '_部署脚本.bat');
+  saveAs(blob, title + '_deploy.bat');
 };
 
 export default ({
   setHide,
   hide,
-  title = '默认工作空间',
+  title: _title = '默认工作空间',
   author = '未知作者',
   getThumbnail,
 }: {
@@ -54,6 +56,7 @@ export default ({
   author: string;
   getThumbnail: (scale: number, filename: string | null) => Promise<string | void>;
 }) => {
+  let title = pinyin.toPinYinFull(_title);
   const [show, setShow] = useState(false);
   const onSave = async () => {
     let props = await getLocalConfig();
@@ -67,6 +70,7 @@ export default ({
     getThumbnail(0.2, title);
 
     let dashboard = {
+      title: _title,
       rec_time: lib.now(),
       panel,
       page: {
@@ -99,18 +103,19 @@ export default ({
           }}
         >
           <div style={{ height: 200, paddingTop: 20 }}>
-            <p>请按以下步骤完成剩余操作：</p>
+            <p>1.如果弹出批处理文件是否保存，请点确定；</p>
             <p>
-              1.将下载后的json和缩略图文件(路径:%userprofile%/downloads/)上传到服务器的 /data/
-              目录下;
+              2.下载完毕后进入下载目录，运行{title}
+              _deploy.bat文件，系统将自动把配置文件上传到服务器对应的目录下;
             </p>
+            <p>3.运行完毕后，系统将自动打开链接；</p>
             <p>
-              2.
+              4.
               <a
                 href={`${window.location.origin}?id=/data/${title}.json&autoresize=movie`}
                 target="_blank"
               >
-                浏览这个链接查看线上版本
+                手动浏览这个链接查看线上版本
               </a>
             </p>
           </div>

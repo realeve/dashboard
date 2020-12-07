@@ -1,7 +1,6 @@
 import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
 import { message } from 'antd';
-import localforage from 'localforage';
 import { IPage, IPanelConfig } from '@/models/common';
 
 export enum EResizeType {
@@ -61,7 +60,12 @@ export const getConfig = async (url) => {
         baseURL: window.location.origin,
       };
     }
-    return axios(option).then((config) => ({ type: 'online', ...config }));
+    return axios(option).then((config) => {
+      if (config.slice(0, 15) == '<!DOCTYPE html>') {
+        return { type: 'notExist' };
+      }
+      return { type: 'online', ...config };
+    });
   }
   return getLocalConfig();
 };
