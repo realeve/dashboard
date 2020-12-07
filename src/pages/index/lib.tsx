@@ -61,7 +61,7 @@ export const getConfig = async (url) => {
       };
     }
     return axios(option).then((config) => {
-      if (config.slice(0, 15) == '<!DOCTYPE html>') {
+      if (typeof config === 'string' && config.slice(0, 15) == '<!DOCTYPE html>') {
         return { type: 'notExist' };
       }
       return { type: 'online', ...config };

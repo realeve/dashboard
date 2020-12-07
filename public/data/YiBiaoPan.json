@@ -1,0 +1,130 @@
+{
+  "title": "仪表盘",
+  "rec_time": "2020-12-07 22:04:31",
+  "panel": [{
+    "id": "6eff10923307c",
+    "key": "group_rect",
+    "fold": false,
+    "icon": "datav-font icon-group layer-item-icon",
+    "title": "业务-1",
+    "engine": "other",
+    "business": true
+  }, {
+    "id": "a3bde7df567b",
+    "api": {},
+    "key": "text_single",
+    "ajax": false,
+    "icon": "com-font icon-com-regular_bar",
+    "name": "other.text_single",
+    "type": "regular_bar",
+    "group": "6eff10923307c",
+    "image": "/img/config/text.png",
+    "style": {
+      "transform": {
+        "translate": "505px,219px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "80px",
+      "left": "80px",
+      "width": "574px",
+      "height": "51px",
+      "position": "absolute"
+    },
+    "title": "文本",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "边框29",
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": false,
+    "showBackground": false,
+    "componentConfig": {
+      "content": "在这里输入文字",
+      "opacity": 1,
+      "fontSize": 20,
+      "fontColor": "#27e2e6",
+      "undefined": "",
+      "fontWeight": "normal",
+      "letterSpacing": 0,
+      "textShadowBlur": 0,
+      "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+      "textShadowOffsetX": 0,
+      "textShadowOffsetY": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "22e9ecca84aa4",
+    "api": {},
+    "key": "base_line",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "name": "echarts.base_line",
+    "type": "regular_bar",
+    "group": "6eff10923307c",
+    "image": "/img/icons/01_barChartPositiveNegative.png",
+    "style": {
+      "transform": {
+        "translate": "505px,270px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "80px",
+      "left": "80px",
+      "width": "574px",
+      "height": "345px",
+      "position": "absolute"
+    },
+    "title": "echarts基础图表",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "边框29",
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {},
+    "useGeneralStyle": true,
+    "business": true
+  }],
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "默认",
+    "author": "管理员",
+    "title": "仪表盘",
+    "padding": 15,
+    "screen_edge_width": 6,
+    "screen_x": 4,
+    "screen_y": 4,
+    "showEdgeTag": false,
+    "showEdge": true,
+    "thumbnail": "./YiBiaoPan.jpg",
+    "border": "边框29",
+    "chartBackground": "transparent",
+    "head": {
+      "background": "linear-gradient(90deg, rgba(67,10,228,0.88) 13%, rgba(84,125,204,0.73) 48%, rgba(0,0,0,0) 70%)",
+      "fontSize": 17,
+      "color": "#aec1f9",
+      "textAlign": "left",
+      "padding": 10
+    }
+  }
+}
