@@ -75,6 +75,19 @@ export interface IPanelStyle {
   transform: string;
 }
 
+export interface IApiProps {
+  legend?: number;
+  x?: number;
+  y?: number;
+  show?: boolean;
+  url?: string;
+  interval?: number;
+  api_type?: string;
+  mock?: string;
+  dateType: string;
+  [key: string]: any;
+}
+
 // 渲染引擎
 export type TChartEngine = 'echarts' | 'g2' | 'g2plot' | 'other';
 export interface IPanelConfig {
@@ -102,9 +115,7 @@ export interface IPanelConfig {
     [key: string]: any;
   }; // 组件自带配置项
 
-  api?: {
-    [key: string]: any;
-  }; // 接口配置项
+  api?: IApiProps; // 接口配置项
 
   [key: string]: any;
 }

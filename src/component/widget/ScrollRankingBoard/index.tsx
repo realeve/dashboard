@@ -115,7 +115,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     if (heights !== undefined) {
       Object.assign(stateRef.current, { heights });
-      setState(state => ({ ...state, heights }));
+      setState((state) => ({ ...state, heights }));
     }
   }
 
@@ -132,7 +132,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     Object.assign(stateRef.current, data, { rowsData: rows, animationIndex: 0 });
 
-    setState(state => ({ ...state, ...data }));
+    setState((state) => ({ ...state, ...data }));
   }
 
   function calcHeights({ rowNum, data }, onresize = false) {
@@ -155,7 +155,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (start) yield new Promise(resolve => setTimeout(resolve, waitTime));
+    if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
@@ -163,9 +163,9 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     rows.push(...rowsData.slice(0, animationIndex));
 
     const heights = new Array(rowLength).fill(avgHeight);
-    setState(state => ({ ...state, rows, heights }));
+    setState((state) => ({ ...state, rows, heights }));
 
-    yield new Promise(resolve => setTimeout(resolve, 300));
+    yield new Promise((resolve) => setTimeout(resolve, 300));
 
     animationIndex += animationNum;
 
@@ -176,7 +176,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
-    setState(state => ({ ...state, heights: newHeights }));
+    setState((state) => ({ ...state, heights: newHeights }));
   }
 
   useEffect(() => {
@@ -192,7 +192,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
         const { waitTime } = stateRef.current.mergedConfig;
 
-        yield new Promise(resolve => setTimeout(resolve, waitTime - 300));
+        yield new Promise((resolve) => setTimeout(resolve, waitTime - 300));
       }
     }
 
@@ -226,8 +226,9 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     fontSize: config.fontSize,
     fontWeight: config.fontWeight,
     color: config.fontColor,
+    textAlign: config.textAlign,
   };
- 
+
   return (
     <div
       className={classNames}
@@ -249,13 +250,19 @@ const ScrollRankingBoard = ({ config, className, style }) => {
               {item.ranking <= 3 ? emojiList[item.ranking - 1] : item.ranking}
             </div>
             <div className={styles['info-name']}>{item.name}</div>
-            <div className={styles['info-value']}>{item.value} {mergedConfig.unit}</div>
+            <div className={styles['info-value']}>
+              {item.value} {mergedConfig.unit}
+            </div>
           </div>
 
           <div className={styles['ranking-column']}>
             <div
               className={styles['inside-column']}
-              style={{ width: `${item.percent}%`, height: config.barHeight,borderRadius:`0 ${config.barHeight/2}px ${config.barHeight/2}px 0` }}
+              style={{
+                width: `${item.percent}%`,
+                height: config.barHeight,
+                borderRadius: `0 ${config.barHeight / 2}px ${config.barHeight / 2}px 0`,
+              }}
             >
               <div className={styles.shine} />
             </div>

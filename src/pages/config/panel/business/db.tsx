@@ -175,7 +175,15 @@ export const getSaveOption: (
     return null;
   }
   let { title, image } = getImage(panels);
-  let config = JSON.stringify(panels);
+
+  // 保存业务组件时需要移除其中的mock数据
+  let _panels = R.clone(panels);
+  _panels = _panels.map(({ api: _api = {}, ...item }) => {
+    let { mock, ...api } = _api;
+    return { ...item, api };
+  });
+
+  let config = JSON.stringify(_panels);
   let create_time = lib.now();
 
   let option = {

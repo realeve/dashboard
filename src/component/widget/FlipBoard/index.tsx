@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { thouandsNum } from '@/utils/lib';
 import { textColor } from '@/component/chartItem/option';
 
-export interface ICountUp extends CountUpProps { 
+export interface ICountUp extends CountUpProps {
   value: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -15,7 +15,7 @@ export interface ICountUp extends CountUpProps {
   [key: string]: any;
 }
 
-export default ({ 
+export default ({
   value,
   prefix = null,
   suffix = null,
@@ -24,6 +24,7 @@ export default ({
   style,
   duration = 1.5,
   fontSize = 18,
+  textAlign,
   fontWeight = 'normal',
   backgroundColor = '#0f396b',
   fontColor = textColor,
@@ -33,9 +34,9 @@ export default ({
   const { countUp, update } = useCountUp({ end: Number(value), duration, decimals, ...props });
   useEffect(() => {
     update(Number(value));
-  }, [value]); 
+  }, [value]);
   return (
-    <div className={classnames(styles.flipBoard, className)} style={style}> 
+    <div className={classnames(styles.flipBoard, className)} style={style}>
       <div className={styles.counter}>
         <span>{prefix}</span>
         {thouandsNum(countUp as number, decimals)
@@ -49,6 +50,7 @@ export default ({
                   : {
                       fontSize,
                       fontWeight,
+                      textAlign,
                       color: fontColor,
                       backgroundColor,
                       paddingLeft: padding,

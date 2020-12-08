@@ -188,7 +188,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     const data = { widths, heights };
 
     Object.assign(stateRef.current, data);
-    setState(state => ({ ...state, ...data }));
+    setState((state) => ({ ...state, ...data }));
   }
 
   function calcData() {
@@ -218,7 +218,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
       animationIndex: 0,
     });
 
-    setState(state => ({ ...state, ...data }));
+    setState((state) => ({ ...state, ...data }));
   }
 
   function calcWidths({ columnWidth, header }, rowsData) {
@@ -260,7 +260,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (start) yield new Promise(resolve => setTimeout(resolve, waitTime));
+    if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
@@ -268,9 +268,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     rows.push(...rowsData.slice(0, animationIndex));
 
     const heights = new Array(rowLength).fill(avgHeight);
-    setState(state => ({ ...state, rows, heights }));
+    setState((state) => ({ ...state, rows, heights }));
 
-    yield new Promise(resolve => setTimeout(resolve, 300));
+    yield new Promise((resolve) => setTimeout(resolve, 300));
 
     animationIndex += animationNum;
 
@@ -281,7 +281,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
-    setState(state => ({ ...state, heights: newHeights }));
+    setState((state) => ({ ...state, heights: newHeights }));
   }
 
   function emitEvent(ri, ci, row, ceil) {
@@ -290,7 +290,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     onClick && onClick({ row: ceils, ceil, rowIndex, columnIndex: ci });
   }
 
-  const getBackgroundColor = rowIndex =>
+  const getBackgroundColor = (rowIndex) =>
     mergedConfig[rowIndex % 2 === 0 ? 'evenRowBGC' : 'oddRowBGC'];
 
   useEffect(() => {
@@ -306,7 +306,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
         const { waitTime } = stateRef.current.mergedConfig;
 
-        yield new Promise(resolve => setTimeout(resolve, waitTime - 300));
+        yield new Promise((resolve) => setTimeout(resolve, waitTime - 300));
       }
     }
 
@@ -336,6 +336,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
             fontSize: config.fontSize,
             fontWeight: config.fontWeight,
             color: config.fontColor,
+            textAlign: config.textAlign,
           }}
         >
           {header.map((headerItem, i) => (
@@ -373,6 +374,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
                 fontSize: config.fontSize,
                 fontWeight: config.fontWeight,
                 color: config.fontColor,
+                textAlign: config.textAlign,
               }}
             >
               {row.ceils.map((ceil, ci) => (

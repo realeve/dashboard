@@ -62,6 +62,7 @@ interface ITimeChartProps {
   fontSize: number;
   fontWeight: number | 'bold' | 'normal' | 'bolder' | 'lighter';
   fontColor: string;
+  textAlign: 'left' | 'center' | 'right';
   letterSpacing: number;
   showWeekday: boolean;
   datetype: string;
@@ -72,6 +73,7 @@ interface ITimeChartProps {
 export default ({
   option: {
     fontSize = 16,
+    textAlign,
     fontWeight = 'normal',
     fontColor = textColor,
     letterSpacing = 0,
@@ -96,6 +98,7 @@ export default ({
       style={{
         color: fontColor,
         fontSize,
+        textAlign,
         fontWeight,
         letterSpacing,
         flexDirection: breakWeekday ? 'column' : 'row',

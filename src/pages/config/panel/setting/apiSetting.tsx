@@ -7,6 +7,7 @@ import { IPanelConfig } from '@/models/common';
 import { FormItem, getDefaultState } from './componentSetting';
 import styles from './index.less';
 import JsonViewer from './JsonViewer';
+import { rangeConfig } from '@/utils/range';
 
 const initState = (configs: IApiConfig, api: any) => {
   let { config, type, ...props } = configs;
@@ -53,6 +54,7 @@ const appendConfig: IChartConfig[] = [
     valueType: 'text',
     placeholder: '在此填入接口地址',
   },
+  rangeConfig,
 ];
 
 export default ({
@@ -94,7 +96,7 @@ export default ({
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        {[0, 1, 2].map(
+        {[0, 1, 2, 4].map(
           (i) =>
             (i < 2 || state.show) && (
               <FormItem

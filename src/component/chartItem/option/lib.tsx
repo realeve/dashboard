@@ -687,6 +687,26 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     ],
   },
   {
+    key: 'textAlign',
+    defaultValue: 'center',
+    title: '对齐',
+    type: 'radio',
+    option: [
+      {
+        title: <Align.AlignLeftIcon style={{ color: '#fff' }} />,
+        value: 'left',
+      },
+      {
+        title: <Align.AlignCenterIcon style={{ color: '#fff' }} />,
+        value: 'center',
+      },
+      {
+        title: <Align.AlignRightIcon style={{ color: '#fff' }} />,
+        value: 'right',
+      },
+    ],
+  },
+  {
     key: 'fontColor',
     defaultValue: color,
     title: '颜色',

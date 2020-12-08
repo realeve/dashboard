@@ -3,7 +3,7 @@ import Echarts from '@/component/echarts';
 
 import * as chartLib from '@/component/chartItem/option';
 import { connect } from 'dva';
-import { ICommon, IPage, IPanelConfig } from '@/models/common';
+import { ICommon, IPage, IPanelConfig, IApiProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
@@ -14,6 +14,9 @@ import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
 import G2Plot from '@/component/g2plot';
 import { isArray } from '@antv/util';
+import { Moment } from 'moment';
+import ranges from '@/utils/range';
+
 const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   let obj = {};
   arr.forEach((item) => {
@@ -21,6 +24,14 @@ const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   });
   return obj;
 };
+
+const getRange = ({ dateType = '本月' }: { dateType: string }) => {
+  let [start, end]: [Moment, Moment] = ranges[dateType];
+  let tstart = start.format('YYYYMMDD'),
+    tend = end.format('YYYYMMDD');
+  return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
+};
+
 const Item = ({
   config,
   title,
@@ -51,7 +62,7 @@ const Item = ({
   }
   const { default: method, defaultOption = {}, ...lib } = chartLib[config.key];
 
-  let api = config.api || {};
+  let api: IApiProps = config.api || { dateType: '本月' };
   /**
    * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
    */
@@ -63,7 +74,10 @@ const Item = ({
   let valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
 
   let { data, loading } = useFetch({
-    param: { url: api?.api_type === 'url' ? api?.url : null },
+    param: {
+      url: api?.api_type === 'url' ? api?.url : null,
+      params: { ...getRange(api), cache: api.cache || 5 },
+    },
     valid: () => valid,
     interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),
     callback(e) {

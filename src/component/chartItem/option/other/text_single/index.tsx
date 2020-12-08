@@ -75,6 +75,7 @@ export const apiConfig: IApiConfig = {};
 const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathname }) => {
   let {
     fontSize = 25,
+    textAlign,
     fontColor = '#27e2e6',
     letterSpacing = 0,
     fontWeight = 'normal',
@@ -133,6 +134,7 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
         fontSize,
         fontWeight,
         color: fontColor,
+        justifyContent: { left: 'flex-start', center: 'center', right: 'flex-end' }[textAlign],
         opacity,
         letterSpacing,
         ...textShadow,

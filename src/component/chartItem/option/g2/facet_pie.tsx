@@ -109,6 +109,7 @@ export const onMount = (
     facet = 'list',
     outterPercent = 100,
     fontSize = 16,
+    textAlign,
     fontWeight = 'normal',
     fontColor = '#ffffff',
     theme = 'cbpc',
@@ -166,6 +167,7 @@ export const onMount = (
         style: {
           fill: fontColor,
           fontSize,
+          textAlign,
           fontWeight,
           stroke: null,
           textAlign: 'center',
