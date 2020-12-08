@@ -76,7 +76,7 @@ const Item = ({
   let { data, loading } = useFetch({
     param: {
       url: api?.api_type === 'url' ? api?.url : null,
-      params: { ...getRange(api), cache: api.cache || 5 },
+      params: { ...getRange(api), cache: api.cache ?? 2 },
     },
     valid: () => valid,
     interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),

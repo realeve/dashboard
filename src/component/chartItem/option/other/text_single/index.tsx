@@ -17,6 +17,8 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
+export const textAlignConfig = { left: 'flex-start', center: 'center', right: 'flex-end' };
+
 export const config: IChartConfig[] = [
   {
     key: 'opacity',
@@ -34,6 +36,12 @@ export const config: IChartConfig[] = [
     title: '文本内容',
   },
   ...lib.getFontConfig(25, '#27e2e6'),
+  {
+    key: 'background',
+    defaultValue: 'transparent',
+    type: 'color',
+    title: '背景色',
+  },
   {
     key: 'textShadowBlur',
     type: 'range',
@@ -68,6 +76,15 @@ export const config: IChartConfig[] = [
     max: 30,
     step: 1,
   },
+  {
+    key: 'padding',
+    defaultValue: 0,
+    title: '边距',
+    type: 'range',
+    min: 0,
+    max: 40,
+    step: 2,
+  },
 ];
 
 export const apiConfig: IApiConfig = {};
@@ -85,6 +102,8 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
     textShadowOffsetX = 0,
     textShadowOffsetY = 0,
     content = '这里输入文字',
+    background,
+    padding,
   } = componentConfig;
 
   // 此处像正常的react组件处理，返回对应的信息即可
@@ -134,10 +153,12 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
         fontSize,
         fontWeight,
         color: fontColor,
-        justifyContent: { left: 'flex-start', center: 'center', right: 'flex-end' }[textAlign],
+        justifyContent: textAlignConfig[textAlign],
         opacity,
         letterSpacing,
         ...textShadow,
+        background,
+        padding,
       }}
       html={text.current}
       onBlur={handleBlur}

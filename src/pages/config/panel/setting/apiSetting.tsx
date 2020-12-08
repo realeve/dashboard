@@ -55,6 +55,15 @@ const appendConfig: IChartConfig[] = [
     placeholder: '在此填入接口地址',
   },
   rangeConfig,
+  {
+    key: 'cache',
+    type: 'range',
+    min: 0,
+    max: 10,
+    step: 0.5,
+    title: '缓存(分钟)',
+    defaultValue: 2,
+  },
 ];
 
 export default ({
@@ -96,7 +105,7 @@ export default ({
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        {[0, 1, 2, 4].map(
+        {[0, 1, 2, 4, 5].map(
           (i) =>
             (i < 2 || state.show) && (
               <FormItem

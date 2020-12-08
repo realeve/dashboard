@@ -5,7 +5,7 @@ import * as R from 'ramda';
 import { useInterval } from 'react-use';
 
 import { isDocumentVisible, limit } from './lib';
-
+import { now } from '@/utils/lib';
 import subscribeFocus from './windowFocus';
 import subscribeVisible from './windowVisible';
 
@@ -139,14 +139,14 @@ const useFetch = <T extends {} | void>({
 
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
-    // console.log('即将刷新:', new Date());
+    console.log('即将刷新:', now());
     setInnerTrigger(+new Date());
   };
 
   const limitRefresh = limit(reFetch, focusTimespan * 1000);
   const rePolling = () => {
     setPollingWhenVisibleFlag(true);
-    console.log('页面显示');
+    console.log('页面获得焦点，触发刷新', now());
   };
 
   // 初始时

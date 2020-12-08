@@ -92,6 +92,7 @@ export default class ColorPicker extends React.Component {
 
   onVisibleChange(open) {
     this.setOpen(open);
+    this.props.onVisibleChange && this.props.onVisibleChange(open);
   }
 
   onPanelMount(panelDOMRef) {

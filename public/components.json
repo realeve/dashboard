@@ -13,7 +13,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "echarts基础图表",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
+            "image": "/img/icons/43_baseline.png"
           },
           {
             "name": "echarts.horizontal-positive-negative-bar-chart",

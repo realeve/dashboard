@@ -26,7 +26,7 @@ const getTabIdx = (value) => {
   return EColorType.GARDIENT;
 };
 
-const ColorItem = ({ value = '', onChange, position }) => {
+const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
   if (!value) {
     return null;
   }
@@ -40,6 +40,7 @@ const ColorItem = ({ value = '', onChange, position }) => {
         onChange(`rgba(${color},${e.alpha / 100})`);
       }}
       placement="bottomRight"
+      onVisibleChange={onVisibleChange}
     >
       <div className={styles.item} style={{ backgroundColor: value }}>
         {position}
@@ -82,6 +83,7 @@ const GardientPicker = ({ value, onChange }) => {
     }
     onChange(getGardient(color));
   }, [color]);
+  const [show, setShow] = useState(false);
 
   return (
     <div className={styles.gardient}>
@@ -99,6 +101,7 @@ const GardientPicker = ({ value, onChange }) => {
             key={idx}
             defaultPosition={{ x: 0, y: 0 }}
             position={{ x: color[idx][1] * 1.78 - 12, y: 0 }}
+            disabled={show}
             onStop={(e) => {
               let nextPos = (Number(e.layerX) / 1.78).toFixed(0);
               nextPos = R.clamp(0, 100, nextPos);
@@ -113,6 +116,7 @@ const GardientPicker = ({ value, onChange }) => {
               <div className={styles.arrayTop} style={{ borderBottomColor: color[idx][0] }} />
               <ColorItem
                 value={item[0]}
+                onVisibleChange={setShow}
                 onChange={(e) => {
                   let prev = R.nth(idx, color);
                   prev[0] = e;
@@ -149,7 +153,7 @@ export const PureColor = ({ value = '', onChange, position = 'top', noAnimation 
         </div>
       </div>
       <ColorPicker
-        defaultColor={rgb2hex(value).slice(0, 7)}
+        color={rgb2hex(value).slice(0, 7)}
         alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
         onMouseUp={(e) => {
           let color = hex2rgb(e.color);
