@@ -34,6 +34,8 @@ const Item = ({
   chartid?: string;
   onLoad?: (e: string) => void;
 }) => {
+  const [inited, setInited] = useState(false);
+
   if (!chartLib[config.key]) {
     return (
       <div style={{ color: '#ddd', fontSize: 30, lineHeight: 2 }}>
@@ -77,10 +79,14 @@ const Item = ({
   //   onLoad(mock.title);
   // }
 
-  if (valid && (loading || !data)) {
+  if (valid && ((loading && !inited) || !data)) {
     return <Skeleton />;
   }
+  // console.log({ data, valid, inited });
 
+  if (!inited) {
+    setInited(true);
+  }
   // defaultOption 可能为函数，由config计算得出
   let appendConfig: { renderer: tRender } = { renderer: 'canvas' };
 

@@ -83,7 +83,7 @@ export const FormItem = ({
           <input
             type="number"
             className="data_input"
-            value={value[0] || 0}
+            value={value?.[0] || 0}
             onChange={(e) => {
               let val = Number(e.target.value);
               onChange([val, value[1]]);

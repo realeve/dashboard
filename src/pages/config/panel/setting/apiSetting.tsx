@@ -9,9 +9,11 @@ import styles from './index.less';
 import JsonViewer from './JsonViewer';
 
 const initState = (configs: IApiConfig, api: any) => {
+  let { config, type, ...props } = configs;
   // 配置项中的信息
-  let setting = getDefaultState(configs.config, api);
-  return { ...setting, ...api };
+  let setting = getDefaultState(config, api);
+
+  return { ...props, api_type: type, ...setting, ...api };
 };
 
 const appendConfig: IChartConfig[] = [

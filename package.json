@@ -5,7 +5,7 @@
     "build": "umi build",
     "test": "umi test",
     "add": "node ./config/template.js",
-    "preview": "cd dist && live-server --port=8080"
+    "preview": "live-server --port=8080 ./dist"
   },
   "dependencies": {
     "@antv/chart-advisor": "^0.1.2-alpha.19",

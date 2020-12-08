@@ -84,13 +84,6 @@ const useFetch = <T extends {} | void>({
 
   // 首次加载
   useEffect(() => {
-    // if (!R.isNil(initData) && R.equals(data, initData)) {
-    //   return;
-    // }
-
-    // 加载时，data置为空
-    // setData(null);
-
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
       setData(null);

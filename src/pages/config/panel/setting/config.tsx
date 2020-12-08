@@ -37,6 +37,11 @@ const getGeneralConfig = ({ selectedIdx, panel, page }) => {
 const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
+  const [activeKey, setActiveKey] = useState('1');
+  useEffect(() => {
+    setActiveKey('1');
+  }, [selectedIdx]);
+
   useEffect(() => {
     let setting = panel[selectedIdx];
     const _size = {
@@ -78,7 +83,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   const [general, setGeneral] = useState(null);
 
   return (
-    <Tabs defaultActiveKey="1" type="line">
+    <Tabs defaultActiveKey="1" activeKey={activeKey} type="line" onChange={setActiveKey}>
       <Tabs.TabPane tab="外观设置" key="1" style={{ color: '#eee', height: '100%' }}>
         <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
