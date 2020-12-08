@@ -197,6 +197,37 @@ const Index = ({
   const getThumbnail = (scale: number = 0.2, filename) =>
     editor.current.getThumbnail(scale / zoom, 0.8, filename);
 
+  const getLockedPanel = () =>
+    panel.filter((item) => item.lock || item.hide).map((item) => item.id);
+
+  const calcNextSelectedPanel = (selectedPanel) => {
+    // 此处处理多个组件共同选择的问题；
+    let nextPanel = selectedPanel;
+    let lockedPanel = getLockedPanel();
+    if (selectedPanel.length > 0) {
+      // 2020-11-11 group所在ID的组件需要一并被选择
+      let groupIds: string[] = [];
+
+      panel.filter((item) => {
+        if (selectedPanel.includes(item.id) && item.group) {
+          let items = panel.filter((p) => p.group == item.group);
+          let groupPanel = items.map((p) => p.id);
+          let groupId = items.map((p) => p.group);
+          nextPanel = [...nextPanel, ...groupPanel];
+          groupIds = [...groupIds, ...groupId];
+        }
+      });
+      nextPanel = R.uniq(nextPanel);
+      groupIds = R.uniq(groupIds).filter((item) => item);
+      if (groupIds.length === 1) {
+        nextPanel = [...groupIds, ...nextPanel];
+      }
+    }
+
+    // 移除隐藏或锁定的组件
+    return nextPanel.filter((item) => !lockedPanel.includes(item));
+  };
+
   return (
     <div className={styles.editor}>
       <HeaderComponent
@@ -253,34 +284,13 @@ const Index = ({
               // width={page.width}
               // height={page.height}
               page={page}
-              lockedPanel={panel.filter((item) => item.lock || item.hide).map((item) => item.id)}
+              lockedPanel={getLockedPanel()}
+              calcNextSelectedPanel={calcNextSelectedPanel}
               onSelect={(selectedPanel) => {
-                // 此处处理多个组件共同选择的问题；
-                let nextPanel = selectedPanel;
-                if (selectedPanel.length > 0) {
-                  // 2020-11-11 group所在ID的组件需要一并被选择
-                  let groupIds: string[] = [];
-
-                  panel.filter((item) => {
-                    if (selectedPanel.includes(item.id) && item.group) {
-                      let items = panel.filter((p) => p.group == item.group);
-                      let groupPanel = items.map((p) => p.id);
-                      let groupId = items.map((p) => p.group);
-                      nextPanel = [...nextPanel, ...groupPanel];
-                      groupIds = [...groupIds, ...groupId];
-                    }
-                  });
-                  nextPanel = R.uniq(nextPanel);
-                  groupIds = R.uniq(groupIds).filter((item) => item);
-                  if (groupIds.length === 1) {
-                    nextPanel = [...groupIds, ...nextPanel];
-                  }
-                }
-
                 dispatch({
                   type: 'common/setStore',
                   payload: {
-                    selectedPanel: nextPanel,
+                    selectedPanel: calcNextSelectedPanel(selectedPanel),
                   },
                 });
               }}

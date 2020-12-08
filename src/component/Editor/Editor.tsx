@@ -164,6 +164,9 @@ export interface IEditorProps {
   // 选中元素
   onSelect?: (name: string[]) => void;
 
+  // 计算选中元素
+  calcNextSelectedPanel: (name: string[]) => string[];
+
   // 移除元素
   onRemove?: (name: string[]) => void;
 
@@ -540,8 +543,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (isDragStart) {
               inputEvent.preventDefault();
             }
-
-            this.setSelectedTargets(_selected).then(() => {
+            // console.log('编辑面板手动触发选中', _selected);
+            this.setSelectedTargets(_selected, true, true).then(() => {
               if (!isDragStart) {
                 return;
               }
@@ -718,7 +721,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public getSelectedTargets() {
     return this.state.selectedTargets;
   }
-  public setSelectedTargets(targets: Array<HTMLElement | SVGElement>, isRestore?: boolean) {
+  public setSelectedTargets(
+    targets: Array<HTMLElement | SVGElement>,
+    isRestore = false,
+    selectGroupTarget = false,
+  ) {
     targets = targets.filter((target) => {
       return targets.every((parnetTarget) => {
         return parnetTarget === target || !parnetTarget.contains(target);
@@ -731,17 +738,28 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       return !this.props.lockedPanel.includes(targetId);
     });
 
+    // 是否需要计算关联的选中组件
+    /**
+     * 2020-12-08 调整bug
+     * 当用户点击画布中的组件时，此时应选中同组的组件，用于拖动；
+     * 当需要调整属性时，请选择列表中的单项；
+     */
+    let nexts: string[] = [];
+    if (selectGroupTarget) {
+      nexts = getIds(targets);
+      // 计算关联的父子组件
+      nexts = this.props?.calcNextSelectedPanel(nexts);
+      targets = this.getViewport().getElements(nexts);
+      this.props?.onSelect?.(nexts);
+    }
+
     return this.promiseState({
       selectedTargets: targets,
     }).then(() => {
       if (!isRestore) {
         const prevs = getIds(this.moveableData.getSelectedTargets());
-
-        const nexts = getIds(targets);
-
         if (prevs.length !== nexts.length || !prevs.every((prev, i) => nexts[i] === prev)) {
           // 被选中
-
           this.props?.onSelect?.(nexts);
           this.historyManager.addAction('selectTargets', {
             prevs,

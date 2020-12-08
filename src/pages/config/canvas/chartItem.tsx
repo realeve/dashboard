@@ -73,7 +73,7 @@ const Item = ({
   let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   let valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
 
-  let { data, loading } = useFetch({
+  let { data, loading, error } = useFetch({
     param: {
       url: api?.api_type === 'url' ? api?.url : null,
       params: { ...getRange(api), cache: api.cache ?? 2 },
@@ -87,6 +87,10 @@ const Item = ({
       return e;
     },
   });
+
+  if (error) {
+    return <div style={{ color: '#eee' }}>数据请求出错</div>;
+  }
 
   // 在callback中会触发该效果，无需再次调用
   // if (api?.api_type === 'mock' && mock && mock.title) {
