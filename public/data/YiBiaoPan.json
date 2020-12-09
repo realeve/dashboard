@@ -1,6 +1,5 @@
 {
-  "title": "仪表盘",
-  "rec_time": "2020-12-07 22:04:31",
+  "rec_time": "2020-12-09 21:14:42",
   "panel": [{
     "id": "6eff10923307c",
     "key": "group_rect",
@@ -21,7 +20,7 @@
     "image": "/img/config/text.png",
     "style": {
       "transform": {
-        "translate": "505px,219px",
+        "translate": "742px,411px",
         "rotate": "0deg",
         "scale": "1,1"
       },
@@ -74,7 +73,7 @@
     "image": "/img/icons/01_barChartPositiveNegative.png",
     "style": {
       "transform": {
-        "translate": "505px,270px",
+        "translate": "742px,462px",
         "rotate": "0deg",
         "scale": "1,1"
       },
@@ -101,6 +100,112 @@
     "showBorder": true,
     "showBackground": true,
     "componentConfig": {},
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "dea0a6fb63dff",
+    "api": {},
+    "key": "group_rect",
+    "fold": true,
+    "icon": "datav-font icon-group layer-item-icon",
+    "title": "开包量业务汇总",
+    "engine": "other",
+    "business": true
+  }, {
+    "id": "5f46e6e7e9925",
+    "api": {
+      "x": 1,
+      "y": 2,
+      "url": "http://localhost:90/1092/abe4d1b60f.array",
+      "show": true,
+      "cache": 1,
+      "legend": 0,
+      "api_type": "url",
+      "interval": 10
+    },
+    "key": "base_line",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "name": "echarts.base_line",
+    "type": "regular_bar",
+    "group": "dea0a6fb63dff",
+    "image": "/img/icons/43_baseline.png",
+    "style": {
+      "transform": {
+        "translate": "511px,126.49599249329765px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "80px",
+      "left": "80px",
+      "width": "569px",
+      "height": "245px",
+      "position": "absolute"
+    },
+    "title": "echarts基础图表",
+    "engine": "echarts",
+    "general": null,
+    "showTitle": false,
+    "showBorder": false,
+    "showBackground": false,
+    "componentConfig": {},
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "f28004e6cc083",
+    "api": {},
+    "key": "text_single",
+    "ajax": false,
+    "icon": "com-font icon-com-regular_bar",
+    "name": "other.text_single",
+    "type": "regular_bar",
+    "group": "dea0a6fb63dff",
+    "image": "/img/config/text.png",
+    "style": {
+      "transform": {
+        "translate": "511px,86px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "80px",
+      "left": "80px",
+      "width": "569px",
+      "height": "40px",
+      "position": "absolute"
+    },
+    "title": "文本",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "边框29",
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": false,
+    "showBackground": false,
+    "componentConfig": {
+      "content": "这是某个业务",
+      "opacity": 0.9,
+      "padding": 12,
+      "fontSize": 21,
+      "fontColor": "rgba(255, 255, 255,1)",
+      "textAlign": "right",
+      "undefined": "",
+      "background": "linear-gradient(90deg, rgba(240,234,218,0.06) 23%, rgba(151,230,24,0.67) 58%, rgba(8,61,88,1) 88%)",
+      "fontWeight": "normal",
+      "letterSpacing": 0,
+      "textShadowBlur": 0,
+      "backgroundColor": "linear-gradient(90deg, rgba(255,227,189,1) 2%, rgba(127,130,226,1) 44%, rgba(47,53,216,1) 74%)",
+      "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+      "textShadowOffsetX": 0,
+      "textShadowOffsetY": 0
+    },
     "useGeneralStyle": true,
     "business": true
   }],

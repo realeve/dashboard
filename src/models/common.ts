@@ -5,6 +5,7 @@ import * as lib from '@/utils/lib';
 import { TQuickTool } from '@/component/Editor/types';
 import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 import { reorderPanel } from '@/pages/config/panel/layer';
+import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
 
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
@@ -246,6 +247,36 @@ export default {
         },
       });
     },
+    // 编辑指定的json文件
+    *loadPageOnline({ payload: { file } }, { put, call }) {
+      let res = yield call(getDashboardConfigByUrl, file);
+      if (res.type !== 'online') {
+        return;
+      }
+      let { page, panel } = res;
+      yield put({
+        type: 'setStore',
+        payload: {
+          page,
+          panel,
+        },
+      });
+    },
+
+    // 清空页面数据
+    *clearPage({}, { put, call }) {
+      let { page } = R.clone(defaultState);
+      yield call(db.savePanel('page'), page);
+      yield call(db.savePanel('panel'), []);
+      yield put({
+        type: 'setStore',
+        payload: {
+          page,
+          panel: [],
+          selectedPanel: [],
+        },
+      });
+    },
     *updatePage({ payload: { page } }, { put, call, select }) {
       let prevPage = yield select((state) => state[namespace].page);
       yield updatePage({
@@ -422,19 +453,30 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
+      return history.listen(({ pathname, query }) => {
         // 配置页时才加载信息，首页不加载
-        if (['/config'].includes(pathname)) {
-          dispatch({
-            type: 'loadPanel',
-          });
-          dispatch({
-            type: 'loadPage',
-          });
+        if (['/config', '/config/'].includes(pathname)) {
+          if (query.file) {
+            dispatch({
+              type: 'loadPageOnline',
+              payload: {
+                file: query.file,
+              },
+            });
+          } else {
+            dispatch({
+              type: 'loadPanel',
+            });
+            dispatch({
+              type: 'loadPage',
+            });
+          }
+
           dispatch({
             type: 'loadBusinessCategory',
           });
         }
+
         dispatch({
           type: 'setStore',
           pathname,

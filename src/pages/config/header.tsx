@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { api } from '@/utils/setting';
 import { addDashboardList } from '@/pages/config/panel/business/db';
-
+import qs from 'querystring';
 import pinyin from '@/utils/pinyin.js';
 import { message } from 'antd';
 
@@ -58,7 +58,11 @@ export default ({
   author: string;
   getThumbnail: (scale: number, filename: string | null) => Promise<string | void>;
 }) => {
-  let title = pinyin.toPinYinFull(_title);
+  let query: { file?: string; id?: string } = qs.parse(window.location.search.slice(1));
+  let title = query.file
+    ? query.file.replace('.json', '').split('/').slice(-1)[0]
+    : pinyin.toPinYinFull(_title);
+
   const [show, setShow] = useState(false);
   const onSave = async () => {
     let props = await getLocalConfig();
@@ -72,7 +76,6 @@ export default ({
     getThumbnail(0.2, title);
 
     let dashboard = {
-      title: _title,
       rec_time: lib.now(),
       panel,
       page: {
@@ -87,15 +90,21 @@ export default ({
     setShow(true);
 
     saveBat(title);
+    let success = true;
 
-    // 向大屏中添加列表项
-    addDashboardList({
-      title: _title,
-      file: title + '.json',
-      img: title + '.jpg',
-    }).then((success) => {
-      message[success ? 'success' : 'error'](`添加组件${success ? '成功' : '失败'}`);
-    });
+    // 非编辑模式下，向服务端写入数据；
+    // 否则 按原文件名替换文件
+    if (!query.file) {
+      // 向大屏中添加列表项
+      success = await addDashboardList({
+        title: _title,
+        file: title + '.json',
+        img: title + '.jpg',
+      });
+    } else {
+      message.success('请执行批处理文件并替换服务端现有配置文件以更新内容');
+    }
+    message[success ? 'success' : 'error'](`添加组件${success ? '成功' : '失败'}`);
   };
 
   // todo 增加批处理文件的生成

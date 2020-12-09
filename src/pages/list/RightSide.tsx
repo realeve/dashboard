@@ -77,7 +77,11 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img }: I
         <div className={styles.info}>
           <div className={styles.img} style={{ backgroundImage: `url("/data/${img}")` }} />
           <div className={styles.edit}>
-            <a href={`/config/?id=${id}`} rel="noopener noreferrer" className="edit-wrap">
+            <a
+              href={`/config/?id=${id}&file=./data/${file}`}
+              rel="noopener noreferrer"
+              className="edit-wrap"
+            >
               <Button type="primary">编辑</Button>
             </a>
             <div className={styles['main-button']}>
