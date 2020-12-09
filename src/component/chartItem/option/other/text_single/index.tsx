@@ -3,11 +3,10 @@ import React, { useRef, useEffect } from 'react';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import styles from './index.less';
-
 import { connect } from 'dva';
-
 import ContentEditable from 'react-contenteditable';
 import { ICommon } from '@/models/common';
+import classnames from 'classnames';
 
 export let mock: IChartMock = {
   data: [[45.7]],
@@ -85,6 +84,25 @@ export const config: IChartConfig[] = [
     max: 40,
     step: 2,
   },
+  {
+    title: '文字滚动设置(每圈滚动耗时)',
+    type: 'divider',
+  },
+  {
+    key: 'animationDuration',
+    defaultValue: 30,
+    title: '速度',
+    type: 'range',
+    min: 0,
+    max: 80,
+    step: 2,
+  },
+  {
+    key: 'marquee',
+    defaultValue: false,
+    title: '是否开启',
+    type: 'switch',
+  },
 ];
 
 export const apiConfig: IApiConfig = {};
@@ -104,6 +122,8 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
     content = '这里输入文字',
     background,
     padding,
+    marquee,
+    animationDuration,
   } = componentConfig;
 
   // 此处像正常的react组件处理，返回对应的信息即可
@@ -147,25 +167,36 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
   }, [content]);
 
   return (
-    <ContentEditable
-      className={styles.text}
+    <div
       style={{
-        fontSize,
-        fontWeight,
-        color: fontColor,
-        justifyContent: textAlignConfig[textAlign],
-        opacity,
-        letterSpacing,
-        ...textShadow,
         background,
-        padding,
       }}
-      html={text.current}
-      onBlur={handleBlur}
-      onChange={handleChange}
-      suppressContentEditableWarning={true}
-      disabled={pathname == '/'}
-    />
+      className={classnames({ [styles.marqueeWrapper]: marquee })}
+    >
+      <ContentEditable
+        className={marquee ? styles.marquee : styles.text}
+        style={{
+          fontSize,
+          fontWeight,
+          color: fontColor,
+          justifyContent: textAlignConfig[textAlign],
+          opacity,
+          letterSpacing,
+          ...textShadow,
+          padding,
+          animationDuration: animationDuration + 's',
+        }}
+        html={
+          marquee
+            ? `${text.current}<span style="width:5em;display:inline-block;"></span>${text.current}<span style="width:5em;display:inline-block;"></span>${text.current}`
+            : text.current
+        }
+        onBlur={handleBlur}
+        onChange={handleChange}
+        suppressContentEditableWarning={true}
+        disabled={pathname == '/'}
+      />
+    </div>
   );
 };
 export default connect(({ common: { pathname } }: { common: ICommon }) => ({

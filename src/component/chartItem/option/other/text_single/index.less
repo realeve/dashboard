@@ -1,8 +1,30 @@
+@import '../../../../../style/theme.less';
+
 .text {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+.marquee {
+  position: relative;
+  white-space: nowrap;
+  animation: marqueeAnimation infinite linear;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+}
+.marqueeWrapper {
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+  position: relative;
   height: 100%;
   width: 100%;
 }
