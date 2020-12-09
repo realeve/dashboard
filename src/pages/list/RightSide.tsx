@@ -153,11 +153,12 @@ const RightSide = ({ data, dispatch }: IScreenListProps) => {
       type: 'common/loadPageOnline',
       payload: {
         file: show.file,
+        callback: () => {
+          // step2:进入config路由
+          router.push('/config');
+        },
       },
     });
-
-    // step2:进入config路由
-    router.push('/config');
   };
 
   return (

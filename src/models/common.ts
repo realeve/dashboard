@@ -248,7 +248,7 @@ export default {
       });
     },
     // 编辑指定的json文件
-    *loadPageOnline({ payload: { file } }, { put, call }) {
+    *loadPageOnline({ payload: { file, callback } }, { put, call }) {
       let res = yield call(getDashboardConfigByUrl, file);
       if (res.type !== 'online') {
         return;
@@ -266,6 +266,7 @@ export default {
           panel,
         },
       });
+      callback?.();
     },
 
     // 清空页面数据
