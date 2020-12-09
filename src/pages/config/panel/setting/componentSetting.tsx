@@ -23,7 +23,7 @@ export const getDefaultState = (configs: IChartConfig[] = [], componentConfig: {
 
 export default ({
   onChange,
-  panel: { key, componentConfig },
+  panel: { key, componentConfig, id },
 }: {
   onChange: (e: any) => void;
   panel: IPanelConfig;
@@ -40,7 +40,7 @@ export default ({
     }
     setConfigs(res.config);
     setState(getDefaultState(res.config, componentConfig));
-  }, [key]);
+  }, [id]);
 
   if (!configs) {
     return <p>组件配置信息异常，请联系管理员。</p>;
