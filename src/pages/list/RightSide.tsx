@@ -23,7 +23,7 @@ const NewScreen = () => (
 );
 
 interface IProps extends IScreenItem {
-  setShow: (e: { visible: boolean; type: string; id: number }) => void;
+  setShow: (e: { visible: boolean; type: string; id: number; file?: string }) => void;
 }
 
 const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, setShow }: IProps) => {
@@ -136,22 +136,23 @@ export interface IScreenListProps {
   dispatch: Dispatch;
 }
 const RightSide = ({ data, dispatch }: IScreenListProps) => {
+  // 将面板从子组件中移出来，将事件添加至外部，这样有多个面板需要渲染时，无需渲染多个popup
   const [show, setShow] = useSetState<{
     visible: boolean;
     type: string;
     id: number;
-  }>({ visible: false, type: '', id: null });
+    file: string;
+  }>({ visible: false, type: '', id: null, file: '' });
 
   // 复制数据大屏
   const copyDashboardByFile = () => {
     // message.success('复制当前数据到本机存储，然后进入config路由');
-    let option = R.find<IScreenItem>(R.propEq('id', show.id))(data);
 
     // step1:根据文件名载入基本信息到 本地环境
     dispatch({
       type: 'common/loadPageOnline',
       payload: {
-        file: './data/' + option.file,
+        file: show.file,
       },
     });
 
@@ -197,7 +198,16 @@ const RightSide = ({ data, dispatch }: IScreenListProps) => {
       <div className={styles.screen}>
         <NewScreen />
         {data.map((props) => (
-          <ScreenItem {...props} key={props.id} setShow={setShow} />
+          <ScreenItem
+            {...props}
+            key={props.id}
+            setShow={(show) => {
+              setShow({
+                ...show,
+                file: './data/' + props.file,
+              });
+            }}
+          />
         ))}
       </div>
     </div>
