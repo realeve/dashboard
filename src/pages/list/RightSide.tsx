@@ -202,6 +202,7 @@ const RightSide = ({ data, dispatch }: IScreenListProps) => {
                 publish: 1,
               }).then((success) => {
                 success && message.success(`删除大屏${success ? '成功' : '失败'}`);
+                window.location.reload();
               });
               return;
             }
