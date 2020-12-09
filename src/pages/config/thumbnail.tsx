@@ -24,7 +24,7 @@ const getThumbnailParam = (x: number) => {
 // 缩略图缩放系数
 const SCALE_PARAM = 10;
 
-// TODO 拖动缩略图
+// -[x] 拖动缩略图
 interface IThumbnailProps {
   visible: boolean;
   zoom: number;

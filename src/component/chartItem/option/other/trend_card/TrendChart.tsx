@@ -67,7 +67,7 @@ export default ({
             val[y] = item.value;
             return val;
           });
-      // TODO 由官方示例 https://g2plot.antv.vision/zh/examples/case/statistical-scenario#trend 所得
+      // [-] 由官方示例 https://g2plot.antv.vision/zh/examples/case/statistical-scenario#trend 所得
       // 此处在渲染state的时候有性能问题，此处已修复
       setState({ tooltipItems, activeTooltipTitle });
     });

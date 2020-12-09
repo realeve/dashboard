@@ -34,7 +34,7 @@ const getGeneralConfig = ({ selectedIdx, panel, page }) => {
   return item.useGeneralStyle ? null : res;
 };
 
-// TODO 已知bug，当form渲染出来后，切换组件时，会导致两个组件配置项不一致，对应的数据读取错误而使页面崩溃，
+// [-] 已知bug，当form渲染出来后，切换组件时，会导致两个组件配置项不一致，对应的数据读取错误而使页面崩溃，
 // 此处应先重置面板，进入切换状态；
 
 const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {

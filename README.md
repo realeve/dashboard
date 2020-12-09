@@ -135,7 +135,7 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 - [x] widgets
 - [x] 翻牌器
 - [x] 表单滚动
-- [ ] g2 plot中 柱状图/曲线图
+- [x] g2 plot中 柱状图/曲线图
 - [x] echarts中借鉴借鉴的图表适配
 - [x] 主题配色提取
 
