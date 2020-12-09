@@ -253,7 +253,12 @@ export default {
       if (res.type !== 'online') {
         return;
       }
+
       let { page, panel } = res;
+
+      // 加载配置项到本地
+      yield call(db.savePanel('page'), page);
+      yield call(db.savePanel('panel'), panel);
       yield put({
         type: 'setStore',
         payload: {
