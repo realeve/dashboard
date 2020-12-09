@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-export default () => {
+import { IScreenListProps } from './RightSide';
+export default ({ data }: IScreenListProps) => {
   return (
     <div className={styles.projectManage}>
       <div className={styles['manage-title']}>
@@ -26,22 +27,24 @@ export default () => {
           )}
         >
           <span>全部应用</span>
-          <span className="project-num">5</span>
+          <span className="project-num">{data.length || 0}</span>
         </div>
       </div>
       <div className={styles['manage-main']}>
         <div className={styles['main-project']} style={{ color: 'rgb(188, 201, 212)' }}>
           <span className={classnames(styles['project-name'], styles['project-ungrouped'])}>
-            未分组1
+            未分组
           </span>
-          <span className={classnames(styles['project-num'], styles['project-block'])}>2</span>
+          <span className={classnames(styles['project-num'], styles['project-block'])}>
+            {data.length || 0}
+          </span>
         </div>
-        <div className={styles['main-project']} style={{ color: 'rgb(188, 201, 212)' }}>
+        {/* <div className={styles['main-project']} style={{ color: 'rgb(188, 201, 212)' }}>
           <span className={classnames(styles['project-name'], styles['project-ungrouped'])}>
             未分组2
           </span>
           <span className={classnames(styles['project-num'], styles['project-block'])}>3</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

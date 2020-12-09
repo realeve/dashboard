@@ -2,7 +2,32 @@ import React from 'react';
 import styles from './index.less';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
+
+import { api } from '@/utils/setting';
+import useFetch from '@/component/hooks/useFetch';
+import DNA from '@/pages/index/dna';
+
+export interface IScreenItem {
+  file: string;
+  id: number;
+  img: string;
+  rec_time: string;
+  title: string;
+  publish?: boolean;
+  group_name?: string;
+}
 export default () => {
+  let { data, loading, error } = useFetch<{ data: IScreenItem[] }>({
+    param: {
+      url: api.getDashboardList,
+      params: { cache: 2 },
+    },
+  });
+
+  if (error) {
+    return <DNA title={`大屏列表加载失败，请刷新重试或联系管理员!`} />;
+  }
+
   return (
     <div className={styles.list}>
       <div className={styles.navMain}>
@@ -16,8 +41,14 @@ export default () => {
       </div>
       <div className={styles.navShadow} />
       <div className={styles.project}>
-        <LeftSide />
-        <RightSide />
+        {loading || !data ? (
+          <DNA />
+        ) : (
+          <>
+            <LeftSide data={data.data} />
+            <RightSide data={data.data} />
+          </>
+        )}
       </div>
     </div>
   );

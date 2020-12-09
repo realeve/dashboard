@@ -17,7 +17,7 @@ class Popup extends React.PureComponent<IPopup> {
       <div ref={this.overlayElement} className={prefix('overlay')} onClick={this.onClick}>
         <div className={prefix('popup')} style={this.props.style}>
           <div className={prefix('close')} onClick={this.props.onClose} />
-          {this.props.children}
+          <div className={prefix('container')}>{this.props.children}</div>
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ export const Confirm = ({
   return (
     <Popup onClose={onCancel} {...props}>
       <h2>{title}</h2>
-      {spinning ? <Spin spinning /> : children}
+      {spinning ? <Spin spinning /> : <div style={{ flex: 1 }}>{children}</div>}
       <PopupFooter>
         <Button type="ghost" onClick={onCancel}>
           {cancelText}
