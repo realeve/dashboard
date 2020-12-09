@@ -1,4 +1,4 @@
-import { axios, IAxiosState, AxiosError, DEV, mock, _commonData } from '@/utils/axios';
+import { axios, IAxiosState, DEV, _commonData } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';

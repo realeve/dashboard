@@ -7,8 +7,8 @@ import { useDebounce, useSetState } from 'react-use';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { connect } from 'dva';
 import { Dispatch } from 'redux';
-import * as R from 'ramda';
 import { router } from 'umi';
+import { setDashboardList } from './db';
 
 // 新增组件
 const NewScreen = () => (
@@ -22,11 +22,18 @@ const NewScreen = () => (
   </div>
 );
 
+interface IShowProps {
+  visible: boolean;
+  type: string;
+  id: number;
+  file?: string;
+  title?: string;
+}
 interface IProps extends IScreenItem {
-  setShow: (e: { visible: boolean; type: string; id: number; file?: string }) => void;
+  setShow: (e: IShowProps) => void;
 }
 
-const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, setShow }: IProps) => {
+const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setShow }: IProps) => {
   const [screenTitle, setScreenTitle] = useState(title);
   useEffect(() => {
     setScreenTitle(title);
@@ -38,7 +45,14 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, set
   useDebounce(
     () => {
       if (screenTitle !== title) {
-        message.success(`更新${id}项的 title 字段 为${screenTitle}`);
+        setDashboardList({
+          _id: id,
+          title: screenTitle,
+          is_hide: 0,
+          publish,
+        }).then((success) => {
+          success && message.success(`标题更新${success ? '成功' : '失败'}`);
+        });
       }
     },
     1000,
@@ -73,7 +87,14 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, set
                 <span
                   className={styles['button-span']}
                   onClick={() => {
-                    message.success(`更新${id}项的 public字段`);
+                    setDashboardList({
+                      _id: id,
+                      title,
+                      is_hide: 0,
+                      publish: 1,
+                    }).then((success) => {
+                      success && message.success(`大屏发布${success ? '成功' : '失败'}`);
+                    });
                   }}
                 >
                   <i className="datav-icon datav-font icon-publish" />
@@ -83,7 +104,7 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, set
                 <span
                   className={styles['button-span']}
                   onClick={() => {
-                    setShow({ visible: true, type: 'copy', id });
+                    setShow({ visible: true, type: 'copy', id, title: screenTitle });
                   }}
                 >
                   <i className="datav-icon datav-font icon-copy-screen copy-screen" />
@@ -93,7 +114,7 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, set
                 <span
                   className={styles['button-span']}
                   onClick={() => {
-                    setShow({ visible: true, type: 'del', id });
+                    setShow({ visible: true, type: 'del', id, title: screenTitle });
                   }}
                 >
                   <i className="datav-icon datav-font icon-delete delete" />
@@ -120,10 +141,10 @@ const ScreenItem = ({ publish = true, title = '这是名称', file, id, img, set
             <span
               className={classnames(
                 styles['name-icon'],
-                publish ? styles['color-publish'] : styles['color-notpublish'],
+                publish == 1 ? styles['color-publish'] : styles['color-notpublish'],
               )}
             />
-            <span>{publish ? '已' : '未'}发布</span>
+            <span>{publish == 1 ? '已' : '未'}发布</span>
           </div>
         </div>
       </div>
@@ -137,12 +158,13 @@ export interface IScreenListProps {
 }
 const RightSide = ({ data, dispatch }: IScreenListProps) => {
   // 将面板从子组件中移出来，将事件添加至外部，这样有多个面板需要渲染时，无需渲染多个popup
-  const [show, setShow] = useSetState<{
-    visible: boolean;
-    type: string;
-    id: number;
-    file: string;
-  }>({ visible: false, type: '', id: null, file: '' });
+  const [show, setShow] = useSetState<IShowProps>({
+    visible: false,
+    type: '',
+    id: null,
+    file: '',
+    title: '',
+  });
 
   // 复制数据大屏
   const copyDashboardByFile = () => {
@@ -173,7 +195,14 @@ const RightSide = ({ data, dispatch }: IScreenListProps) => {
           onOk={() => {
             setShow({ visible: false });
             if (show.type == 'del') {
-              message.success(`删除id=${show.id}`);
+              setDashboardList({
+                _id: show.id,
+                title: show.title,
+                is_hide: 1,
+                publish: 1,
+              }).then((success) => {
+                success && message.success(`删除大屏${success ? '成功' : '失败'}`);
+              });
               return;
             }
 

@@ -13,14 +13,14 @@ export interface IScreenItem {
   img: string;
   rec_time: string;
   title: string;
-  publish?: boolean;
+  publish?: number;
   group_name?: string;
 }
 export default () => {
   let { data, loading, error } = useFetch<{ data: IScreenItem[] }>({
     param: {
       url: api.getDashboardList,
-      params: { cache: 2 },
+      params: { cache: 0 },
     },
   });
 

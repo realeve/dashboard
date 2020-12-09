@@ -79,7 +79,10 @@ FROM
 tbl_dashboard_list AS a 
 
 大屏列表	
-select * from tbl_dashboard_list as a 
+select * from tbl_dashboard_list as a where is_hide=0
+
+编辑大屏列表项
+SELECT title,publish,is_hide FROM `tbl_dashboard_list` where id=1
  */
 export const api = {
   // 添加业务组件
@@ -92,4 +95,5 @@ export const api = {
 
   addDashboardList: '/12/08c544a6a4',
   getDashboardList: '/13/b7fa279932',
+  editDashboardItem: '/14/a8de312b18',
 };
