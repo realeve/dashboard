@@ -14,9 +14,16 @@ import { setDashboardList } from './db';
 const NewScreen = () => (
   <div className={styles.screenItem}>
     <div className={styles.new}>
-      <div className={styles.title}>新增一个组件</div>
+      <div className={styles.title}>新增一个大屏</div>
       <div className={styles.info}>
-        <Button type="primary">添加</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            router.push('/config');
+          }}
+        >
+          添加
+        </Button>
       </div>
     </div>
   </div>
