@@ -166,36 +166,45 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
     }
   }, [content]);
 
+  const textStyle = {
+    fontSize,
+    fontWeight,
+    color: fontColor,
+    justifyContent: textAlignConfig[textAlign],
+    opacity,
+    letterSpacing,
+    ...textShadow,
+    padding,
+  };
   return (
     <div
       style={{
         background,
+        width: '100%',
+        height: '100%',
       }}
       className={classnames({ [styles.marqueeWrapper]: marquee })}
     >
-      <ContentEditable
-        className={marquee ? styles.marquee : styles.text}
-        style={{
-          fontSize,
-          fontWeight,
-          color: fontColor,
-          justifyContent: textAlignConfig[textAlign],
-          opacity,
-          letterSpacing,
-          ...textShadow,
-          padding,
-          animationDuration: animationDuration + 's',
-        }}
-        html={
-          marquee
-            ? `${text.current}<span style="width:5em;display:inline-block;"></span>${text.current}<span style="width:5em;display:inline-block;"></span>${text.current}`
-            : text.current
-        }
-        onBlur={handleBlur}
-        onChange={handleChange}
-        suppressContentEditableWarning={true}
-        disabled={pathname == '/'}
-      />
+      {marquee ? (
+        <div
+          className={styles.marquee}
+          style={{ ...textStyle, animationDuration: animationDuration + 's' }}
+        >
+          {content}
+          <span /> {content}
+          <span /> {content}
+        </div>
+      ) : (
+        <ContentEditable
+          className={styles.text}
+          style={textStyle}
+          html={text.current}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          suppressContentEditableWarning={true}
+          disabled={pathname == '/'}
+        />
+      )}
     </div>
   );
 };

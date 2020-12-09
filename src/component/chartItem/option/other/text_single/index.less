@@ -1,9 +1,11 @@
 @import '../../../../../style/theme.less';
-
-.text {
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.text {
+  .center;
   cursor: pointer;
   height: 100%;
   width: 100%;
@@ -17,6 +19,12 @@
   display: inline-block;
   position: relative;
   white-space: nowrap;
+  height: 100%;
+  .center;
+  span {
+    width: 5em;
+    display: inline-block;
+  }
 }
 .marqueeWrapper {
   display: block;
@@ -25,6 +33,4 @@
   white-space: nowrap;
   text-overflow: clip;
   position: relative;
-  height: 100%;
-  width: 100%;
 }
