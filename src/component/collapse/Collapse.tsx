@@ -1,7 +1,6 @@
 import * as React from 'react';
 import RcCollapse from 'rc-collapse';
 import classNames from 'classnames';
-import RightOutlined from '@ant-design/icons/RightOutlined';
 
 import CollapsePanel from './CollapsePanel';
 import { ConfigContext } from 'antd/lib/config-provider';
@@ -44,7 +43,7 @@ interface CollapseInterface extends React.FC<CollapseProps> {
   Panel: typeof CollapsePanel;
 }
 
-const Collapse: CollapseInterface = props => {
+const Collapse: CollapseInterface = (props) => {
   const { getPrefixCls, direction } = React.useContext(ConfigContext);
   const { prefixCls: customizePrefixCls, className = '', bordered, ghost } = props;
   const prefixCls = getPrefixCls('collapse', customizePrefixCls);
