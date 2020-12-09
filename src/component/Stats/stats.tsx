@@ -81,7 +81,7 @@ const Panel = function (name, fg, bg) {
   };
 };
 
-var Stats = function (container) {
+export default function (container) {
   function addPanel(panel) {
     container.appendChild(panel.dom);
     return panel;
@@ -109,11 +109,9 @@ var Stats = function (container) {
   return {
     addPanel,
     showPanel,
-
     begin: function () {
       beginTime = (performance || Date).now();
     },
-
     end: function () {
       frames++;
 
@@ -140,6 +138,4 @@ var Stats = function (container) {
       beginTime = this.end();
     },
   };
-};
-
-export { Stats as default };
+}

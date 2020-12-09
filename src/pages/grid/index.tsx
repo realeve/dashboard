@@ -39,26 +39,8 @@ const maxCols = 12;
 
 let chartList = [
   {
-    name: '装饰挂件',
-    type: 'decotation',
-  },
-  {
     name: '空组件',
     type: '_blank',
-  },
-  // 以下图表报错
-  {
-    name: '柱状图',
-    type: 'bar',
-    group: true,
-  },
-  {
-    name: '曲线图',
-    type: 'line',
-  },
-  {
-    name: '雷达图',
-    type: 'radar',
   },
 ];
 
