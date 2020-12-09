@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Stats from './stats';
+import { useTimeout } from 'react-use';
 
 export default function PerformanceStat({ style }) {
-  const [inited, setInited] = useState(false);
   const [mode, setMode] = useState(0);
   const ref = useRef(null);
   const [stats, setStates] = useState(null);
+  const [isReady] = useTimeout(3 * 1000);
 
   useEffect(() => {
-    if (inited) {
+    if (!isReady()) {
       return;
     }
     let stats = new Stats(ref.current);
@@ -18,12 +19,11 @@ export default function PerformanceStat({ style }) {
       stats?.update();
       requestAnimationFrame(loop);
     });
-    setInited(true);
 
     return () => {
       window.cancelAnimationFrame(requestId);
     };
-  }, []);
+  }, [isReady()]);
 
   useEffect(() => {
     stats?.showPanel(mode);
@@ -39,7 +39,6 @@ export default function PerformanceStat({ style }) {
         cursor: 'pointer',
         opacity: 0.9,
         zIndex: 10000,
-        transform: `scale(0.8)`,
         ...style,
       }}
       onClick={() => {
