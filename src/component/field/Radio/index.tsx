@@ -6,6 +6,7 @@ import { isString } from '@antv/util';
 export interface IRadioProps {
   value: string | number;
   onChange: (e: string) => void;
+  disabled?: boolean;
   config: { title: string | React.ReactNode; value: string }[];
   className?: string;
 }
@@ -24,10 +25,15 @@ const handleConfig = (config) => {
   return config;
 };
 
-export default ({ value, onChange, config = [], className }: IRadioProps) => {
+export default ({ value, onChange, config = [], disabled, className }: IRadioProps) => {
   return (
     <div className={classnames(styles.fields, className)}>
-      <Radio.Group size="middle" value={value} onChange={(e) => onChange(e.target.value)}>
+      <Radio.Group
+        disabled={disabled}
+        size="middle"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
         {handleConfig(config).map(({ title, value }) => (
           <Radio.Button key={value + title} value={value}>
             {title}
@@ -38,9 +44,14 @@ export default ({ value, onChange, config = [], className }: IRadioProps) => {
   );
 };
 
-export const Select = ({ value, onChange, config = [] }: IRadioProps) => {
+export const Select = ({ value, onChange, disabled, config = [] }: IRadioProps) => {
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)} className="data_input">
+    <select
+      disabled={disabled}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="data_input"
+    >
       {handleConfig(config).map(({ title, value }) => (
         <option key={value} value={value}>
           {title}

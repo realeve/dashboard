@@ -6,6 +6,7 @@ export const rangeCfg = { min: 0.3, max: 1.5, step: 0.1 };
 export default ({
   showValue = true,
   onChange = () => {},
+  disabled = false,
   ...props
 }: {
   min?: number;
@@ -18,11 +19,14 @@ export default ({
 }) => {
   const percent = props.value / props.max;
   return (
-    <div className={styles.rangeWrapper}>
+    <div className={classnames(styles.rangeWrapper, { [styles.disabled]: disabled })}>
       {showValue && <span>{props.value}</span>}
       <i
         className="datav-icon datav-font icon-zoom-out slider-icon zoom-out "
         onClick={(e) => {
+          if (disabled) {
+            return;
+          }
           let nextVal =
             typeof props.min !== 'undefined'
               ? Math.max(props.min, props.value - props.step)
@@ -37,6 +41,8 @@ export default ({
           className={classnames(styles['input-range'], {
             [styles.disabled]: props.disabled,
           })}
+          disabled={disabled}
+          readOnly={disabled}
           {...props}
           onChange={(e) => onChange(Number(e.target.value))}
           style={{
@@ -49,6 +55,9 @@ export default ({
       <i
         className="datav-icon datav-font icon-zoom-in slider-icon zoom-in"
         onClick={(e) => {
+          if (disabled) {
+            return;
+          }
           let nextVal =
             typeof props.max !== 'undefined'
               ? Math.min(props.max, props.value + props.step)

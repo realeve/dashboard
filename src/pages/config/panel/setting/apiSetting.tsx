@@ -69,9 +69,11 @@ const appendConfig: IChartConfig[] = [
 export default ({
   onChange,
   panel: { key, api },
+  isBusiness = false,
 }: {
   onChange: (e: any) => void;
   panel: IPanelConfig;
+  isBusiness?: boolean;
 }) => {
   let res = R.prop(key, chartLib);
   if (!res) {
@@ -115,6 +117,7 @@ export default ({
                   handleStateChange(res, appendConfig[i]);
                 }}
                 config={appendConfig[i]}
+                disabled={[0, 2].includes(i) && isBusiness}
               />
             ),
         )}
@@ -126,6 +129,7 @@ export default ({
                 handleStateChange(res, appendConfig[3]);
               }}
               config={appendConfig[3]}
+              disabled={isBusiness}
             />
           ) : (
             <JsonViewer
@@ -146,6 +150,7 @@ export default ({
                 handleStateChange(res, config, false);
               }}
               config={config}
+              disabled={isBusiness}
             />
           ))}
 

@@ -74,7 +74,7 @@ const getGardient = (_color) => {
 /**
  * 渐变选择器
  */
-const GardientPicker = ({ value, onChange }) => {
+const GardientPicker = ({ value, onChange, disabled }) => {
   const [color, setColor] = useState(getInitVal(value));
   useEffect(() => {
     const nextGardient = getGardient(color);
@@ -101,7 +101,7 @@ const GardientPicker = ({ value, onChange }) => {
             key={idx}
             defaultPosition={{ x: 0, y: 0 }}
             position={{ x: color[idx][1] * 1.78 - 12, y: 0 }}
-            disabled={show}
+            disabled={disabled || show}
             onStop={(e) => {
               let nextPos = (Number(e.layerX) / 1.78).toFixed(0);
               nextPos = R.clamp(0, 100, nextPos);
@@ -117,6 +117,7 @@ const GardientPicker = ({ value, onChange }) => {
               <ColorItem
                 value={item[0]}
                 onVisibleChange={setShow}
+                disabled={disabled}
                 onChange={(e) => {
                   let prev = R.nth(idx, color);
                   prev[0] = e;
@@ -133,7 +134,13 @@ const GardientPicker = ({ value, onChange }) => {
   );
 };
 
-export const PureColor = ({ value = '', onChange, position = 'top', noAnimation = false }) => {
+export const PureColor = ({
+  value = '',
+  disabled,
+  onChange,
+  position = 'top',
+  noAnimation = false,
+}) => {
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
   return (
@@ -160,6 +167,7 @@ export const PureColor = ({ value = '', onChange, position = 'top', noAnimation 
           onChange(`rgba(${color},${e.alpha / 100})`);
         }}
         placement="bottomRight"
+        disabled={disabled}
       >
         <div className={styles.head} style={{ backgroundColor: value }}>
           {colorLib.getColorName(value).title}
@@ -173,7 +181,7 @@ export const PureColor = ({ value = '', onChange, position = 'top', noAnimation 
   );
 };
 
-export default ({ value, onChange }) => {
+export default ({ value, onChange, disabled }) => {
   const [tab, setTab] = useState(getTabIdx(value));
   return (
     <div className={styles.fields}>
@@ -187,13 +195,18 @@ export default ({ value, onChange }) => {
             onChange('transparent');
           }
         }}
+        disabled={disabled}
       >
         <Radio.Button value="0">透明</Radio.Button>
         <Radio.Button value="1">纯色</Radio.Button>
         <Radio.Button value="2">渐变</Radio.Button>
       </Radio.Group>
-      {tab == EColorType.COLOR && <PureColor value={value} onChange={onChange} />}
-      {tab == EColorType.GARDIENT && <GardientPicker value={value} onChange={onChange} />}
+      {tab == EColorType.COLOR && (
+        <PureColor disabled={disabled} value={value} onChange={onChange} />
+      )}
+      {tab == EColorType.GARDIENT && (
+        <GardientPicker disabled={disabled} value={value} onChange={onChange} />
+      )}
     </div>
   );
 };

@@ -34,6 +34,9 @@ const getGeneralConfig = ({ selectedIdx, panel, page }) => {
   return item.useGeneralStyle ? null : res;
 };
 
+// TODO 已知bug，当form渲染出来后，切换组件时，会导致两个组件配置项不一致，对应的数据读取错误而使页面崩溃，
+// 此处应先重置面板，进入切换状态；
+
 const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
@@ -221,13 +224,14 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
       </Tabs.TabPane>
 
       {/* 业务组件不允许设置ajax，此处新增字段需要与不发起ajax做区分 */}
-      {panel[selectedIdx].ajax && !panel[selectedIdx].business && (
+      {panel[selectedIdx].ajax && (
         <Tabs.TabPane tab="接口配置" key="3">
           <ApiSetting
             onChange={(api) => {
               updateAttrib({ api });
             }}
             panel={panel[selectedIdx]}
+            isBusiness={panel[selectedIdx].business}
           />
         </Tabs.TabPane>
       )}

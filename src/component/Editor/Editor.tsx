@@ -634,16 +634,18 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       },
       '向下移动',
     );
-    this.keyManager.keyup(
-      ['backspace'],
-      () => {
-        let targets = this.getSelectedTargets();
-        const ids = getIds(targets);
-        this.props.onRemove?.(ids);
-        this.removeElements(targets);
-      },
-      '删除',
-    );
+
+    // delete允许删除，backspace禁止删除
+    // this.keyManager.keyup(
+    //   ['backspace'],
+    //   () => {
+    //     let targets = this.getSelectedTargets();
+    //     const ids = getIds(targets);
+    //     this.props.onRemove?.(ids);
+    //     this.removeElements(targets);
+    //   },
+    //   '删除',
+    // );
     this.keyManager.keyup(
       ['delete'],
       () => {

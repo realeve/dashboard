@@ -4,12 +4,19 @@ import classnames from 'classnames';
 
 export { ImgSelector } from '@/pages/config/panel/setting/page';
 
-export default ({ title = null, children = null, style = {}, titleWidth = 100 }) => {
+export default ({
+  title = null,
+  disabled = false,
+  children = null,
+  style = {},
+  titleWidth = 100,
+  className,
+}) => {
   return (
-    <div className={styles.field} style={style}>
+    <div className={classnames(styles.field, className)} style={style}>
       {title && (
         <div title={title} className={styles.title} style={{ width: titleWidth }}>
-          {title}
+          {disabled && '🔒'} {title}
         </div>
       )}
       <div className={classnames(styles.container, { [styles.notitle]: !title })}>
