@@ -85,7 +85,7 @@ export interface IApiProps {
   interval?: number;
   api_type?: string;
   mock?: string;
-  dateType: string;
+  dateType?: string;
   [key: string]: any;
 }
 

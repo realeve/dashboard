@@ -207,6 +207,30 @@
       left: 3px;
     }
   }
+
+  // 业务组件
+  .business {
+    .mask {
+      width: 100%;
+      height: 40px;
+      background: rgba(7, 75, 193, 0.8);
+      color: #bcc9d4;
+      position: absolute;
+      left: 0;
+      top: 80px;
+      display: flex;
+      transition: top ease 0.5s;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    &:hover {
+      .mask {
+        top: 40px;
+      }
+    }
+  }
   li {
     width: 83px;
     cursor: pointer;

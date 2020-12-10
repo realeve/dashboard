@@ -9,7 +9,8 @@ import * as lib from '@/utils/lib';
 import SearchPanel, { ISearchState } from './SearchPanel';
 import pinyin from '@/utils/pinyin.js';
 import { IBusinessState } from '../business/TabBusiness';
-
+import { Confirm } from '@/component/Editor/Popup/Popup';
+import { useSetState } from 'react-use';
 const { Panel } = Collapse;
 
 const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | string } = () => {
@@ -37,9 +38,16 @@ interface IComponentList {
   loading: boolean;
   state: (IComponent | IBusinessState)[];
   error: null | string;
+  isBusiness?: boolean;
 }
 
-export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) => {
+export const ComponentList = ({
+  onAdd,
+  state,
+  error,
+  loading,
+  isBusiness = false,
+}: IComponentList) => {
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(false);
   const [val, setVal] = useState('');
@@ -85,6 +93,8 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
 
   const inputRef = useRef(null);
 
+  const [show, setShow] = useSetState({ visible: false, panel: null });
+
   if (error) {
     return <div style={{ color: '#ddd' }}>{error}</div>;
   }
@@ -116,6 +126,21 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
               ))}
             </div>
           </div>
+          {show.visible && (
+            <Confirm
+              title="删除业务组件"
+              style={{ width: 400, minHeight: 150, height: 'auto' }}
+              onCancel={() => {
+                setShow({ visible: false, panel: null });
+              }}
+              onOk={() => {
+                console.log(show.panel);
+                setShow({ visible: false, panel: null });
+              }}
+            >
+              删除后将不可恢复，是否继续？
+            </Confirm>
+          )}
           <div className={styles.content}>
             <Collapse accordion defaultActiveKey={[state[tab] ? state[tab].list[0].title : '全部']}>
               {((state[tab] || { list: [] }).list as IComponentItem[]).map(
@@ -138,9 +163,15 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
                           key={panel.key || panel.title}
                           style={{ border: 0 }}
                           onClick={() => {
-                            onAdd && onAdd(panel);
+                            if (isBusiness) {
+                              return;
+                            }
+                            onAdd?.(panel);
                           }}
-                          className={classnames({ [styles.finished]: panel.key })}
+                          className={classnames({
+                            [styles.finished]: panel.key,
+                            [styles.business]: isBusiness,
+                          })}
                         >
                           <div className={styles.text}>{panel.title}</div>
                           <div
@@ -150,6 +181,35 @@ export const ComponentList = ({ onAdd, state, error, loading }: IComponentList) 
                               pointerEvents: 'none',
                             }}
                           />
+                          {isBusiness && (
+                            <div className={styles.mask}>
+                              <Tooltip placement="bottom" title="添加到画布">
+                                <span
+                                  className={styles['button-span']}
+                                  onClick={() => {
+                                    onAdd?.(panel);
+                                  }}
+                                >
+                                  <i className="datav-icon datav-font icon-add add" />
+                                </span>
+                              </Tooltip>
+                              <Tooltip placement="bottom" title="编辑">
+                                <span className={styles['button-span']} onClick={() => {}}>
+                                  <i className="datav-icon datav-font icon-edit edit" />
+                                </span>
+                              </Tooltip>
+                              <Tooltip placement="bottom" title="删除">
+                                <span
+                                  className={styles['button-span']}
+                                  onClick={() => {
+                                    setShow({ visible: true, panel });
+                                  }}
+                                >
+                                  <i className="datav-icon datav-font icon-delete delete" />
+                                </span>
+                              </Tooltip>
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>

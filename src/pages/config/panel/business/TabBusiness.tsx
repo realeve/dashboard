@@ -122,6 +122,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
       state={itemList}
       loading={loading}
       error={error}
+      isBusiness
     />
   );
 };

@@ -1,9 +1,7 @@
-import http from 'axios';
+import http, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'qs';
 import { host } from './setting';
 import { notification } from 'antd';
-// import router from 'umi/router';
-import router from './router';
 import * as R from 'ramda';
 export { DEV } from './setting';
 import localforage from 'localforage';
@@ -12,6 +10,11 @@ export interface GlobalAxios {
   token: string;
 }
 
+/**
+ * @param affected_rows 数据写操作返回的成功条数
+ */
+export type TDbWrite = { affected_rows?: number; id?: number; [key: string]: any };
+export type TAxiosData = TDbWrite | [];
 /**
  * @param title:标题
  * @param rows 数据行
@@ -24,17 +27,18 @@ export interface GlobalAxios {
  * @param serverTime 服务器时间
  * @param hash 当前数据的hash值，数据变更时hash变更
  */
-export interface IAxiosState {
+export interface IAxiosState<T = TAxiosData> {
   title: string;
   rows: number;
-  data: ({ [key: string]: any } | [])[];
+  data: T[];
   header: string[];
-  ip: string;
-  date: string[];
-  source: string;
-  time: number;
+  ip?: string;
+  date?: string[];
+  source?: string;
+  time?: number;
   serverTime: string;
   hash: string;
+  token?: string;
   [key: string]: any;
 }
 
@@ -67,12 +71,15 @@ export const codeMessage: {
   504: '网关超时。',
 };
 
-export const _commonData = {
+export const _commonData: IAxiosState = {
   rows: 1,
   data: [{ affected_rows: 1, id: Math.ceil(Math.random() * 100) }],
   time: 20,
   ip: '127.0.0.1',
   title: '数据更新/插入/删除返回值',
+  hash: 'hash',
+  header: ['affected_rows', 'id'],
+  serverTime: '2020-12-31 00:00:00',
 };
 
 // 导出数据，随机时长
@@ -129,7 +136,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError = async (error) => {
+export const handleError: (error: any) => Promise<AxiosError | null> = async (error) => {
   let config = error.config || {};
   let str = config.params || config.data || {};
   let { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -140,7 +147,7 @@ export const handleError = async (error) => {
 
   if (typeof error.message === 'undefined') {
     // 路由取消
-    return;
+    return null;
   }
 
   config.url += `${id ? id + '/' + nonce : ''}?${qs.stringify(params)}`;
@@ -148,13 +155,9 @@ export const handleError = async (error) => {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     let { data, status } = error.response;
-    if (status === 401) {
-      // window.g_app._store.dispatch({
-      //   type: 'login?autoLogin=0'
-      // });
-      router.push('/unlogin');
-    }
-    console.log({ status }, codeMessage[status]);
+    // if (status === 401) {
+    //   router.push('/unlogin');
+    // }
 
     const errortext = (codeMessage[status] || '') + (data.msg || '');
     notification.error({
@@ -183,7 +186,7 @@ export const handleError = async (error) => {
   });
 };
 
-export const handleData = ({ data }) => {
+export const handleData: <T extends IAxiosState>({ data }: AxiosResponse<T>) => T = ({ data }) => {
   // 刷新token
   if (typeof data.token !== 'undefined') {
     window.g_axios.token = data.token;
@@ -202,7 +205,10 @@ export const handleUrl = (option) => {
 };
 
 // 自动处理token更新，data 序列化等
-export let axios = ({ baseURL = host, ...option }) => {
+export let axios: <T>(params: AxiosRequestConfig) => Promise<AxiosError | IAxiosState<T>> = ({
+  baseURL = host,
+  ...option
+}) => {
   window.g_axios = window.g_axios || {
     host,
     token: '',

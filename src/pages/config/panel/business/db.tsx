@@ -1,4 +1,4 @@
-import { axios, IAxiosState, DEV, _commonData } from '@/utils/axios';
+import { axios, IAxiosState, DEV, _commonData, TDbWrite } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
@@ -10,13 +10,13 @@ import {
 } from '@/models/common';
 
 import { message } from 'antd';
-
+import { IScreenItem } from '@/pages/list/';
 import localforage from 'localforage';
 
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // [ x ] 业务组件数据结构定义
 export interface IBusinessProps {
-  id?: string; // 服务端 生成
+  id?: number; // 服务端 生成
   title: string; // 标题(弹出面板)
   category_main: string; // 一级分类(弹出面板)
   category_sub: string; // 二级分类(弹出面板)
@@ -32,17 +32,19 @@ export interface IBusinessProps {
  *   @database: { 微信开发 }
  *   @desc:     { 添加业务组件 }
  */
-export const addDashboardBusiness: (params: IBusinessProps) => Promise<IAxiosState> = (params) =>
-  axios({
-    url: DEV ? _commonData : api.addDashboardBusiness,
-    params,
-  });
+export const addDashboardBusiness = (params: IBusinessProps) =>
+  DEV
+    ? Promise.resolve(_commonData)
+    : axios<IAxiosState>({
+        url: api.addDashboardBusiness,
+        params,
+      });
 /**
  *   @database: { 微信开发 }
  *   @desc:     { 业务组件列表 }
  */
-export const getDashboardBusiness: () => Promise<IAxiosState> = () =>
-  axios({
+export const getDashboardBusiness = () =>
+  axios<IBusinessProps>({
     url: api.getDashboardBusiness,
   });
 
@@ -55,17 +57,37 @@ export const addDashboardList: (params: {
   img: string;
   file: string;
 }) => Promise<boolean> = (params) =>
-  axios({
+  axios<TDbWrite>({
     url: api.addDashboardList,
     params,
-  }).then(({ data: [{ affected_rows }] }: IAxiosState) => (affected_rows as number) > 0);
+  }).then(({ data: [{ affected_rows }] }: IAxiosState<TDbWrite>) => affected_rows > 0);
+
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 编辑业务组件 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号 
+*/
+export const setDashboardBusiness: (params: {
+  title: string;
+  category_main: string;
+  category_sub: string;
+  image: string;
+  config: string;
+  is_hide: string;
+  _id: string;
+}) => Promise<boolean> = (params) =>
+  axios<TDbWrite>({
+    url: api.editDashboardBusiness,
+    params,
+  }).then(({ data: [{ affected_rows }] }: IAxiosState<TDbWrite>) => affected_rows > 0);
 
 /**
  *   @database: { 接口管理 }
  *   @desc:     { 大屏列表 }
  */
-export const getDashboardList: () => Promise<IAxiosState> = () =>
-  axios({
+export const getDashboardList = () =>
+  axios<IScreenItem>({
     url: api.getDashboardList,
   });
 
@@ -177,7 +199,7 @@ export const getSaveOption: (
   let { title, image } = getImage(panels);
 
   // 保存业务组件时需要移除其中的mock数据
-  let _panels = R.clone(panels);
+  let _panels = R.clone<IPanelConfig>(panels);
   _panels = _panels.map(({ api: _api = {}, ...item }) => {
     let { mock, ...api } = _api;
     return { ...item, api };
@@ -204,6 +226,6 @@ export const getSaveOption: (
  * 读取业务列表
  */
 export const getTblBusinessCategory: () => Promise<IBusinessCategory[]> = () =>
-  axios({
+  axios<IBusinessCategory>({
     url: window.location.origin + '/business_category.json',
-  });
+  }).then(({ data }: IAxiosState<IBusinessCategory>) => data);

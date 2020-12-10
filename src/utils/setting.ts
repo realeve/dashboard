@@ -68,7 +68,20 @@ FROM
 tbl_dashboard_business AS a  
 
 业务组件列表
-SELECT * FROM tbl_dashboard_business a 
+SELECT * FROM tbl_dashboard_business a  where is_hide=0
+
+编辑业务组件(含删除)
+SELECT 
+a.title,
+a.category_main,
+a.category_sub,
+a.image,
+a.config,
+a.is_hide
+FROM
+tbl_dashboard_business AS a
+where a.id=2
+
 
 添加大屏
 SELECT
@@ -81,7 +94,7 @@ tbl_dashboard_list AS a
 大屏列表	
 select * from tbl_dashboard_list as a where is_hide=0
 
-编辑大屏列表项
+编辑大屏列表项(含删除)
 SELECT title,publish,is_hide FROM `tbl_dashboard_list` where id=1
  */
 export const api = {
@@ -90,10 +103,17 @@ export const api = {
   // 业务组件列表
   getDashboardBusiness: '/11/bd60f6312a.json',
 
+  // 编辑业务组件
+  editDashboardBusiness: '/15/15748d590e.json',
+
   // 业务部署路径，自动化脚本使用
   deployDir: DEV ? '.\\test' : `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
 
+  // 添加大屏
   addDashboardList: '/12/08c544a6a4',
+  // 大屏列表
   getDashboardList: '/13/b7fa279932',
+
+  // 编辑大屏项
   editDashboardItem: '/14/a8de312b18',
 };
