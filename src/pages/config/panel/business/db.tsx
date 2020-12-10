@@ -1,4 +1,4 @@
-import { axios, IAxiosState, DEV, _commonData, TDbWrite } from '@/utils/axios';
+import { axios, IAxiosState, mock, DEV, _commonData, TDbWrite } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
@@ -34,7 +34,7 @@ export interface IBusinessProps {
  */
 export const addDashboardBusiness = (params: IBusinessProps) =>
   DEV
-    ? Promise.resolve(_commonData)
+    ? mock(_commonData)
     : axios<IAxiosState>({
         url: api.addDashboardBusiness,
         params,
@@ -52,15 +52,11 @@ export const getDashboardBusiness = () =>
  *   @database: { 接口管理 }
  *   @desc:     { 添加大屏 }
  */
-export const addDashboardList: (params: {
-  title: string;
-  img: string;
-  file: string;
-}) => Promise<boolean> = (params) =>
+export const addDashboardList = (params: { title: string; img: string; file: string }) =>
   axios<TDbWrite>({
     url: api.addDashboardList,
     params,
-  }).then(({ data: [{ affected_rows }] }: IAxiosState<TDbWrite>) => affected_rows > 0);
+  }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 
 /**
 *   @database: { 接口管理 }
@@ -68,7 +64,7 @@ export const addDashboardList: (params: {
 	以下参数在建立过程中与系统保留字段冲突，已自动替换:
 	@id:_id. 参数说明：api 索引序号 
 */
-export const setDashboardBusiness: (params: {
+export const setDashboardBusiness = (params: {
   title: string;
   category_main: string;
   category_sub: string;
@@ -76,11 +72,11 @@ export const setDashboardBusiness: (params: {
   config: string;
   is_hide: string;
   _id: string;
-}) => Promise<boolean> = (params) =>
+}) =>
   axios<TDbWrite>({
     url: api.editDashboardBusiness,
     params,
-  }).then(({ data: [{ affected_rows }] }: IAxiosState<TDbWrite>) => affected_rows > 0);
+  }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 
 /**
  *   @database: { 接口管理 }
@@ -225,7 +221,7 @@ export const getSaveOption: (
 /**
  * 读取业务列表
  */
-export const getTblBusinessCategory: () => Promise<IBusinessCategory[]> = () =>
+export const getTblBusinessCategory = () =>
   axios<IBusinessCategory>({
     url: window.location.origin + '/business_category.json',
-  }).then(({ data }: IAxiosState<IBusinessCategory>) => data);
+  }).then(({ data }) => data);

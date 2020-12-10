@@ -1,4 +1,4 @@
-import http, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import http, { AxiosRequestConfig, AxiosResponse, AxiosError as _AxiosError } from 'axios';
 import qs from 'qs';
 import { host } from './setting';
 import { notification } from 'antd';
@@ -136,7 +136,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError: (error: any) => Promise<AxiosError | null> = async (error) => {
+export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = async (error) => {
   let config = error.config || {};
   let str = config.params || config.data || {};
   let { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -205,7 +205,7 @@ export const handleUrl = (option) => {
 };
 
 // 自动处理token更新，data 序列化等
-export let axios: <T>(params: AxiosRequestConfig) => Promise<AxiosError | IAxiosState<T>> = ({
+export let axios: <T = TAxiosData>(params: AxiosRequestConfig) => Promise<IAxiosState<T>> = ({
   baseURL = host,
   ...option
 }) => {
