@@ -1,4 +1,4 @@
-import { axios, IAxiosState, _commonData } from '@/utils/axios';
+import { axios, TDbWrite, _commonData } from '@/utils/axios';
 import { api } from '@/utils/setting';
 
 /**
@@ -13,7 +13,7 @@ export const setDashboardList: (params: {
   is_hide: number;
   _id: number;
 }) => Promise<boolean> = (params) =>
-  axios({
+  axios<TDbWrite>({
     url: api.editDashboardItem,
     params,
-  }).then(({ data: [{ affected_rows }] }: IAxiosState) => (affected_rows as number) > 0);
+  }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-import { Drawer, Tooltip, Spin } from 'antd';
+import { Drawer, Tooltip, Spin, message } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
 import { IComponentItem, IComponent } from './db';
@@ -11,6 +11,8 @@ import pinyin from '@/utils/pinyin.js';
 import { IBusinessState } from '../business/TabBusiness';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { useSetState } from 'react-use';
+import { setDashboardBusiness } from '@/pages/config/panel/business/db';
+
 const { Panel } = Collapse;
 
 const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | string } = () => {
@@ -39,6 +41,7 @@ interface IComponentList {
   state: (IComponent | IBusinessState)[];
   error: null | string;
   isBusiness?: boolean;
+  onRefresh?: () => void;
 }
 
 export const ComponentList = ({
@@ -47,6 +50,7 @@ export const ComponentList = ({
   error,
   loading,
   isBusiness = false,
+  onRefresh,
 }: IComponentList) => {
   const [tab, setTab] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -99,6 +103,21 @@ export const ComponentList = ({
     return <div style={{ color: '#ddd' }}>{error}</div>;
   }
 
+  const removeBusiness = () => {
+    let { id, ...params } = show.panel;
+    setDashboardBusiness({
+      ...params,
+      _id: id,
+      is_hide: 1,
+    }).then((success) => {
+      if (!success) return;
+      // 重新加载业务组件
+      onRefresh();
+      setShow({ visible: false, panel: null });
+      message.success(`业务组件删除${success ? '成功' : '失败'}`);
+    });
+  };
+
   return (
     <Spin spinning={loading}>
       <div className={styles['component-panel-wrapper']}>
@@ -133,10 +152,7 @@ export const ComponentList = ({
               onCancel={() => {
                 setShow({ visible: false, panel: null });
               }}
-              onOk={() => {
-                console.log(show.panel);
-                setShow({ visible: false, panel: null });
-              }}
+              onOk={removeBusiness}
             >
               删除后将不可恢复，是否继续？
             </Confirm>

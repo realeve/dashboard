@@ -1,4 +1,4 @@
-import { axios, IAxiosState, mock, DEV, _commonData, TDbWrite } from '@/utils/axios';
+import { axios, IAxiosState, DEV, _commonData, TDbWrite } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
@@ -33,12 +33,10 @@ export interface IBusinessProps {
  *   @desc:     { 添加业务组件 }
  */
 export const addDashboardBusiness = (params: IBusinessProps) =>
-  DEV
-    ? mock(_commonData)
-    : axios<IAxiosState>({
-        url: api.addDashboardBusiness,
-        params,
-      });
+  axios<IAxiosState>({
+    url: DEV ? _commonData : api.addDashboardBusiness,
+    params,
+  });
 /**
  *   @database: { 微信开发 }
  *   @desc:     { 业务组件列表 }

@@ -74,6 +74,10 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
     if (businessCategory.length === 0) {
       return;
     }
+    refreshBusiness();
+  }, [JSON.stringify(businessCategory)]);
+
+  const refreshBusiness = () => {
     setLoading(true);
     getTblBusiness()
       .then(({ data }: { data: IBusinessProps[] }) => {
@@ -111,7 +115,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [JSON.stringify(businessCategory)]);
+  };
 
   return (
     <ComponentList
@@ -123,6 +127,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
       loading={loading}
       error={error}
       isBusiness
+      onRefresh={refreshBusiness}
     />
   );
 };

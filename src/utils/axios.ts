@@ -204,11 +204,18 @@ export const handleUrl = (option) => {
   return option;
 };
 
+interface IAxiosConfig extends Omit<AxiosRequestConfig, 'url'> {
+  url?: string | IAxiosState;
+}
+
 // 自动处理token更新，data 序列化等
-export let axios: <T = TAxiosData>(params: AxiosRequestConfig) => Promise<IAxiosState<T>> = ({
+export let axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosState<T>> = ({
   baseURL = host,
-  ...option
+  ..._option
 }) => {
+  if (typeof _option.url == 'object') {
+    return mock(_option.url);
+  }
   window.g_axios = window.g_axios || {
     host,
     token: '',
@@ -218,7 +225,7 @@ export let axios: <T = TAxiosData>(params: AxiosRequestConfig) => Promise<IAxios
     localforage.getItem('user').then(loadUserInfo);
   }
 
-  option = handleUrl(option);
+  let option: AxiosRequestConfig = handleUrl(_option);
 
   option = Object.assign(option, {
     headers: {
