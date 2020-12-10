@@ -36,7 +36,7 @@ const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | s
 };
 
 interface IComponentList {
-  onAdd: (e) => void;
+  onAdd: (e, isEdit?: boolean) => void;
   loading: boolean;
   state: (IComponent | IBusinessState)[];
   error: null | string;
@@ -206,12 +206,25 @@ export const ComponentList = ({
                                     onAdd?.(panel);
                                   }}
                                 >
-                                  <i className="datav-icon datav-font icon-add add" />
+                                  <i
+                                    className="datav-icon datav-font icon-add add"
+                                    style={{ fontSize: 24 }}
+                                  />
                                 </span>
                               </Tooltip>
                               <Tooltip placement="bottom" title="编辑">
-                                <span className={styles['button-span']} onClick={() => {}}>
-                                  <i className="datav-icon datav-font icon-edit edit" />
+                                <span
+                                  className={styles['button-span']}
+                                  onClick={() => {
+                                    message.success('添加到画布后请尽快编辑组件并保存');
+                                    // 增加id管理
+                                    onAdd?.(panel, true);
+                                  }}
+                                >
+                                  <i
+                                    className="datav-icon datav-font icon-edit edit"
+                                    style={{ fontSize: 20 }}
+                                  />
                                 </span>
                               </Tooltip>
                               <Tooltip placement="bottom" title="删除">
@@ -221,7 +234,10 @@ export const ComponentList = ({
                                     setShow({ visible: true, panel });
                                   }}
                                 >
-                                  <i className="datav-icon datav-font icon-delete delete" />
+                                  <i
+                                    className="datav-icon datav-font icon-delete delete"
+                                    style={{ fontSize: 20 }}
+                                  />
                                 </span>
                               </Tooltip>
                             </div>
