@@ -1,0 +1,18 @@
+@import '../../../../style/theme.less';
+.li {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 8px;
+  position: relative;
+  background: var(--datav-panel-item-bg);
+  transition: background 0.2s;
+  cursor: pointer;
+  flex: none;
+  &:hover {
+    background-color: var(--datav-item-hover-color);
+  }
+  border-bottom: 1px solid var(--datav-item-hover-color);
+}

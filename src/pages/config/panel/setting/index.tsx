@@ -20,7 +20,6 @@ const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => se
 export interface IHideProps {
   components: boolean;
   config: boolean;
-  history: boolean;
   layer: boolean;
   toolbox: boolean;
 }

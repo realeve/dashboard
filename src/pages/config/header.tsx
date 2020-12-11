@@ -200,20 +200,20 @@ export default ({
               </div>
             </Tooltip>
           </div>
-          <div className={styles['drawer-actions']}>
+          {/* <div className={styles['drawer-actions']}>
             <Tooltip title="历史记录" placement="bottom">
               <div
                 className={classnames(styles['header-button'], styles.ml4, {
-                  [styles.selected]: !hide.history,
+                  [styles.selected]: !hide.layer,
                 })}
                 onClick={() => {
-                  setHide({ history: !hide.history });
+                  setHide({ layer: !hide.layer });
                 }}
               >
                 <i className="datav-icon datav-font icon-filter header-button-icon" />
               </div>
             </Tooltip>
-          </div>
+          </div> */}
         </div>
         <div className={styles['screen-info']}>
           <i

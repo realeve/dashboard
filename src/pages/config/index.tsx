@@ -49,7 +49,6 @@ const initState: IHideProps = {
   components: false,
   toolbox: false,
   config: false,
-  history: true,
 };
 
 const Index = ({
@@ -239,7 +238,7 @@ const Index = ({
       />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
-        <HistoryManager setHide={setHide} hide={hide} />
+        <HistoryManager hide={hide} />
         <ComponentPanel
           setHide={setHide}
           hide={hide}

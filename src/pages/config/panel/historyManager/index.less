@@ -4,14 +4,15 @@
 .history-manager-panel-wp {
   position: absolute;
   width: @panelWidth;
-  left: 0;
-  height: 100%;
+  height: 40%;
+  top: 60%;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  transition: left 0.5s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-  z-index: 6;
-  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 5;
   border-right: 1px solid #000;
+  border-top: 1px solid #000;
 
   padding: 0;
   margin: 0;
@@ -39,8 +40,29 @@
     position: relative;
     user-select: none;
   }
+  .ul {
+    flex: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #bcc9d4;
+    font-size: 12px;
+    list-style: none;
+    line-height: 2;
+    user-select: none;
+    position: relative;
+    background: var(--datav-panel-color);
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+  }
 }
 
 .hide {
-  left: -@panelWidth;
+  width: 0;
+  .layer-manager-top {
+    display: none;
+  }
 }
