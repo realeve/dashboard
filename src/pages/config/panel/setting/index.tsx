@@ -68,9 +68,20 @@ const Index = ({
       return;
     }
 
+    // 2020-12-11 业务组件编辑
+    // 查看是否为业务组件的编辑模式
+    let haveEditableBusinessComponent = panel.find(
+      (item) => selectedPanel.includes(item.id) && item.edit_id,
+    );
+    if (haveEditableBusinessComponent) {
+      setShouldSave(true);
+      return;
+    }
+
     // 业务组件自身不允许被选取；
     // TODO 此处需讨论是否开放，这样可在多个业务组件之间组合成新组件
-    const haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
+    let haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
+
     setShouldSave(!haseBusiness);
   }, [selectedPanel.length]);
 

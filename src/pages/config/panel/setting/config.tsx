@@ -85,6 +85,9 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
   // 通用配置
   const [general, setGeneral] = useState(null);
 
+  // 当前选中的面板
+  let currentPanel = panel[selectedIdx];
+
   return (
     <Tabs defaultActiveKey="1" activeKey={activeKey} type="line" onChange={setActiveKey}>
       <Tabs.TabPane tab="外观设置" key="1" style={{ color: '#eee', height: '100%' }}>
@@ -123,11 +126,9 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
                 min={0}
                 max={360}
                 disabled
-                value={Math.floor(
-                  panel[selectedIdx].style.transform?.rotate?.replace('deg', '') || '0',
-                )}
+                value={Math.floor(currentPanel.style.transform?.rotate?.replace('deg', '') || '0')}
                 onChange={(rotate) => {
-                  const style = R.clone(panel[selectedIdx].style || {});
+                  const style = R.clone(currentPanel.style || {});
                   const nextStyle = {
                     style: {
                       ...style,
@@ -143,7 +144,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             </Field>
             <Field title="使用全局样式">
               <Switch
-                checked={panel[selectedIdx]?.useGeneralStyle}
+                checked={currentPanel?.useGeneralStyle}
                 onChange={(useGeneralStyle) => {
                   if (useGeneralStyle) {
                     updateAttrib({
@@ -163,7 +164,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             <Divider plain>显示设置</Divider>
             <Field title="标题">
               <Switch
-                checked={panel[selectedIdx]?.showTitle}
+                checked={currentPanel?.showTitle}
                 onChange={(showTitle) => {
                   updateAttrib({
                     showTitle,
@@ -175,7 +176,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             </Field>
             <Field title="边框">
               <Switch
-                checked={panel[selectedIdx]?.showBorder}
+                checked={currentPanel?.showBorder}
                 onChange={(showBorder) => {
                   updateAttrib({
                     showBorder,
@@ -187,7 +188,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             </Field>
             <Field title="背景">
               <Switch
-                checked={panel[selectedIdx]?.showBackground}
+                checked={currentPanel?.showBackground}
                 onChange={(showBackground) => {
                   updateAttrib({
                     showBackground,
@@ -200,7 +201,7 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
             {general && (
               <ComponentConfig
                 {...general}
-                showTitle={panel[selectedIdx].showTitle}
+                showTitle={currentPanel.showTitle}
                 onChange={(e) => {
                   const next = {
                     ...general,
@@ -219,19 +220,19 @@ const Index = ({ selectedIdx, panel, page, dispatch, onChange }: IPanel) => {
           onChange={(componentConfig) => {
             updateAttrib({ componentConfig });
           }}
-          panel={panel[selectedIdx]}
+          panel={currentPanel}
         />
       </Tabs.TabPane>
 
       {/* 业务组件不允许设置ajax，此处新增字段需要与不发起ajax做区分 */}
-      {panel[selectedIdx].ajax && (
+      {currentPanel.ajax && (
         <Tabs.TabPane tab="接口配置" key="3">
           <ApiSetting
             onChange={(api) => {
               updateAttrib({ api });
             }}
-            panel={panel[selectedIdx]}
-            isBusiness={panel[selectedIdx].business}
+            panel={currentPanel}
+            isBusiness={currentPanel.business && !currentPanel.edit_id}
           />
         </Tabs.TabPane>
       )}

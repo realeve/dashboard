@@ -123,7 +123,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
         let item = handleBusinessItemId(panel);
         if (isEdit) {
           // 编辑模式下，将edit_id注入；
-          item[0].edit_id = panel.id;
+          item = item.map((e) => ({ ...e, edit_id: panel.id }));
         }
         onAddPanel(item);
       }}

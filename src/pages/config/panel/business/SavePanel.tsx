@@ -4,7 +4,8 @@ import { Confirm } from '@/component/Editor/Popup/Popup';
 import FieldComponent from '@/component/field';
 import Radio, { Select } from '@/component/field/Radio';
 import styles from './SavePanel.less';
-import { getSaveOption, getSelectedComponent, IBusinessProps, addTblBusiness } from './db';
+import { getSaveOption, getSelectedComponent, IBusinessProps, IBusinessEditProps } from './db';
+import * as db from './db';
 import { IPanelConfig, IBusinessCategory } from '@/models/common';
 import { useSetState } from 'react-use';
 import { message } from 'antd';
@@ -37,6 +38,7 @@ export default ({
   const [option, setOption] = useSetState<IBusinessProps | null>(null);
 
   const [cateIdx, setCateIdx] = useState(0);
+  const [editId, setEditId] = useState(null);
 
   // 缩略图列表
   const [thumb, setThumb] = useState<string[]>([]);
@@ -45,6 +47,12 @@ export default ({
       return;
     }
     let panels = getSelectedComponent(selectedPanel, panel);
+
+    // 获取 当前编辑的id
+    let edit_id = R.uniq(R.pluck<string>('edit_id')(panels));
+    // 记录待编辑id
+    setEditId(edit_id[0]);
+
     let thumbImages = R.uniq(R.pluck<string>('image')(panels));
     setThumb(thumbImages.filter((item) => item));
 
@@ -58,13 +66,42 @@ export default ({
 
   useEffect(onLoad, [show]);
 
-  const saveComponent = () => {
-    addTblBusiness(option)
-      .then(({ data: [{ affected_rows }] }) => {
-        if (affected_rows > 0) {
-          reset();
-          message.success('业务组件保存成功');
+  // 编辑成功后将面板列表中对应的edit_id属性删除掉；
+  const closeEditModeFromPanels = () => {
+    let nextPanel = R.map(({ edit_id, ...item }) => item)(panel);
+    dispatch({
+      type: 'common/updatePanel',
+      payload: {
+        panel: nextPanel,
+      },
+    });
 
+    // 清空当前选择项
+    dispatch({
+      type: 'common/setStore',
+      payload: {
+        selectedPanel: [],
+      },
+    });
+  };
+
+  const saveComponent = () => {
+    let _option: Partial<IBusinessEditProps> = {};
+    let method = editId ? 'setDashboardBusiness' : 'addTblBusiness';
+    if (editId) {
+      _option = R.pick('title category_main category_sub image config is_hide'.split(' '))(option);
+      _option._id = editId;
+      _option.is_hide = '0';
+    }
+
+    db[method](editId ? _option : option)
+      .then((success) => {
+        if (success) {
+          reset();
+          message.success(`业务组件${editId ? '编辑' : '添加'}成功`);
+          if (editId) {
+            closeEditModeFromPanels();
+          }
           // 保存成功后需要重新刷新业务组件列表
           dispatch({
             type: 'common/loadBusinessCategory',
@@ -77,6 +114,7 @@ export default ({
   };
 
   const reset = () => {
+    setEditId(null);
     setCateIdx(0);
     onClose();
     setThumb([]);

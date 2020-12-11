@@ -36,7 +36,7 @@ export const addDashboardBusiness = (params: IBusinessProps) =>
   axios<IAxiosState>({
     url: DEV ? _commonData : api.addDashboardBusiness,
     params,
-  });
+  }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 /**
  *   @database: { 微信开发 }
  *   @desc:     { 业务组件列表 }
@@ -56,13 +56,7 @@ export const addDashboardList = (params: { title: string; img: string; file: str
     params,
   }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 
-/**
-*   @database: { 接口管理 }
-*   @desc:     { 编辑业务组件 } 
-	以下参数在建立过程中与系统保留字段冲突，已自动替换:
-	@id:_id. 参数说明：api 索引序号 
-*/
-export const setDashboardBusiness = (params: {
+export interface IBusinessEditProps {
   title: string;
   category_main: string;
   category_sub: string;
@@ -70,7 +64,14 @@ export const setDashboardBusiness = (params: {
   config: string;
   is_hide: string;
   _id: string;
-}) =>
+}
+/**
+*   @database: { 接口管理 }
+*   @desc:     { 编辑业务组件 } 
+	以下参数在建立过程中与系统保留字段冲突，已自动替换:
+	@id:_id. 参数说明：api 索引序号 
+*/
+export const setDashboardBusiness = (params: IBusinessEditProps) =>
   axios<TDbWrite>({
     url: api.editDashboardBusiness,
     params,
@@ -103,9 +104,7 @@ const addLocaleBusiness = async (params: IBusinessProps) => {
   let { data, rows } = await getLocalBusiness();
   let startId = rows + 1;
   let nextParams = [...data, { id: startId, ...params }];
-  return localforage.setItem(BUSINESS_KEY, nextParams).then((e) => ({
-    data: [{ affected_rows: 1 }],
-  }));
+  return localforage.setItem(BUSINESS_KEY, nextParams).then((e) => true);
 };
 
 /**
@@ -194,7 +193,9 @@ export const getSaveOption: (
 
   // 保存业务组件时需要移除其中的mock数据
   let _panels = R.clone<IPanelConfig>(panels);
-  _panels = _panels.map(({ api: _api = {}, ...item }) => {
+
+  // 保存时将edit_id扔掉
+  _panels = _panels.map(({ api: _api = {}, edit_id, ...item }) => {
     let { mock, ...api } = _api;
     return { ...item, api };
   });

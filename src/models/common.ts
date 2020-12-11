@@ -228,7 +228,7 @@ export default {
         },
       });
     },
-    *updatePanel({ payload: { panel } }, { put, call }) {
+    *updatePanel({ payload: { panel, recordHistory = true } }, { put, call }) {
       let nextPanel = R.uniq(panel);
       yield updatePanel({
         panel: nextPanel,

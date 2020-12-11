@@ -10,7 +10,7 @@ export default ({
   children = null,
   style = {},
   titleWidth = 100,
-  className,
+  className = '',
 }) => {
   return (
     <div className={classnames(styles.field, className)} style={style}>
