@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "title": "echarts基础图表",
+      "category_main": "印刷",
+      "category_sub": "胶印",
+      "image": "/img/icons/43_baseline.png",
+      "config": "[{\"id\": \"963fd542c3045\", \"api\": {}, \"key\": \"group_rect\", \"fold\": false, \"icon\": \"datav-font icon-group layer-item-icon\", \"title\": \"echarts基础图表1\", \"engine\": \"other\", \"business\": true}, {\"id\": \"21b1639ee7ea9\", \"api\": {\"x\": 1, \"y\": 2, \"url\": \"http://localhost:90/1092/abe4d1b60f.array\", \"show\": true, \"cache\": 2, \"legend\": 0, \"api_type\": \"url\", \"interval\": 10}, \"key\": \"base_line\", \"ajax\": true, \"icon\": \"com-font icon-com-regular_bar\", \"name\": \"echarts.base_line\", \"type\": \"regular_bar\", \"group\": \"963fd542c3045\", \"image\": \"/img/icons/43_baseline.png\", \"style\": {\"top\": \"80px\", \"left\": \"80px\", \"width\": \"600px\", \"height\": \"320px\", \"position\": \"absolute\", \"transform\": {\"scale\": \"1,1\", \"rotate\": \"0deg\", \"translate\": \"396px,99px\"}}, \"title\": \"echarts基础图表\", \"engine\": \"echarts\", \"general\": null, \"business\": true, \"showTitle\": false, \"showBorder\": false, \"showBackground\": false, \"componentConfig\": {\"theme\": 3, \"isArea\": false, \"isStep\": false, \"smooth\": true, \"symbol\": \"circle\", \"isPolar\": false, \"isStack\": false, \"barWidth\": 20, \"roundCap\": false, \"chartType\": \"line\", \"isPercent\": false, \"isReverse\": false, \"lineWidth\": 2, \"markArea1\": [10, 20], \"markArea2\": [10, 20], \"markArea3\": [10, 20], \"markArea4\": [10, 20], \"markArea5\": [10, 20], \"showLabel\": false, \"undefined\": \"\", \"legendShow\": true, \"markTitle1\": \"\", \"markTitle2\": \"\", \"markTitle3\": \"\", \"markTitle4\": \"\", \"markTitle5\": \"\", \"showSymbol\": false, \"symbolSize\": 4, \"axisPointer\": \"shadow\", \"legendAlign\": \"center\", \"area_opacity\": 1, \"legendOrient\": \"horizontal\", \"needRerverse\": false, \"showMarkArea\": false, \"showMarkline\": false, \"markAreaColor\": \"rgba(255,255,255,0.1)\", \"showMarkpoint\": false, \"legendPosition\": \"top\", \"markAreaColor2\": \"rgba(255,255,255,0.3)\", \"showBackground\": true, \"barBackgroundColor\": \"rgba(140,150,200,0.2)\"}, \"useGeneralStyle\": true}, {\"id\": \"d20f32cb03bfb\", \"api\": {}, \"key\": \"text_single\", \"ajax\": false, \"icon\": \"com-font icon-com-regular_bar\", \"name\": \"other.text_single\", \"type\": \"regular_bar\", \"group\": \"963fd542c3045\", \"image\": \"/img/config/text.png\", \"style\": {\"top\": \"80px\", \"left\": \"80px\", \"width\": \"600px\", \"height\": \"53px\", \"position\": \"absolute\", \"transform\": {\"scale\": \"1,1\", \"rotate\": \"0deg\", \"translate\": \"396px,46px\"}}, \"title\": \"文本\", \"engine\": \"other\", \"general\": {\"head\": {\"color\": \"#aec1f9\", \"padding\": 10, \"fontSize\": 20, \"textAlign\": \"left\", \"background\": \"linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)\"}, \"border\": \"边框29\", \"chartBackground\": \"rgba(3,11,31,0.8)\"}, \"business\": true, \"showTitle\": false, \"showBorder\": false, \"showBackground\": false, \"componentConfig\": {\"content\": \"这是某个业务3\", \"marquee\": false, \"opacity\": 0.9, \"padding\": 12, \"fontSize\": 21, \"fontColor\": \"rgba(255, 255, 255,1)\", \"textAlign\": \"right\", \"undefined\": \"\", \"background\": \"linear-gradient(90deg, rgba(240,234,218,0.06) 23%, rgba(151,230,24,0.67) 58%, rgba(8,61,88,1) 88%)\", \"fontWeight\": \"normal\", \"letterSpacing\": 0, \"textShadowBlur\": 0, \"backgroundColor\": \"linear-gradient(90deg, rgba(255,227,189,1) 2%, rgba(127,130,226,1) 44%, rgba(47,53,216,1) 74%)\", \"textShadowColor\": \"rgba(39 ,228, 247 , 0.85)\", \"animationDuration\": 30, \"textShadowOffsetX\": 0, \"textShadowOffsetY\": 0}, \"useGeneralStyle\": true}]",
+      "creator": "管理员",
+      "is_hide": 0,
+      "create_time": "2020-12-08 21:31:25",
+      "useage_times": 0,
+      "update_time": "2020-12-11 10:45:28"
+    }
+  ],
+  "rows": 1,
+  "dates": [],
+  "ip": "0.0.0.0",
+  "header": [
+    "id",
+    "title",
+    "category_main",
+    "category_sub",
+    "image",
+    "config",
+    "creator",
+    "is_hide",
+    "create_time",
+    "useage_times",
+    "update_time"
+  ],
+  "title": "业务组件列表",
+  "time": "9.755ms",
+  "serverTime": "2020-12-11 11:34:37",
+  "source": "数据来源：接口管理",
+  "hash": "W/\"00869f68746fe88315cf71aa558abd9e\""
+}

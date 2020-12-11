@@ -100,8 +100,8 @@ SELECT title,publish,is_hide FROM `tbl_dashboard_list` where id=1
 export const api = {
   // 添加业务组件
   addDashboardBusiness: '/10/663d99e189.json',
-  // 业务组件列表
-  getDashboardBusiness: '/11/bd60f6312a.json',
+  // 业务组件列表 此处定义了开发模式下的mock链接，添加和编辑业务需要后端自行实现
+  getDashboardBusiness: DEV ? '@/mock/11_bd60f6312a.json' : '/11/bd60f6312a.json',
 
   // 编辑业务组件
   editDashboardBusiness: '/15/15748d590e.json',
@@ -111,8 +111,8 @@ export const api = {
 
   // 添加大屏
   addDashboardList: '/12/08c544a6a4',
-  // 大屏列表
-  getDashboardList: '/13/b7fa279932',
+  // 大屏列表 此处定义了开发模式下的mock链接，添加和编辑业务需要后端自行实现
+  getDashboardList: DEV ? '@/mock/13_b7fa279932.json' : '/13/b7fa279932',
 
   // 编辑大屏项
   editDashboardItem: '/14/a8de312b18',

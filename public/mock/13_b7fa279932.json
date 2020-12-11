@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "仪表盘2211",
+      "file": "YiBiaoPan.json",
+      "img": "YiBiaoPan.jpg",
+      "rec_time": "2020-12-07 22:04:31",
+      "publish": 1,
+      "is_hide": 0
+    }
+  ],
+  "rows": 1,
+  "dates": [],
+  "ip": "0.0.0.0",
+  "header": ["id", "title", "file", "img", "rec_time", "publish", "is_hide"],
+  "title": "大屏列表",
+  "time": "3.791ms",
+  "serverTime": "2020-12-11 11:32:03",
+  "source": "数据来源：接口管理",
+  "hash": "W/\"63bff8d2e5d0ffd4c24c58bb7db7a458\""
+}
