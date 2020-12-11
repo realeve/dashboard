@@ -99,7 +99,7 @@ export interface IPanelConfig {
   image?: string; // 缩略图
   id: string; // 自动生成的ID
   icon?: string; // 图标
-  style?: IPanelStyle;
+  style?: React.CSSProperties;
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
 

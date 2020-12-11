@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './historyManager.less';
+import styles from './index.less';
 import classnames from 'classnames';
 
 export default ({ hide, setHide }) => {
