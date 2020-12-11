@@ -17,7 +17,7 @@ export interface IScreenItem {
   group_name?: string;
 }
 export default () => {
-  let { data, loading, error } = useFetch<{ data: IScreenItem[] }>({
+  let { data, loading, error, reFetch } = useFetch<{ data: IScreenItem[] }>({
     param: {
       url: api.getDashboardList,
       params: { cache: 0 },
@@ -46,7 +46,7 @@ export default () => {
         ) : (
           <>
             <LeftSide data={data.data} />
-            <RightSide data={data.data} />
+            <RightSide data={data.data} onRefresh={reFetch} />
           </>
         )}
       </div>

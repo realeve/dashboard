@@ -161,9 +161,10 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
 
 export interface IScreenListProps {
   data: IScreenItem[];
-  dispatch: Dispatch;
+  dispatch?: Dispatch;
+  onRefresh?: () => void;
 }
-const RightSide = ({ data, dispatch }: IScreenListProps) => {
+const RightSide = ({ data, dispatch, onRefresh }: IScreenListProps) => {
   // 将面板从子组件中移出来，将事件添加至外部，这样有多个面板需要渲染时，无需渲染多个popup
   const [show, setShow] = useSetState<IShowProps>({
     visible: false,
@@ -209,7 +210,7 @@ const RightSide = ({ data, dispatch }: IScreenListProps) => {
                 publish: 1,
               }).then((success) => {
                 success && message.success(`删除大屏${success ? '成功' : '失败'}`);
-                window.location.reload();
+                onRefresh?.();
               });
               return;
             }
