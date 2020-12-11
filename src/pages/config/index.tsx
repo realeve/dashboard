@@ -6,7 +6,7 @@ import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/layer';
 
-import FilterPanel from './panel/filterManager';
+import HistoryManager from './panel/historyManager';
 
 import Setting, { IHideProps } from './panel/setting';
 import Thumbnail from './thumbnail';
@@ -49,7 +49,7 @@ const initState: IHideProps = {
   components: false,
   toolbox: false,
   config: false,
-  filter: true,
+  history: true,
 };
 
 const Index = ({
@@ -91,7 +91,7 @@ const Index = ({
       return;
     }
 
-    localforage.getItem('zoom').then((e) => {
+    localforage.getItem('zoom').then((e: number) => {
       setZoom(e || 1);
     });
 
@@ -239,7 +239,7 @@ const Index = ({
       />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
-        <FilterPanel setHide={setHide} hide={hide} />
+        <HistoryManager setHide={setHide} hide={hide} />
         <ComponentPanel
           setHide={setHide}
           hide={hide}

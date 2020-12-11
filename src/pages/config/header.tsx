@@ -204,10 +204,10 @@ export default ({
             <Tooltip title="历史记录" placement="bottom">
               <div
                 className={classnames(styles['header-button'], styles.ml4, {
-                  [styles.selected]: !hide.filter,
+                  [styles.selected]: !hide.history,
                 })}
                 onClick={() => {
-                  setHide({ filter: !hide.filter });
+                  setHide({ history: !hide.history });
                 }}
               >
                 <i className="datav-icon datav-font icon-filter header-button-icon" />

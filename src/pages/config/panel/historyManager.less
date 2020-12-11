@@ -1,7 +1,7 @@
 @import '../../../style/theme.less';
 
 @panelWidth: 200px;
-.filter-manager-panel-wp {
+.history-manager-panel-wp {
   position: absolute;
   width: @panelWidth;
   left: 0;
@@ -18,6 +18,27 @@
   //   background: var(--datav-nav-active-bg);
   background: rgba(29, 33, 39, 50%);
   backdrop-filter: saturate(180%) blur(20px);
+
+  .layer-num {
+    line-height: 30px;
+    vertical-align: middle;
+  }
+  .layer-manager-layout-selector {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    font-size: 0;
+    letter-spacing: 4px;
+  }
+  .layer-manager-top {
+    background: var(--datav-panel-title-bg);
+    text-indent: 10px;
+    height: 30px;
+    color: #bcc9d4;
+    line-height: 30px;
+    position: relative;
+    user-select: none;
+  }
 }
 
 .hide {
