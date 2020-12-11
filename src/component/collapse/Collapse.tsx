@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import RcCollapse from 'rc-collapse';
 import classNames from 'classnames';
 

@@ -120,12 +120,11 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
   return (
     <ComponentList
       onAdd={(panel: IBusinessProps, isEdit = false) => {
-        console.log(isEdit, panel);
-        if (isEdit) {
-          console.log('在此处增加编辑的逻辑处理，将id注入到rect中，如果开启启为可编辑； editable');
-          return;
-        }
         let item = handleBusinessItemId(panel);
+        if (isEdit) {
+          // 编辑模式下，将edit_id注入；
+          item[0].edit_id = panel.id;
+        }
         onAddPanel(item);
       }}
       state={itemList}

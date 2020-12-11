@@ -92,6 +92,7 @@ export interface IApiProps {
 // 渲染引擎
 export type TChartEngine = 'echarts' | 'g2' | 'g2plot' | 'other';
 export interface IPanelConfig {
+  edit_id?: number; // 编辑状态下的业务组件 id;
   engine?: TChartEngine;
   type?: string; //类型
   title: string; //标题
@@ -394,11 +395,12 @@ export default {
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
-      let prevPanel = yield select((state) => state[namespace].panel);
-
+      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      let item = R.find<IPanelConfig>((item) => idx.includes(item.id))(prevPanel);
       // 移除打包组件需要考虑一并移除子组件
-      let nextPanel = R.filter<IPanelConfig>(
-        (item) => !idx.includes(item.id) && !idx.includes(item.group),
+      let idList = item ? [...idx, item.group] : idx;
+      let nextPanel = R.reject<IPanelConfig>(
+        (item) => idList.includes(item.id) || idList.includes(item.group),
       )(prevPanel);
 
       // 默认选中最新添加的面板

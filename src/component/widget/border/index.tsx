@@ -8,12 +8,14 @@ import { TChartEngine } from '@/models/common';
 
 import { connect } from 'dva';
 import { ICommon } from '@/models/common';
+import { Dispatch } from 'redux';
 
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
   children: ScenaJSXElement;
   engine?: TChartEngine;
+  dispatch?: Dispatch;
   [key: string]: any;
 }
 export const borderNames = Object.keys(assets.borders);
@@ -27,6 +29,7 @@ const BorderItem = ({
   className,
   engine = 'other',
   pathname,
+  dispatch,
   ...props
 }: WidgetBorder) => {
   const { url, ...img } = assets.borders[name] || {};
