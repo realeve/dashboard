@@ -14,18 +14,15 @@ const HistoryHeader = ({ onClear }) => (
   </div>
 );
 
-export default ({ hide }) => {
+export default ({ className }) => {
   return (
-    <div
-      className={classnames(styles['history-manager-panel-wp'], {
-        [styles.hide]: hide.layer,
-      })}
-    >
+    <div className={classnames(styles['history-manager-panel-wp'], className)}>
       <HistoryHeader
         onClear={() => {
           console.log('clear');
         }}
       />
+
       <ul className={styles.ul}>
         <HistoryItem />
         <HistoryItem />

@@ -7,7 +7,7 @@ import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-import { IHideProps, TFnHide } from '../setting';
+import { TFnHide } from '../setting';
 
 import { message } from 'antd';
 import { Dispatch } from 'redux';
@@ -18,14 +18,14 @@ import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPan
 import { LayerItem } from './LayerItem';
 
 interface ILayerProps {
-  hide: IHideProps;
   setHide: TFnHide;
   panel: IPanelConfig[];
   selectedPanel: string[];
   onRemove: (e: string[]) => void;
   dispatch: Dispatch;
+  className: string;
 }
-const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILayerProps) => {
+const Index = ({ setHide, panel, selectedPanel, onRemove, dispatch, className }: ILayerProps) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState<number[]>([]);
@@ -285,11 +285,7 @@ const Index = ({ setHide, hide, panel, selectedPanel, onRemove, dispatch }: ILay
   // console.log(selectedPanel, selected, showPanel);
 
   return (
-    <div
-      className={classnames(styles['layer-panel-wp'], {
-        [styles.hide]: hide.layer,
-      })}
-    >
+    <div className={classnames(styles['layer-panel-wp'], className)}>
       <div className={styles['layer-manager-top']}>
         <div className={styles['layer-num']}>图层</div>
         <div className={styles['layer-manager-layout-selector']}>

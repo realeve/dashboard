@@ -4,7 +4,7 @@ import { useSetState } from 'react-use';
 
 import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
-import LayerPanel from './panel/layer';
+import LayerPanel from './panel/LayerPanel';
 
 import HistoryManager from './panel/historyManager';
 
@@ -238,7 +238,7 @@ const Index = ({
       />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
-        <HistoryManager hide={hide} />
+        {/* <HistoryManager hide={hide} /> */}
         <ComponentPanel
           setHide={setHide}
           hide={hide}
