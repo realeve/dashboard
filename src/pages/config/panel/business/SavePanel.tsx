@@ -73,16 +73,17 @@ export default ({
       type: 'common/updatePanel',
       payload: {
         panel: nextPanel,
+        selectedPanel: [],
       },
     });
 
     // 清空当前选择项
-    dispatch({
-      type: 'common/setStore',
-      payload: {
-        selectedPanel: [],
-      },
-    });
+    // dispatch({
+    //   type: 'common/setStore',
+    //   payload: {
+    //     selectedPanel: [],
+    //   },
+    // });
   };
 
   const saveComponent = () => {

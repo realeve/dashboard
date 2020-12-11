@@ -9,6 +9,7 @@ import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
 
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
+  console.log(props);
   yield put({
     type: 'setStore',
     payload: {
@@ -219,9 +220,10 @@ export default {
   namespace,
   state: defaultState,
   reducers: {
-    setStore(prevState, store: Store) {
-      let nextState = setStore(prevState, store);
-      return handleHistoryPanel(prevState, nextState, store);
+    setStore(prevState, _store: Store) {
+      let { type, recordHistory, historyTitle, ...storeCopy } = R.clone(_store.payload);
+      let nextState = setStore(prevState, { payload: storeCopy });
+      return handleHistoryPanel(prevState, nextState, _store);
     },
   },
   effects: {
@@ -345,6 +347,8 @@ export default {
         call,
         put,
         selectedPanel: [panelItem.id],
+        recordHistory: true,
+        historyTitle: '组件分组',
       });
     },
     *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
@@ -378,6 +382,8 @@ export default {
         call,
         put,
         selectedPanel: [],
+        recordHistory: true,
+        historyTitle: '取消组件分组',
       });
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
@@ -407,6 +413,8 @@ export default {
         put,
         // 默认选中最新添加的面板
         selectedPanel: [panel.id],
+        recordHistory: true,
+        historyTitle: '添加组件 - ' + panelItem.title,
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
@@ -419,16 +427,18 @@ export default {
       )(prevPanel);
 
       // 默认选中最新添加的面板
-      yield put({
-        type: 'setStore',
-        payload: {
-          selectedPanel: [],
-        },
-      });
+      // yield put({
+      //   type: 'setStore',
+      //   payload: {
+      //   },
+      // });
       yield updatePanel({
         panel: nextPanel,
         call,
         put,
+        recordHistory: true,
+        historyTitle: '删除组件 - ' + item.title,
+        selectedPanel: [],
       });
     },
     // 更新第I个面板的属性
@@ -473,6 +483,8 @@ export default {
         panel: _panel,
         call,
         put,
+        recordHistory: true,
+        historyTitle: '复制组件 - ' + _panel[0].title,
       });
       // 页面需要刷新,使用 Editor 添加失败
       window.location.reload();
@@ -507,7 +519,7 @@ export default {
 
         dispatch({
           type: 'setStore',
-          pathname,
+          payload: { pathname },
         });
       });
     },
