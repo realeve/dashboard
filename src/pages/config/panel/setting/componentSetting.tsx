@@ -25,7 +25,7 @@ export default ({
   onChange,
   panel: { key, componentConfig, id },
 }: {
-  onChange: (e: any) => void;
+  onChange: (e: any, title?: string) => void;
   panel: IPanelConfig;
 }) => {
   const [configs, setConfigs] = useState<IChartConfig[]>(null);
@@ -63,7 +63,9 @@ export default ({
                 [config.key]: res,
               };
               setState(next);
-              onChange(next);
+
+              let val = String(res).length < 10 ? ` 调整( ${state[config.key]} → ${res} )` : '';
+              onChange(next, (typeof config.title === 'string' ? config.title : config.key) + val);
             }}
             config={config}
           />

@@ -15,4 +15,13 @@
     background-color: var(--datav-item-hover-color);
   }
   border-bottom: 1px solid var(--datav-item-hover-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
+}
+.active {
+  background: var(--datav-com-focus-color);
 }

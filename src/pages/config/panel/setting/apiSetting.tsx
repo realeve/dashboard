@@ -71,7 +71,7 @@ export default ({
   panel: { key, api },
   isBusiness = false,
 }: {
-  onChange: (e: any) => void;
+  onChange: (e: any, title?: string) => void;
   panel: IPanelConfig;
   isBusiness?: boolean;
 }) => {

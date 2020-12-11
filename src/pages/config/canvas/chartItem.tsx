@@ -3,7 +3,7 @@ import Echarts from '@/component/echarts';
 
 import * as chartLib from '@/component/chartItem/option';
 import { connect } from 'dva';
-import { ICommon, IPage, IPanelConfig, IApiProps } from '@/models/common';
+import { ICommon, IPage, IPanelConfig, IApiProps, IHistoryProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
@@ -168,15 +168,13 @@ const Item = ({
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;
 };
 
-const Index = ({
-  chartid,
-  page: _page,
-  panel,
-}: {
+interface IChartProps extends IHistoryProps {
   chartid: string;
   page: IPage;
   panel: IPanelConfig[];
-}) => {
+}
+const Index = ({ chartid, page: _page, history, curHistoryIdx, panel: _panel }: IChartProps) => {
+  let panel = history[curHistoryIdx]?.panel || _panel;
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
   let config = R.find<IPanelConfig>(R.propEq<string>('id', chartid))(panel);
   if (!config) {
@@ -191,10 +189,7 @@ const Index = ({
   return <ChartItem page={page} config={config} />;
 };
 
-export default connect(({ common }: { common: ICommon }) => ({
-  page: common.page,
-  panel: common.panel,
-}))(Index);
+export default connect(({ common }: { common: ICommon }) => common)(Index);
 
 interface IChartItemProps {
   page: IPage;

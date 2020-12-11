@@ -9,6 +9,7 @@ import {
   IPanelConfig,
   IPage,
   IBusinessCategory,
+  IHistoryProps,
 } from '@/models/common';
 import Config from './config';
 import { Dispatch } from 'redux';
@@ -28,7 +29,7 @@ export type TFnHide = (
   patch: Partial<IHideProps> | ((prevState: IHideProps) => Partial<IHideProps>),
 ) => void;
 
-export interface ISettingProps {
+export interface ISettingProps extends IHistoryProps {
   setHide: TFnHide;
   hide: IHideProps;
   selectedPanel: string[];
@@ -42,12 +43,15 @@ const Index = ({
   setHide,
   hide,
   selectedPanel,
-  panel,
   onChange,
   page,
   businessCategory,
   dispatch,
+  history,
+  curHistoryIdx,
+  panel: _panel,
 }: ISettingProps) => {
+  let panel = history[curHistoryIdx]?.panel || _panel;
   const [show, setShow] = useState<boolean>(false);
 
   let pageChart = selectedPanel.length == 1;

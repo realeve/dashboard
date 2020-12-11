@@ -5,7 +5,7 @@ import { useToggle } from 'react-use';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import * as R from 'ramda';
 import { connect } from 'dva';
-import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
+import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY, IHistoryProps } from '@/models/common';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { TFnHide } from '../setting';
 
@@ -17,7 +17,7 @@ import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPan
 
 import { LayerItem } from './LayerItem';
 
-interface ILayerProps {
+interface ILayerProps extends IHistoryProps {
   setHide: TFnHide;
   panel: IPanelConfig[];
   selectedPanel: string[];
@@ -25,7 +25,17 @@ interface ILayerProps {
   dispatch: Dispatch;
   className: string;
 }
-const Index = ({ setHide, panel, selectedPanel, onRemove, dispatch, className }: ILayerProps) => {
+const Index = ({
+  setHide,
+  selectedPanel,
+  onRemove,
+  dispatch,
+  className,
+  history,
+  curHistoryIdx,
+  panel: _panel,
+}: ILayerProps) => {
+  let panel = history[curHistoryIdx]?.panel || _panel;
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState<number[]>([]);
@@ -568,7 +578,4 @@ const Index = ({ setHide, panel, selectedPanel, onRemove, dispatch, className }:
   );
 };
 
-export default connect(({ common }: { common: ICommon }) => ({
-  panel: common.panel,
-  selectedPanel: common.selectedPanel,
-}))(Index);
+export default connect(({ common }: { common: ICommon }) => common)(Index);

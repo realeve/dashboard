@@ -1,4 +1,4 @@
-import { setStore } from '@/utils/lib';
+import { setStore, Store, handleHistoryPanel } from '@/utils/lib';
 import * as db from '../services/db';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
@@ -172,16 +172,25 @@ export interface IBusinessCategory {
   icon: string;
   list: string[];
 }
-export interface ICommon {
+
+export interface IHistoryProps {
+  history: { panel: IPanelConfig[]; title: string | null }[]; // 历史记录，只记录panel变更情况
+  curHistoryIdx: number; //当前历史记录的指针
+}
+export interface ICommon extends IHistoryProps {
   panel: IPanelConfig[]; // 配置页面中面板列表
   selectedPanel: string[]; // 当前选中面板
   page: Partial<IPage>; // 当前页面设置
   curTool: TQuickTool; // 当前的工具
   businessCategory: IBusinessCategory[]; //业务组件两级分类
   pathname: string;
+  history: { panel: IPanelConfig[]; title: string | null }[];
+  curHistoryIdx: number;
 }
 const defaultState: ICommon = {
   pathname: '',
+  history: [],
+  curHistoryIdx: 0,
   panel: [],
   selectedPanel: [],
   page: {
@@ -203,11 +212,17 @@ const defaultState: ICommon = {
   businessCategory: [],
 };
 
+// 历史记录最大存储的条数
+export const MAX_HISTORY_STEP = 50;
+
 export default {
   namespace,
   state: defaultState,
   reducers: {
-    setStore,
+    setStore(prevState, store: Store) {
+      let nextState = setStore(prevState, store);
+      return handleHistoryPanel(prevState, nextState, store);
+    },
   },
   effects: {
     *loadBusinessCategory({}, { put, call }) {
@@ -417,7 +432,10 @@ export default {
       });
     },
     // 更新第I个面板的属性
-    *updatePanelAttrib({ payload: { idx, attrib } }, { put, call, select }) {
+    *updatePanelAttrib(
+      { payload: { idx, attrib, recordHistory = true, historyTitle = null } },
+      { put, call, select },
+    ) {
       let panel = yield select((state) => state[namespace].panel);
       let _panel = R.clone(panel);
 
@@ -443,6 +461,8 @@ export default {
         panel: _panel,
         call,
         put,
+        recordHistory,
+        historyTitle,
       });
     },
     // 复制一份

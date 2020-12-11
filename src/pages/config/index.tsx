@@ -6,8 +6,6 @@ import HeaderComponent from './header';
 import ComponentPanel from './panel/components';
 import LayerPanel from './panel/LayerPanel';
 
-import HistoryManager from './panel/historyManager';
-
 import Setting, { IHideProps } from './panel/setting';
 import Thumbnail from './thumbnail';
 // import Toolbox from './toolbox';
@@ -37,7 +35,7 @@ export const addPanel = (
   { style, ...config }: IPanelConfig,
 ) => {
   editor?.current.append(
-    <div style={style} className={styles.chartWrapper}>
+    <div className={styles.chartWrapper} style={style}>
       <ChartItem chartid={config.id} />
     </div>,
     { id: config.id, name: config.title, style },
@@ -53,17 +51,23 @@ const initState: IHideProps = {
 
 const Index = ({
   dispatch,
-  panel,
+  curHistoryIdx,
   selectedPanel,
   page,
   curTool,
+  history,
+  panel: _panel,
 }: {
-  dispatch: Dispatch;
   panel: IPanelConfig[];
+  dispatch: Dispatch;
+  history: { panel: IPanelConfig[]; title: string | null }[];
+  curHistoryIdx: number;
   page: IPage;
   selectedPanel: string[];
   curTool: TQuickTool;
 }) => {
+  let panel = history[curHistoryIdx]?.panel || _panel;
+
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
 
@@ -116,6 +120,15 @@ const Index = ({
         });
     }
   }, [editor]);
+  // const [prevHistory, setPrevHistory] = useState(curHistoryIdx);
+  // useEffect(() => {
+  //   setPrevHistory(curHistoryIdx);
+  //   if (prevHistory < curHistoryIdx) {
+  //     return;
+  //   }
+  //   console.log('需要清空');
+  //   console.log('添加对应的panel');
+  // }, [curHistoryIdx]);
 
   useEffect(() => {
     // 页面动画变更完后再变更hash, CSS动画执行时长为300ms,增加10ms再执行
@@ -300,6 +313,7 @@ const Index = ({
                     payload: {
                       idx,
                       attrib: { style },
+                      recordHistory: false,
                     },
                   });
                 });

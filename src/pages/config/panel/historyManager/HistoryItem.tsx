@@ -2,6 +2,13 @@ import React from 'react';
 import styles from './HistoryItem.less';
 import classnames from 'classnames';
 
-export default () => {
-  return <li className={styles.li}>12</li>;
-};
+export default ({ value, onUpdate, active = false }) => (
+  <li
+    className={classnames(styles.li, {
+      [styles.active]: active,
+    })}
+    onClick={onUpdate}
+  >
+    {value}
+  </li>
+);

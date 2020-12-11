@@ -3,6 +3,7 @@ import moment from 'dayjs';
 import beautify from 'js-beautify';
 import * as axios from './axios';
 import * as R from 'ramda';
+import { IPanelConfig, MAX_HISTORY_STEP } from '@/models/common';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
@@ -86,16 +87,16 @@ export const noncer = () => Math.random().toString(16).slice(2);
 
 export const getType = axios.getType;
 
-interface Store {
+export interface Store {
   payload: any;
 }
-export const setStore = (state, store: Store) => {
+export const setStore = (prevState, store: Store) => {
   let { payload } = store;
   if (typeof payload === 'undefined') {
     payload = store;
     // throw new Error('需要更新的数据请设置在payload中');
   }
-  let nextState = R.clone(state);
+  let nextState = R.clone(prevState);
   Object.keys(payload).forEach((key) => {
     let val = payload[key];
     if (getType(val) == 'object') {
@@ -104,5 +105,29 @@ export const setStore = (state, store: Store) => {
       nextState[key] = val;
     }
   });
+  return nextState;
+};
+
+export const handleHistoryPanel = (prevState, nextState, store: Store) => {
+  let panel = store.payload?.panel;
+  // 需要记录历史记录
+  let recordHistory = store.payload?.recordHistory == true;
+  if (panel && recordHistory) {
+    let nextHistory: { panel: IPanelConfig[]; title: string | null }[] = prevState.history;
+    let title: string | null = store.payload?.historyTitle || null;
+
+    // 写入一项panel
+    nextHistory = [...nextHistory, { panel, title }];
+    if (nextHistory.length > MAX_HISTORY_STEP) {
+      nextHistory.shift();
+    }
+    nextHistory = R.reject((item) => item.panel.length == 0, nextHistory);
+
+    nextState = {
+      ...nextState,
+      history: nextHistory,
+      curHistoryIdx: Math.max(nextHistory.length - 1, 0),
+    };
+  }
   return nextState;
 };
