@@ -10,7 +10,7 @@ import FilterPanel from './panel/filterManager';
 
 import Setting, { IHideProps } from './panel/setting';
 import Thumbnail from './thumbnail';
-import Toolbox from './toolbox';
+// import Toolbox from './toolbox';
 import EditSlider from './EditSlider';
 
 import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
@@ -47,7 +47,7 @@ export const addPanel = (
 const initState: IHideProps = {
   layer: true,
   components: false,
-  toolbox: true,
+  toolbox: false,
   config: false,
   filter: true,
 };
@@ -266,7 +266,7 @@ const Index = ({
         />
 
         <div className={styles['right-edit-main']}>
-          <Toolbox hide={hide} />
+          {/* <Toolbox hide={hide} /> */}
           <div className={styles['editor-panel-wp']}>
             <Editor
               ref={editor}
@@ -315,9 +315,10 @@ const Index = ({
                 editor?.current?.scrollTo(e);
               }}
               page={page}
-              visible={thumbVisible}
+              visible={thumbVisible && !hide.toolbox}
               zoom={zoom}
               dragPercent={dragPercent}
+              showConfig={!hide.config}
             />
           </div>
           <EditSlider
@@ -329,20 +330,23 @@ const Index = ({
             onToggleThumb={() => {
               toggleThumb(!thumbVisible);
             }}
+            hide={hide.toolbox}
+            showConfig={!hide.config}
+          />
+
+          <Setting
+            setHide={setHide}
+            hide={hide}
+            onChange={(e, type) => {
+              // 调整大小
+              if (type === 'size') {
+                let key = Object.keys(e);
+                editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
+              }
+              // console.log(e, type);
+            }}
           />
         </div>
-        <Setting
-          setHide={setHide}
-          hide={hide}
-          onChange={(e, type) => {
-            // 调整大小
-            if (type === 'size') {
-              let key = Object.keys(e);
-              editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
-            }
-            console.log(e, type);
-          }}
-        />
       </div>
     </div>
   );

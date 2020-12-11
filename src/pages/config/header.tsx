@@ -201,7 +201,7 @@ export default ({
             </Tooltip>
           </div>
           <div className={styles['drawer-actions']}>
-            <Tooltip title="过滤器" placement="bottom">
+            <Tooltip title="历史记录" placement="bottom">
               <div
                 className={classnames(styles['header-button'], styles.ml4, {
                   [styles.selected]: !hide.filter,

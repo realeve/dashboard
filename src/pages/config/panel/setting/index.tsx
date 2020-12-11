@@ -89,7 +89,7 @@ const Index = ({
 
   return (
     <div
-      className={classnames(styles['config-panel-wp'], {
+      className={classnames(styles['config-panel-wp'], styles.configPanelTransparent, {
         [styles.hide]: hide.config,
       })}
     >

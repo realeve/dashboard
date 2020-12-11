@@ -3,9 +3,11 @@
 .config-panel-wp {
   width: 332px;
   height: 100%;
+  right: 0;
+  position: absolute;
   z-index: 90;
   background: #1c1f25;
-  position: relative;
+  // position: relative;
   transition: width 0.25s ease-in-out;
   overflow: hidden;
   box-shadow: -1px 0 #000;
@@ -111,6 +113,12 @@
     cursor: pointer;
   }
 }
+
+.configPanelTransparent {
+  background: rgba(29, 33, 39, 50%);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
 .hide {
   width: 0;
 }

@@ -31,8 +31,9 @@ interface IThumbnailProps {
   dragPercent: { x: number; y: number };
   page: IPage;
   onScroll: (e: { x: number; y: number }) => void;
+  showConfig: boolean;
 }
-export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps) => {
+export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThumbnailProps) => {
   const thumbnailSize = {
     width: Number(page.width) / SCALE_PARAM,
     height: Number(page.height) / SCALE_PARAM,
@@ -79,7 +80,7 @@ export default ({ zoom, dragPercent, visible, page, onScroll }: IThumbnailProps)
   return (
     <div
       className={classnames(styles.thumbnail, styles[`thumbnail-${visible ? 'show' : 'hide'}`])}
-      style={thumbnailSize}
+      style={{ ...thumbnailSize, right: showConfig ? 337 : 5 }}
     >
       <div
         className={styles['datav-thumbnail']}

@@ -9,7 +9,7 @@ export default ({ hide, setHide }) => {
         [styles.hide]: hide.filter,
       })}
     >
-      过滤器
+      历史记录
     </div>
   );
 };
