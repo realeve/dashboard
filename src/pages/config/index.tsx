@@ -268,7 +268,11 @@ const Index = ({
             // 添加一组panel
             dispatch({
               type: 'common/updatePanel',
-              payload: { panel: [...panel, ...business] },
+              payload: {
+                panel: [...panel, ...business],
+                recordHistory: true,
+                historyTitle: '添加业务组件 - ' + business[0].title,
+              },
             });
             business.forEach((nextPanel) => {
               if (nextPanel.key === GROUP_COMPONENT_KEY) return;

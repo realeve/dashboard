@@ -249,12 +249,15 @@ export default {
         },
       });
     },
-    *updatePanel({ payload: { panel, recordHistory = true } }, { put, call }) {
+    *updatePanel({ payload: { panel, recordHistory = true, historyTitle = null } }, { put, call }) {
       let nextPanel = R.uniq(panel);
+      console.log(recordHistory, historyTitle);
       yield updatePanel({
         panel: nextPanel,
         call,
         put,
+        recordHistory,
+        historyTitle,
       });
     },
     *loadPage({}, { put, call }) {
@@ -448,7 +451,7 @@ export default {
     },
     // 更新第I个面板的属性
     *updatePanelAttrib(
-      { payload: { idx, attrib, recordHistory = true, historyTitle = null } },
+      { payload: { idx, attrib, recordHistory = true, historyTitle = '更新组件基础属性' } },
       { put, call, select },
     ) {
       let panel = yield select((state) => state[namespace].panel);

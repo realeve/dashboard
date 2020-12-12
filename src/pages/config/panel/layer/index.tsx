@@ -98,6 +98,8 @@ const Index = ({
         type: 'common/updatePanel',
         payload: {
           panel: distPanel,
+          recordHistory: true,
+          historyTitle: '调整组件层级 - ' + distPanel[0].title,
         },
       });
       return;
@@ -142,6 +144,8 @@ const Index = ({
       type: 'common/updatePanel',
       payload: {
         panel: _nextPanel,
+        recordHistory: true,
+        historyTitle: '调整组件层级 - ' + _nextPanel[0].title,
       },
     });
     setSelected([to]);
@@ -532,6 +536,8 @@ const Index = ({
               type: 'common/updatePanel',
               payload: {
                 panel: nextPanel,
+                recordHistory: true,
+                historyTitle: '整理面板 - ' + nextPanel[0].title,
               },
             });
           }}
