@@ -7,7 +7,7 @@ import * as R from 'ramda';
 import { connect } from 'dva';
 import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY, IHistoryProps } from '@/models/common';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-import { TFnHide } from '../setting';
+import { TFnHide, IHideProps } from '../setting';
 
 import { message } from 'antd';
 import { Dispatch } from 'redux';
@@ -24,8 +24,10 @@ interface ILayerProps extends IHistoryProps {
   onRemove: (e: string[]) => void;
   dispatch: Dispatch;
   className: string;
+  hide: IHideProps;
 }
 const Index = ({
+  hide,
   setHide,
   selectedPanel,
   onRemove,
