@@ -75,9 +75,32 @@ export const getConfig = async (url) => {
  * @param style 样式内容
  * @param unit 单位
  */
-const parseStyle = (style: string, unit = 'px') => {
+export const parseStyle = (style: string | number, unit = 'px') => {
   let reg = RegExp(unit, 'g');
-  return Number(style.replace(reg, ''));
+  return parseInt(String(style).replace(reg, ''));
+};
+
+/**
+ * 通过translate字符串计算位置
+ */
+export const calcTranslate = ({
+  translate,
+  left,
+  top,
+}: {
+  translate: string;
+  left: number;
+  top: number;
+}) => {
+  if (translate) {
+    let arr = translate
+      .replace(/px/g, '')
+      .split(',')
+      .map((item) => Number(item));
+    left += arr[0];
+    top += arr[1];
+  }
+  return { left: parseInt('' + left), top: parseInt('' + top) };
 };
 
 /**
@@ -103,15 +126,9 @@ export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
     _transform = {};
 
   if (transform) {
-    let translate = transform.translate;
-    if (translate) {
-      translate = translate
-        .replace(/px/g, '')
-        .split(',')
-        .map((item) => Number(item));
-      left += translate[0];
-      top += translate[1];
-    }
+    let res = calcTranslate({ translate: transform.translate, left, top });
+    (left = res.left), (top = res.top);
+
     rotate = parseStyle(transform.rotate, 'deg') > 0 ? `rotate(${transform?.rotate}) ` : '';
     scale = transform.scale == '1,1' ? '' : `scale(${transform?.scale})`;
     _transform = (rotate + scale).length > 0 ? { transform: rotate + scale } : {};

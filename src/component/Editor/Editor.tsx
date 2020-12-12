@@ -60,12 +60,10 @@ const edgeConfig = {
   zoom150: 80,
 };
 
+export const defaultRect = { top: 16, left: 16, width: 600, height: 320 };
 export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
-    top: 80,
-    left: 80,
-    width: 600,
-    height: 320,
+    ...defaultRect,
     ...style,
   };
 

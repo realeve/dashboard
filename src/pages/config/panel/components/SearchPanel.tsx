@@ -20,7 +20,7 @@ export default ({ data, onAdd }: { data: ISearchState[]; onAdd: (e) => void }) =
           <li
             key={item.key}
             onClick={() => {
-              onAdd && onAdd(item.panel);
+              onAdd?.(item.panel);
             }}
           >
             <p className={classnames(styles['components-from-text'], styles.ellipsis)}>

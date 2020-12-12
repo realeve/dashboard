@@ -25,6 +25,8 @@ import localforage from 'localforage';
 
 import { useDebounce } from 'react-use';
 
+import { calcPanelPosition } from './lib';
+
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
@@ -321,9 +323,12 @@ const Index = ({
         <ComponentPanel
           setHide={setHide}
           hide={hide}
-          onAddPanel={(panel) => {
-            const style = getDefaultStyle();
-            const nextPanel = { style, ...panel };
+          onAddPanel={(newPanel) => {
+            let autoStyle = calcPanelPosition({ panel, page });
+            console.log(autoStyle);
+            const style = getDefaultStyle(autoStyle);
+            // TODO  2020-12-12 根据当前的panel项自动计算合适的位置
+            const nextPanel = { style, ...newPanel };
             dispatch({
               type: 'common/addPanel',
               payload: { panel: nextPanel },
