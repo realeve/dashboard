@@ -72,9 +72,8 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 5.组件
 - [x] (1)增加当前 时间／全屏功能按钮；
-(- [ ] 2)tab组件
-
-- [ ] 标题/dashboard1/dashboard2
+- [ ] (2)tab组件
+ 
 - [x] （3）公告；滚动文字
 
 - [x] 6.dashboard 管理列表

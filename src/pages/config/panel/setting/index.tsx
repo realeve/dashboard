@@ -93,7 +93,19 @@ const Index = ({
         [styles.hide]: hide.config,
       })}
     >
-      {!pageChart && <div className={styles.head}>页面设置</div>}
+      {!pageChart && (
+        <div className={styles.head}>
+          <span>页面设置</span>
+          <span
+            onClick={() => {
+              setHide({ config: true });
+            }}
+            style={{ transform: 'rotate(180deg)', height: '100%', marginRight: 5 }}
+          >
+            <i className="datav-icon datav-font icon-back"></i>
+          </span>
+        </div>
+      )}
 
       <div className={styles.body}>
         {pageChart ? (
@@ -127,7 +139,7 @@ const Index = ({
           保存为业务组件
         </div>
       )}
-      {!pageChart && (
+      {/* {!pageChart && (
         <div
           className={styles.bottom}
           onClick={() => {
@@ -136,7 +148,7 @@ const Index = ({
         >
           确定
         </div>
-      )}
+      )} */}
     </div>
   );
 };

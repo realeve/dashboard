@@ -23,6 +23,8 @@
     padding-left: 10px;
     user-select: none;
     font-size: 12px;
+    display: flex;
+    justify-content: space-between;
   }
   .body {
     width: 100%;
@@ -57,16 +59,16 @@
       height: 100%;
       overflow-y: scroll;
       position: relative;
-      padding: 0 10px;
+      // padding: 0 10px;
       .datav-gui {
-        height: auto;
-        max-height: calc(100vh - 125px);
-        min-height: 180px;
+        height: 100%;
+        // max-height: calc(100vh - 125px);
+        // min-height: 180px;
         overflow-y: scroll;
         font-style: normal;
         -webkit-font-smoothing: antialiased;
         width: 100%;
-        // background: var(--datav-gui-background-color-back);
+        background: rgba(28, 32, 38, 0.603); // var(--datav-gui-background-color-back);
         :global {
           .ant-divider {
             color: #6e7481;

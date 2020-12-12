@@ -139,7 +139,7 @@ export const handleHistoryPanel: (
     }
     // nextHistory = R.reject((item) => item.panel.length == 0, nextHistory);
 
-    // TODO 在删除组件的场景中，此处的panel为空，需要重新处理
+    // 在删除组件的场景中，此处的panel为空，需要重新处理
     // console.log({ title, nextHistory, panel });
     nextState = {
       ...nextState,
