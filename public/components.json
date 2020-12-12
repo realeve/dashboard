@@ -309,7 +309,7 @@
             "engine": "other",
             "type": "fullscreen",
             "title": "全屏组件",
-            "image": "/img/icons/20_scroll_digit.png",
+            "image": "/img/icons/44_fullscreen.png",
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
