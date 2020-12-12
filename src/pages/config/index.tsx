@@ -23,6 +23,8 @@ import * as lib from '@/utils/lib';
 
 import localforage from 'localforage';
 
+import { useDebounce } from 'react-use';
+
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
@@ -34,6 +36,9 @@ export const addPanel = (
   editor: React.MutableRefObject<Editor>,
   { style, ...config }: IPanelConfig,
 ) => {
+  if (config.key === GROUP_COMPONENT_KEY) {
+    return;
+  }
   editor?.current.append(
     <div className={styles.chartWrapper} style={style}>
       <ChartItem chartid={config.id} />
@@ -67,6 +72,7 @@ const Index = ({
   curTool: TQuickTool;
 }) => {
   let panel = history[curHistoryIdx]?.panel || _panel;
+  let panelIds = R.pluck('id', panel);
 
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
@@ -101,25 +107,43 @@ const Index = ({
     editor.current && setInstance(editor.current);
 
     // onMount,载入初始panel
-    panel.map((item) => {
-      item.key != GROUP_COMPONENT_KEY && addPanel(editor, item);
-    });
+    // panel.map((item) => {
+    //   addPanel(editor, item);
+    // });
 
     // setting selected panel.
-    if (panel.length > 0) {
-      let lastPanel = R.last<IPanelConfig>(panel);
-      let inValid = lastPanel.lock || lastPanel.hide;
+    // if (panel.length > 0) {
+    //   let lastPanel = R.last<IPanelConfig>(panel);
+    //   let inValid = lastPanel.lock || lastPanel.hide;
 
-      // 如果锁定了或者隐藏，不允许选择
-      !inValid &&
-        dispatch({
-          type: 'common/setStore',
-          payload: {
-            selectedPanel: [lastPanel.id],
-          },
-        });
-    }
+    //   // 如果锁定了或者隐藏，不允许选择
+    //   !inValid &&
+    //     dispatch({
+    //       type: 'common/setStore',
+    //       payload: {
+    //         selectedPanel: [lastPanel.id],
+    //       },
+    //     });
+    // }
   }, [editor]);
+
+  // 当前editor上的keys
+  const [panelKeys, setPanelKeys] = useState([]);
+
+  useEffect(() => {
+    // onMount,载入初始panel
+    let nextKeys = panelKeys.slice();
+    panel.forEach((item) => {
+      if (nextKeys.includes(item.id)) {
+        return;
+      }
+      nextKeys = [...nextKeys, item.id];
+      addPanel(editor, item);
+    });
+    setPanelKeys(nextKeys);
+    console.log({ nextKeys, panelIds });
+  }, [panelIds.join(',')]);
+
   // const [prevHistory, setPrevHistory] = useState(curHistoryIdx);
   // useEffect(() => {
   //   setPrevHistory(curHistoryIdx);
@@ -195,7 +219,7 @@ const Index = ({
     ids.forEach((id) => {
       let item = R.find<IPanelConfig>(R.propEq<string>('id', id))(panel);
       let _item = { ...item, id: lib.noncer() };
-      addPanel(editor, _item);
+      // addPanel(editor, _item);
       newPanel.push(_item);
     });
     dispatch({
@@ -240,6 +264,27 @@ const Index = ({
     return nextPanel.filter((item) => !lockedPanel.includes(item));
   };
 
+  const [changedPanel, setChangedPanel] = useState([]);
+
+  useDebounce(
+    () => {
+      changedPanel.forEach(({ id: idx, next: style }) => {
+        dispatch({
+          type: 'common/updatePanelAttrib',
+          payload: {
+            idx,
+            attrib: { style },
+            recordHistory: false,
+          },
+        });
+      });
+      // 更新缩略图
+      editor?.current.updateThumbnail();
+    },
+    800,
+    [changedPanel],
+  );
+
   return (
     <div className={styles.editor}>
       <HeaderComponent
@@ -262,7 +307,7 @@ const Index = ({
               type: 'common/addPanel',
               payload: { panel: nextPanel },
             });
-            addPanel(editor, nextPanel);
+            // addPanel(editor, nextPanel);
           }}
           onAddBusiness={(business) => {
             // 添加一组panel
@@ -274,10 +319,9 @@ const Index = ({
                 historyTitle: '添加业务组件 - ' + business[0].title,
               },
             });
-            business.forEach((nextPanel) => {
-              if (nextPanel.key === GROUP_COMPONENT_KEY) return;
-              addPanel(editor, nextPanel);
-            });
+            // business.forEach((nextPanel) => {
+            //   addPanel(editor, nextPanel);
+            // });
           }}
         />
 
@@ -310,18 +354,7 @@ const Index = ({
                   },
                 });
               }}
-              onChange={(panels) => {
-                panels.forEach(({ id: idx, next: style }) => {
-                  dispatch({
-                    type: 'common/updatePanelAttrib',
-                    payload: {
-                      idx,
-                      attrib: { style },
-                      recordHistory: false,
-                    },
-                  });
-                });
-              }}
+              onChange={setChangedPanel}
               // onGuidesChange={e => {
               //   console.log(e, '辅助线');
               // }}

@@ -460,7 +460,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               editor={this}
               onChange={(e) => {
                 this.props.onChange(e);
-                this.updateThumbnail();
+                // this.updateThumbnail();
               }}
               selectedMenu={this.props.curTool}
             />
