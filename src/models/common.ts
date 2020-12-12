@@ -226,8 +226,8 @@ export default {
   reducers: {
     setStore(prevState, _store: Store) {
       let { type, recordHistory, historyTitle, ...storeCopy } = R.clone(_store.payload);
-      let nextState = setStore(prevState, { payload: storeCopy });
-      return handleHistoryPanel(prevState, nextState, _store);
+      let nextState = setStore<ICommon>(prevState, { payload: storeCopy });
+      return handleHistoryPanel<ICommon>(prevState, nextState, _store);
     },
   },
   effects: {

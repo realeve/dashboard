@@ -3,7 +3,7 @@ import moment from 'dayjs';
 import beautify from 'js-beautify';
 import * as axios from './axios';
 import * as R from 'ramda';
-import { IPanelConfig, MAX_HISTORY_STEP } from '@/models/common';
+import { IPanelConfig, MAX_HISTORY_STEP, ICommon } from '@/models/common';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
@@ -90,7 +90,10 @@ export const getType = axios.getType;
 export interface Store {
   payload: any;
 }
-export const setStore = (prevState, store: Store) => {
+export const setStore: <T = ICommon>(prevState: T, store: Store) => T = (
+  prevState,
+  store: Store,
+) => {
   let { payload } = store;
   if (typeof payload === 'undefined') {
     payload = store;
@@ -108,7 +111,11 @@ export const setStore = (prevState, store: Store) => {
   return nextState;
 };
 
-export const handleHistoryPanel = (prevState, nextState, store: Store) => {
+export const handleHistoryPanel: (
+  prevState: ICommon,
+  nextState: ICommon,
+  store: Store,
+) => ICommon = (prevState, nextState, store: Store) => {
   let panel = store.payload?.panel;
   // 需要记录历史记录
   let recordHistory = store.payload?.recordHistory == true;
@@ -117,8 +124,14 @@ export const handleHistoryPanel = (prevState, nextState, store: Store) => {
     let nextHistory: { panel: IPanelConfig[]; title: string | null }[] = prevState.history;
     let title: string | null = store.payload?.historyTitle || null;
 
+    // 需要覆盖后面的历史记录
+    const coverPrev = prevState.curHistoryIdx < nextHistory.length - 1;
+
     // 写入一项panel
-    nextHistory = [...nextHistory, { panel, title }];
+    nextHistory = coverPrev
+      ? [...nextHistory.slice(0, prevState.curHistoryIdx + 1), { panel, title }]
+      : [...nextHistory, { panel, title }];
+
     if (nextHistory.length > MAX_HISTORY_STEP) {
       nextHistory.shift();
     }
