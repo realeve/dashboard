@@ -112,11 +112,11 @@ export const handleHistoryPanel = (prevState, nextState, store: Store) => {
   let panel = store.payload?.panel;
   // 需要记录历史记录
   let recordHistory = store.payload?.recordHistory == true;
-  console.log({ recordHistory });
+  // console.log({ recordHistory });
   if (panel && recordHistory) {
     let nextHistory: { panel: IPanelConfig[]; title: string | null }[] = prevState.history;
     let title: string | null = store.payload?.historyTitle || null;
-    console.log({ title });
+
     // 写入一项panel
     nextHistory = [...nextHistory, { panel, title }];
     if (nextHistory.length > MAX_HISTORY_STEP) {
@@ -124,6 +124,8 @@ export const handleHistoryPanel = (prevState, nextState, store: Store) => {
     }
     nextHistory = R.reject((item) => item.panel.length == 0, nextHistory);
 
+    // TODO 在删除组件的场景中，此处的panel为空，需要重新处理
+    // console.log({ title, nextHistory, panel });
     nextState = {
       ...nextState,
       history: nextHistory,

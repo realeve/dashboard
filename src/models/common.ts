@@ -7,6 +7,7 @@ import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 import { reorderPanel } from '@/pages/config/panel/layer';
 import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
 
+// TODO 删除、复制组件的功能需要调整
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
   console.log(props);
@@ -421,7 +422,8 @@ export default {
       let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
       let item = R.find<IPanelConfig>((item) => idx.includes(item.id))(prevPanel);
       // 移除打包组件需要考虑一并移除子组件
-      let idList = item ? [...idx, item.group] : idx;
+      // 此处需要以item.group来判断 ，否则会导致全部删除的bug
+      let idList = item?.group ? [...idx, item.group] : idx;
       let nextPanel = R.reject<IPanelConfig>(
         (item) => idList.includes(item.id) || idList.includes(item.group),
       )(prevPanel);

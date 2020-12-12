@@ -79,18 +79,6 @@ export const handleData = (
 
 export const config = [
   {
-    key: 'legend',
-    defaultValue: 0,
-  },
-  {
-    key: 'x',
-    defaultValue: 1,
-  },
-  {
-    key: 'y',
-    defaultValue: 2,
-  },
-  {
     key: 'barWidth',
     defaultValue: 20,
     title: '柱状宽度',

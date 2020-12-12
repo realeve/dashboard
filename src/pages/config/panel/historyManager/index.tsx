@@ -37,7 +37,7 @@ const HistoryPanel = ({
         onClear={() => {
           dispatch({
             type: 'common/setStore',
-            payload: { history: [panel], curHistoryIdx: 0 },
+            payload: { history: [], curHistoryIdx: 0 },
           });
         }}
       />
@@ -51,7 +51,12 @@ const HistoryPanel = ({
             onUpdate={() => {
               dispatch({
                 type: 'common/setStore',
-                payload: { curHistoryIdx: idx, recordHistory: false, panel: history[idx].panel },
+                payload: {
+                  curHistoryIdx: idx,
+                  recordHistory: false,
+                  panel: history[idx].panel,
+                  selectedPanel: [],
+                },
               });
             }}
           />
