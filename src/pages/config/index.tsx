@@ -128,7 +128,7 @@ const Index = ({
   }, [editor]);
 
   // 当前editor上的keys
-  const [panelKeys, setPanelKeys] = useState([]);
+  const [panelKeys, setPanelKeys] = useState<string[]>([]);
 
   useEffect(() => {
     // onMount,载入初始panel
@@ -140,8 +140,10 @@ const Index = ({
       nextKeys = [...nextKeys, item.id];
       addPanel(editor, item);
     });
+    // console.log({ nextKeys, panelIds });
+    nextKeys = R.uniq(nextKeys);
+    // 每次添加后，都设置为最近一次的panelId
     setPanelKeys(nextKeys);
-    console.log({ nextKeys, panelIds });
   }, [panelIds.join(',')]);
 
   // const [prevHistory, setPrevHistory] = useState(curHistoryIdx);
@@ -207,6 +209,10 @@ const Index = ({
     });
     // 更新缩略图
     editor?.current.updateThumbnail();
+
+    // 移除记录的id列表
+    let _panelKeys = R.reject<string>((item) => idx.includes(item))(panelKeys);
+    setPanelKeys(_panelKeys);
   };
 
   /**
@@ -285,6 +291,20 @@ const Index = ({
     [changedPanel],
   );
 
+  // 载入json配置文件手动编辑
+  const onLoadConfig = ({ page, panel }) => {
+    dispatch({
+      type: 'common/setStore',
+      payload: {
+        page,
+        panel,
+        history: [],
+        curHistoryIdx: 0,
+        recordHistory: false,
+      },
+    });
+  };
+
   return (
     <div className={styles.editor}>
       <HeaderComponent
@@ -293,6 +313,7 @@ const Index = ({
         hide={hide}
         title={page.title}
         author={page.author}
+        onLoadConfig={onLoadConfig}
       />
       <div className={styles.main}>
         <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />

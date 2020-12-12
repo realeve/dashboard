@@ -101,7 +101,16 @@ const Index = ({
 
   return (
     <Tabs defaultActiveKey="1" activeKey={activeKey} type="line" onChange={setActiveKey}>
-      <Tabs.TabPane tab="外观设置" key="1" style={{ color: '#eee', height: '100%' }}>
+      <Tabs.TabPane
+        tab={
+          <span>
+            <i className="datav-icon datav-font icon-theme header-button-icon" />
+            外观配置
+          </span>
+        }
+        key="1"
+        style={{ color: '#eee', height: '100%' }}
+      >
         <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
             <Field title="组件尺寸">
@@ -250,7 +259,15 @@ const Index = ({
           </div>
         </div>
       </Tabs.TabPane>
-      <Tabs.TabPane tab="组件配置" key="2">
+      <Tabs.TabPane
+        tab={
+          <span>
+            <i className="datav-icon datav-font icon-com-package header-button-icon" />
+            组件配置
+          </span>
+        }
+        key="2"
+      >
         <ComponentSetting
           onChange={(componentConfig, title) => {
             updateAttrib({ componentConfig }, true, title + ` - ${panel[selectedIdx].title}`);
@@ -261,7 +278,15 @@ const Index = ({
 
       {/* 业务组件不允许设置ajax，此处新增字段需要与不发起ajax做区分 */}
       {currentPanel.ajax && (
-        <Tabs.TabPane tab="接口配置" key="3">
+        <Tabs.TabPane
+          tab={
+            <span>
+              <i className="datav-icon datav-font icon-link header-button-icon" />
+              接口配置
+            </span>
+          }
+          key="3"
+        >
           <ApiSetting
             onChange={(api) => {
               updateAttrib({ api }, true, '调整接口配置项' + ` - ${panel[selectedIdx].title}`);

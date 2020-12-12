@@ -55,7 +55,7 @@ export interface IConfirmProps {
   spinning?: boolean;
   onOk?: () => void;
   onCancel?: () => void;
-  okText?: string;
+  okText?: string | React.ReactNode;
   cancelText?: string;
   style?: React.CSSProperties;
   container?: string;

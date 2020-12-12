@@ -29,7 +29,9 @@ export const saveDashboard = (layout) => {
  * @param {回调函数} callback
  * @desc 将file图像文件对象转换为BASE64
  */
-export let loadDataFile: (file: File | Blob) => Promise<null | Blob> = async (file: File) => {
+export let loadDataFile: (file: File | Blob) => Promise<null | string | ArrayBuffer> = async (
+  file: File,
+) => {
   // if (typeof FileReader === 'undefined') {
   //   return Promise.resolve(null);
   // }
@@ -43,7 +45,7 @@ export let loadDataFile: (file: File | Blob) => Promise<null | Blob> = async (fi
   reader.readAsText(file);
 
   return new Promise((resolve) => {
-    reader.onload = ({ target: { result } }: { target: { result: Blob } }) => {
+    reader.onload = ({ target: { result } }: { target: { result: string | ArrayBuffer } }) => {
       resolve(result);
     };
   });
@@ -53,7 +55,7 @@ export let loadDataFile: (file: File | Blob) => Promise<null | Blob> = async (fi
 export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
 export const loadDashboard = async (file: File | Blob) => {
-  let str = (await loadDataFile(file)) as Proimse<string>;
+  let str = (await loadDataFile(file)) as string;
   return JSON.parse(str as string);
 };
 

@@ -14,7 +14,6 @@ import {
 import Config from './config';
 import { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
-import { Confirm } from '@/component/Editor/Popup/Popup';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
@@ -88,8 +87,6 @@ const Index = ({
     setShouldSave(!haseBusiness);
   }, [selectedPanel.length]);
 
-  const [showConfirm, setShowConfirm] = useState(false);
-
   return (
     <div
       className={classnames(styles['config-panel-wp'], styles.configPanelTransparent, {
@@ -130,43 +127,15 @@ const Index = ({
           保存为业务组件
         </div>
       )}
-      {showConfirm && (
-        <Confirm
-          title="清空画板"
-          style={{ width: 400, minHeight: 230, height: 'auto' }}
-          onCancel={() => {
-            setShowConfirm(false);
-          }}
-          onOk={() => {
-            dispatch({
-              type: 'common/clearPage',
-            });
-            setShowConfirm(false);
+      {!pageChart && (
+        <div
+          className={styles.bottom}
+          onClick={() => {
+            setHide({ config: true });
           }}
         >
-          <div style={{ paddingTop: 20 }}>确定清空当前画板？该操作不可恢复。</div>
-        </Confirm>
-      )}
-      {!pageChart && (
-        <>
-          <div
-            className={styles.bottom}
-            onClick={() => {
-              setShowConfirm(true);
-            }}
-            style={{ outline: '1px solid #aaa', background: 'transparent' }}
-          >
-            清空画板
-          </div>
-          <div
-            className={styles.bottom}
-            onClick={() => {
-              setHide({ config: true });
-            }}
-          >
-            确定
-          </div>
-        </>
+          确定
+        </div>
       )}
     </div>
   );

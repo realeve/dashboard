@@ -226,7 +226,7 @@ export default {
     setStore(prevState, _store: Store) {
       let { type, recordHistory, historyTitle, ...storeCopy } = R.clone(_store.payload);
       let nextState = setStore<ICommon>(prevState, { payload: storeCopy });
-      return handleHistoryPanel<ICommon>(prevState, nextState, _store);
+      return handleHistoryPanel(prevState, nextState, _store);
     },
   },
   effects: {
@@ -304,6 +304,8 @@ export default {
           page,
           panel: [],
           selectedPanel: [],
+          recordHistory: true,
+          historyTitle: '清空画板',
         },
       });
     },
