@@ -7,10 +7,9 @@ import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 import { reorderPanel } from '@/pages/config/panel/layer';
 import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
 
-// TODO 删除、复制组件的功能需要调整
+// 删除、复制组件的功能需要调整
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
-  console.log(props);
   yield put({
     type: 'setStore',
     payload: {

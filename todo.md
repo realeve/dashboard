@@ -75,9 +75,9 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 (- [ ] 2)tab组件
 
 - [ ] 标题/dashboard1/dashboard2
-- [ ] （3）公告；滚动文字
+- [x] （3）公告；滚动文字
 
-- [ ] 6.dashboard 管理列表
+- [x] 6.dashboard 管理列表
 
 ~~7.预警功能：(在后台业务实现，前台不处理预警)~~
 ~~（1）业务组件，定义需要观测某列指标，阈值。超阈值向指定的用户发送预警信息（预警能力：短信、腾讯通推送、当前页面警告）~~
