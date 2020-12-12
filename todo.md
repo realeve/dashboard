@@ -16,7 +16,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 ---
 
 - [x] 增加组件锁定
-- [ ] 增加操作历史记录，X次可设置。点击之后重新渲染dashboard；每一步记录具体的操作；
+- [x] 增加操作历史记录，X次可设置。点击之后重新渲染dashboard；每一步记录具体的操作；
 - [x] 业务组件管理
 
 -----

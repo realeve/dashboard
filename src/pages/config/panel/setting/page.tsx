@@ -212,6 +212,16 @@ export const ComponentConfig = ({
             max={30}
           />
         </Field>
+        <Field title="拼接线颜色">
+          <PureColor
+            value={page.screen_edge_background}
+            onChange={(screen_edge_background) => {
+              updatePage({ screen_edge_background });
+            }}
+            position="top"
+            noAnimation
+          />
+        </Field>
         <Field title="拼接线标签">
           <Switch
             checked={page.showEdgeTag}

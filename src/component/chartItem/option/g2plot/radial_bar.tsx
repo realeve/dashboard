@@ -80,6 +80,7 @@ export const config = [
     defaultValue: false,
     title: 'X/Y轴互换',
     type: 'switch',
+    noAnimation: true,
   },
   {
     key: 'color',

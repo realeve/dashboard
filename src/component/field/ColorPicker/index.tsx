@@ -74,7 +74,7 @@ const getGardient = (_color) => {
 /**
  * 渐变选择器
  */
-const GardientPicker = ({ value, onChange, disabled }) => {
+const GardientPicker = ({ value, onChange, disabled = false }) => {
   const [color, setColor] = useState(getInitVal(value));
   useEffect(() => {
     const nextGardient = getGardient(color);
@@ -136,7 +136,7 @@ const GardientPicker = ({ value, onChange, disabled }) => {
 
 export const PureColor = ({
   value = '',
-  disabled,
+  disabled = false,
   onChange,
   position = 'top',
   noAnimation = false,
@@ -181,7 +181,7 @@ export const PureColor = ({
   );
 };
 
-export default ({ value, onChange, disabled }) => {
+export default ({ value, onChange, disabled = false }) => {
   const [tab, setTab] = useState(getTabIdx(value));
   return (
     <div className={styles.fields}>
