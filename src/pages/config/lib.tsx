@@ -31,6 +31,7 @@ interface IPage {
   width: number | string;
   height: number | string;
 }
+
 interface IFnAutoPosition {
   panel: IPanel[];
   page?: IPage;
@@ -38,10 +39,10 @@ interface IFnAutoPosition {
 }
 
 // x轴能否放下：当前的x轴坐标 + 目标矩形的宽度 小于 页面宽度，X轴可放下
-const isXAllowed = (item: IPanelStyleProps, page, rect = defaultRect) =>
+const isXAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
   item.x2 + rect.width < Number(page.width);
 
-const isYAllowed = (item: IPanelStyleProps, page, rect = defaultRect) =>
+const isYAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
   item.y1 + rect.height < Number(page.height);
 
 /**
@@ -73,13 +74,13 @@ export const findPosition = (
     let rect1: IDistRect =
       direction == 'right'
         ? {
-            x1: item.x2,
+            x1: item.x2, // 向右放置，起始点从x2起，y轴不变
             y1: item.y1,
             x2: item.x2 + rect.width,
             y2: item.y1 + rect.height,
           }
         : {
-            x1: item.x1,
+            x1: item.x1, // 向下放置，起始点不变，y轴从y2起
             y1: item.y2,
             x2: item.x1 + rect.width,
             y2: item.y2 + rect.height,
@@ -89,15 +90,12 @@ export const findPosition = (
       yAllowed = isYAllowed(item, page);
 
     // x/y轴未越界
-    let success = xAllowed && yAllowed;
-
-    // 同时不同其它区域相交
-    if (success) {
-      success = shouldRectPosIn(rect1, panelStyle);
+    if (!xAllowed || !yAllowed) {
+      return;
     }
 
-    // 如果全部判断完毕后满足条件，校验通过
-    if (success) {
+    // 同时不同其它区域相交
+    if (shouldRectPosIn(rect1, panelStyle)) {
       newPosition = {
         isFind: true,
         ...defaultRect,
@@ -110,18 +108,14 @@ export const findPosition = (
 };
 
 /**
- * 计算新面板最佳的放置位置
- * @param panel 当前的面板列表
- * @param page 页面设置
- * @param padding 组件之间的边距
+ * 转换面板样式基础配置，只提取与区域判断有关的信息
+ * @param param0
  */
-export const calcPanelPosition = ({
+export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyleProps[] = ({
   panel,
-  page = { width: 1920, height: 1080 },
   padding = 8,
-}: IFnAutoPosition) => {
-  // 转换当前组件列表已经占领的区域
-  let panelStyle: IPanelStyleProps[] = panel.map(({ style }) => {
+}) => {
+  let dist = panel.map(({ style }) => {
     let width = parseStyle(style.width),
       height = parseStyle(style.height),
       top = parseStyle(style.top),
@@ -137,9 +131,24 @@ export const calcPanelPosition = ({
       y2: top + height + padding,
     };
   });
-
   // 优先从上方至下，从左至右放置
-  panelStyle.sort((a, b) => a.y1 - b.y1);
+  dist.sort((a, b) => a.y1 - b.y1);
+  return dist;
+};
+
+/**
+ * 计算新面板最佳的放置位置
+ * @param panel 当前的面板列表
+ * @param page 页面设置
+ * @param padding 组件之间的边距
+ */
+export const calcPanelPosition = ({
+  panel,
+  page = { width: 1920, height: 1080 },
+  padding = 8,
+}: IFnAutoPosition) => {
+  // 转换当前组件列表已经占领的区域
+  let panelStyle = convertPanel({ panel, padding });
 
   let distPos: IRectPos = {
     isFind: false,
