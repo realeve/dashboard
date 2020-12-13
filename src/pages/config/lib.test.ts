@@ -1,5 +1,6 @@
-import * as lib from '../index/lib';
+import * as lib from './lib';
 
+// umi test ./src/pages/config/lib.test.ts
 const panel = [
   {
     style: {
@@ -38,3 +39,15 @@ const panel = [
     },
   },
 ];
+
+test('基础样式转换', () => {
+  expect(lib.convertPanel({ panel, padding: 16 })).toMatchObject([
+    { width: 600, height: 320, x1: 15, y1: 15 },
+    { width: 600, height: 320, x1: 650, y1: 15 },
+    { width: 600, height: 320, x1: 15, y1: 380 },
+    { width: 600, height: 320, x1: 15, y1: 732 },
+  ]);
+  expect(lib.parseStyle('223.11px')).toBe(223);
+  expect(lib.parseStyle('223.11px', 'px')).toBe(223);
+  expect(lib.parseStyle('223.11mm', 'mm')).toBe(223);
+});

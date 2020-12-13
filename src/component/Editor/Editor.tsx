@@ -29,7 +29,7 @@ import { IPage } from '@/models/common';
 import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
-
+import { defaultRect } from '@/pages/config/lib';
 const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => ({
   width: `${page.width}px`,
@@ -54,13 +54,6 @@ const edgeConfig = {
   zoom150: 80,
 };
 
-const rectPadding = 12;
-export const defaultRect = {
-  top: rectPadding,
-  left: rectPadding,
-  width: 1920 / 4 - 2.4 * rectPadding,
-  height: 1080 / 4 - 2.4 * rectPadding,
-};
 export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     ...defaultRect,

@@ -3,9 +3,48 @@
  * 本函数用于在画布的空余区域搜索最佳放置的位置
  */
 import * as R from 'ramda';
-import { defaultRect } from '@/component/Editor/Editor';
-import { parseStyle, calcTranslate } from '@/pages/index/lib';
 import { IPanelConfig as IPanel } from '@/models/common';
+
+const rectPadding = 12;
+export const defaultRect = {
+  top: rectPadding,
+  left: rectPadding,
+  width: 1920 / 4 - 2.4 * rectPadding,
+  height: 1080 / 4 - 2.4 * rectPadding,
+};
+
+/**
+ * 将style中   233px 转换为 数值型 233
+ * @param style 样式内容
+ * @param unit 单位
+ */
+export const parseStyle = (style: string | number, unit = 'px') => {
+  let reg = RegExp(unit, 'g');
+  return parseInt(String(style).replace(reg, ''));
+};
+
+/**
+ * 通过translate字符串计算位置
+ */
+export const calcTranslate = ({
+  translate,
+  left,
+  top,
+}: {
+  translate: string;
+  left: number;
+  top: number;
+}) => {
+  if (translate) {
+    let arr = translate
+      .replace(/px/g, '')
+      .split(',')
+      .map((item) => Number(item));
+    left += arr[0];
+    top += arr[1];
+  }
+  return { left: parseInt('' + left), top: parseInt('' + top) };
+};
 
 // 默认样式
 export interface IRect {

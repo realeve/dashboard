@@ -2,6 +2,7 @@ import { axios } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/Editor';
 import { message } from 'antd';
 import { IPage, IPanelConfig } from '@/models/common';
+import { parseStyle, calcTranslate } from '@/pages/config/lib';
 
 export enum EResizeType {
   NONE = 'none', // 不缩放
@@ -68,39 +69,6 @@ export const getConfig = async (url) => {
     });
   }
   return getLocalConfig();
-};
-
-/**
- * 将style中   233px 转换为 数值型 233
- * @param style 样式内容
- * @param unit 单位
- */
-export const parseStyle = (style: string | number, unit = 'px') => {
-  let reg = RegExp(unit, 'g');
-  return parseInt(String(style).replace(reg, ''));
-};
-
-/**
- * 通过translate字符串计算位置
- */
-export const calcTranslate = ({
-  translate,
-  left,
-  top,
-}: {
-  translate: string;
-  left: number;
-  top: number;
-}) => {
-  if (translate) {
-    let arr = translate
-      .replace(/px/g, '')
-      .split(',')
-      .map((item) => Number(item));
-    left += arr[0];
-    top += arr[1];
-  }
-  return { left: parseInt('' + left), top: parseInt('' + top) };
 };
 
 /**
