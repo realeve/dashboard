@@ -11,6 +11,10 @@ export interface IRect {
   height: number;
 }
 
+interface IRectPos extends IRect {
+  isFind: boolean;
+}
+
 // 放置组件后围成的矩形区域
 interface IDistRect {
   x1: number;
@@ -23,12 +27,88 @@ interface IPanelStyleProps extends IDistRect {
   width: number;
   height: number;
 }
-
+interface IPage {
+  width: number | string;
+  height: number | string;
+}
 interface IFnAutoPosition {
   panel: IPanel[];
-  page?: { width: number | string; height: number | string };
+  page?: IPage;
   padding?: number;
 }
+
+// x轴能否放下：当前的x轴坐标 + 目标矩形的宽度 小于 页面宽度，X轴可放下
+const isXAllowed = (item: IPanelStyleProps, page, rect = defaultRect) =>
+  item.x2 + rect.width < Number(page.width);
+
+const isYAllowed = (item: IPanelStyleProps, page, rect = defaultRect) =>
+  item.y1 + rect.height < Number(page.height);
+
+/**
+ * 当前所围成的矩形区域是否与其它组件重叠；
+ * @param direction 查找方向
+ * @param page 页面设置，用于判断是否越界
+ * @param panelStyle 需要判断的现有panel
+ * @param distPos 初始值
+ * @param rect rect默认设置
+ */
+export const findPosition = (
+  direction = 'right',
+  page: IPage,
+  panelStyle: IPanelStyleProps[],
+  distPos: IRectPos,
+  rect: IRect = defaultRect,
+) => {
+  if (distPos.isFind) {
+    return distPos;
+  }
+  let newPosition = R.clone<IRectPos>(distPos);
+  // 开始轮询，计算是否有位置放置
+  panelStyle.forEach((item, idx) => {
+    if (newPosition.isFind) {
+      return;
+    }
+
+    // 如果放在当前位置，所围成的矩形
+    let rect1: IDistRect =
+      direction == 'right'
+        ? {
+            x1: item.x2,
+            y1: item.y1,
+            x2: item.x2 + rect.width,
+            y2: item.y1 + rect.height,
+          }
+        : {
+            x1: item.x1,
+            y1: item.y2,
+            x2: item.x1 + rect.width,
+            y2: item.y2 + rect.height,
+          };
+
+    let xAllowed = isXAllowed(item, page),
+      yAllowed = isYAllowed(item, page);
+
+    // x/y轴未越界
+    let success = xAllowed && yAllowed;
+
+    // 同时不同其它区域相交
+    if (success) {
+      success = shouldRectPosIn(rect1, panelStyle);
+    }
+
+    // 如果全部判断完毕后满足条件，校验通过
+    if (success) {
+      newPosition = {
+        isFind: true,
+        ...defaultRect,
+        top: rect1.y1,
+        left: rect1.x1,
+      };
+    }
+  });
+  return newPosition;
+};
+
 /**
  * 计算新面板最佳的放置位置
  * @param panel 当前的面板列表
@@ -40,9 +120,6 @@ export const calcPanelPosition = ({
   page = { width: 1920, height: 1080 },
   padding = 8,
 }: IFnAutoPosition) => {
-  // 获取默认样式
-  let rect: IRect = R.clone(defaultRect);
-
   // 转换当前组件列表已经占领的区域
   let panelStyle: IPanelStyleProps[] = panel.map(({ style }) => {
     let width = parseStyle(style.width),
@@ -64,68 +141,18 @@ export const calcPanelPosition = ({
   // 优先从上方至下，从左至右放置
   panelStyle.sort((a, b) => a.y1 - b.y1);
 
-  let distPos = {
+  let distPos: IRectPos = {
     isFind: false,
     ...defaultRect,
   };
 
-  // x轴能否放下：当前的x轴坐标 + 目标矩形的宽度 小于 页面宽度，X轴可放下
-  const isXAllowed = (item: IPanelStyleProps) => item.x2 + rect.width < Number(page.width);
-  const isYAllowed = (item: IPanelStyleProps) => item.y1 + rect.height < Number(page.height);
-  // 开始轮询，计算是否有位置放置
-  panelStyle.forEach((item, idx) => {
-    if (distPos.isFind) {
-      return;
-    }
+  // 优先放在右边，查看能否放下
+  distPos = findPosition('right', page, panelStyle, distPos);
 
-    // 当前所围成的矩形区域是否与其它组件重叠；
-
-    // 如果放在当前位置，所围成的矩形
-    let rectNeedJudge: IDistRect = {
-      x1: item.x2,
-      y1: item.y1,
-      x2: item.x2 + rect.width,
-      y2: item.y1 + rect.height,
-    };
-    console.log({ rectNeedJudge });
-
-    // 当前区域后续的组件列表，用于判断是否允许放置当前组件
-    let rest = panelStyle; //.slice(idx + 1);
-
-    let xAllowed = isXAllowed(item),
-      yAllowed = isYAllowed(item);
-    let success = xAllowed && yAllowed;
-    if (!success) {
-      if (!xAllowed) {
-        // X轴不允许，另起一行
-        distPos = {
-          ...distPos,
-          top: rect.top + item.height + padding,
-        };
-      }
-      if (!yAllowed) {
-        distPos = {
-          ...distPos,
-          left: rect.left + item.width + padding,
-        };
-      }
-    } else {
-      success = shouldRectPosIn(rectNeedJudge, rest);
-    }
-
-    // TODO 此处的逻辑需继续处理
-
-    console.log({ success, rest });
-    // 当前点会相交
-    if (success) {
-      distPos = {
-        isFind: true,
-        ...defaultRect,
-        top: item.y1,
-        left: item.x2,
-      };
-    }
-  });
+  // 否则向下搜索
+  if (!distPos.isFind) {
+    distPos = findPosition('top', page, panelStyle, distPos);
+  }
 
   let { isFind, ...props } = distPos;
   return props as IRect;
@@ -144,10 +171,10 @@ export const calcPanelPosition = ({
  *  只要目标矩形任意一个顶点在以上方框之内视为无效
  */
 export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
-  let allowed = true;
-  for (let i = 0; i < panel.length && allowed; i++) {
-    let item = panel[i];
-    allowed = !isRectCross(item, rect);
+  let i = 0,
+    allowed = true;
+  while (allowed && i < panel.length) {
+    allowed = !isRectCross(panel[i++], rect);
   }
   return allowed;
 };
@@ -159,5 +186,5 @@ export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
  * @param r2 矩形
  */
 export const isRectCross = (r1: IDistRect, r2: IDistRect) =>
-  Math.abs((r1.x1 + r1.x2) / 2 - (r2.x1 + r2.x2) / 2) <= (r1.x2 + r2.x2 - r1.x1 - r2.x1) / 2 &&
-  Math.abs((r1.y1 + r1.y2) / 2 - (r2.y1 + r2.y2) / 2) <= (r1.y2 + r2.y2 - r1.y1 - r2.y1) / 2;
+  Math.abs((r1.x1 + r1.x2) / 2 - (r2.x1 + r2.x2) / 2) < (r1.x2 + r2.x2 - r1.x1 - r2.x1) / 2 &&
+  Math.abs((r1.y1 + r1.y2) / 2 - (r2.y1 + r2.y2) / 2) < (r1.y2 + r2.y2 - r1.y1 - r2.y1) / 2;
