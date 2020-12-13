@@ -92,6 +92,13 @@ export interface IApiProps {
 
 // 渲染引擎
 export type TChartEngine = 'echarts' | 'g2' | 'g2plot' | 'other';
+
+export type TPanelItemStyle = Omit<React.CSSProperties, 'transform'>;
+
+// transform 需要单独处理
+export interface IPanelItemStyle extends TPanelItemStyle {
+  transform: { translate: string };
+}
 export interface IPanelConfig {
   edit_id?: number; // 编辑状态下的业务组件 id;
   engine?: TChartEngine;
@@ -100,7 +107,7 @@ export interface IPanelConfig {
   image?: string; // 缩略图
   id: string; // 自动生成的ID
   icon?: string; // 图标
-  style?: React.CSSProperties;
+  style?: IPanelItemStyle; // 组件样式，transform不按CSS标准，兼容 Scena 的样式；
   lock?: boolean; //锁定
   hide?: boolean; // 隐藏
 

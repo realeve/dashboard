@@ -1,7 +1,7 @@
 import * as lib from './lib';
 
 // umi test ./src/pages/config/lib.test.ts
-const panel = [
+const panel: lib.TPanelStyle[] = [
   {
     style: {
       transform: { translate: '-65px,-65px' },
@@ -50,12 +50,20 @@ test('基础样式转换', () => {
     top: 6,
   });
 
-  expect(lib.convertPanel({ panel, padding: 16 })).toMatchObject([
-    { width: 600, height: 320, x1: 15, y1: 15 },
-    { width: 600, height: 320, x1: 650, y1: 15 },
-    { width: 600, height: 320, x1: 15, y1: 380 },
-    { width: 600, height: 320, x1: 15, y1: 732 },
-  ]);
+  expect(lib.calcTranslate({ left: 3, top: 4 })).toMatchObject({
+    left: 3,
+    top: 4,
+  });
+
+  const panelStyle = [
+    { x1: 15, y1: 15 },
+    { x1: 650, y1: 15 },
+    { x1: 15, y1: 380 },
+    { x1: 15, y1: 732 },
+  ];
+  expect(lib.convertPanel({ panel, padding: 16 })).toMatchObject(panelStyle);
+
+  expect(lib.convertPanel({ panel })).toMatchObject(panelStyle);
 });
 
 let page = { width: 300, height: 300 };
@@ -188,4 +196,88 @@ test('判断矩形相交', () => {
   expect(
     lib.isRectCross({ x1: 0, y1: 0, x2: 10, y2: 10 }, { x1: 15, y1: 15, x2: 30, y2: 30 }),
   ).toBeFalsy();
+});
+
+test('判断新的组件是否允许设置到指定的位置', () => {
+  expect(
+    lib.shouldRectPosIn(
+      {
+        x1: 110,
+        y1: 10,
+        x2: 210,
+        y2: 110,
+      },
+      [
+        {
+          x1: 10,
+          y1: 10,
+          x2: 90,
+          y2: 90,
+          width: 80,
+          height: 80,
+        },
+        {
+          x1: 210,
+          y1: 10,
+          x2: 290,
+          y2: 90,
+          width: 80,
+          height: 80,
+        },
+      ],
+    ),
+  ).toBeTruthy();
+
+  expect(
+    lib.shouldRectPosIn(
+      {
+        x1: 110,
+        y1: 10,
+        x2: 210,
+        y2: 110,
+      },
+      [
+        {
+          x1: 10,
+          y1: 10,
+          x2: 90,
+          y2: 90,
+          width: 80,
+          height: 80,
+        },
+        {
+          x1: 110,
+          y1: 10,
+          x2: 190,
+          y2: 90,
+          width: 80,
+          height: 80,
+        },
+      ],
+    ),
+  ).toBeFalsy();
+});
+
+test('寻找最佳放置的位置', () => {
+  let res = { top: 15, left: 1275 };
+  expect(lib.calcPanelPosition({ panel })).toMatchObject(res);
+  expect(
+    lib.calcPanelPosition({ panel, page: { width: 1920, height: 1080 }, padding: 25 }),
+  ).toMatchObject(res);
+
+  expect(
+    lib.calcPanelPosition({
+      panel: [
+        {
+          style: {
+            transform: { translate: '0,0' },
+            top: '10px',
+            left: '1300px',
+            width: '600px',
+            height: '320px',
+          },
+        },
+      ],
+    }),
+  ).toMatchObject({ left: 12, top: 12 });
 });

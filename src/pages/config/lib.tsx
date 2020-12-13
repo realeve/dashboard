@@ -4,7 +4,6 @@
  */
 import * as R from 'ramda';
 import { IPanelConfig as IPanel } from '@/models/common';
-
 const rectPadding = 12;
 export const defaultRect = {
   top: rectPadding,
@@ -31,7 +30,7 @@ export const calcTranslate = ({
   left,
   top,
 }: {
-  translate: string;
+  translate?: string;
   left: number;
   top: number;
 }) => {
@@ -75,8 +74,10 @@ interface IPage {
   height: number | string;
 }
 
+export type TPanelStyle = Pick<IPanel, 'style'>;
+
 interface IFnAutoPosition {
-  panel: IPanel[];
+  panel: TPanelStyle[];
   page?: IPage;
   padding?: number;
 }
@@ -90,14 +91,14 @@ export const isYAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = de
 
 /**
  * 当前所围成的矩形区域是否与其它组件重叠；
- * @param direction 查找方向
  * @param page 页面设置，用于判断是否越界
  * @param panelStyle 需要判断的现有panel
  * @param distPos 初始值
  * @param rect rect默认设置
+ * @param direction 查找方向
  */
 export const findPosition = (
-  direction = 'right',
+  direction,
   page: IPage,
   panelStyle: IPanelStyleProps[],
   distPos: IRectPos,
@@ -202,19 +203,13 @@ export const calcPanelPosition = ({
   distPos = findPosition('right', page, panelStyle, distPos);
 
   // 否则向下搜索
-  if (!distPos.isFind) {
-    distPos = findPosition('top', page, panelStyle, distPos);
-  }
+  distPos = findPosition('top', page, panelStyle, distPos);
 
   let { isFind, ...props } = distPos;
   return props as IRect;
 };
 
-/**
- * 当前的rect是否允许放在目标区域
- * @param rect 需要判断的矩形区域
- * @param panel 当前组件列表的位置及尺寸
-
+/** 
 (x1,y1)                (x3,y3)
   ┏━━━━━━━━━┓            ┏━━━━━━━━━┓       
   ┃   X1    ┃            ┃   X3    ┃       
@@ -227,6 +222,12 @@ export const calcPanelPosition = ({
               ┃         ┃       
               ┗━━━━━━━━━┛(a2,b2)
   矩形A只有与X1,X3都不相交时，允许放置在它所在的位置
+ */
+/**
+ *
+ * 当前的rect是否允许放在目标区域
+ * @param rect 需要判断的矩形区域
+ * @param panel 当前组件列表的位置及尺寸
  */
 export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
   let i = 0,
