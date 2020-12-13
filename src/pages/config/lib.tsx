@@ -82,10 +82,10 @@ interface IFnAutoPosition {
 }
 
 // x轴能否放下：当前的x轴坐标 + 目标矩形的宽度 小于 页面宽度，X轴可放下
-const isXAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
+export const isXAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
   item.x2 + rect.width < Number(page.width);
 
-const isYAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
+export const isYAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = defaultRect) =>
   item.y1 + rect.height < Number(page.height);
 
 /**
@@ -214,13 +214,19 @@ export const calcPanelPosition = ({
  * 当前的rect是否允许放在目标区域
  * @param rect 需要判断的矩形区域
  * @param panel 当前组件列表的位置及尺寸
- *
- *  x,y————————
- *  |         |
- *  |         |
- *  __________x2,y2
- *
- *  只要目标矩形任意一个顶点在以上方框之内视为无效
+
+(x1,y1)                (x3,y3)
+  ┏━━━━━━━━━┓            ┏━━━━━━━━━┓       
+  ┃   X1    ┃            ┃   X3    ┃       
+  ┃         ┃            ┃         ┃       
+  ┗━━━━━━━━━┛(x2,y2)     ┗━━━━━━━━━┛(x4,y4)
+  
+              (a1,b1)
+              ┏━━━━━━━━━┓       
+              ┃   A     ┃       
+              ┃         ┃       
+              ┗━━━━━━━━━┛(a2,b2)
+  矩形A只有与X1,X3都不相交时，允许放置在它所在的位置
  */
 export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
   let i = 0,
@@ -232,11 +238,32 @@ export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
 };
 
 /**
- * 两个矩形是否相交
- * 原理：判断重点的位置：/public/doc/rect cross.png
+ * 判断两个矩形是否相交
+  (x1,y1)
+  ┏━━━━W1━━━━┓ 
+  ┃          ┃     
+  H1   ❶─────┼──W──────┐   
+  ┃          ┃         │
+  ┗━━━━━━━━━━┛(x2,y2)  │
+                       H
+           (a1,b1)┏━━━━┼━━━━━┓ 
+                  ┃    │     ┃     
+                  H2   ❷     ┃     
+                  ┃          ┃     
+                  ┗━━━━W2━━━━┛(a2,b2)
+  两个矩形相交，则需满足以下条件：              
+  1.W > (W1+W2)/2
+  2.H > (H1+H2)/2
+  据此推导出以下的结果。
+  
+ * 原理：判断中心点的位置与距离：/public/doc/rect cross.png
  * @param r1 矩形
  * @param r2 矩形
- */
-export const isRectCross = (r1: IDistRect, r2: IDistRect) =>
+ * 
+ * 以下公式中，除以2可省去
   Math.abs((r1.x1 + r1.x2) / 2 - (r2.x1 + r2.x2) / 2) < (r1.x2 + r2.x2 - r1.x1 - r2.x1) / 2 &&
   Math.abs((r1.y1 + r1.y2) / 2 - (r2.y1 + r2.y2) / 2) < (r1.y2 + r2.y2 - r1.y1 - r2.y1) / 2;
+ */
+export const isRectCross = (r1: IDistRect, r2: IDistRect) =>
+  Math.abs(r1.x1 + r1.x2 - r2.x1 - r2.x2) < r1.x2 + r2.x2 - r1.x1 - r2.x1 &&
+  Math.abs(r1.y1 + r1.y2 - r2.y1 - r2.y2) < r1.y2 + r2.y2 - r1.y1 - r2.y1;
