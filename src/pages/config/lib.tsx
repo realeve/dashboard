@@ -1,3 +1,7 @@
+/**
+ * 2020-12-13
+ * 本函数用于在画布的空余区域搜索最佳放置的位置
+ */
 import * as R from 'ramda';
 import { defaultRect } from '@/component/Editor/Editor';
 import { parseStyle, calcTranslate } from '@/pages/index/lib';
@@ -113,7 +117,7 @@ export const findPosition = (
  */
 export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyleProps[] = ({
   panel,
-  padding = 8,
+  padding = 16,
 }) => {
   let dist = panel.map(({ style }) => {
     let width = parseStyle(style.width),
@@ -145,7 +149,7 @@ export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyle
 export const calcPanelPosition = ({
   panel,
   page = { width: 1920, height: 1080 },
-  padding = 8,
+  padding = 25,
 }: IFnAutoPosition) => {
   // 转换当前组件列表已经占领的区域
   let panelStyle = convertPanel({ panel, padding });

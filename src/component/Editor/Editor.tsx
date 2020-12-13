@@ -15,13 +15,7 @@ import Memory from './utils/Memory';
 import MoveableManager from './Viewport/MoveableMananger';
 import MoveableData from './utils/MoveableData';
 import KeyManager from './KeyManager/KeyManager';
-import {
-  ScenaEditorState,
-  SavedScenaData,
-  ScenaJSXElement,
-  ScenaJSXType,
-  TQuickTool,
-} from './types';
+import { ScenaEditorState, SavedScenaData, ScenaJSXType, TQuickTool } from './types';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
@@ -60,7 +54,13 @@ const edgeConfig = {
   zoom150: 80,
 };
 
-export const defaultRect = { top: 16, left: 16, width: 600, height: 320 };
+const rectPadding = 12;
+export const defaultRect = {
+  top: rectPadding,
+  left: rectPadding,
+  width: 1920 / 4 - 2.4 * rectPadding,
+  height: 1080 / 4 - 2.4 * rectPadding,
+};
 export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     ...defaultRect,
