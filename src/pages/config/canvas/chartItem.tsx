@@ -225,6 +225,9 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
           background: config.showBackground ? page.chartBackground : 'unset',
           width: '100%',
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
+          borderRadius: (config?.general?.borderRadius || [0, 0, 0, 0])
+            .map((item) => item + 'px')
+            .join(' '),
         }}
         showBackground={config.showBackground}
         showBorder={config.showBorder}

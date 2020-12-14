@@ -293,7 +293,7 @@ const Index = ({
       // 更新缩略图
       editor?.current.updateThumbnail();
     },
-    800,
+    500,
     [changedPanel],
   );
 
@@ -329,9 +329,9 @@ const Index = ({
           hide={hide}
           onAddPanel={(newPanel) => {
             let autoStyle = calcPanelPosition({ panel, page });
-            console.log(autoStyle);
+            // console.log(autoStyle);
             const style = getDefaultStyle(autoStyle);
-            // TODO  2020-12-12 根据当前的panel项自动计算合适的位置
+            // 2020-12-12 根据当前的panel项自动计算合适的位置
             const nextPanel = { style, ...newPanel };
             dispatch({
               type: 'common/addPanel',

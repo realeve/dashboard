@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
 import { IPage, ICommonConfig } from '@/models/common';
@@ -13,9 +13,45 @@ import Align from '@/component/field/Align';
 import { Tabs, Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
+import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
+import * as R from 'ramda';
+
 const { Panel } = Collapse;
 
 const TabPane = Tabs.TabPane;
+
+const BorderPanel = ({ idx = 0, borderRadius, updatePage }) => (
+  <FormField
+    className="data_input"
+    style={{ width: 45, minWidth: 45, marginRight: idx == 3 ? 0 : 8 }}
+    config={{
+      type: 'input',
+      valueType: 'number',
+      step: 1,
+      min: 0,
+    }}
+    value={borderRadius?.[idx] ?? 0}
+    onChange={(val) => {
+      let radius = R.update<number>(idx, Number(val), borderRadius || [0, 0, 0, 0]);
+      updatePage({
+        borderRadius: radius,
+      });
+    }}
+  />
+);
+
+const BorderRadiusPanel = (props) => {
+  return (
+    <Field title="圆角弧度" style={{ padding: 10 }}>
+      <div className="alignRow">
+        <BorderPanel idx={0} {...props} />
+        <BorderPanel idx={1} {...props} />
+        <BorderPanel idx={2} {...props} />
+        <BorderPanel idx={3} {...props} />
+      </div>
+    </Field>
+  );
+};
 
 export const ImgSelector = ({
   title,
@@ -32,7 +68,7 @@ export const ImgSelector = ({
 }) => {
   const [show, setShow] = useState(false);
   return (
-    <Field title={title} style={{ ...style, height: 100 }}>
+    <Field title={title} style={{ ...style, height: 116 }}>
       <img
         className={styles.img}
         src={assets[imgtype][value]?.url}
@@ -83,6 +119,7 @@ export interface IComponentConfig extends ICommonConfig {
 }
 export const ComponentConfig = ({
   border,
+  borderRadius = [0, 0, 0, 0],
   chartBackground,
   head,
   showTitle = true,
@@ -94,33 +131,17 @@ export const ComponentConfig = ({
   <Collapse defaultActiveKey={defaultKey}>
     {isPage && (
       <Panel header="画布" key="画布">
-        <Field title="屏幕大小">
-          <div className="alignRow">
-            <input
-              type="number"
-              className="data_input"
-              step="2"
-              defaultValue={page.width}
-              onChange={(e) => {
-                updatePage({
-                  width: e.target.value,
-                });
-              }}
-            />
-            <span style={{ margin: '0 8px' }}>x</span>
-            <input
-              type="number"
-              className="data_input"
-              step="2"
-              defaultValue={page.height}
-              onChange={(e) => {
-                updatePage({
-                  height: e.target.value,
-                });
-              }}
-            />
-          </div>
-        </Field>
+        <FormItem
+          config={{ title: '屏幕大小', split: 'x', type: 'slider', step: 2 }}
+          value={[page.width, page.height]}
+          onChange={(e: [string, string]) => {
+            let [width, height] = e;
+            if (width == page.width && height == page.height) {
+              return;
+            }
+            updatePage({ width, height });
+          }}
+        />
         <ImgSelector
           title="背景"
           value={page.background}
@@ -131,18 +152,17 @@ export const ComponentConfig = ({
             });
           }}
         />
-        <Field title="作者">
-          <input
-            type="string"
-            className="data_input"
-            defaultValue={page.author}
-            onChange={(e) => {
-              updatePage({
-                author: e.target.value,
-              });
-            }}
-          />
-        </Field>
+        <FormItem
+          title="作者"
+          config={{ valueType: 'text' }}
+          className="data_input"
+          value={page.author}
+          onChange={(author) => {
+            updatePage({
+              author,
+            });
+          }}
+        />
         <Field title="标题">
           <input
             type="string"
@@ -168,37 +188,17 @@ export const ComponentConfig = ({
             max={30}
           />
         </Field>
-        <Field title="屏幕拼接数量">
-          <div className="alignRow">
-            <input
-              type="number"
-              className="data_input"
-              step="1"
-              min={1}
-              max={10}
-              defaultValue={page.screen_x}
-              onChange={(e) => {
-                updatePage({
-                  screen_x: e.target.value,
-                });
-              }}
-            />
-            <span style={{ margin: '0 8px' }}>x</span>
-            <input
-              type="number"
-              className="data_input"
-              step="1"
-              min={1}
-              max={10}
-              defaultValue={page.screen_y}
-              onChange={(e) => {
-                updatePage({
-                  screen_y: e.target.value,
-                });
-              }}
-            />
-          </div>
-        </Field>
+        <FormItem
+          config={{ title: '屏幕拼接数量', split: 'x', type: 'slider', step: 1, min: 1, max: 10 }}
+          value={[page.screen_x, page.screen_y]}
+          onChange={(e: [number, number]) => {
+            let [screen_x, screen_y] = e;
+            if (screen_x == page.screen_x && screen_y == page.screen_y) {
+              return;
+            }
+            updatePage({ screen_x, screen_y });
+          }}
+        />
         <Field title="拼接边距">
           <InputRange
             step={1}
@@ -259,6 +259,7 @@ export const ComponentConfig = ({
           });
         }}
       />
+      <BorderRadiusPanel borderRadius={borderRadius} updatePage={updatePage} />
       <Field title="背景" style={{ padding: 10 }}>
         <ColorPicker
           value={chartBackground}
@@ -384,6 +385,7 @@ export default ({ page, dispatch }: IPageProps) => {
           onChange={updatePage}
           page={page}
           border={page.border}
+          borderRadius={page.borderRadius || [0, 0, 0, 0]}
           chartBackground={page.chartBackground}
           head={page.head}
           defaultKey="画布"

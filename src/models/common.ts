@@ -100,6 +100,7 @@ export interface IPanelItemStyle extends TPanelItemStyle {
   transform: { translate: string };
 }
 export interface IPanelConfig {
+  key?: string;
   edit_id?: number; // 编辑状态下的业务组件 id;
   engine?: TChartEngine;
   type?: string; //类型
@@ -131,6 +132,7 @@ export interface IPanelConfig {
 }
 export interface ICommonConfig {
   border: string; // 边框样式
+  borderRadius: [number, number, number, number]; //边框半角弧度
   chartBackground: string; // 卡片背景
   head: React.CSSProperties; // 卡片标题栏
 }
@@ -166,6 +168,7 @@ export interface IDashboard {
 
 const panelGeneral: ICommonConfig = {
   border: '边框29', // 边框12,
+  borderRadius: [0, 0, 0, 0],
   chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
   head: {
     background: 'linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)',

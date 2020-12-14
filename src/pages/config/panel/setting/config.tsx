@@ -116,23 +116,21 @@ const Index = ({
       >
         <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
-            <Field title="组件尺寸">
-              <FormItem
-                config={{ split: 'x', type: 'slider' }}
-                value={[size.width, size.height]}
-                onChange={([width, height]) => {
-                  if (width == size.width && height == size.height) {
-                    return;
-                  }
-                  if (width == size.width) {
-                    updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
-                  } else {
-                    updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
-                  }
-                  setSize({ width, height });
-                }}
-              />
-            </Field>
+            <FormItem
+              config={{ title: '组件尺寸', split: 'x', type: 'slider' }}
+              value={[size.width, size.height]}
+              onChange={([width, height]) => {
+                if (width == size.width && height == size.height) {
+                  return;
+                }
+                if (width == size.width) {
+                  updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
+                } else {
+                  updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
+                }
+                setSize({ width, height });
+              }}
+            />
             <Field title="旋转角度">
               <InputRange
                 step={15}

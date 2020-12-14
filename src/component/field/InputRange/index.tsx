@@ -33,7 +33,7 @@ export default ({
     () => {
       onChange(innerValue);
     },
-    800,
+    500,
     [innerValue],
   );
 

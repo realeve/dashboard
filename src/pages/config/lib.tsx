@@ -3,7 +3,7 @@
  * 本函数用于在画布的空余区域搜索最佳放置的位置
  */
 import * as R from 'ramda';
-import { IPanelConfig as IPanel } from '@/models/common';
+import { IPanelConfig as IPanel, GROUP_COMPONENT_KEY } from '@/models/common';
 const rectPadding = 12;
 export const defaultRect = {
   top: rectPadding,
@@ -74,7 +74,7 @@ interface IPage {
   height: number | string;
 }
 
-export type TPanelStyle = Pick<IPanel, 'style'>;
+export type TPanelStyle = Pick<IPanel, 'style' | 'key'>;
 
 interface IFnAutoPosition {
   panel: TPanelStyle[];
@@ -187,10 +187,12 @@ export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyle
  * @param padding 组件之间的边距
  */
 export const calcPanelPosition = ({
-  panel,
+  panel: _panel,
   page = { width: 1920, height: 1080 },
   padding = 25,
 }: IFnAutoPosition) => {
+  let panel = R.reject<TPanelStyle>(R.propEq('key', GROUP_COMPONENT_KEY))(_panel);
+
   // 转换当前组件列表已经占领的区域
   let panelStyle = convertPanel({ panel, padding });
 

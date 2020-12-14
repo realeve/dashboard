@@ -444,6 +444,22 @@
             "ajax": false
           }
         ]
+      },
+      {
+        "title": "视频",
+        "icon": "com-font con-com-media_video icon-com-media",
+        "list": [
+          {
+            "title": "视频",
+            "image": "/img/config/video.png",
+            "name": "other.cbpc_video",
+            "key": "cbpc_video",
+            "engine": "other",
+            "showTitle": false,
+            "showBackground": false,
+            "ajax": false
+          }
+        ]
       }
     ]
   },

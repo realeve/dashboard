@@ -12,21 +12,24 @@ import classnames from 'classnames';
 import { useDebounce } from 'react-use';
 
 type IFormItemValue = string | number | boolean | [number, number] | [string, string];
-export const FormItem = ({
-  value,
-  onChange,
-  config: { defaultValue, valueType = 'number', type, key, title, ...config },
-  style,
-  disabled = false,
-}: {
+
+interface IFormItemProps {
   config: IChartConfig;
   value: IFormItemValue;
   onChange: (e: IFormItemValue) => void;
   style?: React.CSSProperties;
   type?: string;
   disabled?: boolean;
-  [key: string]: any;
-}) => {
+  [v: string]: any;
+}
+
+export const FormField = ({
+  value,
+  onChange,
+  config: { defaultValue, valueType = 'number', type, key, title, ...config },
+  style,
+  disabled = false,
+}: IFormItemProps) => {
   const [innerValue, setInnerValue] = useState(value);
   useEffect(() => {
     if (!R.equals(innerValue, value)) {
@@ -36,9 +39,10 @@ export const FormItem = ({
 
   useDebounce(
     () => {
+      if (R.equals(innerValue, value)) return;
       onChange(innerValue);
     },
-    800,
+    500,
     [innerValue],
   );
 
@@ -53,11 +57,11 @@ export const FormItem = ({
   } else if (type === 'image') {
     return <ImgSelector onChange={onChange} value={value as string} title={title} {...config} />;
   }
-  let Item: null | React.ReactNode = null;
+
   switch (type) {
     case 'input':
     default:
-      Item = (
+      return (
         <input
           type={valueType}
           onChange={(e) => {
@@ -66,6 +70,7 @@ export const FormItem = ({
           className={classnames('data_input')}
           value={String(R.isNil(innerValue) ? '' : innerValue)}
           {...config}
+          style={style}
           disabled={disabled}
           readOnly={disabled}
         />
@@ -73,47 +78,47 @@ export const FormItem = ({
       break;
     case 'radio':
       let { option, ...props } = config;
-      Item = (
+      return (
         <Radio disabled={disabled} onChange={onChange} value={value} config={option} {...props} />
       );
       break;
     case 'select':
-      Item = (
+      return (
         <Select disabled={disabled} onChange={onChange} value={value} config={config.option} />
       );
       break;
     case 'antselect':
-      Item = (
+      return (
         <AntSelect disabled={disabled} onChange={onChange} value={value} config={config.option} />
       );
       break;
     case 'switch':
-      Item = (
+      return (
         <Switch disabled={disabled} checked={value as boolean} onChange={onChange} {...config} />
       );
       break;
     case 'range':
-      Item = (
+      return (
         <InputRange disabled={disabled} value={Number(value)} onChange={onChange} {...config} />
       );
       break;
     case 'color':
-      Item = (
+      return (
         <ColorPicker disabled={disabled} value={innerValue} onChange={setInnerValue} {...config} />
       );
       break;
     case 'purecolor':
-      Item = (
+      return (
         <PureColor disabled={disabled} value={innerValue} onChange={setInnerValue} {...config} />
       );
       break;
     case 'slider':
-      Item = (
+      return (
         <div className="alignRow">
           <input
             type="number"
             className={classnames('data_input')}
-            value={innerValue?.[0] || 0}
+            value={innerValue?.[0] ?? 0}
             onChange={(e) => {
               let val = Number(e.target.value);
               setInnerValue([val, innerValue[1]]);
@@ -130,7 +135,7 @@ export const FormItem = ({
               let val = Number(e.target.value);
               setInnerValue([innerValue[0], val]);
             }}
-            value={innerValue[1] || 0}
+            value={innerValue[1] ?? 0}
             {...config}
             disabled={disabled}
             readOnly={disabled}
@@ -139,6 +144,15 @@ export const FormItem = ({
       );
       break;
   }
+};
+
+export const FormItem = (props: IFormItemProps) => {
+  let {
+    config: { key, title },
+    style,
+    disabled = false,
+  } = props;
+
   return (
     <Field
       title={title || key}
@@ -146,7 +160,7 @@ export const FormItem = ({
       style={style}
       className={classnames({ disabled })}
     >
-      {Item}
+      <FormField {...props} />
     </Field>
   );
 };
