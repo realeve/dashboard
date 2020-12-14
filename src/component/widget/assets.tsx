@@ -2313,6 +2313,10 @@ assets.backgrounds = {
   默认: {
     url: require('./img-templet/bg_03.png'),
   },
+  深蓝色: {
+    // url: `data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoBAAEAAsBMJYwAA3AA/vfEX+rSaRIAAAA=`,
+    url: '#02011b',
+  },
   蓝色网格: {
     url: require('./img-templet/background-17.png'),
   },

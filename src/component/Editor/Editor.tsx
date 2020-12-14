@@ -30,16 +30,29 @@ import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
 import { defaultRect } from '@/pages/config/lib';
-const backgroundStyle = { backgroundRepeat: 'no-repeat', backgroundPosition: 'top center' };
-export const getDashboardStyle = (page: { width: string; height: string; background: string }) => ({
-  width: `${page.width}px`,
-  height: `${page.height}px`,
-  backgroundImage: page.background
-    ? `url('${assets.backgrounds[page.background].url}')`
-    : 'url(/img/panel/panelbg.png)',
-  backgroundSize: 'cover',
-  ...backgroundStyle,
-});
+import { isColor } from '@/component/chartItem/option/lib';
+
+const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
+export const getDashboardStyle = (page: { width: string; height: string; background: string }) => {
+  let url = page.background
+    ? assets.backgrounds[page.background].url
+    : 'url(/img/panel/panelbg.png)';
+  let background = isColor(url)
+    ? { background: url }
+    : {
+        backgroundImage: page.background
+          ? `url('${assets.backgrounds[page.background].url}')`
+          : 'url(/img/panel/panelbg.png)',
+        backgroundSize: 'cover',
+        ...backgroundStyle,
+      };
+
+  return {
+    width: `${page.width}px`,
+    height: `${page.height}px`,
+    ...background,
+  };
+};
 
 const edgeConfig = {
   zoom60: 50,

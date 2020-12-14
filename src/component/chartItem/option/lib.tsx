@@ -209,6 +209,13 @@ export let getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
   return R.map(R.values)(_data);
 };
 
+/**
+ * 判断颜色是否为色彩
+ * @param str 颜色值
+ */
+export const isColor = (str: string) =>
+  /^rgb\(|^rgba\(|^\#[\d|a-f]/.test(String(str).toLowerCase());
+
 export const colors: Array<string> = [
   '#da0d68',
   '#975e6d',
