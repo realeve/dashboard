@@ -46,8 +46,8 @@ const Index = ({
   page,
   businessCategory,
   dispatch,
-  history,
-  curHistoryIdx,
+  // history,
+  // curHistoryIdx,
   panel, //: _panel,
 }: ISettingProps) => {
   // let panel = history[curHistoryIdx]?.panel || _panel;

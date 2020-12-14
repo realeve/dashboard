@@ -41,14 +41,15 @@ const getGeneralConfig = ({ selectedIdx, panel, page }) => {
 
 const Index = ({
   selectedIdx,
-  history,
-  curHistoryIdx,
-  panel: _panel,
+  // history,
+  // curHistoryIdx,
+  panel, //: _panel,
   page,
   dispatch,
   onChange,
 }: IPanel) => {
-  let panel = history[curHistoryIdx]?.panel || _panel;
+  // let panel = history[curHistoryIdx]?.panel || _panel;
+
   // 当前选中的面板
   let currentPanel = panel[selectedIdx];
 
@@ -132,28 +133,28 @@ const Index = ({
                 }}
               />
             </Field>
-            {/* <Field title="旋转角度">
+            <Field title="旋转角度">
               <InputRange
                 step={15}
                 min={0}
                 max={360}
                 disabled
                 value={Math.floor(currentPanel.style.transform?.rotate?.replace('deg', '') || '0')}
-                onChange={(rotate) => {
-                  const style = R.clone(currentPanel.style || {});
-                  const nextStyle = {
-                    style: {
-                      ...style,
-                      transform: {
-                        ...style.transform,
-                        rotate: `${rotate}deg`,
-                      },
-                    },
-                  };
-                  updateAttrib(nextStyle, true, '调整旋转角度');
-                }}
+                // onChange={(rotate) => {
+                //   const style = R.clone(currentPanel.style || {});
+                //   const nextStyle = {
+                //     style: {
+                //       ...style,
+                //       transform: {
+                //         ...style.transform,
+                //         rotate: `${rotate}deg`,
+                //       },
+                //     },
+                //   };
+                //   updateAttrib(nextStyle, true, '调整旋转角度');
+                // }}
               />
-            </Field> */}
+            </Field>
             <Field title="使用全局样式">
               <Switch
                 checked={currentPanel?.useGeneralStyle}
