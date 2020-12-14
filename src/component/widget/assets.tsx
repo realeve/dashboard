@@ -2322,6 +2322,12 @@ assets.backgrounds = {
   深色蓝色标题: {
     url: require('./img-templet/bg_01.png'),
   },
+  蓝色背景1: {
+    url: require('./img-templet/b01.png'),
+  },
+  蓝色背景2: {
+    url: require('./img-templet/b02.jpg'),
+  },
   深色蓝色渐变: {
     url: require('./img-templet/bg_02.png'),
   },

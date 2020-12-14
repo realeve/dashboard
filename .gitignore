@@ -18,3 +18,5 @@
 .umi-production
 
 /coverage
+
+/public/video
