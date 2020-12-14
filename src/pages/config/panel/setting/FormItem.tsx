@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Field from '@/component/field';
 import { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
@@ -9,7 +9,9 @@ import InputRange from '@/component/field/InputRange';
 import { ImgSelector } from '@/component/field';
 import { Switch, Divider } from 'antd';
 import classnames from 'classnames';
+import { useDebounce } from 'react-use';
 
+type IFormItemValue = string | number | boolean | [number, number] | [string, string];
 export const FormItem = ({
   value,
   onChange,
@@ -18,13 +20,28 @@ export const FormItem = ({
   disabled = false,
 }: {
   config: IChartConfig;
-  value: string | number | boolean;
-  onChange: (e: string | number | boolean) => void;
+  value: IFormItemValue;
+  onChange: (e: IFormItemValue) => void;
   style?: React.CSSProperties;
   type?: string;
   disabled?: boolean;
   [key: string]: any;
 }) => {
+  const [innerValue, setInnerValue] = useState(value);
+  useEffect(() => {
+    if (!R.equals(innerValue, value)) {
+      setInnerValue(value);
+    }
+  }, [value]);
+
+  useDebounce(
+    () => {
+      onChange(innerValue);
+    },
+    800,
+    [innerValue],
+  );
+
   if (type === 'divider') {
     return <Divider plain>{title}</Divider>;
   } else if (type === 'label') {
@@ -44,10 +61,10 @@ export const FormItem = ({
         <input
           type={valueType}
           onChange={(e) => {
-            onChange(valueType === 'number' ? Number(e.target.value) : e.target.value);
+            setInnerValue(valueType === 'number' ? Number(e.target.value) : e.target.value);
           }}
           className={classnames('data_input')}
-          value={String(R.isNil(value) ? '' : value)}
+          value={String(R.isNil(innerValue) ? '' : innerValue)}
           {...config}
           disabled={disabled}
           readOnly={disabled}
@@ -81,10 +98,14 @@ export const FormItem = ({
       );
       break;
     case 'color':
-      Item = <ColorPicker disabled={disabled} value={value} onChange={onChange} {...config} />;
+      Item = (
+        <ColorPicker disabled={disabled} value={innerValue} onChange={setInnerValue} {...config} />
+      );
       break;
     case 'purecolor':
-      Item = <PureColor disabled={disabled} value={value} onChange={onChange} {...config} />;
+      Item = (
+        <PureColor disabled={disabled} value={innerValue} onChange={setInnerValue} {...config} />
+      );
       break;
     case 'slider':
       Item = (
@@ -92,10 +113,10 @@ export const FormItem = ({
           <input
             type="number"
             className={classnames('data_input')}
-            value={value?.[0] || 0}
+            value={innerValue?.[0] || 0}
             onChange={(e) => {
               let val = Number(e.target.value);
-              onChange([val, value[1]]);
+              setInnerValue([val, innerValue[1]]);
             }}
             disabled={disabled}
             readOnly={disabled}
@@ -107,9 +128,9 @@ export const FormItem = ({
             className={classnames('data_input')}
             onChange={(e) => {
               let val = Number(e.target.value);
-              onChange([value[0], val]);
+              setInnerValue([innerValue[0], val]);
             }}
-            value={value[1] || 0}
+            value={innerValue[1] || 0}
             {...config}
             disabled={disabled}
             readOnly={disabled}

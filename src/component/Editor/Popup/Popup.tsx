@@ -61,7 +61,7 @@ export interface IConfirmProps {
   container?: string;
 }
 
-export const Confirm = ({
+export const ConfirmPanel = ({
   children,
   title = null,
   spinning = false,
@@ -84,5 +84,12 @@ export const Confirm = ({
         </Button>
       </PopupFooter>
     </Popup>
+  );
+};
+
+export const Confirm = ({ container = 'body', ...props }: IConfirmProps) => {
+  return ReactDOM.createPortal(
+    <ConfirmPanel container={container} {...props} />,
+    document.querySelector(container),
   );
 };

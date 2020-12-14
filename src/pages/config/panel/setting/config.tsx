@@ -13,6 +13,8 @@ import ApiSetting from './apiSetting';
 import InputRange from '@/component/field/InputRange';
 import { Divider } from 'antd';
 
+import { FormItem } from '@/pages/config/panel/setting/FormItem';
+
 interface IPanel extends IHistoryProps {
   selectedIdx: number;
   panel: IPanelConfig[];
@@ -23,15 +25,15 @@ interface IPanel extends IHistoryProps {
 
 // 获取通用配置
 const getGeneralConfig = ({ selectedIdx, panel, page }) => {
-  let item = panel[selectedIdx];
+  let item = panel[selectedIdx] || {};
   let commonConfig = {
     border: page.border,
     chartBackground: page.chartBackground,
     head: page.head,
   };
 
-  let res = R.clone(item.general || commonConfig);
-  return item.useGeneralStyle ? null : res;
+  let res = R.clone(item?.general || commonConfig);
+  return item?.useGeneralStyle ? null : res;
 };
 
 // [-] 已知bug，当form渲染出来后，切换组件时，会导致两个组件配置项不一致，对应的数据读取错误而使页面崩溃，
@@ -47,6 +49,9 @@ const Index = ({
   onChange,
 }: IPanel) => {
   let panel = history[curHistoryIdx]?.panel || _panel;
+  // 当前选中的面板
+  let currentPanel = panel[selectedIdx];
+
   // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
   const [activeKey, setActiveKey] = useState('1');
@@ -67,7 +72,7 @@ const Index = ({
   }, [selectedIdx, JSON.stringify(panel)]);
 
   // 更新样式
-  const updateStyle = (item: { [key: string]: any }, type = 'size') => {
+  const updateStyle = (item: { [key: string]: any }, title) => {
     const style = R.clone(panel[selectedIdx].style || {});
     const nextStyle = {
       style: {
@@ -75,7 +80,7 @@ const Index = ({
         ...item,
       },
     };
-    updateAttrib(nextStyle, true, `调整【${panel[selectedIdx].title}】基础样式`);
+    updateAttrib(nextStyle, true, title + `——【${panel[selectedIdx].title}】`);
     onChange(item, 'size');
   };
 
@@ -96,9 +101,6 @@ const Index = ({
   // 通用配置
   const [general, setGeneral] = useState(null);
 
-  // 当前选中的面板
-  let currentPanel = panel[selectedIdx];
-
   return (
     <Tabs defaultActiveKey="1" activeKey={activeKey} type="line" onChange={setActiveKey}>
       <Tabs.TabPane
@@ -114,33 +116,23 @@ const Index = ({
         <div className={styles.pageconfig} style={{ height: '100%' }}>
           <div className={styles['datav-gui']}>
             <Field title="组件尺寸">
-              <div className="alignRow">
-                <input
-                  type="number"
-                  className="data_input"
-                  step="2"
-                  value={size.width}
-                  onChange={(e) => {
-                    const style = { width: Number(e.target.value) };
-                    setSize(style);
-                    updateStyle(style);
-                  }}
-                />
-                <span style={{ margin: '0 8px' }}>x</span>
-                <input
-                  type="number"
-                  className="data_input"
-                  step="2"
-                  onChange={(e) => {
-                    const style = { height: Number(e.target.value) };
-                    setSize(style);
-                    updateStyle(style);
-                  }}
-                  value={size.height}
-                />
-              </div>
+              <FormItem
+                config={{ split: 'x', type: 'slider' }}
+                value={[size.width, size.height]}
+                onChange={([width, height]) => {
+                  if (width == size.width && height == size.height) {
+                    return;
+                  }
+                  if (width == size.width) {
+                    updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
+                  } else {
+                    updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
+                  }
+                  setSize({ width, height });
+                }}
+              />
             </Field>
-            <Field title="旋转角度">
+            {/* <Field title="旋转角度">
               <InputRange
                 step={15}
                 min={0}
@@ -158,10 +150,10 @@ const Index = ({
                       },
                     },
                   };
-                  updateAttrib(nextStyle, false);
+                  updateAttrib(nextStyle, true, '调整旋转角度');
                 }}
               />
-            </Field>
+            </Field> */}
             <Field title="使用全局样式">
               <Switch
                 checked={currentPanel?.useGeneralStyle}
@@ -277,7 +269,7 @@ const Index = ({
       </Tabs.TabPane>
 
       {/* 业务组件不允许设置ajax，此处新增字段需要与不发起ajax做区分 */}
-      {currentPanel.ajax && (
+      {currentPanel?.ajax && (
         <Tabs.TabPane
           tab={
             <span>
@@ -289,10 +281,11 @@ const Index = ({
         >
           <ApiSetting
             onChange={(api) => {
+              console.log(api);
               updateAttrib({ api }, true, '调整接口配置项' + ` - ${panel[selectedIdx].title}`);
             }}
             panel={currentPanel}
-            isBusiness={currentPanel.business && !currentPanel.edit_id}
+            isBusiness={currentPanel?.business && !currentPanel.edit_id}
           />
         </Tabs.TabPane>
       )}

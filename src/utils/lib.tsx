@@ -121,7 +121,9 @@ export const handleHistoryPanel: (
   let panel = store.payload?.panel;
   // 需要记录历史记录
   let recordHistory = store.payload?.recordHistory == true;
-  // console.log({ recordHistory });
+
+  // console.log({ recordHistory, panel });
+
   if (panel && recordHistory) {
     let nextHistory: { panel: IPanelConfig[]; title: string | null }[] = prevState.history;
     let title: string | null = store.payload?.historyTitle || null;

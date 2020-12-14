@@ -58,14 +58,16 @@ export default ({
             key={config.key || Math.random().toString(16).slice(2, 8)}
             value={state[config.key]}
             onChange={(res) => {
-              // 数据未变更时不更新
-              if (state[config.key] == res) {
+              // 数据一致时不更新
+              if (R.equals(res, state[config.key])) {
                 return;
               }
+
               let next = {
                 ...state,
                 [config.key]: res,
               };
+
               setState(next);
 
               let val = String(res).length < 10 ? ` 调整( ${state[config.key]} → ${res} )` : '';

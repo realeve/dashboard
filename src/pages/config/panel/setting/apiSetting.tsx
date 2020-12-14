@@ -16,7 +16,7 @@ const initState = (configs: IApiConfig, api: any) => {
 
   return { ...props, api_type: type, ...setting, ...api };
 };
-
+const cacheConfig: IChartConfig = { defaultValue: 2, min: 0, step: 0.5, max: 10, type: 'range' };
 const appendConfig: IChartConfig[] = [
   {
     title: '发起请求',
@@ -27,11 +27,10 @@ const appendConfig: IChartConfig[] = [
     defaultValue: 'ajax',
   },
   {
-    title: '定时刷新(秒)',
+    title: '定时刷新(分钟)',
     key: 'interval',
-    defaultValue: '',
-    placeholder: '单位:秒',
-    min: 0,
+    placeholder: '单位:分钟',
+    ...cacheConfig,
   },
   {
     title: '类型',
@@ -57,12 +56,8 @@ const appendConfig: IChartConfig[] = [
   rangeConfig,
   {
     key: 'cache',
-    type: 'range',
-    min: 0,
-    max: 10,
-    step: 0.5,
     title: '缓存(分钟)',
-    defaultValue: 2,
+    ...cacheConfig,
   },
 ];
 
@@ -96,6 +91,12 @@ export default ({
     let next = {
       [config.key]: res,
     };
+
+    // 数据一致时不更新
+    if (R.equals(res, state[config.key])) {
+      return;
+    }
+
     setState(next);
     update &&
       onChange({

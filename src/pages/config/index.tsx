@@ -263,13 +263,17 @@ const Index = ({
       });
       nextPanel = R.uniq(nextPanel);
       groupIds = R.uniq(groupIds).filter((item) => item);
-      if (groupIds.length === 1) {
+
+      // 需判断当前groupId下是否只有1项
+      let arr = panel.filter((p) => groupIds.includes(p.group));
+      if (groupIds.length === 1 && arr.length > 1) {
         nextPanel = [...groupIds, ...nextPanel];
       }
     }
 
     // 移除隐藏或锁定的组件
-    return nextPanel.filter((item) => !lockedPanel.includes(item));
+    let nextSelectedPanel = nextPanel.filter((item) => !lockedPanel.includes(item));
+    return R.uniq(nextSelectedPanel);
   };
 
   const [changedPanel, setChangedPanel] = useState([]);

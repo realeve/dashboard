@@ -48,16 +48,24 @@ const Index = ({
   dispatch,
   history,
   curHistoryIdx,
-  panel: _panel,
+  panel, //: _panel,
 }: ISettingProps) => {
-  let panel = history[curHistoryIdx]?.panel || _panel;
+  // let panel = history[curHistoryIdx]?.panel || _panel;
   const [show, setShow] = useState<boolean>(false);
 
-  let pageChart = selectedPanel.length == 1;
+  // const [pageChart, setPageChart] = useState(selectedPanel.length == 1);
+  // useEffect(() => {
+  //   let valid = selectedPanel.length == 1;
+  //   if (valid) {
+  //     let config = panel.find((item) => item.id == selectedPanel[0]);
+  //     valid = config && config?.key !== GROUP_COMPONENT_KEY;
+  //   }
+  //   setPageChart(valid);
+  // }, [panel, selectedPanel]);
 
+  let pageChart = selectedPanel.length == 1;
   if (pageChart) {
     let config = panel.find((item) => item.id == selectedPanel[0]);
-
     pageChart = config && config?.key !== GROUP_COMPONENT_KEY;
   }
 

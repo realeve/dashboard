@@ -79,7 +79,7 @@ const Item = ({
       params: { ...getRange(api), cache: api.cache ?? 2 },
     },
     valid: () => valid,
-    interval: typeof api.interval === 'undefined' ? 0 : Number(api.interval),
+    interval: typeof api.interval === 'undefined' ? 0 : parseInt('' + Number(api.interval) * 60),
     callback(e) {
       if (e && e.title) {
         onLoad(e.title);
