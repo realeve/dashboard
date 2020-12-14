@@ -20,7 +20,7 @@ const ScaleBackground = ({
   children,
 }: {
   resizeType: EResizeType;
-  page: {};
+  page: { width: string; height: string; background: string };
   children: React.ReactNode;
 }) => {
   // 直接缩放
@@ -33,11 +33,12 @@ const ScaleBackground = ({
   } else if (resizeType === EResizeType.MOVIE) {
     let autosize = getAutoSizeStyle(page, resizeType);
     let bg = getBackground(page);
+    let bgStyle = bg.background
+      ? { background: bg.background }
+      : { backgroundImage: bg.backgroundImage };
+
     return (
-      <div
-        style={{ backgroundImage: bg.backgroundImage, backgroundRepeat: 'repeat' }}
-        className={styles.movieDashboard}
-      >
+      <div style={{ ...bgStyle, backgroundRepeat: 'repeat' }} className={styles.movieDashboard}>
         <div className={styles.dashboard} style={{ ...bg, ...autosize }}>
           <div style={{ width: '100%', height: '100%' }}>{children}</div>
         </div>
