@@ -88,7 +88,7 @@ export default () => {
   };
 
   const save = () => {
-    console.log(state);
+    // console.log(state);
     let layout = saveLayout(state);
     saveToLS('dashboard', layout);
     lib.saveDashboard(layout);

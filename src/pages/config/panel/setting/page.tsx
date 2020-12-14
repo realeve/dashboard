@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
 import { IPage, ICommonConfig } from '@/models/common';
@@ -14,44 +14,9 @@ import { Tabs, Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
-import * as R from 'ramda';
-
 const { Panel } = Collapse;
 
 const TabPane = Tabs.TabPane;
-
-const BorderPanel = ({ idx = 0, borderRadius, updatePage }) => (
-  <FormField
-    className="data_input"
-    style={{ width: 45, minWidth: 45, marginRight: idx == 3 ? 0 : 8 }}
-    config={{
-      type: 'input',
-      valueType: 'number',
-      step: 1,
-      min: 0,
-    }}
-    value={borderRadius?.[idx] ?? 0}
-    onChange={(val) => {
-      let radius = R.update<number>(idx, Number(val), borderRadius || [0, 0, 0, 0]);
-      updatePage({
-        borderRadius: radius,
-      });
-    }}
-  />
-);
-
-const BorderRadiusPanel = (props) => {
-  return (
-    <Field title="圆角弧度" style={{ padding: 10 }}>
-      <div className="alignRow">
-        <BorderPanel idx={0} {...props} />
-        <BorderPanel idx={1} {...props} />
-        <BorderPanel idx={2} {...props} />
-        <BorderPanel idx={3} {...props} />
-      </div>
-    </Field>
-  );
-};
 
 export const ImgSelector = ({
   title,
@@ -259,7 +224,23 @@ export const ComponentConfig = ({
           });
         }}
       />
-      <BorderRadiusPanel borderRadius={borderRadius} updatePage={updatePage} />
+      <Field title="圆角弧度">
+        <FormField
+          value={borderRadius}
+          config={{
+            length: 4,
+            type: 'slider',
+            valueType: 'number',
+            step: 1,
+            min: 0,
+            split: '',
+            style: { width: 50, minWidth: 50 },
+          }}
+          onChange={(borderRadius) => {
+            updatePage({ borderRadius });
+          }}
+        />
+      </Field>
       <Field title="背景" style={{ padding: 10 }}>
         <ColorPicker
           value={chartBackground}

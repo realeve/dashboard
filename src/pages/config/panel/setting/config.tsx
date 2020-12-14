@@ -280,7 +280,7 @@ const Index = ({
         >
           <ApiSetting
             onChange={(api) => {
-              console.log(api);
+              // console.log(api);
               updateAttrib({ api }, true, '调整接口配置项' + ` - ${panel[selectedIdx].title}`);
             }}
             panel={currentPanel}

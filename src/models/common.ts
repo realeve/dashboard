@@ -260,7 +260,7 @@ export default {
     },
     *updatePanel({ payload: { panel, recordHistory = true, historyTitle = null } }, { put, call }) {
       let nextPanel = R.uniq(panel);
-      console.log(recordHistory, historyTitle);
+      // console.log(recordHistory, historyTitle);
       yield updatePanel({
         panel: nextPanel,
         call,

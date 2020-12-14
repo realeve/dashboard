@@ -11,7 +11,7 @@ import { Switch, Divider } from 'antd';
 import classnames from 'classnames';
 import { useDebounce } from 'react-use';
 
-type IFormItemValue = string | number | boolean | [number, number] | [string, string];
+type IFormItemValue = string | number | boolean | (number | string)[];
 
 interface IFormItemProps {
   config: IChartConfig;
@@ -113,33 +113,28 @@ export const FormField = ({
       );
       break;
     case 'slider':
+      // 支持任意长度的slide排为一组
+      let len = config.length || 2;
+      let arr = R.range(0, len);
       return (
         <div className="alignRow">
-          <input
-            type="number"
-            className={classnames('data_input')}
-            value={innerValue?.[0] ?? 0}
-            onChange={(e) => {
-              let val = Number(e.target.value);
-              setInnerValue([val, innerValue[1]]);
-            }}
-            disabled={disabled}
-            readOnly={disabled}
-            {...config}
-          />
-          <span style={{ margin: '0 8px' }}> {config.split || '~'} </span>
-          <input
-            type="number"
-            className={classnames('data_input')}
-            onChange={(e) => {
-              let val = Number(e.target.value);
-              setInnerValue([innerValue[0], val]);
-            }}
-            value={innerValue[1] ?? 0}
-            {...config}
-            disabled={disabled}
-            readOnly={disabled}
-          />
+          {arr.map((id) => (
+            <React.Fragment key={id}>
+              <input
+                type="number"
+                className={classnames('data_input')}
+                value={innerValue?.[id] ?? 0}
+                onChange={(e) => {
+                  let val = R.update(id, Number(e.target.value), (innerValue as number[]).slice());
+                  setInnerValue(val);
+                }}
+                disabled={disabled}
+                readOnly={disabled}
+                {...config}
+              />
+              {id < len - 1 && <span style={{ margin: '0 5px' }}> {config.split ?? '~'} </span>}
+            </React.Fragment>
+          ))}
         </div>
       );
       break;
