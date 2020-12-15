@@ -24,7 +24,6 @@ import { generateId, guideDb, calcDefaultGuidline } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
 import assets from '@/component/widget/assets';
-import ScreenEdge from './ScreenEdge';
 import { IPage } from '@/models/common';
 import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
@@ -468,7 +467,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               }}
               selectedMenu={this.props.curTool}
             />
-            {this.props.page.showEdge && <ScreenEdge page={this.props.page} />}
           </Viewport>
         </InfiniteViewer>
         <Selecto

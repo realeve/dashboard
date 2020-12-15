@@ -11,7 +11,7 @@ import {
   EResizeType,
 } from './lib';
 import { getDashboardStyle } from '@/component/Editor/Editor';
-import { GROUP_COMPONENT_KEY } from '@/models/common';
+import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 
 const ScaleBackground = ({
@@ -88,7 +88,7 @@ const Index = ({ location }) => {
     <ScaleBackground resizeType={resizeType} page={page}>
       {panel.map(
         (item) =>
-          item.key !== GROUP_COMPONENT_KEY && (
+          ![SCREEN_EDGE_KEY, GROUP_COMPONENT_KEY].includes(item.key) && (
             <div style={getStyle({ style: item.style, resizeType, page })} key={item.id}>
               <ChartItem config={item} page={page} />
             </div>
