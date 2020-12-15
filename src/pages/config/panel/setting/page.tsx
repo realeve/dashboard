@@ -14,6 +14,8 @@ import { Tabs, Switch } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
+import { isColor } from '@/component/chartItem/option/lib';
+
 const { Panel } = Collapse;
 
 const TabPane = Tabs.TabPane;
@@ -32,15 +34,31 @@ export const ImgSelector = ({
   style?: React.CSSProperties;
 }) => {
   const [show, setShow] = useState(false);
+  let val = assets[imgtype][value]?.url;
   return (
     <Field title={title} style={{ ...style, height: 116 }}>
-      <img
-        className={styles.img}
-        src={assets[imgtype][value]?.url}
-        onClick={() => {
-          setShow(!show);
-        }}
-      />
+      {isColor(val) ? (
+        <div
+          className={styles.img}
+          style={{
+            background: val,
+            color: '#ddd',
+            width: '100%',
+            textAlign: 'center',
+            lineHeight: 116,
+          }}
+        >
+          点击设置背景
+        </div>
+      ) : (
+        <img
+          className={styles.img}
+          src={val}
+          onClick={() => {
+            setShow(!show);
+          }}
+        />
+      )}
       {show && (
         <Popup
           onClose={() => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import { IPanelConfig, ICommon, IPage, IHistoryProps } from '@/models/common';
+import { IPanelConfig, ICommon, IPage, IHistoryProps, SCREEN_EDGE_KEY } from '@/models/common';
 import { connect } from 'dva';
 import { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
@@ -13,7 +13,7 @@ import ApiSetting from './apiSetting';
 import InputRange from '@/component/field/InputRange';
 import { Divider } from 'antd';
 
-import { FormItem } from '@/pages/config/panel/setting/FormItem';
+import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
 
 interface IPanel extends IHistoryProps {
   selectedIdx: number;
@@ -115,139 +115,149 @@ const Index = ({
         style={{ color: '#eee', height: '100%' }}
       >
         <div className={styles.pageconfig} style={{ height: '100%' }}>
-          <div className={styles['datav-gui']}>
-            <FormItem
-              config={{ title: '组件尺寸', split: 'x', type: 'slider' }}
-              value={[size.width, size.height]}
-              onChange={([width, height]) => {
-                if (width == size.width && height == size.height) {
-                  return;
-                }
-                if (width == size.width) {
-                  updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
-                } else {
-                  updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
-                }
-                setSize({ width, height });
-              }}
-            />
-            <Field title="旋转角度">
-              <InputRange
-                step={15}
-                min={0}
-                max={360}
-                disabled
-                value={Math.floor(currentPanel.style.transform?.rotate?.replace('deg', '') || '0')}
-                // onChange={(rotate) => {
-                //   const style = R.clone(currentPanel.style || {});
-                //   const nextStyle = {
-                //     style: {
-                //       ...style,
-                //       transform: {
-                //         ...style.transform,
-                //         rotate: `${rotate}deg`,
-                //       },
-                //     },
-                //   };
-                //   updateAttrib(nextStyle, true, '调整旋转角度');
-                // }}
+          {currentPanel.key == SCREEN_EDGE_KEY ? (
+            <div className={styles['datav-gui']}>
+              <FormField
+                config={{ title: '请在组件配置中设置屏幕分割线的配置项', type: 'divider' }}
               />
-            </Field>
-            <Field title="使用全局样式">
-              <Switch
-                checked={currentPanel?.useGeneralStyle}
-                onChange={(useGeneralStyle) => {
-                  if (useGeneralStyle) {
-                    updateAttrib(
-                      {
-                        useGeneralStyle,
-                        general: null, // 使用全局配置时，当前项置为空
-                      },
-                      true,
-                      `使用全局样式 - ${panel[selectedIdx].title}`,
-                    );
-                  } else {
-                    updateAttrib(
-                      {
-                        useGeneralStyle,
-                      },
-                      true,
-                      `禁用全局样式 - ${panel[selectedIdx].title}`,
-                    );
+            </div>
+          ) : (
+            <div className={styles['datav-gui']}>
+              <FormItem
+                config={{ title: '组件尺寸', split: 'x', type: 'slider' }}
+                value={[size.width, size.height]}
+                onChange={([width, height]) => {
+                  if (width == size.width && height == size.height) {
+                    return;
                   }
-                }}
-                checkedChildren="是"
-                unCheckedChildren="否"
-              />
-            </Field>
-            <Divider plain>显示设置</Divider>
-            <Field title="标题">
-              <Switch
-                checked={currentPanel?.showTitle}
-                onChange={(showTitle) => {
-                  updateAttrib(
-                    {
-                      showTitle,
-                    },
-                    true,
-                    `${showTitle ? '显示' : '隐藏'}标题 - ${panel[selectedIdx].title}`,
-                  );
-                }}
-                checkedChildren="显示"
-                unCheckedChildren="隐藏"
-              />
-            </Field>
-            <Field title="边框">
-              <Switch
-                checked={currentPanel?.showBorder}
-                onChange={(showBorder) => {
-                  updateAttrib(
-                    {
-                      showBorder,
-                    },
-                    true,
-                    `${showBorder ? '显示' : '隐藏'}边框 - ${panel[selectedIdx].title}`,
-                  );
-                }}
-                checkedChildren="显示"
-                unCheckedChildren="隐藏"
-              />
-            </Field>
-            <Field title="背景">
-              <Switch
-                checked={currentPanel?.showBackground}
-                onChange={(showBackground) => {
-                  updateAttrib(
-                    {
-                      showBackground,
-                    },
-                    true,
-                    `${showBackground ? '显示' : '隐藏'}显示背景 - ${panel[selectedIdx].title}`,
-                  );
-                }}
-                checkedChildren="显示"
-                unCheckedChildren="隐藏"
-              />
-            </Field>
-            {general && (
-              <ComponentConfig
-                {...general}
-                showTitle={currentPanel.showTitle}
-                onChange={(e) => {
-                  const next = {
-                    ...general,
-                    ...e,
-                  };
-                  setGeneral(next);
-                  updateAttrib(
-                    { general: next, useGeneralStyle: false },
-                    true,
-                    `个性化设置 - ${panel[selectedIdx].title}`,
-                  );
+                  if (width == size.width) {
+                    updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
+                  } else {
+                    updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
+                  }
+                  setSize({ width, height });
                 }}
               />
-            )}
-          </div>
+              <Field title="旋转角度">
+                <InputRange
+                  step={15}
+                  min={0}
+                  max={360}
+                  disabled
+                  value={Math.floor(
+                    currentPanel.style.transform?.rotate?.replace('deg', '') || '0',
+                  )}
+                  // onChange={(rotate) => {
+                  //   const style = R.clone(currentPanel.style || {});
+                  //   const nextStyle = {
+                  //     style: {
+                  //       ...style,
+                  //       transform: {
+                  //         ...style.transform,
+                  //         rotate: `${rotate}deg`,
+                  //       },
+                  //     },
+                  //   };
+                  //   updateAttrib(nextStyle, true, '调整旋转角度');
+                  // }}
+                />
+              </Field>
+              <Field title="使用全局样式">
+                <Switch
+                  checked={currentPanel?.useGeneralStyle}
+                  onChange={(useGeneralStyle) => {
+                    if (useGeneralStyle) {
+                      updateAttrib(
+                        {
+                          useGeneralStyle,
+                          general: null, // 使用全局配置时，当前项置为空
+                        },
+                        true,
+                        `使用全局样式 - ${panel[selectedIdx].title}`,
+                      );
+                    } else {
+                      updateAttrib(
+                        {
+                          useGeneralStyle,
+                        },
+                        true,
+                        `禁用全局样式 - ${panel[selectedIdx].title}`,
+                      );
+                    }
+                  }}
+                  checkedChildren="是"
+                  unCheckedChildren="否"
+                />
+              </Field>
+              <Divider plain>显示设置</Divider>
+              <Field title="标题">
+                <Switch
+                  checked={currentPanel?.showTitle}
+                  onChange={(showTitle) => {
+                    updateAttrib(
+                      {
+                        showTitle,
+                      },
+                      true,
+                      `${showTitle ? '显示' : '隐藏'}标题 - ${panel[selectedIdx].title}`,
+                    );
+                  }}
+                  checkedChildren="显示"
+                  unCheckedChildren="隐藏"
+                />
+              </Field>
+              <Field title="边框">
+                <Switch
+                  checked={currentPanel?.showBorder}
+                  onChange={(showBorder) => {
+                    updateAttrib(
+                      {
+                        showBorder,
+                      },
+                      true,
+                      `${showBorder ? '显示' : '隐藏'}边框 - ${panel[selectedIdx].title}`,
+                    );
+                  }}
+                  checkedChildren="显示"
+                  unCheckedChildren="隐藏"
+                />
+              </Field>
+              <Field title="背景">
+                <Switch
+                  checked={currentPanel?.showBackground}
+                  onChange={(showBackground) => {
+                    updateAttrib(
+                      {
+                        showBackground,
+                      },
+                      true,
+                      `${showBackground ? '显示' : '隐藏'}显示背景 - ${panel[selectedIdx].title}`,
+                    );
+                  }}
+                  checkedChildren="显示"
+                  unCheckedChildren="隐藏"
+                />
+              </Field>
+              {general && (
+                <ComponentConfig
+                  {...general}
+                  showTitle={currentPanel.showTitle}
+                  onChange={(e) => {
+                    const next = {
+                      ...general,
+                      ...e,
+                    };
+                    setGeneral(next);
+                    updateAttrib(
+                      { general: next, useGeneralStyle: false },
+                      true,
+                      `个性化设置 - ${panel[selectedIdx].title}`,
+                    );
+                  }}
+                />
+              )}
+            </div>
+          )}
         </div>
       </Tabs.TabPane>
       <Tabs.TabPane

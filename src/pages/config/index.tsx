@@ -15,7 +15,13 @@ import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Edi
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
-import { ICommon, GROUP_COMPONENT_KEY, IPage, IPanelConfig } from '@/models/common';
+import {
+  ICommon,
+  GROUP_COMPONENT_KEY,
+  SCREEN_EDGE_KEY,
+  IPage,
+  IPanelConfig,
+} from '@/models/common';
 import * as R from 'ramda';
 
 import { Dispatch } from 'redux';
@@ -26,14 +32,15 @@ import localforage from 'localforage';
 import { useDebounce } from 'react-use';
 
 import { calcPanelPosition } from './lib';
-
+import classnames from 'classnames';
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
   title: string;
 }
 
-// 添加内容
+// 添加组件
+// 当属性名中有 scenaIgnore 时，禁止selectTo选中
 export const addPanel = (
   editor: React.MutableRefObject<Editor>,
   { style, ...config }: IPanelConfig,
@@ -42,10 +49,15 @@ export const addPanel = (
     return;
   }
   editor?.current.append(
-    <div className={styles.chartWrapper} style={style}>
+    <div
+      className={classnames(styles.chartWrapper, {
+        scenaIgnore: SCREEN_EDGE_KEY == config.key,
+      })}
+      style={style}
+    >
       <ChartItem chartid={config.id} />
     </div>,
-    { id: config.id, name: config.title, style },
+    { id: config.id, name: config.title, style, type: config.key },
   );
 };
 

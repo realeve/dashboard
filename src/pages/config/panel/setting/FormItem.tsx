@@ -15,8 +15,8 @@ type IFormItemValue = string | number | boolean | (number | string)[];
 
 interface IFormItemProps {
   config: IChartConfig;
-  value: IFormItemValue;
-  onChange: (e: IFormItemValue) => void;
+  value?: IFormItemValue;
+  onChange?: (e: IFormItemValue) => void;
   style?: React.CSSProperties;
   type?: string;
   disabled?: boolean;

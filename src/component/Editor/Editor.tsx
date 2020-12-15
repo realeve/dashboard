@@ -475,7 +475,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           ref={selecto}
           dragContainer={`.scena-viewer`}
           hitRate={0}
-          selectableTargets={[`.scena-viewport [${DATA_SCENA_ELEMENT_ID}]`]}
+          selectableTargets={[`.scena-viewport [${DATA_SCENA_ELEMENT_ID}]:not(.scenaIgnore)`]}
           selectByClick={selectedMenu !== 'hand'}
           selectFromInside={false}
           toggleContinueSelect={['shift']}

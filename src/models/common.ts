@@ -56,6 +56,7 @@ const copyArray = (idx: number, array: IPanelConfig[]) => {
 
 // 分组组件的key
 export const GROUP_COMPONENT_KEY = 'group_rect';
+export const SCREEN_EDGE_KEY = 'screen_edge';
 
 export const getGroupRect: () => IPanelConfig = () => {
   let id = lib.noncer();
@@ -406,7 +407,9 @@ export default {
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
       let prevPanel = yield select((state) => state[namespace].panel);
-      let panelItem = R.clone(panel);
+      let panelItem = R.clone<IPanelConfig>(panel);
+
+      const IS_EDGE_LINE = panel.key == SCREEN_EDGE_KEY;
       // console.log(panel);
       panelItem = {
         showTitle: true,
@@ -417,13 +420,13 @@ export default {
         id: panel.id || lib.noncer(),
         icon: `com-font icon-com-${panelItem.type}`,
         general: panelGeneral,
-        useGeneralStyle: true,
-
+        useGeneralStyle: !IS_EDGE_LINE,
+        lock: IS_EDGE_LINE,
         // 自定义配置
         componentConfig: {},
         api: {},
       };
-      let nextPanel = [...prevPanel, panelItem];
+      let nextPanel = IS_EDGE_LINE ? [panelItem, ...prevPanel] : [...prevPanel, panelItem];
 
       yield updatePanel({
         panel: nextPanel,
