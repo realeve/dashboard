@@ -146,13 +146,6 @@ export interface IPage extends ICommonConfig {
   title: string; // 业务名称
   padding: number; // 辅助线边距
 
-  screen_x: number; //屏幕数量，X轴
-  screen_y: number; // 屏幕数量，Y轴
-  screen_edge_width: number; //屏幕拼接边缘宽度
-  showEdgeTag: boolean; //是否显示拼接位置标签
-  showEdge: boolean; //显示拼接区域
-  screen_edge_background: string; // 接接线颜色
-
   thumbnail: string; // 缩略图
 }
 

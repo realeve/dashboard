@@ -171,64 +171,6 @@ export const ComponentConfig = ({
             max={30}
           />
         </Field>
-        <FormItem
-          config={{ title: '屏幕拼接数量', split: 'x', type: 'slider', step: 1, min: 1, max: 10 }}
-          value={[page.screen_x, page.screen_y]}
-          onChange={(e: [number, number]) => {
-            let [screen_x, screen_y] = e;
-            if (screen_x == page.screen_x && screen_y == page.screen_y) {
-              return;
-            }
-            updatePage({ screen_x, screen_y });
-          }}
-        />
-        <Field title="拼接边距">
-          <InputRange
-            step={1}
-            value={page.screen_edge_width}
-            onChange={(screen_edge_width) => {
-              updatePage({
-                screen_edge_width,
-              });
-            }}
-            min={0}
-            max={30}
-          />
-        </Field>
-        <Field title="拼接线颜色">
-          <PureColor
-            value={page.screen_edge_background}
-            onChange={(screen_edge_background) => {
-              updatePage({ screen_edge_background });
-            }}
-            position="top"
-            noAnimation
-          />
-        </Field>
-        <Field title="拼接线标签">
-          <Switch
-            checked={page.showEdgeTag}
-            onChange={(showEdgeTag) => {
-              updatePage({
-                showEdgeTag,
-              });
-            }}
-            checkedChildren="显示"
-            unCheckedChildren="隐藏"
-          />
-        </Field>
-        <Field title="拼接线">
-          <Switch
-            checked={page.showEdge}
-            onChange={(showEdge) => {
-              updatePage({
-                showEdge,
-              });
-            }}
-            checkedChildren="显示"
-            unCheckedChildren="隐藏"
-          />
-        </Field>
       </Panel>
     )}
     <Panel header="组件" key="组件">

@@ -52,6 +52,5 @@ export const config: IChartConfig[] = [
   },
 ];
 
-export default function ScreenPanel({ option: { ...props } }: { option: IScreenEdgeProps }) {
-  return <ScreenEdge page={props} />;
-}
+export default ({ option: { ...props } }: { option: IScreenEdgeProps }) =>
+  props.showEdgeTag && <ScreenEdge page={props} />;
