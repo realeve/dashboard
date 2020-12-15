@@ -10,7 +10,7 @@ import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
 
-import { Tabs, Switch } from 'antd';
+import { Tabs } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
@@ -46,6 +46,9 @@ export const ImgSelector = ({
             width: '100%',
             textAlign: 'center',
             lineHeight: 116,
+          }}
+          onClick={() => {
+            setShow(!show);
           }}
         >
           点击设置背景
