@@ -8,6 +8,7 @@ export default ({
   showValue = true,
   onChange = () => {},
   disabled = false,
+  formatter = (e) => <span>{e}</span>,
   ...props
 }: {
   min?: number;
@@ -16,6 +17,7 @@ export default ({
   value?: number;
   showValue?: boolean;
   onChange?: (e) => void;
+  formatter?: (e: number) => React.ReactNode;
   disabled?: boolean;
 }) => {
   const [innerValue, setInnerValue] = useState(props.value);
@@ -39,7 +41,7 @@ export default ({
 
   return (
     <div className={classnames(styles.rangeWrapper, { [styles.disabled]: disabled })}>
-      {showValue && <span>{innerValue}</span>}
+      {showValue && formatter(innerValue)}
       <i
         className="datav-icon datav-font icon-zoom-out slider-icon zoom-out "
         onClick={(e) => {

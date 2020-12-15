@@ -25,10 +25,16 @@ export default ({
     >
       {editor && <ToolMenu curTool={curTool} editor={editor} onSelect={onMenuChange} />}
 
-      <span style={{ color: '#bcc9d4', width: 50, fontSize: 12, textAlign: 'right' }}>
-        {Math.floor(zoom * 100)} %
-      </span>
-      <InputRange {...rangeCfg} value={zoom} onChange={onZoom} showValue={false} />
+      <InputRange
+        {...rangeCfg}
+        value={zoom}
+        onChange={onZoom}
+        formatter={(value) => (
+          <span style={{ color: '#bcc9d4', width: 50, fontSize: 12, textAlign: 'right' }}>
+            {Math.floor(value * 100)} %
+          </span>
+        )}
+      />
       <div className={styles['toggle-thumbnail']} onClick={onToggleThumb}>
         <i className="datav-icon datav-font icon-viewport" />
       </div>
