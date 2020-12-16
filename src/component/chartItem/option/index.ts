@@ -349,3 +349,12 @@ export { cbpc_video };
 */ 
 import * as screen_edge from './other/screen_edge';
 export { screen_edge }; 
+
+/*
+    时间：2020-12-15 21:13:08
+    类型: other
+    序号：45
+    名称：你的图表名称
+*/ 
+import * as waffle from './other/waffle';
+export { waffle }; 

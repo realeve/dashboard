@@ -11,11 +11,12 @@ export default ({
   style = {},
   titleWidth = 100,
   className = '',
+  subTitle = null,
 }) => {
   return (
     <div className={classnames(styles.field, className)} style={style}>
       {title && (
-        <div title={title} className={styles.title} style={{ width: titleWidth }}>
+        <div title={subTitle || title} className={styles.title} style={{ width: titleWidth }}>
           {disabled && '🔒'} {title}
         </div>
       )}

@@ -19,6 +19,7 @@ export interface IChartConfig {
   valueType?: 'number' | 'text';
   type?: TFormConfigType; // 配置时的组件类型，默认为 input
   title?: string | React.ReactNode; // 配置时的标题信息，显示在左侧，当没有设置时将引用 key 作为标题，如本例中的x,y
+  subTitle?: string | React.ReactNode; // 副标题
   noAnimation?: boolean; // purecolor 状态下是否显示动画
   [key: string]: any; // 其余配置将全部注入到对应的组件中，如在input组件中可自行设置  min,max,step等
 }

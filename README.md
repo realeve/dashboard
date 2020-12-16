@@ -147,7 +147,7 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 
 
 ## todo 2
-- [ ] 视频背景
+- [x] 视频背景
 - [ ] 作废率报表解析上传
 - [x] 不同尺寸屏幕的缩放
 - [x] 缩略图显示

@@ -72,7 +72,7 @@ https://resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0
 
 5.组件
 - [x] (1)增加当前 时间／全屏功能按钮；
-- [ ] (2)tab组件
+~- [ ] (2)tab组件~
  
 - [x] （3）公告；滚动文字
 
@@ -109,3 +109,9 @@ id/最近发送时间，时长；
 
  
 - [x] 业务组件允许调整ajax数据请求的缓存，刷新时长等信息；
+
+
+## TODO 12月计划
+1. carousel切换
+2. 优化资源部署，将静态资源拆分
+3. 优化json数据上传的方案

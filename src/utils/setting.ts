@@ -50,7 +50,7 @@ if (DEV) {
   host = 'http://localhost:90/api/';
 }
 
-host = 'http://localhost:90/api/';
+// host = 'http://localhost:90/api/';
 
 export { domain, host };
 

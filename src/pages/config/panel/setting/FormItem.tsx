@@ -26,7 +26,7 @@ interface IFormItemProps {
 export const FormField = ({
   value,
   onChange,
-  config: { defaultValue, valueType = 'number', type, key, title, ...config },
+  config: { defaultValue, valueType = 'number', type, key, title, subTitle, ...config },
   style,
   disabled = false,
 }: IFormItemProps) => {
@@ -50,7 +50,7 @@ export const FormField = ({
     return <Divider plain>{title}</Divider>;
   } else if (type === 'label') {
     return (
-      <Field style={style}>
+      <Field style={style} subTitle={subTitle}>
         <label style={{ color: '#6e7481' }}>{title}</label>
       </Field>
     );
@@ -79,17 +79,33 @@ export const FormField = ({
     case 'radio':
       let { option, ...props } = config;
       return (
-        <Radio disabled={disabled} onChange={onChange} value={value} config={option} {...props} />
+        <Radio
+          disabled={disabled}
+          onChange={onChange}
+          value={value as string | number}
+          config={option}
+          {...props}
+        />
       );
       break;
     case 'select':
       return (
-        <Select disabled={disabled} onChange={onChange} value={value} config={config.option} />
+        <Select
+          disabled={disabled}
+          onChange={onChange}
+          value={value as string | number}
+          config={config.option}
+        />
       );
       break;
     case 'antselect':
       return (
-        <AntSelect disabled={disabled} onChange={onChange} value={value} config={config.option} />
+        <AntSelect
+          disabled={disabled}
+          onChange={onChange}
+          value={value as string | number}
+          config={config.option}
+        />
       );
       break;
     case 'switch':
@@ -109,7 +125,12 @@ export const FormField = ({
       break;
     case 'purecolor':
       return (
-        <PureColor disabled={disabled} value={innerValue} onChange={setInnerValue} {...config} />
+        <PureColor
+          disabled={disabled}
+          value={innerValue as string}
+          onChange={setInnerValue}
+          {...config}
+        />
       );
       break;
     case 'slider':
@@ -143,14 +164,19 @@ export const FormField = ({
 
 export const FormItem = (props: IFormItemProps) => {
   let {
-    config: { key, title },
+    config: { key, title, type, subTitle },
     style,
     disabled = false,
   } = props;
 
+  if (['divider', 'label', 'image'].includes(type)) {
+    return <FormField {...props} />;
+  }
+
   return (
     <Field
       title={title || key}
+      subTitle={subTitle}
       disabled={disabled}
       style={style}
       className={classnames({ disabled })}
