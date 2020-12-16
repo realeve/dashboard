@@ -41,6 +41,12 @@ export const config: IChartConfig[] = [
     defaultValue: false,
   },
   {
+    title: '缩放画布',
+    key: 'zoomable',
+    type: 'switch',
+    defaultValue: false,
+  },
+  {
     title: '紧凑布局',
     key: 'alignContent',
     type: 'switch',
@@ -133,7 +139,6 @@ export const handleData = ({
   let idx = res.length;
   if (gzMode) {
     let id = R.reverse(data).findIndex(R.propEq(y, 1));
-    console.log(id, idx);
     idx = idx - id;
   }
   return res.map((item, i) => {
@@ -167,6 +172,7 @@ const WaffleChart = ({
     boxMargin,
     boxBorderRadius,
     gzMode,
+    zoomable,
   },
   curTool,
 }) => {
@@ -206,7 +212,7 @@ const WaffleChart = ({
   }, []);
 
   return (
-    <MoveableCanvas moveable={curTool == 'hand'}>
+    <MoveableCanvas moveable={curTool == 'hand'} zoomable={zoomable}>
       <div className={styles.container} style={style} ref={ref}>
         {data.map((item) => (
           <div

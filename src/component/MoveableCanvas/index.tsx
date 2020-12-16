@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import Moveable from 'react-moveable';
+import ZoomIcon from './ZoomIcon';
 
 /**
  * 可拖动的画布
@@ -24,8 +25,10 @@ interface IMoveableCanvas {
   style?: React.CSSProperties;
   /** 是否可以拖动，在编辑状态下选中父级组件调整大小和位置时会导致当前封装的组件一并拖动 */
   moveable?: boolean;
+  /** 是否允许缩放 */
+  zoomable?: boolean;
 }
-export default ({ children, style, moveable = true }: IMoveableCanvas) => {
+export default ({ children, style, moveable = true, zoomable = true }: IMoveableCanvas) => {
   const [translate, setTranslate] = useState([0, 0]);
   const ref = React.useRef(null);
   const [target, setTarget] = React.useState();
@@ -33,29 +36,44 @@ export default ({ children, style, moveable = true }: IMoveableCanvas) => {
     setTarget(ref.current);
   }, []);
 
+  // 缩放时，translate同等进行了变换，需要做计算
+  const [zoom, setZoom] = useState(1);
+
   return (
     <div className={styles.moveable_canvas} style={style}>
       <div
         ref={ref}
         style={{
-          transform: `translate(${translate[0]}px, ${translate[1]}px)`,
+          transform: `translate(${translate[0]}px, ${translate[1]}px) scale(${zoom})`,
         }}
       >
         {children}
       </div>
       <Moveable
+        zoom={zoom}
         target={target}
         snappable={true}
         draggable={moveable}
         origin={false}
+        scrollable={moveable}
         onDragStart={({ set }) => {
           set(translate);
         }}
-        onDrag={({ target, beforeTranslate }) => {
+        onDrag={({ beforeTranslate }) => {
           setTranslate(beforeTranslate);
-          target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+        }}
+        onScroll={(e) => {
+          console.log(e);
         }}
       />
+      {zoomable && (
+        <ZoomIcon
+          onChange={setZoom}
+          onRestore={() => {
+            setTranslate([0, 0]);
+          }}
+        />
+      )}
     </div>
   );
 };

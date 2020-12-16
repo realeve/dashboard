@@ -1,0 +1,52 @@
+.zoom {
+  color: #ddd;
+  left: 10px;
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  &Container {
+    display: flex;
+    width: 46px;
+    border-radius: 23px;
+    background: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    z-index: 100;
+    justify-content: space-between;
+    padding: 8px 0;
+    align-items: center;
+    transform: translateY(167px);
+    transition: transform 0.5s ease-in-out;
+    .line {
+      width: 4px;
+      background: #ddd;
+      margin: 5px 0;
+      border-radius: 2px;
+      position: relative;
+      height: 90px;
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #ddd;
+        position: absolute;
+        left: -5px;
+        top: 0px;
+        box-shadow: 0px 0px 6px 2px #4af;
+      }
+    }
+  }
+  &:hover {
+    .zoomContainer {
+      transform: translateY(0);
+    }
+  }
+}
+
+:global {
+  .anticon {
+    &:hover {
+      color: #4af;
+    }
+  }
+}
