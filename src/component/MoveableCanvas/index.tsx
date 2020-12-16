@@ -22,8 +22,10 @@ interface IMoveableCanvas {
   children?: React.ReactNode;
   /** 设置外层边框的样式 */
   style?: React.CSSProperties;
+  /** 是否可以拖动，在编辑状态下选中父级组件调整大小和位置时会导致当前封装的组件一并拖动 */
+  moveable?: boolean;
 }
-export default ({ children, style }: IMoveableCanvas) => {
+export default ({ children, style, moveable = true }: IMoveableCanvas) => {
   const [translate, setTranslate] = useState([0, 0]);
   const ref = React.useRef(null);
   const [target, setTarget] = React.useState();
@@ -32,7 +34,7 @@ export default ({ children, style }: IMoveableCanvas) => {
   }, []);
 
   return (
-    <div className={styles.container} style={style}>
+    <div className={styles.moveable_canvas} style={style}>
       <div
         ref={ref}
         style={{
@@ -44,7 +46,7 @@ export default ({ children, style }: IMoveableCanvas) => {
       <Moveable
         target={target}
         snappable={true}
-        draggable={true}
+        draggable={moveable}
         origin={false}
         onDragStart={({ set }) => {
           set(translate);

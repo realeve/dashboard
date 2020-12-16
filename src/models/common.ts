@@ -206,12 +206,6 @@ const defaultState: ICommon = {
     author: '管理员',
     title: '仪表盘',
     padding: 15, //边距
-    screen_edge_width: 6, //拼接边距
-    screen_x: 4, // 横向4块屏
-    screen_y: 4, // 纵向4块屏
-    showEdgeTag: true, // 默认显示拼接标签
-    showEdge: true, //是否显示拼接区域
-    screen_edge_background: 'rgba(0,0,0,0.5)', // 拼接线颜色
 
     thumbnail: '', // 缩略图
     ...panelGeneral,

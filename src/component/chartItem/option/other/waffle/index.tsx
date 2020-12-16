@@ -5,6 +5,9 @@ import { init } from './lib';
 export { mock } from './mock';
 import { isArray } from '@antv/util';
 import * as R from 'ramda';
+import { connect } from 'dva';
+import MoveableCanvas from '@/component/MoveableCanvas';
+import { ICommon } from '@/models/common';
 export const config: IChartConfig[] = [
   {
     key: 'direction',
@@ -150,7 +153,7 @@ export const handleData = ({
   });
 };
 
-export default ({
+const WaffleChart = ({
   option: {
     data: _data,
     x,
@@ -165,6 +168,7 @@ export default ({
     boxBorderRadius,
     gzMode,
   },
+  curTool,
 }) => {
   // 在移动时，data将重新计算，此处可使用useMemo
   let data = useMemo(() => {
@@ -185,6 +189,8 @@ export default ({
     padding,
     flexWrap: wrap ? 'wrap' : 'wrap-reverse',
     alignContent: alignContent ? 'flex-start' : 'normal',
+    width: 500,
+    height: 500,
   };
 
   const ref = useRef(null);
@@ -200,21 +206,27 @@ export default ({
   }, []);
 
   return (
-    <div className={styles.container} style={style} ref={ref}>
-      {data.map((item) => (
-        <div
-          className={styles.box}
-          style={{
-            width: boxSize,
-            height: boxSize,
-            margin: boxMargin,
-            borderRadius: boxBorderRadius,
-            backgroundColor: item.backgroundColor,
-          }}
-          title={item.title}
-          key={item.title}
-        ></div>
-      ))}
-    </div>
+    <MoveableCanvas moveable={curTool == 'hand'}>
+      <div className={styles.container} style={style} ref={ref}>
+        {data.map((item) => (
+          <div
+            className={styles.box}
+            style={{
+              width: boxSize,
+              height: boxSize,
+              margin: boxMargin,
+              borderRadius: boxBorderRadius,
+              backgroundColor: item.backgroundColor,
+            }}
+            title={item.title}
+            key={item.title}
+          ></div>
+        ))}
+      </div>
+    </MoveableCanvas>
   );
 };
+
+export default connect(({ common: { curTool } }: { common: ICommon }) => ({ curTool }))(
+  WaffleChart,
+);
