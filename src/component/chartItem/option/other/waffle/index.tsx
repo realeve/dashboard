@@ -1,23 +1,10 @@
-import React from 'react';
-
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-
-import * as lib from '@/component/chartItem/option/lib';
-import { textColor } from '@/component/chartItem/option';
+import React, { useEffect, useRef, useMemo } from 'react';
+import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
-import * as R from 'ramda';
 import { init } from './lib';
-
-import classnames from 'classnames';
-
-export let mock: IChartMock = {
-  data: [[45.7]],
-  title: '进度条_MOCK数据',
-  header: ['指标值'],
-  rows: 1,
-  hash: 'mockdata',
-};
-
+export { mock } from './mock';
+import { isArray } from '@antv/util';
+import * as R from 'ramda';
 export const config: IChartConfig[] = [
   {
     key: 'direction',
@@ -53,6 +40,13 @@ export const config: IChartConfig[] = [
   {
     title: '紧凑布局',
     key: 'alignContent',
+    type: 'switch',
+    defaultValue: true,
+  },
+  {
+    title: '冠字顺号模式',
+    subTitle: '冠字后面未印刷的产品标灰，有跳号的标红',
+    key: 'gzMode',
     type: 'switch',
     defaultValue: true,
   },
@@ -102,13 +96,66 @@ export const apiConfig: IApiConfig = {
       defaultValue: 0,
       min: 0,
     },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+    {
+      key: 'legend',
+      title: 'legend 字段',
+      defaultValue: 2,
+      min: 0,
+    },
   ],
+};
+
+let colorArr = ['#ddd', '#2f3', '#ff7373'];
+
+export const handleData = ({
+  x: _x = 0,
+  y: _y = 1,
+  legend: _legend = 2,
+  data: { data, header },
+  gzMode,
+}) => {
+  let dataType = isArray(data[0]);
+  let x = dataType ? _x : header[_x],
+    y = dataType ? _y : header[_y],
+    legend = dataType ? _legend : header[_legend];
+  let res = R.clone(data);
+
+  // 从此id开始产品未印刷，小于它的视为跳号
+  let idx = res.length;
+  if (gzMode) {
+    let id = R.reverse(data).findIndex(R.propEq(y, 1));
+    console.log(id, idx);
+    idx = idx - id;
+  }
+  return res.map((item, i) => {
+    let color = colorArr[item[y]] || '#23d';
+    if (gzMode) {
+      // 前面未印刷的产品，显示红色
+      if (i < idx && item[y] == 0) {
+        color = colorArr[2];
+      }
+    }
+    return {
+      ...item,
+      backgroundColor: color,
+      title: (item[legend] ? `(${item[legend]}) ` : '') + item[x],
+      legend: item[legend],
+    };
+  });
 };
 
 export default ({
   option: {
-    data,
-    x = 0,
+    data: _data,
+    x,
+    y,
+    legend,
     direction,
     padding,
     wrap,
@@ -116,9 +163,14 @@ export default ({
     boxSize,
     boxMargin,
     boxBorderRadius,
+    gzMode,
   },
 }) => {
-  let arr = R.range(0, 85);
+  // 在移动时，data将重新计算，此处可使用useMemo
+  let data = useMemo(() => {
+    return handleData({ x, y, legend, data: _data, gzMode });
+  }, [x, y, legend, _data.hash, gzMode]);
+
   let containerStyle: React.CSSProperties =
     direction == 'vertical'
       ? {
@@ -134,18 +186,33 @@ export default ({
     flexWrap: wrap ? 'wrap' : 'wrap-reverse',
     alignContent: alignContent ? 'flex-start' : 'normal',
   };
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current &&
+      init({
+        selector: ref.current.children,
+        duration: 0.2,
+        eachtime: 0.05,
+        axis: 'x',
+      });
+  }, []);
+
   return (
-    <div className={styles.container} style={style}>
-      {arr.map((item) => (
+    <div className={styles.container} style={style} ref={ref}>
+      {data.map((item) => (
         <div
-          className={classnames(styles.box, '_waffle_box')}
+          className={styles.box}
           style={{
             width: boxSize,
             height: boxSize,
             margin: boxMargin,
             borderRadius: boxBorderRadius,
+            backgroundColor: item.backgroundColor,
           }}
-          key={item}
+          title={item.title}
+          key={item.title}
         ></div>
       ))}
     </div>
