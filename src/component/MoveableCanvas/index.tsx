@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import Moveable from 'react-moveable';
 import ZoomIcon, { config as zoomLevel } from './ZoomIcon';
+import classnames from 'classnames';
+import { SearchOutlined } from '@ant-design/icons';
 /**
  * 可拖动的画布
  *
@@ -47,6 +49,8 @@ export default ({ children, style, moveable = true, zoomable = true, onZoom }: I
     onZoom?.(nextLevel);
   }, [level]);
 
+  const [hover, setHover] = useState(false);
+
   return (
     <div
       className={styles.moveable_canvas}
@@ -84,13 +88,24 @@ export default ({ children, style, moveable = true, zoomable = true, onZoom }: I
         }}
       />
       {zoomable && (
-        <ZoomIcon
-          level={level}
-          setLevel={setLevel}
-          onRestore={() => {
-            setTranslate([0, 0]);
-          }}
-        />
+        <>
+          <ZoomIcon
+            onHover={setHover}
+            level={level}
+            setLevel={setLevel}
+            onRestore={() => {
+              setTranslate([0, 0]);
+            }}
+          />
+          <div
+            className={classnames(styles.zoomText, {
+              [styles.zoomTextHover]: hover,
+            })}
+          >
+            <SearchOutlined style={{ fontSize: 12 }} />
+            {zoom}
+          </div>
+        </>
       )}
     </div>
   );

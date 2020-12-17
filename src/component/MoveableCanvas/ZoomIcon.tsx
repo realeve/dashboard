@@ -47,9 +47,17 @@ export const config = [
   },
 ];
 
-export default ({ onRestore, level, setLevel }) => {
+export default ({ onHover, onRestore, level, setLevel }) => {
   return (
-    <div className={classnames(styles.zoom)}>
+    <div
+      className={classnames(styles.zoom)}
+      onMouseEnter={() => {
+        onHover?.(true);
+      }}
+      onMouseLeave={() => {
+        onHover?.(false);
+      }}
+    >
       <div className={styles.zoomContainer}>
         <ZoomInOutlined
           style={{ marginBottom: 5 }}
