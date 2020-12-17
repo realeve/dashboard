@@ -11,6 +11,7 @@ import { ICommon } from '@/models/common';
 import { Tooltip } from 'antd';
 import { useInterval } from 'react-use';
 import { SEARCH_PREFIX } from '@/utils/setting';
+import classnames from 'classnames';
 
 export const config: IChartConfig[] = [
   {
@@ -261,7 +262,7 @@ const WaffleChart = ({
     () => {
       setVisibleIdx((visibleIdx + 1) % warnNum);
     },
-    warnNum < 1 || !intervalTooltip ? 0 : 5000,
+    warnNum < 2 || !intervalTooltip ? 0 : 5000,
   );
 
   return (
@@ -270,7 +271,9 @@ const WaffleChart = ({
         {data.map((item, i) => {
           let Item = (
             <div
-              className={styles.box}
+              className={classnames(styles.box, {
+                [styles.active]: item._warn && visibleIdx == item._warnIdx,
+              })}
               style={{
                 width: boxSize,
                 height: boxSize,

@@ -16,4 +16,17 @@
     transform: scale(0);
     cursor: pointer;
   }
+  .active {
+    animation: bounce 1s linear alternate-reverse infinite;
+  }
+  @keyframes bounce {
+    0% {
+      box-shadow: 0 0 1px 4px #ec8787;
+      transform: scale(0.8);
+    }
+    100% {
+      box-shadow: 0 0 14px 6px #54545469;
+      transform: scale(1.4);
+    }
+  }
 }
