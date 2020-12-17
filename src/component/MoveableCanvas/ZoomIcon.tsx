@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './zoom.less';
 import { ZoomInOutlined, ZoomOutOutlined, AimOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
-import { Tooltip, Slider } from 'antd';
+import { Tooltip } from 'antd';
 
 export const config = [
   {
@@ -51,6 +51,16 @@ export default ({ onHover, onRestore, level, setLevel }) => {
   const [posY, setPosY] = useState(0);
   const increase = () => setLevel(Math.max(level - 1, 0)),
     decrease = () => setLevel(Math.min(level + 1, config.length - 1));
+  const ref = useRef(null);
+  const dragEnd = (e) => {
+    let direction = e.pageY < posY;
+    if (direction) {
+      increase();
+    } else {
+      decrease();
+    }
+    setPosY(e.pageY);
+  };
   return (
     <div
       className={classnames(styles.zoom)}
@@ -65,20 +75,14 @@ export default ({ onHover, onRestore, level, setLevel }) => {
         <ZoomInOutlined style={{ marginBottom: 5 }} onClick={increase} />
         <div className={styles.line}>
           <div
+            ref={ref}
             className={styles.dot}
             style={{ top: `${config[level].pos}%` }}
             draggable
             onDragStart={(e) => {
               setPosY(e.pageY);
             }}
-            onDragEnd={(e) => {
-              let direction = e.pageY < posY;
-              if (direction) {
-                increase();
-              } else {
-                decrease();
-              }
-            }}
+            onDragEnd={dragEnd}
           />
         </div>
 
