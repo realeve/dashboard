@@ -52,6 +52,12 @@ export const config: IChartConfig[] = [
     defaultValue: false,
   },
   {
+    title: '移动画布',
+    key: 'moveable',
+    type: 'switch',
+    defaultValue: false,
+  },
+  {
     title: '循环显示异常车号',
     key: 'intervalTooltip',
     type: 'switch',
@@ -219,6 +225,7 @@ const WaffleChart = ({
     gzMode,
     zoomable,
     intervalTooltip,
+    moveable,
   },
   curTool,
 }) => {
@@ -266,7 +273,7 @@ const WaffleChart = ({
   );
 
   return (
-    <MoveableCanvas moveable={curTool !== 'MoveTool'} zoomable={zoomable}>
+    <MoveableCanvas moveable={moveable && curTool !== 'MoveTool'} zoomable={zoomable}>
       <div className={styles.container} style={style} ref={ref}>
         {data.map((item, i) => {
           let Item = (
