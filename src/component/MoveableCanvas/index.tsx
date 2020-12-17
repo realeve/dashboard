@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import Moveable from 'react-moveable';
 import ZoomIcon from './ZoomIcon';
@@ -30,9 +30,9 @@ interface IMoveableCanvas {
 }
 export default ({ children, style, moveable = true, zoomable = true }: IMoveableCanvas) => {
   const [translate, setTranslate] = useState([0, 0]);
-  const ref = React.useRef(null);
-  const [target, setTarget] = React.useState();
-  React.useEffect(() => {
+  const ref = useRef(null);
+  const [target, setTarget] = useState();
+  useEffect(() => {
     setTarget(ref.current);
   }, []);
 
@@ -44,26 +44,22 @@ export default ({ children, style, moveable = true, zoomable = true }: IMoveable
       <div
         ref={ref}
         style={{
-          transform: `translate(${translate[0]}px, ${translate[1]}px) scale(${zoom})`,
+          transform: `translate(${translate[0] * zoom}px, ${translate[1] * zoom}px) scale(${zoom})`,
         }}
       >
         {children}
       </div>
       <Moveable
-        zoom={zoom}
+        // zoom={zoom}
         target={target}
         snappable={true}
         draggable={moveable}
         origin={false}
-        scrollable={moveable}
         onDragStart={({ set }) => {
           set(translate);
         }}
         onDrag={({ beforeTranslate }) => {
           setTranslate(beforeTranslate);
-        }}
-        onScroll={(e) => {
-          console.log(e);
         }}
       />
       {zoomable && (
