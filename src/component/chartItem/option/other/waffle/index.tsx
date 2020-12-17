@@ -8,6 +8,10 @@ import * as R from 'ramda';
 import { connect } from 'dva';
 import MoveableCanvas from '@/component/MoveableCanvas';
 import { ICommon } from '@/models/common';
+import { Tooltip } from 'antd';
+import { useInterval } from 'react-use';
+import { SEARCH_PREFIX } from '@/utils/setting';
+
 export const config: IChartConfig[] = [
   {
     key: 'direction',
@@ -47,6 +51,12 @@ export const config: IChartConfig[] = [
     defaultValue: false,
   },
   {
+    title: '循环显示异常车号',
+    key: 'intervalTooltip',
+    type: 'switch',
+    defaultValue: true,
+  },
+  {
     title: '紧凑布局',
     key: 'alignContent',
     type: 'switch',
@@ -70,7 +80,7 @@ export const config: IChartConfig[] = [
     min: 10,
     step: 1,
     max: 40,
-    defaultValue: 10,
+    defaultValue: 16,
   },
   {
     title: '间距',
@@ -89,7 +99,7 @@ export const config: IChartConfig[] = [
     min: 0,
     step: 1,
     max: 20,
-    defaultValue: 1,
+    defaultValue: 8,
   },
 ];
 
@@ -101,38 +111,46 @@ export const apiConfig: IApiConfig = {
   config: [
     {
       key: 'x',
-      title: 'x 字段',
+      title: '冠字',
       defaultValue: 0,
       min: 0,
     },
     {
       key: 'y',
-      title: 'y 字段',
+      title: '生产状态',
       defaultValue: 1,
       min: 0,
     },
     {
       key: 'legend',
-      title: 'legend 字段',
+      title: '产品品种',
       defaultValue: 2,
+      min: 0,
+    },
+    {
+      key: 'cart',
+      title: '车号',
+      defaultValue: 3,
       min: 0,
     },
   ],
 };
 
-let colorArr = ['#ddd', '#2f3', '#ff7373'];
+let colorArr = ['#d9d9d9', '#73d13d', '#ff4d4f'];
 
 export const handleData = ({
   x: _x = 0,
   y: _y = 1,
   legend: _legend = 2,
+  cart: _cart = 3,
   data: { data, header },
   gzMode,
 }) => {
   let dataType = isArray(data[0]);
   let x = dataType ? _x : header[_x],
     y = dataType ? _y : header[_y],
-    legend = dataType ? _legend : header[_legend];
+    legend = dataType ? _legend : header[_legend],
+    cart = dataType ? _cart : header[_cart];
   let res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
@@ -141,22 +159,47 @@ export const handleData = ({
     let id = R.reverse(data).findIndex(R.propEq(y, 1));
     idx = idx - id;
   }
-  return res.map((item, i) => {
+  let _warnIdx = -1;
+  let nextData = res.map((item, i) => {
     let color = colorArr[item[y]] || '#23d';
+    let _warn = false;
     if (gzMode) {
       // 前面未印刷的产品，显示红色
       if (i < idx && item[y] == 0) {
         color = colorArr[2];
+        _warn = true;
+        _warnIdx++;
       }
     }
     return {
       ...item,
       backgroundColor: color,
-      title: (item[legend] ? `(${item[legend]}) ` : '') + item[x],
+      title: item[x],
       legend: item[legend],
+      cart: item[cart],
+      _warn,
+      _warnIdx,
     };
   });
+  return { data: nextData, warnNum: _warnIdx };
 };
+
+// {zoom > 2 && (
+//   <div
+//     style={{
+//       color: '#333',
+//       fontSize: 4,
+//       lineHeight: '7px',
+//       width: '100%',
+//       height: '100%',
+//       display: 'flex',
+//       alignItems: 'center',
+//       textAlign: 'center',
+//     }}
+//   >
+//     {item.title}
+//   </div>
+// )}
 
 const WaffleChart = ({
   option: {
@@ -164,6 +207,7 @@ const WaffleChart = ({
     x,
     y,
     legend,
+    cart,
     direction,
     padding,
     wrap,
@@ -173,13 +217,14 @@ const WaffleChart = ({
     boxBorderRadius,
     gzMode,
     zoomable,
+    intervalTooltip,
   },
   curTool,
 }) => {
   // 在移动时，data将重新计算，此处可使用useMemo
-  let data = useMemo(() => {
-    return handleData({ x, y, legend, data: _data, gzMode });
-  }, [x, y, legend, _data.hash, gzMode]);
+  let { data, warnNum } = useMemo(() => {
+    return handleData({ x, y, legend, cart, data: _data, gzMode });
+  }, [x, y, legend, cart, _data.hash, gzMode]);
 
   let containerStyle: React.CSSProperties =
     direction == 'vertical'
@@ -195,8 +240,6 @@ const WaffleChart = ({
     padding,
     flexWrap: wrap ? 'wrap' : 'wrap-reverse',
     alignContent: alignContent ? 'flex-start' : 'normal',
-    width: 500,
-    height: 500,
   };
 
   const ref = useRef(null);
@@ -211,42 +254,68 @@ const WaffleChart = ({
       });
   }, []);
 
-  const [zoom, setZoom] = useState(1);
+  const [visibleIdx, setVisibleIdx] = useState(0);
+  const [curIdx, setCurIdx] = useState(-1);
+
+  useInterval(
+    () => {
+      setVisibleIdx((visibleIdx + 1) % warnNum);
+    },
+    warnNum < 1 || !intervalTooltip ? 0 : 5000,
+  );
 
   return (
-    <MoveableCanvas moveable={curTool !== 'moveTool'} zoomable={zoomable} onZoom={setZoom}>
+    <MoveableCanvas moveable={curTool !== 'MoveTool'} zoomable={zoomable}>
       <div className={styles.container} style={style} ref={ref}>
-        {data.map((item) => (
-          <div
-            className={styles.box}
-            style={{
-              width: boxSize,
-              height: boxSize,
-              margin: boxMargin,
-              borderRadius: boxBorderRadius,
-              backgroundColor: item.backgroundColor,
-            }}
-            title={item.title}
-            key={item.title}
-          >
-            {zoom > 2 && (
-              <div
-                style={{
-                  color: '#333',
-                  fontSize: 4,
-                  lineHeight: '7px',
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                }}
-              >
-                {item.title}
-              </div>
-            )}
-          </div>
-        ))}
+        {data.map((item, i) => {
+          let Item = (
+            <div
+              className={styles.box}
+              style={{
+                width: boxSize,
+                height: boxSize,
+                margin: boxMargin,
+                borderRadius: boxBorderRadius,
+                backgroundColor: item.backgroundColor,
+                boxShadow: item._warn ? `0px 0px 8px 3px #d23` : 'unset',
+              }}
+              key={item.title}
+              onMouseEnter={() => {
+                setCurIdx(i);
+              }}
+            />
+          );
+          return item._warn ? (
+            <Tooltip
+              align={{
+                offset: [-11, 2],
+              }}
+              placement="topLeft"
+              color="rgba(44,31,84,0.9)"
+              title={
+                <div style={{ lineHeight: '12px', padding: '10px 10px 0 10px' }}>
+                  {item.cart && (
+                    <p>
+                      车号:{' '}
+                      <a href={SEARCH_PREFIX + item.cart} target="_blank" style={{ color: '#ddd' }}>
+                        {item.cart}
+                      </a>
+                    </p>
+                  )}
+                  {item.title && <p>冠字: {item.title}</p>}
+                  {item.legend && <p>品种: {item.legend}</p>}
+                </div>
+              }
+              key={item.title}
+              visible={visibleIdx == item._warnIdx || curIdx == i}
+              overlayStyle={{ transform: `translate(0,-10px)` }}
+            >
+              {Item}
+            </Tooltip>
+          ) : (
+            Item
+          );
+        })}
       </div>
     </MoveableCanvas>
   );

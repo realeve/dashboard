@@ -44,6 +44,8 @@ let domain: string = config[CUR_COMPANY].api;
 // 后台api部署域名
 let host = domain;
 
+export const SEARCH_PREFIX = config[CUR_COMPANY].host + '/search#';
+
 if (DEV) {
   // 上传代码时取消此处的判断
   domain = '';
