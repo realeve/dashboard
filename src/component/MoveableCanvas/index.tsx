@@ -4,6 +4,7 @@ import Moveable from 'react-moveable';
 import ZoomIcon, { config as zoomLevel } from './ZoomIcon';
 import classnames from 'classnames';
 import { SearchOutlined } from '@ant-design/icons';
+
 /**
  * 可拖动的画布
  *
