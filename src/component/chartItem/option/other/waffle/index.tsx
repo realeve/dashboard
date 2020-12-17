@@ -260,7 +260,7 @@ const WaffleChart = ({
 
   useInterval(
     () => {
-      setVisibleIdx((visibleIdx + 1) % warnNum);
+      setVisibleIdx((visibleIdx + 1) % (warnNum + 1));
     },
     warnNum < 2 || !intervalTooltip ? 0 : 5000,
   );
