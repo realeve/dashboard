@@ -47,22 +47,14 @@ export const config = [
   },
 ];
 
-export default ({ onHover, onRestore, level, setLevel }) => {
+export default ({ onRestore, level, setLevel }) => {
   const increase = () => setLevel(Math.max(level - 1, 0)),
     decrease = () => setLevel(Math.min(level + 1, config.length - 1));
 
   return (
-    <div
-      className={classnames(styles.zoom)}
-      onMouseEnter={() => {
-        onHover?.(true);
-      }}
-      onMouseLeave={() => {
-        onHover?.(false);
-      }}
-    >
+    <div className={classnames(styles.zoom)}>
       <div className={styles.zoomContainer}>
-        <ZoomInOutlined style={{ marginBottom: 5 }} onClick={increase} />
+        <ZoomInOutlined onClick={increase} />
         <Slider
           vertical
           style={{ height: 90, marginBottom: 0 }}
@@ -77,7 +69,7 @@ export default ({ onHover, onRestore, level, setLevel }) => {
           }}
           tipFormatter={(v) => config[v].zoom}
         />
-        <ZoomOutOutlined onClick={decrease} style={{ marginTop: 5 }} />
+        <ZoomOutOutlined onClick={decrease} style={{ margin: '5px 0' }} />
         <Tooltip title="还原" placement="right">
           <AimOutlined
             onClick={() => {
