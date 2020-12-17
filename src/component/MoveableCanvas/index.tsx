@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.less';
 import Moveable from 'react-moveable';
-import ZoomIcon from './ZoomIcon';
-
+import ZoomIcon, { config as zoomLevel } from './ZoomIcon';
 /**
  * 可拖动的画布
  *
@@ -27,8 +26,10 @@ interface IMoveableCanvas {
   moveable?: boolean;
   /** 是否允许缩放 */
   zoomable?: boolean;
+  /** 缩放事件 */
+  onZoom?: (e: number) => void;
 }
-export default ({ children, style, moveable = true, zoomable = true }: IMoveableCanvas) => {
+export default ({ children, style, moveable = true, zoomable = true, onZoom }: IMoveableCanvas) => {
   const [translate, setTranslate] = useState([0, 0]);
   const ref = useRef(null);
   const [target, setTarget] = useState();
@@ -39,8 +40,29 @@ export default ({ children, style, moveable = true, zoomable = true }: IMoveable
   // 缩放时，translate同等进行了变换，需要做计算
   const [zoom, setZoom] = useState(1);
 
+  const [level, setLevel] = useState(5);
+  useEffect(() => {
+    let nextLevel = zoomLevel[level].zoom;
+    setZoom(nextLevel);
+    onZoom?.(nextLevel);
+  }, [level]);
+
   return (
-    <div className={styles.moveable_canvas} style={style}>
+    <div
+      className={styles.moveable_canvas}
+      style={style}
+      onWheel={(e) => {
+        if (!zoomable) {
+          return;
+        }
+        let zoomIn = e.deltaY < 0;
+        if (zoomIn) {
+          setLevel(Math.max(level - 1, 0));
+        } else {
+          setLevel(Math.min(level + 1, zoomLevel.length - 1));
+        }
+      }}
+    >
       <div
         ref={ref}
         style={{
@@ -50,7 +72,6 @@ export default ({ children, style, moveable = true, zoomable = true }: IMoveable
         {children}
       </div>
       <Moveable
-        // zoom={zoom}
         target={target}
         snappable={true}
         draggable={moveable}
@@ -64,7 +85,8 @@ export default ({ children, style, moveable = true, zoomable = true }: IMoveable
       />
       {zoomable && (
         <ZoomIcon
-          onChange={setZoom}
+          level={level}
+          setLevel={setLevel}
           onRestore={() => {
             setTranslate([0, 0]);
           }}

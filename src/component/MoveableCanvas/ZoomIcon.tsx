@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './zoom.less';
 import { ZoomInOutlined, ZoomOutOutlined, AimOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
-import { useDebounce } from 'react-use';
 import { Tooltip } from 'antd';
 
 export const config = [
@@ -48,16 +47,7 @@ export const config = [
   },
 ];
 
-export default ({ onChange, onRestore }) => {
-  const [level, setLevel] = useState(5);
-
-  useDebounce(
-    () => {
-      onChange?.(config[level].zoom);
-    },
-    500,
-    [level],
-  );
+export default ({ onRestore, level, setLevel }) => {
   return (
     <div className={classnames(styles.zoom)}>
       <div className={styles.zoomContainer}>
@@ -72,7 +62,7 @@ export default ({ onChange, onRestore }) => {
         </div>
         <ZoomOutOutlined
           onClick={() => {
-            setLevel(Math.min(level + 1, 9));
+            setLevel(Math.min(level + 1, config.length - 1));
           }}
           style={{ marginTop: 5 }}
         />

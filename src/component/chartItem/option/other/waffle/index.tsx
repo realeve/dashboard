@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
 import { init } from './lib';
@@ -206,13 +206,15 @@ const WaffleChart = ({
       init({
         selector: ref.current.children,
         duration: 0.2,
-        eachtime: 0.05,
+        eachtime: 0.01,
         axis: 'x',
       });
   }, []);
 
+  const [zoom, setZoom] = useState(1);
+
   return (
-    <MoveableCanvas moveable={curTool == 'hand'} zoomable={zoomable}>
+    <MoveableCanvas moveable={curTool !== 'moveTool'} zoomable={zoomable} onZoom={setZoom}>
       <div className={styles.container} style={style} ref={ref}>
         {data.map((item) => (
           <div
@@ -226,7 +228,24 @@ const WaffleChart = ({
             }}
             title={item.title}
             key={item.title}
-          ></div>
+          >
+            {zoom > 2 && (
+              <div
+                style={{
+                  color: '#333',
+                  fontSize: 4,
+                  lineHeight: '7px',
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                {item.title}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </MoveableCanvas>
