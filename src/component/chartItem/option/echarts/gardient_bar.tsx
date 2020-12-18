@@ -1,5 +1,5 @@
 import React from 'react';
-import echarts from 'echarts'; 
+import echarts from 'echarts';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
@@ -37,6 +37,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/02_linebar.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',
@@ -57,7 +58,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
   let xData = [],
     yData = [];
   let value = _data.data;
-  value.forEach(item => {
+  value.forEach((item) => {
     xData.push(item[x]);
     yData.push(item[y]);
   });

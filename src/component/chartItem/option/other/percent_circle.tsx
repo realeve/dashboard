@@ -47,6 +47,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/13_percent_circle.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',

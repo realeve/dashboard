@@ -92,6 +92,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/20_scroll_digit.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',

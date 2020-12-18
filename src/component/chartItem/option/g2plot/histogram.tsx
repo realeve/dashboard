@@ -120,6 +120,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/02_linebar.json',
   interval: 5,
+  cache:2,
   config: [
     {
       key: 'x',

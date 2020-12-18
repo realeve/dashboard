@@ -2,6 +2,7 @@ import { ScrollRankingBoard } from '@/component/widget';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
+import { json2Array } from '@/utils/lib';
 
 export let mock: IChartMock = {
   header: ['列1', '列2'],
@@ -136,10 +137,12 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/08_scroll_board.json',
   interval: 5,
+  cache: 2,
   config: [],
 };
 
-export default ({ option: { data, waitTime = 4, carousel = 'page', ...config } }) => {
+export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...config } }) => {
+  let data = json2Array(_data);
   return (
     <ScrollRankingBoard
       config={{

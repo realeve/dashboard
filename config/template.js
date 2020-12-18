@@ -152,6 +152,7 @@ export let mock: IChartMock = {
     type: 'url',
     url: 'http://localhost:8000/mock/${nextIndex}_${dirName}.json',
     interval: 5,
+    cache:2,
     config: [
       {
         key: 'legend',
@@ -372,6 +373,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/${nextIndex}_${dirName}.json',
   interval: 5,
+  cache:2,
   config: [
     {
       key: 'x',
@@ -430,6 +432,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/02_linebar.json',
   interval: 5,
+  cache:2,
   config: [
     {
       key: 'x',

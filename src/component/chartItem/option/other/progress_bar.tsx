@@ -1,6 +1,6 @@
 import React from 'react';
-import { ProgressBar } from '@/component/widget'; 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface'; 
+import { ProgressBar } from '@/component/widget';
+import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 export let mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
@@ -16,6 +16,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/04_progress_bar.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',

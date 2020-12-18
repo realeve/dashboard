@@ -73,6 +73,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/23_datav_ring.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',

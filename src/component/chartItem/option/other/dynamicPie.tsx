@@ -53,7 +53,7 @@ export const config = [
         value: 'area',
       },
     ],
-  }, 
+  },
   {
     key: 'valueFontSize',
     defaultValue: 30,
@@ -79,6 +79,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/06_dynamic_pie.json',
   interval: 5,
+  cache: 2,
   config: [
     {
       key: 'x',
@@ -95,4 +96,4 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export default props => <Pie {...props} />;
+export default (props) => <Pie {...props} />;

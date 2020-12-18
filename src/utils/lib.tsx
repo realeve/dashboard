@@ -4,6 +4,8 @@ import beautify from 'js-beautify';
 import * as axios from './axios';
 import * as R from 'ramda';
 import { IPanelConfig, MAX_HISTORY_STEP, ICommon } from '@/models/common';
+import { IAxiosState } from './axios';
+import { isArray } from '@antv/util';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
@@ -150,4 +152,17 @@ export const handleHistoryPanel: (
     };
   }
   return nextState;
+};
+
+export const json2Array = (data: IAxiosState) => {
+  if (data.rows == 0) {
+    return data;
+  }
+  let res = data.data[0];
+  if (isArray(res)) {
+    return data;
+  }
+
+  let _data = R.clone(data.data).map((item) => Object.values(item));
+  return { ...data, data: _data };
 };

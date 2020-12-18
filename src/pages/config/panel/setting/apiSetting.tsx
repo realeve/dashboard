@@ -57,7 +57,11 @@ const appendConfig: IChartConfig[] = [
   {
     key: 'cache',
     title: '缓存(分钟)',
-    ...cacheConfig,
+    defaultValue: 2,
+    min: 0,
+    step: 0.5,
+    max: 10,
+    type: 'range',
   },
 ];
 

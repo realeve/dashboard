@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import * as R from 'ramda';
 import { useMeasure } from 'react-use';
 import { co } from '@/utils/useAutoResize';
-
+import { isArray } from '@antv/util';
 import styles from './index.less';
 
 export const emojiList = ['🥇', '🥈', '🥉'];
@@ -112,7 +112,7 @@ function calcHeaderData({ header, index, indexHeader }) {
 function calcRows({ data, index, headerBGC, rowNum }) {
   if (index) {
     data = data.map((row, i) => {
-      row = [...row];
+      row = isArray(row) ? [...row] : Object.values(row);
 
       const indexTag = `<div class="${styles.index}" style="background-color: ${
         i < 3 ? 'transparent' : headerBGC

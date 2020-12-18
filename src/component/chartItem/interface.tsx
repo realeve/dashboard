@@ -50,6 +50,7 @@ export interface IApiConfig {
   url?: string; // 默认地址
   data?: IChartMock;
   config?: IChartConfig[];
+  cache?: number; //缓存时长
   interval?: number;
 }
 

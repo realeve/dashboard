@@ -94,7 +94,7 @@ export const config = [
     type: 'range',
     min: 20,
     max: 80,
-  }, 
+  },
   {
     type: 'divider',
     title: '行颜色',
@@ -118,6 +118,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/08_scroll_board.json',
   interval: 5,
+  cache: 2,
   config: [],
 };
 
