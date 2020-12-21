@@ -14,7 +14,7 @@ import { tRender } from '@/component/echarts/';
 import G2 from '@/component/g2';
 import G2Plot from '@/component/g2plot';
 import { isArray } from '@antv/util';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
 
 const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
@@ -26,7 +26,7 @@ const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
 };
 
 const getRange = ({ dateType = '本月' }: { dateType: string }) => {
-  let [start, end]: [Moment, Moment] = ranges[dateType];
+  let [start, end]: [Dayjs, Dayjs] = ranges[dateType];
   let tstart = start.format('YYYYMMDD'),
     tend = end.format('YYYYMMDD');
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };

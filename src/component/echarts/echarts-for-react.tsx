@@ -4,7 +4,7 @@ import elementResizeEvent from 'element-resize-event';
 import theme from './theme';
 
 import echarts from 'echarts';
-import 'echarts-gl';
+// import 'echarts-gl';
 import 'echarts-liquidfill';
 
 const R = require('ramda');
