@@ -4,16 +4,19 @@ import theme from './config/theme';
 const config: IConfig = {
   treeShaking: true,
   theme,
-  // routes: [
-  //   {
-  //     path: '/',
-  //     component: '../layouts/index',
-  //     routes: [
-  //       { path: '/', component: '../pages/index' },
-  //       { path: '/chart', component: '../pages/chart' },
-  //     ],
-  //   },
-  // ],
+  hash: true,
+  exportStatic: { htmlSuffix: false },
+  routes: [
+    {
+      path: '/',
+      component: '../layouts/index',
+      routes: [
+        { path: '/', component: '../pages/index' },
+        { path: '/config', component: '../pages/config' },
+        { path: '/list', component: '../pages/list' },
+      ],
+    },
+  ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     [
@@ -24,7 +27,6 @@ const config: IConfig = {
         dynamicImport: { webpackChunkName: true },
         title: 'dashboard',
         dll: true,
-
         routes: {
           exclude: [
             /models\//,

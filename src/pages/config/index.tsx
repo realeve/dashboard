@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import styles from './index.less';
 import { useSetState } from 'react-use';
 
 import HeaderComponent from './header';
-import ComponentPanel from './panel/components';
-import LayerPanel from './panel/LayerPanel';
 
-import Setting, { IHideProps } from './panel/setting';
-import Thumbnail from './thumbnail';
-// import Toolbox from './toolbox';
-import EditSlider from './EditSlider';
+import { IHideProps } from './panel/setting';
 
-import Editor, { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
+import { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
@@ -33,6 +28,15 @@ import { useDebounce } from 'react-use';
 
 import { calcPanelPosition } from './lib';
 import classnames from 'classnames';
+import { Spin } from 'Antd';
+
+const Editor = React.lazy(() => import('@/component/Editor/Editor'));
+const ComponentPanel = React.lazy(() => import('./panel/components'));
+const LayerPanel = React.lazy(() => import('./panel/LayerPanel'));
+const Setting = React.lazy(() => import('./panel/setting'));
+const Thumbnail = React.lazy(() => import('./thumbnail'));
+const EditSlider = React.lazy(() => import('./EditSlider'));
+
 export interface IPanelItem extends IChartConfig {
   style: React.CSSProperties;
   id: string;
@@ -42,13 +46,13 @@ export interface IPanelItem extends IChartConfig {
 // 添加组件
 // 当属性名中有 scenaIgnore 时，禁止selectTo选中
 export const addPanel = (
-  editor: React.MutableRefObject<Editor>,
+  editor: React.MutableRefObject<any>,
   { style, ...config }: IPanelConfig,
 ) => {
   if (config.key === GROUP_COMPONENT_KEY) {
     return;
   }
-  editor?.current.append(
+  editor?.current?.append(
     <div
       className={classnames(styles.chartWrapper, {
         scenaIgnore: SCREEN_EDGE_KEY == config.key,
@@ -107,44 +111,29 @@ const Index = ({
     setZoom(zoom);
   };
 
-  const editor = React.useRef<Editor>(null);
-  const [instance, setInstance] = React.useState<Editor | null>(null);
+  const editor = React.useRef<any>(null);
+  const [instance, setInstance] = React.useState<any | null>(null);
+
   useEffect(() => {
-    if (instance) {
+    if (!editor.current || instance) {
       return;
     }
-
     localforage.getItem('zoom').then((e: number) => {
       setZoom(e || 1);
     });
-
-    editor.current && setInstance(editor.current);
-
-    // onMount,载入初始panel
-    // panel.map((item) => {
-    //   addPanel(editor, item);
-    // });
-
-    // setting selected panel.
-    // if (panel.length > 0) {
-    //   let lastPanel = R.last<IPanelConfig>(panel);
-    //   let inValid = lastPanel.lock || lastPanel.hide;
-
-    //   // 如果锁定了或者隐藏，不允许选择
-    //   !inValid &&
-    //     dispatch({
-    //       type: 'common/setStore',
-    //       payload: {
-    //         selectedPanel: [lastPanel.id],
-    //       },
-    //     });
-    // }
-  }, [editor]);
+    setInstance(editor.current);
+    initSelectedPanel();
+    initPanel();
+  }, [editor.current]);
 
   // 当前editor上的keys
+
   const [panelKeys, setPanelKeys] = useState<string[]>([]);
 
-  useEffect(() => {
+  const initPanel = () => {
+    if (!editor?.current) {
+      return;
+    }
     // onMount,载入初始panel
     let nextKeys = panelKeys.slice();
     panel.forEach((item) => {
@@ -158,7 +147,19 @@ const Index = ({
     nextKeys = R.uniq(nextKeys);
     // 每次添加后，都设置为最近一次的panelId
     setPanelKeys(nextKeys);
-  }, [panelIds.join(',')]);
+  };
+
+  const initSelectedPanel = () => {
+    editor?.current?.setSelectedTargets(
+      editor?.current.viewport.current!.getElements(selectedPanel),
+      true,
+    );
+  };
+
+  useEffect(initPanel, [panelIds.join(',')]);
+
+  // 选择组件
+  useEffect(initSelectedPanel, [selectedPanel.join(',')]);
 
   // const [prevHistory, setPrevHistory] = useState(curHistoryIdx);
   // useEffect(() => {
@@ -184,14 +185,6 @@ const Index = ({
       window.clearTimeout(tid);
     };
   }, [hide]);
-
-  // 选择组件
-  useEffect(() => {
-    editor?.current.setSelectedTargets(
-      editor?.current.viewport.current!.getElements(selectedPanel),
-      true,
-    );
-  }, [selectedPanel.join(',')]);
 
   // 更新当前的菜单
   const setCurTool = (curTool: TQuickTool) => {
@@ -334,110 +327,122 @@ const Index = ({
         onLoadConfig={onLoadConfig}
       />
       <div className={styles.main}>
-        <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
+        <Suspense fallback={<Spin spinning />}>
+          <LayerPanel setHide={setHide} hide={hide} onRemove={removePanel} />
+        </Suspense>
         {/* <HistoryManager hide={hide} /> */}
-        <ComponentPanel
-          setHide={setHide}
-          hide={hide}
-          onAddPanel={(newPanel) => {
-            let autoStyle = calcPanelPosition({ panel, page });
-            // console.log(autoStyle);
-            const style = getDefaultStyle(autoStyle);
-            // 2020-12-12 根据当前的panel项自动计算合适的位置
-            const nextPanel = { style, ...newPanel };
-            dispatch({
-              type: 'common/addPanel',
-              payload: { panel: nextPanel },
-            });
-            // addPanel(editor, nextPanel);
-          }}
-          onAddBusiness={(business) => {
-            // 添加一组panel
-            dispatch({
-              type: 'common/updatePanel',
-              payload: {
-                panel: [...panel, ...business],
-                recordHistory: true,
-                historyTitle: '添加业务组件 - ' + business[0].title,
-              },
-            });
-            // business.forEach((nextPanel) => {
-            //   addPanel(editor, nextPanel);
-            // });
-          }}
-        />
+        <Suspense fallback={<Spin spinning />}>
+          <ComponentPanel
+            setHide={setHide}
+            hide={hide}
+            onAddPanel={(newPanel) => {
+              let autoStyle = calcPanelPosition({ panel, page });
+              // console.log(autoStyle);
+              const style = getDefaultStyle(autoStyle);
+              // 2020-12-12 根据当前的panel项自动计算合适的位置
+              const nextPanel = { style, ...newPanel };
+              dispatch({
+                type: 'common/addPanel',
+                payload: { panel: nextPanel },
+              });
+              // addPanel(editor, nextPanel);
+            }}
+            onAddBusiness={(business) => {
+              // 添加一组panel
+              dispatch({
+                type: 'common/updatePanel',
+                payload: {
+                  panel: [...panel, ...business],
+                  recordHistory: true,
+                  historyTitle: '添加业务组件 - ' + business[0].title,
+                },
+              });
+              // business.forEach((nextPanel) => {
+              //   addPanel(editor, nextPanel);
+              // });
+            }}
+          />
+        </Suspense>
 
         <div className={styles['right-edit-main']}>
           {/* <Toolbox hide={hide} /> */}
           <div className={styles['editor-panel-wp']}>
-            <Editor
-              ref={editor}
-              dispatch={dispatch}
-              debug={true}
+            <Suspense fallback={<Spin spinning />}>
+              <Editor
+                ref={editor}
+                dispatch={dispatch}
+                debug={true}
+                zoom={zoom}
+                onZoom={updateZoom}
+                domHash={hash}
+                selectMenu={setCurTool}
+                curTool={curTool}
+                setCurTool={setCurTool}
+                onRemove={removePanel}
+                onPaste={onPaste}
+                // background={page.background}
+                // width={page.width}
+                // height={page.height}
+                page={page}
+                lockedPanel={getLockedPanel()}
+                calcNextSelectedPanel={calcNextSelectedPanel}
+                onSelect={(selectedPanel) => {
+                  dispatch({
+                    type: 'common/setStore',
+                    payload: {
+                      selectedPanel: calcNextSelectedPanel(selectedPanel),
+                    },
+                  });
+                }}
+                onChange={setChangedPanel}
+                // onGuidesChange={e => {
+                //   console.log(e, '辅助线');
+                // }}
+                onDrag={setDragPercent}
+              />
+            </Suspense>
+            <Suspense fallback={<Spin spinning />}>
+              <Thumbnail
+                onScroll={(e) => {
+                  editor?.current?.scrollTo(e);
+                }}
+                page={page}
+                visible={thumbVisible && !hide.toolbox}
+                zoom={zoom}
+                dragPercent={dragPercent}
+                showConfig={!hide.config}
+              />
+            </Suspense>
+          </div>
+          <Suspense fallback={<Spin spinning />}>
+            <EditSlider
               zoom={zoom}
               onZoom={updateZoom}
-              domHash={hash}
-              selectMenu={setCurTool}
+              editor={instance}
+              onMenuChange={setCurTool}
               curTool={curTool}
-              setCurTool={setCurTool}
-              onRemove={removePanel}
-              onPaste={onPaste}
-              // background={page.background}
-              // width={page.width}
-              // height={page.height}
-              page={page}
-              lockedPanel={getLockedPanel()}
-              calcNextSelectedPanel={calcNextSelectedPanel}
-              onSelect={(selectedPanel) => {
-                dispatch({
-                  type: 'common/setStore',
-                  payload: {
-                    selectedPanel: calcNextSelectedPanel(selectedPanel),
-                  },
-                });
+              onToggleThumb={() => {
+                toggleThumb(!thumbVisible);
               }}
-              onChange={setChangedPanel}
-              // onGuidesChange={e => {
-              //   console.log(e, '辅助线');
-              // }}
-              onDrag={setDragPercent}
-            />
-            <Thumbnail
-              onScroll={(e) => {
-                editor?.current?.scrollTo(e);
-              }}
-              page={page}
-              visible={thumbVisible && !hide.toolbox}
-              zoom={zoom}
-              dragPercent={dragPercent}
+              hide={hide.toolbox}
               showConfig={!hide.config}
             />
-          </div>
-          <EditSlider
-            zoom={zoom}
-            onZoom={updateZoom}
-            editor={instance}
-            onMenuChange={setCurTool}
-            curTool={curTool}
-            onToggleThumb={() => {
-              toggleThumb(!thumbVisible);
-            }}
-            hide={hide.toolbox}
-            showConfig={!hide.config}
-          />
+          </Suspense>
 
-          <Setting
-            setHide={setHide}
-            hide={hide}
-            onChange={(e, type) => {
-              // 调整大小
-              if (type === 'size') {
-                let key = Object.keys(e);
-                editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
-              }
-              // console.log(e, type);
-            }}
-          />
+          <Suspense fallback={<Spin spinning />}>
+            <Setting
+              setHide={setHide}
+              hide={hide}
+              onChange={(e, type) => {
+                // 调整大小
+                if (type === 'size') {
+                  let key = Object.keys(e);
+                  editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
+                }
+                // console.log(e, type);
+              }}
+            />
+          </Suspense>
         </div>
       </div>
     </div>

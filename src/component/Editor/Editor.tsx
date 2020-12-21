@@ -28,7 +28,7 @@ import { IPage } from '@/models/common';
 import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
-import { defaultRect } from '@/pages/config/lib';
+import { getDefaultStyle } from './lib';
 import { isColor } from '@/component/chartItem/option/lib';
 
 const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
@@ -64,21 +64,6 @@ const edgeConfig = {
   zoom130: 76,
   zoom140: 78,
   zoom150: 80,
-};
-
-export const getDefaultStyle = (style?: React.CSSProperties) => {
-  const rect = {
-    ...defaultRect,
-    ...style,
-  };
-
-  return {
-    top: `${rect.top}px`,
-    left: `${rect.left}px`,
-    position: 'absolute',
-    width: `${rect.width}px`,
-    height: `${rect.height}px`,
-  } as React.CSSProperties;
 };
 
 function undoCreateElements({ infos, prevSelected }: IObject<any>, editor: Editor) {

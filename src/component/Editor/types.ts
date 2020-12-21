@@ -8,7 +8,6 @@ import Editor from './Editor';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import * as React from 'react';
-import { IGuideProps } from './utils/utils';
 
 export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
 
