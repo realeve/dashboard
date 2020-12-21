@@ -5,7 +5,8 @@
     "build": "umi build",
     "test": "umi test",
     "add": "node ./config/template.js",
-    "preview": "live-server --port=8080 ./dist"
+    "preview": "live-server --port=8080 ./dist",
+    "anany": "cross-env ANALYZE=1 umi build"
   },
   "dependencies": {
     "@antv/chart-advisor": "^0.1.2-alpha.19",
@@ -71,6 +72,7 @@
     "@types/react-test-renderer": "^16.0.3",
     "babel-eslint": "^9.0.0",
     "coveralls": "^3.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^1.4.0",
     "eslint-plugin-flowtype": "^2.50.0",

@@ -164,6 +164,10 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 
 > npm run add your_chart_name other
 
+# 分析包
+> npm run anany
+
+
 
 
 ---
