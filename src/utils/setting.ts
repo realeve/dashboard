@@ -119,3 +119,7 @@ export const api = {
   // 编辑大屏项
   editDashboardItem: '/14/a8de312b18',
 };
+
+// 静态资源所在地址，用于背景/边框/图片资源等；
+
+export const ASSETS_URL = '//127.0.0.1:9999/assets/';

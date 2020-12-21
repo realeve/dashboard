@@ -167,7 +167,9 @@ chartcube:[https://chartcube.alipay.com/](https://chartcube.alipay.com/)
 # 分析包
 > npm run anany
 
+# 资源文件
 
+资源文件请参考项目：https://github.com/realeve/dashboard_assets
 
 
 ---
