@@ -1,9 +1,11 @@
 import { Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
-import DataSet from '@antv/data-set';
-import { getColors, getAntThemePanel } from '../g2plot/lib';
 
-const { DataView } = DataSet;
+import { getColors, getAntThemePanel } from '../../g2plot/lib';
+
+// 可考虑用echarts实现  treemap,这样无需引入 data-set
+// 参考 @antv/data-set 源码 https://github.com/antvis/data-set/blob/master/src/transform/hierarchy/treemap.ts
+import { transform, Node } from './transform';
 
 export let mock: IChartMock = {
   data: [
@@ -86,18 +88,14 @@ export const transformer = ({ data, header, x, y }) => {
 };
 
 const getNodes = ({ data, x, y }) => {
-  const dv = new DataView();
-  dv.source(
-    { name: 'root', children: data },
+  const dv: typeof Node = transform(
+    { dataType: 'hierarchy', children: data },
     {
-      type: 'hierarchy',
+      field: y,
+      tile: 'treemapResquarify',
+      as: ['x', 'y'],
     },
-  ).transform({
-    field: y,
-    type: 'hierarchy.treemap',
-    tile: 'treemapResquarify',
-    as: ['x', 'y'],
-  });
+  );
 
   // 将 DataSet 处理后的结果转换为 G2 接受的数据
   const nodes = [];

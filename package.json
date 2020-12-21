@@ -9,8 +9,7 @@
     "anany": "cross-env ANALYZE=1 umi build"
   },
   "dependencies": {
-    "@antv/chart-advisor": "^0.1.2-alpha.19",
-    "@antv/data-set": "^0.11.7",
+    "@antv/chart-advisor": "^0.1.2-alpha.19", 
     "@antv/g2": "^4.0.15",
     "@antv/g2plot": "^2.2.11",
     "@daybrush/drag": "^0.19.1",
