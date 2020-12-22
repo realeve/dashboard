@@ -1,5 +1,5 @@
 import { antvDark } from '@antv/g2/lib/theme/style-sheet/dark';
-import { createThemeByStylesheet } from '@antv/g2/lib/util/theme';
+import { createThemeByStyleSheet } from '@antv/g2/lib/theme/util/create-by-style-sheet';
 import { LooseObject } from '@antv/g2/lib/interface';
 import { G2 } from '@antv/g2plot';
 import { deepMix } from '@antv/util';
@@ -9,7 +9,7 @@ import { deepMix } from '@antv/util';
 // https://github.com/antvis/G2/blob/master/src/theme/util/create-theme.ts
 // https://github.com/antvis/G2/blob/master/src/theme/index.ts
 
-const defaultTheme = createThemeByStylesheet(antvDark);
+const defaultTheme = createThemeByStyleSheet(antvDark);
 
 let labelColor = '#E0E0E3';
 let lineColor = '#ccc';
