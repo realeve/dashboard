@@ -1,5 +1,4 @@
-import { ScrollBoard } from '@/component/widget';
-
+import ScrollBoard from '@/component/widget/ScrollBoard';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
 

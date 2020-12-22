@@ -4,7 +4,7 @@ import { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
-import { BorderItem } from '@/component/widget';
+import BorderItem from '@/component/widget/border';
 import { Spin } from 'antd';
 
 const ChartInstance = React.lazy(() => import('./ChartInstance'));

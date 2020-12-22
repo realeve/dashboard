@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBar } from '@/component/widget';
+import ProgressBar from '@/component/widget/ProgressBar';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 export let mock: IChartMock = {
   data: [[45.7]],

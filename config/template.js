@@ -352,7 +352,7 @@ export let mock: IChartMock = {
   str = `
 import React from 'react';
 // 此处导入你所需要的自定义组件
-import { ProgressBar } from '@/component/widget'; 
+import ProgressBar from '@/component/widget/ProgressBar'; 
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface'; 
 
 import * as lib from '@/component/chartItem/option/lib';

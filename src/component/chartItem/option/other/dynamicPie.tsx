@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pie } from '@/component/widget';
+import Pie from '@/component/widget/Pie';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 

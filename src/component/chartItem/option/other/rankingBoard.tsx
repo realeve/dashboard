@@ -1,5 +1,4 @@
-import { ScrollRankingBoard } from '@/component/widget';
-
+import ScrollRankingBoard from '@/component/widget/ScrollRankingBoard';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
 import { json2Array } from '@/utils/lib';
