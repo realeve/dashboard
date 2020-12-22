@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
-import beautify from 'js-beautify';
 
 const beautyOption = {
   indent_size: 2,
@@ -9,13 +8,21 @@ const beautyOption = {
 };
 
 export default ({ value, onChange }) => {
+  const [val, setVal] = useState('');
+
+  useEffect(() => {
+    import('js-beautify/js/lib/beautify').then(({ js_beautify: beautify }) => {
+      setVal(beautify(value, beautyOption));
+    });
+  }, [value]);
+
   return (
     <div className={styles.jsonwrapper}>
       <div className={styles.title}>(在下方粘贴模拟数据)</div>
       <textarea
         className={styles.json}
-        value={beautify(value, beautyOption)}
-        onChange={e => onChange && onChange(e.target.value.replace(/\n/g, ''))}
+        value={val}
+        onChange={(e) => onChange && onChange(e.target.value.replace(/\n/g, ''))}
       />
     </div>
   );

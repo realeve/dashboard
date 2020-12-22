@@ -1,6 +1,4 @@
-import { saveAs } from 'file-saver';
 import moment from 'dayjs';
-import beautify from 'js-beautify';
 import * as axios from './axios';
 import * as R from 'ramda';
 import { IPanelConfig, MAX_HISTORY_STEP, ICommon } from '@/models/common';
@@ -9,21 +7,6 @@ import { isArray } from '@antv/util';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
 export const ymd = () => moment().format('YYYYMMDD');
-
-export const saveDashboard = (layout) => {
-  const beautyOption = {
-    indent_size: 2,
-    wrap_line_length: 80,
-    jslint_happy: true,
-  };
-  const code: string = beautify(JSON.stringify(layout), beautyOption);
-  const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
-  if (process.env.NODE_ENV !== 'test') {
-    // saveas 会依赖于canvas,在单元测试时会报canvas相关的错误
-    saveAs(blob, '仪表盘_' + now() + '.dashboard');
-  }
-  return true;
-};
 
 /**
  *
