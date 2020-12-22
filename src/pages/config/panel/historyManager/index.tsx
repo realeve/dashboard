@@ -22,10 +22,10 @@ const HistoryPanel = ({
   className,
   history,
   dispatch,
-  panel,
+  // panel,
   curHistoryIdx,
 }: {
-  panel: IPanelConfig[];
+  // panel: IPanelConfig[];
   dispatch: Dispatch;
   history: { panel: IPanelConfig[]; title: null | string }[];
   curHistoryIdx: number;

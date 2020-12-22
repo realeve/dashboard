@@ -1,9 +1,11 @@
-import React from 'react';
-import Layer from './layer';
-import HistoryManager from './historyManager';
+import React, { Suspense } from 'react';
 import styles from './LayerPanel.less';
 import classnames from 'classnames';
 import { IHideProps, TFnHide } from './setting';
+// import HistoryManager from './historyManager';
+
+const Layer = React.lazy(() => import('./layer/layer'));
+const HistoryManager = React.lazy(() => import('./historyManager'));
 
 export default (props: { hide: IHideProps; setHide: TFnHide; onRemove: (e: string[]) => void }) => {
   return (
@@ -12,8 +14,12 @@ export default (props: { hide: IHideProps; setHide: TFnHide; onRemove: (e: strin
         [styles.hide]: props.hide.layer,
       })}
     >
-      <Layer className={styles.top} {...props} />
-      <HistoryManager className={styles.bottom} />
+      <Suspense fallback={null}>
+        <Layer className={styles.top} {...props} />
+      </Suspense>
+      <Suspense fallback={null}>
+        <HistoryManager className={styles.bottom} />
+      </Suspense>
     </div>
   );
 };

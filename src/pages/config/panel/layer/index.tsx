@@ -15,8 +15,8 @@ import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPan
 
 import { LayerItem } from './LayerItem';
 
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 // 无法按此方式引用
 // const { DragDropContext, Droppable, Draggable } = React.lazy(() => import('react-beautiful-dnd'));
@@ -30,6 +30,7 @@ interface ILayerProps extends IHistoryProps {
   dispatch: Dispatch;
   className: string;
   hide: IHideProps;
+  [key: string]: any;
 }
 const Index = ({
   hide,
@@ -41,6 +42,13 @@ const Index = ({
   history,
   curHistoryIdx,
   panel: _panel,
+
+  DragDropContext,
+  Droppable,
+  Draggable,
+  ContextMenu,
+  MenuItem,
+  ContextMenuTrigger,
 }: ILayerProps) => {
   let panel = history[curHistoryIdx]?.panel || _panel;
   const [isThumb, setIsThumb] = useToggle(true);
