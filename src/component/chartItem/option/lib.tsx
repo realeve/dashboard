@@ -1,4 +1,3 @@
-import * as lib from '@/utils/lib';
 import * as R from 'ramda';
 import { EChartsSeriesType } from 'echarts';
 import * as Position from '@/component/field/Align/iconPosition';

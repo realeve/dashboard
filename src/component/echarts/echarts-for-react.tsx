@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import elementResizeEvent from 'element-resize-event';
 import theme from './theme';
-
 import echarts from 'echarts';
-// import 'echarts-gl';
-import 'echarts-liquidfill';
+import { equals as isEqual } from 'ramda';
 
-const R = require('ramda');
-const isEqual = (a, b) => R.equals(a, b);
-// console.log(echarts);
 interface IChartProps {
   option: any; // eslint-disable-line react/forbid-prop-types
   echarts?: any; // eslint-disable-line react/forbid-prop-types

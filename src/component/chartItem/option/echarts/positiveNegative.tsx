@@ -1,14 +1,8 @@
-import echarts from 'echarts';
+import { graphic } from 'echarts';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
 import jStat from 'jstat';
-import {
-  IChartMock,
-  IChartConfig,
-  IChartProps,
-  IApiConfig,
-  TChartMockData,
-} from '@/component/chartItem/interface';
+import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 /**
  * // 自定义组件文档说明 更新自2020-08-31
@@ -241,7 +235,7 @@ export default ({
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [barWidth / 2, 0, 0, barWidth / 2] : 0,
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            color: new graphic.LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
                 color: '#ef00ff',
@@ -269,7 +263,7 @@ export default ({
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,
-            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            color: new graphic.LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
                 color: '#2846ff',

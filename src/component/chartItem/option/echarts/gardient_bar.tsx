@@ -1,5 +1,5 @@
 import React from 'react';
-import echarts from 'echarts';
+import { graphic } from 'echarts';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
@@ -115,7 +115,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
         barWidth: barWidth,
         itemStyle: {
           normal: {
-            color: new echarts.graphic.LinearGradient(
+            color: new graphic.LinearGradient(
               0,
               0,
               0,

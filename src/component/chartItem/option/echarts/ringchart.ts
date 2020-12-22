@@ -1,4 +1,4 @@
-import echarts from 'echarts';
+import { graphic } from 'echarts';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 export let mock: IChartMock = {
   data: [[45.7]],
@@ -130,7 +130,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
             value: value,
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                color: new graphic.LinearGradient(1, 0, 0, 0, [
                   {
                     offset: 0,
                     color: '#aaf14f',
