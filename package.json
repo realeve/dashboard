@@ -52,7 +52,6 @@
     "react-moveable": "^0.22.3", 
     "react-selecto": "^1.6.4",
     "react-use": "^13.14.0",
-    "scenejs": "^1.4.1",
     "three": "^0.122.0"
   },
   "devDependencies": {
