@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-// import * as THREE from 'three';
+import * as THREE from 'three';
 import useMeasure from './useMeasure';
 export let mock = {};
 
@@ -86,21 +86,6 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
-const getColor = ({ ratio, blue_offset, THREE }) => {
-  let color = {
-    r: 0,
-    g: Math.floor(255 - ratio * 255),
-    b: Math.floor(blue_offset + blue_offset * ratio),
-  };
-
-  return new THREE.Color(
-    // color.r / 255,
-    Math.random() * 0.4,
-    color.g / 255,
-    color.b / 255,
-  );
-};
-
 export default ({
   option: {
     speed = 5,
@@ -115,14 +100,20 @@ export default ({
 }) => {
   const [domRef, { width, height }] = useMeasure();
 
-  const [THREE, setTHREE] = useState(null);
-  const [init, setInit] = useState(false);
-  useEffect(() => {
-    import('three').then((res) => {
-      setTHREE(res);
-      setInit(true);
-    });
-  }, []);
+  const getColor = ({ ratio, blue_offset }) => {
+    let color = {
+      r: 0,
+      g: Math.floor(255 - ratio * 255),
+      b: Math.floor(blue_offset + blue_offset * ratio),
+    };
+
+    return new THREE.Color(
+      // color.r / 255,
+      Math.random() * 0.4,
+      color.g / 255,
+      color.b / 255,
+    );
+  };
 
   const wave = () => {
     const SPEED_OFFSET = speed / 100;
@@ -160,7 +151,7 @@ export default ({
           let material = new THREE.SpriteMaterial({
             map,
             opacity: 1,
-            color: getColor({ ratio, blue_offset, THREE }),
+            color: getColor({ ratio, blue_offset }),
           });
 
           let particle = new THREE.Sprite(material);
@@ -235,7 +226,6 @@ export default ({
   };
 
   useEffect(() => {
-    if (!THREE) return;
     canvas?.stopAnimate();
     canvas?.reset();
     refresh();
@@ -250,15 +240,7 @@ export default ({
     MAXSIZE,
     WAVESIZE,
     MOUSE_TRACK,
-    init,
   ]);
-
-  // useEffect(() => {
-  //   if (width * height == 0) {
-  //     return;
-  //   }
-  //   canvas?.onresize();
-  // }, [width, height]);
 
   return <div ref={domRef} style={{ width: '100%', height: '100%' }} />;
 };
