@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react';
 import { MoveableManagerInterface } from 'react-moveable';
-import { connectEditorProps } from '../utils/utils';
+import { getContentElement, connectEditorProps, getId } from '../utils/utils';
 import Editor from '../Editor';
 import { EditorInterface } from '../types';
 import { IObject } from '@daybrush/utils';
 import { diff } from '@egjs/list-differ';
+import * as R from 'ramda';
 
 const Moveable = React.lazy(() => import('react-moveable'));
 

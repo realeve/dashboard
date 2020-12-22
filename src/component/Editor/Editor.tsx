@@ -1,6 +1,5 @@
 import * as React from 'react';
 import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
-// import Guides from '@scena/react-guides';
 
 import Guides from '@/component/react-guides';
 

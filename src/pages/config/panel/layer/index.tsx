@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
@@ -7,7 +7,7 @@ import { connect } from 'dva';
 import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY, IHistoryProps } from '@/models/common';
 import { TFnHide, IHideProps } from '../setting';
 
-import { message, Spin } from 'antd';
+import { message } from 'antd';
 import { Dispatch } from 'redux';
 
 export { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
@@ -15,9 +15,12 @@ import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPan
 
 import { LayerItem } from './LayerItem';
 
-const { DragDropContext, Droppable, Draggable } = React.lazy(() => import('react-beautiful-dnd'));
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
-const { ContextMenu, MenuItem, ContextMenuTrigger } = React.lazy(() => import('react-contextmenu'));
+// 无法按此方式引用
+// const { DragDropContext, Droppable, Draggable } = React.lazy(() => import('react-beautiful-dnd'));
+// const { ContextMenu, MenuItem, ContextMenuTrigger } = React.lazy(() => import('react-contextmenu'));
 
 interface ILayerProps extends IHistoryProps {
   setHide: TFnHide;
@@ -385,98 +388,96 @@ const Index = ({
       </div>
 
       <div className={styles.layerWrap}>
-        <Suspense fallback={<Spin spinning />}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  //provided.droppableProps应用的相同元素.
-                  {...provided.droppableProps}
-                  // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
-                  ref={provided.innerRef}
-                >
-                  {showPanel.map((item, idx) => (
-                    <Draggable key={item.id} draggableId={item.id} index={idx}>
-                      {(provided, snapshot) => (
-                        <li
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={classnames({
-                            [styles.thumbnail]: isThumb,
-                            [styles.locked]: item.lock,
-                            [styles.hided]: item.hide,
-                            [styles.selected]: selectedPanel.includes(item.id),
-                            [styles.dragging]: snapshot.isDragging,
-                            [styles.group_item]: item.group,
-                          })}
-                          onClick={(e) => {
-                            const CTRL_CLICK = e.ctrlKey,
-                              SHIFT_CLICK = e.shiftKey;
-                            let nextPanel = [item.id];
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                //provided.droppableProps应用的相同元素.
+                {...provided.droppableProps}
+                // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
+                ref={provided.innerRef}
+              >
+                {showPanel.map((item, idx) => (
+                  <Draggable key={item.id} draggableId={item.id} index={idx}>
+                    {(provided, snapshot) => (
+                      <li
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className={classnames({
+                          [styles.thumbnail]: isThumb,
+                          [styles.locked]: item.lock,
+                          [styles.hided]: item.hide,
+                          [styles.selected]: selectedPanel.includes(item.id),
+                          [styles.dragging]: snapshot.isDragging,
+                          [styles.group_item]: item.group,
+                        })}
+                        onClick={(e) => {
+                          const CTRL_CLICK = e.ctrlKey,
+                            SHIFT_CLICK = e.shiftKey;
+                          let nextPanel = [item.id];
 
-                            if (CTRL_CLICK) {
-                              nextPanel = !selectedPanel.includes(item.id)
-                                ? [...selectedPanel, item.id]
-                                : selectedPanel.filter((panelItem) => panelItem !== item.id);
-                            } else if (SHIFT_CLICK) {
-                              // DONE shift 连续选择的场景
-                              // console.log('shift被按下', selectedPanel);
-                              if (selectedPanel.length === 0) {
-                                message.error('请先选中一个组件');
-                                return;
-                              }
-                              let id = R.findIndex(R.propEq('id', selectedPanel[0]))(showPanel);
-                              let nextId = R.findIndex(R.propEq('id', item.id))(showPanel);
-                              if (id === nextId) {
-                                return;
-                              }
-
-                              let idList = [id, nextId].sort();
-                              let _panels = R.slice(idList[0], idList[1] + 1)(showPanel);
-                              nextPanel = R.pluck('id', _panels);
+                          if (CTRL_CLICK) {
+                            nextPanel = !selectedPanel.includes(item.id)
+                              ? [...selectedPanel, item.id]
+                              : selectedPanel.filter((panelItem) => panelItem !== item.id);
+                          } else if (SHIFT_CLICK) {
+                            // DONE shift 连续选择的场景
+                            // console.log('shift被按下', selectedPanel);
+                            if (selectedPanel.length === 0) {
+                              message.error('请先选中一个组件');
+                              return;
+                            }
+                            let id = R.findIndex(R.propEq('id', selectedPanel[0]))(showPanel);
+                            let nextId = R.findIndex(R.propEq('id', item.id))(showPanel);
+                            if (id === nextId) {
+                              return;
                             }
 
-                            // 需处理分组的逻辑，存在互斥；
-                            if (item.key == GROUP_COMPONENT_KEY) {
-                              let childrenPanel = panel
-                                .filter((panelItem) => panelItem.group == item.id)
-                                .map((panelItem) => panelItem.id);
-                              nextPanel = R.uniq([...nextPanel, ...childrenPanel]);
-                            }
+                            let idList = [id, nextId].sort();
+                            let _panels = R.slice(idList[0], idList[1] + 1)(showPanel);
+                            nextPanel = R.pluck('id', _panels);
+                          }
 
-                            dispatch({
-                              type: 'common/setStore',
-                              payload: {
-                                selectedPanel: nextPanel,
-                              },
-                            });
-                          }}
+                          // 需处理分组的逻辑，存在互斥；
+                          if (item.key == GROUP_COMPONENT_KEY) {
+                            let childrenPanel = panel
+                              .filter((panelItem) => panelItem.group == item.id)
+                              .map((panelItem) => panelItem.id);
+                            nextPanel = R.uniq([...nextPanel, ...childrenPanel]);
+                          }
+
+                          dispatch({
+                            type: 'common/setStore',
+                            payload: {
+                              selectedPanel: nextPanel,
+                            },
+                          });
+                        }}
+                      >
+                        <ContextMenuTrigger
+                          id={MENU_TYPE}
+                          holdToDisplay={1000}
+                          idx={idx}
+                          collect={(props) => props}
                         >
-                          <ContextMenuTrigger
-                            id={MENU_TYPE}
-                            holdToDisplay={1000}
-                            idx={idx}
-                            collect={(props) => props}
-                          >
-                            <LayerItem
-                              isSelected={selectedPanel.join('') === item.id}
-                              handleAction={(e) => handleAction(e, [idx])}
-                              item={item}
-                              isThumb={isThumb}
-                              dispatch={dispatch}
-                            />
-                          </ContextMenuTrigger>
-                        </li>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </Suspense>
+                          <LayerItem
+                            isSelected={selectedPanel.join('') === item.id}
+                            handleAction={(e) => handleAction(e, [idx])}
+                            item={item}
+                            isThumb={isThumb}
+                            dispatch={dispatch}
+                          />
+                        </ContextMenuTrigger>
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
         <div
           className={styles['last-flex-item']}
@@ -492,46 +493,44 @@ const Index = ({
         />
       </div>
 
-      <Suspense fallback={<Spin spinning />}>
-        <ContextMenu
-          id={MENU_TYPE}
-          onShow={(e) => {
-            // 右键点击选中当前
-            let id = e.detail.data.idx;
+      <ContextMenu
+        id={MENU_TYPE}
+        onShow={(e) => {
+          // 右键点击选中当前
+          let id = e.detail.data.idx;
 
-            // 当选中多个时或在当前选中项点击右键，不执行后续操作；
-            if (selected.length > 1 || selected.join(',') == id) {
-              return;
-            }
+          // 当选中多个时或在当前选中项点击右键，不执行后续操作；
+          if (selected.length > 1 || selected.join(',') == id) {
+            return;
+          }
 
-            setSelected([id]);
-            dispatch({
-              type: 'common/setStore',
-              payload: {
-                selectedPanel: [showPanel[id].id],
-              },
-            });
-          }}
-        >
-          {MENU_LIST.map((item) =>
-            item.icon.includes('divider') ? (
-              <div className="react-contextmenu-item--divider" key={item.icon} />
-            ) : (
-              <MenuItem
-                className={classnames({ disabled: getDisabled(item) })}
-                key={item.icon}
-                onClick={(_, data) => {
-                  handleClick(data);
-                }}
-                data={{ action: item.action }}
-              >
-                <i className={`datav-icon datav-font ${item.icon}`} />
-                {item.title}
-              </MenuItem>
-            ),
-          )}
-        </ContextMenu>
-      </Suspense>
+          setSelected([id]);
+          dispatch({
+            type: 'common/setStore',
+            payload: {
+              selectedPanel: [showPanel[id].id],
+            },
+          });
+        }}
+      >
+        {MENU_LIST.map((item) =>
+          item.icon.includes('divider') ? (
+            <div className="react-contextmenu-item--divider" key={item.icon} />
+          ) : (
+            <MenuItem
+              className={classnames({ disabled: getDisabled(item) })}
+              key={item.icon}
+              onClick={(_, data) => {
+                handleClick(data);
+              }}
+              data={{ action: item.action }}
+            >
+              <i className={`datav-icon datav-font ${item.icon}`} />
+              {item.title}
+            </MenuItem>
+          ),
+        )}
+      </ContextMenu>
 
       <div className={classnames(styles['layer-toolbar'], styles['layer-toolbar-bottom'])}>
         <i

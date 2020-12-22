@@ -17,7 +17,6 @@
     "@egjs/component": "^2.1.2",
     "@jiaminghi/charts": "^0.2.17",
     "@scena/dragscroll": "^0.2.1",
-    "@scena/react-guides": "^0.7.0", 
     "antd": "^4.7.0",
     "axios": "^0.19.1",
     "classnames": "^2.2.6",
