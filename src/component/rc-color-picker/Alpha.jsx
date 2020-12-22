@@ -8,10 +8,6 @@ function rgbaColor(r, g, b, a) {
 }
 
 export default class Alpha extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillUnmount() {
     this.removeListeners();
   }

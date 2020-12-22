@@ -1,7 +1,6 @@
 import { graphic } from 'echarts';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
-import jStat from 'jstat';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 /**
@@ -54,7 +53,7 @@ export let mock: IChartMock = {
 const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   (legend = Number(legend)), (x = Number(x)), (y = Number(y));
   let arr = R.pluck<string, { [key: string]: any }>(String(y), data);
-  let max = jStat.max(arr);
+  let max = Math.max(...arr);
 
   let result = lib.handleMinMax({ min: 0, max });
   let legendArr = lib.getUniqByIdx({ key: legend, data });

@@ -2,7 +2,6 @@ import React from 'react';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { textColor } from '..';
-import jStat from 'jstat';
 
 import panel from '@/component/echarts/themeColor';
 
@@ -130,7 +129,7 @@ export default ({
     yData.push(item[y]);
   });
 
-  let max = jStat.max(yData);
+  let max = Math.max(...yData);
   let result = lib.handleMinMax({ min: 0, max });
 
   let append =

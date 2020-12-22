@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import styles from './index.less';
-import Moveable from 'react-moveable';
 import ZoomIcon, { config as zoomLevel } from './ZoomIcon';
+
+const Moveable = React.lazy(() => import('react-moveable'));
 
 /**
  * 可拖动的画布
@@ -72,18 +73,20 @@ export default ({ children, style, moveable = true, zoomable = true, onZoom }: I
       >
         {children}
       </div>
-      <Moveable
-        target={target}
-        snappable={true}
-        draggable={moveable}
-        origin={false}
-        onDragStart={({ set }) => {
-          set(translate);
-        }}
-        onDrag={({ beforeTranslate }) => {
-          setTranslate(beforeTranslate);
-        }}
-      />
+      <Suspense fallback={null}>
+        <Moveable
+          target={target}
+          snappable={true}
+          draggable={moveable}
+          origin={false}
+          onDragStart={({ set }) => {
+            set(translate);
+          }}
+          onDrag={({ beforeTranslate }) => {
+            setTranslate(beforeTranslate);
+          }}
+        />
+      </Suspense>
       {zoomable && (
         <ZoomIcon
           level={level}

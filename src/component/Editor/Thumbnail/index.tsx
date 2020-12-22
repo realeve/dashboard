@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import styles from './thumbnail.less';
+import React, { useEffect, Suspense } from 'react';
+import styles from './index.less';
 import classnames from 'classnames';
-
-import Moveable from 'react-moveable';
 
 import { IPage } from '@/models/common';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
+
+const Moveable = React.lazy(() => import('react-moveable'));
 
 /**
  * 获取缩略图的宽度及可用的最大边距，推导过程见  /public/缩略图推导.png
@@ -97,32 +97,34 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
           }}
           ref={ref}
         />
-        <Moveable
-          target={ref?.current}
-          snappable={true}
-          bounds={{
-            left: 0,
-            top: 0,
-            right: thumbnailSize.width * moveParam,
-            bottom: thumbnailSize.height * moveParam,
-          }}
-          draggable={true}
-          origin={false}
-          onDragStart={({ set }) => {
-            set(frame.translate);
-          }}
-          onDrag={({ target, beforeTranslate }) => {
-            setFrame({ translate: beforeTranslate });
-            target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+        <Suspense fallback={null}>
+          <Moveable
+            target={ref?.current}
+            snappable={true}
+            bounds={{
+              left: 0,
+              top: 0,
+              right: thumbnailSize.width * moveParam,
+              bottom: thumbnailSize.height * moveParam,
+            }}
+            draggable={true}
+            origin={false}
+            onDragStart={({ set }) => {
+              set(frame.translate);
+            }}
+            onDrag={({ target, beforeTranslate }) => {
+              setFrame({ translate: beforeTranslate });
+              target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
 
-            // 左上角滚动的位置
-            onScroll &&
-              onScroll({
-                x: beforeTranslate[0] * SCALE_PARAM * (zoom - 0.15) - 100,
-                y: beforeTranslate[1] * SCALE_PARAM * (zoom - 0.15) - 100,
-              });
-          }}
-        />
+              // 左上角滚动的位置
+              onScroll &&
+                onScroll({
+                  x: beforeTranslate[0] * SCALE_PARAM * (zoom - 0.15) - 100,
+                  y: beforeTranslate[1] * SCALE_PARAM * (zoom - 0.15) - 100,
+                });
+            }}
+          />
+        </Suspense>
       </div>
     </div>
   );

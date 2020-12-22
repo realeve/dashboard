@@ -30,14 +30,6 @@ const config: IConfig = {
           minChunks: 3,
           automaticNameDelimiter: '.',
           cacheGroups: {
-            moveable: {
-              name: 'moveable',
-              test: /[\\/]node_modules[\\/]([\S]+|)(moveable)/,
-              enforce: true,
-              priority: 10,
-              minSize: 0,
-              minChunks: 1,
-            },
             antv_g2: {
               name: 'antv_g2',
               test({ resource }) {
@@ -76,7 +68,7 @@ const config: IConfig = {
     [
       'umi-plugin-react',
       {
-        chunks: ['vendors', 'moveable', 'antv_g2', 'echarts', 'umi'],
+        chunks: ['vendors', 'antv_g2', 'echarts', 'umi'],
         antd: true,
         dva: true,
         dynamicImport: { webpackChunkName: true },

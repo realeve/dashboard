@@ -1,6 +1,5 @@
 import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as R from 'ramda';
-import jstat from 'jstat';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 
@@ -65,7 +64,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/35_bi_direct_bar.json',
   interval: 5,
-  cache:2,
+  cache: 2,
   config: [
     {
       key: 'x',
@@ -95,7 +94,7 @@ export const apiConfig: IApiConfig = {
  */
 export const getMaxByKey = (data, key) => {
   let arr = R.pluck(key)(data);
-  let max = jstat.max(arr);
+  let max = Math.max(...arr);
   return max;
 };
 
@@ -107,7 +106,7 @@ export const getMaxByKey = (data, key) => {
  */
 export const getMaxByKeys = (data, keys) => {
   let arr = keys.map((key) => getMaxByKey(data, key));
-  let max = jstat.max(arr);
+  let max = Math.max(...arr);
   let val = lib.getMax(max);
   let yAxis = {};
   keys.forEach((key) => {

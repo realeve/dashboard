@@ -34,7 +34,7 @@ const Editor = React.lazy(() => import('@/component/Editor/Editor'));
 const ComponentPanel = React.lazy(() => import('./panel/components'));
 const LayerPanel = React.lazy(() => import('./panel/LayerPanel'));
 const Setting = React.lazy(() => import('./panel/setting'));
-const Thumbnail = React.lazy(() => import('./thumbnail'));
+const Thumbnail = React.lazy(() => import('@/component/Editor/Thumbnail/'));
 const EditSlider = React.lazy(() => import('./EditSlider'));
 
 export interface IPanelItem extends IChartConfig {

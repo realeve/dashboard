@@ -1,11 +1,12 @@
-import * as React from 'react';
-import Moveable, { MoveableManagerInterface } from 'react-moveable';
-import { getContentElement, connectEditorProps, getId } from '../utils/utils';
+import React, { Suspense } from 'react';
+import { MoveableManagerInterface } from 'react-moveable';
+import { connectEditorProps } from '../utils/utils';
 import Editor from '../Editor';
 import { EditorInterface } from '../types';
 import { IObject } from '@daybrush/utils';
 import { diff } from '@egjs/list-differ';
-import * as R from 'ramda';
+
+const Moveable = React.lazy(() => import('react-moveable'));
 
 // 每次旋转最小旋转度数；
 const ROTATE_DEGREE = 5;
@@ -98,7 +99,7 @@ export default class MoveableManager extends React.PureComponent<{
   horizontalGuidelines: number[];
   onChange?: (name: { id: string; next: {} }[]) => void;
 }> {
-  public moveable = React.createRef<Moveable>();
+  public moveable = React.createRef<typeof Moveable>();
   public getMoveable() {
     return this.moveable.current!;
   }
@@ -121,129 +122,131 @@ export default class MoveableManager extends React.PureComponent<{
     const isShift = keyManager.shiftKey;
 
     return (
-      <Moveable<DimensionViewableProps>
-        ables={[DimensionViewable]}
-        ref={this.moveable}
-        targets={selectedTargets}
-        dimensionViewable={true}
-        draggable={true}
-        resizable={true}
-        throttleResize={1}
-        clippable={false}
-        dragArea={selectedTargets.length > 1}
-        passDragArea={selectedMenu === 'Text'}
-        checkInput={selectedMenu === 'Text'}
-        throttleDragRotate={isShift ? 45 : 0}
-        keepRatio={isShift}
-        rotatable={true}
-        snappable={true}
-        snapCenter={true}
-        snapGap={false}
-        roundable={false}
-        verticalGuidelines={verticalGuidelines}
-        horizontalGuidelines={horizontalGuidelines}
-        elementGuidelines={elementGuidelines}
-        clipArea={false}
-        onDragStart={moveableData.onDragStart}
-        onDrag={moveableData.onDrag}
-        onDragGroupStart={moveableData.onDragGroupStart}
-        onDragGroup={moveableData.onDragGroup}
-        onScaleStart={moveableData.onScaleStart}
-        onScale={moveableData.onScale}
-        onScaleGroupStart={moveableData.onScaleGroupStart}
-        onScaleGroup={moveableData.onScaleGroup}
-        onResizeStart={moveableData.onResizeStart}
-        onResize={moveableData.onResize}
-        onResizeGroupStart={moveableData.onResizeGroupStart}
-        onResizeGroup={moveableData.onResizeGroup}
-        onRotateStart={moveableData.onRotateStart}
-        onRotate={(e) => {
-          let rotate =
-            (Math.floor(
-              (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
-            ) *
-              ROTATE_DEGREE) %
-            360;
+      <Suspense fallback={null}>
+        <Moveable
+          ables={[DimensionViewable]}
+          ref={this.moveable}
+          targets={selectedTargets}
+          dimensionViewable={true}
+          draggable={true}
+          resizable={true}
+          throttleResize={1}
+          clippable={false}
+          dragArea={selectedTargets.length > 1}
+          passDragArea={selectedMenu === 'Text'}
+          checkInput={selectedMenu === 'Text'}
+          throttleDragRotate={isShift ? 45 : 0}
+          keepRatio={isShift}
+          rotatable={true}
+          snappable={true}
+          snapCenter={true}
+          snapGap={false}
+          roundable={false}
+          verticalGuidelines={verticalGuidelines}
+          horizontalGuidelines={horizontalGuidelines}
+          elementGuidelines={elementGuidelines}
+          clipArea={false}
+          onDragStart={moveableData.onDragStart}
+          onDrag={moveableData.onDrag}
+          onDragGroupStart={moveableData.onDragGroupStart}
+          onDragGroup={moveableData.onDragGroup}
+          onScaleStart={moveableData.onScaleStart}
+          onScale={moveableData.onScale}
+          onScaleGroupStart={moveableData.onScaleGroupStart}
+          onScaleGroup={moveableData.onScaleGroup}
+          onResizeStart={moveableData.onResizeStart}
+          onResize={moveableData.onResize}
+          onResizeGroupStart={moveableData.onResizeGroupStart}
+          onResizeGroup={moveableData.onResizeGroup}
+          onRotateStart={moveableData.onRotateStart}
+          onRotate={(e) => {
+            let rotate =
+              (Math.floor(
+                (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
+              ) *
+                ROTATE_DEGREE) %
+              360;
 
-          moveableData.onRotate({
-            ...e,
-            rotate,
-            beforeRotate: rotate,
-          });
-        }}
-        onRotateGroupStart={moveableData.onRotateGroupStart}
-        onRotateGroup={moveableData.onRotateGroup}
-        defaultClipPath={memory.get('crop') || 'inset'}
-        onClip={moveableData.onClip}
-        onDragOriginStart={moveableData.onDragOriginStart}
-        onDragOrigin={moveableData.onDragOrigin}
-        onRound={moveableData.onRound}
-        onClick={(e) => {
-          // 双击时编辑文字
-          const target = e.inputTarget as any;
-          if (e.isDouble && target.isContentEditable) {
-            editor.selectMenu('Text');
-            const el = getContentElement(target);
-            el?.focus();
-          }
-        }}
-        onClickGroup={(e) => {
-          selecto.current!.clickTarget(e.inputEvent, e.inputTarget);
-        }}
-        onRenderStart={(e) => {
-          e.datas.prevData = moveableData.getFrame(e.target).get();
-        }}
-        onRender={(e) => {
-          e.datas.isRender = true;
-          eventBus.requestTrigger('render');
-        }}
-        onRenderEnd={(e) => {
-          eventBus.requestTrigger('render');
+            moveableData.onRotate({
+              ...e,
+              rotate,
+              beforeRotate: rotate,
+            });
+          }}
+          onRotateGroupStart={moveableData.onRotateGroupStart}
+          onRotateGroup={moveableData.onRotateGroup}
+          defaultClipPath={memory.get('crop') || 'inset'}
+          onClip={moveableData.onClip}
+          onDragOriginStart={moveableData.onDragOriginStart}
+          onDragOrigin={moveableData.onDragOrigin}
+          onRound={moveableData.onRound}
+          onClick={(e) => {
+            // 双击时编辑文字
+            const target = e.inputTarget as any;
+            if (e.isDouble && target.isContentEditable) {
+              editor.selectMenu('Text');
+              const el = getContentElement(target);
+              el?.focus();
+            }
+          }}
+          onClickGroup={(e) => {
+            selecto.current!.clickTarget(e.inputEvent, e.inputTarget);
+          }}
+          onRenderStart={(e) => {
+            e.datas.prevData = moveableData.getFrame(e.target).get();
+          }}
+          onRender={(e) => {
+            e.datas.isRender = true;
+            eventBus.requestTrigger('render');
+          }}
+          onRenderEnd={(e) => {
+            eventBus.requestTrigger('render');
 
-          if (!e.datas.isRender) {
-            return;
-          }
-          let next = R.clone(moveableData.getFrame(e.target).get());
+            if (!e.datas.isRender) {
+              return;
+            }
+            let next = R.clone(moveableData.getFrame(e.target).get());
 
-          const item = {
-            id: getId(e.target),
-            next,
-          };
-
-          this.props.onChange?.([item]);
-          this.historyManager.addAction('render', {
-            ...item,
-            prev: e.datas.prevData,
-          });
-        }}
-        onRenderGroupStart={(e) => {
-          e.datas.prevDatas = e.targets.map((target) => moveableData.getFrame(target).get());
-        }}
-        onRenderGroup={(e) => {
-          eventBus.requestTrigger('renderGroup', e);
-          e.datas.isRender = true;
-        }}
-        onRenderGroupEnd={(e) => {
-          eventBus.requestTrigger('renderGroup', e);
-
-          if (!e.datas.isRender) {
-            return;
-          }
-          const prevDatas = e.datas.prevDatas;
-          const infos = e.targets.map((target, i) => {
-            return {
-              id: getId(target),
-              prev: prevDatas[i],
-              next: moveableData.getFrame(target).get(),
+            const item = {
+              id: getId(e.target),
+              next,
             };
-          });
 
-          this.props.onChange?.(infos.map(({ id, next }) => ({ id, next })));
-          this.historyManager.addAction('renders', {
-            infos,
-          });
-        }}
-      />
+            this.props.onChange?.([item]);
+            this.historyManager.addAction('render', {
+              ...item,
+              prev: e.datas.prevData,
+            });
+          }}
+          onRenderGroupStart={(e) => {
+            e.datas.prevDatas = e.targets.map((target) => moveableData.getFrame(target).get());
+          }}
+          onRenderGroup={(e) => {
+            eventBus.requestTrigger('renderGroup', e);
+            e.datas.isRender = true;
+          }}
+          onRenderGroupEnd={(e) => {
+            eventBus.requestTrigger('renderGroup', e);
+
+            if (!e.datas.isRender) {
+              return;
+            }
+            const prevDatas = e.datas.prevDatas;
+            const infos = e.targets.map((target, i) => {
+              return {
+                id: getId(target),
+                prev: prevDatas[i],
+                next: moveableData.getFrame(target).get(),
+              };
+            });
+
+            this.props.onChange?.(infos.map(({ id, next }) => ({ id, next })));
+            this.historyManager.addAction('renders', {
+              infos,
+            });
+          }}
+        />
+      </Suspense>
     );
   }
   public renderViewportMoveable() {
@@ -251,9 +254,11 @@ export default class MoveableManager extends React.PureComponent<{
     // const target = viewport ? viewport.viewportRef.current! : null;
 
     return (
-      <Moveable
-        ref={this.moveable} // target={target}
-      />
+      <Suspense fallback={null}>
+        <Moveable
+          ref={this.moveable} // target={target}
+        />
+      </Suspense>
     );
   }
   public componentDidMount() {
