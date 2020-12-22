@@ -18,6 +18,8 @@ const config: IConfig = {
       ],
     },
   ],
+  // https://umijs.org/zh/plugin/umi-plugin-react.html#chunks
+  // https://webpack.docschina.org/plugins/split-chunks-plugin/
   chainWebpack: function (config) {
     config.merge({
       optimization: {
@@ -28,17 +30,22 @@ const config: IConfig = {
           minChunks: 3,
           automaticNameDelimiter: '.',
           cacheGroups: {
-            // three: {
-            //   name: 'three',
-            //   test: /[\\/]node_modules[\\/][\w|\W](three)[\w|\W]/,
-            //   enforce: true,
-            //   priority: 10,
-            //   minSize: 0,
-            //   minChunks: 1,
-            // },
+            moveable: {
+              name: 'moveable',
+              test: /[\\/]node_modules[\\/]([\S]+|)(moveable)/,
+              enforce: true,
+              priority: 10,
+              minSize: 0,
+              minChunks: 1,
+            },
             antv_g2: {
               name: 'antv_g2',
-              test: /[\\/]node_modules[\\/]([\S]|)(@antv_g2)[\w|\W]/,
+              test({ resource }) {
+                return (
+                  /[\\/]node_modules[\\/]([\S]+|)(@antv_)[\w|\W]/.test(resource) &&
+                  !resource.includes('@antv_util')
+                );
+              },
               enforce: true,
               priority: 10,
               minSize: 0,
@@ -46,7 +53,7 @@ const config: IConfig = {
             },
             echarts: {
               name: 'echarts',
-              test: /[\\/]node_modules[\\/]([\S]|)(echarts|zrender)/,
+              test: /[\\/]node_modules[\\/]([\S]+|)(echarts|zrender)/,
               enforce: true,
               priority: 10,
               minSize: 0,
@@ -54,13 +61,13 @@ const config: IConfig = {
             },
             html2canvas: {
               name: 'html2canvas',
-              test: /[\\/]node_modules[\\/]([\S]|)(html2canvas)/,
+              test: /[\\/]node_modules[\\/]([\S]+|)(html2canvas)/,
               enforce: true,
               priority: 10,
               minSize: 0,
               minChunks: 1,
             },
-            vendor: {
+            vendors: {
               name: 'vendors',
               test({ resource }) {
                 return /[\\/]node_modules[\\/]/.test(resource);
@@ -72,35 +79,12 @@ const config: IConfig = {
       },
     });
   },
-
-  // chainWebpack(config, { webpack }) {
-  //   config.optimization.splitChunks({
-  //     cacheGroups: {
-  //       three: {
-  //         chunks: 'all',
-  //         name: 'three',
-  //         test: /(three)/,
-  //         enforce: true,
-  //         priority: 10,
-  //         minSize: 0,
-  //         minChunks: 1,
-  //       },
-  //       vendor: {
-  //         chunks: 'all',
-  //         name: 'vendor',
-  //         priority: 1,
-  //         minSize: 0,
-  //         minChunks: 1,
-  //       },
-  //     },
-  //   });
-  // },
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     [
       'umi-plugin-react',
       {
-        chunks: ['vendors', 'umi'],
+        chunks: ['vendors', 'moveable', 'antv_g2', 'echarts', 'html2canvas', 'umi'],
         antd: true,
         dva: true,
         dynamicImport: { webpackChunkName: true },
