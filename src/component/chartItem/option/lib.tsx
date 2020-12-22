@@ -4,12 +4,13 @@ import * as Position from '@/component/field/Align/iconPosition';
 import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
 import { IChartConfig } from '@/component/chartItem/interface';
-import { tRender } from '@/component/echarts/';
-import { palette } from '@/component/g2plot';
 
+import { palette } from '@/component/g2plot/palette';
+
+export type tRender = 'canvas' | 'svg';
 // 获取最佳轴长度
 import { nice, quantity } from 'echarts/lib/util/number';
-import * as zrUtil from 'zrender/lib/core/util';
+import { reduce, map } from 'zrender/lib/core/util';
 
 export interface IChart {
   key?: string;
@@ -818,7 +819,7 @@ export function getPercentWithPrecision(
   valueList: (number | '-')[],
   precision: number = 2,
 ): number[] {
-  const sum = zrUtil.reduce(
+  const sum = reduce(
     valueList,
     function (acc, val) {
       return acc + (isNaN(val) ? 0 : val);
@@ -830,16 +831,16 @@ export function getPercentWithPrecision(
   }
 
   const digits = Math.pow(10, precision);
-  const votesPerQuota = zrUtil.map(valueList, function (val) {
+  const votesPerQuota = map(valueList, function (val) {
     return ((isNaN(val) ? 0 : val) / sum) * digits * 100;
   });
   const targetSeats = digits * 100;
 
-  const seats = zrUtil.map(votesPerQuota, function (votes) {
+  const seats = map(votesPerQuota, function (votes) {
     // Assign automatic seats.
     return Math.floor(votes);
   });
-  let currentSum = zrUtil.reduce(
+  let currentSum = reduce(
     seats,
     function (acc, val) {
       return acc + val;
@@ -847,7 +848,7 @@ export function getPercentWithPrecision(
     0,
   );
 
-  const remainder = zrUtil.map(votesPerQuota, function (votes, idx) {
+  const remainder = map(votesPerQuota, function (votes, idx) {
     return votes - seats[idx];
   });
 

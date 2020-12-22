@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Echarts from '@/component/echarts';
+import React, { useState, useEffect, Suspense } from 'react';
+
 import pie from '@/component/chartItem/option/echarts/pie';
 import styles from './index.less';
-import CountUp from 'react-countup';
+
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
+
+const Echarts = React.lazy(() => import('@/component/echarts'));
+const CountUp = React.lazy(() => import('react-countup'));
+
 export default ({
   toggleItem = true,
   option: { x = 0, y = 1, data, titleFontSize = 16, valueFontSize = 30, ...option },
@@ -27,35 +31,39 @@ export default ({
 
   return (
     <div className={styles.pie}>
-      <Echarts
-        option={pie({
-          x,
-          y,
-          data: data.data,
-          ...option,
-        })}
-        toggleItem={toggleItem}
-        renderer="svg"
-        setToggleIdx={(idx) => {
-          let start = val.end;
-          setVal({
-            start,
-            end: Number(((data.data[idx][y] / sum) * 100).toFixed(2)),
-            name: data.data[idx][x],
-          });
-        }}
-      />
+      <Suspense fallback={null}>
+        <Echarts
+          option={pie({
+            x,
+            y,
+            data: data.data,
+            ...option,
+          })}
+          toggleItem={toggleItem}
+          renderer="svg"
+          setToggleIdx={(idx) => {
+            let start = val.end;
+            setVal({
+              start,
+              end: Number(((data.data[idx][y] / sum) * 100).toFixed(2)),
+              name: data.data[idx][x],
+            });
+          }}
+        />
+      </Suspense>
       <div className={styles.tip}>
         <div className={styles.name} style={{ fontSize: titleFontSize }}>
           {val.name}
         </div>
-        <CountUp
-          {...val}
-          decimals={2}
-          suffix="%"
-          className={styles.value}
-          style={{ fontSize: valueFontSize }}
-        />
+        <Suspense fallback={null}>
+          <CountUp
+            {...val}
+            decimals={2}
+            suffix="%"
+            className={styles.value}
+            style={{ fontSize: valueFontSize }}
+          />
+        </Suspense>
       </div>
     </div>
   );
