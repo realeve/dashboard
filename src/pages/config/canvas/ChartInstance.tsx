@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import Echarts from '@/component/echarts';
+import React, { useState, Suspense } from 'react';
 
 import * as chartLib from '@/component/chartItem/option';
 import { IPanelConfig, IApiProps } from '@/models/common';
 
 import * as R from 'ramda';
-import { Skeleton } from 'antd';
+import { Skeleton, Spin } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
-import { tRender } from '@/component/echarts/';
-import G2 from '@/component/g2';
-import G2Plot from '@/component/g2plot';
+
 import { isArray } from '@antv/util';
 import { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
+export type tRender = 'canvas' | 'svg';
+
+const Echarts = React.lazy(() => import('@/component/echarts'));
+const G2 = React.lazy(() => import('@/component/g2'));
+const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
 const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   let obj = {};
@@ -43,8 +45,9 @@ export default ({
   onLoad?: (e: string) => void;
 }) => {
   const [inited, setInited] = useState(false);
+  const currentLib = chartLib[config.key];
 
-  if (!chartLib[config.key]) {
+  if (!currentLib) {
     return (
       <div style={{ color: '#ddd', fontSize: 30, lineHeight: 2 }}>
         组件渲染出错：
@@ -57,7 +60,7 @@ export default ({
       </div>
     );
   }
-  const { default: method, defaultOption = {}, ...lib } = chartLib[config.key];
+  const { default: method, defaultOption = {}, ...lib } = currentLib;
 
   let api: IApiProps = config.api || { dateType: '本月' };
   /**
@@ -119,11 +122,13 @@ export default ({
 
   if (config.engine === 'echarts') {
     return (
-      <Echarts
-        option={method(injectProps)}
-        renderer={appendConfig.renderer || 'canvas'}
-        style={style}
-      />
+      <Suspense fallback={<Spin spinning />}>
+        <Echarts
+          option={method(injectProps)}
+          renderer={appendConfig.renderer || 'canvas'}
+          style={style}
+        />
+      </Suspense>
     );
   } else if (config.engine === 'g2plot') {
     let option = method({
@@ -140,22 +145,26 @@ export default ({
         : appendPadding + option.appendPadding;
     }
     return (
-      <G2Plot
-        option={{ ...option, appendPadding }}
-        renderer={appendConfig.renderer || 'canvas'}
-        style={style}
-      />
+      <Suspense fallback={<Spin spinning />}>
+        <G2Plot
+          option={{ ...option, appendPadding }}
+          renderer={appendConfig.renderer || 'canvas'}
+          style={style}
+        />
+      </Suspense>
     );
   } else if (config.engine === 'g2') {
     return (
-      <G2
-        option={{
-          onMount: method,
-          transformer: lib.transformer || null,
-          ...injectProps,
-        }}
-        style={style}
-      />
+      <Suspense fallback={<Spin spinning />}>
+        <G2
+          option={{
+            onMount: method,
+            transformer: lib.transformer || null,
+            ...injectProps,
+          }}
+          style={style}
+        />
+      </Suspense>
     );
   } else if (config.engine === 'other') {
     const Item = method;

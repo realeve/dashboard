@@ -21,15 +21,15 @@ import * as progressBar from './other/progress_bar';
 export { progressBar };
 
 // 05.水球图
-import * as water from './water';
+import * as water from './echarts/water';
 export { water };
 
 // 06.百分比环图
-import * as ringchart from './ringchart';
+import * as ringchart from './echarts/ringchart';
 export { ringchart };
 
 // 07.动态饼图
-export { default as pie } from './pie';
+export { default as pie } from './echarts/pie';
 import * as dynamicPie from './other/dynamicPie';
 export { dynamicPie };
 
