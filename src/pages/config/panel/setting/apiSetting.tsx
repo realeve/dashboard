@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import * as chartLib from '@/component/chartItem/option';
+import React, { useEffect, useState } from 'react';
+
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
@@ -8,6 +8,8 @@ import { FormItem, getDefaultState } from './componentSetting';
 import styles from './index.less';
 import JsonViewer from './JsonViewer';
 import { rangeConfig } from '@/utils/range';
+import { Spin } from 'antd';
+import { chartList } from '@/component/chartItem/option';
 
 const initState = (configs: IApiConfig, api: any) => {
   let { config, type, ...props } = configs;
@@ -65,21 +67,36 @@ const appendConfig: IChartConfig[] = [
   },
 ];
 
-export default ({
+export default (props) => {
+  if (!chartList.includes(props.panel.key)) {
+    return <p>组件配置信息异常，请联系管理员。</p>;
+  }
+
+  const [chartLib, setChartLib] = useState(null);
+  useEffect(() => {
+    import(`../../../../component/chartItem/charts/${props.panel.key}`).then((res) => {
+      setChartLib({ ...res.default });
+    });
+  }, []);
+
+  if (!chartLib) {
+    return <Spin spinning />;
+  }
+  return <ApiSetting {...props} chartLib={chartLib} />;
+};
+
+const ApiSetting = ({
   onChange,
-  panel: { key, api },
+  panel: { api },
   isBusiness = false,
+  chartLib,
 }: {
   onChange: (e: any, title?: string) => void;
   panel: IPanelConfig;
   isBusiness?: boolean;
+  chartLib: any;
 }) => {
-  let res = R.prop<string>(key, chartLib);
-  if (!res) {
-    return <p>组件配置信息异常，请联系管理员。</p>;
-  }
-
-  let configs = res.apiConfig as IApiConfig;
+  let configs = chartLib.apiConfig as IApiConfig;
 
   if (R.type(configs) != 'Object') {
     return <p>该组件无数据请求，无需配置接口信息</p>;
@@ -138,7 +155,7 @@ export default ({
             />
           ) : (
             <JsonViewer
-              value={state.mock || JSON.stringify(res.mock || '')}
+              value={state.mock || JSON.stringify(chartLib.mock || '')}
               onChange={(res) => {
                 handleStateChange(res, { key: 'mock' });
               }}

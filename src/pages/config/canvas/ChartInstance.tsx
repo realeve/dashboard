@@ -1,6 +1,5 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 
-import * as chartLib from '@/component/chartItem/option';
 import { IPanelConfig, IApiProps } from '@/models/common';
 
 import * as R from 'ramda';
@@ -10,6 +9,9 @@ import useFetch from '@/component/hooks/useFetch';
 import { isArray } from '@antv/util';
 import { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
+
+import { chartList } from '@/component/chartItem/option';
+
 export type tRender = 'canvas' | 'svg';
 
 const Echarts = React.lazy(() => import('@/component/echarts'));
@@ -31,36 +33,29 @@ const getRange = ({ dateType = '本月' }: { dateType: string }) => {
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
 };
 
-export default ({
-  config,
-  title,
-  style = {},
-  onLoad,
-  chartid,
-}: {
+interface ChartInstanceProps {
   config: IPanelConfig;
   style?: React.CSSProperties;
   title?: string;
   chartid?: string;
   onLoad?: (e: string) => void;
-}) => {
-  const [inited, setInited] = useState(false);
-  const currentLib = chartLib[config.key];
+}
 
-  if (!currentLib) {
-    return (
-      <div style={{ color: '#ddd', fontSize: 30, lineHeight: 2 }}>
-        组件渲染出错：
-        <br />
-        @/component/chartItem/option 中 未导出函数 {config.key}，请仔细检查
-        {/* <br />
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <img src="/img/no-data.svg" style={{ width: 200 }} />
-          </div> */}
-      </div>
-    );
-  }
-  const { default: method, defaultOption = {}, ...lib } = currentLib;
+interface ChartRenderProps extends ChartInstanceProps {
+  chartLib: any;
+}
+
+const ChartRender = ({
+  config,
+  title,
+  style = {},
+  onLoad,
+  chartid,
+  chartLib,
+}: ChartRenderProps) => {
+  const [inited, setInited] = useState(false);
+
+  const { default: method, defaultOption = {}, ...lib } = chartLib;
 
   let api: IApiProps = config.api || { dateType: '本月' };
   /**
@@ -172,4 +167,28 @@ export default ({
   }
 
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;
+};
+
+export default (props: ChartInstanceProps) => {
+  if (!chartList.includes(props.config.key)) {
+    return (
+      <div style={{ color: '#eee', fontSize: 30, lineHeight: 2 }}>
+        组件渲染出错：
+        <br />
+        @/component/chartItem/option 中 未导出函数 {props.config.key}，请仔细检查
+      </div>
+    );
+  }
+
+  const [chartLib, setChartLib] = useState(null);
+  useEffect(() => {
+    import(`../../../component/chartItem/charts/${props.config.key}`).then((res) => {
+      setChartLib({ ...res.default });
+    });
+  }, []);
+
+  if (!chartLib) {
+    return <Spin spinning />;
+  }
+  return <ChartRender {...props} chartLib={chartLib} />;
 };

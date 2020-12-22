@@ -1,6 +1,5 @@
 import styles from './index.less';
 import React, { useEffect, useState } from 'react';
-import * as chartLib from '@/component/chartItem/option';
 import { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { IPanelConfig } from '@/models/common';
@@ -33,14 +32,18 @@ export default ({
 
   // 当key变更时，重新载入默认值
   useEffect(() => {
-    let res = R.prop<string>(key, chartLib);
+    init();
+  }, [id]);
+
+  const init = async () => {
+    let { default: res } = await import(`../../../../component/chartItem/charts/${key}`);
     if (!res) {
       setConfigs(null);
       return;
     }
     setConfigs(res.config);
     setState(getDefaultState(res.config, componentConfig));
-  }, [id]);
+  };
 
   if (!configs) {
     return <p>组件配置信息异常，请联系管理员。</p>;

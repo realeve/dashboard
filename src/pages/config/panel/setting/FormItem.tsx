@@ -144,7 +144,7 @@ export const FormField = ({
               <input
                 type="number"
                 className={classnames('data_input')}
-                value={innerValue?.[id] ?? 0}
+                value={innerValue?.[id] || 0}
                 onChange={(e) => {
                   let val = R.update(id, Number(e.target.value), (innerValue as number[]).slice());
                   setInnerValue(val);
