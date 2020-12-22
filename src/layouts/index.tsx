@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import './index.less';
+
 // import FPSStats from '@/component/Stats';
 
 //  top: -4, transform: `scale(0.8)`

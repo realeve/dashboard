@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from '@/component/echarts';
-import * as lib from '@/component/chartItem/option';
+import pie from '@/component/chartItem/option/echarts/pie';
 import styles from './index.less';
 import CountUp from 'react-countup';
 import { useSetState } from 'react-use';
@@ -28,7 +28,7 @@ export default ({
   return (
     <div className={styles.pie}>
       <Echarts
-        option={lib.pie({
+        option={pie({
           x,
           y,
           data: data.data,

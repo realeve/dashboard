@@ -33,7 +33,7 @@ export default ({
 
   // 当key变更时，重新载入默认值
   useEffect(() => {
-    let res = R.prop(key, chartLib);
+    let res = R.prop<string>(key, chartLib);
     if (!res) {
       setConfigs(null);
       return;

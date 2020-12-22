@@ -74,7 +74,7 @@ export default ({
   panel: IPanelConfig;
   isBusiness?: boolean;
 }) => {
-  let res = R.prop(key, chartLib);
+  let res = R.prop<string>(key, chartLib);
   if (!res) {
     return <p>组件配置信息异常，请联系管理员。</p>;
   }
