@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import useMeasure from './useMeasure';
 export let mock = {};
 
@@ -86,7 +86,7 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
-const getColor = ({ ratio, blue_offset }) => {
+const getColor = ({ ratio, blue_offset, THREE }) => {
   let color = {
     r: 0,
     g: Math.floor(255 - ratio * 255),
@@ -114,6 +114,15 @@ export default ({
   },
 }) => {
   const [domRef, { width, height }] = useMeasure();
+
+  const [THREE, setTHREE] = useState(null);
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    import('three').then((res) => {
+      setTHREE(res);
+      setInit(true);
+    });
+  }, []);
 
   const wave = () => {
     const SPEED_OFFSET = speed / 100;
@@ -151,7 +160,7 @@ export default ({
           let material = new THREE.SpriteMaterial({
             map,
             opacity: 1,
-            color: getColor({ ratio, blue_offset }),
+            color: getColor({ ratio, blue_offset, THREE }),
           });
 
           let particle = new THREE.Sprite(material);
@@ -226,6 +235,7 @@ export default ({
   };
 
   useEffect(() => {
+    if (!THREE) return;
     canvas?.stopAnimate();
     canvas?.reset();
     refresh();
@@ -240,6 +250,7 @@ export default ({
     MAXSIZE,
     WAVESIZE,
     MOUSE_TRACK,
+    init,
   ]);
 
   // useEffect(() => {
