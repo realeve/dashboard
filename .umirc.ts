@@ -59,14 +59,6 @@ const config: IConfig = {
               minSize: 0,
               minChunks: 1,
             },
-            html2canvas: {
-              name: 'html2canvas',
-              test: /[\\/]node_modules[\\/]([\S]+|)(html2canvas)/,
-              enforce: true,
-              priority: 10,
-              minSize: 0,
-              minChunks: 1,
-            },
             vendors: {
               name: 'vendors',
               test({ resource }) {
@@ -84,12 +76,11 @@ const config: IConfig = {
     [
       'umi-plugin-react',
       {
-        chunks: ['vendors', 'moveable', 'antv_g2', 'echarts', 'html2canvas', 'umi'],
+        chunks: ['vendors', 'moveable', 'antv_g2', 'echarts', 'umi'],
         antd: true,
         dva: true,
         dynamicImport: { webpackChunkName: true },
         title: 'dashboard',
-        // dll: true,
         routes: {
           exclude: [
             /models\//,

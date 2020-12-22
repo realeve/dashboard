@@ -25,7 +25,6 @@ import classnames from 'classnames';
 import * as R from 'ramda';
 import assets from '@/component/widget/assets';
 import { IPage } from '@/models/common';
-import html2canvas from 'html2canvas';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
 import { getDefaultStyle } from './lib';
@@ -277,22 +276,24 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
   public async getThumbnail(scale: number, quality = 0.8, filename = null) {
     let canvasEl = this.viewport.current.viewport.el;
-    return html2canvas(canvasEl, {
-      backgroundColor: null,
-      scale,
-    }).then((canvas) => {
-      /* canvas.toBlob 对于各个浏览器有兼容问题. ie会报错没有toBlob对象
-       * 解决方式：引入canvas-toBlob.js（https://github.com/eligrey/canvas-toBlob.js/blob/master/canvas-toBlob.js）
-       * */
-      if (filename) {
-        canvas.toBlob(function (blob) {
-          fileSaver.saveAs(blob, filename + '.jpg');
-        });
-        return;
-      }
+    return import('html2canvas').then(({ default: html2canvas }) =>
+      html2canvas(canvasEl, {
+        backgroundColor: null,
+        scale,
+      }).then((canvas) => {
+        /* canvas.toBlob 对于各个浏览器有兼容问题. ie会报错没有toBlob对象
+         * 解决方式：引入canvas-toBlob.js（https://github.com/eligrey/canvas-toBlob.js/blob/master/canvas-toBlob.js）
+         * */
+        if (filename) {
+          canvas.toBlob(function (blob) {
+            fileSaver.saveAs(blob, filename + '.jpg');
+          });
+          return;
+        }
 
-      return canvas.toDataURL('image/jpeg', quality);
-    });
+        return canvas.toDataURL('image/jpeg', quality);
+      }),
+    );
   }
 
   // 更新缩略图
@@ -645,14 +646,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
     this.keyManager.keydown([isMacintosh ? 'meta' : 'ctrl', 'x'], () => {}, '剪切');
     this.keyManager.keydown([isMacintosh ? 'meta' : 'ctrl', 'c'], () => {}, '复制');
-    this.keyManager.keydown(
-      [isMacintosh ? 'meta' : 'ctrl', 'shift', 'c'],
-      (e) => {
-        this.clipboardManager.copyImage();
-        e.inputEvent.preventDefault();
-      },
-      '复制为图像',
-    );
     this.keyManager.keydown([isMacintosh ? 'meta' : 'ctrl', 'v'], () => {}, '粘贴');
     this.keyManager.keydown(
       [isMacintosh ? 'meta' : 'ctrl', 'z'],

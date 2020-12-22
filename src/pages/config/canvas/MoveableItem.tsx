@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
-import Moveable, { OnDrag, OnResize } from 'react-moveable';
+import Moveable from 'react-moveable';
 
-import KeyController from 'keycon';
 import { useDebounce, useSetState } from 'react-use';
 
 const padding = 30;
@@ -32,7 +31,7 @@ const handleTransform = (str: string) => {
       .match(/matrix(\S| )+/)[0]
       .match(/(\d|\,|\.|\-)+/)[0]
       .split(',') || [];
-  matrix = matrix.map(item => Number(item).toFixed(1));
+  matrix = matrix.map((item) => Number(item).toFixed(1));
 
   // let arr = matrix.slice(-2);
   // let arr2 = str.match(/translate(\S| )+/)[0].match(/(\d|\.)+/g);
@@ -91,7 +90,7 @@ export default ({
           height: (style?.height || 500) * zoom,
           transform: style.transform,
         }}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
           if (!resizable) {
@@ -113,8 +112,8 @@ export default ({
         throttleDrag={0}
         throttleRotate={15}
         zoom={zoom}
-        verticalGuidelines={guides.v.map(item => item - padding / zoom)}
-        horizontalGuidelines={guides.h.map(item => item - padding / zoom)}
+        verticalGuidelines={guides.v.map((item) => item - padding / zoom)}
+        horizontalGuidelines={guides.h.map((item) => item - padding / zoom)}
         isDisplaySnapDigit={true}
         onDragStart={({ set }) => {
           set(frame.translate);
