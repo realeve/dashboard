@@ -308,7 +308,12 @@ const WaffleChart = ({
                   {item.cart && (
                     <p>
                       车号:{' '}
-                      <a href={SEARCH_PREFIX + item.cart} target="_blank" style={{ color: '#ddd' }}>
+                      <a
+                        href={SEARCH_PREFIX + item.cart}
+                        target="_blank"
+                        style={{ color: '#ddd' }}
+                        rel="nofollow"
+                      >
                         {item.cart}
                       </a>
                     </p>

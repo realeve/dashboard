@@ -85,6 +85,7 @@ const config = {
   dva: {
     hmr: true,
   },
+  mock: false,
   dynamicImport: {},
   title: 'dashboard',
   theme,
@@ -94,9 +95,9 @@ const config = {
       path: '/',
       component: '../layouts/index',
       routes: [
-        { path: '/', component: '../pages/index' },
-        { path: '/config', component: '../pages/config' },
-        { path: '/list', component: '../pages/list' },
+        { path: '/', component: '../pages/index', title: '数据大屏' },
+        { path: '/config', component: '../pages/config', title: '页面配置' },
+        { path: '/list', component: '../pages/list', title: '大屏列表' },
       ],
     },
   ],
