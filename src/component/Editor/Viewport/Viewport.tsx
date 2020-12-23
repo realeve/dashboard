@@ -61,6 +61,9 @@ export default class Viewport extends React.PureComponent<{
   };
   public state = {};
   public viewportRef = React.createRef<HTMLDivElement>();
+  public getRenderIds() {
+    return Object.keys(this.ids).filter((item) => item !== 'viewport');
+  }
   public render() {
     return (
       <div ref={this.viewportRef} className={prefix('viewport-container')} {...this.props}>
@@ -75,7 +78,7 @@ export default class Viewport extends React.PureComponent<{
     this.ids.viewport.el = this.viewportRef.current!;
   }
   public renderChildren(children: ElementInfo[]): ScenaJSXElement[] {
-    return children.map(info => {
+    return children.map((info) => {
       const jsx = info.jsx;
       const nextChildren = info.children!;
       const renderedChildren = this.renderChildren(nextChildren);
@@ -188,7 +191,7 @@ export default class Viewport extends React.PureComponent<{
     return [...this.getIndexes(info.scopeId), parentInfo.children!.indexOf(info)];
   }
   public registerChildren(jsxs: ElementInfo[], parentScopeId?: string) {
-    return jsxs.map(info => {
+    return jsxs.map((info) => {
       const id = info.id || info.name || this.makeId();
       const jsx = info.jsx;
       const children = info.children || [];
@@ -240,7 +243,7 @@ export default class Viewport extends React.PureComponent<{
       }
     });
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.forceUpdate(() => {
         const infos = jsxInfos.map(function registerElement(info) {
           const id = info.id!;
@@ -285,13 +288,15 @@ export default class Viewport extends React.PureComponent<{
     const length = indexes.length;
     return length ? indexes[length - 1] : -1;
   }
-  public getElements(ids: string[]) { 
-    return ids.map(id => this.getElement(id)).filter(el => el) as Array<HTMLElement | SVGElement>;
+  public getElements(ids: string[]) {
+    return ids.map((id) => this.getElement(id)).filter((el) => el) as Array<
+      HTMLElement | SVGElement
+    >;
   }
   public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {
     const ids = this.ids;
 
-    return children.slice(0).map(info => {
+    return children.slice(0).map((info) => {
       const target = info.el!;
       let innerText = '';
       let innerHTML = '';
@@ -327,11 +332,11 @@ export default class Viewport extends React.PureComponent<{
   }
   public removeTargets(targets: Array<HTMLElement | SVGElement>): Promise<RemovedInfo> {
     const removedChildren = this.getSortedTargets(targets)
-      .map(target => {
+      .map((target) => {
         return this.getInfoByElement(target);
       })
-      .filter(info => info) as ElementInfo[];
-    const indexes = removedChildren.map(info => this.getIndex(info.id!));
+      .filter((info) => info) as ElementInfo[];
+    const indexes = removedChildren.map((info) => this.getIndex(info.id!));
     const removed = this.unregisterChildren(removedChildren);
 
     removed.forEach((info, i) => {
@@ -339,7 +344,7 @@ export default class Viewport extends React.PureComponent<{
         info.index = indexes[i];
       }
     });
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.forceUpdate(() => {
         resolve({
           removed,
@@ -348,7 +353,7 @@ export default class Viewport extends React.PureComponent<{
     });
   }
   public getSortedIndexesList(targets: Array<string | HTMLElement | SVGElement | number[]>) {
-    const indexesList = targets.map(target => {
+    const indexesList = targets.map((target) => {
       if (Array.isArray(target)) {
         return target;
       }
@@ -372,12 +377,12 @@ export default class Viewport extends React.PureComponent<{
     return indexesList;
   }
   public getSortedTargets(targets: Array<string | HTMLElement | SVGElement>) {
-    return this.getSortedInfos(targets).map(info => info.el!);
+    return this.getSortedInfos(targets).map((info) => info.el!);
   }
   public getSortedInfos(targets: Array<string | HTMLElement | SVGElement>) {
     const indexesList = this.getSortedIndexesList(targets);
 
-    return indexesList.map(indexes => this.getInfoByIndexes(indexes));
+    return indexesList.map((indexes) => this.getInfoByIndexes(indexes));
   }
   public moveInside(target: HTMLElement | SVGElement | string): Promise<MovedResult> {
     const info = isString(target) ? this.getInfo(target)! : this.getInfoByElement(target)!;
@@ -430,7 +435,7 @@ export default class Viewport extends React.PureComponent<{
 
     const infos = nextInfos.map(({ info }) => info);
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.forceUpdate(() => {
         infos.forEach(function moveInfo(info) {
           const id = info.id!;
@@ -453,7 +458,7 @@ export default class Viewport extends React.PureComponent<{
     parentInfo: ElementInfo,
     prevInfo?: ElementInfo,
   ): Promise<MovedResult> {
-    const sortedInfos = this.getSortedInfos(infos.map(info => info.el!));
+    const sortedInfos = this.getSortedInfos(infos.map((info) => info.el!));
 
     return this.moves(
       sortedInfos.map((info, i) => {

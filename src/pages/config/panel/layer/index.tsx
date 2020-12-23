@@ -599,4 +599,4 @@ const Index = ({
     </div>
   );
 };
-export default connect(({ common }: { common: ICommon }) => common)(HistoryPanel);
+export default connect(({ common }: { common: ICommon }) => common)(Index);

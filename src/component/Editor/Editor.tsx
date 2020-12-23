@@ -755,6 +755,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     });
   }
 
+  public getEditorIds() {
+    return this.getViewport().getRenderIds();
+  }
+
   public appendJSX(info: ElementInfo) {
     return this.appendJSXs([info]).then((targets) => targets[0]);
   }
@@ -763,9 +767,14 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     config: { id?: string; name?: string; style?: React.CSSProperties },
   ) {
     // 判断id是否重复;
-    console.log(this.memory, this.moveableData);
-
     let id = config.id || generateId();
+    if (config.id) {
+      let curIds = this.getEditorIds();
+      if (curIds.includes(config.id)) {
+        console.log('当前id', config.id, '已存在，添加失败');
+        return;
+      }
+    }
     let name = config.name || id;
     return this.appendJSXs([
       {
