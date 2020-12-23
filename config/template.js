@@ -57,7 +57,13 @@ export default ${dirName};
     console.log(str);
     return true;
   }
+  // 先写文件内容
+  handleTemplate();
+
+  // 再注入导出的项
   fs.writeFileSync(`${dir}charts/${dirName}.ts`, fileStr);
+
+  // 最后将图表列表写入
   fs.writeFileSync(dir + 'option/index.ts', nextOption);
 
   console.log('1.组件 lib 导出文件完成');
@@ -499,7 +505,7 @@ const handleTemplate = () => {
   if (DEBUG_MODE) {
     console.log(str);
   } else {
-    fs.writeFileSync(`option/${dir}${chartType}/${dirName}.tsx`, str);
+    fs.writeFileSync(`${dir}option/${chartType}/${dirName}.tsx`, str);
   }
   console.log('3.文件组件写入完成');
 };
@@ -509,7 +515,6 @@ const init = () => {
     return;
   }
   handleComponents();
-  handleTemplate();
   console.log(`模版${dirName}已创建`);
 };
 
