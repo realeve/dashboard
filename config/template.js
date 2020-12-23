@@ -11,10 +11,7 @@ const beautify = require('js-beautify');
 const moment = require('dayjs');
 let components = require('../public/components.json');
 const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
-const { chartList } = require('/component/chartItem/option/index.ts');
 
-console.log(chartList);
-return;
 // 测试模式，只打印，不改文件
 const DEBUG_MODE = false;
 
@@ -33,29 +30,38 @@ if (!dirName) {
   process.exit(0);
 }
 
-let dir = './src/component/chartItem/option/';
+let dir = './src/component/chartItem/';
 const handleOptionIndex = () => {
-  let str = fs.readFileSync(dir + 'index.ts', 'utf8');
-  let idx = str.match(/：\d+/g);
-  nextIndex = Number(R.last(idx).replace('：', '')) + 1;
+  let str = fs.readFileSync(dir + 'option/index.ts', 'utf8');
+  let chartArr = eval(str.match(/\[(\S|\s)+\]/)[0]);
 
-  str = `${str}
-/*
+  if (chartArr.includes(dirName)) {
+    console.error(dirName + '图表已存在，请更换名称');
+    return false;
+  }
+
+  let nextIndex = chartArr.length + 1;
+
+  let nextOption = str.replace('];', `  '${dirName}',\n];`);
+
+  let fileStr = `/*
     时间：${now()}
     类型: ${chartType}
     序号：${nextIndex}
     名称：你的图表名称
 */ 
-import * as ${dirName} from './${chartType}/${dirName}';
-export { ${dirName} }; 
+import * as ${dirName} from '../option/${chartType}/${dirName}';
+export default ${dirName}; 
 `;
   if (DEBUG_MODE) {
     console.log(str);
-  } else {
-    fs.writeFileSync(dir + 'index.ts', str);
+    return true;
   }
+  fs.writeFileSync(`${dir}charts/${dirName}.ts`, fileStr);
+  fs.writeFileSync(dir + 'option/index.ts', nextOption);
 
   console.log('1.组件 lib 导出文件完成');
+  return true;
 };
 
 /**
@@ -493,12 +499,15 @@ const handleTemplate = () => {
   if (DEBUG_MODE) {
     console.log(str);
   } else {
-    fs.writeFileSync(`${dir}${chartType}/${dirName}.tsx`, str);
+    fs.writeFileSync(`option/${dir}${chartType}/${dirName}.tsx`, str);
   }
   console.log('3.文件组件写入完成');
 };
 const init = () => {
-  handleOptionIndex();
+  let success = handleOptionIndex();
+  if (!success) {
+    return;
+  }
   handleComponents();
   handleTemplate();
   console.log(`模版${dirName}已创建`);
