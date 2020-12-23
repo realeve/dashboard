@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Percent from '@/component/widget/Percent';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 export let mock: IChartMock = {

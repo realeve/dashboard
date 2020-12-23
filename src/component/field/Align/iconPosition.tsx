@@ -1,4 +1,3 @@
-import React from 'react';
 import Icon from '@ant-design/icons';
 
 const TopSvg = () => (
@@ -33,8 +32,8 @@ const RightSvg = () => (
   </svg>
 );
 
-export const TopIcon = props => <Icon component={TopSvg} {...props} />;
+export const TopIcon = (props) => <Icon component={TopSvg} {...props} />;
 
-export const LeftIcon = props => <Icon component={LeftSvg} {...props} />;
-export const BottomIcon = props => <Icon component={BottomSvg} {...props} />;
-export const RightIcon = props => <Icon component={RightSvg} {...props} />;
+export const LeftIcon = (props) => <Icon component={LeftSvg} {...props} />;
+export const BottomIcon = (props) => <Icon component={BottomSvg} {...props} />;
+export const RightIcon = (props) => <Icon component={RightSvg} {...props} />;

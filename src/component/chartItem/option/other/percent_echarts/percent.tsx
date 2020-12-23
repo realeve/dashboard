@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './index.less';
 
 export default ({ fill = '#69bffe', size = 200, lineWidth = 5, value = 12 }) => {

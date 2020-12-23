@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { prefix, connectEditorProps } from '../utils/utils';
 import { IObject } from '@daybrush/utils';
 import Memory from '../utils/Memory';
@@ -34,7 +34,7 @@ export default abstract class Icon extends React.PureComponent<{
       </div>
     );
   }
-  public onClick = () => { 
+  public onClick = () => {
     this.props?.onSelect?.((this.constructor as any).id);
   };
 
@@ -43,7 +43,7 @@ export default abstract class Icon extends React.PureComponent<{
     if (keys.length) {
       this.keyManager.keydown(
         keys,
-        e => {
+        (e) => {
           if (e.ctrlKey || e.metaKey) {
             return false;
           }

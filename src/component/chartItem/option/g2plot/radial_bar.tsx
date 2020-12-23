@@ -1,4 +1,3 @@
-import React from 'react';
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {

@@ -1,5 +1,4 @@
 import { Radio } from 'antd';
-import React from 'react';
 import styles from '../ColorPicker/index.less';
 import classnames from 'classnames';
 import { isString } from '@antv/util';

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -30,8 +29,16 @@ export default class Params extends React.Component {
 
   getChannelInRange = (value, index) => {
     const channelMap = {
-      RGB: [[0, 255], [0, 255], [0, 255]],
-      HSB: [[0, 359], [0, 100], [0, 100]],
+      RGB: [
+        [0, 255],
+        [0, 255],
+        [0, 255],
+      ],
+      HSB: [
+        [0, 359],
+        [0, 100],
+        [0, 100],
+      ],
     };
     const mode = this.state.mode;
     const range = channelMap[mode][index];
@@ -66,7 +73,7 @@ export default class Params extends React.Component {
     }
   };
 
-  handleHexPress = event => {
+  handleHexPress = (event) => {
     const hex = this.state.hex;
     if (event.nativeEvent.which === 13) {
       let color = null;
@@ -85,7 +92,7 @@ export default class Params extends React.Component {
     }
   };
 
-  handleHexChange = event => {
+  handleHexChange = (event) => {
     const hex = event.target.value;
 
     this.setState({
@@ -105,7 +112,7 @@ export default class Params extends React.Component {
     });
   };
 
-  handleAlphaHandler = event => {
+  handleAlphaHandler = (event) => {
     let alpha = parseInt(event.target.value, 10);
 
     if (isNaN(alpha)) {
@@ -156,7 +163,7 @@ export default class Params extends React.Component {
       },
       () => {
         this.props.onChange(color, false);
-      }
+      },
     );
   };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './zoom.less';
 import { ZoomInOutlined, ZoomOutOutlined, AimOutlined } from '@ant-design/icons';
 import classnames from 'classnames';

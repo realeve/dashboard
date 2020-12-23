@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({
   st0 = '#08ade5',
   st1 = '#80bfe8',

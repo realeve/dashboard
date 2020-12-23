@@ -1,4 +1,3 @@
-import React from 'react';
 import { Select } from 'antd';
 import { IRadioProps } from '../Radio';
 import classnames from 'classnames';

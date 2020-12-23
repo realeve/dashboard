@@ -8,7 +8,6 @@ export let config = {
     company: '成都印钞有限公司',
     api: 'http://10.8.1.25:100',
     footer: '成都印钞有限公司 印钞管理部',
-    systemName: '质量信息管理平台',
     uploadHost: 'http://10.8.1.25:100/upload/',
     host: 'http://10.8.2.133:8000',
     org: 'CDYC',
@@ -29,10 +28,6 @@ export let config = {
 };
 
 export const CUR_COMPANY = 'chengdu';
-
-let defaultTitle = window.localStorage.getItem('_userMenuTitle');
-
-export let systemName = defaultTitle || config[CUR_COMPANY].systemName;
 
 export let AUTHOR = config[CUR_COMPANY].footer;
 

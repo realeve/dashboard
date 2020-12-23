@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import RcCollapse from 'rc-collapse';
 import classNames from 'classnames';
 import { ConfigContext } from 'antd/lib/config-provider';
@@ -17,7 +17,7 @@ export interface CollapsePanelProps {
 }
 
 const CollapsePanel: React.FC<CollapsePanelProps> = (props) => {
-  const { getPrefixCls } = React.useContext(ConfigContext);
+  const { getPrefixCls } = useContext(ConfigContext);
   const { prefixCls: customizePrefixCls, className = '', showArrow = true } = props;
   const prefixCls = getPrefixCls('collapse', customizePrefixCls);
   const collapsePanelClassName = classNames(

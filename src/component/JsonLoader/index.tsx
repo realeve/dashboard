@@ -1,4 +1,3 @@
-import React from 'react';
 import * as lib from '@/utils/lib';
 import { Upload } from 'antd';
 

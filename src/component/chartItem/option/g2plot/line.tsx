@@ -1,4 +1,3 @@
-import React from 'react';
 import { IApiConfig, IG2PlotProps, IChartMock } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { palette } from '@/component/g2plot';

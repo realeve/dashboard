@@ -1,4 +1,3 @@
-import React from 'react';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { textColor } from '..';

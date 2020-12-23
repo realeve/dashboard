@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './EditSlider.less';
 import ToolMenu from './ToolMenu';
 import InputRange from '@/component/field/InputRange';

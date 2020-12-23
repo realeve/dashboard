@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
 
 import Guides from '@/component/react-guides';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { prefix } from '../utils/utils';
 import './Popup.less';
 import * as ReactDOM from 'react-dom';

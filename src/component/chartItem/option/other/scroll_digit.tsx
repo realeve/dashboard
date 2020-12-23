@@ -1,4 +1,3 @@
-import React from 'react';
 // 此处导入你所需要的自定义组件
 import DigitalScroll from '@/component/widget/DigitalScroll';
 import { ICountUp } from '@/component/widget/DigitalScroll';

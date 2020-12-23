@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import VanillaInfiniteViewer, {
   CLASS_NAME,
   OPTIONS,
@@ -23,7 +23,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
 
     return (
       <div className={`${className || ''} ${CLASS_NAME}`} ref={ref(this, 'container')}>
-        <div ref={ref(this, 'scrollArea')}/>
+        <div ref={ref(this, 'scrollArea')} />
         {this.props.children}
       </div>
     );
@@ -32,11 +32,11 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
     const props = this.props;
     const options: Partial<InfiniteViewerOptions> = {};
 
-    OPTIONS.forEach(name => {
+    OPTIONS.forEach((name) => {
       if (name in props && typeof props[name] !== 'undefined') {
         (options as any)[name] = props[name];
       }
-    }); 
+    });
     this.infiniteViewer = new VanillaInfiniteViewer(
       this.container,
       this.scrollArea.nextElementSibling as HTMLElement,
@@ -61,7 +61,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
     const props = this.props;
     const infiniteViewer = this.infiniteViewer;
 
-    PROPERTIES.forEach(name => {
+    PROPERTIES.forEach((name) => {
       if (name in props && infiniteViewer[name] !== props[name]) {
         (infiniteViewer as any)[name] = props[name];
       }

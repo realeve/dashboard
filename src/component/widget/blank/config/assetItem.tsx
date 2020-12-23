@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import { isColor } from '@/component/chartItem/option/lib';

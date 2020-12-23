@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Ruler from '@scena/react-ruler';
 import { ref, refs } from 'framework-utils';
 import Dragger, { OnDragEnd } from '@daybrush/drag';

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './index.less';
 
 export default ({ percent: position = 45.2, style }) => {

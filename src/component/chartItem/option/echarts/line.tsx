@@ -1,4 +1,3 @@
-import React from 'react';
 import { graphic } from 'echarts';
 import * as lib from '../lib';
 

@@ -11,61 +11,51 @@ console.log({ DEV });
 let headScripts = DEV ? [] : ['http://cdn.cdyc.cbpm/lib/cbpc_log.min.js'];
 
 let chain = DEV
-  ? {}
+  ? {
+      chainWebpack: function (config) {
+        config.optimization.splitChunks({
+          cacheGroups: {
+            styles: {
+              name: 'styles',
+              test: /\.(css|less)$/,
+              chunks: 'async',
+              minChunks: 1,
+              minSize: 0,
+            },
+          },
+        });
+      },
+    }
   : {
       // https://umijs.org/zh/plugin/umi-plugin-react.html#chunks
       // https://webpack.docschina.org/plugins/split-chunks-plugin/
       chainWebpack: function (config) {
-        config.merge({
-          // plugin: {
-          //   install: {
-          //     plugin: require('uglifyjs-webpack-plugin'),
-          //     args: [
-          //       {
-          //         sourceMap: false,
-          //         uglifyOptions: {
-          //           compress: {
-          //             // 删除所有的 `console` 语句
-          //             drop_console: true,
-          //           },
-          //           output: {
-          //             // 最紧凑的输出
-          //             beautify: false,
-          //             // 删除所有的注释
-          //             comments: false,
-          //           },
-          //         },
-          //       },
-          //     ],
-          //   },
-          // },
-          optimization: {
-            minimize: true,
-            splitChunks: {
-              chunks: 'all',
-              minSize: 30000, //生成块的最小大小（以字节为单位）1024字节=1KB。
-              minChunks: 3, //拆分前必须共享模块的最小块数。
-              automaticNameDelimiter: '.',
-              cacheGroups: {
-                antv_g2: {
-                  name: 'antv_g2',
-                  test({ resource }) {
-                    return /[\\/]node_modules[\\/]([\S]+|)(@antv_)[\w|\W]/.test(resource); //&& !resource.includes('@antv_util')
-                  },
-                  enforce: true,
-                  priority: 10,
-                  minSize: 0,
-                  minChunks: 1,
-                },
-                echarts: {
-                  name: 'echarts',
-                  test: /[\\/]node_modules[\\/]([\S]+|)(echarts|zrender)/,
-                  enforce: true,
-                  priority: 10,
-                  minSize: 0,
-                  minChunks: 1,
-                },
+        config.optimization.splitChunks({
+          cacheGroups: {
+            styles: {
+              name: 'styles',
+              test: /\.(css|less)$/,
+              chunks: 'async',
+              minChunks: 1,
+              minSize: 0,
+            },
+            antv_g2: {
+              name: 'antv_g2',
+              test({ resource }) {
+                return /[\\/]node_modules[\\/]([\S]+|)(@antv_)[\w|\W]/.test(resource); //&& !resource.includes('@antv_util')
               },
+              enforce: true,
+              priority: 10,
+              minSize: 0,
+              minChunks: 1,
+            },
+            echarts: {
+              name: 'echarts',
+              test: /[\\/]node_modules[\\/]([\S]+|)(echarts|zrender)/,
+              enforce: true,
+              priority: 10,
+              minSize: 0,
+              minChunks: 1,
             },
           },
         });
@@ -86,7 +76,9 @@ const config = {
     hmr: true,
   },
   mock: false,
-  dynamicImport: {},
+  dynamicImport: {
+    loading: '@/component/Loading',
+  },
   title: 'dashboard',
   theme,
   exportStatic: { htmlSuffix: false },

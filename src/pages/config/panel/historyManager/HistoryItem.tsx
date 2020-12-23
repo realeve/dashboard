@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './HistoryItem.less';
 import classnames from 'classnames';
 

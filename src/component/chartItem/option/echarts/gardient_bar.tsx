@@ -1,4 +1,3 @@
-import React from 'react';
 import { graphic } from 'echarts';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';

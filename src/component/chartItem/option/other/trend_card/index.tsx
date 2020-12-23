@@ -1,4 +1,3 @@
-import React from 'react';
 import { IChartConfig, IChartMock } from '@/component/chartItem/interface';
 export { mock } from './mock';
 import { lineConfig, IG2Plot, getLineConfig } from '../../g2plot/line';

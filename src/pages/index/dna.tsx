@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './dna.less';
 import * as R from 'ramda';
 export default ({ title = '载入中...' }) => (

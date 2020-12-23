@@ -2,7 +2,6 @@ import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/inte
 // import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';
 import * as R from 'ramda';
-import React from 'react';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';

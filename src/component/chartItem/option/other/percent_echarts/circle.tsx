@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({ fill = '#69bffe', speed = 40 }) => {
   let center = 30.09;
   return (

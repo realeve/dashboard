@@ -1,4 +1,3 @@
-import React from 'react';
 import useFullscreen from './useFullscreen';
 import { useToggle, useLocation } from 'react-use';
 import Icon from './icon';

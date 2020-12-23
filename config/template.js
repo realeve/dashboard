@@ -136,8 +136,7 @@ export let mock: IChartMock = {
     rows: 10,
     hash: 'mockdata',
 };`;
-  let str = `
-  import React from 'react'; 
+  let str = ` 
   import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
   import { handleData } from '@/component/chartItem/option/echarts/line';
   
@@ -365,7 +364,6 @@ export let mock: IChartMock = {
     return str;
   }
   str = `
-import React from 'react';
 // 此处导入你所需要的自定义组件
 import ProgressBar from '@/component/widget/ProgressBar'; 
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface'; 
@@ -495,9 +493,7 @@ export default ({
     return str;
   }
 
-  return ` import React from 'react';
-  // 未知的组件类型  ${chartType}
-  `;
+  return `// 未知的组件类型  ${chartType}`;
 };
 
 const handleTemplate = () => {

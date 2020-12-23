@@ -1,4 +1,3 @@
-import React from 'react';
 import { IChartConfig } from '@/component/chartItem/interface';
 import ScreenEdge, { IScreenEdgeProps } from '@/component/Editor/ScreenEdge';
 

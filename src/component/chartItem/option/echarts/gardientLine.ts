@@ -1,4 +1,3 @@
-import React from 'react';
 import { textColor } from '@/component/chartItem/option';
 import util from '@/component/echarts/themeColor';
 import { graphic } from 'echarts';

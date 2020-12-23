@@ -1,11 +1,10 @@
-import React from 'react';
 import Icon from '@ant-design/icons';
 
 const LeftSvg = () => (
   <svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false">
     <svg viewBox="0 0 1024 1024">
       <path d="M181.312 960H106.688V64h74.624v896zM928 773.312H256V250.688h672v522.624z m-74.688-74.624V325.312H330.688v373.376h522.624z"></path>
-    </svg> 
+    </svg>
   </svg>
 );
 
@@ -25,7 +24,6 @@ const RightSvg = () => (
   </svg>
 );
 
-
-export const AlignLeftIcon = props => <Icon component={LeftSvg} {...props} />;
-export const AlignCenterIcon = props => <Icon component={CenterSvg} {...props} />;
-export const AlignRightIcon = props => <Icon component={RightSvg} {...props} />;
+export const AlignLeftIcon = (props) => <Icon component={LeftSvg} {...props} />;
+export const AlignCenterIcon = (props) => <Icon component={CenterSvg} {...props} />;
+export const AlignRightIcon = (props) => <Icon component={RightSvg} {...props} />;

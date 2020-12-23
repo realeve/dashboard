@@ -7,7 +7,7 @@ import KeyManager from './KeyManager/KeyManager';
 import Editor from './Editor';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
-import * as React from 'react';
+import React from 'react';
 
 export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
 

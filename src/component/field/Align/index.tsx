@@ -1,7 +1,6 @@
-import React from 'react';
 import { AlignCenterIcon, AlignRightIcon, AlignLeftIcon } from './iconAlign';
 import Radio from '@/component/field/Radio';
-export default props => {
+export default (props) => {
   return (
     <Radio
       {...props}
