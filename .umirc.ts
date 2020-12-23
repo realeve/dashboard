@@ -1,7 +1,14 @@
-import { IConfig } from 'umi-types';
+// import { IConfig } from 'umi-types';
+
+// https://umijs.org/config/
+import { defineConfig } from 'umi';
+
 import theme from './config/theme';
 const DEV = process.env.NODE_ENV == 'development';
 console.log({ DEV });
+
+// 注入自动日志;
+let headScripts = DEV ? [] : ['http://cdn.cdyc.cbpm/lib/cbpc_log.min.js'];
 
 let chain = DEV
   ? {}
@@ -10,28 +17,28 @@ let chain = DEV
       // https://webpack.docschina.org/plugins/split-chunks-plugin/
       chainWebpack: function (config) {
         config.merge({
-          plugin: {
-            install: {
-              plugin: require('uglifyjs-webpack-plugin'),
-              args: [
-                {
-                  sourceMap: false,
-                  uglifyOptions: {
-                    compress: {
-                      // 删除所有的 `console` 语句
-                      drop_console: true,
-                    },
-                    output: {
-                      // 最紧凑的输出
-                      beautify: false,
-                      // 删除所有的注释
-                      comments: false,
-                    },
-                  },
-                },
-              ],
-            },
-          },
+          // plugin: {
+          //   install: {
+          //     plugin: require('uglifyjs-webpack-plugin'),
+          //     args: [
+          //       {
+          //         sourceMap: false,
+          //         uglifyOptions: {
+          //           compress: {
+          //             // 删除所有的 `console` 语句
+          //             drop_console: true,
+          //           },
+          //           output: {
+          //             // 最紧凑的输出
+          //             beautify: false,
+          //             // 删除所有的注释
+          //             comments: false,
+          //           },
+          //         },
+          //       },
+          //     ],
+          //   },
+          // },
           optimization: {
             minimize: true,
             splitChunks: {
@@ -72,10 +79,15 @@ let chunks = DEV
     };
 
 // ref: https://umijs.org/config/
-const config: IConfig = {
-  treeShaking: true,
-  theme,
+const config = {
   hash: true,
+  antd: {},
+  dva: {
+    hmr: true,
+  },
+  dynamicImport: {},
+  title: 'dashboard',
+  theme,
   exportStatic: { htmlSuffix: false },
   routes: [
     {
@@ -89,28 +101,15 @@ const config: IConfig = {
     },
   ],
   ...chain,
-  plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
-    [
-      'umi-plugin-react',
-      {
-        ...chunks,
-        antd: true,
-        dva: true,
-        dynamicImport: { webpackChunkName: true },
-        title: 'dashboard',
-        routes: {
-          exclude: [
-            /models\//,
-            /services\//,
-            /model\.(t|j)sx?$/,
-            /service\.(t|j)sx?$/,
-            /components\//,
-          ],
-        },
-      },
-    ],
-  ],
+  ...chunks,
+  headScripts,
+  targets: {
+    chrome: 70,
+    firefox: false,
+    safari: false,
+    edge: false,
+    ios: false,
+  },
 };
 
-export default config;
+export default defineConfig(config);

@@ -9,6 +9,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
+      "@@/*": ["src/.umi/*"],
       "@/*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,

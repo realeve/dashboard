@@ -7,7 +7,7 @@ import { useDebounce, useSetState } from 'react-use';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { router } from 'umi';
+import { history } from 'umi';
 import { setDashboardList } from './db';
 
 // 新增组件
@@ -19,7 +19,7 @@ const NewScreen = () => (
         <Button
           type="primary"
           onClick={() => {
-            router.push('/config');
+            history.push('/config');
           }}
         >
           添加
@@ -185,7 +185,7 @@ const RightSide = ({ data, dispatch, onRefresh }: IScreenListProps) => {
         file: show.file,
         callback: () => {
           // step2:进入config路由
-          router.push('/config');
+          history.push('/config');
         },
       },
     });

@@ -156,7 +156,7 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
     // that falls out of the range of 2xx
     let { data, status } = error.response;
     // if (status === 401) {
-    //   router.push('/unlogin');
+    //   history.push('/unlogin');
     // }
 
     const errortext = (codeMessage[status] || '') + (data.msg || '');

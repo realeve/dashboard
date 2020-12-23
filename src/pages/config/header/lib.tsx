@@ -1,5 +1,5 @@
 import { getLocalConfig } from '@/pages/index/lib';
-import { router } from 'umi';
+import { history } from 'umi';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
 
@@ -14,7 +14,7 @@ export const onPreview = async () => {
   if (!props) {
     return;
   }
-  router.push('/');
+  history.push('/');
 };
 
 // 此处保存完毕后为utf-8格式编码，需要转换为ANSI(结论：暂时无解)

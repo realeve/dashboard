@@ -16,7 +16,7 @@ export interface IScreenItem {
   publish?: number;
   group_name?: string;
 }
-export default () => {
+const List = () => {
   let { data, loading, error, reFetch } = useFetch<{ data: IScreenItem[] }>({
     param: {
       url: api.getDashboardList,
@@ -53,3 +53,5 @@ export default () => {
     </div>
   );
 };
+
+export default List;
