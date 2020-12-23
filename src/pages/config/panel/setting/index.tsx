@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import Page from './page';
-import { connect } from 'dva';
 import {
   ICommon,
   GROUP_COMPONENT_KEY,
@@ -14,6 +13,7 @@ import {
 import Config from './config';
 import { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
+import { connect } from 'react-redux';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 

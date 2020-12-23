@@ -3,12 +3,12 @@ import styles from './index.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
 import * as R from 'ramda';
-import { connect } from 'dva';
 import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY, IHistoryProps } from '@/models/common';
 import { TFnHide, IHideProps } from '../setting';
 
 import { message } from 'antd';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 export { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
 import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
@@ -599,5 +599,4 @@ const Index = ({
     </div>
   );
 };
-
-export default connect(({ common }: { common: ICommon }) => common)(Index);
+export default connect(({ common }: { common: ICommon }) => common)(HistoryPanel);

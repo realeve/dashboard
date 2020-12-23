@@ -3,10 +3,9 @@ import React, { useRef, useEffect } from 'react';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import styles from './index.less';
-import { connect } from 'dva';
 import ContentEditable from 'react-contenteditable';
-import { ICommon } from '@/models/common';
 import classnames from 'classnames';
+import { useLocation } from 'react-use';
 
 export let mock: IChartMock = {
   data: [[45.7]],
@@ -107,7 +106,8 @@ export const config: IChartConfig[] = [
 
 export const apiConfig: IApiConfig = {};
 
-const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathname }) => {
+export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
+  const { pathname } = useLocation();
   let {
     fontSize = 25,
     textAlign,
@@ -208,6 +208,3 @@ const Index = ({ option: { data, ...componentConfig }, chartid, dispatch, pathna
     </div>
   );
 };
-export default connect(({ common: { pathname } }: { common: ICommon }) => ({
-  pathname,
-}))(Index);

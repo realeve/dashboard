@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import DNA from './dna';
 import styles from './index.less';
 import {

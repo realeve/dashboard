@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
 import { IPanelConfig, ICommon, IPage, IHistoryProps, SCREEN_EDGE_KEY } from '@/models/common';
-import { connect } from 'dva';
 import { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
@@ -12,7 +11,7 @@ import ComponentSetting from './componentSetting';
 import ApiSetting from './apiSetting';
 import InputRange from '@/component/field/InputRange';
 import { Divider } from 'antd';
-
+import { connect } from 'react-redux';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
 
 interface IPanel extends IHistoryProps {

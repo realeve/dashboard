@@ -11,7 +11,10 @@ const beautify = require('js-beautify');
 const moment = require('dayjs');
 let components = require('../public/components.json');
 const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
+const { chartList } = require('/component/chartItem/option/index.ts');
 
+console.log(chartList);
+return;
 // 测试模式，只打印，不改文件
 const DEBUG_MODE = false;
 

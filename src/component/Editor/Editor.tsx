@@ -762,6 +762,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     jsx: ScenaJSXType,
     config: { id?: string; name?: string; style?: React.CSSProperties },
   ) {
+    // 判断id是否重复;
+    console.log(this.memory, this.moveableData);
+
     let id = config.id || generateId();
     let name = config.name || id;
     return this.appendJSXs([

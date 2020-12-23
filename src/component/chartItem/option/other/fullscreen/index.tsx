@@ -1,10 +1,10 @@
 import React from 'react';
 import useFullscreen from './useFullscreen';
-import { useToggle } from 'react-use';
+import { useToggle, useLocation } from 'react-use';
 import Icon from './icon';
 import { Tooltip } from 'antd';
 import { IChartConfig } from '@/component/chartItem/interface';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import { ICommon } from '@/models/common';
 
 export const config: IChartConfig[] = [
@@ -17,7 +17,8 @@ export const config: IChartConfig[] = [
   },
 ];
 
-const FullScreen = ({ option: { fill = '#e6e6e6' }, curTool, pathname }) => {
+const FullScreen = ({ option: { fill = '#e6e6e6' }, curTool }) => {
+  const { pathname } = useLocation();
   const [show, toggle] = useToggle(false);
   const isFullscreen = useFullscreen(show, () => toggle(false));
 
@@ -38,7 +39,6 @@ const FullScreen = ({ option: { fill = '#e6e6e6' }, curTool, pathname }) => {
   );
 };
 
-export default connect(({ common: { curTool, pathname } }: { common: ICommon }) => ({
+export default connect(({ common: { curTool } }: { common: ICommon }) => ({
   curTool,
-  pathname,
 }))(FullScreen);

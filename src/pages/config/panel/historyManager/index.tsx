@@ -3,9 +3,9 @@ import styles from './index.less';
 import classnames from 'classnames';
 import HistoryItem from './HistoryItem';
 import { Tooltip } from 'antd';
-import { connect } from 'dva';
 import { ICommon, IPanelConfig } from '@/models/common';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 const HistoryHeader = ({ onClear }) => (
   <div className={styles['layer-manager-top']}>

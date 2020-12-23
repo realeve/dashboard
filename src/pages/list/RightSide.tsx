@@ -5,7 +5,7 @@ import { Button, Tooltip, message } from 'antd';
 import { IScreenItem } from './index';
 import { useDebounce, useSetState } from 'react-use';
 import { Confirm } from '@/component/Editor/Popup/Popup';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { router } from 'umi';
 import { setDashboardList } from './db';

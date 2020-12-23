@@ -58,13 +58,6 @@ let chain = DEV
                   minSize: 0,
                   minChunks: 1,
                 },
-                vendors: {
-                  name: 'vendors',
-                  test({ resource }) {
-                    return /[\\/]node_modules[\\/]/.test(resource);
-                  },
-                  priority: 2,
-                },
               },
             },
           },
@@ -75,7 +68,7 @@ let chain = DEV
 let chunks = DEV
   ? {}
   : {
-      chunks: ['vendors', 'antv_g2', 'echarts', 'umi'],
+      chunks: ['antv_g2', 'echarts', 'umi'],
     };
 
 // ref: https://umijs.org/config/
@@ -101,7 +94,7 @@ const config: IConfig = {
     [
       'umi-plugin-react',
       {
-        // ...chunks,
+        ...chunks,
         antd: true,
         dva: true,
         dynamicImport: { webpackChunkName: true },

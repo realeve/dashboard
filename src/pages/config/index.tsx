@@ -1,14 +1,14 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import styles from './index.less';
-import { useSetState } from 'react-use';
+import { useSetState, useDebounce } from 'react-use';
 import HeaderComponent from './header';
 import { IHideProps } from './panel/setting';
 import { getDefaultStyle } from '@/component/Editor/lib';
 import { TQuickTool } from '@/component/Editor/types';
 import { generateId } from '@/component/Editor/utils/utils';
-import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
+import { connect } from 'react-redux';
 import {
   ICommon,
   GROUP_COMPONENT_KEY,
@@ -22,8 +22,6 @@ import { Dispatch } from 'redux';
 import * as lib from '@/utils/lib';
 
 import localforage from 'localforage';
-
-import { useDebounce } from 'react-use';
 
 import { calcPanelPosition } from './lib';
 import classnames from 'classnames';

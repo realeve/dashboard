@@ -8,7 +8,7 @@ import { onCopy, onPreview, saveBat } from './lib';
 import { addDashboardList } from '@/pages/config/panel/business/db';
 import classnames from 'classnames';
 import { Tooltip, message } from 'antd';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 export type FnOnLoadConfig = ({ page, panel }: { page: IPage; panel: IPanelConfig[] }) => void;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentList } from '../components/TabComponent';
 import { getTblBusiness, IBusinessProps } from './db';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import { ICommon, IBusinessCategory, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';

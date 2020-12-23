@@ -1,12 +1,11 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { connect } from 'dva';
 import { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';
 import { Spin } from 'antd';
-
+import { connect } from 'react-redux';
 const ChartInstance = React.lazy(() => import('./ChartInstance'));
 interface IChartProps extends IHistoryProps {
   chartid: string;

@@ -5,7 +5,7 @@ import { init } from './lib';
 export { mock } from './mock';
 import { isArray } from '@antv/util';
 import * as R from 'ramda';
-import { connect } from 'dva';
+import { connect } from 'react-redux';
 import MoveableCanvas from '@/component/MoveableCanvas';
 import { ICommon } from '@/models/common';
 import { Tooltip } from 'antd';

@@ -6,9 +6,8 @@ import * as R from 'ramda';
 import { ScenaJSXElement } from '@/component/Editor/types';
 import { TChartEngine } from '@/models/common';
 
-import { connect } from 'dva';
-import { ICommon } from '@/models/common';
 import { Dispatch } from 'redux';
+import { useLocation } from 'react-use';
 
 export interface WidgetBorder {
   name?: string;
@@ -20,7 +19,7 @@ export interface WidgetBorder {
 }
 export const borderNames = Object.keys(assets.borders);
 
-const BorderItem = ({
+export default ({
   name,
   children,
   style,
@@ -28,10 +27,10 @@ const BorderItem = ({
   showBackground = true,
   className,
   engine = 'other',
-  pathname,
   dispatch,
   ...props
 }: WidgetBorder) => {
+  const { pathname } = useLocation();
   const { url, ...img } = assets.borders[name] || {};
 
   // 11-12
@@ -64,7 +63,3 @@ const BorderItem = ({
     </div>
   );
 };
-
-export default connect(({ common: { pathname } }: { common: ICommon }) => ({
-  pathname,
-}))(BorderItem);
