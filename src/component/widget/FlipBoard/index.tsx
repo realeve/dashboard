@@ -4,8 +4,7 @@ import { useCountUp, CountUpProps } from 'react-countup';
 import classnames from 'classnames';
 import { thouandsNum } from '@/utils/lib';
 import { textColor } from '@/component/chartItem/option';
-
-export interface ICountUp extends CountUpProps {
+export interface ICountUp extends Omit<CountUpProps, 'prefix' | 'suffix'> {
   value: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;

@@ -7,8 +7,6 @@ import { thouandsNum } from '@/utils/lib';
 export interface ICountUp extends CountUpProps {
   title: string;
   value: number;
-  prefix?: string;
-  suffix?: string;
   decimals?: number;
   className?: string;
   style?: React.CSSProperties;

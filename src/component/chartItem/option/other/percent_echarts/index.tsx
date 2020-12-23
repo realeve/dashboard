@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
 import Circle from './circle';
 import Percent from './percent';
 
 import { useMeasure, useSetState } from 'react-use';
-import CountUp from 'react-countup';
+
+const CountUp = React.lazy(() => import('react-countup'));
 
 export let mock: IChartMock = {
   data: [[85.7]],
@@ -141,7 +142,14 @@ export default ({
           <div className={styles.name} style={{ color: st2, fontSize: fontSize * 0.7 }}>
             {header[x]}
           </div>
-          <CountUp {...val} decimals={2} suffix="%" style={{ color: st2, fontSize, fontWeight }} />
+          <Suspense fallback={null}>
+            <CountUp
+              {...val}
+              decimals={2}
+              suffix="%"
+              style={{ color: st2, fontSize, fontWeight }}
+            />
+          </Suspense>
         </div>
       </div>
     </div>

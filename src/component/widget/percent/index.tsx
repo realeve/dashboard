@@ -1,10 +1,8 @@
 import React, { useEffect, Suspense } from 'react';
-
 import percent from '@/component/chartItem/option/echarts/percent';
 import styles from './index.less';
-import CountUp from 'react-countup';
 import { useSetState } from 'react-use';
-
+const CountUp = React.lazy(() => import('react-countup'));
 const Echarts = React.lazy(() => import('@/component/echarts'));
 
 export default ({ option }) => {
@@ -27,7 +25,9 @@ export default ({ option }) => {
       </Suspense>
       <div className={styles.tip} style={{ justifyContent: option.half ? 'flex-end' : 'center' }}>
         <div className={styles.name}>{val.name}</div>
-        <CountUp {...val} decimals={2} suffix="%" className={styles.value} />
+        <Suspense fallback={null}>
+          <CountUp {...val} decimals={2} suffix="%" className={styles.value} />
+        </Suspense>
       </div>
     </div>
   );

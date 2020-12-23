@@ -1,8 +1,8 @@
-import * as d3Hierarchy from 'd3-hierarchy';
+import { hierarchy, treemap, treemapResquarify } from 'd3-hierarchy';
 import { assign, isArray } from '@antv/util';
 import { getField } from './option-parser';
 
-let { Node } = d3Hierarchy.hierarchy;
+let { Node } = hierarchy;
 export { Node };
 interface HierarchyApi {
   root?: any;
@@ -76,7 +76,7 @@ export function transform(dataView: View, options: Options): typeof Node {
   if (dataView.dataType !== HIERARCHY) {
     throw new TypeError('Invalid DataView: This transform is for Hierarchy data only!');
   }
-  dataView.rows = dataView.root = d3Hierarchy.hierarchy({
+  dataView.rows = dataView.root = hierarchy({
     name: 'root',
     children: dataView.children,
   });
@@ -98,9 +98,9 @@ export function transform(dataView: View, options: Options): typeof Node {
     root.sum((d) => d[field]);
   }
 
-  const treemapLayout = d3Hierarchy.treemap();
+  const treemapLayout = treemap();
   treemapLayout
-    .tile(d3Hierarchy[options.tile])
+    .tile(treemapResquarify)
     .size(options.size)
     .round(options.round)
     .padding(options.padding)

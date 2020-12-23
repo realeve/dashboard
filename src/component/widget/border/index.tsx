@@ -3,7 +3,7 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import { ScenaJSXElement } from '@/component/Editor';
+import { ScenaJSXElement } from '@/component/Editor/types';
 import { TChartEngine } from '@/models/common';
 
 import { connect } from 'dva';

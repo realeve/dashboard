@@ -1,12 +1,11 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import styles from './index.less';
 import { useSetState } from 'react-use';
-
 import HeaderComponent from './header';
-
 import { IHideProps } from './panel/setting';
-
-import { getDefaultStyle, generateId, TQuickTool } from '@/component/Editor';
+import { getDefaultStyle } from '@/component/Editor/lib';
+import { TQuickTool } from '@/component/Editor/types';
+import { generateId } from '@/component/Editor/utils/utils';
 import { connect } from 'dva';
 import ChartItem from './canvas/chartItem';
 import { IChartConfig } from './panel/components/db';
