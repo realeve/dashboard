@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { IHideProps, TFnHide } from './setting';
 // import HistoryManager from './historyManager';
 
-const Layer = React.lazy(() => import('./layer/layer'));
+const Layer = React.lazy(() => import('./layer/index'));
 const HistoryManager = React.lazy(() => import('./historyManager'));
 
 export default (props: { hide: IHideProps; setHide: TFnHide; onRemove: (e: string[]) => void }) => {

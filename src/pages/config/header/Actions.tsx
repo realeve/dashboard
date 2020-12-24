@@ -8,9 +8,7 @@ import { onCopy, onPreview, saveBat } from './lib';
 import { addDashboardList } from '@/pages/config/panel/business/db';
 import classnames from 'classnames';
 import { Tooltip, message } from 'antd';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-
+import { useDispatch } from 'dva';
 export type FnOnLoadConfig = ({ page, panel }: { page: IPage; panel: IPanelConfig[] }) => void;
 
 const Actions = ({
@@ -19,15 +17,14 @@ const Actions = ({
   getThumbnail,
   isEditMode = false,
   title,
-  dispatch,
 }: {
   onLoadConfig: FnOnLoadConfig;
   title: string;
   fileTitle: string;
   getThumbnail: (scale: number, filename: string | null) => Promise<string | void>;
   isEditMode?: boolean;
-  dispatch: Dispatch;
 }) => {
+  const dispatch = useDispatch();
   const [loadPanel, setLoadPanel] = useState(false);
   const [show, setShow] = useState(false);
   const [clear, setClear] = useState(false);
@@ -168,4 +165,4 @@ const Actions = ({
   );
 };
 
-export default connect()(Actions);
+export default Actions;

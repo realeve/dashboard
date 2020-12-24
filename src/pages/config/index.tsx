@@ -26,6 +26,7 @@ import localforage from 'localforage';
 import { calcPanelPosition } from './lib';
 import classnames from 'classnames';
 import { Spin } from 'Antd';
+import { Prompt } from 'umi';
 
 const Editor = React.lazy(() => import('@/component/Editor/Editor'));
 const ComponentPanel = React.lazy(() => import('./panel/components'));
@@ -315,6 +316,7 @@ const Index = ({
 
   return (
     <div className={styles.editor}>
+      <Prompt message="确定要离开本页面？当前的配置项系统已自动保存" />
       <HeaderComponent
         getThumbnail={getThumbnail}
         setHide={setHide}

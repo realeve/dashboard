@@ -5,10 +5,11 @@ import { Button, Tooltip, message } from 'antd';
 import { IScreenItem } from './index';
 import { useDebounce, useSetState } from 'react-use';
 import { Confirm } from '@/component/Editor/Popup/Popup';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+
 import { history } from 'umi';
 import { setDashboardList } from './db';
+
+import { useDispatch } from 'dva';
 
 // 新增组件
 const NewScreen = () => (
@@ -161,10 +162,10 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
 
 export interface IScreenListProps {
   data: IScreenItem[];
-  dispatch?: Dispatch;
   onRefresh?: () => void;
 }
-const RightSide = ({ data, dispatch, onRefresh }: IScreenListProps) => {
+const RightSide = ({ data, onRefresh }: IScreenListProps) => {
+  const dispatch = useDispatch();
   // 将面板从子组件中移出来，将事件添加至外部，这样有多个面板需要渲染时，无需渲染多个popup
   const [show, setShow] = useSetState<IShowProps>({
     visible: false,
@@ -253,4 +254,4 @@ const RightSide = ({ data, dispatch, onRefresh }: IScreenListProps) => {
   );
 };
 
-export default connect()(RightSide);
+export default RightSide;

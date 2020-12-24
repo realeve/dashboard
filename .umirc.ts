@@ -26,6 +26,7 @@ export default defineConfig({
     // 对按照 css modules 方式引入的 css 或 less 等样式文件，自动生成 ts 类型定义文件。
     mode: 'emit',
   },
+  esbuild: DEV ? {} : false,
   devtool: DEV ? 'eval' : false,
   // mpa: {
   //   splitChunks: {

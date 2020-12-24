@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import DNA from './dna';
 import styles from './index.less';
 import {
@@ -13,7 +12,7 @@ import {
 import { getDashboardStyle } from '@/component/Editor/Editor';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
-
+import { useLocation } from 'umi';
 const ScaleBackground = ({
   resizeType,
   page,
@@ -65,9 +64,11 @@ const ScaleBackground = ({
  * @enum 不设置或其它(不缩放)
  * @enum autoresize=movie(电影一样留出左右两边)
  */
-// DEMO:  http://localhost:8000/?id=/data/01.json&autoresize=component
-const Index = ({ location }) => {
+// DEMO:  http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
+const Index = () => {
   const [config, setConfig] = useState(null);
+
+  let location = useLocation<{ query: {} }>();
 
   useEffect(() => {
     setConfig(null);
@@ -79,7 +80,7 @@ const Index = ({ location }) => {
   let { page, panel, type } = config,
     autoSize = location?.query?.autoresize;
   if (type == 'notExist') {
-    return <DNA title={`文件${location.query.id}加载失败，请检查是否上传!`} />;
+    return <DNA title={`文件${location?.query?.id}加载失败，请检查是否上传!`} />;
   }
 
   let resizeType = getResizeType(autoSize);
@@ -98,4 +99,4 @@ const Index = ({ location }) => {
   );
 };
 
-export default connect()(Index);
+export default Index;
