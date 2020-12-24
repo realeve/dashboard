@@ -264,6 +264,8 @@ interface CssExports {
   'icon-zhongxin': string;
   'icon-zoom-in': string;
   'icon-zoom-out': string;
+  'ka-content': string;
+  'ka-wrapper': string;
   'marqueeAnimation': string;
   'notitle': string;
   'rc-color-picker-wrap': string;
