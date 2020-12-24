@@ -1,5 +1,5 @@
 import { axios } from '@/utils/axios';
-import { getDashboardStyle } from '@/component/Editor/Editor';
+import { getDashboardStyle } from '@/component/Editor/lib';
 import { message } from 'antd';
 import { IPage, IPanelConfig } from '@/models/common';
 import { parseStyle, calcTranslate } from '@/pages/config/lib';

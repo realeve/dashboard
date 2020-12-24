@@ -9,7 +9,7 @@ import {
   getResizeType,
   EResizeType,
 } from './lib';
-import { getDashboardStyle } from '@/component/Editor/Editor';
+import { getDashboardStyle } from '@/component/Editor/lib';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 import { useLocation } from 'umi';

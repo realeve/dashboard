@@ -22,35 +22,10 @@ import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb, calcDefaultGuidline } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import assets from '@/component/widget/assets';
 import { IPage } from '@/models/common';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
-import { getDefaultStyle } from './lib';
-import { isColor } from '@/component/chartItem/option/lib';
-
-const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
-export const getDashboardStyle = (page: { width: string; height: string; background: string }) => {
-  let url = page.background
-    ? assets.backgrounds[page.background].url
-    : 'url(/img/panel/panelbg.png)';
-  let background = isColor(url)
-    ? { background: url, backgroundRepeat: 'repeat' }
-    : {
-        backgroundImage: page.background
-          ? `url('${assets.backgrounds[page.background].url}')`
-          : 'url(/img/panel/panelbg.png)',
-        backgroundSize: 'auto',
-        backgroundRepeat: 'repeat',
-        ...backgroundStyle,
-      };
-
-  return {
-    width: `${page.width}px`,
-    height: `${page.height}px`,
-    ...background,
-  };
-};
+import { getDefaultStyle, getDashboardStyle } from './lib';
 
 const edgeConfig = {
   zoom60: 50,

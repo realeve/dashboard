@@ -56,6 +56,4 @@ test('文件读写', async () => {
   let res = await lib.loadDashboard(blob);
   expect(lib.loadDashboard()).toMatchObject({});
   expect(res).toMatchObject(JSON.parse(testResult));
-
-  expect(lib.saveDashboard({ a: 1 })).toBeTruthy();
 });
