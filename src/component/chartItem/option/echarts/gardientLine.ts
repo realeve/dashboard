@@ -1,6 +1,8 @@
 import { textColor } from '@/component/chartItem/option';
 import util from '@/component/echarts/themeColor';
-import { graphic } from 'echarts';
+
+import LinearGradient from 'zrender/lib/graphic/LinearGradient';
+
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import { handleData } from './line';
 import * as lib from '../lib';
@@ -118,7 +120,7 @@ export default ({
         borderWidth: 4,
         areaStyle: {
           //渐变色的设置
-          color: new graphic.LinearGradient(0, 0, 0, 1, [
+          color: LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
               color: util.hex2rgb(color[idx % res.series.length], 0.9),

@@ -1,4 +1,4 @@
-import { graphic } from 'echarts';
+import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
@@ -114,7 +114,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
         barWidth: barWidth,
         itemStyle: {
           normal: {
-            color: new graphic.LinearGradient(
+            color: LinearGradient(
               0,
               0,
               0,

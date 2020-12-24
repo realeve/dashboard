@@ -1,6 +1,7 @@
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { handleData } from '@/component/chartItem/option/echarts/line';
-import { graphic } from 'echarts';
+
+import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 export let mock: IChartMock = {
   data: [
@@ -67,7 +68,7 @@ export default ({ data, x = 0, y = 1, showSplit = true }) => {
       barWidth: 24.5,
       itemStyle: {
         normal: {
-          color: new graphic.LinearGradient(
+          color: new LinearGradient(
             0,
             1,
             0,
@@ -98,7 +99,7 @@ export default ({ data, x = 0, y = 1, showSplit = true }) => {
       barWidth: 8,
       itemStyle: {
         normal: {
-          color: new graphic.LinearGradient(
+          color: new LinearGradient(
             0,
             1,
             0,

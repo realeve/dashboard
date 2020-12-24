@@ -10,7 +10,6 @@ import { palette } from '@/component/g2plot/palette';
 export type tRender = 'canvas' | 'svg';
 // 获取最佳轴长度
 import { nice, quantity } from 'echarts/lib/util/number';
-import { reduce, map } from 'zrender/lib/core/util';
 
 export interface IChart {
   key?: string;
@@ -819,38 +818,22 @@ export function getPercentWithPrecision(
   valueList: (number | '-')[],
   precision: number = 2,
 ): number[] {
-  const sum = reduce(
-    valueList,
-    function (acc, val) {
-      return acc + (isNaN(val) ? 0 : val);
-    },
-    0,
-  );
+  const sum = valueList.reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
   if (sum === 0) {
-    return valueList.map((item) => 0);
+    return valueList.map(() => 0);
   }
 
   const digits = Math.pow(10, precision);
-  const votesPerQuota = map(valueList, function (val) {
-    return ((isNaN(val) ? 0 : val) / sum) * digits * 100;
-  });
+  const votesPerQuota = valueList.map(
+    (val: number | '-') => ((isNaN(val) || val == '-' ? 0 : val) / sum) * digits * 100,
+  );
   const targetSeats = digits * 100;
 
-  const seats = map(votesPerQuota, function (votes) {
-    // Assign automatic seats.
-    return Math.floor(votes);
-  });
-  let currentSum = reduce(
-    seats,
-    function (acc, val) {
-      return acc + val;
-    },
-    0,
-  );
+  // Assign automatic seats.
+  const seats = votesPerQuota.map((votes) => Math.floor(votes));
+  let currentSum = seats.reduce((acc, val) => acc + val, 0);
 
-  const remainder = map(votesPerQuota, function (votes, idx) {
-    return votes - seats[idx];
-  });
+  const remainder = votesPerQuota.map((votes, idx) => votes - seats[idx]);
 
   // Has remainding votes.
   while (currentSum < targetSeats) {
