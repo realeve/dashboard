@@ -35,12 +35,13 @@ export const getDashboardStyle = (page: { width: string; height: string; backgro
     ? assets.backgrounds[page.background].url
     : 'url(/img/panel/panelbg.png)';
   let background = isColor(url)
-    ? { background: url }
+    ? { background: url, backgroundRepeat: 'repeat' }
     : {
         backgroundImage: page.background
           ? `url('${assets.backgrounds[page.background].url}')`
           : 'url(/img/panel/panelbg.png)',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
+        backgroundRepeat: 'repeat',
         ...backgroundStyle,
       };
 
