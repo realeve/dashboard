@@ -327,7 +327,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     };
 
     let zoomRange = calcCanvasRange({ width, hideWidth: this.props.hideWidth, height }, zoom);
-    console.log(zoomRange, this.props.hideWidth);
+
     return (
       <div
         className={classnames(prefix('editor'), {

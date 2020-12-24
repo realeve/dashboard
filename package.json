@@ -50,7 +50,7 @@
     "react-dom": "^17.0.1",
     "react-draggable": "^4.4.3",
     "react-infinite-viewer": "^0.10.1",
-    "react-moveable": "^0.22.3",
+    "react-moveable": "^0.25.0",
     "react-selecto": "^1.6.4",
     "react-use": "^13.14.0",
     "three": "^0.122.0",
