@@ -12,7 +12,9 @@ let headScripts = DEV ? [] : ['http://cdn.cdyc.cbpm/lib/cbpc_log.min.js'];
 
 export default defineConfig({
   hash: true,
-  antd: {},
+  antd: {
+    dark: true,
+  },
   dva: {
     hmr: true,
   },
