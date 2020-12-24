@@ -201,7 +201,9 @@ https://web.raykite.com/square
  
 [enzyme](https://enzymejs.github.io/enzyme/docs/installation/index.html)
 
+[react-testing-library](https://github.com/testing-library/react-testing-library)
 
+[test-renderer](https://zh-hans.reactjs.org/docs/test-renderer.html)
 ---
 
 IIS Url Rewrite:https://www.iis.net/downloads/microsoft/url-rewrite
