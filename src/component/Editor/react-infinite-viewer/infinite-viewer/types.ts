@@ -9,22 +9,26 @@ export interface InfiniteViewerOptions {
   margin: number;
   threshold: number;
   zoom: number;
-  scrollArea: HTMLElement;
   rangeX: number[];
   rangeY: number[];
   usePinch: boolean;
   pinchThreshold: number;
   wheelScale: number;
+
+  /** 缩放范围 */
+  zoomRange: [number, number];
+  /** 鼠标缩放事件 */
+  onZoom: (scale: number) => void;
+
   cspNonce: string;
+  displayVerticalScroll: boolean;
+  displayHorizontalScroll: boolean;
+  useForceWheel: boolean;
 
-  // 缩放范围，最大最小值
-  zoomRange?: number[];
-
-  // 缩放变更
-  onZoom?: (e: number) => void;
-
-  // 允许滚动
-  allowWheel?: boolean;
+  wrapperElement: HTMLElement;
+  scrollAreaElement: HTMLElement;
+  verticalScrollElement: HTMLElement;
+  horizontalScrollElement: HTMLElement;
 }
 
 /**
@@ -70,6 +74,14 @@ export interface OnDragEnd {
  * @typedef
  * @memberof InfiniteViewer
  */
+export interface OnPinchStart {
+  inputEvent: any;
+  stop(): void;
+}
+/**
+ * @typedef
+ * @memberof InfiniteViewer
+ */
 export interface OnPinch {
   distance: number;
   scale: number;
@@ -82,6 +94,7 @@ export interface InfiniteViewerEvents {
   dragStart: OnDragStart;
   drag: OnDrag;
   dragEnd: OnDragEnd;
+  pinchStart: OnPinchStart;
   pinch: OnPinch;
 }
 export type InfiniteViewerProperties = {

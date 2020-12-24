@@ -25,20 +25,10 @@ import * as R from 'ramda';
 import { IPage } from '@/models/common';
 import { Dispatch } from 'redux';
 import fileSaver from 'file-saver';
-import { getDefaultStyle, getDashboardStyle } from './lib';
+import { getDefaultStyle, getDashboardStyle, calcCanvasRange } from './lib';
 
-const edgeConfig = {
-  zoom60: 50,
-  zoom70: 56,
-  zoom80: 60,
-  zoom90: 64,
-  zoom100: 70,
-  zoom110: 72,
-  zoom120: 74,
-  zoom130: 76,
-  zoom140: 78,
-  zoom150: 80,
-};
+// 缩放的范围
+export const rangeCfg = { min: 0.4, max: 2, step: 0.1 };
 
 function undoCreateElements({ infos, prevSelected }: IObject<any>, editor: Editor) {
   const res = editor.removeByIds(
@@ -145,6 +135,9 @@ export interface IEditorProps {
   onPaste: (e: string[]) => void;
 
   selectMenu?: React.Dispatch<React.SetStateAction<TQuickTool>>;
+
+  /** 被遮挡区域的总宽度 */
+  hideWidth?: number;
 }
 /**
  * @param page 全局page设置
@@ -301,7 +294,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const defaultGuides = calcDefaultGuidline(this.props.page);
 
     const { curTool: selectedMenu } = this.props;
-    const { width, height } = this.props.page;
+    let { width: _width, height: _height } = this.props.page;
+    let width = Number(_width),
+      height = Number(_height);
+
     const horizontalSnapGuides = [
       // 0,
       // Number(height),
@@ -330,6 +326,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       dragPosFormat: (e) => e - 44,
     };
 
+    let zoomRange = calcCanvasRange({ width, hideWidth: this.props.hideWidth, height }, zoom);
+    console.log(zoomRange, this.props.hideWidth);
     return (
       <div
         className={classnames(prefix('editor'), {
@@ -393,12 +391,17 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           ref={infiniteViewer}
           className={prefix('viewer')}
           usePinch={true}
-          threshold={100}
+          useForceWheel={true}
           pinchThreshold={50}
+          threshold={100}
           zoom={zoom}
-          allowWheel={false}
+          zoomRange={[rangeCfg.min, rangeCfg.max]}
           onZoom={this.props.onZoom}
-          zoomRange={[0.3, 1.5]}
+          wheelScale={0.005}
+          rangeX={zoomRange.x}
+          rangeY={zoomRange.y}
+          displayHorizontalScroll={false}
+          displayVerticalScroll={false}
           onAbortPinch={(e) => {
             selecto.current!.triggerDragStart(e.inputEvent);
           }}
@@ -410,6 +413,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             verticalGuides.current!.scrollGuides(e.scrollLeft);
           }}
           onPinch={(e) => {
+            if (moveableManager.current!.getMoveable().isDragging()) {
+              return;
+            }
             this.setState({
               zoom: e.zoom,
             });
@@ -440,19 +446,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           toggleContinueSelect={['shift']}
           preventDefault={true}
           rectOffset={this.state.rectOffset}
-          // scrollOptions={
-          //   infiniteViewer.current
-          //     ? {
-          //         container: infiniteViewer.current.getContainer(),
-          //         threshold: 30,
-          //         throttleTime: 30,
-          //         getScrollPosition: () => {
-          //           const current = infiniteViewer.current!;
-          //           return [current.getScrollLeft(), current.getScrollTop()];
-          //         },
-          //       }
-          //     : undefined
-          // }
           onDragStart={(e) => {
             if (selectedMenu === 'hand') {
               return;
@@ -473,30 +466,29 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (selectedMenu !== 'hand') {
               return;
             }
-            const { offsetWidth, offsetHeight } = infiniteViewer.current.getContainer();
-            let zoomWidth = Number(width) * zoom,
-              zoomHeight = Number(height) * zoom;
-
             const dragPos = {
-              x: zoomWidth < offsetWidth - 40 ? 0 : -e.deltaX,
-              y: zoomHeight < offsetHeight - 40 ? 0 : -e.deltaY,
+              x: -e.deltaX,
+              y: -e.deltaY,
             };
+            let pos = infiniteViewer.current!.scrollBy(dragPos.x, dragPos.y);
 
-            let left = infiniteViewer.current!.getScrollLeft(),
-              top = infiniteViewer.current!.getScrollTop();
-
-            let pos = calcDragPos(left, top, {
-              width: this.props.page.width,
-              height: this.props.page.height,
+            // 计算画布移动的百分比
+            let lenX = zoomRange.x[1] - zoomRange.x[0],
+              lenY = zoomRange.y[1] - zoomRange.y[0];
+            let posX = pos.nextX - zoomRange.x[0],
+              posY = pos.nextY - zoomRange.y[0];
+            let x = 0,
+              y = 0;
+            if (lenX > 0) {
+              x = (posX * 100) / lenX;
+            }
+            if (lenY > 0) {
+              y = (posY * 100) / lenY;
+            }
+            this.props?.onDrag?.({
+              x,
+              y,
             });
-            let zoomKey = 'zoom' + Math.floor(zoom * 100);
-            let maxPos = edgeConfig[zoomKey] || 50;
-
-            infiniteViewer.current!.scrollBy(
-              left < -150 ? 20 : pos.x < maxPos ? dragPos.x : -20,
-              top < -150 ? 20 : pos.y < maxPos ? dragPos.y : -20,
-            );
-            this.props?.onDrag?.(pos);
           }}
           onSelectEnd={({ isDragStart, selected, inputEvent }) => {
             if (selectedMenu === 'hand') {

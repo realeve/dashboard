@@ -314,6 +314,21 @@ const Index = ({
     });
   };
 
+  /** 被遮挡区域的总宽度 */
+  const hideWidth = React.useMemo(() => {
+    let width = 30;
+    if (!hide.layer) {
+      width += 200;
+    }
+    if (!hide.components) {
+      width += 233;
+    }
+    if (!hide.config) {
+      width += 332;
+    }
+    return width;
+  }, [hide]);
+
   return (
     <div className={styles.editor}>
       <Prompt message="确定要离开本页面？当前的配置项系统已自动保存" />
@@ -383,6 +398,7 @@ const Index = ({
                 // width={page.width}
                 // height={page.height}
                 page={page}
+                hideWidth={hideWidth}
                 lockedPanel={getLockedPanel()}
                 calcNextSelectedPanel={calcNextSelectedPanel}
                 onSelect={(selectedPanel) => {

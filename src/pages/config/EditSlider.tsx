@@ -3,7 +3,7 @@ import ToolMenu from './ToolMenu';
 import InputRange from '@/component/field/InputRange';
 import classnames from 'classnames';
 
-export const rangeCfg = { min: 0.3, max: 1.5, step: 0.1 };
+import { rangeCfg } from '@/component/Editor/Editor';
 
 export default ({
   editor,
