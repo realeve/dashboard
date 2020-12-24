@@ -57,6 +57,13 @@ let chain = DEV
               minSize: 0,
               minChunks: 1,
             },
+            vendors: {
+              name: 'vendors',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 5,
+              minChunks: 3,
+              minSize: 20000,
+            },
           },
         });
       },
@@ -65,7 +72,7 @@ let chain = DEV
 let chunks = DEV
   ? {}
   : {
-      chunks: ['antv_g2', 'echarts', 'umi'],
+      chunks: ['vendors', 'antv_g2', 'echarts', 'umi'],
     };
 
 // ref: https://umijs.org/config/
@@ -81,6 +88,10 @@ const config = {
   },
   title: 'dashboard',
   theme,
+  cssModulesTypescriptLoader: {
+    // 对按照 css modules 方式引入的 css 或 less 等样式文件，自动生成 ts 类型定义文件。
+    mode: 'emit',
+  },
   exportStatic: { htmlSuffix: false },
   routes: [
     {
