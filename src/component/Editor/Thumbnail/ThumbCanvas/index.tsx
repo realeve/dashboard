@@ -5,24 +5,12 @@ import { getStyle } from '@/pages/index/lib';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import * as R from 'ramda';
 import { connect } from 'react-redux';
-import { ICommon, IPanelConfig } from '@/models/common';
+import { ICommon } from '@/models/common';
 import { IPanelItem, diff } from './lib';
-
-// {panel.map(
-//     (item) =>
-//       ![SCREEN_EDGE_KEY, GROUP_COMPONENT_KEY].includes(item.key) && (
-//         <div style={getStyle({ style: item.style, resizeType, page })} key={item.id}>
-//           <ChartItem config={item} page={page} />
-//         </div>
-//       ),
-//   )}
 
 const getRect = (option: IPanelItem, { fill, stroke }) => ({
   rect: new zrender.Rect({
-    shape: {
-      ...option,
-      r: 2,
-    },
+    shape: option,
     style: {
       fill,
       stroke,
@@ -35,7 +23,7 @@ let activeStyle = { fill: '#2681ff', stroke: '#2681ff' };
 
 const Index = ({
   fill = '#999',
-  stroke = fill,
+  stroke = '#2681ff',
   page,
   history,
   panel: _panel,
@@ -92,8 +80,8 @@ const Index = ({
     updateRect(result);
   }, [instanse == null, nextIds]);
 
-  const getRectEl = (id) => {
-    let el = R.find(R.propEq('id', id))(rects);
+  const getRectEl = (id: string) => {
+    let el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
     if (!el) {
       return false;
     }
@@ -124,17 +112,11 @@ const Index = ({
   const changeRect = (rect: IPanelItem[]) => {
     if (rect.length == 0) return;
 
-    rect.forEach(({ width, height, id, x, y }) => {
+    rect.forEach(({ id, ...shape }) => {
       let el = getRectEl(id);
       el?.animateTo(
         {
-          shape: {
-            width: width,
-            height: height,
-            r: 2,
-            x,
-            y,
-          },
+          shape,
           style: selectedPanel.includes(id) ? activeStyle : { fill, stroke },
         },
         50,
