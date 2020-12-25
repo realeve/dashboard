@@ -20,7 +20,7 @@ export default ({
   formatter?: (e: number) => React.ReactNode;
   disabled?: boolean;
 }) => {
-  const [innerValue, setInnerValue] = useState(props.value);
+  const [innerValue, setInnerValue] = useState(props.value || 0);
 
   const percent = innerValue / props.max;
 

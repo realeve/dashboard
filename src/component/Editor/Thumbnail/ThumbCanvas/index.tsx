@@ -41,7 +41,7 @@ const Index = ({
   curHistoryIdx,
   style = {},
   selectedPanel,
-  renderer = 'svg',
+  renderer = 'canvas',
 }: IThumbProps) => {
   const ref = useRef(null);
   let panel = history[curHistoryIdx]?.panel || _panel;
@@ -107,11 +107,13 @@ const Index = ({
     setPrevSelect(selectedPanel);
     prevSelect.forEach((id) => {
       let el = getRectEl(id);
-      el?.animate('style', false).when(50, { fill, stroke })?.start();
+      if (!el) return;
+      el.animate('style', false).when(50, { fill, stroke })?.start();
     });
     selectedPanel.forEach((id) => {
       let el = getRectEl(id);
-      el?.animate('style', false).when(50, activeStyle)?.start();
+      if (!el) return;
+      el.animate('style', false).when(50, activeStyle)?.start();
     });
   }, [selectedPanel]);
 
@@ -126,7 +128,8 @@ const Index = ({
 
     rect.forEach(({ id, ...shape }) => {
       let el = getRectEl(id);
-      el?.animateTo(
+      if (!el) return;
+      el.animateTo(
         {
           shape,
           style: selectedPanel.includes(id) ? activeStyle : { fill, stroke },
