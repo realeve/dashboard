@@ -264,21 +264,6 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
   }
 
-  // 更新缩略图
-  public updateThumbnail = () => {
-    this.getThumbnail(0.1 / this.state.zoom).then((thumbnail) => {
-      // 更新缩略图
-      this.props.dispatch({
-        type: 'common/updatePage',
-        payload: {
-          page: {
-            thumbnail,
-          },
-        },
-      });
-    });
-  };
-
   public render() {
     const {
       horizontalGuides,
@@ -428,10 +413,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               verticalGuidelines={verticalSnapGuides}
               horizontalGuidelines={horizontalSnapGuides}
               editor={this}
-              onChange={(e) => {
-                this.props.onChange(e);
-                // this.updateThumbnail();
-              }}
+              onChange={this.props.onChange}
               selectedMenu={this.props.curTool}
             />
           </Viewport>

@@ -222,40 +222,41 @@
     }
   }
 }
-
-.react-contextmenu {
-  // z-index: 9999;
-  background: var(--datav-context-menu-bg);
-  color: var(--datav-font-color);
-  position: fixed;
-  user-select: none;
-  .datav-icon {
-    margin-right: 3px;
-  }
-  &-item {
-    padding: 0 6px;
-    line-height: 28px;
-    height: 28px;
-    border-left: 2px solid transparent;
-    cursor: pointer;
-    overflow: hidden;
-    padding-right: 3em;
-    display: flex;
-    &--divider {
-      height: 1px;
-      width: 100%;
-      background-color: var(--datav-context-menu-line);
+:global {
+  .react-contextmenu {
+    z-index: 4;
+    background: var(--datav-context-menu-bg);
+    color: var(--datav-font-color);
+    position: fixed;
+    user-select: none;
+    .datav-icon {
+      margin-right: 3px;
     }
-    &:hover,
-    &:focus {
-      background-color: var(--datav-context-menu-hover);
-      color: var(--datav-main-color);
-      border-left: 2px solid var(--datav-main-color);
+    &-item {
+      padding: 0 6px;
+      line-height: 28px;
+      height: 28px;
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      overflow: hidden;
+      padding-right: 3em;
+      display: flex;
+      &--divider {
+        height: 1px;
+        width: 100%;
+        background-color: var(--datav-context-menu-line);
+      }
+      &:hover,
+      &:focus {
+        background-color: var(--datav-context-menu-hover);
+        color: var(--datav-main-color);
+        border-left: 2px solid var(--datav-main-color);
+      }
     }
-  }
-  .disabled {
-    color: #576369;
-    pointer-events: none;
-    cursor: auto;
+    .disabled {
+      color: #576369;
+      pointer-events: none;
+      cursor: auto;
+    }
   }
 }

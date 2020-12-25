@@ -53,8 +53,7 @@
     "react-moveable": "^0.25.0",
     "react-selecto": "^1.6.4",
     "react-use": "^13.14.0",
-    "three": "^0.122.0",
-    "umi-plugin-keep-alive": "^0.0.1-beta.18"
+    "three": "^0.122.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",

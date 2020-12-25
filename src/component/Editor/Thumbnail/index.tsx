@@ -2,10 +2,10 @@ import React, { useEffect, Suspense } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 
-import { IPage } from '@/models/common';
+import { IPage, IPanelConfig } from '@/models/common';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
-
+import ThumbCanvas from './ThumbCanvas';
 const Moveable = React.lazy(() => import('react-moveable'));
 
 /**
@@ -30,10 +30,19 @@ interface IThumbnailProps {
   zoom: number;
   dragPercent: { x: number; y: number };
   page: IPage;
+  panel: IPanelConfig[];
   onScroll: (e: { x: number; y: number }) => void;
   showConfig: boolean;
 }
-export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThumbnailProps) => {
+export default ({
+  zoom,
+  dragPercent,
+  visible,
+  page,
+  onScroll,
+  panel,
+  showConfig,
+}: IThumbnailProps) => {
   const thumbnailSize = {
     width: Number(page.width) / SCALE_PARAM,
     height: Number(page.height) / SCALE_PARAM,
@@ -82,12 +91,8 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
       className={classnames(styles.thumbnail, styles[`thumbnail-${visible ? 'show' : 'hide'}`])}
       style={{ ...thumbnailSize, right: showConfig ? 337 : 5 }}
     >
-      <div
-        className={styles['datav-thumbnail']}
-        style={{
-          backgroundImage: page.thumbnail.length > 0 ? `url(${page.thumbnail})` : null,
-        }}
-      >
+      <div className={styles['datav-thumbnail']}>
+        <ThumbCanvas style={{ position: 'absolute', left: 0, top: 0 }} />
         <span
           className={styles['select-span']}
           style={{

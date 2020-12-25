@@ -4,8 +4,6 @@ interface CssExports {
   'alignColumn': string;
   'alignRow': string;
   'center': string;
-  'datav-icon': string;
-  'disabled': string;
   'dragging': string;
   'enable': string;
   'group_item': string;
@@ -25,9 +23,6 @@ interface CssExports {
   'layerWrap': string;
   'locked': string;
   'marqueeAnimation': string;
-  'react-contextmenu': string;
-  'react-contextmenu-item': string;
-  'react-contextmenu-item--divider': string;
   'rotateCustom': string;
   'rotateX': string;
   'rotateY': string;

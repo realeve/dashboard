@@ -212,8 +212,6 @@ const Index = ({
         idx,
       },
     });
-    // 更新缩略图
-    editor?.current.updateThumbnail();
 
     // 移除记录的id列表
     let _panelKeys = R.reject<string>((item) => idx.includes(item))(panelKeys);
@@ -289,12 +287,11 @@ const Index = ({
           payload: {
             idx,
             attrib: { style },
-            recordHistory: false,
+            recordHistory: true,
+            historyTitle: '调整位置/尺寸',
           },
         });
       });
-      // 更新缩略图
-      editor?.current.updateThumbnail();
     },
     500,
     [changedPanel],
@@ -421,6 +418,7 @@ const Index = ({
                 onScroll={(e) => {
                   editor?.current?.scrollTo(e);
                 }}
+                panel={panel}
                 page={page}
                 visible={thumbVisible && !hide.toolbox}
                 zoom={zoom}

@@ -145,8 +145,6 @@ export interface IPage extends ICommonConfig {
   author: string; // 作者
   title: string; // 业务名称
   padding: number; // 辅助线边距
-
-  thumbnail: string; // 缩略图
 }
 
 /**
@@ -206,7 +204,6 @@ const defaultState: ICommon = {
     title: '仪表盘',
     padding: 15, //边距
 
-    thumbnail: '', // 缩略图
     ...panelGeneral,
   },
   curTool: 'MoveTool',
