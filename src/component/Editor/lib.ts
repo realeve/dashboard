@@ -23,13 +23,13 @@ const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top c
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => {
   let url = page.background
     ? assets.backgrounds[page.background].url
-    : 'url(/img/panel/panelbg.png)';
+    : 'url(/img/panel/panelbg.png.webp)';
   let background = isColor(url)
     ? { background: url, backgroundRepeat: 'repeat' }
     : {
         backgroundImage: page.background
           ? `url('${assets.backgrounds[page.background].url}')`
-          : 'url(/img/panel/panelbg.png)',
+          : 'url(/img/panel/panelbg.png.webp)',
         backgroundSize: 'auto',
         backgroundRepeat: 'repeat',
         ...backgroundStyle,

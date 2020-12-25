@@ -13,7 +13,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "echarts基础图表",
-            "image": "/img/icons/43_baseline.png"
+            "image": "/img/icons/43_baseline.png.webp"
           },
           {
             "name": "echarts.horizontal-positive-negative-bar-chart",
@@ -21,7 +21,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "水平正负柱状图",
-            "image": "/img/icons/01_barChartPositiveNegative.png"
+            "image": "/img/icons/01_barChartPositiveNegative.png.webp"
           },
           {
             "name": "echarts.line-bar-chart",
@@ -29,7 +29,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "折线柱图",
-            "image": "/img/icons/02_barChartLine.png"
+            "image": "/img/icons/02_barChartLine.png.webp"
           },
           {
             "name": "g2.waterfall",
@@ -37,7 +37,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "瀑布图",
-            "image": "/img/icons/03_waterfall.png"
+            "image": "/img/icons/03_waterfall.png.webp"
           },
           {
             "name": "echarts.gardient_bar",
@@ -45,7 +45,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "渐变柱形图",
-            "image": "/img/icons/10_gardient_bar.png"
+            "image": "/img/icons/10_gardient_bar.png.webp"
           },
           {
             "name": "echarts.pictorial_bar",
@@ -53,7 +53,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "间隔柱状图",
-            "image": "/img/icons/12_pictorial_bar.png"
+            "image": "/img/icons/12_pictorial_bar.png.webp"
           },
           {
             "name": "echarts.bar_polar",
@@ -61,7 +61,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "弧形柱图",
-            "image": "/img/icons/15_bar_polar.png"
+            "image": "/img/icons/15_bar_polar.png.webp"
           },
           {
             "name": "g2.whirlwind",
@@ -69,7 +69,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "旋风图",
-            "image": "/img/icons/18_whirlwind.png"
+            "image": "/img/icons/18_whirlwind.png.webp"
           },
           {
             "name": "g2.facet_vertical",
@@ -77,7 +77,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "垂直分面图",
-            "image": "/img/icons/21_facet_vertical.png"
+            "image": "/img/icons/21_facet_vertical.png.webp"
           },
           {
             "name": "g2.group_column",
@@ -85,7 +85,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "分组条形图",
-            "image": "/img/icons/22_group_column.png"
+            "image": "/img/icons/22_group_column.png.webp"
           },
           {
             "name": "echarts.bar_2d",
@@ -93,7 +93,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "模拟三维柱状图",
-            "image": "/img/icons/30_2d_bar.png"
+            "image": "/img/icons/30_2d_bar.png.webp"
           },
           {
             "name": "g2.rangeLine",
@@ -101,7 +101,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "范围曲线图",
-            "image": "/img/icons/41_rangeline.png"
+            "image": "/img/icons/41_rangeline.png.webp"
           },
           {
             "name": "g2.treemap",
@@ -109,7 +109,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "基础树形图",
-            "image": "/img/icons/42_treemap.png"
+            "image": "/img/icons/42_treemap.png.webp"
           }
         ]
       },
@@ -123,7 +123,7 @@
             "engine": "echarts",
             "type": "regular_bar",
             "title": "渐变面积图",
-            "image": "/img/icons/11_gardient_line.png"
+            "image": "/img/icons/11_gardient_line.png.webp"
           }
         ]
       }
@@ -143,7 +143,7 @@
             "engine": "other",
             "type": "regular_pie",
             "title": "动态饼图",
-            "image": "/img/icons/07_dynamicpie.png"
+            "image": "/img/icons/07_dynamicpie.png.webp"
           },
           {
             "name": "g2.pie_detail",
@@ -151,7 +151,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "饼图_详情",
-            "image": "/img/icons/14_pie_detail.png"
+            "image": "/img/icons/14_pie_detail.png.webp"
           },
           {
             "name": "g2.g2_pie_rose",
@@ -159,7 +159,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "可调节角度饼图",
-            "image": "/img/icons/16_g2_pie_rose.png"
+            "image": "/img/icons/16_g2_pie_rose.png.webp"
           },
           {
             "name": "g2.facet_pie",
@@ -167,7 +167,7 @@
             "engine": "g2",
             "type": "regular_bar",
             "title": "分面饼图",
-            "image": "/img/icons/17_facet_pie.png"
+            "image": "/img/icons/17_facet_pie.png.webp"
           },
           {
             "name": "other.datav_ring",
@@ -175,7 +175,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "datav饼图",
-            "image": "/img/icons/23_datav_ring.png"
+            "image": "/img/icons/23_datav_ring.png.webp"
           }
         ]
       }
@@ -195,7 +195,7 @@
             "engine": "other",
             "type": "others",
             "title": "进度条",
-            "image": "/img/icons/04_progress_bar.png"
+            "image": "/img/icons/04_progress_bar.png.webp"
           },
           {
             "name": "other.water",
@@ -203,7 +203,7 @@
             "engine": "echarts",
             "type": "others",
             "title": "水球图",
-            "image": "/img/icons/05_water.png"
+            "image": "/img/icons/05_water.png.webp"
           },
           {
             "name": "other.ringchart",
@@ -211,7 +211,7 @@
             "engine": "echarts",
             "type": "others",
             "title": "百分比环图",
-            "image": "/img/icons/06_ringchart.png"
+            "image": "/img/icons/06_ringchart.png.webp"
           },
           {
             "name": "other.percent_circle",
@@ -219,7 +219,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "百分比圆环",
-            "image": "/img/icons/13_percent_circle.png"
+            "image": "/img/icons/13_percent_circle.png.webp"
           },
           {
             "name": "other.svg_rotate",
@@ -227,7 +227,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "旋转圆环",
-            "image": "/img/icons/24_svg_rotate.png"
+            "image": "/img/icons/24_svg_rotate.png.webp"
           },
           {
             "name": "other.percent_echarts",
@@ -235,7 +235,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "百分比环图2",
-            "image": "/img/icons/25_circle_percent.png"
+            "image": "/img/icons/25_circle_percent.png.webp"
           }
         ]
       },
@@ -249,7 +249,7 @@
             "engine": "other",
             "type": "others",
             "title": "滚动表单",
-            "image": "/img/icons/08_scroll_board.png"
+            "image": "/img/icons/08_scroll_board.png.webp"
           },
           {
             "name": "other.rankingBoard",
@@ -257,7 +257,7 @@
             "engine": "other",
             "type": "others",
             "title": "排名表",
-            "image": "/img/icons/09_ranking_board.png"
+            "image": "/img/icons/09_ranking_board.png.webp"
           }
         ]
       },
@@ -271,7 +271,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "翻牌器",
-            "image": "/img/icons/19_flipboard.png"
+            "image": "/img/icons/19_flipboard.png.webp"
           },
           {
             "name": "other.scroll_digit",
@@ -279,7 +279,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "滚动翻牌器",
-            "image": "/img/icons/20_scroll_digit.png"
+            "image": "/img/icons/20_scroll_digit.png.webp"
           }
         ]
       },
@@ -293,7 +293,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "粒子效果",
-            "image": "/img/icons/26_wave_effect.png",
+            "image": "/img/icons/26_wave_effect.png.webp",
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
@@ -309,7 +309,7 @@
             "engine": "other",
             "type": "fullscreen",
             "title": "全屏组件",
-            "image": "/img/icons/44_fullscreen.png",
+            "image": "/img/icons/44_fullscreen.png.webp",
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
@@ -342,7 +342,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "冠字华夫图",
-            "image": "/img/icons/45_waffle.png",
+            "image": "/img/icons/45_waffle.png.webp",
             "style": { "width": "530px", "height": "240px" }
           }
         ]
@@ -363,7 +363,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "g2曲线图",
-            "image": "/img/icons/32_g2_plotline.png"
+            "image": "/img/icons/32_g2_plotline.png.webp"
           },
           {
             "name": "g2plot.radial_bar",
@@ -371,7 +371,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "G2玉珏图",
-            "image": "/img/icons/33_radial_bar.png"
+            "image": "/img/icons/33_radial_bar.png.webp"
           },
           {
             "name": "g2plot.bi_direct_bar",
@@ -379,7 +379,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "双向条形图",
-            "image": "/img/icons/35_bi_direct.png"
+            "image": "/img/icons/35_bi_direct.png.webp"
           },
           {
             "name": "g2plot.range",
@@ -387,7 +387,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "区间柱状图",
-            "image": "/img/icons/36_range.png"
+            "image": "/img/icons/36_range.png.webp"
           },
           {
             "name": "g2plot.histogram",
@@ -395,7 +395,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "直方图",
-            "image": "/img/icons/37_histogram.png"
+            "image": "/img/icons/37_histogram.png.webp"
           },
           {
             "name": "g2plot.bullet",
@@ -403,7 +403,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "子弹图",
-            "image": "/img/icons/38_bullet.png"
+            "image": "/img/icons/38_bullet.png.webp"
           },
           {
             "name": "other.trend_card",
@@ -411,7 +411,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "指标卡趋势图",
-            "image": "/img/icons/39_trend_card.png"
+            "image": "/img/icons/39_trend_card.png.webp"
           },
           {
             "name": "g2plot.pie",
@@ -419,7 +419,7 @@
             "engine": "g2plot",
             "type": "regular_bar",
             "title": "饼图",
-            "image": "/img/icons/40_pie.png"
+            "image": "/img/icons/40_pie.png.webp"
           }
         ]
       }
@@ -438,7 +438,7 @@
             "key": "image_single",
             "engine": "other",
             "title": "单张图片",
-            "image": "/img/config/img_single.png",
+            "image": "/img/config/img_single.png.webp",
             "type": "image.single",
             "showBorder": false,
             "showTitle": false,
@@ -451,7 +451,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "文本",
-            "image": "/img/config/text.png",
+            "image": "/img/config/text.png.webp",
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
@@ -463,7 +463,7 @@
             "engine": "other",
             "type": "regular_bar",
             "title": "时钟",
-            "image": "/img/icons/31_time_clock.png",
+            "image": "/img/icons/31_time_clock.png.webp",
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
@@ -477,7 +477,7 @@
         "list": [
           {
             "title": "视频",
-            "image": "/img/config/video.png",
+            "image": "/img/config/video.png.webp",
             "name": "other.cbpc_video",
             "key": "cbpc_video",
             "engine": "other",

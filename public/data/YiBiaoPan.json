@@ -1,213 +1,269 @@
 {
-  "rec_time": "2020-12-09 21:14:42",
+  "rec_time": "2020-12-25 21:53:00",
   "panel": [{
-    "id": "6eff10923307c",
-    "key": "group_rect",
-    "fold": false,
-    "icon": "datav-font icon-group layer-item-icon",
-    "title": "业务-1",
-    "engine": "other",
-    "business": true
-  }, {
-    "id": "a3bde7df567b",
-    "api": {},
-    "key": "text_single",
-    "ajax": false,
-    "icon": "com-font icon-com-regular_bar",
-    "name": "other.text_single",
-    "type": "regular_bar",
-    "group": "6eff10923307c",
-    "image": "/img/config/text.png",
-    "style": {
-      "transform": {
-        "translate": "742px,411px",
-        "rotate": "0deg",
-        "scale": "1,1"
-      },
-      "top": "80px",
-      "left": "80px",
-      "width": "574px",
-      "height": "51px",
-      "position": "absolute"
-    },
-    "title": "文本",
-    "engine": "other",
-    "general": {
-      "head": {
-        "color": "#aec1f9",
-        "padding": 10,
-        "fontSize": 20,
-        "textAlign": "left",
-        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-      },
-      "border": "边框29",
-      "chartBackground": "rgba(3,11,31,0.8)"
-    },
-    "showTitle": false,
-    "showBorder": false,
-    "showBackground": false,
-    "componentConfig": {
-      "content": "在这里输入文字",
-      "opacity": 1,
-      "fontSize": 20,
-      "fontColor": "#27e2e6",
-      "undefined": "",
-      "fontWeight": "normal",
-      "letterSpacing": 0,
-      "textShadowBlur": 0,
-      "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
-      "textShadowOffsetX": 0,
-      "textShadowOffsetY": 0
-    },
-    "useGeneralStyle": true,
-    "business": true
-  }, {
-    "id": "22e9ecca84aa4",
-    "api": {},
-    "key": "base_line",
-    "ajax": true,
-    "icon": "com-font icon-com-regular_bar",
-    "name": "echarts.base_line",
-    "type": "regular_bar",
-    "group": "6eff10923307c",
-    "image": "/img/icons/01_barChartPositiveNegative.png",
-    "style": {
-      "transform": {
-        "translate": "742px,462px",
-        "rotate": "0deg",
-        "scale": "1,1"
-      },
-      "top": "80px",
-      "left": "80px",
-      "width": "574px",
-      "height": "345px",
-      "position": "absolute"
-    },
-    "title": "echarts基础图表",
-    "engine": "echarts",
-    "general": {
-      "head": {
-        "color": "#aec1f9",
-        "padding": 10,
-        "fontSize": 20,
-        "textAlign": "left",
-        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-      },
-      "border": "边框29",
-      "chartBackground": "rgba(3,11,31,0.8)"
-    },
-    "showTitle": false,
+    "showTitle": true,
     "showBorder": true,
     "showBackground": true,
-    "componentConfig": {},
-    "useGeneralStyle": true,
-    "business": true
-  }, {
-    "id": "dea0a6fb63dff",
-    "api": {},
-    "key": "group_rect",
-    "fold": true,
-    "icon": "datav-font icon-group layer-item-icon",
-    "title": "开包量业务汇总",
-    "engine": "other",
-    "business": true
-  }, {
-    "id": "5f46e6e7e9925",
-    "api": {
-      "x": 1,
-      "y": 2,
-      "url": "http://localhost:90/1092/abe4d1b60f.array",
-      "show": true,
-      "cache": 1,
-      "legend": 0,
-      "api_type": "url",
-      "interval": 10
-    },
-    "key": "base_line",
     "ajax": true,
-    "icon": "com-font icon-com-regular_bar",
+    "style": {
+      "transform": {
+        "translate": "69.4289079245417px,358.50010634953026px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "12px",
+      "left": "12px",
+      "position": "absolute",
+      "width": "550.188px",
+      "height": "339.188px"
+    },
     "name": "echarts.base_line",
-    "type": "regular_bar",
-    "group": "dea0a6fb63dff",
-    "image": "/img/icons/43_baseline.png",
-    "style": {
-      "transform": {
-        "translate": "511px,126.49599249329765px",
-        "rotate": "0deg",
-        "scale": "1,1"
-      },
-      "top": "80px",
-      "left": "80px",
-      "width": "569px",
-      "height": "245px",
-      "position": "absolute"
-    },
-    "title": "echarts基础图表",
+    "key": "base_line",
     "engine": "echarts",
-    "general": null,
-    "showTitle": false,
-    "showBorder": false,
-    "showBackground": false,
-    "componentConfig": {},
-    "useGeneralStyle": true,
-    "business": true
-  }, {
-    "id": "f28004e6cc083",
-    "api": {},
-    "key": "text_single",
-    "ajax": false,
-    "icon": "com-font icon-com-regular_bar",
-    "name": "other.text_single",
     "type": "regular_bar",
-    "group": "dea0a6fb63dff",
-    "image": "/img/config/text.png",
+    "title": "echarts基础图表",
+    "image": "/img/icons/43_baseline.png",
+    "id": "6e904ebe71599",
+    "icon": "com-font icon-com-regular_bar",
+    "general": {
+      "border": "边框29",
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
+    },
+    "useGeneralStyle": true,
+    "lock": false,
+    "componentConfig": {
+      "theme": "cbpc",
+      "needRerverse": false,
+      "chartType": "line",
+      "isPolar": false,
+      "isArea": false,
+      "isStack": false,
+      "isPercent": false,
+      "isStep": false,
+      "showLabel": false,
+      "isReverse": false,
+      "axisPointer": "shadow",
+      "undefined": "",
+      "showSymbol": false,
+      "symbolSize": 4,
+      "symbol": "circle",
+      "legendShow": true,
+      "legendAlign": "center",
+      "legendPosition": "top",
+      "legendOrient": "horizontal",
+      "smooth": true,
+      "area_opacity": 1,
+      "lineWidth": 2,
+      "barWidth": 20,
+      "showBackground": true,
+      "barBackgroundColor": "rgba(140,150,200,0.2)",
+      "roundCap": false,
+      "showMarkpoint": false,
+      "showMarkline": false,
+      "showMarkArea": false,
+      "markAreaColor": "rgba(255,255,255,0.1)",
+      "markAreaColor2": "rgba(255,255,255,0.3)",
+      "markTitle1": "",
+      "markArea1": [10, 20],
+      "markTitle2": "",
+      "markArea2": [10, 20],
+      "markTitle3": "",
+      "markArea3": [10, 20],
+      "markTitle4": "",
+      "markArea4": [10, 20],
+      "markTitle5": "",
+      "markArea5": [10, 20]
+    },
+    "api": {}
+  }, {
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "ajax": true,
     "style": {
       "transform": {
-        "translate": "511px,86px",
+        "translate": "211.07114340301234px,245.214285728726px",
         "rotate": "0deg",
         "scale": "1,1"
       },
-      "top": "80px",
-      "left": "80px",
-      "width": "569px",
-      "height": "40px",
-      "position": "absolute"
+      "top": "200px",
+      "left": "942px",
+      "position": "absolute",
+      "width": "451.2px",
+      "height": "241.2px"
     },
-    "title": "文本",
-    "engine": "other",
+    "name": "echarts.line-bar-chart",
+    "key": "barChartLine",
+    "engine": "echarts",
+    "type": "regular_bar",
+    "title": "折线柱图",
+    "image": "/img/icons/02_barChartLine.png",
+    "id": "c898be8b11449",
+    "icon": "com-font icon-com-regular_bar",
     "general": {
-      "head": {
-        "color": "#aec1f9",
-        "padding": 10,
-        "fontSize": 20,
-        "textAlign": "left",
-        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-      },
       "border": "边框29",
-      "chartBackground": "rgba(3,11,31,0.8)"
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
     },
+    "useGeneralStyle": true,
+    "lock": false,
+    "componentConfig": {},
+    "api": {}
+  }, {
+    "id": "6f8e30b7c5381",
+    "icon": "datav-font icon-group layer-item-icon",
+    "key": "group_rect",
+    "title": "组",
+    "engine": "other",
+    "fold": false
+  }, {
     "showTitle": false,
     "showBorder": false,
     "showBackground": false,
-    "componentConfig": {
-      "content": "这是某个业务",
-      "opacity": 0.9,
-      "padding": 12,
-      "fontSize": 21,
-      "fontColor": "rgba(255, 255, 255,1)",
-      "textAlign": "right",
-      "undefined": "",
-      "background": "linear-gradient(90deg, rgba(240,234,218,0.06) 23%, rgba(151,230,24,0.67) 58%, rgba(8,61,88,1) 88%)",
-      "fontWeight": "normal",
-      "letterSpacing": 0,
-      "textShadowBlur": 0,
-      "backgroundColor": "linear-gradient(90deg, rgba(255,227,189,1) 2%, rgba(127,130,226,1) 44%, rgba(47,53,216,1) 74%)",
-      "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
-      "textShadowOffsetX": 0,
-      "textShadowOffsetY": 0
+    "ajax": true,
+    "style": {
+      "transform": {
+        "translate": "63.87770013337479px,-169.61020029023305px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "370px",
+      "left": "656px",
+      "position": "absolute",
+      "width": "496.188px",
+      "height": "165.1875px"
+    },
+    "name": "other.percent",
+    "key": "progressBar",
+    "engine": "other",
+    "type": "others",
+    "title": "进度条",
+    "image": "/img/icons/04_progress_bar.png",
+    "id": "6d532626180da",
+    "icon": "com-font icon-com-others",
+    "general": {
+      "border": "边框29",
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
     },
     "useGeneralStyle": true,
-    "business": true
+    "lock": false,
+    "componentConfig": {},
+    "api": {},
+    "group": "6f8e30b7c5381"
+  }, {
+    "showTitle": false,
+    "showBorder": false,
+    "showBackground": false,
+    "ajax": false,
+    "style": {
+      "transform": {
+        "translate": "-35.999984227038226px,-363.99999999999983px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "370px",
+      "left": "656px",
+      "position": "absolute",
+      "width": "496.188px",
+      "height": "133.1875px"
+    },
+    "name": "other.text_single",
+    "key": "text_single",
+    "engine": "other",
+    "type": "regular_bar",
+    "title": "文本",
+    "image": "/img/config/text.png",
+    "id": "18cd545b9d593",
+    "icon": "com-font icon-com-regular_bar",
+    "general": {
+      "border": "边框29",
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
+    },
+    "useGeneralStyle": true,
+    "lock": false,
+    "componentConfig": {},
+    "api": {},
+    "group": "6f8e30b7c5381"
+  }, {
+    "showTitle": false,
+    "showBorder": false,
+    "showBackground": false,
+    "ajax": false,
+    "style": {
+      "transform": {
+        "translate": "-541.9428571428572px,445.7142857142857px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "top": "200px",
+      "left": "1240px",
+      "position": "absolute",
+      "width": "397.188px",
+      "height": "334.188px"
+    },
+    "name": "other.image_single",
+    "key": "image_single",
+    "engine": "other",
+    "title": "单张图片",
+    "image": "/img/config/img_single.png",
+    "type": "image.single",
+    "id": "d938ddcc0bb43",
+    "icon": "com-font icon-com-image.single",
+    "general": {
+      "border": "边框29",
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
+    },
+    "useGeneralStyle": true,
+    "lock": false,
+    "componentConfig": {
+      "imgname": "科技118",
+      "undefined": "",
+      "rotate": true,
+      "autoHeight": true,
+      "reverse": "rotateZ",
+      "rotateTime": 20,
+      "opacity": 0.65
+    },
+    "api": {}
   }],
   "page": {
     "width": "1920",
@@ -216,20 +272,16 @@
     "author": "管理员",
     "title": "仪表盘",
     "padding": 15,
-    "screen_edge_width": 6,
-    "screen_x": 4,
-    "screen_y": 4,
-    "showEdgeTag": false,
-    "showEdge": true,
-    "thumbnail": "./YiBiaoPan.jpg",
     "border": "边框29",
-    "chartBackground": "transparent",
+    "borderRadius": [0, 0, 0, 0],
+    "chartBackground": "rgba(3,11,31,0.8)",
     "head": {
-      "background": "linear-gradient(90deg, rgba(67,10,228,0.88) 13%, rgba(84,125,204,0.73) 48%, rgba(0,0,0,0) 70%)",
-      "fontSize": 17,
+      "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+      "fontSize": 20,
       "color": "#aec1f9",
       "textAlign": "left",
       "padding": 10
-    }
+    },
+    "thumbnail": "./YiBiaoPan.jpg"
   }
 }

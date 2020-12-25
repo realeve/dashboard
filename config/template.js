@@ -82,7 +82,7 @@ const handleComponents = () => {
       engine: chartType,
       type: 'regular_bar',
       title: '请设置图表名称',
-      image: '/img/icons/01_barChartPositiveNegative.png',
+      image: '/img/icons/01_barChartPositiveNegative.png.webp',
     },
   ];
   components = [...R.init(components), lastComponent];

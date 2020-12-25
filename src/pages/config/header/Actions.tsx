@@ -44,10 +44,13 @@ const Actions = ({
     // 否则 按原文件名替换文件
     if (!isEditMode) {
       // 向大屏中添加列表项
+
+      // TODO jpg to webp
+
       success = await addDashboardList({
         title,
         file: title + '.json',
-        img: title + '.jpg',
+        img: title + '.webp',
       });
     } else {
       message.success('请执行批处理文件并替换服务端现有配置文件以更新内容');

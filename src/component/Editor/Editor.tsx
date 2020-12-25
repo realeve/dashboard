@@ -242,6 +242,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.props.selectMenu(menu);
   }
 
+  // TODO jpg to webp
   public async getThumbnail(scale: number, quality = 0.8, filename = null) {
     let canvasEl = this.viewport.current.viewport.el;
     return import('html2canvas').then(({ default: html2canvas }) =>
@@ -254,12 +255,12 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
          * */
         if (filename) {
           canvas.toBlob(function (blob) {
-            fileSaver.saveAs(blob, filename + '.jpg');
+            fileSaver.saveAs(blob, filename + '.webp');
           });
           return;
         }
 
-        return canvas.toDataURL('image/jpeg', quality);
+        return canvas.toDataURL('image/webp', quality);
       }),
     );
   }

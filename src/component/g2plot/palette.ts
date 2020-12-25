@@ -1,6 +1,6 @@
 export const palette = [
   {
-    title: '/img/palette/palette0.png',
+    title: '/img/palette/palette0.png.webp',
     desc: '分类色板1',
     value: 0,
     theme: {
@@ -41,7 +41,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette1.png',
+    title: '/img/palette/palette1.png.webp',
     desc: '分类色板2',
     value: 1,
     theme: {
@@ -82,7 +82,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette2.png',
+    title: '/img/palette/palette2.png.webp',
     desc: '分类色板3',
     value: 2,
     theme: {
@@ -123,7 +123,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette3.png',
+    title: '/img/palette/palette3.png.webp',
     desc: '分类色板4',
     value: 3,
     theme: {
@@ -165,7 +165,7 @@ export const palette = [
   },
 
   {
-    title: '/img/palette/palette4.png',
+    title: '/img/palette/palette4.png.webp',
     desc: '顺序色板1',
     value: 4,
     theme: {
@@ -194,7 +194,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette5.png',
+    title: '/img/palette/palette5.png.webp',
     desc: '顺序色板2',
     value: 5,
     theme: {
@@ -223,7 +223,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette6.png',
+    title: '/img/palette/palette6.png.webp',
     desc: '发散色板1',
     value: 6,
     theme: {
@@ -260,7 +260,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette7.png',
+    title: '/img/palette/palette7.png.webp',
     desc: '发散色板2',
     value: 7,
     theme: {
@@ -297,7 +297,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette8.png',
+    title: '/img/palette/palette8.png.webp',
     desc: '顺序色板3',
     value: 8,
     theme: {
@@ -324,7 +324,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette9.png',
+    title: '/img/palette/palette9.png.webp',
     desc: '顺序色板4',
     value: 9,
     theme: {
@@ -351,7 +351,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette10.png',
+    title: '/img/palette/palette10.png.webp',
     desc: '顺序色板5',
     value: 10,
     theme: {
@@ -378,7 +378,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette11.png',
+    title: '/img/palette/palette11.png.webp',
     desc: '顺序色板6',
     value: 11,
     theme: {
@@ -405,7 +405,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette12.png',
+    title: '/img/palette/palette12.png.webp',
     desc: '顺序色板7',
     value: 12,
     theme: {
@@ -432,7 +432,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette13.png',
+    title: '/img/palette/palette13.png.webp',
     desc: '顺序色板8',
     value: 13,
     theme: {
@@ -459,7 +459,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette14.png',
+    title: '/img/palette/palette14.png.webp',
     desc: '顺序色板9',
     value: 14,
     theme: {
@@ -488,7 +488,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette15.png',
+    title: '/img/palette/palette15.png.webp',
     desc: '顺序色板10',
     value: 15,
     theme: {
@@ -517,7 +517,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette16.png',
+    title: '/img/palette/palette16.png.webp',
     desc: '顺序色板11',
     value: 16,
     theme: {
@@ -546,7 +546,7 @@ export const palette = [
     },
   },
   {
-    title: '/img/palette/palette17.png',
+    title: '/img/palette/palette17.png.webp',
     desc: '顺序色板12',
     value: 17,
     theme: {

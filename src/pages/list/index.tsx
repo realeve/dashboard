@@ -34,7 +34,7 @@ const List = () => {
           <img className={styles['nav-img-text']} src="/img/list/logo.png" />
           <div
             className={styles['nav-img']}
-            style={{ backgroundImage: `url("/img/list/header.png")` }}
+            style={{ backgroundImage: `url("/img/list/header.png.webp")` }}
           />
         </div>
       </div>

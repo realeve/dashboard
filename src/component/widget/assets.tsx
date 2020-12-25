@@ -513,161 +513,161 @@ assets.borders = {
     left: 20,
   },
   边框1: {
-    url: ASSETS_URL + 'border-1.png',
+    url: ASSETS_URL + 'border-1.png.webp',
     top: 10,
     right: 16,
     bottom: 15,
     left: 10,
   },
   边框2: {
-    url: ASSETS_URL + 'border-2.png',
+    url: ASSETS_URL + 'border-2.png.webp',
     top: 10,
     right: 16,
     bottom: 15,
     left: 10,
   },
   边框3: {
-    url: ASSETS_URL + 'border-2-647997910e4f2e40.png',
+    url: ASSETS_URL + 'border-2-647997910e4f2e40.png.webp',
     top: 10,
     right: 10,
     bottom: 10,
     left: 10,
   },
   边框4: {
-    url: ASSETS_URL + 'border-2-1.png',
+    url: ASSETS_URL + 'border-2-1.png.webp',
     top: 10,
     right: 10,
     bottom: 10,
     left: 10,
   },
   边框5: {
-    url: ASSETS_URL + 'border-4D8PhZnr7fHiBHD2.png',
+    url: ASSETS_URL + 'border-4D8PhZnr7fHiBHD2.png.webp',
     top: 10,
     right: 10,
     bottom: 10,
     left: 10,
   },
   边框6: {
-    url: ASSETS_URL + 'border-9qqu7FvN3i3ejGjx.png',
+    url: ASSETS_URL + 'border-9qqu7FvN3i3ejGjx.png.webp',
     top: 17,
     right: 4,
     bottom: 4,
     left: 36,
   },
   边框7: {
-    url: ASSETS_URL + 'border-75-326aa8b5a6b87b2f.png',
+    url: ASSETS_URL + 'border-75-326aa8b5a6b87b2f.png.webp',
     top: 48,
     right: 48,
     bottom: 48,
     left: 48,
   },
   边框8: {
-    url: ASSETS_URL + 'border-93-63f1aa8a1c6516ca.png',
+    url: ASSETS_URL + 'border-93-63f1aa8a1c6516ca.png.webp',
     top: 35,
     right: 35,
     bottom: 35,
     left: 35,
   },
   边框9: {
-    url: ASSETS_URL + 'border-236-7ab7e7d6ce1bc4b5.gif',
+    url: ASSETS_URL + 'border-236-7ab7e7d6ce1bc4b5.gif.webp',
     top: 35,
     right: 35,
     bottom: 35,
     left: 35,
   },
   边框10: {
-    url: ASSETS_URL + 'border-121-0f05f2ce15011b2a.png',
+    url: ASSETS_URL + 'border-121-0f05f2ce15011b2a.png.webp',
     top: 14,
     right: 14,
     bottom: 14,
     left: 14,
   },
   边框11: {
-    url: ASSETS_URL + 'border-229-6a0fdf839ec2ef45.gif',
+    url: ASSETS_URL + 'border-229-6a0fdf839ec2ef45.gif.webp',
     top: 43,
     right: 20,
     bottom: 24,
     left: 24,
   },
   边框12: {
-    url: ASSETS_URL + 'border-235-6841c1286c4094b6.gif',
+    url: ASSETS_URL + 'border-235-6841c1286c4094b6.gif.webp',
     top: 37,
     right: 37,
     bottom: 37,
     left: 37,
   },
   边框13: {
-    url: ASSETS_URL + 'border-120-88a3f27c6352fd96.png',
+    url: ASSETS_URL + 'border-120-88a3f27c6352fd96.png.webp',
     top: 122,
     right: 192,
     bottom: 63,
     left: 207,
   },
   边框14: {
-    url: ASSETS_URL + 'border-123-ddd7b5d4266a8aaa.png',
+    url: ASSETS_URL + 'border-123-ddd7b5d4266a8aaa.png.webp',
     top: 60,
     right: 60,
     bottom: 60,
     left: 60,
   },
   边框15: {
-    url: ASSETS_URL + 'border-124-554d9d6ed0674ec2.png',
+    url: ASSETS_URL + 'border-124-554d9d6ed0674ec2.png.webp',
     top: 40,
     right: 40,
     bottom: 40,
     left: 40,
   },
   边框16: {
-    url: ASSETS_URL + 'border-125-62ce2b374cfa1209.png',
+    url: ASSETS_URL + 'border-125-62ce2b374cfa1209.png.webp',
     top: 100,
     right: 100,
     bottom: 100,
     left: 100,
   },
   边框17: {
-    url: ASSETS_URL + 'border-7718acec67f35819.png',
+    url: ASSETS_URL + 'border-7718acec67f35819.png.webp',
     top: 37,
     right: 120,
     bottom: 56,
     left: 37,
   },
   边框18: {
-    url: ASSETS_URL + 'border-234-21caaaed0d132596.gif',
+    url: ASSETS_URL + 'border-234-21caaaed0d132596.gif.webp',
     top: 37,
     right: 120,
     bottom: 56,
     left: 37,
   },
   边框19: {
-    url: ASSETS_URL + 'border-FL9pZhDg36ZNEGi4.png',
+    url: ASSETS_URL + 'border-FL9pZhDg36ZNEGi4.png.webp',
     top: 50,
     right: 50,
     bottom: 50,
     left: 50,
   },
   边框20: {
-    url: ASSETS_URL + 'border-vVMmzK86nT24eHzC.png',
+    url: ASSETS_URL + 'border-vVMmzK86nT24eHzC.png.webp',
     top: 60,
     right: 75,
     bottom: 60,
     left: 75,
   },
   边框21: {
-    url: ASSETS_URL + 'border-21.png',
+    url: ASSETS_URL + 'border-21.png.webp',
     top: 8,
     right: 8,
     bottom: 8,
     left: 8,
   },
   边框22: {
-    url: ASSETS_URL + 'border_22.png',
+    url: ASSETS_URL + 'border_22.png.webp',
     top: 8,
     right: 8,
     bottom: 8,
     left: 8,
   },
   边框23: {
-    url: ASSETS_URL + 'border_23.png',
+    url: ASSETS_URL + 'border_23.png.webp',
     top: 8,
     right: 8,
     bottom: 8,
@@ -721,43 +721,43 @@ let picList = [
     title: '百度sugar',
     data: {
       默认头图: {
-        url: ASSETS_URL + 'header_03.png',
+        url: ASSETS_URL + 'header_03.png.webp',
       },
       淡蓝色: {
-        url: ASSETS_URL + 'header_01.png',
+        url: ASSETS_URL + 'header_01.png.webp',
       },
       蓝色: {
-        url: ASSETS_URL + 'header_02.png',
+        url: ASSETS_URL + 'header_02.png.webp',
       },
       蓝色2: {
-        url: ASSETS_URL + 'header_04.png',
+        url: ASSETS_URL + 'header_04.png.webp',
       },
       蓝色底部: {
-        url: ASSETS_URL + 'footer_03.png',
+        url: ASSETS_URL + 'footer_03.png.webp',
       },
       旋转gif: {
-        url: ASSETS_URL + '02.gif',
+        url: ASSETS_URL + '02.gif.webp',
       },
       旋转gif2: {
-        url: ASSETS_URL + '01.gif',
+        url: ASSETS_URL + '01.gif.webp',
       },
       紫色圆形装饰动图gif: {
-        url: ASSETS_URL + 'pic-228-2cff2e714fff18e2.gif',
+        url: ASSETS_URL + 'pic-228-2cff2e714fff18e2.gif.webp',
       },
       紫色圆形频谱音频装饰动图gif: {
-        url: ASSETS_URL + 'pic-232-f5b366790d3979f7.gif',
+        url: ASSETS_URL + 'pic-232-f5b366790d3979f7.gif.webp',
       },
       蓝色橙色圆形3D效果科技装饰动图gif: {
-        url: ASSETS_URL + 'pic-233-e01e793cd1bdcdc9.gif',
+        url: ASSETS_URL + 'pic-233-e01e793cd1bdcdc9.gif.webp',
       },
       蓝色直线线条装饰动图gif: {
-        url: ASSETS_URL + 'pic-237-dc21156e2c9fe530.gif',
+        url: ASSETS_URL + 'pic-237-dc21156e2c9fe530.gif.webp',
       },
       蓝色边框科技装饰动图gif: {
-        url: ASSETS_URL + 'pic-240-e9640eece337d0dc.gif',
+        url: ASSETS_URL + 'pic-240-e9640eece337d0dc.gif.webp',
       },
       蓝色圆形3D立体透明科技图标: {
-        url: ASSETS_URL + 'pic-86BKa8kymLuDfLG7.png',
+        url: ASSETS_URL + 'pic-86BKa8kymLuDfLG7.png.webp',
       },
       蓝色透明圆形科技图形装饰: {
         url: ASSETS_URL + 'pic-GhM7QJJFM28Z8jcP.svg',
@@ -802,10 +802,10 @@ let picList = [
         url: ASSETS_URL + 'pic-125-ac14305bc4902088.svg',
       },
       蓝色透明圆形科技3D图标: {
-        url: ASSETS_URL + 'pic-4yvtgiMdd2c8fwn4.png',
+        url: ASSETS_URL + 'pic-4yvtgiMdd2c8fwn4.png.webp',
       },
       白色透明3D立体科技圆形图标: {
-        url: ASSETS_URL + 'pic-6scio8hXYU2qCTa8.png',
+        url: ASSETS_URL + 'pic-6scio8hXYU2qCTa8.png.webp',
       },
       白色透明科技装饰图标: {
         url: ASSETS_URL + 'pic-e8bEx2j2Njx6YzMe.svg',
@@ -817,13 +817,13 @@ let picList = [
         url: ASSETS_URL + 'pic-157-8843d74dfcb5bb70.svg',
       },
       彩色真实地图地球3D立体图标: {
-        url: ASSETS_URL + 'pic-139-091a0b3cae26a353.png',
+        url: ASSETS_URL + 'pic-139-091a0b3cae26a353.png.webp',
       },
       蓝色紫色点状抽象透明地图地球3D立体图标: {
-        url: ASSETS_URL + 'pic-142-8933834d7b2e57e4.png',
+        url: ASSETS_URL + 'pic-142-8933834d7b2e57e4.png.webp',
       },
       白色点状抽象透明地图地球3D立体图标: {
-        url: ASSETS_URL + 'pic-143-1471b2dcc36fdc59.png',
+        url: ASSETS_URL + 'pic-143-1471b2dcc36fdc59.png.webp',
       },
       蓝色点状抽象透明地图地球3D立体图标: {
         url: ASSETS_URL + 'pic-144-c93d4c577194bb71.svg',
@@ -835,7 +835,7 @@ let picList = [
         url: ASSETS_URL + 'pic-123-2fb2025bc0c60429.svg',
       },
       绿色点状抽象透明地图地球3D立体图标: {
-        url: ASSETS_URL + 'pic-147-8940a6a3e6cdc2b0.png',
+        url: ASSETS_URL + 'pic-147-8940a6a3e6cdc2b0.png.webp',
       },
       白色网状抽象透明地图地球3D立体图标: {
         url: ASSETS_URL + 'pic-148-efe393176a82c55d.svg',
@@ -850,13 +850,13 @@ let picList = [
         url: ASSETS_URL + 'pic-126-a47a0fe24cba84c7.svg',
       },
       蓝色地图地球3D立体飞线图标: {
-        url: ASSETS_URL + 'pic-77nxFJv3pkX4mpUQ.png',
+        url: ASSETS_URL + 'pic-77nxFJv3pkX4mpUQ.png.webp',
       },
       黑色地图地球3图标: {
         url: ASSETS_URL + 'pic-124-04eec188e228195f.svg',
       },
       绿色地图透明点圆形图标: {
-        url: ASSETS_URL + 'pic-aUM23LyRC6HZ9CCM.png',
+        url: ASSETS_URL + 'pic-aUM23LyRC6HZ9CCM.png.webp',
       },
       蓝色网状抽象透明地图地球3D立体图标: {
         url: ASSETS_URL + 'pic-55-79b6a45e5d4c9ea0.svg',
@@ -942,16 +942,16 @@ let picList = [
         url: ASSETS_URL + 'pic-213-718b64f3032df04a.svg',
       },
       蓝色透明异形科技标题容器2移动端: {
-        url: ASSETS_URL + 'pic-11.png',
+        url: ASSETS_URL + 'pic-11.png.webp',
       },
       蓝色透明异形科技标题容器2: {
-        url: ASSETS_URL + 'pic-12.png',
+        url: ASSETS_URL + 'pic-12.png.webp',
       },
       蓝色紫色透明条纹异形科技标题容器: {
-        url: ASSETS_URL + 'pic-13.png',
+        url: ASSETS_URL + 'pic-13.png.webp',
       },
       蓝色紫色透明条纹异形科技标题容器移动端: {
-        url: ASSETS_URL + 'pic-14.png',
+        url: ASSETS_URL + 'pic-14.png.webp',
       },
       粉色蓝色透明圆形科技图标内容容器: {
         url: ASSETS_URL + 'pic-60-e784d97a934bedde.svg',
@@ -1044,19 +1044,19 @@ let picList = [
         url: ASSETS_URL + 'pic-Rx6skE3VN4Cg7sbv.svg',
       },
       蓝色灰色透明圆形科技图标内容容器: {
-        url: ASSETS_URL + 'pic-134-963e5094b0dba95b.png',
+        url: ASSETS_URL + 'pic-134-963e5094b0dba95b.png.webp',
       },
       透明圆形科技图标内容容器: {
         url: ASSETS_URL + 'pic-135-a0fa9e03938661a5.svg',
       },
       灰色透明圆形科技图标内容容器: {
-        url: ASSETS_URL + 'pic-136-ad9201b14eb6c652.png',
+        url: ASSETS_URL + 'pic-136-ad9201b14eb6c652.png.webp',
       },
       彩色透明圆形科技图标内容容器: {
-        url: ASSETS_URL + 'pic-145-21e245aedee0de09.png',
+        url: ASSETS_URL + 'pic-145-21e245aedee0de09.png.webp',
       },
       黑色透明圆形科技图标内容容器: {
-        url: ASSETS_URL + 'pic-146-8920af838646a629.png',
+        url: ASSETS_URL + 'pic-146-8920af838646a629.png.webp',
       },
       蓝色透明圆形科技图标内容容器8: {
         url: ASSETS_URL + 'pic-149-b32beb8fd134fc54.svg',
@@ -1170,7 +1170,7 @@ let picList = [
         url: ASSETS_URL + 'pic-42-2b7dabd8042669a7.svg',
       },
       蓝色透明圆形科技图标装饰: {
-        url: ASSETS_URL + 'pic-6EuNuYY8tzmZTB38.png',
+        url: ASSETS_URL + 'pic-6EuNuYY8tzmZTB38.png.webp',
       },
       蓝色圆形透明科技图标装饰: {
         url: ASSETS_URL + 'pic-k4Ko7fAZvg7kK2wQ.svg',
@@ -1251,7 +1251,7 @@ let picList = [
         url: ASSETS_URL + 'pic-ak77ojdPz6y6xLgM.svg',
       },
       红色蓝色绿色透明3D立体椭圆形科技图标图形: {
-        url: ASSETS_URL + 'pic-PMx4yFtQ9Bwk24Ye.png',
+        url: ASSETS_URL + 'pic-PMx4yFtQ9Bwk24Ye.png.webp',
       },
       绿色橙色透明科技3D立体圆形图标: {
         url: ASSETS_URL + 'pic-127-a88e3546cdc09d2f.svg',
@@ -1278,7 +1278,7 @@ let picList = [
         url: ASSETS_URL + 'pic-26-cda6b50c1329139b.svg',
       },
       蓝色透明科技图形线条装饰: {
-        url: ASSETS_URL + 'pic-g2N6DyaQF6LPAs4B.png',
+        url: ASSETS_URL + 'pic-g2N6DyaQF6LPAs4B.png.webp',
       },
       蓝色黄色灰色科技圆形透明装饰: {
         url: ASSETS_URL + 'pic-112-a8c845277ebef04c.svg',
@@ -1341,7 +1341,7 @@ let picList = [
         url: ASSETS_URL + 'pic-219-4cb48f0a3b6abef6.svg',
       },
       金色透明底部装饰城市楼图形: {
-        url: ASSETS_URL + 'pic-rx8P7K2RLhNKMqY8.png',
+        url: ASSETS_URL + 'pic-rx8P7K2RLhNKMqY8.png.webp',
       },
       金色黑色透明圆形科技装饰内容容器: {
         url: ASSETS_URL + 'pic-202-348bab7afad0c590.svg',
@@ -1431,16 +1431,16 @@ let picList = [
         url: ASSETS_URL + 'pic-193-c6fe2f0bc2f7150b.svg',
       },
       紫色图标文件文档透明: {
-        url: ASSETS_URL + 'pic-4.png',
+        url: ASSETS_URL + 'pic-4.png.webp',
       },
       橙色透明灯泡图标: {
-        url: ASSETS_URL + 'pic-5.png',
+        url: ASSETS_URL + 'pic-5.png.webp',
       },
       红色闪电图标透明: {
-        url: ASSETS_URL + 'pic-6.png',
+        url: ASSETS_URL + 'pic-6.png.webp',
       },
       绿色闪电图标透明: {
-        url: ASSETS_URL + 'pic-7.png',
+        url: ASSETS_URL + 'pic-7.png.webp',
       },
     },
   },
@@ -1916,13 +1916,13 @@ let picList = [
     title: '分隔线',
     data: {
       蓝色频谱音频装饰动图gif: {
-        url: ASSETS_URL + 'pic-230-1abf980f5d966f30.gif',
+        url: ASSETS_URL + 'pic-230-1abf980f5d966f30.gif.webp',
       },
       蓝色直线科技装饰动图gif: {
-        url: ASSETS_URL + 'pic-239-ce970cb4d39a64db.gif',
+        url: ASSETS_URL + 'pic-239-ce970cb4d39a64db.gif.webp',
       },
       蓝色橙色标尺装饰动图gif: {
-        url: ASSETS_URL + 'pic-238-0e821128f121a815.gif',
+        url: ASSETS_URL + 'pic-238-0e821128f121a815.gif.webp',
       },
       白色透明电波频率脉动科技直线线条边框图形装饰: {
         url: ASSETS_URL + 'pic-132-9b13886b9c0b3372.svg',
@@ -1955,16 +1955,16 @@ let picList = [
         url: ASSETS_URL + 'pic-199-9bad7c1391b74106.svg',
       },
       蓝色透明科技折线线条边框图形装饰4: {
-        url: ASSETS_URL + 'pic-1.png',
+        url: ASSETS_URL + 'pic-1.png.webp',
       },
       蓝色透明科技折线线条边框图形装饰5: {
-        url: ASSETS_URL + 'pic-2.png',
+        url: ASSETS_URL + 'pic-2.png.webp',
       },
       蓝色渐变科技直线线条边框图形装饰: {
-        url: ASSETS_URL + 'pic-3.png',
+        url: ASSETS_URL + 'pic-3.png.webp',
       },
       灰色透明科技直线线条边框图形装饰: {
-        url: ASSETS_URL + 'pic-9.png',
+        url: ASSETS_URL + 'pic-9.png.webp',
       },
       蓝色透明科技直线边框装饰图标图形: {
         url: ASSETS_URL + 'pic-9DHkf6Cgsb7Th2Gr.svg',
@@ -2315,121 +2315,121 @@ picList.forEach((item) => {
 });
 assets.backgrounds = {
   默认: {
-    url: ASSETS_URL + 'bg_03.png',
+    url: ASSETS_URL + 'bg_03.png.webp',
   },
   深蓝色: {
     // url: `data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoBAAEAAsBMJYwAA3AA/vfEX+rSaRIAAAA=`,
     url: '#02011b',
   },
   蓝色网格: {
-    url: ASSETS_URL + 'background-17.png',
+    url: ASSETS_URL + 'background-17.png.webp',
   },
   深色蓝色网格: {
-    url: ASSETS_URL + 'background-3.png',
+    url: ASSETS_URL + 'background-3.png.webp',
   },
   深色蓝色标题: {
-    url: ASSETS_URL + 'bg_01.png',
+    url: ASSETS_URL + 'bg_01.png.webp',
   },
   蓝色背景1: {
-    url: ASSETS_URL + 'b01.png',
+    url: ASSETS_URL + 'b01.png.webp',
   },
   蓝色背景2: {
-    url: ASSETS_URL + 'b02.jpg',
+    url: ASSETS_URL + 'b02.jpg.webp',
   },
   深色蓝色渐变: {
-    url: ASSETS_URL + 'bg_02.png',
+    url: ASSETS_URL + 'bg_02.png.webp',
   },
   深色蓝色简约: {
-    url: ASSETS_URL + 'background-1.png',
+    url: ASSETS_URL + 'background-1.png.webp',
   },
   深色蓝色网格标题: {
-    url: ASSETS_URL + 'background-2.png',
+    url: ASSETS_URL + 'background-2.png.webp',
   },
   深色蓝色星空: {
-    url: ASSETS_URL + 'background-zKvVf3rb7brY6rK8.jpg',
+    url: ASSETS_URL + 'background-zKvVf3rb7brY6rK8.jpg.webp',
   },
   深色黑色星空星球地球: {
-    url: ASSETS_URL + 'background-g4Q9Ar2kRDRpr8yK.jpg',
+    url: ASSETS_URL + 'background-g4Q9Ar2kRDRpr8yK.jpg.webp',
   },
   深色紫色蓝色地球地图: {
-    url: ASSETS_URL + 'background-88VwuczRK2Rx8iRx.jpg',
+    url: ASSETS_URL + 'background-88VwuczRK2Rx8iRx.jpg.webp',
   },
   深色渐变星空: {
-    url: ASSETS_URL + 'background-49uxqXBm2G2jQqod.jpg',
+    url: ASSETS_URL + 'background-49uxqXBm2G2jQqod.jpg.webp',
   },
   深色黑色金色标题: {
-    url: ASSETS_URL + 'background-44cWxfnyxe4Vj3XF.jpg',
+    url: ASSETS_URL + 'background-44cWxfnyxe4Vj3XF.jpg.webp',
   },
   透明: {
-    url: ASSETS_URL + 'background-4.png',
+    url: ASSETS_URL + 'background-4.png.webp',
   },
   深色蓝色地球科技: {
-    url: ASSETS_URL + 'background-1-41949a72a05e60d0.jpg',
+    url: ASSETS_URL + 'background-1-41949a72a05e60d0.jpg.webp',
   },
   深色蓝色地球科技1: {
-    url: ASSETS_URL + 'background-2-6dfcf39aa56ca711.jpg',
+    url: ASSETS_URL + 'background-2-6dfcf39aa56ca711.jpg.webp',
   },
   深色金色蓝色线条: {
-    url: ASSETS_URL + 'background-3-647572d6c5cce669.jpg',
+    url: ASSETS_URL + 'background-3-647572d6c5cce669.jpg.webp',
   },
   深色蓝色金色地球地图: {
-    url: ASSETS_URL + 'background-6-aa4b2b1f271ad50a.jpg',
+    url: ASSETS_URL + 'background-6-aa4b2b1f271ad50a.jpg.webp',
   },
   深色蓝色白色线条宽屏: {
-    url: ASSETS_URL + 'background-4-3a9445e651481957.jpg',
+    url: ASSETS_URL + 'background-4-3a9445e651481957.jpg.webp',
   },
   深色红色科技线条宽屏: {
-    url: ASSETS_URL + 'background-5-f6e7276179ee0caf.jpg',
+    url: ASSETS_URL + 'background-5-f6e7276179ee0caf.jpg.webp',
   },
   深色蓝色白色科技地球星空移动端: {
-    url: ASSETS_URL + 'background-5.png',
+    url: ASSETS_URL + 'background-5.png.webp',
   },
   深色蓝色白色科技地球星空: {
-    url: ASSETS_URL + 'background-6.png',
+    url: ASSETS_URL + 'background-6.png.webp',
   },
   深色蓝色红色圆形光点光线网格移动端: {
-    url: ASSETS_URL + 'background-7.png',
+    url: ASSETS_URL + 'background-7.png.webp',
   },
   深色蓝色红色圆形光点光线网格: {
-    url: ASSETS_URL + 'background-8.png',
+    url: ASSETS_URL + 'background-8.png.webp',
   },
   深色蓝色方形光点网格移动端: {
-    url: ASSETS_URL + 'background-9.png',
+    url: ASSETS_URL + 'background-9.png.webp',
   },
   深色蓝色方形光点网格: {
-    url: ASSETS_URL + 'background-10.png',
+    url: ASSETS_URL + 'background-10.png.webp',
   },
   深色蓝色星空科技标题容器: {
-    url: ASSETS_URL + 'background-11.png',
+    url: ASSETS_URL + 'background-11.png.webp',
   },
   深色蓝色星空科技标题容器移动端: {
-    url: ASSETS_URL + 'background-12.png',
+    url: ASSETS_URL + 'background-12.png.webp',
   },
   深色蓝色中国地图科技标题容器: {
-    url: ASSETS_URL + 'background-13.png',
+    url: ASSETS_URL + 'background-13.png.webp',
   },
   深色蓝色中国地图科技标题容器移动端: {
-    url: ASSETS_URL + 'background-14.png',
+    url: ASSETS_URL + 'background-14.png.webp',
   },
   深色蓝色地球图表容器科技: {
-    url: ASSETS_URL + 'background-15.png',
+    url: ASSETS_URL + 'background-15.png.webp',
   },
   深色蓝色光点水滴唯美柔光网格标题容器科技: {
-    url: ASSETS_URL + 'background-16.png',
+    url: ASSETS_URL + 'background-16.png.webp',
   },
 };
 assets.headers = {
   默认头图: {
-    url: ASSETS_URL + 'header_03.png',
+    url: ASSETS_URL + 'header_03.png.webp',
   },
   淡蓝色: {
-    url: ASSETS_URL + 'header_01.png',
+    url: ASSETS_URL + 'header_01.png.webp',
   },
   蓝色: {
-    url: ASSETS_URL + 'header_02.png',
+    url: ASSETS_URL + 'header_02.png.webp',
   },
   蓝色2: {
-    url: ASSETS_URL + 'header_04.png',
+    url: ASSETS_URL + 'header_04.png.webp',
   },
 };
 assets.footers = {
@@ -2437,7 +2437,7 @@ assets.footers = {
     url: null,
   },
   蓝色底部: {
-    url: ASSETS_URL + 'footer_03.png',
+    url: ASSETS_URL + 'footer_03.png.webp',
   },
 };
 
