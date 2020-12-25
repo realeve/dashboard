@@ -21,6 +21,17 @@ const getRect = (option: IPanelItem, { fill, stroke }) => ({
 });
 let activeStyle = { fill: '#2681ff', stroke: '#2681ff' };
 
+export interface IThumbProps
+  extends Pick<ICommon, 'page' | 'history' | 'panel' | 'curHistoryIdx' | 'selectedPanel'> {
+  style?: React.CSSProperties;
+  /** 渲染引擎 */
+  renderer?: 'svg' | 'canvas';
+  /** 颜色 */
+  fill: string;
+  /** 边框颜色 **/
+  stroke: string;
+  [key: string]: any;
+}
 const Index = ({
   fill = '#999',
   stroke = '#2681ff',
@@ -30,7 +41,8 @@ const Index = ({
   curHistoryIdx,
   style = {},
   selectedPanel,
-}) => {
+  renderer = 'svg',
+}: IThumbProps) => {
   const ref = useRef(null);
   let panel = history[curHistoryIdx]?.panel || _panel;
   const [rects, setRects] = useState<
@@ -53,7 +65,7 @@ const Index = ({
     if (!ref.current) {
       return;
     }
-    let zr = zrender.init(ref.current);
+    let zr = zrender.init(ref.current, { renderer });
     setInstanse(zr);
   }, []);
 
