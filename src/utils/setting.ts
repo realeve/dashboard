@@ -117,4 +117,5 @@ export const api = {
 
 // 静态资源所在地址，用于背景/边框/图片资源等；
 
-export const ASSETS_URL = '//127.0.0.1:9999/assets/';
+export const ASSETS_HOST = '//127.0.0.1:9999/';
+export const ASSETS_URL = ASSETS_HOST + 'assets/';

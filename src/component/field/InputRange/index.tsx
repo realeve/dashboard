@@ -8,7 +8,7 @@ export default ({
   showValue = true,
   onChange = () => {},
   disabled = false,
-  formatter = (e) => <span>{e}</span>,
+  formatter = (e = 0) => <span>{e}</span>,
   ...props
 }: {
   min?: number;

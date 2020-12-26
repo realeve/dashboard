@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import { IChartConfig } from '@/component/chartItem/interface';
+import { ASSETS_HOST } from '@/utils/setting';
 
 export const config: IChartConfig[] = [
   {
     title: '视频地址',
     key: 'video_url',
     valueType: 'text',
-    defaultValue: '/video/01.mp4',
+    defaultValue: ASSETS_HOST + 'video/01.mp4.webm',
   },
   {
     title: '圆角',
