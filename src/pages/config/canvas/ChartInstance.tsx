@@ -163,7 +163,7 @@ const ChartRender = ({
     );
   } else if (config.engine === 'other') {
     const Item = method;
-    return <Item option={injectProps} chartid={chartid} style={style} />;
+    return <Item panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />;
   }
 
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;

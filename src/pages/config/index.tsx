@@ -45,17 +45,19 @@ export interface IPanelItem extends IChartConfig {
 // 当属性名中有 scenaIgnore 时，禁止selectTo选中
 export const addPanel = (
   editor: React.MutableRefObject<any>,
-  { style, ...config }: IPanelConfig,
+  { style: _style, ...config }: IPanelConfig,
 ) => {
   if (config.key === GROUP_COMPONENT_KEY) {
     return;
   }
+  let { ['transform-origin']: transformOrigin, ...style } = _style;
+
   editor?.current?.append(
     <div
       className={classnames(styles.chartWrapper, {
         scenaIgnore: SCREEN_EDGE_KEY == config.key,
       })}
-      style={style}
+      style={{ ...style, transformOrigin }}
     >
       <ChartItem chartid={config.id} />
     </div>,

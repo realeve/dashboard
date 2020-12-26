@@ -131,6 +131,11 @@ export default class MoveableManager extends React.PureComponent<{
           dimensionViewable={true}
           draggable={true}
           resizable={true}
+          originDraggable={true}
+          originRelative={true}
+          origin={true}
+          onDragOriginStart={moveableData.onDragOriginStart}
+          onDragOrigin={moveableData.onDragOrigin}
           throttleResize={1}
           clippable={false}
           dragArea={selectedTargets.length > 1}

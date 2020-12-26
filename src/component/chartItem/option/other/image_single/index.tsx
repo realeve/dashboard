@@ -84,26 +84,28 @@ export default ({
     opacity = 1,
     autoHeight = true,
   },
+  panelStyle,
 }) => {
   let url = assets.pics[imgname]?.url;
+  let origin = { transformOrigin: panelStyle?.['transform-origin'] };
   let animation = !rotate
-    ? {}
+    ? origin
     : {
+        ...origin,
         animationDuration: rotateTime + 's',
         animationName: reverse,
         animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
       };
+
   return (
-    <div className={styles.imgWrapper}>
+    <div className={classnames(styles.imgWrapper, { [styles.rotate]: rotate })} style={animation}>
       <img
         src={url}
         style={{
           width: '100%',
           height: autoHeight ? 'auto' : '100%',
           opacity,
-          ...animation,
         }}
-        className={classnames({ [styles.rotate]: rotate })}
       />
     </div>
   );
