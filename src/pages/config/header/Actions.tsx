@@ -45,7 +45,7 @@ const Actions = ({
     if (!isEditMode) {
       // 向大屏中添加列表项
 
-      // TODO jpg to webp
+      // jpg to webp
 
       success = await addDashboardList({
         title,

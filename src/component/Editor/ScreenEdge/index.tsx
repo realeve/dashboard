@@ -34,7 +34,9 @@ interface EdgeLineProps {
   showEdgeTag?: boolean;
   screen_edge_background?: string;
 }
-const EdgeLine = forwardRef(
+const EdgeLine: React.ForwardRefExoticComponent<
+  EdgeLineProps & React.RefAttributes<HTMLDivElement>
+> = forwardRef(
   (
     {
       direction = 'horizontal',
@@ -42,7 +44,7 @@ const EdgeLine = forwardRef(
       screen_edge_width,
       showEdgeTag = true,
       screen_edge_background = 'rgba(0, 0, 0, 0.5)',
-    }: EdgeLineProps,
+    },
     ref,
   ) => {
     let isHorizontal = direction == 'horizontal';

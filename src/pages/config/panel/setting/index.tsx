@@ -89,7 +89,7 @@ const Index = ({
     }
 
     // 业务组件自身不允许被选取；
-    // TODO 此处需讨论是否开放，这样可在多个业务组件之间组合成新组件
+    // 此处需讨论是否开放，这样可在多个业务组件之间组合成新组件
     let haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
 
     setShouldSave(!haseBusiness);

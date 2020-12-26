@@ -242,7 +242,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.props.selectMenu(menu);
   }
 
-  // TODO jpg to webp
+  // jpg to webp
   public async getThumbnail(scale: number, quality = 0.8, filename = null) {
     let canvasEl = this.viewport.current.viewport.el;
     return import('html2canvas').then(({ default: html2canvas }) =>

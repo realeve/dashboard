@@ -246,7 +246,7 @@ ILayerProps) => {
         onRemove?.([index]);
         break;
 
-      // TODO 组件收藏功能（暂时不做）
+      // 组件收藏功能（暂时不做）
       // case MENU_ACTIONS.FAVORITE:
       //   message.success('该功能待添加。id:' + index);
       //   break;

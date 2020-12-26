@@ -23,7 +23,9 @@ export interface G2PlotChartProps extends ContainerProps {
   readonly renderer?: 'canvas' | 'svg';
 }
 
-const G2PlotChart = forwardRef((props: G2PlotChartProps, ref) => {
+const G2PlotChart: React.ForwardRefExoticComponent<
+  G2PlotChartProps & React.RefAttributes<HTMLDivElement>
+> = forwardRef((props, ref) => {
   const {
     chartRef,
     style = {
