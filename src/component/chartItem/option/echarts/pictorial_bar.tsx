@@ -72,7 +72,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/12_pictorial_bar.json',
   interval: 5,
-    cache:2,
+  cache: 2,
   config: [
     {
       key: 'x',
@@ -94,12 +94,12 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
   let itemData = [];
 
   // 取出每一条数据value,作为显示数据
-  data.forEach(function(items, index) {
+  data.forEach(function (items, index) {
     itemData.push(items.value);
   });
 
   // 取出所有数据最大值,作为背景象形柱图数据
-  data.forEach(function(items, index) {
+  data.forEach(function (items, index) {
     bgData.push({
       name: items.name,
       value: Math.max.apply(null, itemData),
@@ -114,9 +114,7 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
   let animate = {
     symbolSize: [size, '100%'],
     animationEasing: 'elasticOut',
-    animationDelay: function(dataIndex, params) {
-      return params.index * 30 * 1.1;
-    },
+    animationDelay: (idx) => idx * 33,
   };
   const label = {
     z: -1,
@@ -125,7 +123,7 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
       show: true,
       position: 'top',
       distance: 5,
-      formatter: function(params) {
+      formatter: function (params) {
         return data[params.dataIndex].value;
       },
       color: config.fontColor || '#ffc72b',
@@ -214,11 +212,11 @@ export default ({
   axisFontSize = 16,
   ...config
 }: IPictorialBar) => {
-  let chartData = data.map(item => ({ name: item[x], value: item[y] }));
+  let chartData = data.map((item) => ({ name: item[x], value: item[y] }));
 
   return {
     tooltip: {
-      formatter: params => {
+      formatter: (params) => {
         let { name, value } = params[1].data;
         return `${name}: ${value}`;
       },
@@ -233,9 +231,9 @@ export default ({
     xAxis: [
       {
         type: 'category',
-        data: (function(data) {
+        data: (function (data) {
           let arr = [];
-          data.forEach(function(items) {
+          data.forEach(function (items) {
             arr.push(items.name);
           });
           return arr;

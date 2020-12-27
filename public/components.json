@@ -200,7 +200,7 @@
           {
             "name": "other.water",
             "key": "water",
-            "engine": "echarts",
+            "engine": "other",
             "type": "others",
             "title": "水球图",
             "image": "/img/icons/05_water.png.webp"

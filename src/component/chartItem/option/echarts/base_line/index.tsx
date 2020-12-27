@@ -77,6 +77,15 @@ export default ({
     markArea5,
   });
 
+  let endLabel = {
+    show:true,
+    formatter: '{a}: {b}',
+    offset:[-300,-290],
+    // rotate:20,
+    // position:'insideRight',
+    overflow:'truncate'
+}
+
   let series: ISeries[] = res.series.map(({ name, arr: data }, idx: number) => ({
     name,
     coordinateSystem: isPolar ? 'polar' : 'cartesian2d',
@@ -84,6 +93,7 @@ export default ({
     stack: isStack,
     type: chartType,
     step: isStep,
+    endLabel,
     smooth,
     lineStyle: {
       width: lineWidth,

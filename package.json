@@ -26,7 +26,7 @@
     "css-styled": "^0.2.1",
     "dayjs": "^1.8.19",
     "dva": "^2.6.0-beta.20",
-    "echarts": "^5.0.0",
+    "echarts": "^5.0.0", 
     "element-resize-event": "^3.0.3",
     "file-saver": "^2.0.2",
     "framework-utils": "^0.3.4",
