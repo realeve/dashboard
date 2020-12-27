@@ -234,7 +234,7 @@ export default ({
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [barWidth / 2, 0, 0, barWidth / 2] : 0,
-            color: LinearGradient(0, 0, 1, 0, [
+            color: new LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
                 color: '#ef00ff',
@@ -262,7 +262,7 @@ export default ({
         itemStyle: {
           normal: {
             barBorderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,
-            color: LinearGradient(0, 0, 1, 0, [
+            color: new LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
                 color: '#2846ff',

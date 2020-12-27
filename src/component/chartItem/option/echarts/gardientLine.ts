@@ -120,7 +120,7 @@ export default ({
         borderWidth: 4,
         areaStyle: {
           //渐变色的设置
-          color: LinearGradient(0, 0, 0, 1, [
+          color: new LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
               color: util.hex2rgb(color[idx % res.series.length], 0.9),

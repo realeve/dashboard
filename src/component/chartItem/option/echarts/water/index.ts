@@ -1,6 +1,6 @@
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 // 水球图只在该组件中用到，不应封装到echarts全局组件中
-import 'echarts-liquidfill';
+import './echarts-liquidfill';
 
 export let mock: IChartMock = {
   data: [[45.7]],

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import elementResizeEvent from 'element-resize-event';
 import theme from './theme';
-import echarts from 'echarts';
+import * as echarts from 'echarts';
 import { equals as isEqual } from 'ramda';
 
 interface IChartProps {

@@ -1,4 +1,3 @@
-import zrender from 'zrender';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import styles from './index.less';
 import { getStyle } from '@/pages/index/lib';
@@ -8,8 +7,12 @@ import { connect } from 'react-redux';
 import { ICommon } from '@/models/common';
 import { IPanelItem, diff } from './lib';
 
+import * as zrender from 'zrender/esm/zrender';
+import 'zrender/esm/canvas/canvas';
+import * as graphic from 'echarts/esm/util/graphic';
+
 const getRect = (option: IPanelItem, { fill, stroke }) => ({
-  rect: new zrender.Rect({
+  rect: new graphic.Rect({
     shape: option,
     style: {
       fill,

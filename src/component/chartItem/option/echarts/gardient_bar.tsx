@@ -114,7 +114,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
         barWidth: barWidth,
         itemStyle: {
           normal: {
-            color: LinearGradient(
+            color: new LinearGradient(
               0,
               0,
               0,
