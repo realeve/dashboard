@@ -46,6 +46,9 @@ export interface IEchartsBaselineProps {
   /** 显示legend */
   readonly legendShow: boolean;
 
+  /** 显示尾部跟随标签 */
+  readonly showEndlabel:boolean;
+
   /** 显示标记点 */
   readonly showMarkpoint: false | 'minmax' | 'min' | 'max';
 

@@ -7,6 +7,8 @@ import { mock, config,apiConfig, default as getOption } from './water';
 export {mock,config,apiConfig};
 import elementResizeEvent from 'element-resize-event';
 
+// TODO 升级至ECharts 5.0版支持的模式，此时用4.9版实现
+
 export default ({option:props}) => {
   let watch = R.pick(['data', 'x', 'valueFontSize', 'percentFontSize', 'titleFontSize'], props); 
   const ref = useRef(null);

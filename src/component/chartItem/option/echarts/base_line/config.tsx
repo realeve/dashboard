@@ -75,6 +75,12 @@ export const config: IChartConfig[] = [
     ],
   },
   {
+    key: 'showEndlabel',
+    defaultValue: true,
+    type: 'switch',
+    title: '尾部跟随标签',
+  },
+  {
     key: 'showLabel',
     defaultValue: false,
     type: 'switch',

@@ -27,6 +27,7 @@ export default ({
   smooth = true,
   isReverse = false,
   legendShow = true,
+  showEndlabel = true,
   showMarkpoint,
   showMarkline,
   showMarkArea,
@@ -61,6 +62,9 @@ export default ({
     return {};
   }
   let res = handleData(data, { legend, x, y });
+
+  let color = getColors(theme, needRerverse);
+
   let markAreaInfo = utils.getMarkAreaInfo({
     showMarkArea,
     markAreaColor,
@@ -77,14 +81,28 @@ export default ({
     markArea5,
   });
 
-  let endLabel = {
-    show:true,
-    formatter: '{a}: {b}',
-    offset:[-300,-290],
+  // https://github.com/apache/incubator-echarts/issues/13878
+  // TODO 此处在标签很长时会有bug
+  let getEndLabel = (idx) => ({
+    show: showEndlabel,
+    formatter: '{a}',
     // rotate:20,
     // position:'insideRight',
-    overflow:'truncate'
-}
+    // width: 100,
+    // distance: -50,
+    overflow: 'truncate',
+    color: color[idx % res.series.length], //"inherit",
+  });
+
+  let barLabelOption = {
+    position: isReverse ? 'insideLeft' : 'insideBottom',
+    distance: 15,
+    align: 'left',
+    verticalAlign: 'middle',
+    rotate: isReverse ? 0 : 90,
+    formatter: '{a}  {c}',
+    fontSize: 16,
+  };
 
   let series: ISeries[] = res.series.map(({ name, arr: data }, idx: number) => ({
     name,
@@ -93,10 +111,17 @@ export default ({
     stack: isStack,
     type: chartType,
     step: isStep,
-    endLabel,
+    endLabel: getEndLabel(idx),
     smooth,
     lineStyle: {
       width: lineWidth,
+    },
+
+    // ECharts 5.0开始支持
+    // https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation
+    // https://echarts.apache.org/next/zh/option.html#series-line.emphasis.focus
+    emphasis: {
+      focus: 'series',
     },
 
     // 只在第一组数据显示标记区域
@@ -143,7 +168,8 @@ export default ({
               {
                 name: '平均值',
                 type: 'average',
-                label: { formatter: '{b}\n{c}', distance: -10 },
+                // 此处的颜色设定在echarts 5.0版本中无效
+                label: { formatter: '{b}\n{c}', distance: -10, color: '#fff' },
               },
             ],
             symbol: 'none',
@@ -160,6 +186,10 @@ export default ({
       show: showLabel,
       position: `inside${isReverse ? 'Right' : 'Top'}`,
       color: '#fff',
+
+      // https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation
+      // 柱状图标签自动旋转
+      ...(showEndlabel && chartType === 'bar' ? barLabelOption : {}),
     },
     showBackground,
     backgroundStyle: {
@@ -172,8 +202,6 @@ export default ({
   if (isPercent) {
     series = utils.handlePercent(series);
   }
-
-  let color = getColors(theme, needRerverse);
 
   return {
     color,
