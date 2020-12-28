@@ -112,6 +112,9 @@ export default ({
     type: chartType,
     step: isStep,
     endLabel: getEndLabel(idx),
+    labelLayout: {
+      moveOverlap: 'shiftY',
+    },
     smooth,
     lineStyle: {
       width: lineWidth,
@@ -214,7 +217,7 @@ export default ({
     legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {
       left: '3%',
-      right: '4%',
+      right: '4%', // chartType == 'line' && showEndlabel ? '100' :
       bottom: '3%',
       containLabel: true,
     },
@@ -256,6 +259,7 @@ export default ({
         axisLabel: {
           color: '#ddd',
         },
+        nameLocation: 'middle',
       },
     ],
     series,

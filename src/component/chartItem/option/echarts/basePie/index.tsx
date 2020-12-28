@@ -58,6 +58,9 @@ export default (
           borderWidth,
           borderRadius: [borderRadiusInner, borderRadiusOutter],
         },
+        emphasis: {
+          focus: 'series',
+        },
         label: {
           position: labelPosition,
           alignTo: labelAlign,
