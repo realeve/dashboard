@@ -32,7 +32,7 @@ export interface IChartMock {
   header: string[];
   rows: number;
   hash: string;
-  serverTime: string;
+  serverTime?: string;
   [key: string]: any;
 }
 

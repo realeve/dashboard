@@ -9,7 +9,28 @@ import styles from './index.less';
 
 export const emojiList = ['🥇', '🥈', '🥉'];
 
-const defaultConfig = {
+export interface IScrollBoardProps {
+  header: string[];
+  data: string[][];
+  rowNum: number;
+  headerBGC: string;
+  oddRowBGC: string;
+  evenRowBGC: string;
+  waitTime: number;
+  headerHeight: number;
+  columnWidth: number[];
+  align: ('left' | 'center' | 'right')[];
+  index: boolean;
+  indexHeader: string;
+  carousel: 'single' | 'page';
+  fontSize: number;
+  fontWeight: string;
+  fontColor: string;
+  formatIndex: boolean;
+
+  hoverColumns?: number[];
+}
+const defaultConfig: IScrollBoardProps = {
   /**
    * @description Board header
    * @type {Array<String>}
@@ -95,6 +116,9 @@ const defaultConfig = {
   fontSize: 16,
   fontWeight: 'normal',
   fontColor: '#f2f2f2',
+
+  formatIndex: true,
+  hoverColumns: [],
 };
 
 function calcHeaderData({ header, index, indexHeader }) {
@@ -109,7 +133,14 @@ function calcHeaderData({ header, index, indexHeader }) {
   return header;
 }
 
-function calcRows({ data, index, headerBGC, rowNum, formatIndex = true }) {
+function calcRows({
+  data,
+  index,
+  headerBGC,
+  rowNum,
+  formatIndex = true,
+  hoverColumns = [],
+}: IScrollBoardProps) {
   if (index) {
     data = data.map((row, i) => {
       row = isArray(row) ? [...row] : Object.values(row);
@@ -287,8 +318,14 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
   function emitEvent(ri, ci, row, ceil) {
     const { ceils, rowIndex } = row;
+    let appendIndex = config.formatIndex;
 
-    onClick && onClick({ row: ceils, ceil, rowIndex, columnIndex: ci });
+    onClick?.({
+      data: appendIndex ? ceils.slice(1) : ceils,
+      ceil,
+      row: rowIndex,
+      col: appendIndex ? ci - 1 : ci,
+    });
   }
 
   const getBackgroundColor = (rowIndex) =>
@@ -382,16 +419,28 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
                 textAlign: config.textAlign,
               }}
             >
-              {row.ceils.map((ceil, ci) => (
-                <div
-                  className={styles.ceil}
-                  key={ceil + ri + ci}
-                  style={{ width: `${widths[ci]}px`, flex: config.index && ci === 0 ? 'unset' : 1 }}
-                  align={aligns[ci]}
-                  dangerouslySetInnerHTML={{ __html: ceil }}
-                  onClick={() => emitEvent(ri, ci, row, ceil)}
-                />
-              ))}
+              {row.ceils.map((ceil, ci) => {
+                let showDetail = (config?.hoverColumns || []).includes(
+                  ci - (config.formatIndex ? 1 : 0),
+                );
+                let Item = (
+                  <div
+                    className={classnames(styles.ceil, {
+                      [styles.hoverAble]: showDetail,
+                    })}
+                    title={showDetail ? '点击查看详情' : ''}
+                    key={ceil + ri + ci}
+                    style={{
+                      width: `${widths[ci]}px`,
+                      flex: config.index && ci === 0 ? 'unset' : 1,
+                    }}
+                    align={aligns[ci]}
+                    dangerouslySetInnerHTML={{ __html: ceil }}
+                    onClick={() => emitEvent(ri, ci, row, ceil)}
+                  />
+                );
+                return Item;
+              })}
             </div>
           ))}
         </div>

@@ -134,7 +134,12 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
-export default ({ option: { data, waitTime = 4, carousel = 'page', ...config } }) => {
+export default ({
+  option: { data, waitTime = 4, carousel = 'page', ...config },
+  onClick = (e) => {
+    console.log(e);
+  },
+}) => {
   return (
     <ScrollBoard
       config={{
@@ -144,8 +149,10 @@ export default ({ option: { data, waitTime = 4, carousel = 'page', ...config } }
         align: ['center'],
         carousel,
         waitTime: waitTime * 1000,
+        hoverColumns: [5, 6, 7, 8],
         ...config,
       }}
+      onClick={onClick}
     />
   );
 };

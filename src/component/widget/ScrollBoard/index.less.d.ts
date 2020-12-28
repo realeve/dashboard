@@ -10,6 +10,7 @@ interface CssExports {
   'header': string;
   'header-item': string;
   'heartBeat': string;
+  'hoverAble': string;
   'index': string;
   'marqueeAnimation': string;
   'rotateCustom': string;
