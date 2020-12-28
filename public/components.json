@@ -12,7 +12,7 @@
             "key": "base_line",
             "engine": "echarts",
             "type": "regular_bar",
-            "title": "echarts基础图表",
+            "title": "基础曲线图",
             "image": "/img/icons/43_baseline.png.webp"
           },
           {
@@ -137,6 +137,14 @@
         "title": "百分比",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
         "list": [
+          {
+            "name": "echarts.basePie",
+            "key": "basePie",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "饼图",
+            "image": "/img/icons/46_basePie.webp"
+          },
           {
             "name": "other.dynamicPie",
             "key": "dynamicPie",
@@ -343,7 +351,10 @@
             "type": "regular_bar",
             "title": "冠字华夫图",
             "image": "/img/icons/45_waffle.png.webp",
-            "style": { "width": "530px", "height": "240px" }
+            "style": {
+              "width": "530px",
+              "height": "240px"
+            }
           }
         ]
       }

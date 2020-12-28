@@ -47,4 +47,5 @@ export const chartList = [
   'cbpc_video',
   'screen_edge',
   'waffle',
+  'basePie',
 ];

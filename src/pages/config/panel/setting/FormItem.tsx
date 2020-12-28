@@ -24,7 +24,7 @@ interface IFormItemProps {
 }
 
 export const FormField = ({
-  value,
+  value = '',
   onChange,
   config: { defaultValue, valueType = 'number', type, key, title, subTitle, ...config },
   style,

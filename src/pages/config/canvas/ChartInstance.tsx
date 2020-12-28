@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
 
 import { IPanelConfig, IApiProps } from '@/models/common';
 
@@ -115,11 +115,15 @@ const ChartRender = ({
     ...api,
   };
 
+  const ref = useRef(null);
+
   if (config.engine === 'echarts') {
+    let chart = ref?.current?.echartsInstance;  
     return (
       <Suspense fallback={<Spin spinning />}>
         <Echarts
-          option={method(injectProps)}
+          ref={ref}
+          option={method(injectProps, chart)}
           renderer={appendConfig.renderer || 'canvas'}
           style={style}
         />

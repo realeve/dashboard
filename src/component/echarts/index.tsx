@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import ReactEcharts from './echarts-for-react';
 import { useInterval } from 'react-use';
 import * as R from 'ramda';
@@ -32,27 +32,33 @@ let toggleSeriesItem = (option, idx) => {
   return { option, idx };
 };
 
-export default ({ toggleItem = false, setToggleIdx, renderer, ...props }: IProp) => {
-  const echarts_react = useRef(null);
-  useEffect(() => {
-    return () => {
-      if (echarts_react && echarts_react.current && echarts_react.current.dispose) {
-        echarts_react.current.dispose();
-      }
-    };
-  }, []);
+const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
+  ({ toggleItem = false, setToggleIdx, renderer, ...props }, ref) => {
+    useEffect(() => {
+      return () => {
+        if (ref && ref.current && ref.current.dispose) {
+          ref.current.dispose();
+        }
+      };
+    }, []);
 
-  const [idx, setIdx] = useState(0);
-  useInterval(() => {
-    if (!echarts_react || !toggleItem) {
-      return;
-    }
-    let chart = echarts_react.current.getEchartsInstance();
-    setToggleIdx && setToggleIdx(idx);
-    let { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
-    setIdx(id);
-    chart.setOption(option, true);
-  }, 3000);
+    const [idx, setIdx] = useState(0);
+    useInterval(
+      () => {
+        if (!ref?.current) {
+          return;
+        }
+        let chart = ref.current?.echartsInstance;
+        setToggleIdx && setToggleIdx(idx);
+        let { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
+        setIdx(id);
+        chart.setOption(option, true);
+      },
+      toggleItem ? 3000 : null,
+    );
 
-  return <ReactEcharts ref={echarts_react} {...props} opts={{ renderer: renderer || 'canvas' }} />;
-};
+    return <ReactEcharts ref={ref} {...props} opts={{ renderer: renderer || 'canvas' }} />;
+  },
+);
+
+export default EChart;

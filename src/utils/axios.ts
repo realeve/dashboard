@@ -14,7 +14,7 @@ export interface GlobalAxios {
  * @param affected_rows 数据写操作返回的成功条数
  */
 export type TDbWrite = { affected_rows?: number; id?: number; [key: string]: any };
-export type TAxiosData = TDbWrite | [];
+export type TAxiosData = TDbWrite | any[];
 /**
  * @param title:标题
  * @param rows 数据行

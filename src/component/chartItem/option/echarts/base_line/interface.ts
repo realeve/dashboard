@@ -1,18 +1,5 @@
-import { IChartMock } from '@/component/chartItem/interface';
-
-export interface IEchartsBaselineProps {
-  /** 传入的数据  */
-  readonly data: IChartMock;
-
-  /** legend字段  */
-  readonly legend: number;
-
-  /** x字段 */
-  readonly x: number;
-
-  /** y字段 */
-  readonly y: number;
-
+import { ILegendProps, IApiProps } from '../interface';
+export interface IEchartsBaselineProps extends ILegendProps, IApiProps {
   /** 主题 */
   readonly theme: number | string;
 
@@ -43,11 +30,8 @@ export interface IEchartsBaselineProps {
   /** 交换XY轴 */
   readonly isReverse: boolean;
 
-  /** 显示legend */
-  readonly legendShow: boolean;
-
   /** 显示尾部跟随标签 */
-  readonly showEndlabel:boolean;
+  readonly showEndlabel: boolean;
 
   /** 显示标记点 */
   readonly showMarkpoint: false | 'minmax' | 'min' | 'max';
@@ -102,15 +86,6 @@ export interface IEchartsBaselineProps {
 
   /** 显示数据标签 */
   readonly showLabel: boolean;
-
-  /** legend排列 */
-  readonly legendAlign: 'left' | 'right' | 'center';
-
-  /** legend位置 */
-  readonly legendPosition: 'left' | 'right' | 'center';
-
-  /** legend横纵排列 */
-  readonly legendOrient: 'horizontal' | 'vertical';
 
   /** 面积图透明度 */
   readonly area_opacity: number;

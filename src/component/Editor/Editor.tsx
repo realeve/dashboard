@@ -24,8 +24,8 @@ import classnames from 'classnames';
 import * as R from 'ramda';
 import { IPage } from '@/models/common';
 import { Dispatch } from 'redux';
-import fileSaver from 'file-saver';
-import { getDefaultStyle, getDashboardStyle, calcCanvasRange } from './lib';
+
+import { getDefaultStyle, getDashboardStyle, calcCanvasRange, getThumbnail } from './lib';
 
 // 缩放的范围
 export const rangeCfg = { min: 0.4, max: 2, step: 0.1 };
@@ -245,24 +245,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   // jpg to webp
   public async getThumbnail(scale: number, quality = 0.8, filename = null) {
     let canvasEl = this.viewport.current.viewport.el;
-    return import('html2canvas').then(({ default: html2canvas }) =>
-      html2canvas(canvasEl, {
-        backgroundColor: null,
-        scale,
-      }).then((canvas) => {
-        /* canvas.toBlob 对于各个浏览器有兼容问题. ie会报错没有toBlob对象
-         * 解决方式：引入canvas-toBlob.js（https://github.com/eligrey/canvas-toBlob.js/blob/master/canvas-toBlob.js）
-         * */
-        if (filename) {
-          canvas.toBlob(function (blob) {
-            fileSaver.saveAs(blob, filename + '.webp');
-          });
-          return;
-        }
-
-        return canvas.toDataURL('image/webp', quality);
-      }),
-    );
+    return getThumbnail(canvasEl, { scale, quality, filename });
   }
 
   public render() {

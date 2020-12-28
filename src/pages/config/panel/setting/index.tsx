@@ -14,6 +14,8 @@ import Config from './config';
 import { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
 import { connect } from 'react-redux';
+import { getTargetsById } from '@/component/Editor/utils/utils';
+import { getThumbnail } from '@/component/Editor/lib';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
@@ -137,6 +139,20 @@ const Index = ({
         selectedPanel={selectedPanel}
         businessCategory={businessCategory}
       />
+
+      {selectedPanel.length == 1 && (
+        <div
+          className={styles.bottom}
+          onClick={() => {
+            let id = selectedPanel[0];
+            let el = getTargetsById(id);
+            el && getThumbnail(el, { filename: '缩略图' });
+          }}
+          style={{ outline: '1px solid #aaa', background: 'transparent' }}
+        >
+          获取组件缩略图
+        </div>
+      )}
 
       {shouldSave && (
         <div

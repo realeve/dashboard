@@ -188,7 +188,7 @@ class InfiniteViewer extends Component {
    */
   public scrollTo(x: number, y: number) {
     const {
-      zoom = DEFAULT_OPTIONS.zoom,
+      zoom = DEFAULT_OPTIONS.zoom||1,
       margin = DEFAULT_OPTIONS.margin,
       threshold = DEFAULT_OPTIONS.threshold,
       scrollLeft: prevScrollLeft,

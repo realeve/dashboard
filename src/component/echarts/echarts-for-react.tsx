@@ -62,6 +62,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
 
   echartsElement = null;
   echartsLib = null;
+  echartsInstance = null;
 
   constructor(props) {
     super(props);
@@ -124,8 +125,12 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
 
   // return the echart object
   getEchartsInstance = () =>
-    this.echartsLib.getInstanceByDom(this.echartsElement) ||
-    this.echartsLib.init(this.echartsElement, this.props.theme, this.props.opts);
+    this.echartsInstance ||
+    (this.echartsInstance = this.echartsLib.init(
+      this.echartsElement,
+      this.props.theme,
+      this.props.opts,
+    ));
 
   // dispose echarts and element-resize-event
   dispose = () => {
@@ -184,7 +189,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
 
     // set the echart option
     echartObj.setOption(
-      this.props.option,
+      { darkMode: true, ...this.props.option },
       this.props.notMerge || false,
       this.props.lazyUpdate || false,
     );

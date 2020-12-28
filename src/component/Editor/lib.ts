@@ -1,6 +1,6 @@
 import { defaultRect } from '@/pages/config/lib';
 import { isColor } from '@/component/chartItem/option/lib';
-
+import { saveAs } from 'file-saver';
 import assets from '@/component/widget/assets';
 
 export const getDefaultStyle = (style?: React.CSSProperties) => {
@@ -93,4 +93,34 @@ export const calcCanvasRange = (
     x: [-margin, x + hideWidth],
     y: [-margin, y],
   };
+};
+
+// jpg to webp
+export const getThumbnail = async (
+  canvasEl: HTMLElement,
+  { scale = 1, quality = 0.8, filename = null },
+) => {
+  let imageType = 'image/webp';
+  return import('html2canvas').then(({ default: html2canvas }) =>
+    html2canvas(canvasEl, {
+      backgroundColor: null,
+      scale,
+    }).then((canvas) => {
+      /* canvas.toBlob 对于各个浏览器有兼容问题. ie会报错没有toBlob对象
+       * 解决方式：引入canvas-toBlob.js（https://github.com/eligrey/canvas-toBlob.js/blob/master/canvas-toBlob.js）
+       * */
+      if (filename) {
+        canvas.toBlob(
+          function (blob) {
+            saveAs(blob, filename + '.webp');
+          },
+          imageType,
+          quality,
+        );
+        return;
+      }
+
+      return canvas.toDataURL(imageType, quality);
+    }),
+  );
 };

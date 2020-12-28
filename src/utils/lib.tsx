@@ -137,7 +137,9 @@ export const handleHistoryPanel: (
   return nextState;
 };
 
-export const json2Array = (data: IAxiosState) => {
+export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) => IAxiosState<T> = (
+  data: IAxiosState,
+) => {
   if (data.rows == 0) {
     return data;
   }
