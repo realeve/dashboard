@@ -109,15 +109,16 @@ function calcHeaderData({ header, index, indexHeader }) {
   return header;
 }
 
-function calcRows({ data, index, headerBGC, rowNum }) {
+function calcRows({ data, index, headerBGC, rowNum, formatIndex = true }) {
   if (index) {
     data = data.map((row, i) => {
       row = isArray(row) ? [...row] : Object.values(row);
+      const needFormat = i < 3 && formatIndex;
 
       const indexTag = `<div class="${styles.index}" style="background-color: ${
-        i < 3 ? 'transparent' : headerBGC
+        needFormat ? 'transparent' : headerBGC
       };">
-      ${i < 3 ? emojiList[i] : i + 1}
+      ${needFormat ? emojiList[i] : i + 1}
     </div>`;
 
       row.unshift(indexTag);
@@ -327,7 +328,11 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   const classNames = useMemo(() => classnames(styles['dv-scroll-board'], className), [className]);
 
   return (
-    <div className={classNames} style={style} ref={domRef}>
+    <div
+      className={classNames}
+      style={{ ...style, fontFamily: config.beautyFont ? 'inherit' : 'Acens' }}
+      ref={domRef}
+    >
       {!!header.length && !!mergedConfig && (
         <div
           className={styles.header}

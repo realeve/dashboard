@@ -35,6 +35,7 @@ let toggleSeriesItem = (option, idx) => {
 const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
   ({ toggleItem = false, setToggleIdx, renderer, ...props }, ref) => {
     useEffect(() => {
+      console.log(ref)
       return () => {
         if (ref && ref.current && ref.current.dispose) {
           ref.current.dispose();

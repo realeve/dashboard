@@ -54,6 +54,7 @@ const ChartRender = ({
   chartLib,
 }: ChartRenderProps) => {
   const [inited, setInited] = useState(false);
+  const ref = useRef(null);
 
   const { default: method, defaultOption = {}, ...lib } = chartLib;
 
@@ -115,7 +116,6 @@ const ChartRender = ({
     ...api,
   };
 
-  const ref = useRef(null);
 
   if (config.engine === 'echarts') {
     let chart = ref?.current?.echartsInstance;  

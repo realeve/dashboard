@@ -1,6 +1,6 @@
 import ScrollBoard from '@/component/widget/ScrollBoard';
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
+import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 export let mock: IChartMock = {
   header: ['列1', '列2', '列3'],
@@ -21,7 +21,7 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-export const config = [
+export const config: IChartConfig = [
   {
     key: 'waitTime',
     defaultValue: 4,
@@ -73,6 +73,18 @@ export const config = [
     title: '显示索引列',
     type: 'switch',
   },
+  {
+    key: 'formatIndex',
+    defaultValue: true,
+    title: '格式化索引列',
+    type: 'switch',
+  },
+  {
+    key: 'beautyFont',
+    defaultValue: false,
+    title: '使用系统默认字体',
+    type: 'switch',
+  },
   ...lib.getFontConfig(),
 
   {
@@ -84,6 +96,7 @@ export const config = [
     defaultValue: '#0d5dff',
     title: '颜色',
     type: 'purecolor',
+    noAnimation: true,
   },
   {
     key: 'headerHeight',
