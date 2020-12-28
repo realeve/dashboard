@@ -133,14 +133,7 @@ function calcHeaderData({ header, index, indexHeader }) {
   return header;
 }
 
-function calcRows({
-  data,
-  index,
-  headerBGC,
-  rowNum,
-  formatIndex = true,
-  hoverColumns = [],
-}: IScrollBoardProps) {
+function calcRows({ data, index, headerBGC, rowNum, formatIndex = true }: IScrollBoardProps) {
   if (index) {
     data = data.map((row, i) => {
       row = isArray(row) ? [...row] : Object.values(row);
@@ -318,10 +311,10 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
   function emitEvent(ri, ci, row, ceil) {
     const { ceils, rowIndex } = row;
-    let appendIndex = config.formatIndex;
+    let appendIndex = config.index;
 
     onClick?.({
-      data: appendIndex ? ceils.slice(1) : ceils,
+      data: appendIndex ? R.tail(ceils) : ceils,
       ceil,
       row: rowIndex,
       col: appendIndex ? ci - 1 : ci,
@@ -420,9 +413,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
               }}
             >
               {row.ceils.map((ceil, ci) => {
-                let showDetail = (config?.hoverColumns || []).includes(
-                  ci - (config.formatIndex ? 1 : 0),
-                );
+                let showDetail = (config?.hoverColumns || []).includes(ci - (config.index ? 1 : 0));
                 let Item = (
                   <div
                     className={classnames(styles.ceil, {
@@ -436,7 +427,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
                     }}
                     align={aligns[ci]}
                     dangerouslySetInnerHTML={{ __html: ceil }}
-                    onClick={() => emitEvent(ri, ci, row, ceil)}
+                    onClick={() => showDetail && emitEvent(ri, ci, row, ceil)}
                   />
                 );
                 return Item;

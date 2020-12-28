@@ -5,6 +5,8 @@ interface CssExports {
   'bounce': string;
   'box': string;
   'container': string;
+  'waffleContainer': string;
+  'waffleTitle': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

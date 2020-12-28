@@ -351,6 +351,8 @@
             "type": "regular_bar",
             "title": "冠字华夫图",
             "image": "/img/icons/45_waffle.png.webp",
+            "showBorder": false,
+            "showBackground": false,
             "style": {
               "width": "530px",
               "height": "240px"
