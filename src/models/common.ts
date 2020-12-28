@@ -136,6 +136,7 @@ export interface ICommonConfig {
   borderRadius: [number, number, number, number]; //边框半角弧度
   chartBackground: string; // 卡片背景
   head: React.CSSProperties; // 卡片标题栏
+  engine?: TChartEngine;
 }
 export interface IPage extends ICommonConfig {
   width: string; // 页面宽
@@ -171,6 +172,28 @@ const panelGeneral: ICommonConfig = {
   },
 };
 
+// 初始化时只有屏幕分割线组件
+const screenEdgePanel: IPanelConfig = {
+  showTitle: false,
+  showBorder: false,
+  showBackground: false,
+  ajax: false,
+  style: { width: '100%', height: '100%', zIndex: -1, transform: { translate: '' } },
+  name: 'other.screen_edge',
+  key: 'screen_edge',
+  engine: 'other',
+  type: 'regular_bar',
+  title: '屏幕分割线',
+  image: '/img/icons/45_screen_edge.jpg',
+  id: 'def1389e24e9e',
+  icon: 'com-font icon-com-regular_bar',
+  general: {},
+  useGeneralStyle: false,
+  lock: true,
+  componentConfig: {},
+  api: {},
+};
+
 export interface IBusinessCategory {
   title: string;
   icon: string;
@@ -194,7 +217,7 @@ export interface ICommon extends IHistoryProps {
 const defaultState: ICommon = {
   history: [],
   curHistoryIdx: 0,
-  panel: [],
+  panel: [screenEdgePanel],
   selectedPanel: [],
   page: {
     width: '1920',
@@ -291,12 +314,12 @@ export default {
     *clearPage({}, { put, call }) {
       let { page } = R.clone(defaultState);
       yield call(db.savePanel('page'), page);
-      yield call(db.savePanel('panel'), []);
+      yield call(db.savePanel('panel'), [screenEdgePanel]);
       yield put({
         type: 'setStore',
         payload: {
           page,
-          panel: [],
+          panel: [screenEdgePanel],
           selectedPanel: [],
           recordHistory: true,
           historyTitle: '清空画板',
