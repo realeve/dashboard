@@ -146,7 +146,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-let colorArr = ['#d9d9d9', '#73d13d', '#ff4d4f'];
+let colorArr = ['#aaa', '#749cff', '#fb0348'];
 
 export const handleData = ({
   x: _x = 0,

@@ -29,9 +29,7 @@ export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...con
     }
     let [prod, gz] = _data.data[0];
     setState({ prod, gz, detail: '印码' });
-  }, [_data?.hash]);
-
-  console.log(data, loading, error);
+  }, [_data?.hash]); 
 
   return (
     <div className={styles.waffleContainer}>
