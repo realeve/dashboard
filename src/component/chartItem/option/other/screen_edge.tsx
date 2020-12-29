@@ -39,8 +39,7 @@ export const config: IChartConfig[] = [
     key: 'screen_edge_background',
     title: '拼接线颜色',
     type: 'purecolor',
-    position: 'top',
-    noAnimation: true,
+    position: 'top', 
     defaultValue: 'rgba(0,0,0,0.5)',
   },
   {

@@ -75,8 +75,7 @@ export const config: IChartConfig[] = [
     title: '渐隐边界颜色',
     key: 'fadeColor',
     type: 'purecolor',
-    defaultValue: '#0c0131',
-    noAnimation: true,
+    defaultValue: '#0c0131', 
   },
   {
     title: '渐隐分隔距离',

@@ -95,8 +95,7 @@ export const config: IChartConfig = [
     key: 'headerBGC',
     defaultValue: '#0d5dff',
     title: '颜色',
-    type: 'purecolor',
-    noAnimation: true,
+    type: 'purecolor', 
   },
   {
     key: 'headerHeight',

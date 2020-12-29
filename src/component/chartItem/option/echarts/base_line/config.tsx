@@ -156,8 +156,7 @@ export const config: IChartConfig[] = [
     key: 'barBackgroundColor',
     defaultValue: 'rgba(140,150,200,0.2)',
     type: 'purecolor',
-    title: '背景颜色',
-    noAnimation: true,
+    title: '背景颜色', 
   },
   {
     key: 'roundCap',
@@ -217,16 +216,14 @@ export const config: IChartConfig[] = [
     defaultValue: 'rgba(255,255,255,0.1)',
     type: 'purecolor',
     title: '标记区域颜色',
-    position: 'bottom',
-    noAnimation: true,
+    position: 'bottom', 
   },
   {
     key: 'markAreaColor2',
     defaultValue: 'rgba(255,255,255,0.3)',
     type: 'purecolor',
     title: '标记区域颜色2',
-    position: 'bottom',
-    noAnimation: true,
+    position: 'bottom', 
   },
   ...utils.getMarkArea(5, 1),
 ];

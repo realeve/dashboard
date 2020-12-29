@@ -78,8 +78,7 @@ export const config = [
     key: 'transpose',
     defaultValue: false,
     title: 'X/Y轴互换',
-    type: 'switch',
-    noAnimation: true,
+    type: 'switch', 
   },
   {
     key: 'color',

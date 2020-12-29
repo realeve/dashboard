@@ -166,10 +166,11 @@ export const handleData = ({
   // 从此id开始产品未印刷，小于它的视为跳号
   let idx = res.length;
   if (gzMode) {
-    let id = R.reverse(data).findIndex(R.propEq(y, 1));
+    let id = R.reverse(data).findIndex((item) => item[y] == 1);
     idx = idx - id;
   }
   let _warnIdx = -1;
+
   let nextData = res.map((item, i) => {
     let color = colorArr[item[y]] || '#23d';
     let _warn = false;
@@ -191,6 +192,7 @@ export const handleData = ({
       _warnIdx,
     };
   });
+  
   return { data: nextData, warnNum: _warnIdx };
 };
 
@@ -231,12 +233,17 @@ const WaffleChart = ({
     moveable,
   },
   curTool,
-  style
+  style,
 }) => {
   // 在移动时，data将重新计算，此处可使用useMemo
-  let { data, warnNum } = useMemo(() => {
-    return handleData({ x, y, legend, cart, data: _data, gzMode });
-  }, [x, y, legend, cart, _data.hash, gzMode]);
+  let { data, warnNum } = useMemo(() => handleData({ x, y, legend, cart, data: _data, gzMode }), [
+    x,
+    y,
+    legend,
+    cart,
+    _data.hash,
+    gzMode,
+  ]);
 
   let containerStyle: React.CSSProperties =
     direction == 'vertical'
@@ -251,7 +258,7 @@ const WaffleChart = ({
     ...containerStyle,
     padding,
     flexWrap: wrap ? 'wrap' : 'wrap-reverse',
-    alignContent: alignContent ? 'flex-start' : 'normal', 
+    alignContent: alignContent ? 'flex-start' : 'normal',
   };
 
   const ref = useRef(null);
@@ -297,6 +304,7 @@ const WaffleChart = ({
               onMouseEnter={() => {
                 setCurIdx(i);
               }}
+              title={item.title}
             />
           );
           return item._warn ? (

@@ -139,7 +139,7 @@ export const PureColor = ({
   disabled = false,
   onChange,
   position = 'top',
-  noAnimation = false,
+  noAnimation = true,
 }) => {
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
