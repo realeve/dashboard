@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import ScrollBoard, { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-
+import * as R from 'ramda';
 export let mock: IChartMock = {
   header: ['列1', '列2', '列3'],
   data: [
@@ -137,16 +137,17 @@ export const apiConfig: IApiConfig = {
 export interface IScrollBoard extends Omit<IScrollBoardProps, 'data' | 'header'> {
   data: IChartMock;
 }
+interface IScrollTable {
+  option: IScrollBoard;
+  onClick?: (e: any) => void;
+  style: React.CSSProperties;
+}
 // TODO 讲述如何引进页面重新渲染
 export default ({
   option: { data, waitTime = 4, ...config },
   onClick = (e) => {},
   style = {},
-}: {
-  option: IScrollBoard;
-  onClick?: (e: any) => void;
-  style: React.CSSProperties;
-}) =>
+}: IScrollTable) =>
   useMemo(
     () => (
       <ScrollBoard
@@ -163,3 +164,34 @@ export default ({
     ),
     [JSON.stringify(config), data?.hash],
   );
+
+
+// 使用 PureComponent实现
+
+// class ScrollTable extends React.PureComponent<IScrollTable> { 
+//   shouldComponentUpdate({ option: { data, ...nextConfig } }: IScrollTable) {
+//     let dataChange = data.hash !== this.props.option.data.hash;
+//     let { data: _data, ...prevConfig } = this.props.option;
+//     let configChange = !R.equals(prevConfig, nextConfig);
+//     return dataChange || configChange;
+//   }
+
+//   render() {
+//     let { data, waitTime = 4, ...config } = this.props.option;
+//     return (
+//       <ScrollBoard
+//         config={{
+//           ...data,
+//           columnWidth: [50],
+//           align: ['center'],
+//           waitTime: waitTime * 1000,
+//           ...config,
+//         }}
+//         onClick={this.props.onClick}
+//         style={this.props.style}
+//       />
+//     );
+//   }
+// }
+
+// export default ScrollTable;
