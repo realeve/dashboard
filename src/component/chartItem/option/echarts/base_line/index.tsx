@@ -212,7 +212,7 @@ export default ({
       trigger: 'axis',
       axisPointer: {
         type: axisPointer,
-      },
+      } 
     },
     legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {

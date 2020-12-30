@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+
 export const init = ({
   selector = '_waffle_box',
   duration = 0.2,

@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import ScrollBoard from '../scroll_board';
-export { config, apiConfig } from '../scroll_board';
+export { apiConfig } from '../scroll_board';
+import { config as mainConfig } from '../scroll_board';
 export { mock1 as mock } from './mock';
 import useFetch from '@/component/hooks/useFetch';
 import styles from './index.less';
-import Waffle from './waffle';
+import ScatterWaffle, { config as detailConfig } from './ScatterWaffle';
+import { DEV } from '@/utils/setting';
+import { Spin } from 'antd';
 
 let detailType = ['印码', '涂布', '检封', '装箱'];
 
+export const config = [...mainConfig, ...detailConfig];
 interface IWaffleState {
   prod?: string;
   gz?: string;
-  detail?: string;
+  procname?: string;
 }
-export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...config } }) => {
+export default ({
+  option: { data: _data, waitTime = 4, carousel = 'page', detailApi, boxSize, boxShape, ...config },
+}) => {
   const [state, setState] = useState<IWaffleState>(null);
   let { data, loading, error } = useFetch({
     param: {
-      url: 'http://localhost:8000/mock/45_waffle.json',
+      url: DEV ? 'http://localhost:8000/mock/45_waffle.json' : detailApi,
       params: state,
     },
     valid: () => 'undefined' !== typeof state?.prod,
@@ -28,13 +34,19 @@ export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...con
       return;
     }
     let [prod, gz] = _data.data[0];
-    setState({ prod, gz, detail: '印码' });
-  }, [_data?.hash]); 
+    setState({ prod, gz, procname: '印码' });
+  }, [_data?.hash]);
+
+  let detailProps = {
+    boxSize,
+    boxShape,
+    y: config.y,
+  };
 
   return (
     <div className={styles.waffleContainer}>
       <ScrollBoard
-        style={{ width: '100%', maxHeight: '60%', flex: 1 }}
+        style={{ width: '100%', height: '50%' }}
         option={{
           data: _data,
           index: true,
@@ -46,46 +58,48 @@ export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...con
           ...config,
         }}
         onClick={(e) => {
-          let prod = e.data[0],
-            gz = e.data[1];
           let type = e.col - 5;
-          let detail = detailType[type];
-
           setState({
-            prod,
-            gz,
-            detail,
+            prod: e.data[0],
+            gz: e.data[1],
+            procname: detailType[type],
           });
         }}
       />
-      {data && (
-        <>
+      <Spin spinning={loading}>
+        {state && (
           <div className={styles.waffleTitle}>
-            {state.prod}品 {state.detail}工序 {state.gz}冠字 生产情况
+            {state.prod}品 {state.procname}工序 {state.gz}冠字 生产详情
           </div>
-          <Waffle
-            option={{
-              data,
-              x: 0,
-              y: 1,
-              legend: 2,
-              cart: 3,
-              direction: 'vertical',
-              padding: 0,
-              wrap: false,
-              alignContent: false,
-              boxSize: 16,
-              boxMargin: 2,
-              boxBorderRadius: 8,
-              gzMode: true,
-              zoomable: false,
-              intervalTooltip: true,
-              moveable: false,
-            }}
-            style={{ height: 'auto' }}
-          />
-        </>
+        )}
+      </Spin>
+      {data && (
+        <ScatterWaffle
+          {...detailProps}
+          prod={state.prod}
+          data={data}
+          style={{ height: 'auto', flex: 1 }}
+        />
       )}
     </div>
   );
 };
+
+// option={{
+//   data,
+//   x: 0,
+//   y: 1,
+//   legend: 2,
+//   cart: 3,
+//   direction: 'vertical',
+//   padding: 0,
+//   wrap: false,
+//   alignContent: false,
+//   boxSize: 16,
+//   boxMargin: 2,
+//   boxBorderRadius: 8,
+//   gzMode: true,
+//   zoomable: false,
+//   intervalTooltip: true,
+//   moveable: false,
+// }}

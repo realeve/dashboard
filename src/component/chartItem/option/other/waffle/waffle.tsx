@@ -3,8 +3,6 @@ import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
 import { init } from './lib';
 export { mock } from './mock';
-import { isArray } from '@antv/util';
-import * as R from 'ramda';
 import { connect } from 'react-redux';
 import MoveableCanvas from '@/component/MoveableCanvas';
 import { ICommon } from '@/models/common';
@@ -12,7 +10,7 @@ import { Tooltip } from 'antd';
 import { useInterval } from 'react-use';
 import { SEARCH_PREFIX } from '@/utils/setting';
 import classnames from 'classnames';
-
+import {handleData} from './util'
 // title:冠字华夫图
 
 export const config: IChartConfig[] = [
@@ -144,56 +142,6 @@ export const apiConfig: IApiConfig = {
       min: 0,
     },
   ],
-};
-
-let colorArr = ['#aaa', '#749cff', '#fb0348'];
-
-export const handleData = ({
-  x: _x = 0,
-  y: _y = 1,
-  legend: _legend = 2,
-  cart: _cart = 3,
-  data: { data, header },
-  gzMode,
-}) => {
-  let dataType = isArray(data[0]);
-  let x = dataType ? _x : header[_x],
-    y = dataType ? _y : header[_y],
-    legend = dataType ? _legend : header[_legend],
-    cart = dataType ? _cart : header[_cart];
-  let res = R.clone(data);
-
-  // 从此id开始产品未印刷，小于它的视为跳号
-  let idx = res.length;
-  if (gzMode) {
-    let id = R.reverse(data).findIndex((item) => item[y] == 1);
-    idx = idx - id;
-  }
-  let _warnIdx = -1;
-
-  let nextData = res.map((item, i) => {
-    let color = colorArr[item[y]] || '#23d';
-    let _warn = false;
-    if (gzMode) {
-      // 前面未印刷的产品，显示红色
-      if (i < idx && item[y] == 0) {
-        color = colorArr[2];
-        _warn = true;
-        _warnIdx++;
-      }
-    }
-    return {
-      ...item,
-      backgroundColor: color,
-      title: item[x],
-      legend: item[legend],
-      cart: item[cart],
-      _warn,
-      _warnIdx,
-    };
-  });
-  
-  return { data: nextData, warnNum: _warnIdx };
 };
 
 // {zoom > 2 && (

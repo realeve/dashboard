@@ -21,7 +21,7 @@ export let mock: IChartMock = {
   hash: 'mockdata',
 };
 
-export const config: IChartConfig = [
+export const config: IChartConfig[] = [
   {
     key: 'waitTime',
     defaultValue: 4,
@@ -95,7 +95,7 @@ export const config: IChartConfig = [
     key: 'headerBGC',
     defaultValue: '#0d5dff',
     title: '颜色',
-    type: 'purecolor', 
+    type: 'purecolor',
   },
   {
     key: 'headerHeight',
@@ -127,7 +127,7 @@ export const config: IChartConfig = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/08_scroll_board.json',
+  url: '1197/54d0a53345.array?status=0', //'http://localhost:8000/mock/08_scroll_board.json',
   interval: 5,
   cache: 2,
   config: [],

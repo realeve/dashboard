@@ -1,14 +1,16 @@
 import color from './themeColor';
+// const FONT_FAMILY =  '"-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto,"Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",SimSun, "sans-serif"';
 const FONT_FAMILY =
-  '"-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto,"Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",SimSun, "sans-serif"';
+  '"Unica One","-apple-system", "Segoe UI", Roboto, "Helvetica Neue", Arial,\n  "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","Noto Color Emoji"';
+
 export default {
   backgroundColor: 'transparent',
   color: color.COLOR_PLATE_8,
   animationDuration: 1500,
   // animationEasing: 'elasticOut',
   // animationEasingUpdate: 'elasticOut',
-  animationDelay: (idx) => idx * 100,
-  animationDelayUpdate: (idx) => idx * 100,
+  // animationDelay: (idx) => idx * 100,
+  // animationDelayUpdate: (idx) => idx * 100,
   singleAxis: {
     top: 50,
     bottom: 50,
@@ -50,6 +52,7 @@ export default {
       color: '#666',
     },
   },
+  darkMode: true,
   toolbox: {
     color: ['rgb(38,185,139)', 'rgb(38,185,139)', 'rgb(38,185,139)', 'rgb(38,185,139)'],
     left: 'left',
@@ -59,12 +62,15 @@ export default {
     left: 'right',
   },
   tooltip: {
-    // backgroundColor: 'rgba(255,255,255,0.95)',
-    // extraCssText:
-    //   'padding:20px;color:#999;border-radius:5px;box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);',
-    // textStyle: {
-    //   color: '#333',
-    // },
+    backgroundColor: 'rgba(48, 54, 64, 0.8)',
+    padding: 12,
+    extraCssText:
+      'box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;border-radius: 3px;border:none;opacity: 0.95;backdrop-filter: saturate(180%) blur(20px);',
+    textStyle: {
+      color: '#E0E0E3',
+      fontSize: 12,
+      lineHeight: 1.5
+    },
     trigger: 'axis',
     axisPointer: {
       type: 'cross',
@@ -282,128 +288,6 @@ export default {
             type: 'solid',
           },
         },
-      },
-    },
-  },
-  k: {
-    itemStyle: {
-      normal: {
-        color: '#E4925D',
-        color0: '#85ca36',
-        lineStyle: {
-          width: 1,
-          color: '#E4925D',
-          color0: '#85ca36',
-        },
-      },
-    },
-  },
-  map: {
-    itemStyle: {
-      normal: {
-        areaStyle: {
-          color: '#ddd',
-        },
-        label: {
-          textStyle: {
-            color: '#c12e34',
-          },
-        },
-      },
-      emphasis: {
-        areaStyle: {
-          color: '#99d2dd',
-        },
-        label: {
-          textStyle: {
-            color: '#c12e34',
-          },
-        },
-      },
-    },
-  },
-  force: {
-    itemStyle: {
-      normal: {
-        linkStyle: {
-          strokeColor: 'rgb(38,185,139)',
-        },
-      },
-    },
-  },
-  chord: {
-    padding: 4,
-    itemStyle: {
-      normal: {
-        lineStyle: {
-          width: 1,
-          color: 'rgba(128, 128, 128, 0.5)',
-        },
-        chordStyle: {
-          lineStyle: {
-            width: 1,
-            color: 'rgba(128, 128, 128, 0.5)',
-          },
-        },
-      },
-      emphasis: {
-        lineStyle: {
-          width: 1,
-          color: 'rgba(128, 128, 128, 0.5)',
-        },
-        chordStyle: {
-          lineStyle: {
-            width: 1,
-            color: 'rgba(128, 128, 128, 0.5)',
-          },
-        },
-      },
-    },
-  },
-  gauge: {
-    startAngle: 225,
-    endAngle: -45,
-    axisLine: {
-      show: true,
-      lineStyle: {
-        color: [
-          [0.2, 'rgb(148,205,97)'],
-          [0.8, 'rgb(38,185,139)'],
-          [1, 'rgb(255,107,104)'],
-        ],
-        width: 8,
-      },
-    },
-    axisTick: {
-      splitNumber: 10,
-      length: 12,
-      lineStyle: {
-        color: 'auto',
-      },
-    },
-    axisLabel: {
-      textStyle: {
-        color: 'auto',
-      },
-    },
-    splitLine: {
-      length: 18,
-      lineStyle: {
-        color: 'auto',
-      },
-    },
-    pointer: {
-      length: '90%',
-      color: 'auto',
-    },
-    title: {
-      textStyle: {
-        color: '#333',
-      },
-    },
-    detail: {
-      textStyle: {
-        color: 'auto',
       },
     },
   },

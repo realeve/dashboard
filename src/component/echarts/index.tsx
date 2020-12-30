@@ -35,7 +35,7 @@ let toggleSeriesItem = (option, idx) => {
 const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
   ({ toggleItem = false, setToggleIdx, renderer, ...props }, ref) => {
     useEffect(() => {
-      console.log(ref)
+      // console.log(ref);
       return () => {
         if (ref && ref.current && ref.current.dispose) {
           ref.current.dispose();
@@ -58,7 +58,16 @@ const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
       toggleItem ? 3000 : null,
     );
 
-    return <ReactEcharts ref={ref} {...props} opts={{ renderer: renderer || 'canvas' }} />;
+    return (
+      <ReactEcharts
+        ref={ref}
+        {...props}
+        onEvents={{
+          click: props.onClick,
+        }}
+        opts={{ renderer: renderer || 'canvas' }}
+      />
+    );
   },
 );
 

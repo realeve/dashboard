@@ -9,7 +9,6 @@ interface CssExports {
   'head': string;
   'item': string;
   'itemWrapper': string;
-  'noAnimation': string;
   'rectPop': string;
   'tools': string;
 }

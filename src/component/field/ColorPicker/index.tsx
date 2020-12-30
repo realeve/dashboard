@@ -139,12 +139,13 @@ export const PureColor = ({
   disabled = false,
   onChange,
   position = 'top',
-  noAnimation = true,
+  // noAnimation = true,
 }) => {
   let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
+  // , { [styles.noAnimation]: noAnimation }
   return (
-    <div className={classnames(styles.colorItem, { [styles.noAnimation]: noAnimation })}>
+    <div className={styles.colorItem}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>
         <div className={styles.rectPop} style={{ top: position === 'bottom' ? 36 : -115 }}>
           {paletteList.map(({ color: backgroundColor, title }) => (
