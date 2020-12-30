@@ -54,7 +54,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
         xAxis: { show: false },
         yAxis: { show: false },
         tooltip: {
-          trigger: 'item',
+          trigger: 'item', 
           axisPointer: false,
           formatter: ({ value }) => {
             if (!value[3]) {
@@ -96,6 +96,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
           },
           {
             type: 'effectScatter',
+            symbol: boxShape,
             symbolSize: boxSize * 0.75,
             data: data.filter((item) => item[2] == EStatus.ERROR),
             itemStyle: {

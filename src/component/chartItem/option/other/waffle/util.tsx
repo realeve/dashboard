@@ -7,7 +7,7 @@ import * as R from 'ramda';
  */
 let getTemplate = (prod) => {
   let FormatPos40 = ['9602A', '9603A', '9602T', '9603T'].includes(prod);
-  let colRow = FormatPos40 ? [26, 11] : [25, 10];
+  let colRow = FormatPos40 ? [25, 10] : [26, 11];
   let arr = [];
   for (let i = 0; i < colRow[1]; i++) {
     for (let j = 0; j < colRow[0]; j++) {
@@ -37,7 +37,7 @@ export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) =
   let idx = res.length - id;
 
   let template = getTemplate(prod);
-  
+
   return template.map((temp, j) => {
     let item = res[j];
     if (!item) {

@@ -19,15 +19,15 @@ export interface IScrollBoardProps {
   waitTime: number;
   headerHeight: number;
   columnWidth: number[];
-  align: ('left' | 'center' | 'right')[];
+  align?: ('left' | 'center' | 'right')[];
   index: boolean;
   indexHeader: string;
-  carousel: 'single' | 'page';
+  carousel?: 'single' | 'page';
   fontSize: number;
   fontWeight: string;
   fontColor: string;
   formatIndex: boolean;
-
+  
   hoverColumns?: number[];
 }
 const defaultConfig: IScrollBoardProps = {

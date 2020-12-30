@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import ScrollBoard from '../scroll_board';
+import React, { useState, useEffect, useMemo } from 'react';
+import ScrollBoard, { IScrollBoard } from '../scroll_board';
 export { apiConfig } from '../scroll_board';
 import { config as mainConfig } from '../scroll_board';
 export { mock1 as mock } from './mock';
@@ -9,19 +9,30 @@ import ScatterWaffle, { config as detailConfig } from './ScatterWaffle';
 import { DEV } from '@/utils/setting';
 import { Spin } from 'antd';
 
-let detailType = ['印码', '涂布', '检封', '装箱'];
-
 export const config = [...mainConfig, ...detailConfig];
 interface IWaffleState {
   prod?: string;
   gz?: string;
   procname?: string;
 }
+
+let detailType = ['印码', '涂布', '检封', '装箱'];
+
+export interface IBoxProp {
+  boxSize: number;
+  boxShape: 'circle' | 'rect' | 'roundRect';
+  detailApi: string;
+}
+interface IWaffleProps extends IScrollBoard, IBoxProp {
+  [key: string]: any;
+}
 export default ({
-  option: { data: _data, waitTime = 4, carousel = 'page', detailApi, boxSize, boxShape, ...config },
+  option: { detailApi, boxSize, boxShape, ...config },
+}: {
+  option: IWaffleProps;
 }) => {
   const [state, setState] = useState<IWaffleState>(null);
-  let { data, loading, error } = useFetch({
+  let { data, loading } = useFetch({
     param: {
       url: DEV ? 'http://localhost:8000/mock/45_waffle.json' : detailApi,
       params: state,
@@ -30,12 +41,12 @@ export default ({
   });
 
   useEffect(() => {
-    if (!_data) {
+    if (!config.data) {
       return;
     }
-    let [prod, gz] = _data.data[0];
+    let [prod, gz] = config.data.data[0] as [string, string];
     setState({ prod, gz, procname: '印码' });
-  }, [_data?.hash]);
+  }, [config?.data?.hash]);
 
   let detailProps = {
     boxSize,
@@ -43,17 +54,11 @@ export default ({
     y: config.y,
   };
 
-  return (
-    <div className={styles.waffleContainer}>
+  const ScrollTable = useMemo(
+    () => (
       <ScrollBoard
         style={{ width: '100%', height: '50%' }}
         option={{
-          data: _data,
-          index: true,
-          columnWidth: [50],
-          align: ['center'],
-          carousel,
-          waitTime: waitTime * 1000,
           hoverColumns: [5, 6, 7, 8],
           ...config,
         }}
@@ -66,6 +71,13 @@ export default ({
           });
         }}
       />
+    ),
+    [JSON.stringify(config)],
+  );
+
+  return (
+    <div className={styles.waffleContainer}>
+      {ScrollTable}
       <Spin spinning={loading}>
         {state && (
           <div className={styles.waffleTitle}>

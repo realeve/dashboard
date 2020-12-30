@@ -1,4 +1,4 @@
-import ScrollBoard from '@/component/widget/ScrollBoard';
+import ScrollBoard, { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
@@ -133,24 +133,29 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
+export interface IScrollBoard extends Omit<IScrollBoardProps, 'data' | 'header'> {
+  data: IChartMock;
+}
 export default ({
   option: { data, waitTime = 4, carousel = 'page', ...config },
   onClick = (e) => {},
   style = {},
-}) => {
-  return (
-    <ScrollBoard
-      config={{
-        ...data,
-        index: true,
-        columnWidth: [50],
-        align: ['center'],
-        carousel,
-        waitTime: waitTime * 1000,
-        ...config,
-      }}
-      onClick={onClick}
-      style={style}
-    />
-  );
-};
+}: {
+  option: IScrollBoard;
+  onClick?: (e: any) => void;
+  style: React.CSSProperties;
+}) => (
+  <ScrollBoard
+    config={{
+      ...data,
+      index: true,
+      columnWidth: [50],
+      align: ['center'],
+      carousel,
+      waitTime: waitTime * 1000,
+      ...config,
+    }}
+    onClick={onClick}
+    style={style}
+  />
+);
