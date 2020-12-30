@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScrollBoard, { IScrollBoard } from '../scroll_board';
 export { apiConfig } from '../scroll_board';
 import { config as mainConfig } from '../scroll_board';
@@ -16,7 +16,26 @@ interface IWaffleState {
   procname?: string;
 }
 
-let detailType = ['印码', '涂布', '检封', '装箱'];
+const ScrollTable = ({ config, onClick }) => {
+  let detailType = ['印码', '涂布', '检封', '装箱'];
+  return (
+    <ScrollBoard
+      style={{ width: '100%', height: '50%' }}
+      option={{
+        hoverColumns: [5, 6, 7, 8],
+        ...config,
+      }}
+      onClick={(e) => {
+        let type = e.col - 5;
+        onClick({
+          prod: e.data[0],
+          gz: e.data[1],
+          procname: detailType[type],
+        });
+      }}
+    />
+  );
+};
 
 export interface IBoxProp {
   boxSize: number;
@@ -32,14 +51,6 @@ export default ({
   option: IWaffleProps;
 }) => {
   const [state, setState] = useState<IWaffleState>(null);
-  let { data, loading } = useFetch({
-    param: {
-      url: DEV ? 'http://localhost:8000/mock/45_waffle.json' : detailApi,
-      params: state,
-    },
-    valid: () => 'undefined' !== typeof state?.prod,
-  });
-
   useEffect(() => {
     if (!config.data) {
       return;
@@ -48,36 +59,17 @@ export default ({
     setState({ prod, gz, procname: '印码' });
   }, [config?.data?.hash]);
 
-  let detailProps = {
-    boxSize,
-    boxShape,
-    y: config.y,
-  };
-
-  const ScrollTable = useMemo(
-    () => (
-      <ScrollBoard
-        style={{ width: '100%', height: '50%' }}
-        option={{
-          hoverColumns: [5, 6, 7, 8],
-          ...config,
-        }}
-        onClick={(e) => {
-          let type = e.col - 5;
-          setState({
-            prod: e.data[0],
-            gz: e.data[1],
-            procname: detailType[type],
-          });
-        }}
-      />
-    ),
-    [JSON.stringify(config)],
-  );
+  let { data, loading } = useFetch({
+    param: {
+      url: DEV ? 'http://localhost:8000/mock/45_waffle.json' : detailApi,
+      params: state,
+    },
+    valid: () => 'undefined' !== typeof state?.prod,
+  });
 
   return (
     <div className={styles.waffleContainer}>
-      {ScrollTable}
+      <ScrollTable config={config} onClick={setState} />
       <Spin spinning={loading}>
         {state && (
           <div className={styles.waffleTitle}>
@@ -87,9 +79,13 @@ export default ({
       </Spin>
       {data && (
         <ScatterWaffle
-          {...detailProps}
+          {...{
+            boxSize,
+            boxShape,
+            data,
+          }}
+          y={config.y}
           prod={state.prod}
-          data={data}
           style={{ height: 'auto', flex: 1 }}
         />
       )}

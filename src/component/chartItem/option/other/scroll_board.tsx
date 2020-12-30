@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import ScrollBoard, { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
@@ -136,26 +137,29 @@ export const apiConfig: IApiConfig = {
 export interface IScrollBoard extends Omit<IScrollBoardProps, 'data' | 'header'> {
   data: IChartMock;
 }
+// TODO 讲述如何引进页面重新渲染
 export default ({
-  option: { data, waitTime = 4, carousel = 'page', ...config },
+  option: { data, waitTime = 4, ...config },
   onClick = (e) => {},
   style = {},
 }: {
   option: IScrollBoard;
   onClick?: (e: any) => void;
   style: React.CSSProperties;
-}) => (
-  <ScrollBoard
-    config={{
-      ...data,
-      index: true,
-      columnWidth: [50],
-      align: ['center'],
-      carousel,
-      waitTime: waitTime * 1000,
-      ...config,
-    }}
-    onClick={onClick}
-    style={style}
-  />
-);
+}) =>
+  useMemo(
+    () => (
+      <ScrollBoard
+        config={{
+          ...data,
+          columnWidth: [50],
+          align: ['center'],
+          waitTime: waitTime * 1000,
+          ...config,
+        }}
+        onClick={onClick}
+        style={style}
+      />
+    ),
+    [JSON.stringify(config), data?.hash],
+  );
