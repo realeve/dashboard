@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import styles from './LayerPanel.less';
 import classnames from 'classnames';
-import { IHideProps, TFnHide } from './setting';
+import type { IHideProps, TFnHide } from './setting';
 
 const Layer = React.lazy(() => import('./layer/index'));
 const HistoryManager = React.lazy(() => import('./historyManager'));

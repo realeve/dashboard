@@ -5,4 +5,5 @@
     名称：你的图表名称
 */
 import * as treemap from '../option/g2/treemap';
+
 export default treemap;

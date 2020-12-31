@@ -1,27 +1,29 @@
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
 import lib from './plot';
-import useChart, { ContainerProps, Base, Options } from './hooks/useChart';
+import type { ContainerProps, Base, Options } from './hooks/useChart';
+import useChart from './hooks/useChart';
 import { getChart, utils } from './util';
-import { ChartRefOptions, TChartType } from './interface';
+import type { ChartRefOptions, TChartType } from './interface';
 import { ErrorBoundary } from './base';
 import ChartLoading from './util/createLoading';
 import './theme';
-export { palette } from './palette';
 import styles from './index.less';
 import classnames from 'classnames';
 
-export interface ChartConfig extends Options {
+export { palette } from './palette';
+
+export type ChartConfig = {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
   readonly chartType: TChartType;
-}
+} & Options
 
-export interface G2PlotChartProps extends ContainerProps {
+export type G2PlotChartProps = {
   chartRef?: ChartRefOptions;
   /** 图表配置项 */
   option: ChartConfig;
   /** 使用 canvas 或 svg 渲染 */
   readonly renderer?: 'canvas' | 'svg';
-}
+} & ContainerProps
 
 const G2PlotChart: React.ForwardRefExoticComponent<
   G2PlotChartProps & React.RefAttributes<HTMLDivElement>
@@ -39,7 +41,7 @@ const G2PlotChart: React.ForwardRefExoticComponent<
     renderer = 'canvas',
   } = props;
 
-  let instance = lib[utils.camelCase(chartType)];
+  const instance = lib[utils.camelCase(chartType)];
   if (!instance) {
     return <h5>图表类型无效</h5>;
   }

@@ -22,13 +22,13 @@ export const getColorName = (color: string) => {
   if (color[0] == '#') {
     color = hex2rgb(color);
   }
-  let colors = getRGB(color);
-  let res = colorList.map(({ title, color }) => {
-    let delta = Math.sqrt(
+  const colors = getRGB(color);
+  const res = colorList.map(({ title, color }) => {
+    const delta = Math.sqrt(
       (color[0] - colors[0]) ** 2 + (color[1] - colors[1]) ** 2 + (color[2] - colors[2]) ** 2,
     );
     return { title, color, delta: +delta.toFixed(1) };
   });
-  let distColor = R.sortBy((a) => a.delta, res);
+  const distColor = R.sortBy((a) => a.delta, res);
   return distColor[0];
 };

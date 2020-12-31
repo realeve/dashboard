@@ -5,4 +5,5 @@
     名称：你的图表名称
 */
 import * as rangeLine from '../option/g2/rangeLine';
+
 export default rangeLine;

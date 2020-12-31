@@ -5,4 +5,5 @@
     名称：你的图表名称
 */ 
 import * as basePie from '../option/echarts/basePie';
+
 export default basePie; 

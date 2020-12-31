@@ -5,4 +5,5 @@
     名称：文字
 */
 import * as text_single from '../option/other/text_single';
+
 export default text_single;

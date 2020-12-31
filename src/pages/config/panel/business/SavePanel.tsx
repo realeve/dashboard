@@ -4,13 +4,14 @@ import { Confirm } from '@/component/Editor/Popup/Popup';
 import FieldComponent from '@/component/field';
 import Radio, { Select } from '@/component/field/Radio';
 import styles from './SavePanel.less';
-import { getSaveOption, getSelectedComponent, IBusinessProps, IBusinessEditProps } from './db';
+import type { IBusinessProps, IBusinessEditProps } from './db';
+import { getSaveOption, getSelectedComponent } from './db';
 import * as db from './db';
-import { IPanelConfig, IBusinessCategory } from '@/models/common';
+import type { IPanelConfig, IBusinessCategory } from '@/models/common';
 import { useSetState } from 'react-use';
 import { message } from 'antd';
 import * as R from 'ramda';
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 
 const FieldStyle = { background: 'unset' };
 const Field = ({ children, ...props }) => (
@@ -19,7 +20,7 @@ const Field = ({ children, ...props }) => (
   </FieldComponent>
 );
 
-interface ISavePanelProps {
+type ISavePanelProps = {
   show: boolean;
   onClose: () => void;
   selectedPanel: string[];
@@ -46,17 +47,17 @@ export default ({
     if (!show) {
       return;
     }
-    let panels = getSelectedComponent(selectedPanel, panel);
+    const panels = getSelectedComponent(selectedPanel, panel);
 
     // 获取 当前编辑的id
-    let edit_id = R.uniq(R.pluck<string>('edit_id')(panels));
+    const edit_id = R.uniq(R.pluck<string>('edit_id')(panels));
     // 记录待编辑id
     setEditId(edit_id[0]);
 
-    let thumbImages = R.uniq(R.pluck<string>('image')(panels));
+    const thumbImages = R.uniq(R.pluck<string>('image')(panels));
     setThumb(thumbImages.filter((item) => item));
 
-    let _option = getSaveOption(panels, businessCategory[0]);
+    const _option = getSaveOption(panels, businessCategory[0]);
     if (!_option) {
       onClose();
       return;
@@ -68,7 +69,7 @@ export default ({
 
   // 编辑成功后将面板列表中对应的edit_id属性删除掉；
   const closeEditModeFromPanels = () => {
-    let nextPanel = R.map(({ edit_id, ...item }) => item)(panel);
+    const nextPanel = R.map(({ edit_id, ...item }) => item)(panel);
     dispatch({
       type: 'common/updatePanel',
       payload: {
@@ -88,7 +89,7 @@ export default ({
 
   const saveComponent = () => {
     let _option: Partial<IBusinessEditProps> = {};
-    let method = editId ? 'setDashboardBusiness' : 'addTblBusiness';
+    const method = editId ? 'setDashboardBusiness' : 'addTblBusiness';
     if (editId) {
       _option = R.pick('title category_main category_sub image config is_hide'.split(' '))(option);
       _option._id = editId;
@@ -160,7 +161,7 @@ export default ({
               <Radio
                 value={option.category_main}
                 onChange={(category_main) => {
-                  let idx = R.findIndex(R.propEq('title', category_main))(businessCategory);
+                  const idx = R.findIndex(R.propEq('title', category_main))(businessCategory);
                   setCateIdx(idx);
                   setOption({ category_main, category_sub: businessCategory[idx]?.list?.[0] });
                 }}

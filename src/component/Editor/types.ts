@@ -1,18 +1,18 @@
-import { IObject } from '@daybrush/utils';
-import Memory from './utils/Memory';
-import EventBus from './utils/EventBus';
-import MoveableData from './utils/MoveableData';
-import MoveableManager from './Viewport/MoveableMananger';
-import KeyManager from './KeyManager/KeyManager';
-import Editor from './Editor';
-import HistoryManager from './utils/HistoryManager';
-import Debugger from './utils/Debugger';
-import React from 'react';
+import type { IObject } from '@daybrush/utils';
+import type Memory from './utils/Memory';
+import type EventBus from './utils/EventBus';
+import type MoveableData from './utils/MoveableData';
+import type MoveableManager from './Viewport/MoveableMananger';
+import type KeyManager from './KeyManager/KeyManager';
+import type Editor from './Editor';
+import type HistoryManager from './utils/HistoryManager';
+import type Debugger from './utils/Debugger';
+import type React from 'react';
 
 export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
 
-export interface ScenaEditorState {
-  selectedTargets: Array<SVGElement | HTMLElement>;
+export type ScenaEditorState = {
+  selectedTargets: (SVGElement | HTMLElement)[];
   horizontalGuides: number[];
   verticalGuides: number[];
   zoom: number;
@@ -23,14 +23,14 @@ export interface ScenaEditorState {
   guideVisible?: boolean;
 }
 
-export interface TagAppendInfo {
+export type TagAppendInfo = {
   tag: any;
   props: IObject<any>;
   name: string;
   frame: IObject<any>;
 }
 
-export interface EditorInterface {
+export type EditorInterface = {
   editor: Editor;
   memory: Memory;
   eventBus: EventBus;
@@ -41,15 +41,15 @@ export interface EditorInterface {
   moveableManager: React.RefObject<MoveableManager>;
 }
 
-export interface Clipboard {
-  write(items: ClipboardItem[]): Promise<void>;
+export type Clipboard = {
+  write: (items: ClipboardItem[]) => Promise<void>;
 }
-export interface ClipboardItem {
+export type ClipboardItem = {
   types: string[];
-  getType(type: string): Promise<Blob>;
+  getType: (type: string) => Promise<Blob>;
 }
 
-export interface SavedScenaData {
+export type SavedScenaData = {
   name: string;
   jsxId: string;
   componentId: string;
@@ -60,7 +60,7 @@ export interface SavedScenaData {
   frame: IObject<any>;
   children: SavedScenaData[];
 }
-export interface ScenaProps {
+export type ScenaProps = {
   scenaElementId?: string;
   scenaAttrs?: IObject<any>;
   scenaText?: string;

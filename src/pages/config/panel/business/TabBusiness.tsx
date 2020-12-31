@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ComponentList } from '../components/TabComponent';
-import { getTblBusiness, IBusinessProps } from './db';
+import type { IBusinessProps } from './db';
+import { getTblBusiness } from './db';
 import { connect } from 'react-redux';
-import { ICommon, IBusinessCategory, IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
+import type { ICommon, IBusinessCategory, IPanelConfig} from '@/models/common';
+import { GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 
-export interface IBusinessState {
+export type IBusinessState = {
   list: {
     title: string;
     list: IBusinessProps[];
@@ -14,7 +16,7 @@ export interface IBusinessState {
   title: string;
   icon: string;
 }
-interface IBusinessTabProps {
+type IBusinessTabProps = {
   onAddPanel: (e: IPanelConfig[]) => void;
   businessCategory: IBusinessCategory[];
 }
@@ -27,7 +29,7 @@ interface IBusinessTabProps {
 const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (business) => {
   let items = JSON.parse(business.config) as IPanelConfig[];
 
-  let groupId = lib.noncer();
+  const groupId = lib.noncer();
 
   // 只有一项时，无分组信息，直接修改id即可;
   if (items.length === 1) {
@@ -43,7 +45,7 @@ const handleBusinessItemId: (business: IBusinessProps) => IPanelConfig[] = (busi
   // 有分组的场景。目前分组是将多个组件添加到一个分组中
 
   // 更新group项的标题和ID
-  let groupIdx = R.findIndex<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
+  const groupIdx = R.findIndex<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
   items[groupIdx] = {
     ...items[groupIdx],
     title: business.title,
@@ -81,13 +83,13 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
     setLoading(true);
     getTblBusiness()
       .then(({ data }: { data: IBusinessProps[] }) => {
-        let panels = R.map<IBusinessCategory, IBusinessState>((item) => {
+        const panels = R.map<IBusinessCategory, IBusinessState>((item) => {
           // 一级列表
-          let mainList = R.filter<IBusinessProps>(R.propEq<string>('category_main', item.title))(
+          const mainList = R.filter<IBusinessProps>(R.propEq<string>('category_main', item.title))(
             data,
           );
-          let list = item.list.map((title) => {
-            let list = R.filter<IBusinessProps>(R.propEq<string>('category_sub', title))(mainList);
+          const list = item.list.map((title) => {
+            const list = R.filter<IBusinessProps>(R.propEq<string>('category_sub', title))(mainList);
             return {
               title,
               list,

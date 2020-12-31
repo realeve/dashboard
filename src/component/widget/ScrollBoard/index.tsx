@@ -9,7 +9,7 @@ import styles from './index.less';
 
 export const emojiList = ['🥇', '🥈', '🥉'];
 
-export interface IScrollBoardProps {
+export type IScrollBoardProps = {
   header: string[];
   data: string[][];
   rowNum: number;
@@ -165,7 +165,7 @@ function calcRows({ data, index, headerBGC, rowNum, formatIndex = true }: IScrol
 function calcAligns(mergedConfig, header) {
   const columnNum = header.length;
 
-  let aligns = new Array(columnNum).fill('left');
+  const aligns = new Array(columnNum).fill('left');
 
   const { align } = mergedConfig;
 
@@ -289,7 +289,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
-    let rows = rowsData.slice(animationIndex);
+    const rows = rowsData.slice(animationIndex);
     rows.push(...rowsData.slice(0, animationIndex));
 
     const heights = new Array(rowLength).fill(avgHeight);
@@ -311,7 +311,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
   function emitEvent(ri, ci, row, ceil) {
     const { ceils, rowIndex } = row;
-    let appendIndex = config.index;
+    const appendIndex = config.index;
 
     onClick?.({
       data: appendIndex ? R.tail(ceils) : ceils,
@@ -413,8 +413,8 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
               }}
             >
               {row.ceils.map((ceil, ci) => {
-                let showDetail = (config?.hoverColumns || []).includes(ci - (config.index ? 1 : 0));
-                let Item = (
+                const showDetail = (config?.hoverColumns || []).includes(ci - (config.index ? 1 : 0));
+                const Item = (
                   <div
                     className={classnames(styles.ceil, {
                       [styles.hoverAble]: showDetail,

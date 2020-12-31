@@ -5,4 +5,5 @@
     名称：你的图表名称
 */
 import * as cbpc_video from '../option/other/cbpc_video';
+
 export default cbpc_video;

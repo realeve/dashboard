@@ -1,8 +1,8 @@
-import { ShapeAttrs } from '@antv/g-base/lib/types';
-import { Options } from '@antv/g2plot/lib/types';
+import type { ShapeAttrs } from '@antv/g-base/lib/types';
+import type { Options } from '@antv/g2plot/lib/types';
 
 /** 配置类型定义 */
-export interface RadialBarOptions extends Options {
+export type RadialBarOptions = {
   /** x 轴字段 */
   readonly xField?: string;
   /** y 轴字段 */
@@ -23,4 +23,4 @@ export interface RadialBarOptions extends Options {
   readonly coordinate?: 'polar' | 'rect';
   /** 是否转换 */
   readonly transpose?: boolean;
-}
+} & Options

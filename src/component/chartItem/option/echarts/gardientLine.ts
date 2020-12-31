@@ -3,7 +3,7 @@ import util from '@/component/echarts/themeColor';
 
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import { handleData } from './line';
 import * as lib from '../lib';
 
@@ -106,11 +106,11 @@ export default ({
   if (String(legend) == '') {
     return {};
   }
-  let res = handleData(data, { legend, x, y });
+  const res = handleData(data, { legend, x, y });
 
-  let color = util.getColor(res.xArr.length, 'line');
+  const color = util.getColor(res.xArr.length, 'line');
 
-  let series = res.series.map(({ name, arr }, idx) => ({
+  const series = res.series.map(({ name, arr }, idx) => ({
     name,
     type: 'line',
     smooth,
@@ -119,7 +119,7 @@ export default ({
         color: color[idx % res.series.length],
         borderWidth: 4,
         areaStyle: {
-          //渐变色的设置
+          // 渐变色的设置
           color: new LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,

@@ -5,4 +5,5 @@
     名称：百分比饼图
 */
 import * as percent_echarts from '../option/other/percent_echarts';
+
 export default percent_echarts;

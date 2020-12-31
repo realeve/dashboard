@@ -15,7 +15,7 @@ export default ({
 }) => {
   const [sum, setSum] = useState(null);
   useEffect(() => {
-    let count = R.sum(data.data.map((item) => item[y]));
+    const count = R.sum(data.data.map((item) => item[y]));
     setSum(count || 1);
     setVal({
       start: 0,
@@ -42,7 +42,7 @@ export default ({
           toggleItem={toggleItem}
           renderer="svg"
           setToggleIdx={(idx) => {
-            let start = val.end;
+            const start = val.end;
             setVal({
               start,
               end: Number(((data.data[idx][y] / sum) * 100).toFixed(2)),

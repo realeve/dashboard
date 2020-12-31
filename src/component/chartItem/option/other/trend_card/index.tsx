@@ -1,9 +1,11 @@
-import { IChartConfig, IChartMock } from '@/component/chartItem/interface';
-export { mock } from './mock';
-import { lineConfig, IG2Plot, getLineConfig } from '../../g2plot/line';
-import { ChartConfig } from '@/component/g2plot';
+import type { IChartConfig, IChartMock } from '@/component/chartItem/interface';
+import type { IG2Plot} from '../../g2plot/line';
+import { lineConfig, getLineConfig } from '../../g2plot/line';
+import type { ChartConfig } from '@/component/g2plot';
 import * as _ from '@antv/util';
 import TrendChart from './TrendChart';
+
+export { mock } from './mock';
 
 export { apiConfig } from '../../g2plot/line';
 export const config: IChartConfig = [
@@ -53,8 +55,8 @@ export const config: IChartConfig = [
 ];
 
 export default ({ option }: { option: IG2Plot }) => {
-  let { ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
-  let props = _.pick<{
+  const { ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
+  const props = _.pick<{
     data: IChartMock;
     x: number;
     y: number;

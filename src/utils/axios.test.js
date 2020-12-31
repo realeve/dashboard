@@ -1,6 +1,6 @@
 import { axios, handleError, handleUrl, loadUserInfo, handleData, mock, getType } from './axios';
 
-let readData = () =>
+const readData = () =>
   axios({
     url: 'http://api.cbpc.ltd/3/e4e497e849',
   }).then((res) => res.rows);
@@ -155,20 +155,20 @@ test('错误处理', async () => {
 });
 
 test('loadUserInfo', () => {
-  let user = loadUserInfo(null);
+  const user = loadUserInfo(null);
   expect(user.token.split('.')).toHaveLength(3);
   expect(loadUserInfo(JSON.stringify({ token: 'token' }))).toMatchObject({ token: undefined });
 });
 
 test('handleData', () => {
-  let data = { token: 'token', rows: 1 };
+  const data = { token: 'token', rows: 1 };
   expect(handleData({ data })).toMatchObject({ rows: 1 });
   expect(handleData({ data: { rows: 1 } })).toMatchObject({ rows: 1 });
 });
 
 test('mock', async () => {
   // mock增加require后会报循环调用的错误，同时打包会存在问题，故取消，只允许传数据
-  let a = await mock('a', 1000);
+  const a = await mock('a', 1000);
   expect(a).toBe('a');
   expect(mock({ rows: 2 })).resolves.toMatchObject({ rows: 2 });
 });

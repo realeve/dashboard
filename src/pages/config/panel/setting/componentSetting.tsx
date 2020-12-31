@@ -1,9 +1,10 @@
 import styles from './index.less';
 import React, { useEffect, useState } from 'react';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
-import { IPanelConfig } from '@/models/common';
+import type { IPanelConfig } from '@/models/common';
 import { FormItem } from './FormItem';
+
 export { FormItem } from './FormItem';
 
 /**
@@ -12,7 +13,7 @@ export { FormItem } from './FormItem';
  * @param componentConfig 组件默认存储的设置信息
  */
 export const getDefaultState = (configs: IChartConfig[] = [], componentConfig: {}) => {
-  let res = {};
+  const res = {};
   configs.forEach((item) => {
     res[item.key] = typeof item.defaultValue === 'undefined' ? '' : item.defaultValue;
   });
@@ -36,7 +37,7 @@ export default ({
   }, [id]);
 
   const init = async () => {
-    let { default: res } = await import(`../../../../component/chartItem/charts/${key}`);
+    const { default: res } = await import(`../../../../component/chartItem/charts/${key}`);
     if (!res) {
       setConfigs(null);
       return;
@@ -66,14 +67,14 @@ export default ({
                 return;
               }
 
-              let next = {
+              const next = {
                 ...state,
                 [config.key]: res,
               };
 
               setState(next);
 
-              let val = String(res).length < 10 ? ` 调整( ${state[config.key]} → ${res} )` : '';
+              const val = String(res).length < 10 ? ` 调整( ${state[config.key]} → ${res} )` : '';
               onChange(next, (typeof config.title === 'string' ? config.title : config.key) + val);
             }}
             config={config}

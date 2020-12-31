@@ -1,5 +1,6 @@
-import { Chart, Util } from '@antv/g2'; // getTheme,
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart} from '@antv/g2';
+import { Util } from '@antv/g2'; // getTheme,
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { getPercent } from '../lib';
@@ -158,11 +159,11 @@ export const onMount = (
     intervalId = null;
     window.clearInterval(intervalId);
   }
-  let data = getPercent({ data: _data, y: _y, header });
+  const data = getPercent({ data: _data, y: _y, header });
 
   chart.data(data);
-  let x = header[_x],
-    y = header[_y];
+  const x = header[_x];
+    const y = header[_y];
 
   chart.coordinate(coordinate, {
     innerRadius: innerPercent / 100,
@@ -172,7 +173,7 @@ export const onMount = (
 
   if (coordinate === 'polar') chart.axis(false);
 
-  let interval = chart
+  const interval = chart
     .interval()
     .position(coordinate === 'theta' ? `${y}` : `${x}*${y}`)
     .label(String(x), (val) => ({
@@ -183,7 +184,7 @@ export const onMount = (
         stroke: null,
       },
       content: (obj) => {
-        return obj[x] + '\n' + obj.percent + '%';
+        return `${obj[x]  }\n${  obj.percent  }%`;
       },
     }))
     .style({
@@ -193,7 +194,7 @@ export const onMount = (
     .state({
       active: {
         style: (element) => {
-          const shape = element.shape;
+          const {shape} = element;
           return {
             matrix: Util.zoom(shape, 1.1),
           };
@@ -205,7 +206,7 @@ export const onMount = (
     interval.adjust('stack');
   }
 
-  let color = getColors(theme, needRerverse);
+  const color = getColors(theme, needRerverse);
   interval.color(String(x), color);
 
   chart.tooltip({
@@ -220,7 +221,7 @@ export const onMount = (
 
   chart.render();
   return;
-  var idx = data.length;
+  let idx = data.length;
   if (!intervalData) {
     return;
   }

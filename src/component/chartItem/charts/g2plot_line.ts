@@ -5,4 +5,5 @@
     名称：G2线型图
 */
 import * as g2plot_line from '../option/g2plot/line';
+
 export default g2plot_line;

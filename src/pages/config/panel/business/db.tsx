@@ -1,26 +1,28 @@
-import { axios, IAxiosState, DEV, _commonData, TDbWrite } from '@/utils/axios';
+import type { IAxiosState, TDbWrite } from '@/utils/axios';
+import { axios, DEV, _commonData } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
+import type {
+  IPanelConfig,
+  IBusinessCategory} from '@/models/common';
 import {
   GROUP_COMPONENT_KEY,
-  IPanelConfig,
-  getGroupRect,
-  IBusinessCategory,
+  getGroupRect
 } from '@/models/common';
 
 import { message } from 'antd';
-import { IScreenItem } from '@/pages/list/';
+import type { IScreenItem } from '@/pages/list/';
 import localforage from 'localforage';
 
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // [ x ] 业务组件数据结构定义
-export interface IBusinessProps {
+export type IBusinessProps = {
   id?: number; // 服务端 生成
   title: string; // 标题(弹出面板)
   category_main: string; // 一级分类(弹出面板)
   category_sub: string; // 二级分类(弹出面板)
-  image: string; //缩略图
+  image: string; // 缩略图
   config: string; // json配置项
   creator: string; // 创建者(弹出面板)
   create_time: string;
@@ -56,7 +58,7 @@ export const addDashboardList = (params: { title: string; img: string; file: str
     params,
   }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 
-export interface IBusinessEditProps {
+export type IBusinessEditProps = {
   title: string;
   category_main: string;
   category_sub: string;
@@ -89,7 +91,7 @@ export const getDashboardList = () =>
 const BUSINESS_KEY = 'business_list';
 
 const getLocalBusiness = async () => {
-  let data = await localforage.getItem<IBusinessProps[]>(BUSINESS_KEY).then((res) => res || []);
+  const data = await localforage.getItem<IBusinessProps[]>(BUSINESS_KEY).then((res) => res || []);
   return {
     rows: data.length,
     data,
@@ -101,9 +103,9 @@ const getLocalBusiness = async () => {
  * @param params 业务组件
  */
 const addLocaleBusiness = async (params: IBusinessProps) => {
-  let { data, rows } = await getLocalBusiness();
-  let startId = rows + 1;
-  let nextParams = [...data, { id: startId, ...params }];
+  const { data, rows } = await getLocalBusiness();
+  const startId = rows + 1;
+  const nextParams = [...data, { id: startId, ...params }];
   return localforage.setItem(BUSINESS_KEY, nextParams).then((e) => true);
 };
 
@@ -134,7 +136,7 @@ export const getImage = (panels: IPanelConfig[]) => {
   if (panels.length == 1) {
     return { image: panels[0].image, title: panels[0].title };
   }
-  let item =
+  const item =
     panels.find(
       (item) => ![GROUP_COMPONENT_KEY, 'text_single', 'image_single'].includes(item.key),
     ) || R.last(panels);
@@ -147,7 +149,7 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
     return [];
   }
 
-  let panels = R.filter<IPanelConfig>((item) => selectedPanel.includes(item.id))(panel);
+  const panels = R.filter<IPanelConfig>((item) => selectedPanel.includes(item.id))(panel);
   // 只选中了一个组件的导出
   if (panels.length === 1) {
     return panels;
@@ -161,8 +163,8 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
 
   // 选中多个组件，未分组,需要手工将组件合并
   if (groups.length === 0) {
-    let groupItem = getGroupRect();
-    let _panel = R.map((item: IPanelConfig) => ({ group: groupItem.id, ...item }))(panels);
+    const groupItem = getGroupRect();
+    const _panel = R.map((item: IPanelConfig) => ({ group: groupItem.id, ...item }))(panels);
     return [groupItem, ..._panel];
   }
 
@@ -176,7 +178,7 @@ export const getSelectedComponent = (selectedPanel: string[], panel: IPanelConfi
     return panels;
   }
 
-  let groupPanel = R.find<IPanelConfig>(R.propEq('id', groups[0]))(panel);
+  const groupPanel = R.find<IPanelConfig>(R.propEq('id', groups[0]))(panel);
   return [groupPanel, ...panels];
 };
 
@@ -189,21 +191,21 @@ export const getSaveOption: (
     message.error('业务保存需要确保组件在同一个分组内');
     return null;
   }
-  let { title, image } = getImage(panels);
+  const { title, image } = getImage(panels);
 
   // 保存业务组件时需要移除其中的mock数据
   let _panels = R.clone<IPanelConfig>(panels);
 
   // 保存时将edit_id扔掉
   _panels = _panels.map(({ api: _api = {}, edit_id, ...item }) => {
-    let { mock, ...api } = _api;
+    const { mock, ...api } = _api;
     return { ...item, api };
   });
 
-  let config = JSON.stringify(_panels);
-  let create_time = lib.now();
+  const config = JSON.stringify(_panels);
+  const create_time = lib.now();
 
-  let option = {
+  const option = {
     config,
     title,
     image,
@@ -222,5 +224,5 @@ export const getSaveOption: (
  */
 export const getTblBusinessCategory = () =>
   axios<IBusinessCategory>({
-    url: window.location.origin + '/business_category.json',
+    url: `${window.location.origin  }/business_category.json`,
   }).then(({ data }) => data);

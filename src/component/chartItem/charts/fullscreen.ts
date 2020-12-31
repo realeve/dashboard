@@ -5,4 +5,5 @@
     名称：全屏
 */
 import * as fullscreen from '../option/other/fullscreen';
+
 export default fullscreen;

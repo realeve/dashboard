@@ -1,4 +1,5 @@
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+
 export const mock: IChartMock = {
   data: [[45.7]],
   title: '水球图_MOCK数据',
@@ -60,10 +61,10 @@ export default ({
   percentFontSize = 16,
   titleFontSize = 16,
 }) => {
-  let value = _data.data[0][x];
-  let data = [value / 100, value / 100, value / 100];
+  const value = _data.data[0][x];
+  const data = [value / 100, value / 100, value / 100];
 
-  let option = {
+  const option = {
     title: {
       text: `${value.toFixed(0)}{a| %}`,
       textStyle: {
@@ -107,7 +108,7 @@ export default ({
         radius: '80%',
         center: ['50%', '50%'],
         //  shape: 'roundRect',
-        data: data,
+        data,
         backgroundStyle: {
           color: {
             type: 'linear',

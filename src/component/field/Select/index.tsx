@@ -1,5 +1,5 @@
 import { Select } from 'antd';
-import { IRadioProps } from '../Radio';
+import type { IRadioProps } from '../Radio';
 import classnames from 'classnames';
 import styles from '../ColorPicker/index.less';
 

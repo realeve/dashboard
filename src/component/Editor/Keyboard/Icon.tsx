@@ -1,11 +1,11 @@
 import React from 'react';
 import { prefix, connectEditorProps } from '../utils/utils';
-import { IObject } from '@daybrush/utils';
-import Memory from '../utils/Memory';
-import Editor from '../Editor';
-import { EditorInterface, ScenaJSXType } from '../types';
+import type { IObject } from '@daybrush/utils';
+import type Memory from '../utils/Memory';
+import type Editor from '../Editor';
+import type { EditorInterface, ScenaJSXType } from '../types';
 
-export interface Maker {
+export type Maker = {
   tag: string;
   attrs: IObject<any>;
   style: IObject<any>;
@@ -39,7 +39,7 @@ export default abstract class Icon extends React.PureComponent<{
   };
 
   public componentDidMount() {
-    const keys = this.keys;
+    const {keys} = this;
     if (keys.length) {
       this.keyManager.keydown(
         keys,
@@ -55,4 +55,4 @@ export default abstract class Icon extends React.PureComponent<{
   }
 }
 
-export default interface Icon extends EditorInterface {}
+export default type Icon = {} & EditorInterface

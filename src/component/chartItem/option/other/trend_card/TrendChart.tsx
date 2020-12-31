@@ -1,17 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import * as _ from '@antv/util';
-import { IChartMock } from '@/component/chartItem/interface';
+import type { IChartMock } from '@/component/chartItem/interface';
 import styles from './index.less';
 import classnames from 'classnames';
-import G2Plot, { ChartConfig } from '@/component/g2plot';
+import type { ChartConfig } from '@/component/g2plot';
+import G2Plot from '@/component/g2plot';
 import { useSetState } from 'react-use';
 
-interface ITrendChartState {
+type ITrendChartState = {
   tooltipItems: any[];
   activeTooltipTitle: any;
   activeSeriesList: any[];
 }
-interface ITrendChartProps {
+type ITrendChartProps = {
   data: IChartMock;
   config: ChartConfig;
   x: number;
@@ -29,9 +30,9 @@ export default ({
   config,
   cardPosition = 'left',
 }: ITrendChartProps) => {
-  let x = header[_x],
-    y = header[_y],
-    legend = header[_legend];
+  const x = header[_x];
+    const y = header[_y];
+    const legend = header[_legend];
 
   const [state, setState] = useSetState<ITrendChartState>({
     tooltipItems: [],
@@ -42,7 +43,7 @@ export default ({
   const chartRef = useRef(null);
 
   useEffect(() => {
-    let line = chartRef?.current?.getChart();
+    const line = chartRef?.current?.getChart();
     if (!line) {
       return;
     }
@@ -63,7 +64,7 @@ export default ({
       const tooltipItems = !config.isPercent
         ? data.filter((d) => d[x] === activeTooltipTitle)
         : items.map((item) => {
-            let val = _.clone(item.data);
+            const val = _.clone(item.data);
             val[y] = item.value;
             return val;
           });
@@ -84,12 +85,12 @@ export default ({
     setState({ activeSeriesList: newList });
 
     // @ts-ignore
-    let chart = chartRef?.current?.getChart()?.chart;
+    const chart = chartRef?.current?.getChart()?.chart;
     if (!chart || !activeSeries) {
       return;
     }
     chart.filter(legend, (series) => {
-      return newList.includes(series) ? false : true;
+      return !newList.includes(series);
     });
     chart.render(true);
     chart.geometries
@@ -104,7 +105,7 @@ export default ({
 
   const CustomTooltip = () => {
     // @ts-ignore
-    let chart = chartRef?.current?.getChart();
+    const chart = chartRef?.current?.getChart();
     if (!chart) {
       return null;
     }

@@ -1,10 +1,10 @@
 import * as lib from '../lib';
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { textColor } from '..';
 
 import panel from '@/component/echarts/themeColor';
 
-let color = panel.COLOR_PLATE_16;
+const color = panel.COLOR_PLATE_16;
 
 export const mock: IChartMock = {
   data: [
@@ -120,18 +120,18 @@ export default ({
   roundCap = true,
   colorType = 'gardient',
 }) => {
-  let xData = [],
-    yData = [];
-  let value = _data.data;
+  const xData = [];
+    const yData = [];
+  const value = _data.data;
   value.forEach((item) => {
     xData.push(item[x]);
     yData.push(item[y]);
   });
 
-  let max = Math.max(...yData);
-  let result = lib.handleMinMax({ min: 0, max });
+  const max = Math.max(...yData);
+  const result = lib.handleMinMax({ min: 0, max });
 
-  let append =
+  const append =
     colorType === 'gardient'
       ? {
           series: [
@@ -146,7 +146,7 @@ export default ({
           ],
           visualMap: {
             min: 0,
-            max: max,
+            max,
             type: 'piecewise',
             splitNumber: xData.length,
             dimension: y,

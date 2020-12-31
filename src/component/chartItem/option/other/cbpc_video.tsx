@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 import { ASSETS_HOST } from '@/utils/setting';
 
 export const config: IChartConfig[] = [
@@ -7,7 +7,7 @@ export const config: IChartConfig[] = [
     title: '视频地址',
     key: 'video_url',
     valueType: 'text',
-    defaultValue: ASSETS_HOST + 'video/01.mp4.webm',
+    defaultValue: `${ASSETS_HOST  }video/01.mp4.webm`,
   },
   {
     title: '圆角',
@@ -137,7 +137,7 @@ export default ({
           ...style,
           padding,
           opacity,
-          borderRadius: borderRadius.map((item) => item + 'px').join(' '),
+          borderRadius: borderRadius.map((item) => `${item  }px`).join(' '),
           height: autoHeight ? 'auto' : '100%',
           objectFit: 'fill',
           zIndex: 1,

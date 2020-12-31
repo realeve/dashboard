@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [
@@ -75,12 +75,12 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-interface IG2Plot extends IG2PlotProps {
+type IG2Plot = {
   color: string;
   fill: string;
   reverseXY: boolean;
   [key: string]: any;
-}
+} & IG2PlotProps
 
 export default ({
   data: { data, header },
@@ -92,13 +92,13 @@ export default ({
   fill = '#ddd',
   reverseXY = false,
 }: IG2Plot) => {
-  let xField = header[x];
-  let _data = data.map((item) => ({
+  const xField = header[x];
+  const _data = data.map((item) => ({
     [xField]: item[xField],
     value: [item[header[y]], item[header[y2]]],
   }));
 
-  let config = reverseXY
+  const config = reverseXY
     ? {
         chartType: 'bar',
         yField: xField,

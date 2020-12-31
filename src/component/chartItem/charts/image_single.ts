@@ -5,4 +5,5 @@
     名称：单张图片
 */
 import * as image_single from '../option/other/image_single';
+
 export default image_single;

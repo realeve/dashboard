@@ -1,4 +1,5 @@
-import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+
 export const mock: IChartMock = {
   data: [
     ['A', 80, 85, 100],
@@ -78,9 +79,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-interface IG2Plot extends IG2PlotProps {
-  [key: string]: any;
-}
+type IG2Plot = Record<string, any>;
 
 export default ({
   data: { data },
@@ -92,17 +91,17 @@ export default ({
   renderer = 'canvas',
   legendShow = true,
 }: IG2Plot) => {
-  let res = data[0];
-  let isHorizontal = direction == 'horizontal';
+  const res = data[0];
+  const isHorizontal = direction == 'horizontal';
 
-  let bulletData = data.map((res) => ({
+  const bulletData = data.map((res) => ({
     title: res[x],
     ranges: [res[max]],
     measures: [res[y]],
     target: res[y2],
   }));
 
-  let option = {
+  const option = {
     chartType: 'bullet',
     renderer,
     layout: direction,

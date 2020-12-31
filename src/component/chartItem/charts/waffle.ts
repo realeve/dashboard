@@ -5,4 +5,5 @@
     名称：你的图表名称
 */
 import * as waffle from '../option/other/waffle';
+
 export default waffle;

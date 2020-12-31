@@ -41,7 +41,7 @@ var extendStatics = function(d, b) {
         d.__proto__ = b;
       }) ||
     function(d, b) {
-      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+      for (const p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     };
 
   return extendStatics(d, b);
@@ -63,7 +63,7 @@ var __assign = function() {
       for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
 
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        for (const p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
       }
 
       return t;
@@ -72,7 +72,7 @@ var __assign = function() {
   return __assign.apply(this, arguments);
 };
 function __rest(s, e) {
-  var t = {};
+  const t = {};
 
   for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
 
@@ -84,14 +84,14 @@ function __rest(s, e) {
   return t;
 }
 function __decorate(decorators, target, key, desc) {
-  var c = arguments.length,
-    r =
-      c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc,
-    d;
+  const c = arguments.length;
+    let r =
+      c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc;
+    let d;
   if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
+    for (let i = decorators.length - 1; i >= 0; i--)
       if ((d = decorators[i])) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
   return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
@@ -99,38 +99,38 @@ function __spreadArrays() {
   for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
 
   for (var r = Array(s), k = 0, i = 0; i < il; i++)
-    for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
+    for (let a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
 
   return r;
 }
 
 function getClient(e) {
   if ('touches' in e) {
-    var touch = e.touches[0] || e.changedTouches[0];
+    const touch = e.touches[0] || e.changedTouches[0];
     return {
       clientX: touch.clientX,
       clientY: touch.clientY,
     };
-  } else {
+  } 
     return {
       clientX: e.clientX,
       clientY: e.clientY,
     };
-  }
+  
 }
 function createElement(jsx, prevTarget, container) {
-  var tag = jsx.tag,
-    children = jsx.children,
-    attributes = jsx.attributes,
-    className = jsx.className,
-    style = jsx.style;
-  var el = prevTarget || document.createElement(tag);
+  const {tag} = jsx;
+    const {children} = jsx;
+    const {attributes} = jsx;
+    const {className} = jsx;
+    const {style} = jsx;
+  const el = prevTarget || document.createElement(tag);
 
   for (var name in attributes) {
     el.setAttribute(name, attributes[name]);
   }
 
-  var elChildren = el.children;
+  const elChildren = el.children;
   children.forEach(function(child, i) {
     createElement(child, elChildren[i], el);
   });
@@ -144,7 +144,7 @@ function createElement(jsx, prevTarget, container) {
   }
 
   if (style) {
-    var elStyle = el.style;
+    const elStyle = el.style;
 
     for (var name in style) {
       elStyle[name] = style[name];
@@ -158,25 +158,25 @@ function createElement(jsx, prevTarget, container) {
   return el;
 }
 function h(tag, attrs) {
-  var children = [];
+  const children = [];
 
-  for (var _i = 2; _i < arguments.length; _i++) {
+  for (let _i = 2; _i < arguments.length; _i++) {
     children[_i - 2] = arguments[_i];
   }
 
-  var _a = attrs || {},
-    _b = _a.className,
-    className = _b === void 0 ? '' : _b,
-    _c = _a.style,
-    style = _c === void 0 ? {} : _c,
-    attributes = __rest(_a, ['className', 'style']);
+  const _a = attrs || {};
+    const _b = _a.className;
+    const className = _b === void 0 ? '' : _b;
+    const _c = _a.style;
+    const style = _c === void 0 ? {} : _c;
+    const attributes = __rest(_a, ['className', 'style']);
 
   return {
-    tag: tag,
-    className: className,
-    style: style,
-    attributes: attributes,
-    children: children,
+    tag,
+    className,
+    style,
+    attributes,
+    children,
   };
 }
 function diffValue(prev, cur, func) {
@@ -185,38 +185,38 @@ function diffValue(prev, cur, func) {
   }
 }
 function getRect(e) {
-  var _a = e.distX,
-    distX = _a === void 0 ? 0 : _a,
-    _b = e.distY,
-    distY = _b === void 0 ? 0 : _b,
-    datas = e.datas;
-  var startX = datas.startX,
-    startY = datas.startY;
-  var tx = Math.min(0, distX);
-  var ty = Math.min(0, distY);
-  var width = Math.abs(distX);
-  var height = Math.abs(distY);
-  var left = startX + tx;
-  var top = startY + ty;
+  const _a = e.distX;
+    const distX = _a === void 0 ? 0 : _a;
+    const _b = e.distY;
+    const distY = _b === void 0 ? 0 : _b;
+    const {datas} = e;
+  const {startX} = datas;
+    const {startY} = datas;
+  const tx = Math.min(0, distX);
+  const ty = Math.min(0, distY);
+  const width = Math.abs(distX);
+  const height = Math.abs(distY);
+  const left = startX + tx;
+  const top = startY + ty;
   return {
-    left: left,
-    top: top,
+    left,
+    top,
     right: left + width,
     bottom: top + height,
-    width: width,
-    height: height,
+    width,
+    height,
   };
 }
 
-var injector = styled(
+const injector = styled(
   '\n:host {\n    position: fixed;\n    display: none;\n    border: 1px solid #4af;\n    background: rgba(68, 170, 255, 0.5);\n    z-index: 100;\n}\n',
 );
 /**
  * @memberof Selecto
  */
 
-var CLASS_NAME = 'selecto-selection ' + injector.className;
-var PROPERTIES = [
+const CLASS_NAME = `selecto-selection ${  injector.className}`;
+const PROPERTIES = [
   'selectableTargets',
   'selectByClick',
   'selectFromInside',
@@ -233,7 +233,7 @@ var PROPERTIES = [
  * @memberof Selecto
  */
 
-var OPTIONS = __spreadArrays(
+const OPTIONS = __spreadArrays(
   [
     // ignore target, container,
     'dragContainer',
@@ -241,7 +241,7 @@ var OPTIONS = __spreadArrays(
   ],
   PROPERTIES,
 );
-var OPTION_TYPES = {
+const OPTION_TYPES = {
   target: null,
   container: null,
   dragContainer: null,
@@ -261,7 +261,7 @@ var OPTION_TYPES = {
  * @memberof Selecto
  */
 
-var EVENTS = [
+const EVENTS = [
   'dragStart',
   'drag',
   'dragEnd',
@@ -276,7 +276,7 @@ var EVENTS = [
  * @memberof Selecto
  */
 
-var METHODS = ['clickTarget', 'setSelectedTargets', 'triggerDragStart'];
+const METHODS = ['clickTarget', 'setSelectedTargets', 'triggerDragStart'];
 
 /**
  * Selecto.js is a component that allows you to select elements in the drag area using the mouse or touch.
@@ -284,8 +284,8 @@ var METHODS = ['clickTarget', 'setSelectedTargets', 'triggerDragStart'];
  * @extends eg.Component
  */
 
-var Selecto =
-  /*#__PURE__*/
+const Selecto =
+  /* #__PURE__ */
   (function(_super) {
     __extends(Selecto, _super);
     /**
@@ -297,44 +297,44 @@ var Selecto =
         options = {};
       }
 
-      var _this = _super.call(this) || this;
+      const _this = _super.call(this) || this;
 
       _this.selectedTargets = [];
       _this.differ = new ChildrenDiffer();
       _this.dragScroll = new DragScroll();
 
       _this.onDragStart = function(e, clickedTarget) {
-        var datas = e.datas,
-          clientX = e.clientX,
-          clientY = e.clientY,
-          inputEvent = e.inputEvent;
-        var _a = _this.options,
-          continueSelect = _a.continueSelect,
-          selectFromInside = _a.selectFromInside,
-          selectByClick = _a.selectByClick;
+        const {datas} = e;
+          const {clientX} = e;
+          const {clientY} = e;
+          const {inputEvent} = e;
+        const _a = _this.options;
+          const {continueSelect} = _a;
+          const {selectFromInside} = _a;
+          const {selectByClick} = _a;
 
-        var selectableTargets = _this.getSelectableTargets();
+        const selectableTargets = _this.getSelectableTargets();
 
-        var selectableRects = selectableTargets.map(function(target) {
-          var rect = target.getBoundingClientRect();
-          var left = rect.left,
-            top = rect.top,
-            width = rect.width,
-            height = rect.height;
+        const selectableRects = selectableTargets.map(function(target) {
+          const rect = target.getBoundingClientRect();
+          const {left} = rect;
+            const {top} = rect;
+            const {width} = rect;
+            const {height} = rect;
           return {
-            left: left,
-            top: top,
+            left,
+            top,
             right: left + width,
             bottom: top + height,
-            width: width,
-            height: height,
+            width,
+            height,
           };
         });
         datas.selectableTargets = selectableTargets;
         datas.selectableRects = selectableRects;
         datas.startSelectedTargets = _this.selectedTargets;
-        var pointTarget = clickedTarget || document.elementFromPoint(clientX, clientY);
-        var hitRect = {
+        let pointTarget = clickedTarget || document.elementFromPoint(clientX, clientY);
+        const hitRect = {
           left: clientX,
           top: clientY,
           right: clientX,
@@ -351,16 +351,16 @@ var Selecto =
           pointTarget = pointTarget.parentElement;
         }
 
-        var firstPassedTargets = pointTarget ? [pointTarget] : [];
-        var hasInsideTargets = firstPassedTargets.length > 0;
-        var isPreventSelect = !selectFromInside && hasInsideTargets;
+        let firstPassedTargets = pointTarget ? [pointTarget] : [];
+        const hasInsideTargets = firstPassedTargets.length > 0;
+        const isPreventSelect = !selectFromInside && hasInsideTargets;
 
         if (isPreventSelect && !selectByClick) {
           return false;
         }
 
-        var type = inputEvent.type;
-        var isTrusted = type === 'mousedown' || type === 'touchstart';
+        const {type} = inputEvent;
+        const isTrusted = type === 'mousedown' || type === 'touchstart';
         /**
          * When the drag starts, the dragStart event is called.
          * Call the stop () function if you have a specific element or don't want to raise a select
@@ -390,7 +390,7 @@ var Selecto =
          * });
          */
 
-        var result = isTrusted ? _this.trigger('dragStart', e) : true;
+        const result = isTrusted ? _this.trigger('dragStart', e) : true;
 
         if (!result) {
           return false;
@@ -408,34 +408,34 @@ var Selecto =
         datas.startY = clientY;
         datas.selectedTargets = firstPassedTargets;
 
-        var x = _this.rectOffset.x,
-          y = _this.rectOffset.y;
+        const {x} = _this.rectOffset;
+          const {y} = _this.rectOffset;
 
         _this.target.style.cssText +=
-          'left:0px;top:0px;transform: translate(' + (clientX - x) + 'px, ' + (clientY - y) + 'px)';
+          `left:0px;top:0px;transform: translate(${  clientX - x  }px, ${  clientY - y  }px)`;
 
         if (isPreventSelect && selectByClick) {
           _this.onDragEnd(e);
 
           inputEvent.preventDefault();
           return false;
-        } else {
+        } 
           if (type === 'touchstart') {
             inputEvent.preventDefault();
           }
 
-          var scrollOptions = _this.options.scrollOptions;
+          const {scrollOptions} = _this.options;
 
           if (scrollOptions && scrollOptions.container) {
             _this.dragScroll.dragStart(e, scrollOptions);
           }
 
           return true;
-        }
+        
       };
 
       _this.onDrag = function(e) {
-        var scrollOptions = _this.options.scrollOptions;
+        const {scrollOptions} = _this.options;
 
         if (scrollOptions && scrollOptions.container) {
           if (_this.dragScroll.drag(e, scrollOptions)) {
@@ -447,8 +447,8 @@ var Selecto =
       };
 
       _this.onDragEnd = function(e) {
-        var datas = e.datas;
-        var rect = getRect(e);
+        const {datas} = e;
+        const rect = getRect(e);
 
         _this.dragScroll.dragEnd();
 
@@ -456,9 +456,7 @@ var Selecto =
 
         _this.trigger(
           'dragEnd',
-          __assign(__assign({}, e), {
-            rect: rect,
-          }),
+          {...e, rect,},
         );
 
         _this.selectEnd(datas.startSelectedTargets, datas.selectedTargets, rect, e);
@@ -549,15 +547,15 @@ var Selecto =
           return;
         }
 
-        var dragContainer = _this.dragContainer;
+        let {dragContainer} = _this;
 
         if (dragContainer === window) {
           dragContainer = document.documentElement;
         }
 
-        var containers =
+        const containers =
           dragContainer instanceof Element ? [dragContainer] : [].slice.call(dragContainer);
-        var target = e.target;
+        const {target} = e;
         containers.some(function(container) {
           if (container === target || container.contains(target)) {
             e.preventDefault();
@@ -568,9 +566,8 @@ var Selecto =
 
       _this.target = options.target;
       _this.container = options.container;
-      _this.options = __assign(
-        {
-          target: null,
+      _this.options = {
+        target: null,
           container: null,
           dragContainer: null,
           selectableTargets: [],
@@ -584,9 +581,8 @@ var Selecto =
           checkInput: false,
           preventDefault: false,
           cspNonce: '',
-        },
-        options,
-      );
+        ...options,
+      };
 
       _this.initElement();
 
@@ -600,7 +596,7 @@ var Selecto =
      * You can set the currently selected targets.
      */
 
-    var __proto = Selecto.prototype;
+    const __proto = Selecto.prototype;
 
     __proto.setSelectedTargets = function(selectedTargets) {
       this.selectedTargets = selectedTargets;
@@ -609,9 +605,9 @@ var Selecto =
     };
 
     __proto.setKeyContainer = function(keyContainer) {
-      var _this = this;
+      const _this = this;
 
-      var options = this.options;
+      const {options} = this;
       diffValue(options.keyContainer, keyContainer, function() {
         options.keyContainer = keyContainer;
 
@@ -620,9 +616,9 @@ var Selecto =
     };
 
     __proto.setToggleContinueSelect = function(toggleContinueSelect) {
-      var _this = this;
+      const _this = this;
 
-      var options = this.options;
+      const {options} = this;
       diffValue(options.toggleContinueSelect, toggleContinueSelect, function() {
         options.toggleContinueSelect = toggleContinueSelect;
 
@@ -678,14 +674,14 @@ var Selecto =
      */
 
     __proto.clickTarget = function(e, clickedTarget) {
-      var _a = getClient(e),
-        clientX = _a.clientX,
-        clientY = _a.clientY;
+      const _a = getClient(e);
+        const {clientX} = _a;
+        const {clientY} = _a;
 
-      var dragEvent = {
+      const dragEvent = {
         datas: {},
-        clientX: clientX,
-        clientY: clientY,
+        clientX,
+        clientY,
         inputEvent: e,
       };
 
@@ -697,9 +693,9 @@ var Selecto =
     };
 
     __proto.setKeyController = function() {
-      var _a = this.options,
-        keyContainer = _a.keyContainer,
-        toggleContinueSelect = _a.toggleContinueSelect;
+      const _a = this.options;
+        const {keyContainer} = _a;
+        const {toggleContinueSelect} = _a;
 
       if (this.keycon) {
         this.keycon.destroy();
@@ -716,7 +712,7 @@ var Selecto =
     };
 
     __proto.setKeyEvent = function() {
-      var toggleContinueSelect = this.options.toggleContinueSelect;
+      const {toggleContinueSelect} = this.options;
 
       if (!toggleContinueSelect || this.keycon) {
         return;
@@ -733,19 +729,19 @@ var Selecto =
         this.target,
         this.container,
       );
-      var target = this.target;
-      var _a = this.options,
-        dragContainer = _a.dragContainer,
-        checkInput = _a.checkInput,
-        preventDefault = _a.preventDefault;
+      const {target} = this;
+      const _a = this.options;
+        const {dragContainer} = _a;
+        const {checkInput} = _a;
+        const {preventDefault} = _a;
       this.dragContainer =
         typeof dragContainer === 'string'
           ? [].slice.call(document.querySelectorAll(dragContainer))
           : this.options.dragContainer || this.target.parentNode;
       this.dragger = new Dragger(this.dragContainer, {
         container: window,
-        checkInput: checkInput,
-        preventDefault: preventDefault,
+        checkInput,
+        preventDefault,
         dragstart: this.onDragStart,
         drag: this.onDrag,
         dragend: this.onDragEnd,
@@ -757,29 +753,29 @@ var Selecto =
     };
 
     __proto.hitTest = function(selectRect, clientX, clientY, targets, rects) {
-      var _a = this.options,
-        hitRate = _a.hitRate,
-        selectByClick = _a.selectByClick;
-      var left = selectRect.left,
-        top = selectRect.top,
-        right = selectRect.right,
-        bottom = selectRect.bottom;
-      var passedTargets = [];
+      const _a = this.options;
+        const {hitRate} = _a;
+        const {selectByClick} = _a;
+      const {left} = selectRect;
+        const {top} = selectRect;
+        const {right} = selectRect;
+        const {bottom} = selectRect;
+      const passedTargets = [];
       rects.forEach(function(rect, i) {
-        var rectLeft = rect.left,
-          rectTop = rect.top,
-          rectRight = rect.right,
-          rectBottom = rect.bottom;
-        var isStart =
+        const rectLeft = rect.left;
+          const rectTop = rect.top;
+          const rectRight = rect.right;
+          const rectBottom = rect.bottom;
+        const isStart =
           rectLeft <= clientX &&
           clientX <= rectRight &&
           rectTop <= clientY &&
           clientY <= rectBottom;
-        var rectSize = (rectRight - rectLeft) * (rectBottom - rectTop);
-        var testLeft = Math.max(rectLeft, left);
-        var testRight = Math.min(rectRight, right);
-        var testTop = Math.max(rectTop, top);
-        var testBottom = Math.min(rectBottom, bottom);
+        const rectSize = (rectRight - rectLeft) * (rectBottom - rectTop);
+        const testLeft = Math.max(rectLeft, left);
+        const testRight = Math.min(rectRight, right);
+        const testTop = Math.max(rectTop, top);
+        const testBottom = Math.min(rectBottom, bottom);
 
         if (selectByClick && isStart) {
           passedTargets.push(targets[i]);
@@ -790,7 +786,7 @@ var Selecto =
           return;
         }
 
-        var rate = Math.round((((testRight - testLeft) * (testBottom - testTop)) / rectSize) * 100);
+        const rate = Math.round((((testRight - testLeft) * (testBottom - testTop)) / rectSize) * 100);
 
         if (rate >= hitRate) {
           passedTargets.push(targets[i]);
@@ -800,23 +796,23 @@ var Selecto =
     };
 
     __proto.initDragScroll = function() {
-      var _this = this;
+      const _this = this;
 
       this.dragScroll
         .on('scroll', function(_a) {
-          var container = _a.container,
-            direction = _a.direction;
+          const {container} = _a;
+            const {direction} = _a;
 
           _this.trigger('scroll', {
-            container: container,
-            direction: direction,
+            container,
+            direction,
           });
         })
         .on('move', function(_a) {
-          var offsetX = _a.offsetX,
-            offsetY = _a.offsetY,
-            inputEvent = _a.inputEvent;
-          var datas = inputEvent.datas;
+          const {offsetX} = _a;
+            const {offsetY} = _a;
+            const {inputEvent} = _a;
+          const {datas} = inputEvent;
           datas.startX -= offsetX;
           datas.startY -= offsetY;
           datas.selectableRects.forEach(function(rect) {
@@ -836,12 +832,12 @@ var Selecto =
     };
 
     __proto.getSelectableTargets = function() {
-      var selectableTargets = [];
+      const selectableTargets = [];
       this.options.selectableTargets.forEach(function(target) {
         if (isObject(target)) {
           selectableTargets.push(target);
         } else {
-          var elements = [].slice.call(document.querySelectorAll(target));
+          const elements = [].slice.call(document.querySelectorAll(target));
           elements.forEach(function(el) {
             selectableTargets.push(el);
           });
@@ -851,11 +847,11 @@ var Selecto =
     };
 
     __proto.getSelectedTargets = function(passedTargets) {
-      var _a = diff(this.selectedTargets, passedTargets),
-        list = _a.list,
-        prevList = _a.prevList,
-        added = _a.added,
-        removed = _a.removed;
+      const _a = diff(this.selectedTargets, passedTargets);
+        const {list} = _a;
+        const {prevList} = _a;
+        const {added} = _a;
+        const {removed} = _a;
 
       return added
         .map(function(index) {
@@ -869,11 +865,11 @@ var Selecto =
     };
 
     __proto.select = function(selectedTargets, rect, inputEvent, isStart) {
-      var _a = this.differ.update(selectedTargets),
-        added = _a.added,
-        removed = _a.removed,
-        prevList = _a.prevList,
-        list = _a.list;
+      const _a = this.differ.update(selectedTargets);
+        const {added} = _a;
+        const {removed} = _a;
+        const {prevList} = _a;
+        const {list} = _a;
 
       if (isStart) {
         /**
@@ -914,8 +910,8 @@ var Selecto =
           removed: removed.map(function(index) {
             return prevList[index];
           }),
-          rect: rect,
-          inputEvent: inputEvent,
+          rect,
+          inputEvent,
         });
       }
 
@@ -951,30 +947,30 @@ var Selecto =
           removed: removed.map(function(index) {
             return prevList[index];
           }),
-          rect: rect,
-          inputEvent: inputEvent,
+          rect,
+          inputEvent,
         });
       }
     };
 
     __proto.selectEnd = function(startSelectedTargets, selectedTargets, rect, e) {
-      var inputEvent = e.inputEvent,
-        isDouble = e.isDouble;
+      const {inputEvent} = e;
+        const {isDouble} = e;
 
-      var _a = diff(startSelectedTargets, selectedTargets),
-        added = _a.added,
-        removed = _a.removed,
-        prevList = _a.prevList,
-        list = _a.list;
+      const _a = diff(startSelectedTargets, selectedTargets);
+        const {added} = _a;
+        const {removed} = _a;
+        const {prevList} = _a;
+        const {list} = _a;
 
-      var _b = diff(this.selectedTargets, selectedTargets),
-        afterAdded = _b.added,
-        afterRemoved = _b.removed,
-        afterPrevList = _b.prevList,
-        afterList = _b.list;
+      const _b = diff(this.selectedTargets, selectedTargets);
+        const afterAdded = _b.added;
+        const afterRemoved = _b.removed;
+        const afterPrevList = _b.prevList;
+        const afterList = _b.list;
 
-      var type = inputEvent.type;
-      var isDragStart = type === 'mousedown' || type === 'touchstart';
+      const {type} = inputEvent;
+      const isDragStart = type === 'mousedown' || type === 'touchstart';
       /**
        * When the select(dragEnd or click) ends, the selectEnd event is called.
        * @memberof Selecto
@@ -1020,53 +1016,51 @@ var Selecto =
         afterRemoved: afterRemoved.map(function(index) {
           return afterPrevList[index];
         }),
-        isDragStart: isDragStart,
+        isDragStart,
         isDouble: !!isDouble,
-        rect: rect,
-        inputEvent: inputEvent,
+        rect,
+        inputEvent,
       });
     };
 
     __proto.check = function(e) {
-      var datas = e.datas,
-        inputEvent = e.inputEvent;
+      const {datas} = e;
+        const {inputEvent} = e;
         
       // bug fix 修复父组件位置不为0，0时，rect偏移
-      var x = this.rectOffset.x,
-        y = this.rectOffset.y;
+      const {x} = this.rectOffset;
+        const {y} = this.rectOffset;
 
-      var rect = getRect(e);
-      var top = rect.top - y,
-        left = rect.left - x,
-        width = rect.width,
-        height = rect.height;
+      const rect = getRect(e);
+      const top = rect.top - y;
+        const left = rect.left - x;
+        const {width} = rect;
+        const {height} = rect;
 
       this.target.style.cssText +=
-        'display: block;' +
-        'left:0px;top:0px;' +
-        ('transform: translate(' + left + 'px, ' + top + 'px);') +
-        ('width:' + width + 'px;height:' + height + 'px;');
-      var passedTargets = this.hitTest(
+        `${'display: block;' +
+        'left:0px;top:0px;'}` +
+        `transform: translate(${  left  }px, ${  top  }px);` +
+        `width:${  width  }px;height:${  height  }px;`;
+      const passedTargets = this.hitTest(
         rect,
         datas.startX,
         datas.startY,
         datas.selectableTargets,
         datas.selectableRects,
       );
-      var selectedTargets = this.getSelectedTargets(passedTargets);
+      const selectedTargets = this.getSelectedTargets(passedTargets);
       this.trigger(
         'drag',
-        __assign(__assign({}, e), {
-          rect: rect,
-        }),
+        {...e, rect,},
       );
       this.select(selectedTargets, rect, inputEvent);
       datas.selectedTargets = selectedTargets;
     };
 
     __proto.sameCombiKey = function(e) {
-      var toggleContinueSelect = [].concat(this.options.toggleContinueSelect);
-      var combi = getCombi(e.inputEvent, e.key);
+      const toggleContinueSelect = [].concat(this.options.toggleContinueSelect);
+      const combi = getCombi(e.inputEvent, e.key);
       return toggleContinueSelect.every(function(key) {
         return combi.indexOf(key) > -1;
       });
@@ -1075,14 +1069,14 @@ var Selecto =
     Selecto = __decorate(
       [
         Properties(PROPERTIES, function(prototype, property) {
-          var attributes = {
+          const attributes = {
             enumerable: true,
             configurable: true,
-            get: function() {
+            get() {
               return this.options[property];
             },
           };
-          var setter = camelize('set ' + property);
+          const setter = camelize(`set ${  property}`);
 
           if (prototype[setter]) {
             attributes.set = function(value) {
@@ -1104,4 +1098,4 @@ var Selecto =
 
 export default Selecto;
 export { CLASS_NAME, EVENTS, METHODS, OPTIONS, OPTION_TYPES, PROPERTIES };
-//# sourceMappingURL=selecto.esm.js.map
+// # sourceMappingURL=selecto.esm.js.map

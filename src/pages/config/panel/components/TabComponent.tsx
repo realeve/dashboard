@@ -4,11 +4,12 @@ import classnames from 'classnames';
 import { Drawer, Tooltip, Spin, message } from 'antd';
 import Collapse from '@/component/collapse';
 import * as db from './db';
-import { IComponentItem, IComponent } from './db';
+import type { IComponentItem, IComponent } from './db';
 import * as lib from '@/utils/lib';
-import SearchPanel, { ISearchState } from './SearchPanel';
+import type { ISearchState } from './SearchPanel';
+import SearchPanel from './SearchPanel';
 import pinyin from '@/utils/pinyin.js';
-import { IBusinessState } from '../business/TabBusiness';
+import type { IBusinessState } from '../business/TabBusiness';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { useSetState } from 'react-use';
 import { setDashboardBusiness } from '@/pages/config/panel/business/db';
@@ -35,7 +36,7 @@ const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | s
   return { loading, state, error };
 };
 
-interface IComponentList {
+type IComponentList = {
   onAdd: (e, isEdit?: boolean) => void;
   loading: boolean;
   state: (IComponent | IBusinessState)[];
@@ -63,13 +64,13 @@ export const ComponentList = ({
   const [list, setList] = useState<ISearchState[]>([]);
 
   useEffect(() => {
-    let arr: ISearchState[] = [];
+    const arr: ISearchState[] = [];
     state.forEach(({ title, list }) =>
       list.forEach((row) => {
         if (row.title == '全部') {
           return;
         }
-        let category = `${title} / ${row.title} /`;
+        const category = `${title} / ${row.title} /`;
         row.list.forEach(({ title, image, ...panel }) => {
           arr.push({
             category,
@@ -104,7 +105,7 @@ export const ComponentList = ({
   }
 
   const removeBusiness = () => {
-    let { id, ...params } = show.panel;
+    const { id, ...params } = show.panel;
     setDashboardBusiness({
       ...params,
       _id: id,

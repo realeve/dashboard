@@ -5,4 +5,5 @@
     名称：直方图
 */
 import * as histogram from '../option/g2plot/histogram';
+
 export default histogram;

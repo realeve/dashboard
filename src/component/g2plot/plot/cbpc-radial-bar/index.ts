@@ -1,6 +1,6 @@
 import { Plot } from '@antv/g2plot';
 import { deepAssign } from '@antv/g2plot/lib/utils';
-import { Adaptor } from '@antv/g2plot';
+import type { Adaptor } from '@antv/g2plot';
 import { RadialBarOptions } from './types';
 import { adaptor } from './adaptor';
 

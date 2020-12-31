@@ -5,4 +5,5 @@
     名称：自定义玉珏图
 */
 import * as radial_bar from '../option/g2plot/radial_bar';
+
 export default radial_bar;

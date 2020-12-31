@@ -1,4 +1,5 @@
-import { axios, TDbWrite, _commonData } from '@/utils/axios';
+import type { TDbWrite } from '@/utils/axios';
+import { axios } from '@/utils/axios';
 import { api } from '@/utils/setting';
 
 /**

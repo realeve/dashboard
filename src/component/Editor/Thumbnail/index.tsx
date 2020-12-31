@@ -2,10 +2,11 @@ import React, { useEffect, Suspense } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 
-import { IPage, IPanelConfig } from '@/models/common';
+import type { IPage, IPanelConfig } from '@/models/common';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
 import ThumbCanvas from './ThumbCanvas';
+
 const Moveable = React.lazy(() => import('react-moveable'));
 
 /**
@@ -25,7 +26,7 @@ const getThumbnailParam = (x: number) => {
 const SCALE_PARAM = 10;
 
 // -[x] 拖动缩略图
-interface IThumbnailProps {
+type IThumbnailProps = {
   visible: boolean;
   zoom: number;
   dragPercent: { x: number; y: number };
@@ -50,7 +51,7 @@ export default ({
   // 缩放比
   // const scale = rangeCfg.min / zoom;
 
-  let offset, moveParam, res;
+  let offset; let moveParam; let res;
   if (zoom < 0.7) {
     res = getThumbnailParam(1);
     (offset = res.x), (moveParam = res.y);
@@ -75,8 +76,8 @@ export default ({
   const ref = React.useRef(null);
 
   useEffect(() => {
-    let maxOffset = 100 * (1 - 1 / offset);
-    let beforeTranslate = [
+    const maxOffset = 100 * (1 - 1 / offset);
+    const beforeTranslate = [
       (R.clamp(0, maxOffset, dragPercent.x) * thumbnailSize.width) / 100,
       (R.clamp(0, maxOffset, dragPercent.y) * thumbnailSize.height) / 100,
     ];

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 class ErrorBoundary extends Component<any> {
   static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };

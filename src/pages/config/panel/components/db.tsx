@@ -1,7 +1,7 @@
 import { axios } from '@/utils/axios';
 import * as R from 'ramda';
 
-export interface IChartConfig {
+export type IChartConfig = {
   type: string;
   title: string;
   image: string;
@@ -17,13 +17,13 @@ export interface IChartConfig {
   showTitle?: number;
   [key: string]: any;
 }
-export interface IComponentItem {
+export type IComponentItem = {
   title: string;
   icon: string;
   num?: number;
   list: IChartConfig[];
 }
-export interface IComponent {
+export type IComponent = {
   title: string;
   icon: string;
   list: IComponentItem[];
@@ -32,7 +32,7 @@ export interface IComponent {
 
 export const getComponentList: () => Promise<IComponent[]> = () =>
   axios({
-    url: window.location.origin + '/components.json',
+    url: `${window.location.origin  }/components.json`,
   }).then((res) =>
     res.map((item) => {
       item.list = handleList(item.list);
@@ -41,7 +41,7 @@ export const getComponentList: () => Promise<IComponent[]> = () =>
   );
 
 const handleList = (list: IComponentItem[]) => {
-  let all = {
+  const all = {
     title: '全部',
     icon: 'com-font icon-com-all',
     num: 0,

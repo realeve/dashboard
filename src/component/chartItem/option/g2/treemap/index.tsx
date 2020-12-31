@@ -1,11 +1,12 @@
-import { Chart } from '@antv/g2';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart } from '@antv/g2';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 import { getColors, getAntThemePanel } from '../../g2plot/lib';
 
 // 可考虑用echarts实现  treemap,这样无需引入 data-set
 // 参考 @antv/data-set 源码 https://github.com/antvis/data-set/blob/master/src/transform/hierarchy/treemap.ts
-import { transform, Node } from './transform';
+import type { Node } from './transform';
+import { transform } from './transform';
 
 export const mock: IChartMock = {
   data: [
@@ -83,7 +84,7 @@ export const defaultOption = {
 
 // 数据转换器，外部数据变更时，将计算结果注入至source
 export const transformer = ({ data, header, x, y }) => {
-  let nodes = getNodes({ data, x: header[x], y: header[y] });
+  const nodes = getNodes({ data, x: header[x], y: header[y] });
   return { data: nodes };
 };
 
@@ -118,7 +119,7 @@ const getNodes = ({ data, x, y }) => {
 // g2 的默认组件需要2个参数，一是配置项，二是chart实例
 export const onMount = (
   {
-    data: { data: data, header },
+    data: { data, header },
     x: _x = 0,
     y: _y = 1,
     coord = 'rect',
@@ -128,11 +129,11 @@ export const onMount = (
   }: IChartProps,
   chart: Chart,
 ) => {
-  let colors = getColors(theme, needRerverse);
-  let x = header[_x],
-    y = header[_y];
+  const colors = getColors(theme, needRerverse);
+  const x = header[_x];
+    const y = header[_y];
 
-  let nodes = getNodes({ data, x, y });
+  const nodes = getNodes({ data, x, y });
 
   chart.data(nodes);
 

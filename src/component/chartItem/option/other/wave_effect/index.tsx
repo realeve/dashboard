@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as THREE from 'three';
 import useMeasure from './useMeasure';
+
 export const mock = {};
 
 export const config: IChartConfig[] = [
@@ -101,7 +102,7 @@ export default ({
   const [domRef, { width, height }] = useMeasure();
 
   const getColor = ({ ratio, blue_offset }) => {
-    let color = {
+    const color = {
       r: 0,
       g: Math.floor(255 - ratio * 255),
       b: Math.floor(blue_offset + blue_offset * ratio),
@@ -118,7 +119,7 @@ export default ({
   const wave = () => {
     const SPEED_OFFSET = speed / 100;
 
-    let container: HTMLElement = domRef.current;
+    const container: HTMLElement = domRef.current;
 
     if (!container || width * height == 0) {
       return;
@@ -129,15 +130,15 @@ export default ({
     camera.position.y = 1000;
     camera.position.z = 2000;
 
-    let renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.setClearAlpha(0);
 
     container.appendChild(renderer.domElement);
-    let scene = new THREE.Scene();
+    const scene = new THREE.Scene();
 
-    let particles = [];
+    const particles = [];
     let count = 0;
 
     function setup() {
@@ -146,15 +147,15 @@ export default ({
       );
       for (let x = 0; x < AMOUNT; x++) {
         particles.push([]);
-        var ratio = x / AMOUNT; //+ Math.random() / 10;
+        const ratio = x / AMOUNT; // + Math.random() / 10;
         for (let y = 0; y < AMOUNT_Y; y++) {
-          let material = new THREE.SpriteMaterial({
+          const material = new THREE.SpriteMaterial({
             map,
             opacity: 1,
             color: getColor({ ratio, blue_offset }),
           });
 
-          let particle = new THREE.Sprite(material);
+          const particle = new THREE.Sprite(material);
           particle.position.x = x * SEPARATION - (AMOUNT * SEPARATION) / 2;
           particle.position.z = y * SEPARATION - (AMOUNT_Y * SEPARATION) / 2;
           particles[x].push(particle);
@@ -182,10 +183,10 @@ export default ({
 
       for (let x = 0; x < AMOUNT; x++) {
         for (let y = 0; y < AMOUNT_Y; y++) {
-          let particle = particles[x][y];
+          const particle = particles[x][y];
           particle.position.y =
             Math.sin((x + count) * 0.3) * WAVESIZE + Math.sin((y + count) * 0.5) * WAVESIZE;
-          let scale =
+          const scale =
             (Math.sin((x + count) * 0.3) + 1) * MAXSIZE +
             (Math.sin((y + count) * 0.5) + 1) * MAXSIZE;
           particle.scale.x = particle.scale.y = scale;
@@ -206,7 +207,7 @@ export default ({
         ANIMATE_ID = requestAnimationFrame(render);
       },
       stopAnimate,
-      onresize: function () {
+      onresize () {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
@@ -217,10 +218,10 @@ export default ({
     };
   };
 
-  let [canvas, setCanvas] = useState(null);
+  const [canvas, setCanvas] = useState(null);
 
   const refresh = () => {
-    let _canvas = wave();
+    const _canvas = wave();
     _canvas?.render();
     setCanvas(_canvas);
   };

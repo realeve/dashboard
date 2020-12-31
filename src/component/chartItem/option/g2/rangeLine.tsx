@@ -1,5 +1,5 @@
-import { Chart } from '@antv/g2';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart } from '@antv/g2';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
@@ -156,12 +156,12 @@ export const onMount = (
   }: IChartProps,
   chart: Chart,
 ) => {
-  let x = header[_x],
-    min = header[_min],
-    avg = header[_avg],
-    max = header[_max];
-  let showAverage = !R.isNil(max),
-    isBar = chartType == 'interval';
+  const x = header[_x];
+    const min = header[_min];
+    const avg = header[_avg];
+    const max = header[_max];
+  const showAverage = !R.isNil(max);
+    const isBar = chartType == 'interval';
   chart.scale({
     y: {
       sync: true,
@@ -179,11 +179,11 @@ export const onMount = (
     padding: 32,
   });
 
-  let data = transform({ data: val, x, min, avg, max });
+  const data = transform({ data: val, x, min, avg, max });
 
   v1.data(data);
-  let colors = getColors(theme, needRerverse);
-  let instance1 = v1[chartType]()
+  const colors = getColors(theme, needRerverse);
+  const instance1 = v1[chartType]()
     .position('x*y')
     .color(colors[0])
     .style({
@@ -192,7 +192,7 @@ export const onMount = (
     .tooltip('y', (y) => {
       return {
         name: '数据区间',
-        value: y?.[0] + ' 至 ' + y?.[1],
+        value: `${y?.[0]  } 至 ${  y?.[1]}`,
       };
     });
 
@@ -207,7 +207,7 @@ export const onMount = (
   if (smooth && !isBar) {
     instance1.shape('smooth');
   }
-  let axis = {
+  const axis = {
     line: null,
     tickLine: null,
     grid: null,
@@ -225,10 +225,10 @@ export const onMount = (
     v2 = chart.createView({
       padding: 32,
     });
-    let data2 = data.map((item) => ({ x: item.x, y: item.y2 }));
+    const data2 = data.map((item) => ({ x: item.x, y: item.y2 }));
     v2.data(data2);
     v2.axis(false);
-    let instance2 = v2
+    const instance2 = v2
       .line()
       .position('x*y')
       .color(colors[0])
@@ -262,11 +262,11 @@ export const onMount = (
   chart.render();
 
   const onChange = ({ data: val }) => {
-    let data = transform({ data: val, x, avg, min, max });
+    const data = transform({ data: val, x, avg, min, max });
     v1.changeData(data);
 
     if (showAverage) {
-      let data2 = data.map((item) => ({ x: item.x, y: item.y2 }));
+      const data2 = data.map((item) => ({ x: item.x, y: item.y2 }));
       v2.changeData(data2);
     }
   };

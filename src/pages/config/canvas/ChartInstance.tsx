@@ -1,13 +1,13 @@
 import React, { useState, Suspense, useEffect, useRef } from 'react';
 
-import { IPanelConfig, IApiProps } from '@/models/common';
+import type { IPanelConfig, IApiProps } from '@/models/common';
 
 import * as R from 'ramda';
 import { Skeleton, Spin } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
 
 import { isArray } from '@antv/util';
-import { Dayjs } from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
 
 import { chartList } from '@/component/chartItem/option';
@@ -19,7 +19,7 @@ const G2 = React.lazy(() => import('@/component/g2'));
 const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
 const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
-  let obj = {};
+  const obj = {};
   arr.forEach((item) => {
     item.key && (obj[item.key] = item.defaultValue);
   });
@@ -27,13 +27,13 @@ const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
 };
 
 const getRange = ({ dateType = '本月' }: { dateType: string }) => {
-  let [start, end]: [Dayjs, Dayjs] = ranges[dateType];
-  let tstart = start.format('YYYYMMDD'),
-    tend = end.format('YYYYMMDD');
+  const [start, end]: [Dayjs, Dayjs] = ranges[dateType];
+  const tstart = start.format('YYYYMMDD');
+    const tend = end.format('YYYYMMDD');
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
 };
 
-interface ChartInstanceProps {
+type ChartInstanceProps = {
   config: IPanelConfig;
   style?: React.CSSProperties;
   title?: string;
@@ -41,9 +41,9 @@ interface ChartInstanceProps {
   onLoad?: (e: string) => void;
 }
 
-interface ChartRenderProps extends ChartInstanceProps {
+type ChartRenderProps = {
   chartLib: any;
-}
+} & ChartInstanceProps
 
 const ChartRender = ({
   config,
@@ -62,20 +62,20 @@ const ChartRender = ({
   /**
    * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
    */
-  let objComponent = getDefaultValue(lib?.config);
-  let objApi = getDefaultValue(lib?.apiConfig?.config);
+  const objComponent = getDefaultValue(lib?.config);
+  const objApi = getDefaultValue(lib?.apiConfig?.config);
   api = { ...objApi, ...api };
 
-  let mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
-  let valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
+  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
+  const valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
 
-  let { data, loading, error } = useFetch({
+  const { data, loading, error } = useFetch({
     param: {
       url: api?.api_type === 'url' ? api?.url : null,
       params: { ...getRange(api), cache: api.cache ?? 2 },
     },
     valid: () => valid,
-    interval: typeof api.interval === 'undefined' ? 0 : parseInt('' + Number(api.interval) * 60),
+    interval: typeof api.interval === 'undefined' ? 0 : parseInt(`${  Number(api.interval) * 60}`),
     callback(e) {
       if (e && e.title) {
         onLoad(e.title);
@@ -118,7 +118,7 @@ const ChartRender = ({
 
 
   if (config.engine === 'echarts') {
-    let chart = ref?.current?.echartsInstance;  
+    const chart = ref?.current?.echartsInstance;  
     return (
       <Suspense fallback={<Spin spinning />}>
         <Echarts
@@ -129,8 +129,8 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } else if (config.engine === 'g2plot') {
-    let option = method({
+  } if (config.engine === 'g2plot') {
+    const option = method({
       ...injectProps,
       autoFit: true,
     });
@@ -152,7 +152,7 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } else if (config.engine === 'g2') {
+  } if (config.engine === 'g2') {
     return (
       <Suspense fallback={<Spin spinning />}>
         <G2
@@ -165,7 +165,7 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } else if (config.engine === 'other') {
+  } if (config.engine === 'other') {
     const Item = method;
     return <Item panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />;
   }

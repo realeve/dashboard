@@ -1,10 +1,11 @@
 import { json2Array } from '@/utils/lib';
-export { mock, apiConfig, defaultOption } from './mock';
-export { config } from './config';
 import * as lib from '../../lib';
 import { getColors } from '../../g2plot/lib';
 import { textColor } from '@/component/chartItem/option';
-import { IBasePieProps } from './interface';
+import type { IBasePieProps } from './interface';
+
+export { mock, apiConfig, defaultOption } from './mock';
+export { config } from './config';
 
 export default (
   {
@@ -30,12 +31,12 @@ export default (
   }: Readonly<IBasePieProps>,
   chart,
 ) => {
-  let chartWidth = chart?.getWidth?.() || 400;
-  let { data } = json2Array<any[]>(_data);
+  const chartWidth = chart?.getWidth?.() || 400;
+  const { data } = json2Array<any[]>(_data);
 
-  let color = getColors(theme);
+  const color = getColors(theme);
 
-  let rose =
+  const rose =
     chartType == 'pie'
       ? {}
       : {
@@ -84,9 +85,9 @@ export default (
           length2: 0,
           maxSurfaceAngle: 80,
         },
-        labelLayout: function (params) {
-          var isLeft = params.labelRect.x < chartWidth / 2;
-          var points = params.labelLinePoints;
+        labelLayout (params) {
+          const isLeft = params.labelRect.x < chartWidth / 2;
+          const points = params.labelLinePoints;
           if (!points) {
             return {};
           }

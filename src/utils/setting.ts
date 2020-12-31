@@ -1,6 +1,6 @@
 export const themeName = 'dashboard';
 
-export const DEV: boolean = process.env.NODE_ENV === 'test'; //|| process.env.NODE_ENV === 'development';
+export const DEV: boolean = process.env.NODE_ENV === 'test'; // || process.env.NODE_ENV === 'development';
 
 // 前台资源部署域名，默认头像图片资源调用域名
 export const config = {
@@ -32,14 +32,14 @@ export const CUR_COMPANY = 'chengdu';
 export const AUTHOR = config[CUR_COMPANY].footer;
 
 export const ORG = config[CUR_COMPANY].org;
-export const uap = config[CUR_COMPANY].uap;
-export const company = config[CUR_COMPANY].company;
+export const {uap} = config[CUR_COMPANY];
+export const {company} = config[CUR_COMPANY];
 
 let domain: string = config[CUR_COMPANY].api;
 // 后台api部署域名
 let host = domain;
 
-export const SEARCH_PREFIX = config[CUR_COMPANY].host + '/search#';
+export const SEARCH_PREFIX = `${config[CUR_COMPANY].host  }/search#`;
 
 if (DEV) {
   // 上传代码时取消此处的判断
@@ -118,4 +118,4 @@ export const api = {
 // 静态资源所在地址，用于背景/边框/图片资源等；
 
 export const ASSETS_HOST = '//127.0.0.1:9999/';
-export const ASSETS_URL = ASSETS_HOST + 'assets/';
+export const ASSETS_URL = `${ASSETS_HOST  }assets/`;

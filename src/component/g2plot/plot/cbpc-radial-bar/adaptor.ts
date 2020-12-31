@@ -6,10 +6,10 @@ import {
   legend,
   annotation,
 } from '@antv/g2plot/lib/adaptor/common';
-import { Params } from '@antv/g2plot';
+import type { Params } from '@antv/g2plot';
 import { flow, deepAssign } from '@antv/g2plot/lib/utils';
 import { interval } from '@antv/g2plot/lib/adaptor/geometries';
-import { RadialBarOptions } from './types';
+import type { RadialBarOptions } from './types';
 import { meta, axis } from '@antv/g2plot/lib/plots/radial-bar/adaptor';
 
 /**
@@ -46,7 +46,7 @@ function coordinate(params: Params<RadialBarOptions>): Params<RadialBarOptions> 
   const { chart, options } = params;
   const { radius, innerRadius, coordinate = 'polar', transpose = true } = options;
 
-  let coord = chart.coordinate({
+  const coord = chart.coordinate({
     type: coordinate,
     cfg: {
       radius,

@@ -1,20 +1,23 @@
 import React from 'react';
-import InfiniteViewer, { OnScroll } from './react-infinite-viewer';
+import type { OnScroll } from './react-infinite-viewer';
+import InfiniteViewer from './react-infinite-viewer';
 
 import Guides from '@/component/react-guides';
 
 import Selecto from './react-selecto';
 import './Editor.less';
-import Viewport, { ElementInfo, MovedInfo, MovedResult } from './Viewport/Viewport';
-import { prefix, getIds, checkImageLoaded, getScenaAttrs, IGuideProps } from './utils/utils';
+import type { ElementInfo, MovedInfo, MovedResult } from './Viewport/Viewport';
+import Viewport from './Viewport/Viewport';
+import type { IGuideProps } from './utils/utils';
+import { prefix, getIds, checkImageLoaded, getScenaAttrs } from './utils/utils';
 
 import EventBus from './utils/EventBus';
-import { IObject } from '@daybrush/utils';
+import type { IObject } from '@daybrush/utils';
 import Memory from './utils/Memory';
 import MoveableManager from './Viewport/MoveableMananger';
 import MoveableData from './utils/MoveableData';
 import KeyManager from './KeyManager/KeyManager';
-import { ScenaEditorState, SavedScenaData, ScenaJSXType, TQuickTool } from './types';
+import type { ScenaEditorState, SavedScenaData, ScenaJSXType, TQuickTool } from './types';
 import HistoryManager from './utils/HistoryManager';
 import Debugger from './utils/Debugger';
 import { isMacintosh, DATA_SCENA_ELEMENT_ID } from './consts';
@@ -22,8 +25,8 @@ import ClipboardManager from './utils/ClipboardManager';
 import { generateId, guideDb, calcDefaultGuidline } from './utils/utils';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import { IPage } from '@/models/common';
-import { Dispatch } from 'redux';
+import type { IPage } from '@/models/common';
+import type { Dispatch } from 'redux';
 
 import { getDefaultStyle, getDashboardStyle, calcCanvasRange, getThumbnail } from './lib';
 
@@ -89,7 +92,7 @@ export const calcDragPos = (
   };
 };
 
-export interface IEditorProps {
+export type IEditorProps = {
   // width: string;
   // height: string;
   // background?: string;
@@ -184,8 +187,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
   // 获取编辑器相对于屏幕的位置
   public getEditorPosition = () => {
-    let rect = this.editorElement.current.getBoundingClientRect();
-    let rectOffset = {
+    const rect = this.editorElement.current.getBoundingClientRect();
+    const rectOffset = {
       x: rect.x,
       y: rect.y,
     };
@@ -215,7 +218,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   componentWillMount() {
     setTimeout(async () => {
       // 载入辅助线
-      let initGuides: IGuideProps = await guideDb.load(this.props.page);
+      const initGuides: IGuideProps = await guideDb.load(this.props.page);
       this.setState({
         horizontalGuides: initGuides.h,
         verticalGuides: initGuides.v,
@@ -244,7 +247,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
   // jpg to webp
   public async getThumbnail(scale: number, quality = 0.8, filename = null) {
-    let canvasEl = this.viewport.current.viewport.el;
+    const canvasEl = this.viewport.current.viewport.el;
     return getThumbnail(canvasEl, { scale, quality, filename });
   }
 
@@ -263,9 +266,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const defaultGuides = calcDefaultGuidline(this.props.page);
 
     const { curTool: selectedMenu } = this.props;
-    let { width: _width, height: _height } = this.props.page;
-    let width = Number(_width),
-      height = Number(_height);
+    const { width: _width, height: _height } = this.props.page;
+    const width = Number(_width);
+      const height = Number(_height);
 
     const horizontalSnapGuides = [
       // 0,
@@ -295,7 +298,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       dragPosFormat: (e) => e - 44,
     };
 
-    let zoomRange = calcCanvasRange({ width, hideWidth: this.props.hideWidth, height }, zoom);
+    const zoomRange = calcCanvasRange({ width, hideWidth: this.props.hideWidth, height }, zoom);
 
     return (
       <div
@@ -416,8 +419,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (selectedMenu === 'hand') {
               return;
             }
-            const inputEvent = e.inputEvent;
-            const target = inputEvent.target;
+            const {inputEvent} = e;
+            const {target} = inputEvent;
             this.checkBlur();
 
             if (
@@ -436,15 +439,15 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
               x: -e.deltaX,
               y: -e.deltaY,
             };
-            let pos = infiniteViewer.current!.scrollBy(dragPos.x, dragPos.y);
+            const pos = infiniteViewer.current!.scrollBy(dragPos.x, dragPos.y);
 
             // 计算画布移动的百分比
-            let lenX = zoomRange.x[1] - zoomRange.x[0],
-              lenY = zoomRange.y[1] - zoomRange.y[0];
-            let posX = pos.nextX - zoomRange.x[0],
-              posY = pos.nextY - zoomRange.y[0];
-            let x = 0,
-              y = 0;
+            const lenX = zoomRange.x[1] - zoomRange.x[0];
+              const lenY = zoomRange.y[1] - zoomRange.y[0];
+            const posX = pos.nextX - zoomRange.x[0];
+              const posY = pos.nextY - zoomRange.y[0];
+            let x = 0;
+              let y = 0;
             if (lenX > 0) {
               x = (posX * 100) / lenX;
             }
@@ -460,7 +463,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (selectedMenu === 'hand') {
               return;
             }
-            let _selected = R.clone(selected);
+            const _selected = R.clone(selected);
             if (isDragStart) {
               inputEvent.preventDefault();
             }
@@ -570,7 +573,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.keyManager.keyup(
       ['delete'],
       () => {
-        let targets = this.getSelectedTargets();
+        const targets = this.getSelectedTargets();
         const ids = getIds(targets);
         this.props.onRemove?.(ids);
         this.removeElements(targets);
@@ -637,7 +640,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     return this.state.selectedTargets;
   }
   public setSelectedTargets(
-    targets: Array<HTMLElement | SVGElement>,
+    targets: (HTMLElement | SVGElement)[],
     isRestore = false,
     selectGroupTarget = false,
   ) {
@@ -649,7 +652,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     // 被锁定的面板不允许选择
     targets = targets.filter((target) => {
-      let targetId = getIds([target])[0];
+      const targetId = getIds([target])[0];
       return !this.props.lockedPanel.includes(targetId);
     });
 
@@ -701,15 +704,15 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     config: { id?: string; name?: string; style?: React.CSSProperties },
   ) {
     // 判断id是否重复;
-    let id = config.id || generateId();
+    const id = config.id || generateId();
     if (config.id) {
-      let curIds = this.getEditorIds();
+      const curIds = this.getEditorIds();
       if (curIds.includes(config.id)) {
         console.log('当前id', config.id, '已存在，添加失败');
         return;
       }
     }
-    let name = config.name || id;
+    const name = config.name || id;
     return this.appendJSXs([
       {
         jsx,
@@ -733,7 +736,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public appendJSXs(
     jsxs: ElementInfo[],
     isRestore?: boolean,
-  ): Promise<Array<HTMLElement | SVGElement>> {
+  ): Promise<(HTMLElement | SVGElement)[]> {
     const viewport = this.getViewport();
     const indexesList = viewport.getSortedIndexesList(this.getSelectedTargets());
     const indexesListLength = indexesList.length;
@@ -784,9 +787,9 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   public getMoveable() {
     return this.moveableManager.current!.getMoveable();
   }
-  public removeFrames(targets: Array<HTMLElement | SVGElement>) {
+  public removeFrames(targets: (HTMLElement | SVGElement)[]) {
     const frameMap: IObject<any> = {};
-    const moveableData = this.moveableData;
+    const {moveableData} = this;
     const viewport = this.getViewport();
 
     targets.forEach(function removeFrame(target) {
@@ -807,7 +810,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
   public restoreFrames(infos: ElementInfo[], frameMap: IObject<any>) {
     const viewport = this.getViewport();
-    const moveableData = this.moveableData;
+    const {moveableData} = this;
 
     infos.forEach(function registerFrame(info) {
       info.frame = frameMap[info.id!];
@@ -819,7 +822,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       moveableData.createFrame(viewport.getInfo(id).el!, frameMap[id]);
     }
   }
-  public removeElements(targets: Array<HTMLElement | SVGElement>, isRestore?: boolean) {
+  public removeElements(targets: (HTMLElement | SVGElement)[], isRestore?: boolean) {
     const viewport = this.getViewport();
     const frameMap = this.removeFrames(targets);
     const indexesList = viewport.getSortedIndexesList(targets);
@@ -836,7 +839,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }
     // return;
     return viewport.removeTargets(targets).then(({ removed }) => {
-      let selectedTarget =
+      const selectedTarget =
         selectedInfo || viewport.getLastChildInfo(scopeId)! || viewport.getInfo(scopeId);
 
       this.setSelectedTargets(
@@ -872,12 +875,12 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
   // 处理粘贴
   public loadDatas(datas: SavedScenaData[]) {
-    let ids = datas.map((item) => item.jsxId);
+    const ids = datas.map((item) => item.jsxId);
     this.props.onPaste(ids);
   }
-  public saveTargets(targets: Array<HTMLElement | SVGElement>): SavedScenaData[] {
+  public saveTargets(targets: (HTMLElement | SVGElement)[]): SavedScenaData[] {
     const viewport = this.getViewport();
-    const moveableData = this.moveableData;
+    const {moveableData} = this;
     this.console.log('save targets', targets);
     return targets
       .map((target) => viewport.getInfoByElement(target))

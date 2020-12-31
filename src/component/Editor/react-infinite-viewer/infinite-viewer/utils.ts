@@ -1,4 +1,4 @@
-import { OnDrag } from "gesto";
+import type { OnDrag } from "gesto";
 import { TINY_NUM } from "./consts";
 
 export function measureSpeed(e: OnDrag) {

@@ -5,4 +5,5 @@
     名称：子弹图
 */
 import * as bullet from '../option/g2plot/bullet';
+
 export default bullet;

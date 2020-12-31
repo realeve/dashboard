@@ -1,7 +1,7 @@
-import { Chart } from '@antv/g2';
+import type { Chart } from '@antv/g2';
 import { textColor } from '../index';
 import * as R from 'ramda';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 export const mock: IChartMock = {
@@ -117,9 +117,9 @@ export const onMount = (
   y = String(y);
   const isVertical = direction === 'vertical';
 
-  let xLen = R.map<any[], number>((item) => item.length)(R.pluck([x])(data));
+  const xLen = R.map<any[], number>((item) => item.length)(R.pluck([x])(data));
 
-  let yConfig = {
+  const yConfig = {
     nice: false,
     alias: header[y],
     sync: true,
@@ -148,7 +148,7 @@ export const onMount = (
         },
   );
 
-  let textStyle = {
+  const textStyle = {
     fill: textColor, // 文本的颜色
     fontSize: 12,
   };
@@ -174,7 +174,7 @@ export const onMount = (
     },
   );
 
-  let showTitle = !showLegend
+  const showTitle = !showLegend
     ? {
         title: {
           offsetY: 5,
@@ -194,7 +194,7 @@ export const onMount = (
     chart.coordinate().transpose();
   }
 
-  let color = getColors(theme, needRerverse);
+  const color = getColors(theme, needRerverse);
   chart.facet('mirror', {
     fields: [legend],
     transpose: isVertical,

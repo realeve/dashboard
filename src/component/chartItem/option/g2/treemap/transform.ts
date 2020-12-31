@@ -2,16 +2,16 @@ import { hierarchy, treemap, treemapResquarify } from 'd3-hierarchy';
 import { assign, isArray } from '@antv/util';
 import { getField } from './option-parser';
 
-let { Node } = hierarchy;
+const { Node } = hierarchy;
 export { Node };
-interface HierarchyApi {
+type HierarchyApi = {
   root?: any;
   rows?: any;
   children?: any;
   dataType: string;
-  getAllNodes?(): any[];
+  getAllNodes?: () => any[];
 }
-interface View extends HierarchyApi {}
+type View = {} & HierarchyApi
 
 const HIERARCHY = 'hierarchy';
 const DEFAULT_OPTIONS: Options = {
@@ -30,7 +30,7 @@ const DEFAULT_OPTIONS: Options = {
   as: ['x', 'y'],
 };
 
-export interface Options {
+export type Options = {
   /**
    * 字段名 默认为 value
    */
@@ -57,7 +57,7 @@ export interface Options {
 
 function getAllNodes() {
   const nodes: any[] = [];
-  let root = this;
+  const root = this;
   if (root && root.each) {
     // d3-hierarchy
     root.each((node: any) => {
@@ -80,10 +80,10 @@ export function transform(dataView: View, options: Options): typeof Node {
     name: 'root',
     children: dataView.children,
   });
-  const root: typeof Node = dataView.root;
+  const {root} = dataView;
   options = assign({} as Options, DEFAULT_OPTIONS, options);
 
-  const as = options.as;
+  const {as} = options;
   if (!isArray(as) || as.length !== 2) {
     throw new TypeError('Invalid as: it must be an array with 2 strings (e.g. [ "x", "y" ])!');
   }

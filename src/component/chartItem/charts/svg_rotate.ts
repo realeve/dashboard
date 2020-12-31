@@ -5,4 +5,5 @@
     名称：旋转svg素材
 */
 import * as svg_rotate from '../option/other/svg_rotate/';
+
 export default svg_rotate;

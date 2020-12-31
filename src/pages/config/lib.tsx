@@ -3,7 +3,9 @@
  * 本函数用于在画布的空余区域搜索最佳放置的位置
  */
 import * as R from 'ramda';
-import { IPanelConfig as IPanel, GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
+import type { IPanelConfig as IPanel} from '@/models/common';
+import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
+
 const rectPadding = 12;
 export const defaultRect = {
   top: rectPadding,
@@ -18,7 +20,7 @@ export const defaultRect = {
  * @param unit 单位
  */
 export const parseStyle = (style: string | number, unit = 'px') => {
-  let reg = RegExp(unit, 'g');
+  const reg = RegExp(unit, 'g');
   return parseInt(String(style).replace(reg, ''));
 };
 
@@ -35,48 +37,48 @@ export const calcTranslate = ({
   top: number;
 }) => {
   if (translate) {
-    let arr = translate
+    const arr = translate
       .replace(/px/g, '')
       .split(',')
       .map((item) => Number(item));
     left += arr[0];
     top += arr[1];
   }
-  return { left: parseInt('' + left), top: parseInt('' + top) };
+  return { left: parseInt(`${  left}`), top: parseInt(`${  top}`) };
 };
 
 // 默认样式
-export interface IRect {
+export type IRect = {
   top: number;
   left: number;
   width: number;
   height: number;
 }
 
-interface IRectPos extends IRect {
+type IRectPos = {
   isFind: boolean;
-}
+} & IRect
 
 // 放置组件后围成的矩形区域
-interface IDistRect {
+type IDistRect = {
   x1: number;
   y1: number;
   x2: number;
   y2: number;
 }
 
-interface IPanelStyleProps extends IDistRect {
+type IPanelStyleProps = {
   width: number;
   height: number;
-}
-interface IPage {
+} & IDistRect
+type IPage = {
   width: number | string;
   height: number | string;
 }
 
 export type TPanelStyle = Pick<IPanel, 'style' | 'key'>;
 
-interface IFnAutoPosition {
+type IFnAutoPosition = {
   panel: TPanelStyle[];
   page?: IPage;
   padding?: number;
@@ -115,7 +117,7 @@ export const findPosition = (
     }
 
     // 如果放在当前位置，所围成的矩形
-    let rect1: IDistRect =
+    const rect1: IDistRect =
       direction == 'right'
         ? {
             x1: item.x2, // 向右放置，起始点从x2起，y轴不变
@@ -130,8 +132,8 @@ export const findPosition = (
             y2: item.y2 + rect.height,
           };
 
-    let xAllowed = isXAllowed(item, page),
-      yAllowed = isYAllowed(item, page);
+    const xAllowed = isXAllowed(item, page);
+      const yAllowed = isYAllowed(item, page);
 
     // x/y轴未越界
     if (!xAllowed || !yAllowed) {
@@ -159,12 +161,12 @@ export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyle
   panel,
   padding = 16,
 }) => {
-  let dist = panel.map(({ style }) => {
-    let width = parseStyle(style.width),
-      height = parseStyle(style.height),
-      top = parseStyle(style.top),
-      left = parseStyle(style.left);
-    let res = calcTranslate({ translate: style?.transform?.translate, left, top });
+  const dist = panel.map(({ style }) => {
+    const width = parseStyle(style.width);
+      const height = parseStyle(style.height);
+      let top = parseStyle(style.top);
+      let left = parseStyle(style.left);
+    const res = calcTranslate({ translate: style?.transform?.translate, left, top });
     (left = res.left), (top = res.top);
     return {
       width,
@@ -191,12 +193,12 @@ export const calcPanelPosition = ({
   page = { width: 1920, height: 1080 },
   padding = 25,
 }: IFnAutoPosition) => {
-  let panel = R.reject<TPanelStyle>((item) =>
+  const panel = R.reject<TPanelStyle>((item) =>
     [SCREEN_EDGE_KEY, GROUP_COMPONENT_KEY].includes(item.key),
   )(_panel);
 
   // 转换当前组件列表已经占领的区域
-  let panelStyle = convertPanel({ panel, padding });
+  const panelStyle = convertPanel({ panel, padding });
 
   let distPos: IRectPos = {
     isFind: false,
@@ -209,7 +211,7 @@ export const calcPanelPosition = ({
   // 否则向下搜索
   distPos = findPosition('top', page, panelStyle, distPos);
 
-  let { isFind, ...props } = distPos;
+  const { isFind, ...props } = distPos;
   return props as IRect;
 };
 
@@ -234,8 +236,8 @@ export const calcPanelPosition = ({
  * @param panel 当前组件列表的位置及尺寸
  */
 export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
-  let i = 0,
-    allowed = true;
+  let i = 0;
+    let allowed = true;
   while (allowed && i < panel.length) {
     allowed = !isRectCross(panel[i++], rect);
   }

@@ -6,7 +6,7 @@ import { api } from '@/utils/setting';
 import useFetch from '@/component/hooks/useFetch';
 import DNA from '@/pages/index/dna';
 
-export interface IScreenItem {
+export type IScreenItem = {
   file: string;
   id: number;
   img: string;
@@ -16,7 +16,7 @@ export interface IScreenItem {
   group_name?: string;
 }
 const List = () => {
-  let { data, loading, error, reFetch } = useFetch<{ data: IScreenItem[] }>({
+  const { data, loading, error, reFetch } = useFetch<{ data: IScreenItem[] }>({
     param: {
       url: api.getDashboardList,
       params: { cache: 0 },

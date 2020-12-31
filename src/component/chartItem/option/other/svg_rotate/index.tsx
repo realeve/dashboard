@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 import { textColor } from '@/component/chartItem/option';
 import Background from './background';
@@ -126,7 +126,7 @@ export default ({
     ...imgOption
   },
 }) => {
-  let value = data[0][x];
+  const value = data[0][x];
   return (
     <div className={styles.widgetDecotation}>
       <div className={styles.borderImg}>

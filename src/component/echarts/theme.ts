@@ -292,6 +292,6 @@ export default {
     },
   },
   textStyle: {
-    fontFamily: FONT_FAMILY, //: "等线,微软雅黑, Arial, Verdana"
+    fontFamily: FONT_FAMILY, // : "等线,微软雅黑, Arial, Verdana"
   },
 };

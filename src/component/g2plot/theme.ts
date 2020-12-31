@@ -1,6 +1,6 @@
 import { antvDark } from '@antv/g2/lib/theme/style-sheet/dark';
 import { createThemeByStyleSheet } from '@antv/g2/lib/theme/util/create-by-style-sheet';
-import { LooseObject } from '@antv/g2/lib/interface';
+import type { LooseObject } from '@antv/g2/lib/interface';
 import { G2 } from '@antv/g2plot';
 import { deepMix } from '@antv/util';
 
@@ -11,12 +11,12 @@ import { deepMix } from '@antv/util';
 
 const defaultTheme = createThemeByStyleSheet(antvDark);
 
-let labelColor = '#E0E0E3';
-let lineColor = '#ccc';
-let fontFamily =
+const labelColor = '#E0E0E3';
+const lineColor = '#ccc';
+const fontFamily =
   '"Unica One","-apple-system", "Segoe UI", Roboto, "Helvetica Neue", Arial,\n  "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","Noto Color Emoji"';
 
-let axis = {};
+const axis = {};
 ['top', 'bottom', 'left', 'right', 'circle', 'radius'].forEach((key) => {
   axis[key] = {
     label: {
@@ -28,7 +28,7 @@ let axis = {};
   };
 });
 
-let legend = {};
+const legend = {};
 ['top', 'bottom', 'left', 'right'].forEach((key) => {
   legend[key] = {
     itemName: {

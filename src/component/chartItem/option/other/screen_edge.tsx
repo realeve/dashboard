@@ -1,5 +1,6 @@
-import { IChartConfig } from '@/component/chartItem/interface';
-import ScreenEdge, { IScreenEdgeProps } from '@/component/Editor/ScreenEdge';
+import type { IChartConfig } from '@/component/chartItem/interface';
+import type { IScreenEdgeProps } from '@/component/Editor/ScreenEdge';
+import ScreenEdge from '@/component/Editor/ScreenEdge';
 
 export const config: IChartConfig[] = [
   {

@@ -12,9 +12,9 @@ import './style.less';
 
 export type ExpandIconPosition = 'left' | 'right' | undefined;
 
-export interface CollapseProps {
-  activeKey?: Array<string | number> | string | number;
-  defaultActiveKey?: Array<string | number> | string | number;
+export type CollapseProps = {
+  activeKey?: (string | number)[] | string | number;
+  defaultActiveKey?: (string | number)[] | string | number;
   /** 手风琴效果 */
   accordion?: boolean;
   destroyInactivePanel?: boolean;
@@ -28,7 +28,7 @@ export interface CollapseProps {
   ghost?: boolean;
 }
 
-interface PanelProps {
+type PanelProps = {
   isActive?: boolean;
   header?: React.ReactNode;
   className?: string;
@@ -39,9 +39,9 @@ interface PanelProps {
   extra?: React.ReactNode;
 }
 
-interface CollapseInterface extends React.FC<CollapseProps> {
+type CollapseInterface = {
   Panel: typeof CollapsePanel;
-}
+} & React.FC<CollapseProps>
 
 const Collapse: CollapseInterface = (props) => {
   const { getPrefixCls, direction } = useContext(ConfigContext);

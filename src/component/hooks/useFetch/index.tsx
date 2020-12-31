@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { mock, axios, AxiosError } from '@/utils/axios';
-import http, { AxiosRequestConfig } from 'axios';
+import type { AxiosError } from '@/utils/axios';
+import { mock, axios } from '@/utils/axios';
+import type { AxiosRequestConfig } from 'axios';
+import http from 'axios';
 import * as R from 'ramda';
 import { useInterval } from 'react-use';
 
@@ -15,11 +17,11 @@ import subscribeVisible from './windowVisible';
  * @example: callback({[key:string]:value}) === value
  * @return value 此处无论key为何值，
  */
-export const callback = <T extends {}>(data: { [key: string]: any }): T => Object.values(data)[0];
+export const callback = <T extends {}>(data: Record<string, any>): T => Object.values(data)[0];
 
 const { CancelToken } = http;
 
-export interface IFetchProps<T> {
+export type IFetchProps<T> = {
   param?: AxiosRequestConfig | null;
   initData?: T;
   valid?: (e?: any) => boolean;
@@ -126,7 +128,7 @@ const useFetch = <T extends {} | void>({
       })
       .finally(() => {
         // 如果屏幕隐藏，并且 !pollingWhenHidden, 则停止轮询，并记录 flag，等 visible 时，继续轮询
-        let needRefresh = !isDocumentVisible() && !pollingWhenHidden;
+        const needRefresh = !isDocumentVisible() && !pollingWhenHidden;
         setPollingWhenVisibleFlag(!needRefresh);
       });
 
@@ -151,7 +153,7 @@ const useFetch = <T extends {} | void>({
 
   // 初始时
   useEffect(() => {
-    let next = [];
+    const next = [];
     if (interval > 0) {
       next.push(subscribeVisible(rePolling));
     }

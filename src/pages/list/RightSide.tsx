@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import { Button, Tooltip, message } from 'antd';
-import { IScreenItem } from './index';
+import type { IScreenItem } from './index';
 import { useDebounce, useSetState } from 'react-use';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 
@@ -30,16 +30,16 @@ const NewScreen = () => (
   </div>
 );
 
-interface IShowProps {
+type IShowProps = {
   visible: boolean;
   type: string;
   id: number;
   file?: string;
   title?: string;
 }
-interface IProps extends IScreenItem {
+type IProps = {
   setShow: (e: IShowProps) => void;
-}
+} & IScreenItem
 
 const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setShow }: IProps) => {
   const [screenTitle, setScreenTitle] = useState(title);
@@ -138,7 +138,7 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
               className={styles.input}
               value={screenTitle}
               onChange={(e) => {
-                let _title = e.target.value;
+                const _title = e.target.value;
                 if (_title != title) {
                   setScreenTitle(_title);
                 }
@@ -160,7 +160,7 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
   );
 };
 
-export interface IScreenListProps {
+export type IScreenListProps = {
   data: IScreenItem[];
   onRefresh?: () => void;
 }
@@ -244,7 +244,7 @@ const RightSide = ({ data, onRefresh }: IScreenListProps) => {
             setShow={(show) => {
               setShow({
                 ...show,
-                file: './data/' + props.file,
+                file: `./data/${  props.file}`,
               });
             }}
           />

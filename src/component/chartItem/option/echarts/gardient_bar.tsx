@@ -1,6 +1,6 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [
@@ -54,9 +54,9 @@ export const apiConfig: IApiConfig = {
 };
 
 export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
-  let xData = [],
-    yData = [];
-  let value = _data.data;
+  const xData = [];
+    const yData = [];
+  const value = _data.data;
   value.forEach((item) => {
     xData.push(item[x]);
     yData.push(item[y]);
@@ -111,7 +111,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
       {
         type: 'bar',
         data: yData,
-        barWidth: barWidth,
+        barWidth,
         itemStyle: {
           normal: {
             color: new LinearGradient(

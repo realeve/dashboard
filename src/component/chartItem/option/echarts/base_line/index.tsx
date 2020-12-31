@@ -1,9 +1,10 @@
 import { handleData } from '@/component/chartItem/option/echarts/line';
 import * as lib from '@/component/chartItem/option/lib';
 import { getColors } from '../../g2plot/lib';
-export { config, mock, apiConfig, defaultOption } from './mock';
 import * as utils from './lib';
-import { ISeries, IEchartsBaselineProps } from './interface';
+import type { ISeries, IEchartsBaselineProps } from './interface';
+
+export { config, mock, apiConfig, defaultOption } from './mock';
 
 /**
  * 2020-11-30
@@ -61,11 +62,11 @@ export default ({
   if (String(legend) == '') {
     return {};
   }
-  let res = handleData(data, { legend, x, y });
+  const res = handleData(data, { legend, x, y });
 
-  let color = getColors(theme, needRerverse);
+  const color = getColors(theme, needRerverse);
 
-  let markAreaInfo = utils.getMarkAreaInfo({
+  const markAreaInfo = utils.getMarkAreaInfo({
     showMarkArea,
     markAreaColor,
     markAreaColor2,
@@ -83,7 +84,7 @@ export default ({
 
   // https://github.com/apache/incubator-echarts/issues/13878
   // TODO 此处在标签很长时会有bug
-  let getEndLabel = (idx) => ({
+  const getEndLabel = (idx) => ({
     show: showEndlabel,
     formatter: '{a}',
     // rotate:20,
@@ -91,10 +92,10 @@ export default ({
     // width: 100,
     // distance: -50,
     overflow: 'truncate',
-    color: color[idx % res.series.length], //"inherit",
+    color: color[idx % res.series.length], // "inherit",
   });
 
-  let barLabelOption = {
+  const barLabelOption = {
     position: isReverse ? 'insideLeft' : 'insideBottom',
     distance: 15,
     align: 'left',

@@ -19,7 +19,7 @@ const Moveable = React.lazy(() => import('react-moveable'));
   </MoveableCanvas>
 
  */
-interface IMoveableCanvas {
+type IMoveableCanvas = {
   /** 内部需要拖拽的画布 */
   children?: React.ReactNode;
   /** 设置外层边框的样式 */
@@ -44,7 +44,7 @@ export default ({ children, style, moveable = true, zoomable = true, onZoom }: I
 
   const [level, setLevel] = useState(5);
   useEffect(() => {
-    let nextLevel = zoomLevel[level].zoom;
+    const nextLevel = zoomLevel[level].zoom;
     setZoom(nextLevel);
     onZoom?.(nextLevel);
   }, [level]);
@@ -57,7 +57,7 @@ export default ({ children, style, moveable = true, zoomable = true, onZoom }: I
         if (!zoomable) {
           return;
         }
-        let zoomIn = e.deltaY < 0;
+        const zoomIn = e.deltaY < 0;
         if (zoomIn) {
           setLevel(Math.max(level - 1, 0));
         } else {

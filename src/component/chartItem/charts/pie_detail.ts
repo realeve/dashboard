@@ -6,4 +6,5 @@
 */
 
 import * as pie_detail from '../option/g2/pie_detail';
+
 export default pie_detail;

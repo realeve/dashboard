@@ -1,4 +1,4 @@
-import { Options as G2PlotConfig } from '@antv/g2plot';
+import type { Options as G2PlotConfig } from '@antv/g2plot';
 
 export type ChartRefOptions =
   | ((chart: any) => void)

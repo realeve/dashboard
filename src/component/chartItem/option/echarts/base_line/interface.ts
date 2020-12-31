@@ -1,5 +1,6 @@
-import { ILegendProps, IApiProps } from '../interface';
-export interface IEchartsBaselineProps extends ILegendProps, IApiProps {
+import type { ILegendProps, IApiProps } from '../interface';
+
+export type IEchartsBaselineProps = {
   /** 主题 */
   readonly theme: number | string;
 
@@ -109,9 +110,9 @@ export interface IEchartsBaselineProps extends ILegendProps, IApiProps {
 
   /** 鼠标移入时，tooltip对应的坐标轴样式 */
   readonly axisPointer: 'shadow' | 'cross' | 'line';
-}
+} & ILegendProps & IApiProps
 
-export interface ISeries {
+export type ISeries = {
   name: string;
   coordinateSystem: string;
   data: (number | string)[];

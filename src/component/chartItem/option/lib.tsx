@@ -1,29 +1,29 @@
 import React from 'react';
 import * as R from 'ramda';
-import { EChartsSeriesType } from 'echarts';
+import type { EChartsSeriesType } from 'echarts';
 import * as Position from '@/component/field/Align/iconPosition';
 import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 
 import { palette } from '@/component/g2plot/palette';
-
-export type tRender = 'canvas' | 'svg';
 // 获取最佳轴长度
 import { nice, quantity } from 'echarts/lib/util/number';
 
-export interface IChart {
+export type tRender = 'canvas' | 'svg';
+
+export type IChart = {
   key?: string;
   title: string;
   default?: string | number;
-  url?: string | Array<string>;
+  url?: string | string[];
   type?: string;
 }
 
-export type TChartConfig = Array<IChart>;
+export type TChartConfig = IChart[];
 
-export const uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
-export interface ITooltipFormatter {
+export const uniq: <T>(arr: T[]) => T[] = (arr) => R.uniq(arr);
+export type ITooltipFormatter = {
   series: { name: string; value: string | number; seriesName: string; color: string }[];
   unit: string | boolean;
   axisName: string;
@@ -39,14 +39,14 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
 }) => {
   let title: boolean | string = false;
   let str = '';
-  let p = series.filter((item) => typeof item.value !== 'undefined');
+  const p = series.filter((item) => typeof item.value !== 'undefined');
 
   if (p.length === 0) {
     return false;
   }
 
   // let shouldDrill = window.location.hash.includes('dr0_id=');
-  let drillTipText = shouldDrill ? '<div style="color:#e23;">( 点击查看详情 )</div>' : '';
+  const drillTipText = shouldDrill ? '<div style="color:#e23;">( 点击查看详情 )</div>' : '';
 
   p.forEach((item, idx) => {
     if (!title) {
@@ -64,8 +64,8 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
           item.color
         };"></div><span>${item.seriesName || axisName}：${
           typeof item.value === 'string' ? Number(item.value) : item.value
-        } </span></div>` +
-        (append ? `<div class="ex_tooltip_append">${append[item.seriesName]}</div>` : '');
+        } </span></div>${ 
+        append ? `<div class="ex_tooltip_append">${append[item.seriesName]}</div>` : ''}`;
     }
   });
   if (unit) {
@@ -83,7 +83,7 @@ export const getTooltipUnit = (title) => {
   if (!title) {
     return unit;
   }
-  let res = title.match(/\((\S+)\)/);
+  const res = title.match(/\((\S+)\)/);
   if (res && res[1]) {
     unit = `<div style="margin-bottom:5px;display:block;">(单位:${res[1]})</div>`;
   }
@@ -126,7 +126,7 @@ export const handleSimpleMode = (option, config) => {
 
   if (config.simple == CHART_MODE.HIDE_DESC) {
     // Reflect.deleteProperty(option, 'toolbox');
-    let [title]: string = option.title;
+    const [title]: string = option.title;
     option.title = title;
   } else if (config.simple == CHART_MODE.HIDE_ALL) {
     option.title = {};
@@ -139,7 +139,7 @@ export const handleSimpleMode = (option, config) => {
     };
     Reflect.deleteProperty(option, 'dataZoom');
   } else if (config.simple == CHART_MODE.SHOW_TITLE) {
-    let [title]: string = option.title;
+    const [title]: string = option.title;
     option.title = title;
     option.toolbox = {};
     option.grid = {
@@ -157,14 +157,14 @@ export const handleSimpleMode = (option, config) => {
 // 字符串转日期
 export const str2Date: (str: string) => string = (str) => {
   str = String(str);
-  let needConvert: boolean = /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(0[1-9]|1[0-2])$/.test(
+  const needConvert: boolean = /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(0[1-9]|1[0-2])$/.test(
     str,
   );
   if (!needConvert) {
     return str;
   }
 
-  let dates: Array<string> = [str.substr(0, 4), str.substr(4, 2)];
+  const dates: string[] = [str.substr(0, 4), str.substr(4, 2)];
   if (str.length === 8) {
     dates[2] = str.substr(6, 2);
   }
@@ -193,10 +193,10 @@ export const needConvertDate: (dateStr: string) => boolean = (dateStr) => {
   );
 };
 
-export const getDataByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
+export const getDataByIdx: ({ key: string, data: any }) => any[] = ({ key, data }) =>
   R.pluck(key)(data);
 
-export const getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
+export const getUniqByIdx: ({ key: string, data: any }) => any[] = ({ key, data }) =>
   R.uniq(
     getDataByIdx({
       key,
@@ -205,7 +205,7 @@ export const getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, 
   );
 
 export const getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
-  let _data: {}[] = R.project(keys)(data);
+  const _data: {}[] = R.project(keys)(data);
   return R.map(R.values)(_data);
 };
 
@@ -216,7 +216,7 @@ export const getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) =>
 export const isColor = (str: string) =>
   /^rgb\(|^rgba\(|^\#[\d|a-f]/.test(String(str).toLowerCase());
 
-export const colors: Array<string> = [
+export const colors: string[] = [
   '#da0d68',
   '#975e6d',
   '#e0719c',
@@ -328,25 +328,25 @@ export const colors: Array<string> = [
 ];
 
 export function hex2rgb(hexVal: string): string {
-  var result: string = '';
+  let result: string = '';
   hexVal = hexVal.includes('#') ? hexVal.slice(1) : hexVal;
   switch (hexVal.length) {
     case 3:
       result =
-        parseInt(hexVal[0] + '' + hexVal[0], 16) +
-        ',' +
-        parseInt(hexVal[1] + '' + hexVal[1], 16) +
-        ',' +
-        parseInt(hexVal[2] + '' + hexVal[2], 16);
+        `${parseInt(`${hexVal[0]  }${  hexVal[0]}`, 16) 
+        },${ 
+        parseInt(`${hexVal[1]  }${  hexVal[1]}`, 16) 
+        },${ 
+        parseInt(`${hexVal[2]  }${  hexVal[2]}`, 16)}`;
       break;
     case 6:
     default:
       result =
-        parseInt(hexVal[0] + '' + hexVal[1], 16) +
-        ',' +
-        parseInt(hexVal[2] + '' + hexVal[3], 16) +
-        ',' +
-        parseInt(hexVal[4] + '' + hexVal[5], 16);
+        `${parseInt(`${hexVal[0]  }${  hexVal[1]}`, 16) 
+        },${ 
+        parseInt(`${hexVal[2]  }${  hexVal[3]}`, 16) 
+        },${ 
+        parseInt(`${hexVal[4]  }${  hexVal[5]}`, 16)}`;
       break;
   }
   return result;
@@ -358,23 +358,23 @@ const toHex = (value: number): string => {
   return x16Value.length === 1 ? `0${x16Value}` : x16Value;
 };
 
-export type arrRgb = Array<string>;
+export type arrRgb = string[];
 export const rgb2hex = (str) => {
   if (str[0] === '#') {
     return str;
   }
-  let val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
-  let alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
+  const val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
+  const alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
   val[3] = alpha;
-  return '#' + val.map(toHex).join('');
+  return `#${  val.map(toHex).join('')}`;
 };
 
 export const getLegendData: <T>(
-  arr: Array<T>,
-) => Array<{
+  arr: T[],
+) => {
   icon: string;
   name: T;
-}> = (legendData) =>
+}[] = (legendData) =>
   legendData.map((name) => ({
     name,
     icon: 'circle',
@@ -390,7 +390,7 @@ export type tGl =
   | 'paralell'
   | 'calendar'
   | EChartsSeriesType;
-export const chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
+export const chartGL: tGl[] = ['bar3d', 'line3d', 'scatter3d', 'surface'];
 
 export const getRenderer: (params: {
   render?: tRender;
@@ -400,7 +400,7 @@ export const getRenderer: (params: {
   params.render ||
   (['paralell', ...chartGL].includes(params.type) || params.histogram ? 'canvas' : 'svg');
 
-export interface Iparams {
+export type Iparams = {
   type: tGl;
   height?: string | number;
   size?: number;
@@ -431,7 +431,7 @@ export const handleMinMax: (params: {
   };
 };
 
-interface IPositionConfig {
+type IPositionConfig = {
   key?: string;
   defaultValue?: string | number | boolean;
   title: string;
@@ -569,10 +569,10 @@ export const getG2LegendOption = ({
   // position：top | top-left | top-right | right | right-top | right-bottom | left | left-top | left-bottom | bottom | bottom-left | bottom-right
   let position = '';
   if (['top', 'bottom'].includes(legendPosition)) {
-    let vPos = legendAlign == 'center' ? '' : `-${legendAlign}`;
+    const vPos = legendAlign == 'center' ? '' : `-${legendAlign}`;
     position = legendPosition + vPos;
   } else {
-    let vPos = legendPosition == 'center' ? '' : `${legendPosition}`;
+    const vPos = legendPosition == 'center' ? '' : `${legendPosition}`;
     position = vPos + { left: '-top', right: '-bottom', center: '' }[legendAlign];
   }
   return {
@@ -601,7 +601,7 @@ export const getLegendOption = ({
       orient: legendOrient,
     };
   } else {
-    let position = {
+    const position = {
       left: 'top',
       center: 'middle',
       right: 'bottom',
@@ -676,19 +676,19 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     type: 'radio',
     option: [
       {
-        title: <div style={{ fontWeight: 'lighter', fontSize: fontSize }}>Aa</div>,
+        title: <div style={{ fontWeight: 'lighter', fontSize }}>Aa</div>,
         value: 'lighter',
       },
       {
-        title: <div style={{ fontWeight: 'normal', fontSize: fontSize }}>Aa</div>,
+        title: <div style={{ fontWeight: 'normal', fontSize }}>Aa</div>,
         value: 'normal',
       },
       {
-        title: <div style={{ fontWeight: 'bold', fontSize: fontSize }}>Aa</div>,
+        title: <div style={{ fontWeight: 'bold', fontSize }}>Aa</div>,
         value: 'bold',
       },
       {
-        title: <div style={{ fontWeight: 'bolder', fontSize: fontSize }}>Aa</div>,
+        title: <div style={{ fontWeight: 'bolder', fontSize }}>Aa</div>,
         value: 'bolder',
       },
     ],
@@ -747,7 +747,7 @@ export const getAntThemePanel: () => IChartConfig = () => ({
 });
 
 export const getBarMax = (data, y: number | string = 1) => {
-  let item = R.last(data)[y];
+  const item = R.last(data)[y];
   return getMax(item);
 };
 
@@ -788,7 +788,7 @@ export const getMin = (val: number | string) => {
  * @param param0
  */
 export const getPercent = ({ data, y: _y, header }) => {
-  let _data = R.clone(data);
+  const _data = R.clone(data);
 
   /**
    * 2020-12-05 写单元测试时做以下调整：
@@ -797,9 +797,9 @@ export const getPercent = ({ data, y: _y, header }) => {
    */
   // let isArray = 'Array' == R.type(_data[0]);
   // let arr: number[] = R.pluck(isArray ? _y : header[_y], _data);
-  let arr: number[] = R.pluck(header[_y], _data);
+  const arr: number[] = R.pluck(header[_y], _data);
 
-  let percent = getPercentWithPrecision(arr, 2);
+  const percent = getPercentWithPrecision(arr, 2);
   return _data.map((item, i) => {
     item.percent = percent[i];
     return item;

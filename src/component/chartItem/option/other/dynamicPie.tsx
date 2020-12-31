@@ -1,6 +1,6 @@
 import Pie from '@/component/widget/Pie';
 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [

@@ -1,4 +1,5 @@
-import { IChartMock } from '@/component/chartItem/interface';
+import type { IChartMock } from '@/component/chartItem/interface';
+
 export const mock: IChartMock = {
   data: [
     {

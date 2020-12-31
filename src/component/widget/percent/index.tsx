@@ -2,11 +2,12 @@ import React, { useEffect, Suspense } from 'react';
 import percent from '@/component/chartItem/option/echarts/percent';
 import styles from './index.less';
 import { useSetState } from 'react-use';
+
 const CountUp = React.lazy(() => import('react-countup'));
 const Echarts = React.lazy(() => import('@/component/echarts'));
 
 export default ({ option }) => {
-  let [val, setVal] = useSetState({
+  const [val, setVal] = useSetState({
     start: 0,
     end: 0,
     name: option.title,

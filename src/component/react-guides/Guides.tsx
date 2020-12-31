@@ -1,12 +1,14 @@
 import React from 'react';
 import Ruler from '@scena/react-ruler';
 import { ref, refs } from 'framework-utils';
-import Dragger, { OnDragEnd } from '@daybrush/drag';
-import styled, { StyledInterface } from 'react-css-styled';
+import type { OnDragEnd } from '@daybrush/drag';
+import Dragger from '@daybrush/drag';
+import type { StyledInterface } from 'react-css-styled';
+import styled from 'react-css-styled';
 import { GUIDES, GUIDE, DRAGGING, ADDER, DISPLAY_DRAG, GUIDES_CSS } from './consts';
 import { prefix } from './utils';
 import { hasClass, addClass, removeClass } from '@daybrush/utils';
-import { GuidesState, GuidesProps, GuidesInterface } from './types';
+import type { GuidesState, GuidesProps, GuidesInterface } from './types';
 import './guides.less';
 
 const GuidesElement = styled('div', GUIDES_CSS);
@@ -88,7 +90,7 @@ export default class Guides
   public renderGuides() {
     const { type, zoom } = this.props as Required<GuidesProps>;
     const translateName = type === 'horizontal' ? 'translateY' : 'translateX';
-    const guides = this.state.guides;
+    const {guides} = this.state;
 
     this.guideElements = [];
     return guides.map((pos, i) => {
@@ -113,8 +115,8 @@ export default class Guides
     this.dragger = new Dragger(this.manager.getElement(), {
       container: document.body,
       dragstart: (e) => {
-        const target = e.inputEvent.target;
-        const datas = e.datas;
+        const {target} = e.inputEvent;
+        const {datas} = e;
 
         if (target === this.ruler.canvasElement) {
           e.datas.fromRuler = true;
@@ -158,12 +160,12 @@ export default class Guides
    */
   public scrollGuides(pos: number) {
     const { zoom } = this.props as Required<GuidesProps>;
-    const guidesElement = this.guidesElement;
+    const {guidesElement} = this;
 
     this.scrollPos = pos;
     guidesElement.style.transform = `${this.getTranslateName()}(${-pos * zoom}px)`;
 
-    const guides = this.state.guides;
+    const {guides} = this.state;
     this.guideElements.forEach((el, i) => {
       if (!el) {
         return;
@@ -231,7 +233,7 @@ export default class Guides
   };
   private onDragEnd = ({ datas, clientX, clientY, isDouble }: OnDragEnd) => {
     const pos = this.onDrag({ datas, clientX, clientY });
-    const guides = this.state.guides;
+    const {guides} = this.state;
     const { setGuides, onChangeGuides, zoom, displayDragPos } = this.props;
     const guidePos = Math.round(pos / zoom!);
 

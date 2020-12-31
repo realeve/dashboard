@@ -2,9 +2,9 @@ import useFullscreen from './useFullscreen';
 import { useToggle, useLocation } from 'react-use';
 import Icon from './icon';
 import { Tooltip } from 'antd';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 import { connect } from 'react-redux';
-import { ICommon } from '@/models/common';
+import type { ICommon } from '@/models/common';
 
 export const config: IChartConfig[] = [
   {

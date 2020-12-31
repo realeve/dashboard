@@ -13,6 +13,7 @@ import { getDashboardStyle } from '@/component/Editor/lib';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 import { useLocation } from 'umi';
+
 const ScaleBackground = ({
   resizeType,
   page,
@@ -29,10 +30,10 @@ const ScaleBackground = ({
         <div style={getAutoSizeStyle(page, resizeType)}>{children}</div>
       </div>
     );
-  } else if (resizeType === EResizeType.MOVIE) {
-    let autosize = getAutoSizeStyle(page, resizeType);
-    let bg = getBackground(page);
-    let bgStyle = bg.background
+  } if (resizeType === EResizeType.MOVIE) {
+    const autosize = getAutoSizeStyle(page, resizeType);
+    const bg = getBackground(page);
+    const bgStyle = bg.background
       ? { background: bg.background }
       : { backgroundImage: bg.backgroundImage };
 
@@ -43,19 +44,19 @@ const ScaleBackground = ({
         </div>
       </div>
     );
-  } else if (resizeType === EResizeType.COMPONENT) {
+  } if (resizeType === EResizeType.COMPONENT) {
     return (
       <div className={styles.dashboard} style={getDashboardStyle(page)}>
         {children}
       </div>
     );
-  } else {
+  } 
     return (
       <div className={styles.dashboard} style={getDashboardStyle(page)}>
         {children}
       </div>
     );
-  }
+  
 };
 /**
  *
@@ -68,7 +69,7 @@ const ScaleBackground = ({
 const Index = () => {
   const [config, setConfig] = useState(null);
 
-  let location = useLocation<{ query: {} }>();
+  const location = useLocation<{ query: {} }>();
 
   useEffect(() => {
     setConfig(null);
@@ -77,13 +78,13 @@ const Index = () => {
   if (!config) {
     return <DNA />;
   }
-  let { page, panel, type } = config,
-    autoSize = location?.query?.autoresize;
+  const { page, panel, type } = config;
+    const autoSize = location?.query?.autoresize;
   if (type == 'notExist') {
     return <DNA title={`文件${location?.query?.id}加载失败，请检查是否上传!`} />;
   }
 
-  let resizeType = getResizeType(autoSize);
+  const resizeType = getResizeType(autoSize);
 
   return (
     <ScaleBackground resizeType={resizeType} page={page}>

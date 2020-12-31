@@ -1,6 +1,6 @@
 export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7' }) => {
-  let getItem = (percent, color = '#30c3a7') => ({
-    //绿色刻度，蓝色刻度precent值是1
+  const getItem = (percent, color = '#30c3a7') => ({
+    // 绿色刻度，蓝色刻度precent值是1
     type: 'gauge',
     animation: true,
     radius: half ? '140%' : '95%',
@@ -19,7 +19,7 @@ export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7'
     splitNumber: 0.36 * percent,
     splitLine: {
       show: true,
-      length: length + '%',
+      length: `${length  }%`,
       lineStyle: {
         color,
         width,

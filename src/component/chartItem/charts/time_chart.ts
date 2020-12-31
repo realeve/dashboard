@@ -5,4 +5,5 @@
     名称：时钟
 */
 import * as time_chart from '../option/other/time_chart';
+
 export default time_chart;

@@ -1,5 +1,5 @@
 import styled from 'css-styled';
-import { InfiniteViewerOptions } from './types';
+import type { InfiniteViewerOptions } from './types';
 import getAgent from '@egjs/agent';
 import { prefixCSS } from 'framework-utils';
 
@@ -153,7 +153,7 @@ export const OPTION_TYPES: { [key in keyof InfiniteViewerOptions]: any } = {
   threshold: Number,
   zoom: Number,
   zoomRange: [Number, Number],
-  onZoom: (scale: Number) => null,
+  onZoom: (scale: number) => null,
   wrapperElement: Object,
   scrollAreaElement: Object,
   verticalScrollElement: Object,

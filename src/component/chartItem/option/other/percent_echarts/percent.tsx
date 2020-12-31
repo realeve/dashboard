@@ -1,8 +1,8 @@
 import styles from './index.less';
 
 export default ({ fill = '#69bffe', size = 200, lineWidth = 5, value = 12 }) => {
-  let x = size / 2,
-    r = x * 0.8;
+  const x = size / 2;
+    const r = x * 0.8;
 
   return (
     <svg xmlns="http://www.w3.org/200/svg" height={size} width={size}>

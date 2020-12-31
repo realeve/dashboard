@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import ScrollBoard, { IScrollBoardProps } from '@/component/widget/ScrollBoard';
+import type { IScrollBoardProps } from '@/component/widget/ScrollBoard';
+import ScrollBoard from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
+
 export const mock: IChartMock = {
   header: ['列1', '列2', '列3'],
   data: [
@@ -128,16 +130,16 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: '1197/54d0a53345.array?status=0', //'http://localhost:8000/mock/08_scroll_board.json',
+  url: '1197/54d0a53345.array?status=0', // 'http://localhost:8000/mock/08_scroll_board.json',
   interval: 5,
   cache: 2,
   config: [],
 };
 
-export interface IScrollBoard extends Omit<IScrollBoardProps, 'data' | 'header'> {
+export type IScrollBoard = {
   data: IChartMock;
-}
-interface IScrollTable {
+} & Omit<IScrollBoardProps, 'data' | 'header'>
+type IScrollTable = {
   option: IScrollBoard;
   onClick?: (e: any) => void;
   style: React.CSSProperties;

@@ -1,4 +1,5 @@
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+
 export { config } from './config';
 
 export const mock: IChartMock = {

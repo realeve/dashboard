@@ -45,8 +45,8 @@ export default class ScrollBar extends Component {
         this.gesto = new Gesto(this.barElement, {
             container: window,
         }).on("dragStart", e => {
-            const target = e.inputEvent.target;
-            const datas = e.datas;
+            const {target} = e.inputEvent;
+            const {datas} = e;
             const isThumb = this.thumbElement === target;
 
             if (!isThumb) {
@@ -61,7 +61,7 @@ export default class ScrollBar extends Component {
                         if (pos1 <= clientPos && clientPos <= pos2) {
                             return;
                         }
-                        const size = this.size;
+                        const {size} = this;
                         const delta = size * size / this.scrollSize;
 
                         this.scrollBy(pos1 < clientPos ? delta : -delta);

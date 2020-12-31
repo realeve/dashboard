@@ -16,7 +16,7 @@ const Fullscreen = ({ fill, style }) => (
   </svg>
 );
 
-export interface IFullscreenProp {
+export type IFullscreenProp = {
   /** 填充颜色 */
   readonly fill?: string;
   /** 全屏状态，用于切换图标 */

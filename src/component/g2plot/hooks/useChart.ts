@@ -1,10 +1,12 @@
-import { ReactNode, useRef, useEffect } from 'react';
+import type { ReactNode} from 'react';
+import { useRef, useEffect } from 'react';
 import { isEqual } from '@antv/util';
 import { utils } from '../util';
-import { Plot, Options as G2PlotConfig } from '@antv/g2plot'; //, Tooltip as G2PlotTooltip
+import type { Plot, Options as G2PlotConfig } from '@antv/g2plot'; // , Tooltip as G2PlotTooltip
 import createNode from '../util/createNode';
-import { TooltipOptions } from '@antv/g2plot/lib/types/tooltip';
-export interface ContainerProps {
+import type { TooltipOptions } from '@antv/g2plot/lib/types/tooltip';
+
+export type ContainerProps = {
   style?: React.CSSProperties;
   className?: string;
   loading?: boolean;
@@ -12,21 +14,21 @@ export interface ContainerProps {
   errorTemplate?: (e: Error) => React.ReactNode;
 }
 
-export interface Tooltip extends Omit<TooltipOptions, 'customContent' | 'container'> {
+export type Tooltip = {
   customContent?: (title: string, data: any[]) => ReactNode | string | void;
   container?: ReactNode;
-}
+} & Omit<TooltipOptions, 'customContent' | 'container'>
 
-export interface Options extends Omit<G2PlotConfig, 'tooltip' | 'data' | 'yAxis'> {
+export type Options = {
   tooltip?: false | Tooltip;
   data?: any;
   yAxis?: G2PlotConfig['yAxis'] | G2PlotConfig['yAxis'][];
   [key: string]: any;
-}
+} & Omit<G2PlotConfig, 'tooltip' | 'data' | 'yAxis'>
 
-export interface Base extends Plot<any> {
+export type Base = {
   __proto__?: any;
-}
+} & Plot<any>
 
 export default function useInit<T extends Base, U extends Options>(
   ChartClass: any,
@@ -101,7 +103,7 @@ export default function useInit<T extends Base, U extends Options>(
       }
 
       if (config.tooltip?.customContent) {
-        const customContent = config.tooltip.customContent;
+        const {customContent} = config.tooltip;
         config.tooltip.customContent = (title: string, items: any[]) => {
           const tooltipDom = customContent(title, items) || '';
           if (utils.isType(tooltipDom, 'HTMLDivElement')) {

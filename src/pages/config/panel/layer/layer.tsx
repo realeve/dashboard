@@ -1,7 +1,8 @@
 // umi官方推荐做法，不生效，移除对该文件的引用；
 import { dynamic } from 'umi';
+
 export default dynamic({
-  loader: async function () {
+  async loader () {
     // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
     const { default: Layer } = await import(/* webpackChunkName: "panel_Layer" */ './index');
     return Layer;

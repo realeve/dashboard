@@ -5,4 +5,5 @@
     名称：纵向分面图
 */
 import * as facet_vertical from '../option/g2/facet_vertical';
+
 export default facet_vertical;

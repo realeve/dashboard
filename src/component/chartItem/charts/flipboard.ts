@@ -5,4 +5,5 @@
     名称：翻牌器
 */
 import * as flipboard from '../option/other/flipboard';
+
 export default flipboard;

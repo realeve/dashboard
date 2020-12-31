@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
 import Circle from './circle';
 import Percent from './percent';
@@ -119,7 +119,7 @@ export default ({
   },
 }) => {
   const [domRef, { width }] = useMeasure();
-  let [val, setVal] = useSetState({
+  const [val, setVal] = useSetState({
     start: 0,
     end: data[0][x],
     name: header[x],

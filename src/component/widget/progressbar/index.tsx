@@ -8,7 +8,7 @@ export default ({ percent: position = 45.2, style }) => {
           <div
             className={styles['progress-bar-bar']}
             style={{
-              width: position + '%',
+              width: `${position  }%`,
             }}
           >
             <div className={styles['progress-bar-bar-light']} />

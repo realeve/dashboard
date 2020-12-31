@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import classnames from 'classnames';
 import Page from './page';
-import {
+import type {
   ICommon,
-  GROUP_COMPONENT_KEY,
   IPanelConfig,
   IPage,
   IBusinessCategory,
-  IHistoryProps,
+  IHistoryProps} from '@/models/common';
+import {
+  GROUP_COMPONENT_KEY
 } from '@/models/common';
 import Config from './config';
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
 import { connect } from 'react-redux';
 import { getTargetsById } from '@/component/Editor/utils/utils';
@@ -19,7 +20,7 @@ import { getThumbnail } from '@/component/Editor/lib';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
 
-export interface IHideProps {
+export type IHideProps = {
   components: boolean;
   config: boolean;
   layer: boolean;
@@ -30,7 +31,7 @@ export type TFnHide = (
   patch: Partial<IHideProps> | ((prevState: IHideProps) => Partial<IHideProps>),
 ) => void;
 
-export interface ISettingProps extends IHistoryProps {
+export type ISettingProps = {
   setHide: TFnHide;
   hide: IHideProps;
   selectedPanel: string[];
@@ -39,7 +40,7 @@ export interface ISettingProps extends IHistoryProps {
   page: IPage;
   dispatch: Dispatch;
   businessCategory: IBusinessCategory[];
-}
+} & IHistoryProps
 const Index = ({
   setHide,
   hide,
@@ -50,7 +51,7 @@ const Index = ({
   dispatch,
   // history,
   // curHistoryIdx,
-  panel, //: _panel,
+  panel, // : _panel,
 }: ISettingProps) => {
   // let panel = history[curHistoryIdx]?.panel || _panel;
   const [show, setShow] = useState<boolean>(false);
@@ -67,7 +68,7 @@ const Index = ({
 
   let pageChart = selectedPanel.length == 1;
   if (pageChart) {
-    let config = panel.find((item) => item.id == selectedPanel[0]);
+    const config = panel.find((item) => item.id == selectedPanel[0]);
     pageChart = config && config?.key !== GROUP_COMPONENT_KEY;
   }
 
@@ -82,7 +83,7 @@ const Index = ({
 
     // 2020-12-11 业务组件编辑
     // 查看是否为业务组件的编辑模式
-    let haveEditableBusinessComponent = panel.find(
+    const haveEditableBusinessComponent = panel.find(
       (item) => selectedPanel.includes(item.id) && item.edit_id,
     );
     if (haveEditableBusinessComponent) {
@@ -92,7 +93,7 @@ const Index = ({
 
     // 业务组件自身不允许被选取；
     // 此处需讨论是否开放，这样可在多个业务组件之间组合成新组件
-    let haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
+    const haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
 
     setShouldSave(!haseBusiness);
   }, [selectedPanel.length]);
@@ -144,8 +145,8 @@ const Index = ({
         <div
           className={styles.bottom}
           onClick={() => {
-            let id = selectedPanel[0];
-            let el = getTargetsById(id);
+            const id = selectedPanel[0];
+            const el = getTargetsById(id);
             el && getThumbnail(el, { filename: '缩略图' });
           }}
           style={{ outline: '1px solid #aaa', background: 'transparent' }}

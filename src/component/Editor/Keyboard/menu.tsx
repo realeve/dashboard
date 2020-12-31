@@ -2,16 +2,16 @@ import * as React from 'react';
 import { prefix } from '../utils/utils';
 import MoveToolIcon from './MoveToolIcon';
 import './Menu.less';
-import Icon from './Icon';
-import Editor from '../Editor';
-import { TQuickTool } from '../types';
+import type Icon from './Icon';
+import type Editor from '../Editor';
+import type { TQuickTool } from '../types';
 
 import KeyboardIcon from './KeyboardIcon';
 import HandIcon from './HandIcon';
 import CenterIcon from './CenterIcon';
 import TextIcon from './TextIcon';
 
-const MENUS: Array<typeof Icon> = [MoveToolIcon, HandIcon, CenterIcon, TextIcon, KeyboardIcon];
+const MENUS: typeof Icon[] = [MoveToolIcon, HandIcon, CenterIcon, TextIcon, KeyboardIcon];
 export default class Menu extends React.PureComponent<{
   editor: Editor;
   onSelect?: (id: string) => any;
@@ -20,7 +20,7 @@ export default class Menu extends React.PureComponent<{
   public state = {
     selected: 'MoveTool',
   };
-  public menuRefs: Array<React.RefObject<Icon>> = [];
+  public menuRefs: React.RefObject<Icon>[] = [];
   public render() {
     return <div className={prefix('menu')}>{this.renderMenus()}</div>;
   }
@@ -32,12 +32,12 @@ export default class Menu extends React.PureComponent<{
     }
   }
   public renderMenus() {
-    const selected = this.state.selected;
-    const menuRefs = this.menuRefs;
-    const editor = this.props.editor;
+    const {selected} = this.state;
+    const {menuRefs} = this;
+    const {editor} = this.props;
 
     return MENUS.map((MenuClass, i) => {
-      const id = MenuClass.id;
+      const {id} = MenuClass;
       if (!menuRefs[i]) {
         menuRefs[i] = React.createRef();
       }
@@ -59,7 +59,7 @@ export default class Menu extends React.PureComponent<{
     this.props?.onSelect?.(id);
   };
   public getSelected(): typeof Icon | undefined {
-    const selected = this.state.selected;
+    const {selected} = this.state;
     return MENUS.filter((m) => m.id === selected)[0];
   }
 }

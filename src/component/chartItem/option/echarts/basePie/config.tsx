@@ -1,4 +1,5 @@
 import * as lib from '@/component/chartItem/option/lib';
+
 export const config = [
   {
     key: 'chartType',

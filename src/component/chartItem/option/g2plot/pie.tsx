@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 import { tooltip } from '@/component/g2plot/theme';
@@ -104,9 +104,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-interface IG2Plot extends IG2PlotProps {
-  [key: string]: any;
-}
+type IG2Plot = Record<string, any>;
 
 export default ({
   data: { data, header },
@@ -123,12 +121,12 @@ export default ({
   labelPosition = 'inner',
   showStatistic = true,
 }: IG2Plot) => {
-  let x = header[_x],
-    y = header[_y];
-  let isPie = chartType == 'pie',
-    innerLabel = labelPosition == 'inner';
+  const x = header[_x];
+    const y = header[_y];
+  const isPie = chartType == 'pie';
+    const innerLabel = labelPosition == 'inner';
 
-  let label = !isPie
+  const label = !isPie
     ? innerLabel
       ? { label: { offset: -15 } }
       : {}

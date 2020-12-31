@@ -5,4 +5,5 @@
     名称：指标卡趋势图
 */
 import * as trend_card from '../option/other/trend_card';
+
 export default trend_card;

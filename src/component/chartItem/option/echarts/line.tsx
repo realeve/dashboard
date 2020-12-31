@@ -1,7 +1,7 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 import * as lib from '../lib';
 
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [
@@ -43,12 +43,12 @@ export const handleData = (
   { data },
   { legend, x, y }: { legend?: number | string; x: number | string; y: number | string },
 ) => {
-  let xArr = lib.getUniqByIdx({ key: x, data });
-  let series = [];
-  if (typeof legend == 'undefined') {
-    let arr = [];
+  const xArr = lib.getUniqByIdx({ key: x, data });
+  const series = [];
+  if (typeof legend === 'undefined') {
+    const arr = [];
     xArr.forEach((xItem) => {
-      let item = data.find((item) => item[x] == xItem);
+      const item = data.find((item) => item[x] == xItem);
       arr.push(item ? item[y] : '-');
     });
     series.push({
@@ -56,11 +56,11 @@ export const handleData = (
       arr,
     });
   } else {
-    let legendArr = lib.getUniqByIdx({ key: legend, data });
+    const legendArr = lib.getUniqByIdx({ key: legend, data });
     legendArr.map((name, idx) => {
-      let arr = [];
+      const arr = [];
       xArr.forEach((xItem) => {
-        let item = data.find((item) => item[legend] == name && item[x] == xItem);
+        const item = data.find((item) => item[legend] == name && item[x] == xItem);
         arr.push(item ? item[y] : '-');
       });
       series.push({
@@ -159,11 +159,11 @@ export default ({
   if (String(legend) == '') {
     return {};
   }
-  let res = handleData(data, { legend, x, y });
+  const res = handleData(data, { legend, x, y });
 
   const color = '#ddd';
-  const axisColor = '#0055bd'; //'#203651';
-  let series = [
+  const axisColor = '#0055bd'; // '#203651';
+  const series = [
     {
       name: res.series[0].name,
       ...lib.getChartType(chart1, area_opacity),

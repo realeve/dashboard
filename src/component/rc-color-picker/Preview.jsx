@@ -4,7 +4,7 @@ import Color from './helpers/color';
 
 export default class Preview extends React.Component {
   onChange = (e) => {
-    const value = e.target.value;
+    const {value} = e.target;
     const color = new Color(value);
     this.props.onChange(color);
     e.stopPropagation();

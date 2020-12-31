@@ -1,6 +1,6 @@
 // 此处导入你所需要的自定义组件
 import FlipBoard from '@/component/widget/FlipBoard';
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
 
@@ -76,6 +76,6 @@ export const apiConfig: IApiConfig = {
 };
 
 export default ({ option: { data, x = 0, ...props } }) => {
-  let value = Number(data.data[0][x].toFixed(props.decimals || 2));
+  const value = Number(data.data[0][x].toFixed(props.decimals || 2));
   return <FlipBoard title="某指标" value={value} {...props} />;
 };

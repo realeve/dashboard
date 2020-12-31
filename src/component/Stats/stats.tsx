@@ -4,27 +4,27 @@
 // 根据此处源码修改而来： https://github.com/mrdoob/stats.js/blob/master/src/Stats.js
 
 const Panel = function (name, fg, bg) {
-  var min = Infinity,
-    max = 0,
-    round = Math.round;
-  var PR = round(window.devicePixelRatio || 1);
+  let min = Infinity;
+    let max = 0;
+    const {round} = Math;
+  const PR = round(window.devicePixelRatio || 1);
 
-  var WIDTH = 80 * PR,
-    HEIGHT = 48 * PR,
-    TEXT_X = 3 * PR,
-    TEXT_Y = 2 * PR,
-    GRAPH_X = 3 * PR,
-    GRAPH_Y = 15 * PR,
-    GRAPH_WIDTH = 74 * PR,
-    GRAPH_HEIGHT = 30 * PR;
+  const WIDTH = 80 * PR;
+    const HEIGHT = 48 * PR;
+    const TEXT_X = 3 * PR;
+    const TEXT_Y = 2 * PR;
+    const GRAPH_X = 3 * PR;
+    const GRAPH_Y = 15 * PR;
+    const GRAPH_WIDTH = 74 * PR;
+    const GRAPH_HEIGHT = 30 * PR;
 
-  var canvas = document.createElement('canvas');
+  const canvas = document.createElement('canvas');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   canvas.style.cssText = 'width:80px;height:48px';
 
-  var context = canvas.getContext('2d');
-  context.font = 'bold ' + 9 * PR + 'px Helvetica,Arial,sans-serif';
+  const context = canvas.getContext('2d');
+  context.font = `bold ${  9 * PR  }px Helvetica,Arial,sans-serif`;
   context.textBaseline = 'top';
 
   context.fillStyle = bg;
@@ -41,7 +41,7 @@ const Panel = function (name, fg, bg) {
   return {
     dom: canvas,
 
-    update: function (value, maxValue) {
+    update (value, maxValue) {
       min = Math.min(min, value);
       max = Math.max(max, value);
 
@@ -50,7 +50,7 @@ const Panel = function (name, fg, bg) {
       context.fillRect(0, 0, WIDTH, GRAPH_Y);
       context.fillStyle = fg;
       context.fillText(
-        round(value) + ' ' + name + ' (' + round(min) + '-' + round(max) + ')',
+        `${round(value)  } ${  name  } (${  round(min)  }-${  round(max)  })`,
         TEXT_X,
         TEXT_Y,
       );
@@ -88,17 +88,17 @@ export default function (container) {
   }
 
   function showPanel(id) {
-    for (var i = 0; i < container.children.length; i++) {
+    for (let i = 0; i < container.children.length; i++) {
       container.children[i].style.display = i === id ? 'block' : 'none';
     }
   }
 
-  var beginTime = (performance || Date).now(),
-    prevTime = beginTime,
-    frames = 0;
+  let beginTime = (performance || Date).now();
+    let prevTime = beginTime;
+    let frames = 0;
 
-  var fpsPanel = addPanel(new Panel('FPS', '#0ff', '#002'));
-  var msPanel = addPanel(new Panel('MS', '#0f0', '#020'));
+  const fpsPanel = addPanel(new Panel('FPS', '#0ff', '#002'));
+  const msPanel = addPanel(new Panel('MS', '#0f0', '#020'));
 
   if (self.performance && self.performance.memory) {
     var memPanel = addPanel(new Panel('MB', '#f08', '#201'));
@@ -109,13 +109,13 @@ export default function (container) {
   return {
     addPanel,
     showPanel,
-    begin: function () {
+    begin () {
       beginTime = (performance || Date).now();
     },
-    end: function () {
+    end () {
       frames++;
 
-      var time = (performance || Date).now();
+      const time = (performance || Date).now();
 
       msPanel.update(time - beginTime, 200);
 
@@ -126,7 +126,7 @@ export default function (container) {
         frames = 0;
 
         if (memPanel) {
-          var memory = performance.memory;
+          const {memory} = performance;
           memPanel.update(memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576);
         }
       }
@@ -134,7 +134,7 @@ export default function (container) {
       return time;
     },
 
-    update: function () {
+    update () {
       beginTime = this.end();
     },
   };

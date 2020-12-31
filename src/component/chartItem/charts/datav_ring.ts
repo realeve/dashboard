@@ -5,4 +5,5 @@
     名称：datav饼图
 */
 import * as datav_ring from '../option/other/datav_ring/index';
+
 export default datav_ring;

@@ -1,14 +1,14 @@
 import styles from './index.less';
 import classnames from 'classnames';
 
-export interface ISearchState {
-  category: string; //类目
-  title: string; //标题
-  image: string; //缩略图
+export type ISearchState = {
+  category: string; // 类目
+  title: string; // 标题
+  image: string; // 缩略图
   key: string;
-  panel: any; //配置项
+  panel: any; // 配置项
   title_simple: string; // 拼音简写
-  title_full: string; //拼音全称
+  title_full: string; // 拼音全称
 }
 
 export default ({ data, onAdd }: { data: ISearchState[]; onAdd: (e) => void }) => {

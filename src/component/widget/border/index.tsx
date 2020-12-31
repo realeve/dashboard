@@ -2,13 +2,13 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import { ScenaJSXElement } from '@/component/Editor/types';
-import { TChartEngine } from '@/models/common';
+import type { ScenaJSXElement } from '@/component/Editor/types';
+import type { TChartEngine } from '@/models/common';
 
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 import { useLocation } from 'react-use';
 
-export interface WidgetBorder {
+export type WidgetBorder = {
   name?: string;
   style?: React.CSSProperties;
   children: ScenaJSXElement;
@@ -52,7 +52,7 @@ export default ({
         borderImageSource: `url(${url})`,
         ...style,
         borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left} fill`,
-        borderWidth: `${img.top}px ${img.right}px ${img.bottom}px ${img.left}px`, //img.borderWidth || Math.min(25, max),
+        borderWidth: `${img.top}px ${img.right}px ${img.bottom}px ${img.left}px`, // img.borderWidth || Math.min(25, max),
         borderStyle: 'solid',
       }}
       {...props}

@@ -2,10 +2,10 @@ import { useEffect, useState, forwardRef } from 'react';
 import ReactEcharts from './echarts-for-react';
 import { useInterval } from 'react-use';
 import * as R from 'ramda';
-import { EChartOption } from 'echarts';
+import type { EChartOption } from 'echarts';
 
 export type tRender = 'canvas' | 'svg';
-interface IProp {
+type IProp = {
   renderer?: tRender;
   option: EChartOption;
   /** 是否轮询切换显示项，用于动态饼图 */
@@ -21,10 +21,10 @@ interface IProp {
  * @param option 配置项
  * @param idx 序号
  */
-let toggleSeriesItem = (option, idx) => {
-  let len = option.series[0].data.length;
+const toggleSeriesItem = (option, idx) => {
+  const len = option.series[0].data.length;
   option.series[0].data = option.series[0].data.map((item, i) => {
-    let flag = i === idx % len;
+    const flag = i === idx % len;
     item.selected = flag;
     // item.label = { show: flag };
     return item;
@@ -50,9 +50,9 @@ const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
         if (!ref?.current) {
           return;
         }
-        let chart = ref.current?.echartsInstance;
+        const chart = ref.current?.echartsInstance;
         setToggleIdx && setToggleIdx(idx);
-        let { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
+        const { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
         setIdx(id);
         chart.setOption(option, true);
       },

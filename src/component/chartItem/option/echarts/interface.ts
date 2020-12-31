@@ -1,6 +1,6 @@
-import { IChartMock } from '@/component/chartItem/interface';
+import type { IChartMock } from '@/component/chartItem/interface';
 
-export interface ILegendProps {
+export type ILegendProps = {
   /** 显示legend */
   readonly legendShow: boolean;
   /** legend排列 */
@@ -13,7 +13,7 @@ export interface ILegendProps {
   readonly legendOrient: 'horizontal' | 'vertical';
 }
 
-export interface IApiProps {
+export type IApiProps = {
   /** 传入的数据  */
   readonly data: IChartMock;
 

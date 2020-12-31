@@ -7,7 +7,7 @@ import { MENU_ACTIONS } from './lib';
 
 export const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction }) => {
   // let type = lib.getType(item);
-  let IS_GROUP = item.key === GROUP_COMPONENT_KEY;
+  const IS_GROUP = item.key === GROUP_COMPONENT_KEY;
 
   const [disableEdit, setDisableEdit] = useState(true);
 
@@ -15,13 +15,6 @@ export const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction })
 
   const handleChange = (e) => {
     text.current = e.target.value;
-  };
-
-  const handleBlur = () => {
-    updateAttrib({
-      title: text.current,
-    });
-    setDisableEdit(true);
   };
 
   const updateAttrib = (attrib) => {
@@ -34,6 +27,13 @@ export const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction })
     });
   };
 
+  const handleBlur = () => {
+    updateAttrib({
+      title: text.current,
+    });
+    setDisableEdit(true);
+  };
+
   const ref = useRef(null);
   useEffect(() => {
     // 允许编辑时获取焦点
@@ -42,9 +42,9 @@ export const LayerItem = ({ isThumb, isSelected, item, dispatch, handleAction })
     }
 
     ref.current.focus();
-    let range = window.getSelection(); //创建range
-    range.selectAllChildren(ref.current); //range 选择obj下所有子内容
-    range.collapseToEnd(); //光标移至最后
+    const range = window.getSelection(); // 创建range
+    range.selectAllChildren(ref.current); // range 选择obj下所有子内容
+    range.collapseToEnd(); // 光标移至最后
   }, [disableEdit]);
 
   return (

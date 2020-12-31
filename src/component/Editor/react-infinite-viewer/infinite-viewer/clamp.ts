@@ -8,35 +8,35 @@
  */
 
 /** Used as references for various `Number` constants. */
-var NAN = 0 / 0;
+const NAN = 0 / 0;
 
 /** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
+const symbolTag = '[object Symbol]';
 
 /** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
+const reTrim = /^\s+|\s+$/g;
 
 /** Used to detect bad signed hexadecimal string values. */
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+const reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
 
 /** Used to detect binary string values. */
-var reIsBinary = /^0b[01]+$/i;
+const reIsBinary = /^0b[01]+$/i;
 
 /** Used to detect octal string values. */
-var reIsOctal = /^0o[0-7]+$/i;
+const reIsOctal = /^0o[0-7]+$/i;
 
 /** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
+const freeParseInt = parseInt;
 
 /** Used for built-in method references. */
-var objectProto = Object.prototype;
+const objectProto = Object.prototype;
 
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var objectToString = objectProto.toString;
+const objectToString = objectProto.toString;
 
 /**
  * The base implementation of `_.clamp` which doesn't coerce arguments.
@@ -85,7 +85,7 @@ function baseClamp(number, lower, upper) {
  * // => false
  */
 function isObject(value) {
-  var type = typeof value;
+  const type = typeof value;
   return !!value && (type == 'object' || type == 'function');
 }
 
@@ -114,7 +114,7 @@ function isObject(value) {
  * // => false
  */
 function isObjectLike(value) {
-  return !!value && typeof value == 'object';
+  return !!value && typeof value === 'object';
 }
 
 /**
@@ -136,7 +136,7 @@ function isObjectLike(value) {
  */
 function isSymbol(value) {
   return (
-    typeof value == 'symbol' || (isObjectLike(value) && objectToString.call(value) == symbolTag)
+    typeof value === 'symbol' || (isObjectLike(value) && objectToString.call(value) == symbolTag)
   );
 }
 
@@ -164,21 +164,21 @@ function isSymbol(value) {
  * // => 3.2
  */
 function toNumber(value) {
-  if (typeof value == 'number') {
+  if (typeof value === 'number') {
     return value;
   }
   if (isSymbol(value)) {
     return NAN;
   }
   if (isObject(value)) {
-    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject(other) ? other + '' : other;
+    const other = typeof value.valueOf === 'function' ? value.valueOf() : value;
+    value = isObject(other) ? `${other  }` : other;
   }
-  if (typeof value != 'string') {
+  if (typeof value !== 'string') {
     return value === 0 ? value : +value;
   }
   value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
+  const isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value)
     ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
     : reIsBadHex.test(value)

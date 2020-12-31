@@ -1,7 +1,7 @@
 // 此处导入你所需要的自定义组件
 import DigitalScroll from '@/component/widget/DigitalScroll';
-import { ICountUp } from '@/component/widget/DigitalScroll';
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { ICountUp } from '@/component/widget/DigitalScroll';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [[138248]],
@@ -102,11 +102,11 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-interface IScrollConfig extends ICountUp {
+type IScrollConfig = {
   data: { data: any[][] };
   x: number;
-}
+} & ICountUp
 export default ({ option: { data, x = 0, ...props } }: { option: IScrollConfig }) => {
-  let value = Number(data.data[0][x]);
+  const value = Number(data.data[0][x]);
   return <DigitalScroll value={value} {...props} />;
 };

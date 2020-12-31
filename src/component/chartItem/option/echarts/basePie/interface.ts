@@ -1,6 +1,6 @@
-import { ILegendProps, IApiProps } from '../interface';
+import type { ILegendProps, IApiProps } from '../interface';
 
-export interface IBasePieProps extends ILegendProps, IApiProps {
+export type IBasePieProps = {
   /** 主题 */
   theme: number | string;
 
@@ -36,4 +36,4 @@ export interface IBasePieProps extends ILegendProps, IApiProps {
 
   /** 标签字号 */
   labelFontSize: number;
-}
+} & ILegendProps & IApiProps

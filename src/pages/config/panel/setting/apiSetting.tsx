@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { useSetState } from 'react-use';
-import { IPanelConfig } from '@/models/common';
+import type { IPanelConfig } from '@/models/common';
 import { FormItem, getDefaultState } from './componentSetting';
 import styles from './index.less';
 import JsonViewer from './JsonViewer';
@@ -12,9 +12,9 @@ import { Spin } from 'antd';
 import { chartList } from '@/component/chartItem/option';
 
 const initState = (configs: IApiConfig, api: any) => {
-  let { config, type, ...props } = configs;
+  const { config, type, ...props } = configs;
   // 配置项中的信息
-  let setting = getDefaultState(config, api);
+  const setting = getDefaultState(config, api);
 
   return { ...props, api_type: type, ...setting, ...api };
 };
@@ -96,7 +96,7 @@ const ApiSetting = ({
   isBusiness?: boolean;
   chartLib: any;
 }) => {
-  let configs = chartLib.apiConfig as IApiConfig;
+  const configs = chartLib.apiConfig as IApiConfig;
 
   if (R.type(configs) != 'Object') {
     return <p>该组件无数据请求，无需配置接口信息</p>;
@@ -109,7 +109,7 @@ const ApiSetting = ({
 
   // 是否需要立即刷新
   const handleStateChange = (res, config, update = true) => {
-    let next = {
+    const next = {
       [config.key]: res,
     };
 

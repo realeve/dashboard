@@ -3,9 +3,9 @@ import classnames from 'classnames';
 import TabComponent from './TabComponent';
 import TabBusiness from '../business/TabBusiness';
 import { Tabs } from 'antd';
-import { IPanelConfig } from '@/models/common';
+import type { IPanelConfig } from '@/models/common';
 
-import { IHideProps, TFnHide } from '../setting';
+import type { IHideProps, TFnHide } from '../setting';
 
 const { TabPane } = Tabs;
 

@@ -1,5 +1,5 @@
 import { isFunction } from '@antv/util';
-import { ChartRefOptions } from '../interface';
+import type { ChartRefOptions } from '../interface';
 
 /**
  * 获取或者绑定图表实例

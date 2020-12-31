@@ -1,10 +1,11 @@
 import styles from './index.less';
 import classnames from 'classnames';
 import { Tooltip } from 'antd';
-import { IHideProps, TFnHide } from '../panel/setting';
+import type { IHideProps, TFnHide } from '../panel/setting';
 import qs from 'querystring';
 import pinyin from '@/utils/pinyin.js';
-import Actions, { FnOnLoadConfig } from './Actions';
+import type { FnOnLoadConfig } from './Actions';
+import Actions from './Actions';
 
 export default ({
   setHide,
@@ -19,8 +20,8 @@ export default ({
   getThumbnail: (scale: number, filename: string | null) => Promise<string | void>;
   onLoadConfig: FnOnLoadConfig;
 }) => {
-  let query: { file?: string; id?: string } = qs.parse(window.location.search.slice(1));
-  let fileTitle = query.file
+  const query: { file?: string; id?: string } = qs.parse(window.location.search.slice(1));
+  const fileTitle = query.file
     ? query.file.replace('.json', '').split('/').slice(-1)[0]
     : pinyin.toPinYinFull(props.title);
 
@@ -94,7 +95,7 @@ export default ({
             {props.title}-({author})
           </span>
         </div>
-        <Actions fileTitle={fileTitle} isEditMode={typeof query.file == 'string'} {...props} />
+        <Actions fileTitle={fileTitle} isEditMode={typeof query.file === 'string'} {...props} />
       </div>
     </div>
   );

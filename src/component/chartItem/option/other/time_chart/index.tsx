@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'dayjs';
 import styles from './index.less';
 
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 
 import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
@@ -58,7 +58,7 @@ export const config: IChartConfig[] = [
     defaultValue: true,
   },
 ];
-interface ITimeChartProps {
+type ITimeChartProps = {
   fontSize: number;
   fontWeight: number | 'bold' | 'normal' | 'bolder' | 'lighter';
   fontColor: string;

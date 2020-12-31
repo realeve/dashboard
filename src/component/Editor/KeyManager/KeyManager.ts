@@ -1,10 +1,10 @@
-import Debugger from '../utils/Debugger';
+import type Debugger from '../utils/Debugger';
 import { checkInput } from '../utils/utils';
 import KeyController from 'keycon';
 
 function check(e: any) {
-  const inputEvent = e.inputEvent;
-  const target = inputEvent.target;
+  const {inputEvent} = e;
+  const {target} = inputEvent;
 
   if (checkInput(target)) {
     return false;
@@ -14,7 +14,7 @@ function check(e: any) {
 export default class KeyManager {
   constructor(private console: Debugger) {}
   public keycon = new KeyController();
-  public keylist: Array<[string[], string]> = [];
+  public keylist: [string[], string][] = [];
   public isEnable = true;
 
   public enable() {

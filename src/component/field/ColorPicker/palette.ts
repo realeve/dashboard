@@ -64,10 +64,10 @@ const colors = [
   'rgb(74, 28, 138)',
 ];
 
-let res = colors.map((color) => {
+const res = colors.map((color) => {
   return { color, title: colorLib.getColorName(color).title };
 });
-let appendList = list
+const appendList = list
   .map((item) => ({ title: item.title, color: `rgb(${item.color.join(',')})` }))
   .reverse();
 

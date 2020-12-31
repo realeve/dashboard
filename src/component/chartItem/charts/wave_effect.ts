@@ -5,4 +5,5 @@
     名称：粒子效果
 */
 import * as wave_effect from '../option/other/wave_effect';
+
 export default wave_effect;

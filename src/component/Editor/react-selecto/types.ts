@@ -1,6 +1,6 @@
-import { SelectoEvents, SelectoOptions } from './selecto.esm.js';
+import type { SelectoEvents, SelectoOptions } from './selecto.esm.js';
 
-export interface ReactSelectoEventNames {
+export type ReactSelectoEventNames = {
   onSelectStart: 'selectStart';
   onSelect: 'select';
   onSelectEnd: 'selectEnd';

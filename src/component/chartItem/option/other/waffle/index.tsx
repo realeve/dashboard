@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ScrollBoard, { IScrollBoard } from '../scroll_board';
-export { apiConfig } from '../scroll_board';
 import { config as mainConfig } from '../scroll_board';
-export { mock1 as mock } from './mock';
 import useFetch from '@/component/hooks/useFetch';
 import styles from './index.less';
 import ScatterWaffle, { config as detailConfig } from './ScatterWaffle';
 import { DEV } from '@/utils/setting';
 import { Spin } from 'antd';
 
+export { apiConfig } from '../scroll_board';
+export { mock1 as mock } from './mock';
+
 export const config = [...mainConfig, ...detailConfig];
-interface IWaffleState {
+type IWaffleState = {
   prod?: string;
   gz?: string;
   procname?: string;
 }
 
 const ScrollTable = ({ config, onClick }) => {
-  let detailType = ['印码', '涂布', '检封', '装箱'];
+  const detailType = ['印码', '涂布', '检封', '装箱'];
   return (
     <ScrollBoard
       style={{ width: '100%', height: '50%' }}
@@ -26,7 +27,7 @@ const ScrollTable = ({ config, onClick }) => {
         ...config,
       }}
       onClick={(e) => {
-        let type = e.col - 5;
+        const type = e.col - 5;
         onClick({
           prod: e.data[0],
           gz: e.data[1],
@@ -37,14 +38,12 @@ const ScrollTable = ({ config, onClick }) => {
   );
 };
 
-export interface IBoxProp {
+export type IBoxProp = {
   boxSize: number;
   boxShape: 'circle' | 'rect' | 'roundRect';
   detailApi: string;
 }
-interface IWaffleProps extends IScrollBoard, IBoxProp {
-  [key: string]: any;
-}
+type IWaffleProps = Record<string, any>;
 export default ({
   option: { detailApi, boxSize, boxShape, ...config },
 }: {
@@ -55,16 +54,16 @@ export default ({
     if (!config.data) {
       return;
     }
-    let [prod, gz] = config.data.data[0] as [string, string];
+    const [prod, gz] = config.data.data[0] as [string, string];
     setState({ prod, gz, procname: '印码' });
   }, [config?.data?.hash]);
 
-  let { data, loading } = useFetch({
+  const { data, loading } = useFetch({
     param: {
       url: DEV ? 'http://localhost:8000/mock/45_waffle.json' : detailApi,
       params: state,
     },
-    valid: () => 'undefined' !== typeof state?.prod,
+    valid: () => typeof state?.prod !== 'undefined',
   });
 
   return (

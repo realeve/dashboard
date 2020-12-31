@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import JsonLoader from '@/component/JsonLoader';
-import { IPanelConfig, IPage } from '@/models/common';
+import type { IPanelConfig, IPage } from '@/models/common';
 import styles from './index.less';
 import { onCopy, onPreview, saveBat } from './lib';
 
@@ -9,6 +9,7 @@ import { addDashboardList } from '@/pages/config/panel/business/db';
 import classnames from 'classnames';
 import { Tooltip, message } from 'antd';
 import { useDispatch } from 'dva';
+
 export type FnOnLoadConfig = ({ page, panel }: { page: IPage; panel: IPanelConfig[] }) => void;
 
 const Actions = ({
@@ -49,8 +50,8 @@ const Actions = ({
 
       success = await addDashboardList({
         title,
-        file: title + '.json',
-        img: title + '.webp',
+        file: `${title  }.json`,
+        img: `${title  }.webp`,
       });
     } else {
       message.success('请执行批处理文件并替换服务端现有配置文件以更新内容');

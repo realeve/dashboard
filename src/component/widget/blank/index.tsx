@@ -4,6 +4,7 @@ import { useToggle } from 'react-use';
 import { Modal, Steps } from 'antd';
 import { AssetItem } from './config';
 import assets from '@/component/widget/assets';
+
 const { Step } = Steps;
 
 export default ({ onChange, config }) => {

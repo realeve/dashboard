@@ -5,10 +5,10 @@ import * as R from 'ramda';
  * 根据品种获取冠字列表的行列式
  * @param prod 品种
  */
-let getTemplate = (prod) => {
-  let FormatPos40 = ['9602A', '9603A', '9602T', '9603T'].includes(prod);
-  let colRow = FormatPos40 ? [25, 10] : [26, 11];
-  let arr = [];
+const getTemplate = (prod) => {
+  const FormatPos40 = ['9602A', '9603A', '9602T', '9603T'].includes(prod);
+  const colRow = FormatPos40 ? [25, 10] : [26, 11];
+  const arr = [];
   for (let i = 0; i < colRow[1]; i++) {
     for (let j = 0; j < colRow[0]; j++) {
       arr.push([j, i]);
@@ -28,18 +28,18 @@ export enum EStatus {
   NO_CODE,
 }
 export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) => {
-  let dataType = isArray(data[0]);
-  let y = dataType ? _y : header[_y];
-  let res = R.clone(data);
+  const dataType = isArray(data[0]);
+  const y = dataType ? _y : header[_y];
+  const res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
-  let id = R.reverse(data).findIndex((item) => item[y] == 1);
-  let idx = res.length - id;
+  const id = R.reverse(data).findIndex((item) => item[y] == 1);
+  const idx = res.length - id;
 
-  let template = getTemplate(prod);
+  const template = getTemplate(prod);
 
   return template.map((temp, j) => {
-    let item = res[j];
+    const item = res[j];
     if (!item) {
       temp[2] = EStatus.NO_CODE; // 印码未印刷
       return temp;
@@ -62,22 +62,22 @@ export const handleData = ({
   gzMode,
   colorArr = ['#aaa', '#749cff', '#fb0348'],
 }) => {
-  let dataType = isArray(data[0]);
-  let x = dataType ? _x : header[_x],
-    y = dataType ? _y : header[_y],
-    legend = dataType ? _legend : header[_legend],
-    cart = dataType ? _cart : header[_cart];
-  let res = R.clone(data);
+  const dataType = isArray(data[0]);
+  const x = dataType ? _x : header[_x];
+    const y = dataType ? _y : header[_y];
+    const legend = dataType ? _legend : header[_legend];
+    const cart = dataType ? _cart : header[_cart];
+  const res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
   let idx = res.length;
   if (gzMode) {
-    let id = R.reverse(data).findIndex((item) => item[y] == 1);
-    idx = idx - id;
+    const id = R.reverse(data).findIndex((item) => item[y] == 1);
+    idx -= id;
   }
   let _warnIdx = -1;
 
-  let nextData = res.map((item, i) => {
+  const nextData = res.map((item, i) => {
     let color = colorArr[item[y]] || '#23d';
     let _warn = false;
     if (gzMode) {

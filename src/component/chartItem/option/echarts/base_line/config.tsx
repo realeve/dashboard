@@ -1,4 +1,4 @@
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import * as utils from './lib';
 

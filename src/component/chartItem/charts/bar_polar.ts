@@ -6,4 +6,5 @@
 */
 
 import * as bar_polar from '../option/echarts/bar_polar';
+
 export default bar_polar;

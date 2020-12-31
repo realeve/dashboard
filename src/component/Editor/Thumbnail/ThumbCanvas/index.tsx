@@ -4,8 +4,9 @@ import { getStyle } from '@/pages/index/lib';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import * as R from 'ramda';
 import { connect } from 'react-redux';
-import { ICommon } from '@/models/common';
-import { IPanelItem, diff } from './lib';
+import type { ICommon } from '@/models/common';
+import type { IPanelItem} from './lib';
+import { diff } from './lib';
 
 import * as zrender from 'zrender/esm/zrender';
 import 'zrender/esm/canvas/canvas';
@@ -22,19 +23,18 @@ const getRect = (option: IPanelItem, { fill, stroke }) => ({
   }),
   id: option.id,
 });
-let activeStyle = { fill: '#2681ff', stroke: '#2681ff' };
+const activeStyle = { fill: '#2681ff', stroke: '#2681ff' };
 
-export interface IThumbProps
-  extends Pick<ICommon, 'page' | 'history' | 'panel' | 'curHistoryIdx' | 'selectedPanel'> {
+export type IThumbProps = {
   style?: React.CSSProperties;
   /** 渲染引擎 */
   renderer?: 'svg' | 'canvas';
   /** 颜色 */
   fill: string;
-  /** 边框颜色 **/
+  /** 边框颜色 * */
   stroke: string;
   [key: string]: any;
-}
+} & Pick<ICommon, 'page' | 'history' | 'panel' | 'curHistoryIdx' | 'selectedPanel'>
 const Index = ({
   fill = '#999',
   stroke = '#2681ff',
@@ -47,7 +47,7 @@ const Index = ({
   renderer = 'canvas',
 }: IThumbProps) => {
   const ref = useRef(null);
-  let panel = history[curHistoryIdx]?.panel || _panel;
+  const panel = history[curHistoryIdx]?.panel || _panel;
   const [rects, setRects] = useState<
     {
       rect: any;
@@ -68,7 +68,7 @@ const Index = ({
     if (!ref.current) {
       return;
     }
-    let zr = zrender.init(ref.current, { renderer });
+    const zr = zrender.init(ref.current, { renderer });
     setInstanse(zr);
   }, []);
 
@@ -76,10 +76,10 @@ const Index = ({
     if (instanse == null) {
       return;
     }
-    let nextItem: IPanelItem[] = panel
+    const nextItem: IPanelItem[] = panel
       .filter((item) => ![SCREEN_EDGE_KEY, GROUP_COMPONENT_KEY].includes(item.key))
       .map((item) => {
-        let { width, height, left, top } = getStyle({ style: item.style, page });
+        const { width, height, left, top } = getStyle({ style: item.style, page });
         return {
           id: item.id,
           x: left / 10,
@@ -89,14 +89,14 @@ const Index = ({
         };
       });
 
-    let result = diff(prevItem, nextItem);
+    const result = diff(prevItem, nextItem);
 
     setPrevItem(nextItem);
     updateRect(result);
   }, [instanse == null, nextIds]);
 
   const getRectEl = (id: string) => {
-    let el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
+    const el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
     if (!el) {
       return false;
     }
@@ -109,12 +109,12 @@ const Index = ({
     }
     setPrevSelect(selectedPanel);
     prevSelect.forEach((id) => {
-      let el = getRectEl(id);
+      const el = getRectEl(id);
       if (!el) return;
       el.animate('style', false).when(50, { fill, stroke })?.start();
     });
     selectedPanel.forEach((id) => {
-      let el = getRectEl(id);
+      const el = getRectEl(id);
       if (!el) return;
       el.animate('style', false).when(50, activeStyle)?.start();
     });
@@ -130,7 +130,7 @@ const Index = ({
     if (rect.length == 0) return;
 
     rect.forEach(({ id, ...shape }) => {
-      let el = getRectEl(id);
+      const el = getRectEl(id);
       if (!el) return;
       el.animateTo(
         {
@@ -154,8 +154,8 @@ const Index = ({
   // 增加矩形面板
   const addRect = (rect: IPanelItem[]) => {
     if (rect.length == 0) return;
-    let style = { fill, stroke };
-    let nextRects = rect.map((item) => {
+    const style = { fill, stroke };
+    const nextRects = rect.map((item) => {
       return getRect(item, selectedPanel.includes(item.id) ? activeStyle : style);
     });
     setRects(nextRects);

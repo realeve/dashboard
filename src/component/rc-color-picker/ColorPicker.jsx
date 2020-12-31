@@ -162,14 +162,14 @@ export default class ColorPicker extends React.Component {
   }
 
   render() {
-    const props = this.props;
-    const state = this.state;
+    const {props} = this;
+    const {state} = this;
     const classes = [`${props.prefixCls}-wrap`, props.className];
     if (state.open) {
       classes.push(`${props.prefixCls}-open`);
     }
 
-    let children = props.children;
+    let {children} = props;
 
     const [r, g, b] = new Color(this.state.color).RGB;
     const RGBA = [r, g, b];

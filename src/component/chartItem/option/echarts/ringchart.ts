@@ -1,5 +1,6 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+
 export const mock: IChartMock = {
   data: [[45.7]],
   title: '百分比环图_MOCK数据',
@@ -59,8 +60,8 @@ export const defaultOption = {
 };
 
 export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, barWidth = 40 }) => {
-  let value = _data.data[0][x];
-  let title = _data.title;
+  const value = _data.data[0][x];
+  const {title} = _data;
   let _title = {
     text: value,
     textStyle: {
@@ -119,7 +120,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
     },
     polar: {
       center: ['50%', '50%'],
-      radius: '160%', //图形大小
+      radius: '160%', // 图形大小
     },
     series: [
       {
@@ -127,7 +128,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
         data: [
           {
             name: '比例',
-            value: value,
+            value,
             itemStyle: {
               normal: {
                 color: new LinearGradient(1, 0, 0, 0, [
@@ -146,7 +147,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
         ],
         coordinateSystem: 'polar',
         roundCap: true,
-        barWidth: barWidth,
+        barWidth,
         barGap: '-100%', // 两环重叠
         z: 2,
       },
@@ -166,7 +167,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
         ],
         coordinateSystem: 'polar',
         roundCap: true,
-        barWidth: barWidth,
+        barWidth,
         barGap: '-100%', // 两环重叠
         z: 1,
       },

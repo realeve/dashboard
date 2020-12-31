@@ -4,7 +4,7 @@ import * as lib from './bi_direct_bar';
 test('双向条形图处理', () => {
   // 根据key计算最大值
   expect(lib.getMaxByKey([{ a: 1 }, { a: 2 }], 'a')).toBe(2);
-  let axis = {
+  const axis = {
     min: 0,
     max: 20,
     grid: { line: null },

@@ -1,8 +1,9 @@
-import { setStore, Store, handleHistoryPanel } from '@/utils/lib';
+import type { Store} from '@/utils/lib';
+import { setStore, handleHistoryPanel } from '@/utils/lib';
 import * as db from '../services/db';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
-import { TQuickTool } from '@/component/Editor/types';
+import type { TQuickTool } from '@/component/Editor/types';
 import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 import { reorderPanel } from '@/pages/config/panel/layer';
 import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
@@ -30,13 +31,13 @@ const updatePage = function* ({ page, call, put }) {
 };
 
 const copyArray = (idx: number, array: IPanelConfig[]) => {
-  let arr = R.clone(array);
-  let newItem = R.nth(idx, array);
-  let _arr = R.clone(array);
+  const arr = R.clone(array);
+  const newItem = R.nth(idx, array);
+  const _arr = R.clone(array);
 
   // 处理成组组件复制的问题
-  let childrenArr = [],
-    isGroup = newItem.key === GROUP_COMPONENT_KEY;
+  let childrenArr = [];
+    const isGroup = newItem.key === GROUP_COMPONENT_KEY;
   if (isGroup) {
     childrenArr = R.filter<IPanelConfig>(R.propEq<string>('group', newItem.id))(
       _arr,
@@ -59,7 +60,7 @@ export const GROUP_COMPONENT_KEY = 'group_rect';
 export const SCREEN_EDGE_KEY = 'screen_edge';
 
 export const getGroupRect: () => IPanelConfig = () => {
-  let id = lib.noncer();
+  const id = lib.noncer();
   return {
     id,
     icon: 'datav-font icon-group layer-item-icon',
@@ -71,14 +72,14 @@ export const getGroupRect: () => IPanelConfig = () => {
 };
 
 const namespace = 'common';
-export interface IPanelStyle {
+export type IPanelStyle = {
   width: number;
   height: number;
   // rotate: number | string;
   transform: string;
 }
 
-export interface IApiProps {
+export type IApiProps = {
   legend?: number;
   x?: number;
   y?: number;
@@ -97,21 +98,21 @@ export type TChartEngine = 'echarts' | 'g2' | 'g2plot' | 'other';
 export type TPanelItemStyle = Omit<React.CSSProperties, 'transform'>;
 
 // transform 需要单独处理
-export interface IPanelItemStyle extends TPanelItemStyle {
+export type IPanelItemStyle = {
   transform: { translate: string };
-  'transform-origin'?:string;
-}
-export interface IPanelConfig {
+  'transform-origin'?: string;
+} & TPanelItemStyle
+export type IPanelConfig = {
   key?: string;
   edit_id?: number; // 编辑状态下的业务组件 id;
   engine?: TChartEngine;
-  type?: string; //类型
-  title: string; //标题
+  type?: string; // 类型
+  title: string; // 标题
   image?: string; // 缩略图
   id: string; // 自动生成的ID
   icon?: string; // 图标
   style?: IPanelItemStyle; // 组件样式，transform不按CSS标准，兼容 Scena 的样式；
-  lock?: boolean; //锁定
+  lock?: boolean; // 锁定
   hide?: boolean; // 隐藏
 
   business?: boolean; // 是否为业务组件，业务组件不允许调节ajax信息
@@ -122,24 +123,22 @@ export interface IPanelConfig {
   showTitle?: boolean; // 显示标题
   showBorder?: boolean; // 显示边框
   showBackground?: boolean; // 显示背景
-  useGeneralStyle?: boolean; //使用全局设置
+  useGeneralStyle?: boolean; // 使用全局设置
 
-  componentConfig?: {
-    [key: string]: any;
-  }; // 组件自带配置项
+  componentConfig?: Record<string, any>; // 组件自带配置项
 
   api?: IApiProps; // 接口配置项
 
   [key: string]: any;
 }
-export interface ICommonConfig {
+export type ICommonConfig = {
   border: string; // 边框样式
-  borderRadius: [number, number, number, number]; //边框半角弧度
+  borderRadius: [number, number, number, number]; // 边框半角弧度
   chartBackground: string; // 卡片背景
   head: React.CSSProperties; // 卡片标题栏
   engine?: TChartEngine;
 }
-export interface IPage extends ICommonConfig {
+export type IPage = {
   width: string; // 页面宽
   height: string; // 页面高
   background: string; // 页面背景
@@ -147,14 +146,14 @@ export interface IPage extends ICommonConfig {
   author: string; // 作者
   title: string; // 业务名称
   padding: number; // 辅助线边距
-}
+} & ICommonConfig
 
 /**
  * page:页面配置
  * panel:面板配置
  * rec_time:创建时间
  */
-export interface IDashboard {
+export type IDashboard = {
   page: IPage;
   panel: IPanelConfig[];
   rec_time?: string;
@@ -195,25 +194,25 @@ const screenEdgePanel: IPanelConfig = {
   api: {},
 };
 
-export interface IBusinessCategory {
+export type IBusinessCategory = {
   title: string;
   icon: string;
   list: string[];
 }
 
-export interface IHistoryProps {
+export type IHistoryProps = {
   history: { panel: IPanelConfig[]; title: string | null }[]; // 历史记录，只记录panel变更情况
-  curHistoryIdx: number; //当前历史记录的指针
+  curHistoryIdx: number; // 当前历史记录的指针
 }
-export interface ICommon extends IHistoryProps {
+export type ICommon = {
   panel: IPanelConfig[]; // 配置页面中面板列表
   selectedPanel: string[]; // 当前选中面板
   page: Partial<IPage>; // 当前页面设置
   curTool: TQuickTool; // 当前的工具
-  businessCategory: IBusinessCategory[]; //业务组件两级分类
+  businessCategory: IBusinessCategory[]; // 业务组件两级分类
   history: { panel: IPanelConfig[]; title: string | null }[];
   curHistoryIdx: number;
-}
+} & IHistoryProps
 
 const defaultState: ICommon = {
   history: [],
@@ -226,7 +225,7 @@ const defaultState: ICommon = {
     background: '默认',
     author: '管理员',
     title: '仪表盘',
-    padding: 15, //边距
+    padding: 15, // 边距
 
     ...panelGeneral,
   },
@@ -242,14 +241,14 @@ export default {
   state: defaultState,
   reducers: {
     setStore(prevState, _store: Store) {
-      let { type, recordHistory, historyTitle, ...storeCopy } = R.clone(_store.payload);
-      let nextState = setStore<ICommon>(prevState, { payload: storeCopy });
+      const { type, recordHistory, historyTitle, ...storeCopy } = R.clone(_store.payload);
+      const nextState = setStore<ICommon>(prevState, { payload: storeCopy });
       return handleHistoryPanel(prevState, nextState, _store);
     },
   },
   effects: {
     *loadBusinessCategory({}, { put, call }) {
-      let businessCategory = yield call(getTblBusinessCategory);
+      const businessCategory = yield call(getTblBusinessCategory);
       yield put({
         type: 'setStore',
         payload: {
@@ -258,7 +257,7 @@ export default {
       });
     },
     *loadPanel({}, { put, call }) {
-      let panel = yield call(db.loadPanel);
+      const panel = yield call(db.loadPanel);
       yield put({
         type: 'setStore',
         payload: {
@@ -267,7 +266,7 @@ export default {
       });
     },
     *updatePanel({ payload: { panel, recordHistory = true, historyTitle = null } }, { put, call }) {
-      let nextPanel = R.uniq(panel);
+      const nextPanel = R.uniq(panel);
       // console.log(recordHistory, historyTitle);
       yield updatePanel({
         panel: nextPanel,
@@ -278,7 +277,7 @@ export default {
       });
     },
     *loadPage({}, { put, call }) {
-      let page = yield call(() => db.loadPanel('page'));
+      const page = yield call(() => db.loadPanel('page'));
       if (!page.width) {
         return;
       }
@@ -291,12 +290,12 @@ export default {
     },
     // 编辑指定的json文件
     *loadPageOnline({ payload: { file, callback } }, { put, call }) {
-      let res = yield call(getDashboardConfigByUrl, file);
+      const res = yield call(getDashboardConfigByUrl, file);
       if (res.type !== 'online') {
         return;
       }
 
-      let { page, panel } = res;
+      const { page, panel } = res;
 
       // 加载配置项到本地
       yield call(db.savePanel('page'), page);
@@ -313,7 +312,7 @@ export default {
 
     // 清空页面数据
     *clearPage({}, { put, call }) {
-      let { page } = R.clone(defaultState);
+      const { page } = R.clone(defaultState);
       yield call(db.savePanel('page'), page);
       yield call(db.savePanel('panel'), [screenEdgePanel]);
       yield put({
@@ -328,7 +327,7 @@ export default {
       });
     },
     *updatePage({ payload: { page } }, { put, call, select }) {
-      let prevPage = yield select((state) => state[namespace].page);
+      const prevPage = yield select((state) => state[namespace].page);
       yield updatePage({
         page: {
           ...prevPage,
@@ -346,8 +345,8 @@ export default {
       if (panel.length < 2) {
         return;
       }
-      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      let panelItem = getGroupRect();
+      const prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      const panelItem = getGroupRect();
 
       let idx = R.findIndex<IPanelConfig>((item) => item.id === panel[0])(prevPanel);
       // :bug: 当只有1项时，idx-1 ==0，在最前方添加组
@@ -378,12 +377,12 @@ export default {
       });
     },
     *unGroup({ payload: { id } }: { payload: { id: string } }, { put, call, select }) {
-      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      let item = R.find<IPanelConfig>(R.propEq('id', id))(prevPanel);
+      const prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      const item = R.find<IPanelConfig>(R.propEq('id', id))(prevPanel);
       const isGroupComponent = item.key === GROUP_COMPONENT_KEY;
 
       // 当前的groupId,测试是否有空组
-      let groupId = item.group;
+      const groupId = item.group;
 
       let unpackPanel = isGroupComponent
         ? R.reject(R.propEq<string>('id', id))(prevPanel)
@@ -396,7 +395,7 @@ export default {
 
       // 判断从组内item取消时，是否有空组;
       if (!isGroupComponent) {
-        let unpackItem = R.find(R.propEq<string>('group', groupId))(unpackPanel);
+        const unpackItem = R.find(R.propEq<string>('group', groupId))(unpackPanel);
         if (!unpackItem) {
           // 如果存在空组,删除group;
           unpackPanel = R.reject(R.propEq('id', groupId))(unpackPanel);
@@ -413,7 +412,7 @@ export default {
       });
     },
     *addPanel({ payload: { panel } }, { put, call, select }) {
-      let prevPanel = yield select((state) => state[namespace].panel);
+      const prevPanel = yield select((state) => state[namespace].panel);
       let panelItem = R.clone<IPanelConfig>(panel);
 
       const IS_EDGE_LINE = panel.key == SCREEN_EDGE_KEY;
@@ -433,7 +432,7 @@ export default {
         componentConfig: {},
         api: {},
       };
-      let nextPanel = IS_EDGE_LINE ? [panelItem, ...prevPanel] : [...prevPanel, panelItem];
+      const nextPanel = IS_EDGE_LINE ? [panelItem, ...prevPanel] : [...prevPanel, panelItem];
 
       yield updatePanel({
         panel: nextPanel,
@@ -442,16 +441,16 @@ export default {
         // 默认选中最新添加的面板
         selectedPanel: [panel.id],
         recordHistory: true,
-        historyTitle: '添加组件 - ' + panelItem.title,
+        historyTitle: `添加组件 - ${  panelItem.title}`,
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
-      let prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      let item = R.find<IPanelConfig>((item) => idx.includes(item.id))(prevPanel);
+      const prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
+      const item = R.find<IPanelConfig>((item) => idx.includes(item.id))(prevPanel);
       // 移除打包组件需要考虑一并移除子组件
       // 此处需要以item.group来判断 ，否则会导致全部删除的bug
-      let idList = item?.group ? [...idx, item.group] : idx;
-      let nextPanel = R.reject<IPanelConfig>(
+      const idList = item?.group ? [...idx, item.group] : idx;
+      const nextPanel = R.reject<IPanelConfig>(
         (item) => idList.includes(item.id) || idList.includes(item.group),
       )(prevPanel);
 
@@ -466,7 +465,7 @@ export default {
         call,
         put,
         recordHistory: true,
-        historyTitle: '删除组件 - ' + item.title,
+        historyTitle: `删除组件 - ${  item.title}`,
         selectedPanel: [],
       });
     },
@@ -475,11 +474,11 @@ export default {
       { payload: { idx, attrib, recordHistory = true, historyTitle = '更新组件基础属性' } },
       { put, call, select },
     ) {
-      let panel = yield select((state) => state[namespace].panel);
+      const panel = yield select((state) => state[namespace].panel);
       let _panel = R.clone(panel);
 
       if (typeof idx === 'string') {
-        let id = R.findIndex(R.propEq('id', idx))(panel);
+        const id = R.findIndex(R.propEq('id', idx))(panel);
         let _item: {} = R.nth(id)(panel);
         _item = {
           ..._item,
@@ -506,14 +505,14 @@ export default {
     },
     // 复制一份
     *copyPanel({ payload: { idx } }, { put, call, select }) {
-      let panel = yield select((state) => state[namespace].panel);
-      let _panel = copyArray(idx, panel);
+      const panel = yield select((state) => state[namespace].panel);
+      const _panel = copyArray(idx, panel);
       yield updatePanel({
         panel: _panel,
         call,
         put,
         recordHistory: true,
-        historyTitle: '复制组件 - ' + _panel[0].title,
+        historyTitle: `复制组件 - ${  _panel[0].title}`,
       });
       // 页面需要刷新,使用 Editor 添加失败
       window.location.reload();

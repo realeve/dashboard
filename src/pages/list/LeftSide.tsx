@@ -1,6 +1,7 @@
 import styles from './index.less';
 import classnames from 'classnames';
-import { IScreenListProps } from './RightSide';
+import type { IScreenListProps } from './RightSide';
+
 export default ({ data }: IScreenListProps) => {
   return (
     <div className={styles.projectManage}>

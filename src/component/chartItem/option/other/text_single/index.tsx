@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 // 此处导入你所需要的自定义组件
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import styles from './index.less';
 import ContentEditable from 'react-contenteditable';
@@ -107,7 +107,7 @@ export const apiConfig: IApiConfig = {};
 
 export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => {
   const { pathname } = useLocation();
-  let {
+  const {
     fontSize = 25,
     textAlign,
     fontColor = '#27e2e6',
@@ -126,7 +126,7 @@ export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => 
   } = componentConfig;
 
   // 此处像正常的react组件处理，返回对应的信息即可
-  let textShadow =
+  const textShadow =
     textShadowBlur == 0
       ? {}
       : {
@@ -187,7 +187,7 @@ export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => 
       {marquee ? (
         <div
           className={styles.marquee}
-          style={{ ...textStyle, animationDuration: animationDuration + 's' }}
+          style={{ ...textStyle, animationDuration: `${animationDuration  }s` }}
         >
           {content}
           <span /> {content}

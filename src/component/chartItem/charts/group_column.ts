@@ -5,4 +5,5 @@
     名称：分组条形图
 */
 import * as group_column from '../option/g2/group_column';
+
 export default group_column;

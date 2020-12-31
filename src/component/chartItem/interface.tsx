@@ -13,7 +13,7 @@ export type TFormConfigType =
   | 'divider'
   | 'image'
   | 'label';
-export interface IChartConfig {
+export type IChartConfig = {
   key?: string; // key字段
   defaultValue?: number | boolean | string | number[]; // 默认值
   valueType?: 'number' | 'text';
@@ -26,7 +26,7 @@ export interface IChartConfig {
 
 export type TChartMockData = (string | number)[] | {};
 // 默认数据定义
-export interface IChartMock {
+export type IChartMock = {
   data: TChartMockData[];
   title: string;
   header: string[];
@@ -36,7 +36,7 @@ export interface IChartMock {
   [key: string]: any;
 }
 
-export interface IChartProps {
+export type IChartProps = {
   data: IChartMock;
   legendPosition?: 'bottom' | 'top' | 'left' | 'right';
   legendAlign?: 'left' | 'center' | 'right';
@@ -45,17 +45,17 @@ export interface IChartProps {
   [key: string]: any;
 }
 
-export interface IApiConfig {
+export type IApiConfig = {
   show?: boolean;
   type?: 'url' | 'mock';
   url?: string; // 默认地址
   data?: IChartMock;
   config?: IChartConfig[];
-  cache?: number; //缓存时长
+  cache?: number; // 缓存时长
   interval?: number;
 }
 
-export interface IG2PlotProps {
+export type IG2PlotProps = {
   data: IChartMock;
   chartType?: string;
   renderer?: 'svg' | 'canvas';

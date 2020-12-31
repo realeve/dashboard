@@ -1,13 +1,13 @@
-import { RulerProps } from '@scena/react-ruler/declaration/types';
-import { IObject } from '@daybrush/utils';
-import { ReactText } from 'react';
+import type { RulerProps } from '@scena/react-ruler/declaration/types';
+import type { IObject } from '@daybrush/utils';
+import type { ReactText } from 'react';
 
-export interface GuidesState {
+export type GuidesState = {
   guides: number[];
   dragPos: number | ReactText;
 }
 
-export interface GuideOptions extends RulerProps {
+export type GuideOptions = {
   className?: string;
   setGuides?: (guides: number[]) => any;
   rulerStyle?: IObject<any>;
@@ -15,17 +15,17 @@ export interface GuideOptions extends RulerProps {
   snaps?: number[];
   displayDragPos?: boolean;
   dragPosFormat?: (value: number) => string | number;
-}
-export interface GuidesProps extends GuideOptions {
+} & RulerProps
+export type GuidesProps = {
   onChangeGuides?: (e: OnChangeGuides) => any;
-}
-export interface OnChangeGuides {
+} & GuideOptions
+export type OnChangeGuides = {
   guides: number[];
 }
-export interface GuidesInterface {
-  getGuides(): number[];
-  scroll(pos: number): void;
-  scrollGuides(pos: number): void;
-  loadGuides(guides: number[]): void;
-  resize(): void;
+export type GuidesInterface = {
+  getGuides: () => number[];
+  scroll: (pos: number) => void;
+  scrollGuides: (pos: number) => void;
+  loadGuides: (guides: number[]) => void;
+  resize: () => void;
 }

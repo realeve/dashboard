@@ -51,9 +51,9 @@ test('store存储测试', () => {
 });
 
 test('文件读写', async () => {
-  let testResult = '{"a":1}';
-  let blob = new Blob([testResult], { type: 'text/plain;charset=utf-8' });
-  let res = await lib.loadDashboard(blob);
+  const testResult = '{"a":1}';
+  const blob = new Blob([testResult], { type: 'text/plain;charset=utf-8' });
+  const res = await lib.loadDashboard(blob);
   expect(lib.loadDashboard()).toMatchObject({});
   expect(res).toMatchObject(JSON.parse(testResult));
 });

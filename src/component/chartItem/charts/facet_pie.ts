@@ -5,4 +5,5 @@
     名称：分面饼图
 */
 import * as facet_pie from '../option/g2/facet_pie';
+
 export default facet_pie;

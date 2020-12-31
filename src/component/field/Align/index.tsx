@@ -1,5 +1,6 @@
 import { AlignCenterIcon, AlignRightIcon, AlignLeftIcon } from './iconAlign';
 import Radio from '@/component/field/Radio';
+
 export default (props) => {
   return (
     <Radio

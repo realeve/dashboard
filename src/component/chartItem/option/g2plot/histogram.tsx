@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 
@@ -137,13 +137,13 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-interface IG2Plot extends IG2PlotProps {
+type IG2Plot = {
   color: string;
   binNumber: number;
   offsetX: number;
   binWidth: number;
   [key: string]: any;
-}
+} & IG2PlotProps
 
 export default ({
   data: { data, header },
@@ -160,7 +160,7 @@ export default ({
   legendPosition,
   legendOrient,
 }: IG2Plot) => {
-  let binConfig =
+  const binConfig =
     binWidth == 0
       ? {
           binNumber: binNumber - 1,
@@ -168,8 +168,8 @@ export default ({
       : {
           binWidth,
         };
-  let noLegend = typeof legend == 'undefined' || header.length == 1;
-  let stackCfg = noLegend
+  const noLegend = typeof legend === 'undefined' || header.length == 1;
+  const stackCfg = noLegend
     ? {
         label: {
           position: 'top',
@@ -197,14 +197,14 @@ export default ({
     tooltip: {
       showMakers: true,
       formatter: ({ range, count, ...props }) => {
-        let name = range.map((item) => item.toFixed(1)).join(' ~ ');
+        const name = range.map((item) => item.toFixed(1)).join(' ~ ');
         return noLegend
           ? {
               name,
               value: count,
             }
           : {
-              name: props[header[legend]] + ` (${name}) `,
+              name: `${props[header[legend]]  } (${name}) `,
               value: count,
             };
       },

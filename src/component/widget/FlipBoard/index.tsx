@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './index.less';
-import { useCountUp, CountUpProps } from 'react-countup';
+import type { CountUpProps } from 'react-countup';
+import { useCountUp } from 'react-countup';
 import classnames from 'classnames';
 import { thouandsNum } from '@/utils/lib';
 import { textColor } from '@/component/chartItem/option';
-export interface ICountUp extends Omit<CountUpProps, 'prefix' | 'suffix'> {
+
+export type ICountUp = {
   value: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -12,7 +14,7 @@ export interface ICountUp extends Omit<CountUpProps, 'prefix' | 'suffix'> {
   className?: string;
   style?: React.CSSProperties;
   [key: string]: any;
-}
+} & Omit<CountUpProps, 'prefix' | 'suffix'>
 
 export default ({
   value,

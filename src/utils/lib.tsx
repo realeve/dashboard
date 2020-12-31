@@ -1,8 +1,9 @@
 import moment from 'dayjs';
 import * as axios from './axios';
 import * as R from 'ramda';
-import { IPanelConfig, MAX_HISTORY_STEP, ICommon } from '@/models/common';
-import { IAxiosState } from './axios';
+import type { IPanelConfig, ICommon } from '@/models/common';
+import { MAX_HISTORY_STEP } from '@/models/common';
+import type { IAxiosState } from './axios';
 import { isArray } from '@antv/util';
 
 export const now = () => moment().format('YYYY-MM-DD HH:mm:ss');
@@ -21,7 +22,7 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
   //   return Promise.resolve(null);
   // }
 
-  let reader: FileReader = new FileReader();
+  const reader: FileReader = new FileReader();
 
   //   　1、readAsText，以纯文本的形式读取文件，将读取到的文件保存到result属性中；
   // 　　2、readAsDataURL，读取文件，并将文件数据URL保存到result属性中；
@@ -40,7 +41,7 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
 export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
 export const loadDashboard = async (file: File | Blob) => {
-  let str = (await loadDataFile(file)) as string;
+  const str = (await loadDataFile(file)) as string;
   return JSON.parse(str as string);
 };
 
@@ -59,22 +60,22 @@ export const thouandsNum: {
     return '';
   }
 
-  let numStr: string = Number(num).toLocaleString();
+  const numStr: string = Number(num).toLocaleString();
   if (numStr.includes('.')) {
-    let [integer, decimal] = numStr.split('.');
-    return integer + '.' + decimal.padEnd(decimalLength, '0');
+    const [integer, decimal] = numStr.split('.');
+    return `${integer  }.${  decimal.padEnd(decimalLength, '0')}`;
   }
   if (decimalLength === 0) {
     return numStr;
   }
-  return numStr + '.' + ''.padEnd(decimalLength, '0');
+  return `${numStr  }.${  ''.padEnd(decimalLength, '0')}`;
 };
 
 export const noncer = () => Math.random().toString(16).slice(2);
 
-export const getType = axios.getType;
+export const {getType} = axios;
 
-export interface Store {
+export type Store = {
   payload: any;
 }
 export const setStore: <T = ICommon>(prevState: T, store: Store) => T = (
@@ -86,11 +87,11 @@ export const setStore: <T = ICommon>(prevState: T, store: Store) => T = (
     payload = store;
     // throw new Error('需要更新的数据请设置在payload中');
   }
-  let nextState = R.clone(prevState);
+  const nextState = R.clone(prevState);
   Object.keys(payload).forEach((key) => {
-    let val = payload[key];
+    const val = payload[key];
     if (getType(val) == 'object') {
-      nextState[key] = Object.assign({}, nextState[key], val);
+      nextState[key] = { ...nextState[key], ...val};
     } else {
       nextState[key] = val;
     }
@@ -103,15 +104,15 @@ export const handleHistoryPanel: (
   nextState: ICommon,
   store: Store,
 ) => ICommon = (prevState, nextState, store: Store) => {
-  let panel = store.payload?.panel;
+  const panel = store.payload?.panel;
   // 需要记录历史记录
-  let recordHistory = store.payload?.recordHistory == true;
+  const recordHistory = store.payload?.recordHistory == true;
 
   // console.log({ recordHistory, panel });
 
   if (panel && recordHistory) {
     let nextHistory: { panel: IPanelConfig[]; title: string | null }[] = prevState.history;
-    let title: string | null = store.payload?.historyTitle || null;
+    const title: string | null = store.payload?.historyTitle || null;
 
     // 需要覆盖后面的历史记录
     const coverPrev = prevState.curHistoryIdx < nextHistory.length - 1;
@@ -143,11 +144,11 @@ export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) =
   if (data.rows == 0) {
     return data;
   }
-  let res = data.data[0];
+  const res = data.data[0];
   if (isArray(res)) {
     return data;
   }
 
-  let _data = R.clone(data.data).map((item) => Object.values(item));
+  const _data = R.clone(data.data).map((item) => Object.values(item));
   return { ...data, data: _data };
 };

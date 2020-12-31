@@ -1,5 +1,5 @@
 // 此处导入你所需要的自定义组件
-import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 import assets from '@/component/widget/assets';
 import classnames from 'classnames';
@@ -86,13 +86,13 @@ export default ({
   },
   panelStyle,
 }) => {
-  let url = assets.pics[imgname]?.url;
-  let origin = { transformOrigin: panelStyle?.['transform-origin'] };
-  let animation = !rotate
+  const url = assets.pics[imgname]?.url;
+  const origin = { transformOrigin: panelStyle?.['transform-origin'] };
+  const animation = !rotate
     ? origin
     : {
         ...origin,
-        animationDuration: rotateTime + 's',
+        animationDuration: `${rotateTime  }s`,
         animationName: reverse,
         animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
       };

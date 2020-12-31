@@ -3,14 +3,13 @@ import styles from './index.less';
 import classnames from 'classnames';
 import { useToggle } from 'react-use';
 import * as R from 'ramda';
-import { ICommon, IPanelConfig, GROUP_COMPONENT_KEY, IHistoryProps } from '@/models/common';
-import { TFnHide, IHideProps } from '../setting';
+import type { ICommon, IPanelConfig, IHistoryProps } from '@/models/common';
+import { GROUP_COMPONENT_KEY } from '@/models/common';
+import type { TFnHide, IHideProps } from '../setting';
 
 import { message } from 'antd';
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-
-export { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
 import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
 
 import { LayerItem } from './LayerItem';
@@ -18,11 +17,13 @@ import { LayerItem } from './LayerItem';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
+export { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
+
 // 无法按此方式引用
 // const { DragDropContext, Droppable, Draggable } = React.lazy(() => import('react-beautiful-dnd'));
 // const { ContextMenu, MenuItem, ContextMenuTrigger } = React.lazy(() => import('react-contextmenu'));
 
-interface ILayerProps extends IHistoryProps {
+type ILayerProps = {
   setHide: TFnHide;
   panel: IPanelConfig[];
   selectedPanel: string[];
@@ -31,7 +32,7 @@ interface ILayerProps extends IHistoryProps {
   className: string;
   hide: IHideProps;
   [key: string]: any;
-}
+} & IHistoryProps
 const Index = ({
   hide,
   setHide,
@@ -49,13 +50,13 @@ const Index = ({
 // MenuItem,
 // ContextMenuTrigger,
 ILayerProps) => {
-  let panel = history[curHistoryIdx]?.panel || _panel;
+  const panel = history[curHistoryIdx]?.panel || _panel;
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState<number[]>([]);
 
   const getSelectedIdx = (selectedPanel) => {
-    let _selected = [];
+    const _selected = [];
     showPanel.forEach((item, idx) => {
       if (selectedPanel.includes(item.id)) {
         _selected.push(idx);
@@ -67,12 +68,12 @@ ILayerProps) => {
   const [showPanel, setShowPanel] = useState<IPanelConfig[]>([]);
 
   useEffect(() => {
-    let nextPanel = getShowedPanel(panel);
+    const nextPanel = getShowedPanel(panel);
     setShowPanel(nextPanel);
   }, [panel]);
 
   useEffect(() => {
-    let _selected = getSelectedIdx(selectedPanel);
+    const _selected = getSelectedIdx(selectedPanel);
     setSelected(_selected);
   }, [selectedPanel.join(''), showPanel.join(',')]);
 
@@ -96,7 +97,7 @@ ILayerProps) => {
     // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
 
     // 拖动分组组件
-    let isDragingGroupRect = showPanel[from].key == GROUP_COMPONENT_KEY;
+    const isDragingGroupRect = showPanel[from].key == GROUP_COMPONENT_KEY;
     // console.log(JSON.stringify(showPanel[from]), JSON.stringify(showPanel[to]));
     if (showPanel[to].group) {
       // 2020-11-12 此处需要判断对应的类型是否为分组，暂时不支持多层分组；取消此处即可打开，但需要处理点击页面时父组件的选择；
@@ -104,37 +105,37 @@ ILayerProps) => {
         return;
       }
       // console.log(panel[from]);
-      let _nextPanel = R.clone(panel);
+      const _nextPanel = R.clone(panel);
       _nextPanel[from].group = _nextPanel[to].group;
-      let distPanel = reorder(_nextPanel, from, to);
+      const distPanel = reorder(_nextPanel, from, to);
 
       dispatch({
         type: 'common/updatePanel',
         payload: {
           panel: distPanel,
           recordHistory: true,
-          historyTitle: '调整组件层级 - ' + distPanel[0].title,
+          historyTitle: `调整组件层级 - ${  distPanel[0].title}`,
         },
       });
       return;
     }
 
     const items: IPanelConfig[] = reorder(showPanel, from, to);
-    let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
-    let groupPanels = R.pluck('id', _groupPanel);
+    const _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(items);
+    const groupPanels = R.pluck('id', _groupPanel);
 
-    let groupId = null,
-      distId = items[to].id,
-      groupItem = items[to].group;
+    let groupId = null;
+      const distId = items[to].id;
+      const groupItem = items[to].group;
     // 处理将图层拖入分组的场景；
     if (to > 1) {
-      let prevItem = items[to - 1];
+      const prevItem = items[to - 1];
       // 更新groupId
       groupId = prevItem.key === GROUP_COMPONENT_KEY ? prevItem.id : prevItem.group || null;
     }
 
     // 不包含子元素的列表
-    let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
+    const _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
 
     // 最终结果
     let _nextPanel: IPanelConfig[] = [];
@@ -145,7 +146,7 @@ ILayerProps) => {
       }
       if (item.key === GROUP_COMPONENT_KEY) {
         // 处理组内移动
-        let childrenPanel: IPanelConfig[] = R.filter(R.propEq<string>('group', item.id))(
+        const childrenPanel: IPanelConfig[] = R.filter(R.propEq<string>('group', item.id))(
           groupItem == item.id ? items : panel,
         ) as IPanelConfig[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
@@ -159,7 +160,7 @@ ILayerProps) => {
       payload: {
         panel: _nextPanel,
         recordHistory: true,
-        historyTitle: '调整组件层级 - ' + _nextPanel[0].title,
+        historyTitle: `调整组件层级 - ${  _nextPanel[0].title}`,
       },
     });
     setSelected([to]);
@@ -170,7 +171,7 @@ ILayerProps) => {
     // 处理整组数据的更新;
     let idxList = [idx];
     if (isGroup) {
-      let childrenPanel = R.filter<IPanelConfig>((item) => [item.id, item.group].includes(idx))(
+      const childrenPanel = R.filter<IPanelConfig>((item) => [item.id, item.group].includes(idx))(
         panel,
       );
       idxList = R.pluck('id', childrenPanel);
@@ -186,14 +187,14 @@ ILayerProps) => {
   };
 
   const handleClick = (data) => {
-    let action = data.action;
-    let idx = data.idx;
+    const {action} = data;
+    const {idx} = data;
     handleAction(action, idx);
   };
   const handleAction = (action, arr: number[]) => {
     if (typeof arr === 'undefined') {
       return;
-    } else if (typeof arr === 'number') {
+    } if (typeof arr === 'number') {
       contextMenuHandler(action, arr);
       return;
     }
@@ -203,9 +204,9 @@ ILayerProps) => {
   };
 
   const contextMenuHandler = (action, idx: number) => {
-    let item = R.nth<IPanelConfig>(idx, showPanel);
+    const item = R.nth<IPanelConfig>(idx, showPanel);
 
-    let index = showPanel[idx]?.id;
+    const index = showPanel[idx]?.id;
 
     switch (action) {
       case MENU_ACTIONS.TOP:
@@ -225,15 +226,15 @@ ILayerProps) => {
         }
         break;
       case MENU_ACTIONS.LOCK:
-        let lock = item.lock || false;
+        const lock = item.lock || false;
         updatePanelItem(item.id, { lock: !lock }, item.key === GROUP_COMPONENT_KEY);
         break;
       case MENU_ACTIONS.HIDE:
-        let hide = item.hide || false;
+        const hide = item.hide || false;
         updatePanelItem(item.id, { hide: !hide }, item.key === GROUP_COMPONENT_KEY);
         break;
       case MENU_ACTIONS.COPY:
-        let prevIndex = R.findIndex(R.propEq('id', index))(panel);
+        const prevIndex = R.findIndex(R.propEq('id', index))(panel);
         dispatch({
           type: 'common/copyPanel',
           payload: {
@@ -399,7 +400,7 @@ ILayerProps) => {
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
               <div
-                //provided.droppableProps应用的相同元素.
+                // provided.droppableProps应用的相同元素.
                 {...provided.droppableProps}
                 // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
                 ref={provided.innerRef}
@@ -420,8 +421,8 @@ ILayerProps) => {
                           [styles.group_item]: item.group,
                         })}
                         onClick={(e) => {
-                          const CTRL_CLICK = e.ctrlKey,
-                            SHIFT_CLICK = e.shiftKey;
+                          const CTRL_CLICK = e.ctrlKey;
+                            const SHIFT_CLICK = e.shiftKey;
                           let nextPanel = [item.id];
 
                           if (CTRL_CLICK) {
@@ -435,20 +436,20 @@ ILayerProps) => {
                               message.error('请先选中一个组件');
                               return;
                             }
-                            let id = R.findIndex(R.propEq('id', selectedPanel[0]))(showPanel);
-                            let nextId = R.findIndex(R.propEq('id', item.id))(showPanel);
+                            const id = R.findIndex(R.propEq('id', selectedPanel[0]))(showPanel);
+                            const nextId = R.findIndex(R.propEq('id', item.id))(showPanel);
                             if (id === nextId) {
                               return;
                             }
 
-                            let idList = [id, nextId].sort();
-                            let _panels = R.slice(idList[0], idList[1] + 1)(showPanel);
+                            const idList = [id, nextId].sort();
+                            const _panels = R.slice(idList[0], idList[1] + 1)(showPanel);
                             nextPanel = R.pluck('id', _panels);
                           }
 
                           // 需处理分组的逻辑，存在互斥；
                           if (item.key == GROUP_COMPONENT_KEY) {
-                            let childrenPanel = panel
+                            const childrenPanel = panel
                               .filter((panelItem) => panelItem.group == item.id)
                               .map((panelItem) => panelItem.id);
                             nextPanel = R.uniq([...nextPanel, ...childrenPanel]);
@@ -504,7 +505,7 @@ ILayerProps) => {
         id={MENU_TYPE}
         onShow={(e) => {
           // 右键点击选中当前
-          let id = e.detail.data.idx;
+          const id = e.detail.data.idx;
 
           // 当选中多个时或在当前选中项点击右键，不执行后续操作；
           if (selected.length > 1 || selected.join(',') == id) {
@@ -546,13 +547,13 @@ ILayerProps) => {
           })}
           title="整理面板"
           onClick={() => {
-            let nextPanel = reorderPanel(panel);
+            const nextPanel = reorderPanel(panel);
             dispatch({
               type: 'common/updatePanel',
               payload: {
                 panel: nextPanel,
                 recordHistory: true,
-                historyTitle: '整理面板 - ' + nextPanel[0].title,
+                historyTitle: `整理面板 - ${  nextPanel[0].title}`,
               },
             });
           }}

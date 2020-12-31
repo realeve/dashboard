@@ -1,5 +1,5 @@
 import ScrollRankingBoard from '@/component/widget/ScrollRankingBoard';
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
 import { json2Array } from '@/utils/lib';
 
@@ -141,7 +141,7 @@ export const apiConfig: IApiConfig = {
 };
 
 export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...config } }) => {
-  let data = json2Array(_data);
+  const data = json2Array(_data);
   return (
     <ScrollRankingBoard
       config={{

@@ -66,7 +66,7 @@ test('基础样式转换', () => {
   expect(lib.convertPanel({ panel })).toMatchObject(panelStyle);
 });
 
-let page = { width: 300, height: 300 };
+const page = { width: 300, height: 300 };
 test('越界判定', () => {
   expect(
     lib.isXAllowed(
@@ -259,7 +259,7 @@ test('判断新的组件是否允许设置到指定的位置', () => {
 });
 
 test('寻找最佳放置的位置', () => {
-  let res = { top: 15, left: 1275 };
+  const res = { top: 15, left: 1275 };
   expect(lib.calcPanelPosition({ panel })).toMatchObject(res);
   expect(
     lib.calcPanelPosition({ panel, page: { width: 1920, height: 1080 }, padding: 25 }),

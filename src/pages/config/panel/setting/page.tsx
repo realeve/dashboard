@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import { IPage, ICommonConfig } from '@/models/common';
-import { Dispatch } from 'redux';
+import type { IPage, ICommonConfig } from '@/models/common';
+import type { Dispatch } from 'redux';
 import assets from '@/component/widget/assets';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
@@ -18,7 +18,7 @@ import { isColor } from '@/component/chartItem/option/lib';
 
 const { Panel } = Collapse;
 
-const TabPane = Tabs.TabPane;
+const {TabPane} = Tabs;
 
 export const ImgSelector = ({
   title,
@@ -34,7 +34,7 @@ export const ImgSelector = ({
   style?: React.CSSProperties;
 }) => {
   const [show, setShow] = useState(false);
-  let val = assets[imgtype][value]?.url;
+  const val = assets[imgtype][value]?.url;
   return (
     <Field title={title} style={{ ...style, height: 116 }}>
       {isColor(val) ? (
@@ -96,13 +96,13 @@ export const ImgSelector = ({
 };
 
 // 组件的通用样式设置
-export interface IComponentConfig extends ICommonConfig {
+export type IComponentConfig = {
   showTitle?: boolean;
   onChange: (e: {}) => void;
   defaultKey?: string;
   isPage?: boolean;
   page?: IPage;
-}
+} & ICommonConfig
 export const ComponentConfig = ({
   border,
   borderRadius = [0, 0, 0, 0],
@@ -121,7 +121,7 @@ export const ComponentConfig = ({
           config={{ title: '屏幕大小', split: 'x', type: 'slider', step: 2 }}
           value={[page.width, page.height]}
           onChange={(e: [string, string]) => {
-            let [width, height] = e;
+            const [width, height] = e;
             if (width == page.width && height == page.height) {
               return;
             }
@@ -308,7 +308,7 @@ export const ComponentConfig = ({
 );
 
 // 页面配置
-interface IPageProps {
+type IPageProps = {
   page: IPage;
   dispatch: Dispatch;
 }

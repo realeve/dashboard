@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { handleData } from '@/component/chartItem/option/echarts/line';
 
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
@@ -55,8 +55,8 @@ export const defaultOption = {
 };
 
 export default ({ data, x = 0, y = 1, showSplit = true }) => {
-  let res = handleData(data, { x, y });
-  let series = [];
+  const res = handleData(data, { x, y });
+  const series = [];
   res.series.forEach(({ name, arr: data }) => {
     series.push({
       name,

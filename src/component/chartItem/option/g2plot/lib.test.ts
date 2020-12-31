@@ -11,7 +11,7 @@ test('排序', () => {
 
 test('图表尾部跟随', () => {
   expect(lib.getAnnotations(null, { xField: 'x', yField: 'y', color: [] }, {})).toHaveLength(0);
-  let data = [
+  const data = [
       {
         x: 10,
         y: 20,
@@ -22,10 +22,10 @@ test('图表尾部跟随', () => {
         y: 21,
         legend: 'a',
       },
-    ],
-    config = { xField: 'x', yField: 'y', seriesField: 'legend', color: ['#111'] };
+    ];
+    const config = { xField: 'x', yField: 'y', seriesField: 'legend', color: ['#111'] };
 
-  let result = {
+  const result = {
     type: 'text',
     content: 'a',
     style: { fill: '#111', textAlign: 'left', textBaseline: 'middle' },

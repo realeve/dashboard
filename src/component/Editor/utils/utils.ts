@@ -1,18 +1,18 @@
 import { prefixNames } from 'framework-utils';
 import { PREFIX, DATA_SCENA_ELEMENT_ID } from '../consts';
 import { EDITOR_PROPERTIES } from '../consts';
-import {
+import type {
   ScenaFunctionComponent,
   ScenaProps,
   ScenaComponent,
   ScenaJSXElement,
   ScenaFunctionJSXElement,
 } from '../types';
-import { IObject } from '@daybrush/utils';
+import type { IObject } from '@daybrush/utils';
 import { isFunction, isObject } from 'util';
 
 import localforage from 'localforage';
-import { IPage } from '@/models/common';
+import type { IPage } from '@/models/common';
 
 export function prefix(...classNames: string[]) {
   return prefixNames(PREFIX, ...classNames);
@@ -28,15 +28,15 @@ export function getContentElement(el: HTMLElement): HTMLElement | null {
 }
 
 export function connectEditorProps(component: any) {
-  const prototype = component.prototype;
+  const {prototype} = component;
   Object.defineProperty(prototype, 'editor', {
-    get: function () {
+    get () {
       return this.props.editor;
     },
   });
   EDITOR_PROPERTIES.forEach((name) => {
     Object.defineProperty(prototype, name, {
-      get: function () {
+      get () {
         return this.props.editor[name];
       },
     });
@@ -51,7 +51,7 @@ export function getTargetsById(id: string) {
 export function getId(el: HTMLElement | SVGElement) {
   return el.getAttribute(DATA_SCENA_ELEMENT_ID)!;
 }
-export function getIds(els: Array<HTMLElement | SVGElement>): string[] {
+export function getIds(els: (HTMLElement | SVGElement)[]): string[] {
   return els.map((el) => getId(el));
 }
 
@@ -99,8 +99,8 @@ export function makeScenaFunctionComponent<T = IObject<any>>(
 }
 
 export function getScenaAttrs(el: HTMLElement | SVGElement) {
-  const attributes = el.attributes;
-  const length = attributes.length;
+  const {attributes} = el;
+  const {length} = attributes;
   const attrs: IObject<any> = {};
 
   for (let i = 0; i < length; ++i) {
@@ -137,7 +137,7 @@ const key = 'datav_guide';
 const GUIDE_OFFSET = 0;
 export const guideDb = {
   save: (e) => {
-    let res = {
+    const res = {
       h: e.h.filter((item) => item > -50),
       v: e.v.filter((item) => item > -50),
     };
@@ -159,7 +159,7 @@ export const calcDefaultGuidline = ({ width, height, padding }: IPage) => {
   };
 };
 
-export interface IGuideProps {
+export type IGuideProps = {
   h: number[];
   v: number[];
 }

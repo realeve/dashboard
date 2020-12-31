@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 // import { textColor } from '@/component/chartItem/option';
 import { getTheme } from '@antv/g2';
@@ -83,7 +83,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-const getRadius = (radius, max = 12) => Math.floor(Math.random() * max + radius) + '%';
+const getRadius = (radius, max = 12) => `${Math.floor(Math.random() * max + radius)  }%`;
 const formatRadius = ({ radius, innerRadius, max }) => {
   while (radius[0] == radius[1]) {
     radius[0] = getRadius(innerRadius, max);
@@ -103,9 +103,9 @@ export default ({
     fontSize = 16,
   },
 }) => {
-  let res = R.clone(data).map((item) => ({ name: item[x], value: item[y] }));
+  const res = R.clone(data).map((item) => ({ name: item[x], value: item[y] }));
 
-  let _data = res.map((item) => {
+  const _data = res.map((item) => {
     let radius = [getRadius(innerRadius, max), getRadius(innerRadius, max)];
     radius = formatRadius({ radius, innerRadius, max });
     return {

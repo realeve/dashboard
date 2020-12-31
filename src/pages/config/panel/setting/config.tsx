@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import { IPanelConfig, ICommon, IPage, IHistoryProps, SCREEN_EDGE_KEY } from '@/models/common';
-import { Dispatch } from 'redux';
+import type { IPanelConfig, ICommon, IPage, IHistoryProps} from '@/models/common';
+import { SCREEN_EDGE_KEY } from '@/models/common';
+import type { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
 import * as R from 'ramda';
 import { ComponentConfig } from './page';
@@ -14,24 +15,24 @@ import { Divider } from 'antd';
 import { connect } from 'react-redux';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
 
-interface IPanel extends IHistoryProps {
+type IPanel = {
   selectedIdx: number;
   panel: IPanelConfig[];
   page: IPage;
   dispatch: Dispatch;
   onChange: (e: any, type: string) => void;
-}
+} & IHistoryProps
 
 // 获取通用配置
 const getGeneralConfig = ({ selectedIdx, panel, page }) => {
-  let item = panel[selectedIdx] || {};
-  let commonConfig = {
+  const item = panel[selectedIdx] || {};
+  const commonConfig = {
     border: page.border,
     chartBackground: page.chartBackground,
     head: page.head,
   };
 
-  let res = R.clone(item?.general || commonConfig);
+  const res = R.clone(item?.general || commonConfig);
   return item?.useGeneralStyle ? null : res;
 };
 
@@ -42,7 +43,7 @@ const Index = ({
   selectedIdx,
   // history,
   // curHistoryIdx,
-  panel, //: _panel,
+  panel, // : _panel,
   page,
   dispatch,
   onChange,
@@ -50,7 +51,7 @@ const Index = ({
   // let panel = history[curHistoryIdx]?.panel || _panel;
 
   // 当前选中的面板
-  let currentPanel = panel[selectedIdx];
+  const currentPanel = panel[selectedIdx];
 
   // 尺寸
   const [size, setSize] = useSetState({ width: 480, height: 270 });
@@ -60,19 +61,19 @@ const Index = ({
   }, [selectedIdx]);
 
   useEffect(() => {
-    let setting = panel[selectedIdx];
+    const setting = panel[selectedIdx];
     const _size = {
       width: Number(String(setting?.style?.width).replace('px', '')),
       height: Number(String(setting?.style?.height).replace('px', '')),
     };
     setSize(_size);
 
-    let next = getGeneralConfig({ selectedIdx, panel, page });
+    const next = getGeneralConfig({ selectedIdx, panel, page });
     setGeneral(next);
   }, [selectedIdx, JSON.stringify(panel)]);
 
   // 更新样式
-  const updateStyle = (item: { [key: string]: any }, title) => {
+  const updateStyle = (item: Record<string, any>, title) => {
     const style = R.clone(panel[selectedIdx].style || {});
     const nextStyle = {
       style: {
@@ -80,7 +81,7 @@ const Index = ({
         ...item,
       },
     };
-    updateAttrib(nextStyle, true, title + `——【${panel[selectedIdx].title}】`);
+    updateAttrib(nextStyle, true, `${title  }——【${panel[selectedIdx].title}】`);
     onChange(item, 'size');
   };
 
@@ -270,7 +271,7 @@ const Index = ({
       >
         <ComponentSetting
           onChange={(componentConfig, title) => {
-            updateAttrib({ componentConfig }, true, title + ` - ${panel[selectedIdx].title}`);
+            updateAttrib({ componentConfig }, true, `${title  } - ${panel[selectedIdx].title}`);
           }}
           panel={currentPanel}
         />

@@ -5,4 +5,5 @@
     名称：区间柱状图
 */
 import * as range from '../option/g2plot/range';
+
 export default range;

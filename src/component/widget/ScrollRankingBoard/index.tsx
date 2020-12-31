@@ -12,8 +12,9 @@ import { emojiList } from '../ScrollBoard';
 import { useMeasure } from 'react-use';
 
 import * as R from 'ramda';
-const deepClone = R.clone,
-  deepMerge = R.merge;
+
+const deepClone = R.clone;
+  const deepMerge = R.merge;
 
 const defaultConfig = {
   /**
@@ -159,7 +160,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
-    let rows = rowsData.slice(animationIndex);
+    const rows = rowsData.slice(animationIndex);
     rows.push(...rowsData.slice(0, animationIndex));
 
     const heights = new Array(rowLength).fill(avgHeight);

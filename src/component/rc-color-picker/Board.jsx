@@ -18,7 +18,7 @@ export default class Board extends React.Component {
   }
 
   onBoardMouseDown = (e) => {
-    const buttons = e.buttons;
+    const {buttons} = e;
 
     // only work on left click
     // @see https://developer.mozilla.org/en-US/docs/Web/Events/mousedown
@@ -136,7 +136,7 @@ export default class Board extends React.Component {
 
   render() {
     const prefixCls = this.getPrefixCls();
-    const color = this.props.color;
+    const {color} = this.props;
 
     const hueHsv = {
       h: color.hue,

@@ -14,7 +14,7 @@ test('获取坐标系名称', () => {
 });
 
 test('handlePercent', () => {
-  let res = lib.handlePercent([
+  const res = lib.handlePercent([
     {
       data: [1, 2],
     },
@@ -26,7 +26,7 @@ test('handlePercent', () => {
 });
 
 test('标记区域', () => {
-  let config = lib.getMarkArea(2, 1, '~');
+  const config = lib.getMarkArea(2, 1, '~');
   expect(config).toHaveLength(4);
   expect(config[0]).toMatchObject({
     key: 'markTitle1',
@@ -38,7 +38,7 @@ test('标记区域', () => {
 });
 
 test('标记区域配置项', () => {
-  let config = lib.getMarkAreaData('平均值', [10, 20]);
+  const config = lib.getMarkAreaData('平均值', [10, 20]);
   expect(lib.getMarkAreaData('', [])).toHaveLength(0);
   expect(config[1]).toMatchObject({
     yAxis: 20,
@@ -55,7 +55,7 @@ test('标记区域配置项', () => {
 });
 
 test('标记区域配置项', () => {
-  let option = {
+  const option = {
     showMarkArea: true,
     markAreaColor: '#fff',
     markAreaColor2: '#f00',
@@ -70,7 +70,7 @@ test('标记区域配置项', () => {
     markTitle5: '',
     markArea5: [10, 20],
   };
-  let config = lib.getMarkAreaInfo(option);
+  const config = lib.getMarkAreaInfo(option);
   expect(config).toMatchObject({
     markArea: {
       silent: true,

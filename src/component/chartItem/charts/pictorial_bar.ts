@@ -6,4 +6,5 @@
 */
 
 import * as pictorial_bar from '../option/echarts/pictorial_bar';
+
 export default pictorial_bar;

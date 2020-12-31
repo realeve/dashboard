@@ -40,7 +40,7 @@ export default class Params extends React.Component {
         [0, 100],
       ],
     };
-    const mode = this.state.mode;
+    const {mode} = this.state;
     const range = channelMap[mode][index];
     let result = parseInt(value, 10);
     if (isNaN(result)) {
@@ -56,7 +56,7 @@ export default class Params extends React.Component {
   };
 
   handleHexBlur = () => {
-    const hex = this.state.hex;
+    const {hex} = this.state;
 
     let color = null;
 
@@ -74,7 +74,7 @@ export default class Params extends React.Component {
   };
 
   handleHexPress = (event) => {
-    const hex = this.state.hex;
+    const {hex} = this.state;
     if (event.nativeEvent.which === 13) {
       let color = null;
 
@@ -101,7 +101,7 @@ export default class Params extends React.Component {
   };
 
   handleModeChange = () => {
-    let mode = this.state.mode;
+    let {mode} = this.state;
 
     const modeIndex = (modesMap.indexOf(mode) + 1) % modesMap.length;
 
@@ -136,15 +136,13 @@ export default class Params extends React.Component {
       } else if (channel === 'B') {
         color.brightness = parseInt(value, 10) / 100;
       }
-    } else {
-      if (channel === 'R') {
+    } else if (channel === 'R') {
         color.red = parseInt(value, 10);
       } else if (channel === 'G') {
         color.green = parseInt(value, 10);
       } else if (channel === 'B') {
         color.blue = parseInt(value, 10);
       }
-    }
 
     return color;
   };

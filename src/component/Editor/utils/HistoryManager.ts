@@ -1,8 +1,8 @@
-import { IObject } from "@daybrush/utils";
-import Editor from "../Editor";
+import type { IObject } from "@daybrush/utils";
+import type Editor from "../Editor";
 
 export type RestoreCallback = (props: any, editor: Editor) => any;
-export interface HistoryAction {
+export type HistoryAction = {
     type: string;
     props: IObject<any>;
 }

@@ -12,10 +12,10 @@ export default function PerformanceStat({ style }) {
     if (!isReady()) {
       return;
     }
-    let stats = new Stats(ref.current);
+    const stats = new Stats(ref.current);
     setStates(stats);
     stats?.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    let requestId = window.requestAnimationFrame(function loop() {
+    const requestId = window.requestAnimationFrame(function loop() {
       stats?.update();
       requestAnimationFrame(loop);
     });

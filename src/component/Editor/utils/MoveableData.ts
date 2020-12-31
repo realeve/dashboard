@@ -1,15 +1,15 @@
 import MoveableHelper from 'moveable-helper';
-import Memory from './Memory';
+import type Memory from './Memory';
 import { getId } from './utils';
 
 export default class MoveableData extends MoveableHelper {
-  public selectedTargets: Array<HTMLElement | SVGElement> = [];
+  public selectedTargets: (HTMLElement | SVGElement)[] = [];
   constructor(private memory: Memory) {
     super({
       createAuto: true,
     });
   }
-  public setSelectedTargets(targets: Array<HTMLElement | SVGElement>) {
+  public setSelectedTargets(targets: (HTMLElement | SVGElement)[]) {
     this.selectedTargets = targets;
   }
   public getSelectedTargets() {
@@ -54,7 +54,7 @@ export default class MoveableData extends MoveableHelper {
   }
   public getProperties(properties: string[][], defaultValues: any[]) {
     const frames = this.getSelectedFrames();
-    const memory = this.memory;
+    const {memory} = this;
 
     if (!frames.length) {
       return properties.map((property, i) => memory.get(property.join('///')) || defaultValues[i]);

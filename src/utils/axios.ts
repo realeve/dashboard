@@ -1,11 +1,14 @@
-import http, { AxiosRequestConfig, AxiosResponse, AxiosError as _AxiosError } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse, AxiosError as _AxiosError } from 'axios';
+import http from 'axios';
 import qs from 'qs';
 import { host } from './setting';
 import { notification } from 'antd';
 import * as R from 'ramda';
-export { DEV } from './setting';
 import localforage from 'localforage';
-export interface GlobalAxios {
+
+export { DEV } from './setting';
+
+export type GlobalAxios = {
   host: string;
   token: string;
 }
@@ -27,7 +30,7 @@ export type TAxiosData = TDbWrite | any[];
  * @param serverTime 服务器时间
  * @param hash 当前数据的hash值，数据变更时hash变更
  */
-export interface IAxiosState<T = TAxiosData> {
+export type IAxiosState<T = TAxiosData> = {
   title: string;
   rows: number;
   data: T[];
@@ -48,12 +51,10 @@ declare global {
   }
 }
 
-let refreshNoncer =
+const refreshNoncer =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDM4NTI0NDcsIm5iZiI6MTU0Mzg1MjQ0NywiZXhwIjoxNTQzODU5NjQ3LCJ1cmwiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTBcL3B1YmxpY1wvbG9naW4uaHRtbCIsImV4dHJhIjp7InVpZCI6MSwiaXAiOiIwLjAuMC4wIn19.65tBJTAMZ-i2tkDDpu9DnVaroXera4h2QerH3x2fgTw';
 
-export const codeMessage: {
-  [key: number]: string;
-} = {
+export const codeMessage: Record<number, string> = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -129,7 +130,7 @@ const saveToken = () => {
     token: window.g_axios.token,
   });
 };
-export interface AxiosError {
+export type AxiosError = {
   message: string;
   description: string;
   url: string;
@@ -137,9 +138,9 @@ export interface AxiosError {
   status?: number;
 }
 export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = async (error) => {
-  let config = error.config || {};
-  let str = config.params || config.data || {};
-  let { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
+  const config = error.config || {};
+  const str = config.params || config.data || {};
+  const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
   Reflect.deleteProperty(params, 'tstart2');
   Reflect.deleteProperty(params, 'tend2');
   Reflect.deleteProperty(params, 'tstart3');
@@ -150,11 +151,11 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
     return null;
   }
 
-  config.url += `${id ? id + '/' + nonce : ''}?${qs.stringify(params)}`;
+  config.url += `${id ? `${id  }/${  nonce}` : ''}?${qs.stringify(params)}`;
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
-    let { data, status } = error.response;
+    const { data, status } = error.response;
     // if (status === 401) {
     //   history.push('/unlogin');
     // }
@@ -172,7 +173,7 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
       url: error.config.url || '',
       params,
     });
-  } else if (error.request) {
+  } if (error.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
@@ -204,16 +205,16 @@ export const handleUrl = (option) => {
   return option;
 };
 
-interface IAxiosConfig extends Omit<AxiosRequestConfig, 'url'> {
+type IAxiosConfig = {
   url?: string | IAxiosState;
-}
+} & Omit<AxiosRequestConfig, 'url'>
 
 // 自动处理token更新，data 序列化等
 export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosState<T>> = ({
   baseURL = host,
   ..._option
 }) => {
-  if (typeof _option.url == 'object') {
+  if (typeof _option.url === 'object') {
     return mock(_option.url);
   }
   window.g_axios = window.g_axios || {
@@ -240,7 +241,7 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
       timeout: 30 * 1000,
       transformRequest: [
         function (data) {
-          let dataType = getType(data);
+          const dataType = getType(data);
           switch (dataType) {
             case 'object':
             case 'array':

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Field from '@/component/field';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio, { Select } from '@/component/field/Radio';
@@ -13,7 +13,7 @@ import { useDebounce } from 'react-use';
 
 type IFormItemValue = string | number | boolean | (number | string)[];
 
-interface IFormItemProps {
+type IFormItemProps = {
   config: IChartConfig;
   value?: IFormItemValue;
   onChange?: (e: IFormItemValue) => void;
@@ -48,13 +48,13 @@ export const FormField = ({
 
   if (type === 'divider') {
     return <Divider plain>{title}</Divider>;
-  } else if (type === 'label') {
+  } if (type === 'label') {
     return (
       <Field style={style} subTitle={subTitle}>
         <label style={{ color: '#6e7481' }}>{title}</label>
       </Field>
     );
-  } else if (type === 'image') {
+  } if (type === 'image') {
     return <ImgSelector onChange={onChange} value={value as string} title={title} {...config} />;
   }
 
@@ -77,7 +77,7 @@ export const FormField = ({
       );
       break;
     case 'radio':
-      let { option, ...props } = config;
+      const { option, ...props } = config;
       return (
         <Radio
           disabled={disabled}
@@ -135,8 +135,8 @@ export const FormField = ({
       break;
     case 'slider':
       // 支持任意长度的slide排为一组
-      let len = config.length || 2;
-      let arr = R.range(0, len);
+      const len = config.length || 2;
+      const arr = R.range(0, len);
       return (
         <div className="alignRow">
           {arr.map((id) => (
@@ -146,7 +146,7 @@ export const FormField = ({
                 className={classnames('data_input')}
                 value={innerValue?.[id] || 0}
                 onChange={(e) => {
-                  let val = R.update(id, Number(e.target.value), (innerValue as number[]).slice());
+                  const val = R.update(id, Number(e.target.value), (innerValue as number[]).slice());
                   setInnerValue(val);
                 }}
                 disabled={disabled}
@@ -163,7 +163,7 @@ export const FormField = ({
 };
 
 export const FormItem = (props: IFormItemProps) => {
-  let {
+  const {
     config: { key, title, type, subTitle },
     style,
     disabled = false,

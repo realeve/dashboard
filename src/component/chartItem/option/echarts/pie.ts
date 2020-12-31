@@ -1,13 +1,14 @@
 import color from '@/component/echarts/themeColor';
+
 export type circlePos = 'inner' | 'outter';
 export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
-  let _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
-  let data = value.map(item => ({
+  const _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
+  const data = value.map(item => ({
     value: item[y],
     name: item[x],
   }));
 
-  let radius =
+  const radius =
     circlePos === 'inner'
       ? [
           ['50%', '90%'],

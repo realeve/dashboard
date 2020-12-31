@@ -46,10 +46,10 @@ export default ({
       return;
     }
 
-    let _data = R.clone(data.data);
+    const _data = R.clone(data.data);
 
     // 数据转换器
-    let { data: dv } = transformer
+    const { data: dv } = transformer
       ? transformer({ data: _data, header: data.header, ...props }, chart)
       : { data: _data };
 

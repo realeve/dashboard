@@ -61,7 +61,7 @@ export default class Alpha extends React.Component {
 
   pointMoveTo = (coords) => {
     const rect = findDOMNode(this).getBoundingClientRect();
-    const width = rect.width;
+    const {width} = rect;
     let left = coords.x - rect.left;
 
     left = Math.max(0, left);

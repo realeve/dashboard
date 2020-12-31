@@ -47,8 +47,8 @@ export const config = [
 ];
 
 export default ({ onRestore, level, setLevel }) => {
-  const increase = () => setLevel(Math.max(level - 1, 0)),
-    decrease = () => setLevel(Math.min(level + 1, config.length - 1));
+  const increase = () => setLevel(Math.max(level - 1, 0));
+    const decrease = () => setLevel(Math.min(level + 1, config.length - 1));
 
   return (
     <div className={classnames(styles.zoom)}>

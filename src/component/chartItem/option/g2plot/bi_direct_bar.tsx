@@ -1,4 +1,4 @@
-import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
@@ -93,8 +93,8 @@ export const apiConfig: IApiConfig = {
  * @param key 键
  */
 export const getMaxByKey = (data, key) => {
-  let arr = R.pluck(key)(data);
-  let max = Math.max(...arr);
+  const arr = R.pluck(key)(data);
+  const max = Math.max(...arr);
   return max;
 };
 
@@ -105,10 +105,10 @@ export const getMaxByKey = (data, key) => {
  * @param keys 键值对
  */
 export const getMaxByKeys = (data, keys) => {
-  let arr = keys.map((key) => getMaxByKey(data, key));
-  let max = Math.max(...arr);
-  let val = lib.getMax(max);
-  let yAxis = {};
+  const arr = keys.map((key) => getMaxByKey(data, key));
+  const max = Math.max(...arr);
+  const val = lib.getMax(max);
+  const yAxis = {};
   keys.forEach((key) => {
     yAxis[key] = {
       min: 0,
@@ -119,13 +119,13 @@ export const getMaxByKeys = (data, keys) => {
   return { yAxis };
 };
 
-export interface IBidirectionalBar extends IG2PlotProps {
+export type IBidirectionalBar = {
   x: number;
   y: number;
   y2: number;
   direction: 'horizontal' | 'vertical';
   limitYaxis?: boolean;
-}
+} & IG2PlotProps
 export default ({
   data: { data, header },
   x = 0,
@@ -140,10 +140,10 @@ export default ({
   legendPosition,
   legendOrient,
 }: IBidirectionalBar) => {
-  let yField = [header[y], header[y2]];
-  let yAxis = limitYaxis ? getMaxByKeys(data, yField) : {};
+  const yField = [header[y], header[y2]];
+  const yAxis = limitYaxis ? getMaxByKeys(data, yField) : {};
 
-  let distTheme = getTheme(theme);
+  const distTheme = getTheme(theme);
 
   return {
     ...distTheme,

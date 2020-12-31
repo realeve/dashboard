@@ -2,8 +2,9 @@ import { uniq, isNumber, isDate } from '@antv/util';
 
 import defaultTheme from '@/component/g2plot/theme';
 import { palette } from '@/component/g2plot';
-export { getAntThemePanel } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
+
+export { getAntThemePanel } from '@/component/chartItem/option/lib';
 
 const dict = {
   周一: 1,
@@ -58,15 +59,15 @@ const dict = {
   nov: 11,
   dec: 12,
 };
-let monthOrWeekKeys = Object.keys(dict);
+const monthOrWeekKeys = Object.keys(dict);
 
 // 数组排序
 export const sort = (a, b) => {
   if (isNumber(a)) {
     return a - b;
-  } else if (isDate(a)) {
+  } if (isDate(a)) {
     return String(a).localeCompare(String(b));
-  } else if (monthOrWeekKeys.includes(a)) {
+  } if (monthOrWeekKeys.includes(a)) {
     return dict[a] - dict[b];
   }
 };
@@ -117,9 +118,9 @@ export const getAnnotations = (
     return [];
   }
   // 获取legend项，根据seriesField字段去重
-  let legend = uniq(data.map((item) => item[seriesField]));
+  const legend = uniq(data.map((item) => item[seriesField]));
 
-  let annotations = legend.map((content, idx) => {
+  const annotations = legend.map((content, idx) => {
     // 获取每个legend项的数组
     let arr = data.filter((item) => item[seriesField] == content);
 
@@ -161,10 +162,10 @@ export const handleStackPosition = (annotations, isArea) => {
   legendVal = [0, ...legendVal];
 
   // 处理堆叠数据
-  let position = annotations
+  const position = annotations
     .map((item, idx) => {
       // 显示在两组数据居中的位置
-      let val = isArea ? (legendVal[idx] + legendVal[idx + 1]) / 2 : legendVal[idx + 1];
+      const val = isArea ? (legendVal[idx] + legendVal[idx + 1]) / 2 : legendVal[idx + 1];
       return [item.position[0], val];
     })
     .reverse();
@@ -178,7 +179,7 @@ export const getTheme: (theme: number | string) => { theme?: { colors10: string[
   theme: number | string,
 ) => {
   const isDefaultTheme = theme === 'cbpc';
-  let themeCfg: { colors10: string[] } | 'cbpc' = isDefaultTheme
+  const themeCfg: { colors10: string[] } | 'cbpc' = isDefaultTheme
     ? defaultTheme
     : palette[theme].theme;
   return isDefaultTheme ? {} : { theme: themeCfg };
@@ -186,8 +187,8 @@ export const getTheme: (theme: number | string) => { theme?: { colors10: string[
 
 // 获取默认主题色列表
 export const getColors = (theme: number | string, needReverse = false) => {
-  let color = getTheme(theme);
-  let colors = [theme, color?.theme].includes('cbpc')
+  const color = getTheme(theme);
+  const colors = [theme, color?.theme].includes('cbpc')
     ? defaultTheme.colors10
     : color?.colors10 || color?.theme?.colors10;
 

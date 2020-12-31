@@ -1,4 +1,4 @@
-import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 // import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';
 import * as R from 'ramda';
@@ -114,18 +114,18 @@ export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
   let _data = R.map((item) => ({ type: item[x], value: item[y], percent: 0 }))(val);
   _data = _data.sort((b, a) => a.value - b.value);
 
-  let sum = _data.reduce((a, b) => a + b.value, 0);
+  const sum = _data.reduce((a, b) => a + b.value, 0);
   _data = _data.map((item) => {
     item.percent = item.value / sum;
     return item;
   });
 
   // 前N个数值
-  let data = R.take(pieItem, _data);
-  let other = R.takeLast(_data.length - pieItem, _data);
+  const data = R.take(pieItem, _data);
+  const other = R.takeLast(_data.length - pieItem, _data);
 
-  let otherRatio = other.reduce((a, b) => a + b.percent, 0);
-  let otherVal = other.reduce((a, b) => a + b.value, 0);
+  const otherRatio = other.reduce((a, b) => a + b.percent, 0);
+  const otherVal = other.reduce((a, b) => a + b.value, 0);
 
   const otherOffsetAngle = otherRatio * Math.PI; // other 占的角度的一半
 
@@ -133,7 +133,7 @@ export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
   return { data, other, otherOffsetAngle };
 };
 
-interface IPieOther {
+type IPieOther = {
   pieItem?: number;
   otherChart?: 'pie' | 'bar';
   theme: string | number;
@@ -154,7 +154,7 @@ export const onMount = (
   }: IPieOther,
   chart,
 ) => {
-  let { data, other, otherOffsetAngle } = transformer({ data: val, x, y, pieItem }, chart);
+  const { data, other, otherOffsetAngle } = transformer({ data: val, x, y, pieItem }, chart);
 
   chart.legend(false);
   chart.tooltip({
@@ -183,8 +183,8 @@ export const onMount = (
   view1.data(data);
   view1.interaction('element-highlight');
 
-  let color = getColors(theme, needRerverse);
-  let startColor = R.nth((data.length - 1) % 10)(color);
+  const color = getColors(theme, needRerverse);
+  const startColor = R.nth((data.length - 1) % 10)(color);
   view1
     .interval()
     .adjust('stack')
@@ -200,7 +200,7 @@ export const onMount = (
           fontSize,
         },
         content: (obj) => {
-          return obj.type + '\n' + (100 * obj.percent).toFixed(2) + '%';
+          return `${obj.type  }\n${  (100 * obj.percent).toFixed(2)  }%`;
         },
       };
     });
@@ -247,7 +247,7 @@ export const onMount = (
         fontSize,
       },
       content: (obj) => {
-        return obj.type + ' ' + (100 * obj.percent).toFixed(2) + '%';
+        return `${obj.type  } ${  (100 * obj.percent).toFixed(2)  }%`;
       },
     });
 

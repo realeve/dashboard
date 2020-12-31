@@ -21,10 +21,10 @@ export const getDefaultStyle = (style?: React.CSSProperties) => {
 const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
 
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => {
-  let url = page.background
+  const url = page.background
     ? assets.backgrounds[page.background].url
     : 'url(/img/panel/panelbg.png.webp)';
-  let background = isColor(url)
+  const background = isColor(url)
     ? { background: url, backgroundRepeat: 'repeat' }
     : {
         backgroundImage: page.background
@@ -74,7 +74,7 @@ export const calcCanvasRange = (
   { width, hideWidth = 0, height }: { width: number; hideWidth?: number; height: number },
   zoom,
 ) => {
-  let margin = 200;
+  const margin = 200;
 
   let x = 0;
   let y = 0;
@@ -100,7 +100,7 @@ export const getThumbnail = async (
   canvasEl: HTMLElement,
   { scale = 1, quality = 0.8, filename = null },
 ) => {
-  let imageType = 'image/webp';
+  const imageType = 'image/webp';
   return import('html2canvas').then(({ default: html2canvas }) =>
     html2canvas(canvasEl, {
       backgroundColor: null,
@@ -112,7 +112,7 @@ export const getThumbnail = async (
       if (filename) {
         canvas.toBlob(
           function (blob) {
-            saveAs(blob, filename + '.webp');
+            saveAs(blob, `${filename  }.webp`);
           },
           imageType,
           quality,

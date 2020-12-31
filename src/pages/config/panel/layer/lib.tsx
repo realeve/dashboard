@@ -1,5 +1,6 @@
 import * as R from 'ramda';
-import { IPanelConfig, GROUP_COMPONENT_KEY } from '@/models/common';
+import type { IPanelConfig} from '@/models/common';
+import { GROUP_COMPONENT_KEY } from '@/models/common';
 
 /**
  * https://codesandbox.io/s/k260nyxq9v?file=/index.js:1257-1263
@@ -105,8 +106,8 @@ export const MENU_LIST = [
 export const MENU_TYPE = 'CONTEXT_MENU';
 
 export const getShowedPanel = (panel: IPanelConfig[]) => {
-  let foldPanel = R.filter(R.propEq<string>('fold', true))(panel);
-  let folds = R.pluck('id', foldPanel);
+  const foldPanel = R.filter(R.propEq<string>('fold', true))(panel);
+  const folds = R.pluck('id', foldPanel);
   return R.reject<IPanelConfig>((item) => folds.includes(item.group))(panel);
 };
 
@@ -115,12 +116,12 @@ export const getShowedPanel = (panel: IPanelConfig[]) => {
  * @param panel 面板列表
  */
 export const reorderPanel = (panel: IPanelConfig[]) => {
-  let _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(panel);
+  const _groupPanel = R.filter<IPanelConfig>(R.propEq<string>('key', GROUP_COMPONENT_KEY))(panel);
   let groupPanels = R.pluck('id', _groupPanel);
   groupPanels = R.uniq(groupPanels);
 
   // 不包含子元素的列表
-  let _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(panel);
+  const _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(panel);
 
   // 最终结果
   let _nextPanel: IPanelConfig[] = [];
@@ -128,7 +129,7 @@ export const reorderPanel = (panel: IPanelConfig[]) => {
   _panel.forEach((item: IPanelConfig) => {
     if (item.key === GROUP_COMPONENT_KEY) {
       // 处理组内移动
-      let childrenPanel = R.filter(R.propEq<string>('group', item.id))(panel) as IPanelConfig[];
+      const childrenPanel = R.filter(R.propEq<string>('group', item.id))(panel) as IPanelConfig[];
       _nextPanel = [..._nextPanel, item, ...childrenPanel];
     } else {
       _nextPanel.push(item);

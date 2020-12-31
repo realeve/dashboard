@@ -6,4 +6,5 @@
 */
 
 import * as percent_circle from '../option/other/percent_circle';
+
 export default percent_circle;

@@ -1,4 +1,4 @@
-import { IApiConfig, IG2PlotProps, IChartMock } from '@/component/chartItem/interface';
+import type { IApiConfig, IG2PlotProps, IChartMock } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { palette } from '@/component/g2plot';
 import { getAnnotations } from './lib';
@@ -541,7 +541,7 @@ export const apiConfig: IApiConfig = {
 };
 
 // export const defaultOption = { renderer: 'svg' };
-export interface IG2Plot extends IG2PlotProps {
+export type IG2Plot = {
   x: number;
   y: number;
   legend: number;
@@ -556,7 +556,7 @@ export interface IG2Plot extends IG2PlotProps {
   pointColor: string;
   pointShape: string;
   stepType: string;
-}
+} & IG2PlotProps
 
 export const getLineConfig = ({
   data: { data, header },
@@ -587,15 +587,15 @@ export const getLineConfig = ({
   const isBarChart = ['column', 'bar'].includes(chartType);
   const reverseXY = chartType == 'bar';
 
-  let seriesField: { seriesField?: string } =
+  const seriesField: { seriesField?: string } =
     header.length < 3 || typeof legend === 'undefined'
       ? {}
       : {
           seriesField: header[legend],
         };
-  let stepOption = stepType == '无' || stepType == '' ? { smooth } : { stepType, smooth: false };
+  const stepOption = stepType == '无' || stepType == '' ? { smooth } : { stepType, smooth: false };
 
-  let slider =
+  const slider =
     !reverseXY && showSlider
       ? {
           slider: {
@@ -606,17 +606,17 @@ export const getLineConfig = ({
       : {};
 
   const isDefaultTheme = theme === 'cbpc';
-  let themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
-  let distTheme = isDefaultTheme ? {} : { theme: themeCfg };
+  const themeCfg = isDefaultTheme ? defaultTheme : palette[theme].theme;
+  const distTheme = isDefaultTheme ? {} : { theme: themeCfg };
 
-  let seriesCfg = {
+  const seriesCfg = {
     xField: header[reverseXY ? y : x],
     yField: header[reverseXY ? x : y],
     ...seriesField,
   };
 
   // 尾部跟随
-  let annotationsOption =
+  const annotationsOption =
     !isBarChart && endLabel && !isPercent
       ? getAnnotations(
           data,
@@ -634,15 +634,15 @@ export const getLineConfig = ({
           },
         )
       : null;
-  let annotations =
+  const annotations =
     !endLabel || isBarChart || !annotationsOption
       ? {}
       : {
           annotations: annotationsOption,
         };
   // 百分比显示数据
-  let formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
-  let label =
+  const formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
+  const label =
     !isBarChart || !showLabel
       ? {}
       : {
@@ -653,7 +653,7 @@ export const getLineConfig = ({
           },
         };
 
-  let interactions =
+  const interactions =
     isBarChart && isStack
       ? [
           // { type: 'element-link' },
@@ -678,7 +678,7 @@ export const getLineConfig = ({
         },
       };
 
-  let config = {
+  const config = {
     chartType,
     renderer,
     appendPadding: [0, endLabel && !isBarChart && !isPercent ? 100 : 0, 0, 0],
@@ -691,7 +691,7 @@ export const getLineConfig = ({
     ...stepOption,
     // 图例位置
     ...lib.getG2LegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
-    //缩略图滑动条
+    // 缩略图滑动条
     ...slider,
     // 交互
     interactions,

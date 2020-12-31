@@ -1,8 +1,9 @@
-import { Chart } from '@antv/g2';
-import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart } from '@antv/g2';
+import type { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { textColor } from '@/component/chartItem/option';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
+
 export const mock: IChartMock = {
   data: [
     ['办公用品', '收纳', 340],
@@ -69,9 +70,9 @@ export const onMount = (
   },
   chart: Chart,
 ) => {
-  let legend = String(_legend);
-  let x = String(_x);
-  let y = String(_y);
+  const legend = String(_legend);
+  const x = String(_x);
+  const y = String(_y);
   chart.data(data);
   chart.scale({
     [y]: {
@@ -119,7 +120,7 @@ export const onMount = (
     },
   });
 
-  let color = getColors(theme, needRerverse);
+  const color = getColors(theme, needRerverse);
   chart.coordinate().transpose();
   chart
     .interval()
@@ -135,10 +136,10 @@ export const onMount = (
       };
     });
 
-  let legendData: string[] = R.compose(R.uniq, R.pluck(legend))(data);
+  const legendData: string[] = R.compose(R.uniq, R.pluck(legend))(data);
 
   legendData.forEach((legendItem) => {
-    let item = data.find((item) => item[legend] == legendItem);
+    const item = data.find((item) => item[legend] == legendItem);
     chart.annotation().text({
       top: true,
       position: [item[x], 'min'],

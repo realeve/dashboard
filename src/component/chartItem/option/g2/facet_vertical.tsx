@@ -1,5 +1,5 @@
-import { Chart } from '@antv/g2';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart } from '@antv/g2';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 import { textColor } from '@/component/chartItem/option';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
@@ -193,9 +193,9 @@ export const onMount = (
     },
   );
 
-  let legendData = R.compose(R.uniq, R.pluck(legend))(data);
+  const legendData = R.compose(R.uniq, R.pluck(legend))(data);
 
-  let showTitle = !showLegend
+  const showTitle = !showLegend
     ? {
         title: {
           offsetY: 5,
@@ -216,7 +216,7 @@ export const onMount = (
     range: [0, 1],
   });
 
-  let color = getColors(theme, needRerverse);
+  const color = getColors(theme, needRerverse);
   transpose && chart.coordinate().transpose();
 
   chart.facet('list', {
@@ -226,7 +226,7 @@ export const onMount = (
     padding: [10, 0, transpose ? 0 : 30, 5 + 13 * 4],
     cols: Math.min(legendData.length, cols), // 超过4个换行
     eachView: function eachView(view, facet) {
-      let coordinateAxis = ['line', 'bar', 'point'].includes(type);
+      const coordinateAxis = ['line', 'bar', 'point'].includes(type);
 
       if (coordinateAxis || facet.columnIndex === 0) {
         view.axis(coordinateAxis ? y : x, {
@@ -250,7 +250,7 @@ export const onMount = (
         });
       }
 
-      let chartView = view[chartType[type]]()
+      const chartView = view[chartType[type]]()
         .shape(type === 'point' ? 'circle' : 'smooth')
         .style({
           opacity: 0.8,

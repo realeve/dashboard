@@ -8,18 +8,18 @@ import { useMeasure } from 'react-use';
  * @param screenNum 分为几个屏幕
  * @param lineWidth 线宽
  */
-let getEdgeArr = (
+const getEdgeArr = (
   _width: string | number,
   screenNum: string | number,
   lineWidth: string | number = 2,
 ) => {
-  let width = Math.ceil(Number(_width));
+  const width = Math.ceil(Number(_width));
   if (Number(screenNum) < 2 || width == 0) {
     return [];
   }
-  let step = width / Number(screenNum),
-    arr = [],
-    lWidth = Number(lineWidth);
+  const step = width / Number(screenNum);
+    const arr = [];
+    const lWidth = Number(lineWidth);
   for (let i = 1; step * i < width; i++) {
     // 此处需要考虑线的宽度，让分割线居中
     arr.push(i * step - Math.floor(lWidth / 2));
@@ -27,7 +27,7 @@ let getEdgeArr = (
   return arr;
 };
 
-interface EdgeLineProps {
+type EdgeLineProps = {
   direction?: 'horizontal' | 'vertical';
   data: any[];
   screen_edge_width: number;
@@ -47,7 +47,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
     },
     ref,
   ) => {
-    let isHorizontal = direction == 'horizontal';
+    const isHorizontal = direction == 'horizontal';
     return (
       <div
         ref={ref}
@@ -57,8 +57,8 @@ const EdgeLine: React.ForwardRefExoticComponent<
         <div className="datav-guides" style={{ transform: 'translateX(-10px)', height: '100%' }}>
           {data.map((item) => (
             <div
-              className={styles.screenEdge + ` datav-${direction}`}
-              key={item + 'px'}
+              className={`${styles.screenEdge  } datav-${direction}`}
+              key={`${item  }px`}
               style={{
                 transform: !isHorizontal
                   ? `translate(${item}px,-30px)`
@@ -77,7 +77,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
   },
 );
 
-export interface IScreenEdgeProps {
+export type IScreenEdgeProps = {
   screen_edge_background: string;
   screen_edge_width: number;
   screen_x: number;

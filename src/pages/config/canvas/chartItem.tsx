@@ -1,21 +1,22 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
+import type { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';
 import { Spin } from 'antd';
 import { connect } from 'react-redux';
+
 const ChartInstance = React.lazy(() => import('./ChartInstance'));
-interface IChartProps extends IHistoryProps {
+type IChartProps = {
   chartid: string;
   page: IPage;
   panel: IPanelConfig[];
-}
+} & IHistoryProps
 const Index = ({ chartid, page: _page, history, curHistoryIdx, panel: _panel }: IChartProps) => {
-  let panel = history[curHistoryIdx]?.panel || _panel;
+  const panel = history[curHistoryIdx]?.panel || _panel;
   // 对于已经添加的组件，在首次渲染后如果需要对属性做深度修改，editor未提供组件更新的选项，需要重新从设置中搜出并渲染
-  let config = R.find<IPanelConfig>(R.propEq<string>('id', chartid))(panel);
+  const config = R.find<IPanelConfig>(R.propEq<string>('id', chartid))(panel);
   if (!config) {
     return null;
   }
@@ -30,7 +31,7 @@ const Index = ({ chartid, page: _page, history, curHistoryIdx, panel: _panel }: 
 
 export default connect(({ common }: { common: ICommon }) => common)(Index);
 
-interface IChartItemProps {
+type IChartItemProps = {
   page: IPage;
   config: IPanelConfig;
 }
@@ -65,7 +66,7 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
           width: '100%',
           height: config.showTitle ? `calc(100% - 50px)` : '100%',
           borderRadius: (config?.general?.borderRadius || [0, 0, 0, 0])
-            .map((item) => item + 'px')
+            .map((item) => `${item  }px`)
             .join(' '),
         }}
         showBackground={config.showBackground}

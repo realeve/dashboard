@@ -1,7 +1,7 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 
 /**
  * // 自定义组件文档说明 更新自2020-08-31
@@ -52,17 +52,17 @@ export const mock: IChartMock = {
 
 const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   (legend = Number(legend)), (x = Number(x)), (y = Number(y));
-  let arr = R.pluck<string, { [key: string]: any }>(String(y), data);
-  let max = Math.max(...arr);
+  const arr = R.pluck<string, Record<string, any>>(String(y), data);
+  const max = Math.max(...arr);
 
-  let result = lib.handleMinMax({ min: 0, max });
-  let legendArr = lib.getUniqByIdx({ key: legend, data });
-  let xArr = lib.getUniqByIdx({ key: x, data });
-  let series = [];
+  const result = lib.handleMinMax({ min: 0, max });
+  const legendArr = lib.getUniqByIdx({ key: legend, data });
+  const xArr = lib.getUniqByIdx({ key: x, data });
+  const series = [];
   legendArr.map((name, idx) => {
-    let arr = [];
+    const arr = [];
     xArr.forEach((xItem) => {
-      let item = data.find((item) => item[legend] == name && item[x] == xItem);
+      const item = data.find((item) => item[legend] == name && item[x] == xItem);
       arr.push(item ? Number(item[y]) * (idx === 0 ? -1 : 1) : '-');
     });
     series.push({
@@ -158,7 +158,7 @@ export default ({
   legendOrient,
   smooth = true,
 }: IChartProps) => {
-  let res = handleData(data, { legend, x, y });
+  const res = handleData(data, { legend, x, y });
 
   const color = '#ddd';
   const axisColor = '#203651';

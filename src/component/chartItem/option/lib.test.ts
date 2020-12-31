@@ -40,14 +40,14 @@ test('getMin', () => {
 });
 
 test('getPercentWithPrecision', () => {
-  let arr = lib.getPercentWithPrecision([11, 21, 31, 41], 2);
+  const arr = lib.getPercentWithPrecision([11, 21, 31, 41], 2);
   expect(arr).toEqual([10.58, 20.19, 29.81, 39.42]);
   expect(lib.getPercentWithPrecision([1, 2, -1, -2], 2)).toEqual([0, 0, 0, 0]);
   expect(lib.getPercentWithPrecision([1, 1, '-'])).toEqual([50, 50, 0]);
 });
 
 test('getPercent', () => {
-  let arr = lib.getPercent({
+  const arr = lib.getPercent({
     data: [
       {
         a: 11,
@@ -79,7 +79,7 @@ test('getChartType', () => {
 });
 
 test('handleMinMax', () => {
-  let res = lib.handleMinMax({ min: 12, max: 55 });
+  const res = lib.handleMinMax({ min: 12, max: 55 });
   expect(res).toMatchObject({
     min: 10,
     max: 100,
@@ -451,7 +451,7 @@ test('getLegendOption ', () => {
     orient: 'horizontal',
   });
 
-  let config = {
+  const config = {
     show: true,
     icon: 'circle',
     textStyle: { color: '#ddd' },

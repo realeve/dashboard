@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import ECharts from '@/component/echarts';
 import { handleScatterData, EStatus } from './util';
 import { SEARCH_PREFIX } from '@/utils/setting';
-import { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
 
 const starableAnimate = (idx) => idx * Math.random() * 10;
 
@@ -38,7 +38,7 @@ export const config: IChartConfig[] = [
 ];
 
 export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
-  let data = useMemo(() => handleScatterData({ prod, y, data: _data }), [_data.hash, y, prod]);
+  const data = useMemo(() => handleScatterData({ prod, y, data: _data }), [_data.hash, y, prod]);
   return (
     <ECharts
       style={style}
@@ -46,7 +46,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
         if (!value[3]) {
           return;
         }
-        let url = value[3].url;
+        const {url} = value[3];
         window.open(SEARCH_PREFIX + url, '_blank');
       }}
       option={{
@@ -60,8 +60,8 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
             if (!value[3]) {
               return '未印码';
             }
-            let { title, type, url } = value[3];
-            let tip = ['未印刷', '正常', '跳号', '未印码'][value[2]];
+            const { title, type, url } = value[3];
+            const tip = ['未印刷', '正常', '跳号', '未印码'][value[2]];
             return `车号:${url}<br/>
             品种:${type}<br/>
             冠字:${title}<br/>

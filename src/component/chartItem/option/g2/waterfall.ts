@@ -1,6 +1,8 @@
-import { registerShape, Chart } from '@antv/g2';
-import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type { Chart } from '@antv/g2';
+import { registerShape } from '@antv/g2';
+import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
+
 const isArray = (arr) => R.type(arr) == 'Array';
 
 /**
@@ -157,9 +159,9 @@ registerShape('interval', 'waterfall', {
 });
 
 export const handleAxisStyle = (chart, { x, y }) => {
-  let textColor = 'rgba(255, 255, 255, 0.95)';
+  const textColor = 'rgba(255, 255, 255, 0.95)';
 
-  let fieldColor = {
+  const fieldColor = {
     label: {
       textStyle: {
         fill: textColor,
@@ -187,8 +189,8 @@ export const handleAxisStyle = (chart, { x, y }) => {
 
 // 数据转换器，外部数据变更时，将计算结果注入至source
 export const transformer = ({ data: val, x, y }) => {
-  let sum = val.reduce((a, b) => a + b[1], 0);
-  let data = [...R.clone(val), ['总计', sum]];
+  const sum = val.reduce((a, b) => a + b[1], 0);
+  const data = [...R.clone(val), ['总计', sum]];
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
@@ -209,13 +211,13 @@ export const onMount = (
     data: { data: val, header },
     x = 0,
     y = 1,
-    color_falling = 'rgb(240,102,74)', //正值柱形填充颜色
-    color_rising = 'rgb(48,191,120)', //负值柱形填充颜色
+    color_falling = 'rgb(240,102,74)', // 正值柱形填充颜色
+    color_rising = 'rgb(48,191,120)', // 负值柱形填充颜色
     color_total = '#1890ff', // 总计值柱形填充颜色，可选
   }: IChartProps,
   chart: Chart,
 ) => {
-  let { data } = transformer({ data: val, x, y });
+  const { data } = transformer({ data: val, x, y });
   chart.data(data);
 
   handleAxisStyle(chart, { x, y });
@@ -243,7 +245,7 @@ export const onMount = (
       }
       return {
         name: header[x],
-        value: value,
+        value,
       };
     })
     .shape('waterfall');

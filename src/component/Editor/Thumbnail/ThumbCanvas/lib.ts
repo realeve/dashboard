@@ -1,5 +1,6 @@
 import * as R from 'ramda';
-export interface IPanelItem {
+
+export type IPanelItem = {
   id: string;
   x: number;
   y: number;
@@ -13,17 +14,17 @@ export interface IPanelItem {
  * @param nextPanel 新的面板
  */
 export const diff = (prevPanel: IPanelItem[], nextPanel: IPanelItem[]) => {
-  let prevIds = R.pluck('id', prevPanel);
-  let nextIds = R.pluck('id', nextPanel);
-  let result = R.difference(nextPanel, prevPanel);
+  const prevIds = R.pluck('id', prevPanel);
+  const nextIds = R.pluck('id', nextPanel);
+  const result = R.difference(nextPanel, prevPanel);
 
   // 新增
-  let add = R.reject<IPanelItem>((item) => prevIds.includes(item.id))(result);
+  const add = R.reject<IPanelItem>((item) => prevIds.includes(item.id))(result);
 
   // 变化
 
-  let change = R.filter<IPanelItem>((item) => prevIds.includes(item.id))(result);
+  const change = R.filter<IPanelItem>((item) => prevIds.includes(item.id))(result);
 
-  let remove = R.difference(prevIds, nextIds);
+  const remove = R.difference(prevIds, nextIds);
   return { remove, change, add };
 };

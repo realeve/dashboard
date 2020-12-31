@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useMemo, useState } from 'react';
-import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import styles from './index.less';
 import { init } from './lib';
-export { mock } from './mock';
 import { connect } from 'react-redux';
 import MoveableCanvas from '@/component/MoveableCanvas';
-import { ICommon } from '@/models/common';
+import type { ICommon } from '@/models/common';
 import { Tooltip } from 'antd';
 import { useInterval } from 'react-use';
 import { SEARCH_PREFIX } from '@/utils/setting';
 import classnames from 'classnames';
 import {handleData} from './util'
+
+export { mock } from './mock';
 // title:冠字华夫图
 
 export const config: IChartConfig[] = [
@@ -184,7 +185,7 @@ const WaffleChart = ({
   style,
 }) => {
   // 在移动时，data将重新计算，此处可使用useMemo
-  let { data, warnNum } = useMemo(() => handleData({ x, y, legend, cart, data: _data, gzMode }), [
+  const { data, warnNum } = useMemo(() => handleData({ x, y, legend, cart, data: _data, gzMode }), [
     x,
     y,
     legend,
@@ -193,7 +194,7 @@ const WaffleChart = ({
     gzMode,
   ]);
 
-  let containerStyle: React.CSSProperties =
+  const containerStyle: React.CSSProperties =
     direction == 'vertical'
       ? {
           flexDirection: 'row',
@@ -202,7 +203,7 @@ const WaffleChart = ({
           flexDirection: 'column',
           height: '100%',
         };
-  let _style: React.CSSProperties = {
+  const _style: React.CSSProperties = {
     ...containerStyle,
     padding,
     flexWrap: wrap ? 'wrap' : 'wrap-reverse',
@@ -235,7 +236,7 @@ const WaffleChart = ({
     <MoveableCanvas style={style} moveable={moveable && curTool !== 'MoveTool'} zoomable={zoomable}>
       <div className={styles.container} style={_style} ref={ref}>
         {data.map((item, i) => {
-          let Item = (
+          const Item = (
             <div
               className={classnames(styles.box, {
                 [styles.active]: item._warn && visibleIdx == item._warnIdx,

@@ -1,5 +1,6 @@
 import styles from './dna.less';
 import * as R from 'ramda';
+
 export default ({ title = '载入中...' }) => (
   <div className={styles.curtain}>
     <div className={styles.tip}>{title}</div>

@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
-import { MoveableManagerInterface } from 'react-moveable';
+import type { MoveableManagerInterface } from 'react-moveable';
 import { getContentElement, connectEditorProps, getId } from '../utils/utils';
-import Editor from '../Editor';
-import { EditorInterface } from '../types';
-import { IObject } from '@daybrush/utils';
+import type Editor from '../Editor';
+import type { EditorInterface } from '../types';
+import type { IObject } from '@daybrush/utils';
 import { diff } from '@egjs/list-differ';
 import * as R from 'ramda';
 
@@ -19,7 +19,7 @@ function restoreRender(id: string, state: IObject<any>, prevState: IObject<any>,
     console.error('No Element');
     return false;
   }
-  const moveableData = editor.moveableData;
+  const {moveableData} = editor;
   const frame = moveableData.getFrame(el);
 
   frame.clear();
@@ -63,7 +63,7 @@ function redoRenders({ infos }: IObject<any>, editor: Editor) {
   editor.eventBus.trigger('render');
 }
 
-export interface DimensionViewableProps {
+export type DimensionViewableProps = {
   dimensionViewable?: boolean;
 }
 const DimensionViewable = {
@@ -94,7 +94,7 @@ const DimensionViewable = {
 @connectEditorProps
 export default class MoveableManager extends React.PureComponent<{
   editor: Editor;
-  selectedTargets: Array<HTMLElement | SVGElement>;
+  selectedTargets: (HTMLElement | SVGElement)[];
   selectedMenu: string;
   verticalGuidelines: number[];
   horizontalGuidelines: number[];
@@ -166,7 +166,7 @@ export default class MoveableManager extends React.PureComponent<{
           onResizeGroup={moveableData.onResizeGroup}
           onRotateStart={moveableData.onRotateStart}
           onRotate={(e) => {
-            let rotate =
+            const rotate =
               (Math.floor(
                 (e.beforeRotate >= 0 ? e.beforeRotate : e.beforeRotate + 360) / ROTATE_DEGREE,
               ) *
@@ -211,7 +211,7 @@ export default class MoveableManager extends React.PureComponent<{
             if (!e.datas.isRender) {
               return;
             }
-            let next = R.clone(moveableData.getFrame(e.target).get());
+            const next = R.clone(moveableData.getFrame(e.target).get());
 
             const item = {
               id: getId(e.target),
@@ -237,7 +237,7 @@ export default class MoveableManager extends React.PureComponent<{
             if (!e.datas.isRender) {
               return;
             }
-            const prevDatas = e.datas.prevDatas;
+            const {prevDatas} = e.datas;
             const infos = e.targets.map((target, i) => {
               return {
                 id: getId(target),
@@ -281,4 +281,4 @@ export default class MoveableManager extends React.PureComponent<{
     this.getMoveable().updateRect();
   }
 }
-export default interface MoveableManager extends EditorInterface {}
+export default type MoveableManager = {} & EditorInterface

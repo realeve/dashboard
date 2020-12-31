@@ -2,7 +2,7 @@ import assets from '../assets';
 import styles from './index.less';
 import classnames from 'classnames';
 
-export interface WidgetDecoration {
+export type WidgetDecoration = {
   name?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;

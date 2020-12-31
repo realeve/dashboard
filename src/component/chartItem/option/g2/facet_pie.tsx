@@ -1,8 +1,8 @@
-import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 
 import { getColors, getAntThemePanel } from '../g2plot/lib';
-import { ShapeAttrs } from '@antv/g-base/lib/types';
+import type { ShapeAttrs } from '@antv/g-base/lib/types';
 
 export const mock: IChartMock = {
   data: [
@@ -121,7 +121,7 @@ export const onMount = (
 
   chart.data(data);
   chart.legend(false);
-  //别名
+  // 别名
   chart.scale({
     type: {
       alias: header[x],
@@ -132,13 +132,13 @@ export const onMount = (
   });
 
   chart.tooltip(false);
-  let colors = getColors(theme, needRerverse);
+  const colors = getColors(theme, needRerverse);
   chart.facet(facet, {
     fields: ['type'],
     cols,
     showTitle: false,
     eachView: function eachView(view, facet) {
-      const data = facet.data;
+      const {data} = facet;
       data.push({ type: '其他', value: max - data[0].value });
       view.data(data);
       view.coordinate('theta', {
@@ -147,7 +147,7 @@ export const onMount = (
       });
 
       // list 模式下，需要手工计算行列
-      let idx = facet.rowIndex * facet.columnValuesLength + facet.columnIndex;
+      const idx = facet.rowIndex * facet.columnValuesLength + facet.columnIndex;
 
       view
         .interval()
@@ -162,7 +162,7 @@ export const onMount = (
       view.annotation().text({
         position: ['50%', '50%'],
         content: (obj) => {
-          return obj[0].type + '\n' + obj[0].value + '%';
+          return `${obj[0].type  }\n${  obj[0].value  }%`;
         },
         style: {
           fill: fontColor,

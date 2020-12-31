@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { CountUpProps } from 'react-countup';
+import type { CountUpProps } from 'react-countup';
 import classnames from 'classnames';
 import { useInterval } from 'react-use';
 import { thouandsNum } from '@/utils/lib';
-export interface ICountUp extends CountUpProps {
+
+export type ICountUp = {
   title: string;
   value: number;
   decimals?: number;
@@ -12,9 +13,9 @@ export interface ICountUp extends CountUpProps {
   style?: React.CSSProperties;
   theme?: 'transparent' | 'theme1' | 'theme2';
   [key: string]: any;
-}
+} & CountUpProps
 
-let numId = {
+const numId = {
   0: 0,
   1: 1,
   2: 2,
@@ -55,7 +56,7 @@ export default ({
   }, [value]);
 
   useEffect(() => {
-    let timeId = setTimeout(() => {
+    const timeId = setTimeout(() => {
       setVal(value.toFixed(decimals));
       setInited(true);
     }, 100);
@@ -65,7 +66,7 @@ export default ({
   }, []);
 
   useInterval(() => {
-    let nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
+    const nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
     setVal(nextVal);
   }, 2000);
 
@@ -81,7 +82,7 @@ export default ({
                 <div
                   className={classnames(styles.num, styles[theme])}
                   style={{
-                    backgroundPosition: `0 ${-numId[num] * 61.1}px`, //58
+                    backgroundPosition: `0 ${-numId[num] * 61.1}px`, // 58
                     transitionDuration: `${duration} s`,
                     transform: `scale(${scale})`,
                     outlineColor,

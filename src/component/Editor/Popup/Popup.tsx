@@ -3,7 +3,8 @@ import { prefix } from '../utils/utils';
 import './Popup.less';
 import * as ReactDOM from 'react-dom';
 import { Spin, Button } from 'Antd';
-export interface IPopup {
+
+export type IPopup = {
   container?: string;
   onClose: () => any;
   style?: React.CSSProperties;
@@ -49,7 +50,7 @@ export const PopupFooter = ({ children, ...props }) => (
   </div>
 );
 
-export interface IConfirmProps {
+export type IConfirmProps = {
   children: React.ReactNode;
   title: React.ReactNode;
   spinning?: boolean;

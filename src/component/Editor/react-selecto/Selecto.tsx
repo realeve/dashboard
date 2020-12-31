@@ -1,17 +1,19 @@
 import * as React from 'react';
+import type {
+  SelectoOptions,
+  SelectoProperties,
+  SelectoMethods} from './selecto.esm.js';
 import VanillaSelecto, {
   CLASS_NAME,
   OPTIONS,
-  SelectoOptions,
   PROPERTIES,
-  SelectoProperties,
   EVENTS,
-  SelectoMethods,
   METHODS,
 } from './selecto.esm.js'; 
 
-import { ref, MethodInterface, withMethods } from 'framework-utils';
-import { SelectoProps } from './types';
+import type { MethodInterface} from 'framework-utils';
+import { ref, withMethods } from 'framework-utils';
+import type { SelectoProps } from './types';
 import { REACT_EVENTS } from './consts';
 
 export default class Selecto extends React.PureComponent<Partial<SelectoProps>> {
@@ -22,7 +24,7 @@ export default class Selecto extends React.PureComponent<Partial<SelectoProps>> 
     return <div className={CLASS_NAME} ref={ref(this, 'selectionElement')} />;
   }
   public componentDidMount() {
-    const props = this.props;
+    const {props} = this;
     const options: Partial<SelectoOptions> = {};
 
     OPTIONS.forEach(name => {
@@ -47,8 +49,8 @@ export default class Selecto extends React.PureComponent<Partial<SelectoProps>> 
     });
   }
   public componentDidUpdate(prevProps: Partial<SelectoProperties>) {
-    const props = this.props;
-    const selecto = this.selecto; 
+    const {props} = this;
+    const {selecto} = this; 
     PROPERTIES.forEach(name => {
       if (prevProps[name] !== props[name]) {
         (selecto as any)[name] = props[name];
@@ -59,4 +61,4 @@ export default class Selecto extends React.PureComponent<Partial<SelectoProps>> 
     this.selecto?.destroy?.();
   }
 }
-export default interface Selecto extends MethodInterface<SelectoMethods, VanillaSelecto, Selecto> {}
+export default type Selecto = {} & MethodInterface<SelectoMethods, VanillaSelecto, Selecto>

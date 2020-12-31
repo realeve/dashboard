@@ -30,13 +30,13 @@ const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
   if (!value) {
     return null;
   }
-  let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
+  const val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
   return (
     <ColorPicker
       color={rgb2hex(value).slice(0, 7)}
       alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
       onMouseUp={(e) => {
-        let color = hex2rgb(e.color);
+        const color = hex2rgb(e.color);
         onChange(`rgba(${color},${e.alpha / 100})`);
       }}
       placement="bottomRight"
@@ -49,7 +49,7 @@ const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
   );
 };
 
-const getInitVal = (value:string) => {
+const getInitVal = (value: string) => {
   if (value.slice(0, 6) == 'linear') {
     return value
       .replace('%)', '%')
@@ -65,7 +65,7 @@ const getInitVal = (value:string) => {
 };
 
 const getGardient = (_color: string[][]) => {
-  let color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color);
+  const color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color);
   return `linear-gradient(90deg, ${color[0].join(' ')}%, ${color[1].join(' ')}%, ${color[2].join(
     ' ',
   )}%)`;
@@ -106,9 +106,9 @@ const GardientPicker = ({ value, onChange, disabled = false }) => {
             onStop={(e) => {
               let nextPos = (Number(e.layerX) / 1.78).toFixed(0);
               nextPos = R.clamp(0, 100, nextPos);
-              let prev = R.nth(idx, color);
+              const prev = R.nth(idx, color);
               prev[1] = nextPos;
-              let pos = R.update(idx, prev, color);
+              const pos = R.update(idx, prev, color);
               setColor(pos);
             }}
             bounds={{ top: 0, left: 0, right: 178, bottom: 0 }}
@@ -120,9 +120,9 @@ const GardientPicker = ({ value, onChange, disabled = false }) => {
                 onVisibleChange={setShow}
                 disabled={disabled}
                 onChange={(e) => {
-                  let prev = R.nth(idx, color);
+                  const prev = R.nth(idx, color);
                   prev[0] = e;
-                  let nextColor = R.update(idx, prev, color);
+                  const nextColor = R.update(idx, prev, color);
                   setColor(nextColor);
                 }}
                 position={color[idx][1]}
@@ -142,7 +142,7 @@ export const PureColor = ({
   position = 'top',
   // noAnimation = true,
 }) => {
-  let val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
+  const val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
   // , { [styles.noAnimation]: noAnimation }
   return (
@@ -165,7 +165,7 @@ export const PureColor = ({
         color={rgb2hex(value).slice(0, 7)}
         alpha={val.length === 4 ? Number(val[3]) * 100 : 100}
         onMouseUp={(e) => {
-          let color = hex2rgb(e.color);
+          const color = hex2rgb(e.color);
           onChange(`rgba(${color},${e.alpha / 100})`);
         }}
         placement="bottomRight"
@@ -191,7 +191,7 @@ export default ({ value, onChange, disabled = false }) => {
         size="middle"
         value={tab}
         onChange={(e) => {
-          let val = e.target.value;
+          const val = e.target.value;
           setTab(val);
           if (val == 0) {
             onChange('transparent');

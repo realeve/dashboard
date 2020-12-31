@@ -11,10 +11,15 @@
 // },
 // };
 
+// 0 = off, 1 = warn, 2 = error
 module.exports = {
+  plugins: ['react-hooks'],
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
-    'no-plusplus': false,
-    'import/newline-after-import': false,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    eqeqeq: 'warn',
+    // 'no-plusplus': 0,
+    // 'import/newline-after-import': 0,
   },
 };

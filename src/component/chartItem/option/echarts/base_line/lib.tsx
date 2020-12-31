@@ -1,5 +1,5 @@
-import { IChartConfig } from '@/component/chartItem/interface';
-import { ISeries } from './interface';
+import type { IChartConfig } from '@/component/chartItem/interface';
+import type { ISeries } from './interface';
 
 import * as R from 'ramda';
 /**
@@ -13,16 +13,16 @@ export const getMarkArea: (num: number, step?: number, split?: string) => IChart
   step = 1,
   split = '~',
 ) => {
-  let arr: IChartConfig[] = R.range(1, num + 1).map((i: number) => [
+  const arr: IChartConfig[] = R.range(1, num + 1).map((i: number) => [
     {
-      key: 'markTitle' + i,
+      key: `markTitle${  i}`,
       defaultValue: '',
       type: 'input',
       valueType: 'text',
       title: `区域${i}标题`,
     },
     {
-      key: 'markArea' + i,
+      key: `markArea${  i}`,
       type: 'slider',
       defaultValue: [10, 20],
       title: `区域${i}范围`,
@@ -76,7 +76,7 @@ export const getMarkAreaData: (
  * @param type 坐标轴类型（横/纵）
  */
 export const getAxisName = ({ isReverse, isPolar, type = 'x' }) => {
-  let arr = ['xAxis', 'yAxis', 'angleAxis', 'radiusAxis'];
+  const arr = ['xAxis', 'yAxis', 'angleAxis', 'radiusAxis'];
   if (!isPolar) {
     return isReverse ? (type == 'x' ? arr[0] : arr[1]) : type == 'x' ? arr[1] : arr[0];
   }
@@ -88,7 +88,7 @@ export const getAxisName = ({ isReverse, isPolar, type = 'x' }) => {
  * @param series 数据系列
  */
 export const handlePercent = (series: ISeries[]) => {
-  let arrSum: number[] = [];
+  const arrSum: number[] = [];
   series.forEach(({ data }, idx: number) => {
     if (idx > 0) {
       data.forEach((td, i: number) => {

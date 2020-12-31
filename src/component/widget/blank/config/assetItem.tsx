@@ -4,7 +4,7 @@ import { isColor } from '@/component/chartItem/option/lib';
 
 export default ({ value, style = {}, onChange, assets }) => {
   return (
-    <div className={styles['configGrid']} style={style}>
+    <div className={styles.configGrid} style={style}>
       {Object.entries(assets).map(([name, val]: [string, { url: string }]) => {
         return (
           <div

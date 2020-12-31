@@ -5,4 +5,5 @@
     名称：旋风图
 */
 import * as whirlwind from '../option/g2/whirlwind';
+
 export default whirlwind;

@@ -2,8 +2,9 @@ import moment from 'dayjs';
 
 // https://github.com/iamkun/dayjs/blob/dev/docs/en/Plugin.md#quarterofyear
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+import type { IChartConfig } from '@/component/chartItem/interface';
+
 moment.extend(quarterOfYear);
-import { IChartConfig } from '@/component/chartItem/interface';
 
 const range = {
   去年: [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],

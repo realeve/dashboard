@@ -5,4 +5,5 @@
     名称：饼图
 */
 import * as g2pie from '../option/g2plot/pie';
+
 export default g2pie;

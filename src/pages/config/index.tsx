@@ -2,23 +2,24 @@ import React, { useEffect, useState, Suspense } from 'react';
 import styles from './index.less';
 import { useSetState, useDebounce } from 'react-use';
 import HeaderComponent from './header';
-import { IHideProps } from './panel/setting';
+import type { IHideProps } from './panel/setting';
 import { getDefaultStyle } from '@/component/Editor/lib';
-import { TQuickTool } from '@/component/Editor/types';
+import type { TQuickTool } from '@/component/Editor/types';
 import { generateId } from '@/component/Editor/utils/utils';
 import ChartItem from './canvas/chartItem';
-import { IChartConfig } from './panel/components/db';
+import type { IChartConfig } from './panel/components/db';
 import { connect } from 'react-redux';
-import {
+import type {
   ICommon,
-  GROUP_COMPONENT_KEY,
-  SCREEN_EDGE_KEY,
   IPage,
-  IPanelConfig,
+  IPanelConfig} from '@/models/common';
+import {
+  GROUP_COMPONENT_KEY,
+  SCREEN_EDGE_KEY
 } from '@/models/common';
 import * as R from 'ramda';
 
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 import * as lib from '@/utils/lib';
 
 import localforage from 'localforage';
@@ -35,11 +36,11 @@ const Setting = React.lazy(() => import('./panel/setting'));
 const Thumbnail = React.lazy(() => import('@/component/Editor/Thumbnail/'));
 const EditSlider = React.lazy(() => import('./EditSlider'));
 
-export interface IPanelItem extends IChartConfig {
+export type IPanelItem = {
   style: React.CSSProperties;
   id: string;
   title: string;
-}
+} & IChartConfig
 
 // 添加组件
 // 当属性名中有 scenaIgnore 时，禁止selectTo选中
@@ -50,7 +51,7 @@ export const addPanel = (
   if (config.key === GROUP_COMPONENT_KEY) {
     return;
   }
-  let { ['transform-origin']: transformOrigin, ...style } = _style;
+  const { 'transform-origin': transformOrigin, ...style } = _style;
 
   editor?.current?.append(
     <div
@@ -89,8 +90,8 @@ const Index = ({
   selectedPanel: string[];
   curTool: TQuickTool;
 }) => {
-  let panel = history[curHistoryIdx]?.panel || _panel;
-  let panelIds = R.pluck('id', panel);
+  const panel = history[curHistoryIdx]?.panel || _panel;
+  const panelIds = R.pluck('id', panel);
 
   useEffect(() => {
     console.log(curTool);
@@ -219,7 +220,7 @@ const Index = ({
     });
 
     // 移除记录的id列表
-    let _panelKeys = R.reject<string>((item) => idx.includes(item))(panelKeys);
+    const _panelKeys = R.reject<string>((item) => idx.includes(item))(panelKeys);
     setPanelKeys(_panelKeys);
   };
 
@@ -229,10 +230,10 @@ const Index = ({
    */
   const onPaste = (ids: string[]) => {
     // 粘贴添加组件
-    let newPanel: IPanelConfig[] = [];
+    const newPanel: IPanelConfig[] = [];
     ids.forEach((id) => {
-      let item = R.find<IPanelConfig>(R.propEq<string>('id', id))(panel);
-      let _item = { ...item, id: lib.noncer() };
+      const item = R.find<IPanelConfig>(R.propEq<string>('id', id))(panel);
+      const _item = { ...item, id: lib.noncer() };
       // addPanel(editor, _item);
       newPanel.push(_item);
     });
@@ -250,19 +251,19 @@ const Index = ({
   const getLockedPanel = () =>
     panel.filter((item) => item.lock || item.hide).map((item) => item.id);
 
-  const calcNextSelectedPanel = (selectedPanel:string[]) => {
+  const calcNextSelectedPanel = (selectedPanel: string[]) => {
     // 此处处理多个组件共同选择的问题；
     let nextPanel = selectedPanel;
-    let lockedPanel = getLockedPanel();
+    const lockedPanel = getLockedPanel();
     if (selectedPanel.length > 0) {
       // 2020-11-11 group所在ID的组件需要一并被选择
       let groupIds: string[] = [];
 
       panel.filter((item) => {
         if (selectedPanel.includes(item.id) && item.group) {
-          let items = panel.filter((p) => p.group == item.group);
-          let groupPanel = items.map((p) => p.id);
-          let groupId = items.map((p) => p.group);
+          const items = panel.filter((p) => p.group == item.group);
+          const groupPanel = items.map((p) => p.id);
+          const groupId = items.map((p) => p.group);
           nextPanel = [...nextPanel, ...groupPanel];
           groupIds = [...groupIds, ...groupId];
         }
@@ -271,14 +272,14 @@ const Index = ({
       groupIds = R.uniq(groupIds).filter((item) => item);
 
       // 需判断当前groupId下是否只有1项
-      let arr = panel.filter((p) => groupIds.includes(p.group));
+      const arr = panel.filter((p) => groupIds.includes(p.group));
       if (groupIds.length === 1 && arr.length > 1) {
         nextPanel = [...groupIds, ...nextPanel];
       }
     }
 
     // 移除隐藏或锁定的组件
-    let nextSelectedPanel = nextPanel.filter((item) => !lockedPanel.includes(item));
+    const nextSelectedPanel = nextPanel.filter((item) => !lockedPanel.includes(item));
     return R.uniq(nextSelectedPanel);
   };
 
@@ -352,7 +353,7 @@ const Index = ({
             setHide={setHide}
             hide={hide}
             onAddPanel={(newPanel) => {
-              let autoStyle = calcPanelPosition({ panel, page });
+              const autoStyle = calcPanelPosition({ panel, page });
               // console.log(autoStyle);
               const style = getDefaultStyle(autoStyle);
               // 2020-12-12 根据当前的panel项自动计算合适的位置
@@ -370,7 +371,7 @@ const Index = ({
                 payload: {
                   panel: [...panel, ...business],
                   recordHistory: true,
-                  historyTitle: '添加业务组件 - ' + business[0].title,
+                  historyTitle: `添加业务组件 - ${  business[0].title}`,
                 },
               });
               // business.forEach((nextPanel) => {
@@ -454,8 +455,8 @@ const Index = ({
               onChange={(e, type) => {
                 // 调整大小
                 if (type === 'size') {
-                  let key = Object.keys(e);
-                  editor?.current.setProperty(key, Object.values(e)[0] + 'px', true);
+                  const key = Object.keys(e);
+                  editor?.current.setProperty(key, `${Object.values(e)[0]  }px`, true);
                 }
                 // console.log(e, type);
               }}
