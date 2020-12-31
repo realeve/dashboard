@@ -102,7 +102,7 @@ const Index = ({
     });
   }, []);
 
-  const [hash, setHash] = useState(generateId());
+  const [hash, setHash] = useState(()=>generateId());
 
   const [zoom, setZoom] = useState(0.7);
 

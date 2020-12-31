@@ -75,7 +75,8 @@ const getGardient = (_color) => {
  * 渐变选择器
  */
 const GardientPicker = ({ value, onChange, disabled = false }) => {
-  const [color, setColor] = useState(getInitVal(value));
+  // https://zh-hans.reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
+  const [color, setColor] = useState(()=>getInitVal(value));
   useEffect(() => {
     const nextGardient = getGardient(color);
     if (value === nextGardient) {
