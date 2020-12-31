@@ -23,9 +23,9 @@ type IChartProps = {
     width?: number | 'auto';
     height?: number | 'auto';
   };
-}
+};
 
-export default class EchartsReactCore extends Component<IChartProps, {}> {
+export default class EchartsReactCore extends Component<IChartProps> {
   static defaultProps = {
     echarts: {},
     notMerge: true, // 路由切换时，不合并option，自动清理信息
@@ -114,7 +114,9 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
     ) {
       try {
         echartObj.resize();
-      } catch (_) {}
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 
@@ -138,7 +140,7 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
       // if elementResizeEvent.unbind exist, just do it.
       try {
         elementResizeEvent.unbind(this.echartsElement, () => {});
-      } catch (_) {}
+      } catch (e) {}
       // dispose echarts instance
       this.echartsLib.dispose(this.echartsElement);
     }
@@ -175,11 +177,11 @@ export default class EchartsReactCore extends Component<IChartProps, {}> {
     };
 
     // loop and bind
-    for (const eventName in events) {
+    Object.entries(events).forEach(([eventName, fn]) => {
       if (Object.prototype.hasOwnProperty.call(events, eventName)) {
-        _bindEvent(eventName, events[eventName]);
+        _bindEvent(eventName, fn);
       }
-    }
+    });
   };
 
   // render the dom

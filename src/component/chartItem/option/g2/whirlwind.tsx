@@ -117,12 +117,12 @@ export const onMount = (
   }: IChartProps,
   chart: Chart,
 ) => {
-  let legend = String(_legend),
-    x = String(_x),
-    y = String(_y);
+  const legend = String(_legend);
+  const x = String(_x);
+  const y = String(_y);
 
   const isVertical = direction === 'vertical';
-  let arr = R.pluck<number[]>([x], data);
+  const arr = R.pluck<number[]>([x], data);
   const xLen = R.map<any[], number>((item) => item.length)(arr);
 
   const yConfig = {
@@ -214,7 +214,7 @@ export const onMount = (
         .interval()
         .position(`${x}*${y}`)
         .color(legend, color)
-        .label(y, function () {
+        .label(y, () => {
           if (!isVertical) {
             return {
               position: 'top',

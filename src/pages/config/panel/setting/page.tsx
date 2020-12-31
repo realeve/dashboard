@@ -18,7 +18,7 @@ import { isColor } from '@/component/chartItem/option/lib';
 
 const { Panel } = Collapse;
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 export const ImgSelector = ({
   title,
@@ -98,11 +98,11 @@ export const ImgSelector = ({
 // 组件的通用样式设置
 export type IComponentConfig = {
   showTitle?: boolean;
-  onChange: (e: {}) => void;
+  onChange: (e: Object) => void;
   defaultKey?: string;
   isPage?: boolean;
   page?: IPage;
-} & ICommonConfig
+} & ICommonConfig;
 export const ComponentConfig = ({
   border,
   borderRadius = [0, 0, 0, 0],
@@ -122,7 +122,7 @@ export const ComponentConfig = ({
           value={[page.width, page.height]}
           onChange={(e: [string, string]) => {
             const [width, height] = e;
-            if (width == page.width && height == page.height) {
+            if (width === page.width && height === page.height) {
               return;
             }
             updatePage({ width, height });
@@ -181,9 +181,9 @@ export const ComponentConfig = ({
         title="边框"
         value={border}
         imgtype="borders"
-        onChange={(border) => {
+        onChange={(nextBorder) => {
           updatePage({
-            border,
+            border: nextBorder,
           });
         }}
       />
@@ -199,17 +199,17 @@ export const ComponentConfig = ({
             split: '',
             style: { width: 50, minWidth: 50 },
           }}
-          onChange={(borderRadius) => {
-            updatePage({ borderRadius });
+          onChange={(radius) => {
+            updatePage({ borderRadius: radius });
           }}
         />
       </Field>
       <Field title="背景" style={{ padding: 10 }}>
         <ColorPicker
           value={chartBackground}
-          onChange={(chartBackground) => {
+          onChange={(bg) => {
             updatePage({
-              chartBackground,
+              chartBackground: bg,
             });
           }}
         />
@@ -311,13 +311,13 @@ export const ComponentConfig = ({
 type IPageProps = {
   page: IPage;
   dispatch: Dispatch;
-}
+};
 export default ({ page, dispatch }: IPageProps) => {
-  const updatePage = (page) => {
+  const updatePage = (nextPage) => {
     dispatch({
       type: 'common/updatePage',
       payload: {
-        page,
+        page: nextPage,
       },
     });
   };

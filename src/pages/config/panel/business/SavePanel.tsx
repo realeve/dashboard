@@ -21,21 +21,13 @@ const Field = ({ children, ...props }) => (
 );
 
 type ISavePanelProps = {
-  show: boolean;
   onClose: () => void;
   selectedPanel: string[];
   panel: IPanelConfig[];
   businessCategory: IBusinessCategory[];
   dispatch: Dispatch;
-}
-export default ({
-  show,
-  onClose,
-  selectedPanel,
-  panel,
-  businessCategory,
-  dispatch,
-}: ISavePanelProps) => {
+};
+export default ({ onClose, selectedPanel, panel, businessCategory, dispatch }: ISavePanelProps) => {
   const [option, setOption] = useSetState<IBusinessProps | null>(null);
 
   const [cateIdx, setCateIdx] = useState(0);
@@ -44,9 +36,6 @@ export default ({
   // 缩略图列表
   const [thumb, setThumb] = useState<string[]>([]);
   const onLoad = () => {
-    if (!show) {
-      return;
-    }
     const panels = getSelectedComponent(selectedPanel, panel);
 
     // 获取 当前编辑的id
@@ -57,15 +46,15 @@ export default ({
     const thumbImages = R.uniq(R.pluck<string>('image')(panels));
     setThumb(thumbImages.filter((item) => item));
 
-    const _option = getSaveOption(panels, businessCategory[0]);
-    if (!_option) {
+    const nextOption = getSaveOption(panels, businessCategory[0]);
+    if (!nextOption) {
       onClose();
       return;
     }
-    setOption(_option);
+    setOption(nextOption);
   };
 
-  useEffect(onLoad, [show]);
+  useEffect(onLoad, []);
 
   // 编辑成功后将面板列表中对应的edit_id属性删除掉；
   const closeEditModeFromPanels = () => {
@@ -87,6 +76,13 @@ export default ({
     // });
   };
 
+  const reset = () => {
+    setEditId(null);
+    setCateIdx(0);
+    onClose();
+    setThumb([]);
+  };
+
   const saveComponent = () => {
     let _option: Partial<IBusinessEditProps> = {};
     const method = editId ? 'setDashboardBusiness' : 'addTblBusiness';
@@ -96,7 +92,7 @@ export default ({
       _option.is_hide = '0';
     }
 
-    db[method](editId ? _option : option)
+    db[method]((editId ? _option : option) as any)
       .then((success) => {
         if (success) {
           reset();
@@ -110,85 +106,76 @@ export default ({
           });
         }
       })
-      .catch((e) => {
+      .catch(() => {
         message.warn('业务组件保存失败');
       });
   };
 
-  const reset = () => {
-    setEditId(null);
-    setCateIdx(0);
-    onClose();
-    setThumb([]);
-  };
-
   return (
-    show && (
-      <Confirm
-        title="保存业务组件"
-        spinning={!option}
-        style={{ width: 400, minHeight: 330, height: 'auto' }}
-        onCancel={onClose}
-        onOk={saveComponent}
-      >
-        {option && (
-          <div className={styles.popContainer}>
-            <Field title="业务名称">
-              <input
-                type="text"
-                className="data_input"
-                value={option.title}
-                onChange={(e) => {
-                  setOption({ title: e.target.value });
-                }}
-              />
-            </Field>
+    <Confirm
+      title="保存业务组件"
+      spinning={!option}
+      style={{ width: 400, minHeight: 330, height: 'auto' }}
+      onCancel={onClose}
+      onOk={saveComponent}
+    >
+      {option && (
+        <div className={styles.popContainer}>
+          <Field title="业务名称">
+            <input
+              type="text"
+              className="data_input"
+              value={option.title}
+              onChange={(e) => {
+                setOption({ title: e.target.value });
+              }}
+            />
+          </Field>
 
-            <Field title="缩略图">
-              <Radio
-                value={option.image}
-                className={styles.imglist}
-                onChange={(image) => {
-                  setOption({ image });
-                }}
-                config={thumb.map((value) => ({
-                  value,
-                  title: <img src={value} style={{ height: 60, maxWidth: 100 }} />,
-                }))}
-              />
-            </Field>
-            <Field title="业务分类">
-              <Radio
-                value={option.category_main}
-                onChange={(category_main) => {
-                  const idx = R.findIndex(R.propEq('title', category_main))(businessCategory);
-                  setCateIdx(idx);
-                  setOption({ category_main, category_sub: businessCategory[idx]?.list?.[0] });
-                }}
-                config={R.map(
-                  ({ title }) => ({
-                    value: title,
-                    title,
-                  }),
-                  businessCategory,
-                )}
-              />
-            </Field>
-            <Field title="二级分类">
-              <Select
-                value={option.category_sub}
-                onChange={(category_sub) => {
-                  setOption({ category_sub });
-                }}
-                config={R.nth(cateIdx, businessCategory).list.map((title) => ({
+          <Field title="缩略图">
+            <Radio
+              value={option.image}
+              className={styles.imglist}
+              onChange={(image) => {
+                setOption({ image });
+              }}
+              config={thumb.map((value) => ({
+                value,
+                title: <img src={value} style={{ height: 60, maxWidth: 100 }} />,
+              }))}
+            />
+          </Field>
+          <Field title="业务分类">
+            <Radio
+              value={option.category_main}
+              onChange={(category_main) => {
+                const idx = R.findIndex(R.propEq('title', category_main))(businessCategory);
+                setCateIdx(idx);
+                setOption({ category_main, category_sub: businessCategory[idx]?.list?.[0] });
+              }}
+              config={R.map(
+                ({ title }) => ({
                   value: title,
                   title,
-                }))}
-              />
-            </Field>
-          </div>
-        )}
-      </Confirm>
-    )
+                }),
+                businessCategory,
+              )}
+            />
+          </Field>
+          <Field title="二级分类">
+            <Select
+              value={option.category_sub}
+              onChange={(category_sub) => {
+                setOption({ category_sub });
+              }}
+              config={R.nth(cateIdx, businessCategory).list.map((title) => ({
+                value: title,
+                title,
+              }))}
+            />
+          </Field>
+        </div>
+      )}
+    </Confirm>
   );
 };

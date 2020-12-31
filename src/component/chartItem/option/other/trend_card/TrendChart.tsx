@@ -11,7 +11,7 @@ type ITrendChartState = {
   tooltipItems: any[];
   activeTooltipTitle: any;
   activeSeriesList: any[];
-}
+};
 type ITrendChartProps = {
   data: IChartMock;
   config: ChartConfig;
@@ -20,10 +20,10 @@ type ITrendChartProps = {
   legend: number;
   cardPosition: 'left' | 'right';
   [key: string]: any;
-}
+};
 
 export default ({
-  data: { data, header },
+  data: { data, header, hash },
   x: _x,
   y: _y,
   legend: _legend,
@@ -31,8 +31,8 @@ export default ({
   cardPosition = 'left',
 }: ITrendChartProps) => {
   const x = header[_x];
-    const y = header[_y];
-    const legend = header[_legend];
+  const y = header[_y];
+  const legend = header[_legend];
 
   const [state, setState] = useSetState<ITrendChartState>({
     tooltipItems: [],
@@ -43,11 +43,6 @@ export default ({
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const line = chartRef?.current?.getChart();
-    if (!line) {
-      return;
-    }
-
     const lastData = _.last(data);
     const activeTooltipTitle = lastData[x];
 
@@ -58,6 +53,13 @@ export default ({
     // line.on('plot:mouseleave', () => {
     //   line.chart.hideTooltip();
     // });
+  }, []);
+
+  useEffect(() => {
+    const line = chartRef?.current?.getChart();
+    if (!line) {
+      return;
+    }
     line.on('tooltip:change', (evt) => {
       const { title: activeTooltipTitle, items } = evt.data;
 
@@ -72,7 +74,7 @@ export default ({
       // 此处在渲染state的时候有性能问题，此处已修复
       setState({ tooltipItems, activeTooltipTitle });
     });
-  }, []);
+  }, [config.isPercent, hash, x, y]);
 
   const changeActiveSeries = (activeSeries: string) => {
     const { activeTooltipTitle, activeSeriesList } = state;

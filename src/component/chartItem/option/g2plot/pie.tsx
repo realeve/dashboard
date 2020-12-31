@@ -1,4 +1,4 @@
-import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 import { tooltip } from '@/component/g2plot/theme';
@@ -109,8 +109,8 @@ type IG2Plot = Record<string, any>;
 export default ({
   data: { data, header },
   chartType,
-  x: _x = 0,
-  y: _y = 1,
+  x: strX = 0,
+  y: strY = 1,
   innerRadius,
   renderer = 'svg',
   theme = 18,
@@ -121,27 +121,47 @@ export default ({
   labelPosition = 'inner',
   showStatistic = true,
 }: IG2Plot) => {
-  const x = header[_x];
-    const y = header[_y];
-  const isPie = chartType == 'pie';
-    const innerLabel = labelPosition == 'inner';
+  const x = header[strX];
+  const y = header[strY];
+  const isPie = chartType === 'pie';
+  const innerLabel = labelPosition === 'inner';
 
-  const label = !isPie
-    ? innerLabel
-      ? { label: { offset: -15 } }
-      : {}
-    : {
-        label: {
-          type: labelPosition,
-          offset: innerLabel ? '-30%' : '10%',
-          content: innerLabel ? '{name} {percentage}' : '{name}\n{percentage}',
-          style: {
-            fontSize: 12,
-            textAlign: 'center',
-            fill: textColor,
-          },
+  let label = {};
+  if (!isPie) {
+    if (innerLabel) {
+      label = { label: { offset: -15 } };
+    }
+  } else {
+    label = {
+      label: {
+        type: labelPosition,
+        offset: innerLabel ? '-30%' : '10%',
+        content: innerLabel ? '{name} {percentage}' : '{name}\n{percentage}',
+        style: {
+          fontSize: 12,
+          textAlign: 'center',
+          fill: textColor,
         },
-      };
+      },
+    };
+  }
+
+  // !isPie
+  //   ? innerLabel
+  //     ? { label: { offset: -15 } }
+  //     : {}
+  //   : {
+  //       label: {
+  //         type: labelPosition,
+  //         offset: innerLabel ? '-30%' : '10%',
+  //         content: innerLabel ? '{name} {percentage}' : '{name}\n{percentage}',
+  //         style: {
+  //           fontSize: 12,
+  //           textAlign: 'center',
+  //           fill: textColor,
+  //         },
+  //       },
+  //     };
 
   return {
     chartType,

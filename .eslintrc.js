@@ -19,7 +19,9 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     eqeqeq: 'warn',
+    'no-underscore-dangle': 'off',
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     // 'import/newline-after-import': 0,
   },
 };

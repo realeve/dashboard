@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
-import type { IPanelConfig, ICommon, IPage, IHistoryProps} from '@/models/common';
+import type { IPanelConfig, ICommon, IPage, IHistoryProps } from '@/models/common';
 import { SCREEN_EDGE_KEY } from '@/models/common';
 import type { Dispatch } from 'redux';
 import { useSetState } from 'react-use';
@@ -21,11 +21,10 @@ type IPanel = {
   page: IPage;
   dispatch: Dispatch;
   onChange: (e: any, type: string) => void;
-} & IHistoryProps
+} & IHistoryProps;
 
 // 获取通用配置
-const getGeneralConfig = ({ selectedIdx, panel, page }) => {
-  const item = panel[selectedIdx] || {};
+const getGeneralConfig = ({ item, page }) => {
   const commonConfig = {
     border: page.border,
     chartBackground: page.chartBackground,
@@ -67,25 +66,17 @@ const Index = ({
       height: Number(String(setting?.style?.height).replace('px', '')),
     };
     setSize(_size);
-
-    const next = getGeneralConfig({ selectedIdx, panel, page });
-    setGeneral(next);
   }, [selectedIdx, JSON.stringify(panel)]);
 
-  // 更新样式
-  const updateStyle = (item: Record<string, any>, title) => {
-    const style = R.clone(panel[selectedIdx].style || {});
-    const nextStyle = {
-      style: {
-        ...style,
-        ...item,
-      },
-    };
-    updateAttrib(nextStyle, true, `${title  }——【${panel[selectedIdx].title}】`);
-    onChange(item, 'size');
-  };
+  // 通用配置
+  const [general, setGeneral] = useState(null);
 
-  const updateAttrib = (res: {}, recordHistory = true, historyTitle = '') => {
+  useEffect(() => {
+    const next = getGeneralConfig({ item: panel[selectedIdx] || {}, page });
+    setGeneral(next);
+  }, [JSON.stringify(panel[selectedIdx]), page.head, page.chartBackground, page.border]);
+
+  const updateAttrib = (res: Object, recordHistory = true, historyTitle = '') => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
@@ -99,8 +90,18 @@ const Index = ({
     });
   };
 
-  // 通用配置
-  const [general, setGeneral] = useState(null);
+  // 更新样式
+  const updateStyle = (item: Record<string, any>, title) => {
+    const style = R.clone(panel[selectedIdx].style || {});
+    const nextStyle = {
+      style: {
+        ...style,
+        ...item,
+      },
+    };
+    updateAttrib(nextStyle, true, `${title}——【${panel[selectedIdx].title}】`);
+    onChange(item, 'size');
+  };
 
   return (
     <Tabs defaultActiveKey="1" activeKey={activeKey} type="line" onChange={setActiveKey}>
@@ -127,10 +128,10 @@ const Index = ({
                 config={{ title: '组件尺寸', split: 'x', type: 'slider' }}
                 value={[size.width, size.height]}
                 onChange={([width, height]) => {
-                  if (width == size.width && height == size.height) {
+                  if (width === size.width && height === size.height) {
                     return;
                   }
-                  if (width == size.width) {
+                  if (width === size.width) {
                     updateStyle({ height }, `调整组件高度${size.height} → ${height}`);
                   } else {
                     updateStyle({ width }, `调整组件宽度${size.width} → ${width}`);
@@ -271,7 +272,7 @@ const Index = ({
       >
         <ComponentSetting
           onChange={(componentConfig, title) => {
-            updateAttrib({ componentConfig }, true, `${title  } - ${panel[selectedIdx].title}`);
+            updateAttrib({ componentConfig }, true, `${title} - ${panel[selectedIdx].title}`);
           }}
           panel={currentPanel}
         />

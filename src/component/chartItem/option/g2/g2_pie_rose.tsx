@@ -1,6 +1,11 @@
-import type { Chart} from '@antv/g2';
+import type { Chart } from '@antv/g2';
 import { Util } from '@antv/g2'; // getTheme,
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { getPercent } from '../lib';
@@ -163,7 +168,7 @@ export const onMount = (
 
   chart.data(data);
   const x = header[_x];
-    const y = header[_y];
+  const y = header[_y];
 
   chart.coordinate(coordinate, {
     innerRadius: innerPercent / 100,
@@ -176,7 +181,7 @@ export const onMount = (
   const interval = chart
     .interval()
     .position(coordinate === 'theta' ? `${y}` : `${x}*${y}`)
-    .label(String(x), (val) => ({
+    .label(String(x), () => ({
       offset: -30,
       style: {
         fill: 'white',
@@ -184,7 +189,7 @@ export const onMount = (
         stroke: null,
       },
       content: (obj) => {
-        return `${obj[x]  }\n${  obj.percent  }%`;
+        return `${obj[x]}\n${obj.percent}%`;
       },
     }))
     .style({
@@ -194,7 +199,7 @@ export const onMount = (
     .state({
       active: {
         style: (element) => {
-          const {shape} = element;
+          const { shape } = element;
           return {
             matrix: Util.zoom(shape, 1.1),
           };
@@ -220,18 +225,18 @@ export const onMount = (
   // chart.interaction('element-highlight');
 
   chart.render();
-  return;
-  let idx = data.length;
-  if (!intervalData) {
-    return;
-  }
-  intervalId = setInterval(() => {
-    chart.changeData(data.slice(0, idx));
-    idx--;
-    if (idx < 2) {
-      idx = data.length;
-    }
-  }, 3000);
+  // return;
+  // let idx = data.length;
+  // if (!intervalData) {
+  //   return;
+  // }
+  // intervalId = setInterval(() => {
+  //   chart.changeData(data.slice(0, idx));
+  //   idx--;
+  //   if (idx < 2) {
+  //     idx = data.length;
+  //   }
+  // }, 3000);
 };
 
 export default onMount;

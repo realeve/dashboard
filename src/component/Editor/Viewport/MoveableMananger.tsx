@@ -49,7 +49,7 @@ function redoRender({ id, prev, next }: IObject<any>, editor: Editor) {
   editor.eventBus.trigger('render');
 }
 function undoRenders({ infos }: IObject<any>, editor: Editor) {
-  infos.forEach(({ id, prev, next }: IObject<any>) => {
+  infos.forEach(({ id, prev }: IObject<any>) => {
     restoreRender(id, prev, prev, editor);
   });
   editor.moveableManager.current!.updateRect();
@@ -98,7 +98,7 @@ export default class MoveableManager extends React.PureComponent<{
   selectedMenu: string;
   verticalGuidelines: number[];
   horizontalGuidelines: number[];
-  onChange?: (name: { id: string; next: {} }[]) => void;
+  onChange?: (name: { id: string; next: Object }[]) => void;
 }> {
   public moveable = React.createRef<typeof Moveable>();
   public getMoveable() {

@@ -15,14 +15,14 @@ export const getMarkArea: (num: number, step?: number, split?: string) => IChart
 ) => {
   const arr: IChartConfig[] = R.range(1, num + 1).map((i: number) => [
     {
-      key: `markTitle${  i}`,
+      key: `markTitle${i}`,
       defaultValue: '',
       type: 'input',
       valueType: 'text',
       title: `区域${i}标题`,
     },
     {
-      key: `markArea${  i}`,
+      key: `markArea${i}`,
       type: 'slider',
       defaultValue: [10, 20],
       title: `区域${i}范围`,
@@ -47,7 +47,7 @@ export const getMarkAreaData: (
     offset: number[];
     color: string;
   };
-  itemStyle?: {};
+  itemStyle?: Object;
   yAxis: number;
 }[] = (markTitle, markArea) => {
   if (markTitle.length > 0) {
@@ -78,9 +78,19 @@ export const getMarkAreaData: (
 export const getAxisName = ({ isReverse, isPolar, type = 'x' }) => {
   const arr = ['xAxis', 'yAxis', 'angleAxis', 'radiusAxis'];
   if (!isPolar) {
-    return isReverse ? (type == 'x' ? arr[0] : arr[1]) : type == 'x' ? arr[1] : arr[0];
+    if (isReverse) {
+      return type === 'x' ? arr[0] : arr[1];
+    }
+    return type === 'x' ? arr[1] : arr[0];
+
+    // return isReverse ? (type === 'x' ? arr[0] : arr[1]) : type === 'x' ? arr[1] : arr[0];
   }
-  return isReverse ? (type == 'x' ? arr[2] : arr[3]) : type == 'x' ? arr[3] : arr[2];
+  if (isReverse) {
+    return type === 'x' ? arr[2] : arr[3];
+  }
+  return type === 'x' ? arr[3] : arr[2];
+
+  // return isReverse ? (type === 'x' ? arr[2] : arr[3]) : type === 'x' ? arr[3] : arr[2];
 };
 
 /**
@@ -102,10 +112,10 @@ export const handlePercent = (series: ISeries[]) => {
   });
 
   return R.map((item) => {
-    item.data = item.data.map((td, i) =>
+    let data = item.data.map((td, i) =>
       arrSum[i] == 0 ? 0 : Number(((100 * +td) / arrSum[i]).toFixed(2)),
     );
-    return item;
+    return { ...item, data };
   }, series);
 };
 

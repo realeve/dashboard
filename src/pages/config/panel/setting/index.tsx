@@ -130,16 +130,17 @@ const Index = ({
       </div>
 
       {/* 保存组件面板 */}
-      <SavePanel
-        show={show}
-        onClose={() => {
-          setShow(false);
-        }}
-        dispatch={dispatch}
-        panel={panel}
-        selectedPanel={selectedPanel}
-        businessCategory={businessCategory}
-      />
+      {show && (
+        <SavePanel
+          onClose={() => {
+            setShow(false);
+          }}
+          dispatch={dispatch}
+          panel={panel}
+          selectedPanel={selectedPanel}
+          businessCategory={businessCategory}
+        />
+      )}
 
       {selectedPanel.length === 1 && (
         <div

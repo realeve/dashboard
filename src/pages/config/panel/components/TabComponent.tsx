@@ -26,7 +26,7 @@ const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | s
       .then((res) => {
         setState(res);
       })
-      .catch((e) => {
+      .catch(() => {
         setError('加载组件列表出错');
       })
       .finally(() => {
@@ -65,12 +65,12 @@ export const ComponentList = ({
 
   useEffect(() => {
     const arr: ISearchState[] = [];
-    state.forEach(({ title, list }) =>
-      list.forEach((row) => {
+    state.forEach(({ title: rowTitle, list: detailList }) =>
+      detailList.forEach((row) => {
         if (row.title === '全部') {
           return;
         }
-        const category = `${title} / ${row.title} /`;
+        const category = `${rowTitle} / ${row.title} /`;
         row.list.forEach(({ title, image, ...panel }) => {
           arr.push({
             category,
@@ -123,7 +123,7 @@ export const ComponentList = ({
               {state.map((item, idx) => (
                 <div
                   className={classnames(styles.tab, {
-                    [styles.tabActived]: idx == tab,
+                    [styles.tabActived]: idx === tab,
                   })}
                   onClick={() => {
                     setTab(idx);
@@ -133,7 +133,7 @@ export const ComponentList = ({
                   <Tooltip placement="left" trigger="hover" title={item.title}>
                     <i
                       className={classnames('com-font', item.icon, {
-                        'icon-active': idx == tab,
+                        'icon-active': idx === tab,
                       })}
                     />
                   </Tooltip>

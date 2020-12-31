@@ -133,7 +133,7 @@ export const getImage = (panels: IPanelConfig[]) => {
   }
   const item =
     panels.find(
-      (item) => ![GROUP_COMPONENT_KEY, 'text_single', 'image_single'].includes(item.key),
+      (panel) => ![GROUP_COMPONENT_KEY, 'text_single', 'image_single'].includes(panel.key),
     ) || R.last(panels);
 
   return { title: item.title, image: item.image };
@@ -192,9 +192,9 @@ export const getSaveOption: (
   let _panels = R.clone<IPanelConfig>(panels);
 
   // 保存时将edit_id扔掉
-  _panels = _panels.map(({ api: _api = {}, edit_id, ...item }) => {
-    const { mock, ...api } = _api;
-    return { ...item, api };
+  _panels = _panels.map(({ api: panelApi = {}, edit_id, ...item }) => {
+    const { mock, ...nextApi } = panelApi;
+    return { ...item, api: nextApi };
   });
 
   const config = JSON.stringify(_panels);

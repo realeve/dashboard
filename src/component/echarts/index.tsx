@@ -14,14 +14,15 @@ type IProp = {
   /** 设置切换项 */
   setToggleIdx?: (e: number) => void;
   [key: string]: any;
-}
+};
 
 /**
  * 将第idx个项目设为选中状态
  * @param option 配置项
  * @param idx 序号
  */
-const toggleSeriesItem = (option, idx) => {
+const toggleSeriesItem = (prevOption, idx) => {
+  let option = R.clone(prevOption);
   const len = option.series[0].data.length;
   option.series[0].data = option.series[0].data.map((item, i) => {
     const flag = i === idx % len;
@@ -35,14 +36,13 @@ const toggleSeriesItem = (option, idx) => {
 
 const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
   ({ toggleItem = false, setToggleIdx, renderer, ...props }, ref) => {
-    useEffect(() => {
-      // console.log(ref);
-      return () => {
-        if (ref && ref.current && ref.current.dispose) {
-          ref.current.dispose();
-        }
-      };
-    }, []);
+    // useEffect(() => {
+    //   return () => {
+    //     if (ref?.current?.dispose) {
+    //       ref.current.dispose();
+    //     }
+    //   };
+    // }, []);
 
     const [idx, setIdx] = useState(0);
     useInterval(

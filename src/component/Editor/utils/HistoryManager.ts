@@ -10,8 +10,8 @@ export default class HistoryManager {
   private undoStack: HistoryAction[] = [];
   private redoStack: HistoryAction[] = [];
   private types: IObject<{ redo: RestoreCallback; undo: RestoreCallback }> = {};
-  private editor: Editor;
-  constructor() {}
+
+  constructor(private editor: Editor) {}
   public registerType(type: string, undo: RestoreCallback, redo: RestoreCallback) {
     this.types[type] = { undo, redo };
   }
