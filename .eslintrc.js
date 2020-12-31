@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    'eslint-config-umi',
+    // 'eslint-config-umi',
     'plugin:react-hooks/recommended',
     require.resolve('@umijs/fabric/dist/eslint'),
   ],

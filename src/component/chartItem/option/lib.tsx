@@ -717,7 +717,7 @@ export const getFontConfig: (fontSize?: number, color?: string) => IChartConfig[
     key: 'fontColor',
     defaultValue: color,
     title: '颜色',
-    type: 'purecolor', 
+    type: 'purecolor',
   },
   {
     key: 'letterSpacing',

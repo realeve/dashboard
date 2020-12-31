@@ -2,11 +2,12 @@ import { useEffect, useState, forwardRef } from 'react';
 import ReactEcharts from './echarts-for-react';
 import { useInterval } from 'react-use';
 import * as R from 'ramda';
+import { EChartOption } from 'echarts';
 
 export type tRender = 'canvas' | 'svg';
 interface IProp {
   renderer?: tRender;
-  option: any;
+  option: EChartOption;
   /** 是否轮询切换显示项，用于动态饼图 */
   toggleItem?: boolean;
 
