@@ -5,3 +5,13 @@
 package.json
 .umi
 .umi-production
+
+**/*.d.ts
+**/*.min.js
+**/*.png
+**/*.gif
+**/*.webp
+**/*.bmp
+**/*.woff
+**/*.ttf
+**/*.gitkeep

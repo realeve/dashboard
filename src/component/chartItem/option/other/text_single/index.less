@@ -1,36 +1,35 @@
 @import '~@/style/theme.less';
 .center {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 .text {
   .center;
-  cursor: pointer;
-  height: 100%;
+
   width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .marquee {
   position: relative;
-  white-space: nowrap;
-  animation: marqueeAnimation infinite linear;
-  cursor: pointer;
   display: inline-block;
-  position: relative;
-  white-space: nowrap;
   height: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+  animation: marqueeAnimation infinite linear;
   .center;
   span {
-    width: 5em;
     display: inline-block;
+    width: 5em;
   }
 }
 .marqueeWrapper {
+  position: relative;
   display: block;
   margin: 0 auto;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;
-  position: relative;
 }

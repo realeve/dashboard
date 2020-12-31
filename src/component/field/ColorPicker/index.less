@@ -2,13 +2,13 @@
 .fields {
   :global {
     .ant-radio-button-wrapper {
-      background: transparent;
-      color: #fff;
-      border-color: var(--datav-gui-primary-color);
       padding: 0 10px;
+      color: #fff;
+      background: transparent;
+      border-color: var(--datav-gui-primary-color);
 
       &-checked,
-      &:before {
+      &::before {
         background: var(--datav-gui-primary-color);
       }
 
@@ -19,42 +19,43 @@
       }
 
       &:hover {
+        color: #fff;
         background: var(--datav-gui-primary-color);
         opacity: 0.9;
-        color: #fff;
       }
     }
   }
+
   display: flex;
   flex-direction: column;
   .gardient {
-    width: 178px;
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    width: 178px;
     height: 100px;
+    margin-bottom: 5px;
   }
   .tools {
     position: relative;
     .item {
       width: @toolsize / 1.5;
       height: @toolsize;
-      cursor: ew-resize;
       text-align: center;
+      cursor: ew-resize;
     }
     .itemWrapper {
       position: absolute;
       top: 0;
       font-size: 10px;
-      &:before {
-        content: '';
+      &::before {
+        position: absolute;
+        top: -30px;
+        left: @toolsize / 3;
         width: 1px;
         height: 30px;
-        top: -30px;
         background: #aaa;
-        position: absolute;
-        left: @toolsize / 3;
+        content: '';
       }
     }
   }
@@ -63,23 +64,23 @@
 .arrayTop {
   width: 0;
   height: 0;
-  border-left: @toolsize / 3 solid transparent;
-  border-right: @toolsize / 3 solid transparent;
-  border-bottom: @toolsize / 3 solid #e02774;
   font-size: 0;
   line-height: 0;
+  border-right: @toolsize / 3 solid transparent;
+  border-bottom: @toolsize / 3 solid #e02774;
+  border-left: @toolsize / 3 solid transparent;
 }
 
 .colorItem {
+  position: relative;
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: flex-start;
-  position: relative;
+  height: 30px;
+  transition-timing-function: ease;
   transition-duration: 0.5s;
   transition-property: height;
-  transition-timing-function: ease;
-  height: 30px;
-  flex: 1;
   // &:hover {
   //   height: 150px;
   // }
@@ -92,8 +93,8 @@
 .colorPanel {
   width: 30px;
   height: 30px;
-  margin-right: 8px;
   margin-top: 5px;
+  margin-right: 8px;
   border-radius: 2px;
   cursor: pointer;
   &:hover {
@@ -104,41 +105,41 @@
   }
   .rectPop {
     position: absolute;
-    width: calc(4px + var(--datav-gui-component-container-width));
-    background: var(--datav-gui-background-color-back);
-    box-sizing: border-box;
-    border: 1px solid var(--datav-gui-primary-color);
-    color: var(--datav-gui-font-color-base);
-    box-shadow: var(--datav-gui-popover-shadow);
-    display: none;
-    padding: 5px 4px 5px 6px;
-    flex-wrap: wrap;
-    height: 120px;
     top: 36px;
     z-index: 2;
+    display: none;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: calc(4px + var(--datav-gui-component-container-width));
+    height: 120px;
+    padding: 5px 4px 5px 6px;
+    color: var(--datav-gui-font-color-base);
+    background: var(--datav-gui-background-color-back);
+    border: 1px solid var(--datav-gui-primary-color);
+    box-shadow: var(--datav-gui-popover-shadow);
     transition: all ease 0.2s;
     span {
       display: inline-block;
       width: 15px;
       height: 15px;
-      margin-right: 3px;
       margin-top: 3px;
+      margin-right: 3px;
       cursor: pointer;
       transition: transform 0.5s ease;
       &:hover {
-        transform: scale(1.5);
         outline: 1px solid #fff;
+        transform: scale(1.5);
       }
     }
   }
 }
 
 .head {
-  height: 30px;
   width: 100%;
-  line-height: 30px;
+  height: 30px;
   margin-top: 5px;
   color: #fff;
+  line-height: 30px;
   text-align: center;
   cursor: crosshair;
   user-select: none;

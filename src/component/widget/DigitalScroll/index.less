@@ -7,15 +7,15 @@
     align-items: center;
     height: 100%;
     .num {
+      display: inline-block;
       width: 31.695px;
       height: 53.693px;
-      display: inline-block;
+      margin: 0 10px;
       background: url('./number.svg') no-repeat;
-      background-size: 100%;
       // background: url('./number.png') no-repeat;
       background-position: 0 0;
+      background-size: 100%;
       transition: background-position cubic-bezier(0.4, 0, 0.2, 1) 0.8s;
-      margin: 0 10px;
     }
     .whiteTheme {
       background-image: url('./number_white.svg');
@@ -23,22 +23,23 @@
 
     .blueTheme {
       outline: 1px solid #0996f9;
-      box-shadow: 0px 0px 6px 1px #40e4e87a;
+      box-shadow: 0 0 6px 1px #40e4e87a;
     }
 
     .item {
-      color: #fff;
-      font-family: Acens;
-      font-size: 40px;
-      font-weight: bold;
-      margin-left: 4px;
-      margin-right: 4px;
       box-sizing: content-box;
-      text-align: center;
       margin: 0 10px;
+      margin-right: 4px;
+      margin-left: 4px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 40px;
+      font-family: Acens;
+      text-align: center;
     }
     span {
       .item;
+
       color: @textColor;
       font-size: 18px;
     }

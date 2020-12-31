@@ -1,54 +1,54 @@
 @import '~@/style/theme.less';
 
 .config-panel-wp {
-  width: 332px;
-  height: 100%;
-  right: 0;
   position: absolute;
+  right: 0;
   z-index: 90;
-  background: #1c1f25;
-  transition: transform 0.25s ease-in-out;
-  overflow: hidden;
-  box-shadow: -1px 0 #000;
   display: flex;
   flex-direction: column;
+  width: 332px;
+  height: 100%;
+  overflow: hidden;
+  background: #1c1f25;
+  box-shadow: -1px 0 #000;
+  transition: transform 0.25s ease-in-out;
 
   .head {
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    background: var(--datav-panel-title-bg);
-    color: #bcc9d4;
-    text-align: left;
-    padding-left: 10px;
-    user-select: none;
-    font-size: 12px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    color: #bcc9d4;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: left;
+    background: var(--datav-panel-title-bg);
+    user-select: none;
   }
   .body {
+    flex: 1;
     width: 100%;
     // height: calc(100% - 60px);
     height: 100%;
-    flex: 1;
 
     :global {
       .ant-tabs-nav-wrap {
         background: var(--datav-panel-title-bg);
       }
       .ant-tabs-tab {
-        padding: 0;
         margin: 0 4px;
+        padding: 0;
         user-select: none;
         &-btn {
+          padding: 4px 5px;
           color: #bcc9d4;
           font-size: 14px;
-          padding: 4px 5px;
         }
       }
       .ant-tabs {
-        color: #fff;
         height: 100%;
+        color: #fff;
         &-content {
           height: 100%;
         }
@@ -56,27 +56,29 @@
     }
 
     .pageconfig {
-      height: 100%;
       // overflow-y: scroll;
       position: relative;
+      height: 100%;
       // padding: 0 10px;
       .datav-gui {
+        width: 100%;
         height: 100%;
+
+        --grid-all: 24;
         // max-height: calc(100vh - 125px);
         // min-height: 180px;
         overflow-y: scroll;
         font-style: normal;
-        -webkit-font-smoothing: antialiased;
-        width: 100%;
         background: rgba(28, 32, 38, 0.603); // var(--datav-gui-background-color-back);
+        -webkit-font-smoothing: antialiased;
         :global {
           .ant-divider {
-            color: #6e7481;
             margin: 0;
             padding: 10px;
+            color: #6e7481;
             background: #1c1f25;
-            &:before,
-            &:after {
+            &::before,
+            &::after {
               border-top-color: #6e7481;
             }
           }
@@ -85,30 +87,29 @@
           }
         }
       }
-      .datav-gui {
-        --grid-all: 24;
-      }
       .img {
-        height: 90px;
-        max-width: 180px;
-        border: 1px dashed #2681ff80; //var(--datav-main-color);
-        vertical-align: unset;
         position: absolute;
         top: 5px;
+        max-width: 180px;
+        height: 90px;
         padding: 5px;
+        // vertical-align: unset;
+        border: 1px dashed #2681ff80; //var(--datav-main-color);
         cursor: pointer;
       }
     }
   }
   .bottom {
     .head;
-    background: var(--datav-main-color);
-    cursor: pointer;
+
     width: calc(100% - 20px);
     margin: 5px 10px 10px 10px;
+    background: var(--datav-main-color);
+    cursor: pointer;
   }
   .btn {
     .head;
+
     height: 35px;
     background: var(--datav-sub-main-color);
     cursor: pointer;
@@ -124,9 +125,9 @@
   transform: translateX(332px);
 }
 .json {
+  width: 100%;
   height: 450px;
   overflow-y: auto;
-  width: 100%;
   background: #292d3e;
   border: none;
   &:focus {
@@ -136,9 +137,9 @@
 }
 .jsonwrapper {
   .title {
-    background: var(--datav-gui-background-color-front);
     // margin-bottom: 10px;
     // padding: 5px 0;
     text-align: right;
+    background: var(--datav-gui-background-color-front);
   }
 }

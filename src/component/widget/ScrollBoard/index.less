@@ -8,10 +8,10 @@
   cursor: pointer;
   // font-family: 'Acens';
   .text {
-    padding: 0 10px;
     box-sizing: border-box;
-    white-space: nowrap;
+    padding: 0 10px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     // color: @textColor;
   }
@@ -19,13 +19,13 @@
   .header {
     display: flex;
     flex-direction: row;
-    font-size: 15px;
     font-weight: bold;
+    font-size: 15px;
     .header-item {
       .text;
-      transition: all 0.3s;
       // color: #f2f2f2;
       flex: 1;
+      transition: all 0.3s;
     }
   }
 
@@ -40,9 +40,10 @@
 
     .ceil {
       .text;
+
       display: flex;
-      align-items: center;
       flex: 1;
+      align-items: center;
     }
     .hoverAble {
       &:hover {
@@ -51,15 +52,15 @@
     }
 
     .index {
-      // border-radius: 3px;
-      // padding: 0px 3px;
-      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 25px;
       height: 25px;
       line-height: 25px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      // border-radius: 3px;
+      // padding: 0px 3px;
+      border-radius: 50%;
     }
   }
 }

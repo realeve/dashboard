@@ -2,67 +2,67 @@
   :global {
     .g2-tooltip {
       position: absolute;
-      z-index: 8;
-      transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s,
-        top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
-      background-color: transparent;
-      color: rgb(140, 140, 140);
-      padding: 0px 12px;
-      margin: 0px;
-      overflow-x: auto;
       // width: 100%;
       // left: 0px;
-      top: 0px;
+      top: 0;
+      z-index: 8;
+      margin: 0;
+      padding: 0 12px;
+      overflow-x: auto;
+      color: rgb(140, 140, 140);
+      background-color: transparent;
+      transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s,
+        top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
       pointer-events: auto;
       &-title {
+        height: 12px;
         margin: 10px 0;
         font-weight: 700;
-        height: 12px;
         line-height: 12px;
       }
       &-items {
         display: flex;
         flex-direction: row;
         align-items: center;
-        overflow: auto;
         width: 100%;
+        overflow: auto;
       }
       &-item {
-        opacity: 1;
-        cursor: pointer;
         position: relative;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         width: 100px;
         min-width: 100px;
         padding-left: 12px;
-        justify-content: space-between;
+        cursor: pointer;
+        opacity: 1;
         &.inactive {
           opacity: 0.25;
         }
         &-marker {
-          width: 3px;
           position: absolute;
-          top: 0px;
-          right: 0px;
-          bottom: 0px;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 3px;
           height: 48px;
-          left: 0px;
         }
         &-label {
+          margin: 2px 0 12px;
+          overflow: hidden; //超出一行文字自动隐藏
           font-size: 14px;
           line-height: 14px;
-          margin: 2px 0px 12px;
-          overflow: hidden; //超出一行文字自动隐藏
-          text-overflow: ellipsis; //文字隐藏后添加省略号
           white-space: nowrap; //强制不换行
+          text-overflow: ellipsis; //文字隐藏后添加省略号
         }
         &-value {
+          margin: 0 0 4px;
+          color: rgba(255, 255, 255, 0.65);
           font-weight: 700;
           font-size: 18px;
           line-height: 18px;
-          color: rgba(255, 255, 255, 0.65);
-          margin: 0px 0px 4px;
         }
       }
     }
@@ -76,8 +76,8 @@
   .chart-wrapper {
     position: absolute !important;
     top: 94px;
-    bottom: 0px;
     right: 10px;
+    bottom: 0;
     left: 10px;
     height: calc(100% - 88px);
   }

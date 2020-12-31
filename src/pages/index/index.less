@@ -1,24 +1,24 @@
 @import '~@/style/theme.less';
 .dashboard {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  position: relative;
+  overflow-y: hidden;
   color: @textColor;
   background: #222e4e;
-  z-index: 1;
-  overflow-y: hidden;
 }
 
 .movieDashboard {
   height: 100%;
   &::after {
-    content: '';
-    filter: blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
     background: inherit;
+    filter: blur(10px);
+    content: '';
   }
 }

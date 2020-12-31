@@ -1,59 +1,55 @@
 .scena-editor {
-  --tabs: 0px;
-  --menu: 0px;
+  --tabs: 0;
+  --menu: 0;
   --mainColor: #4af;
   --back3: #333;
   --back4: #444;
-}
 
-.scena-editor {
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: rgba(13, 42, 67, 0);
   transform-style: preserve-3d;
   cursor: unset;
-  background-color: rgba(13, 42, 67, 0);
-}
-.scena-editor .selecto-selection {
-  border: 1px dashed #4af !important;
-  background: unset !important;
+  .selecto-selection {
+    background: unset !important;
+    border: 1px dashed #4af !important;
+  }
+  .scena-viewer {
+    position: absolute !important;
+    top: 30px;
+    left: calc(30px + var(--menu));
+    width: calc(100% - 30px - var(--menu) - var(--tabs));
+    height: calc(100% - 30px);
+  }
 }
 
 .scena-hand {
   cursor: grab;
-}
-
-.scena-hand .selecto-selection {
-  display: none !important;
-}
-
-.scena-editor .scena-viewer {
-  position: absolute !important;
-  left: calc(30px + var(--menu));
-  top: 30px;
-  width: calc(100% - 30px - var(--menu) - var(--tabs));
-  height: calc(100% - 30px);
+  .selecto-selection {
+    display: none !important;
+  }
 }
 
 .scena-viewport-container {
   position: relative;
-  background-image: url(/img/panel/panelbg.png.webp);
-  transform-origin: 0 0;
+  background-image: url('/img/panel/panelbg.png.webp');
   box-shadow: rgba(0, 0, 0, 0.5) 0 0 30px 0;
+  transform-origin: 0 0;
 }
 .scena-viewport {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
 }
 
 .scena-guides {
   position: absolute !important;
   top: 0;
   left: 0;
-  transform: translateZ(1px);
   z-index: 1;
+  transform: translateZ(1px);
 }
 
 .scena-guides.scena-horizontal {
@@ -65,35 +61,29 @@
 .scena-guides.scena-vertical {
   top: 30px;
   left: var(--menu);
-  height: calc(100% - 30px);
   width: 30px !important;
+  height: calc(100% - 30px);
 }
 
 .scena-reset {
   position: absolute !important;
-  background: var(--back3);
-
-  z-index: 1;
-  border-right: 1px solid var(--back4);
-  border-bottom: 1px solid var(--back4);
-  box-sizing: border-box;
-  cursor: pointer;
-  left: var(--menu);
-  top: 0px;
-
-  width: 30px;
-  height: 30px;
-  border-right: 1px solid var(--datav-ruler-font-color);
-  border-bottom: 1px solid var(--datav-ruler-font-color);
-  font-size: 16px;
-  cursor: pointer;
   position: fixed;
+  top: 0;
+  left: var(--menu);
+  z-index: 1;
   z-index: 999;
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
   color: var(--datav-ruler-font-color);
+  font-size: 16px;
   background: var(--datav-ruler-bg);
+  border-right: 1px solid var(--datav-ruler-font-color);
+  border-bottom: 1px solid var(--datav-ruler-font-color);
+  cursor: pointer;
   &:hover {
     color: #fff;
   }
@@ -101,22 +91,22 @@
 
 .scena-overlay {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
+  z-index: 100;
   width: 100%;
   height: 100%;
-  z-index: 100;
   background: rgba(0, 0, 0, 0.2);
 }
 .moveable-dimension {
   position: absolute;
-  background: var(--mainColor);
-  border-radius: 2px;
   padding: 1px 3px;
   color: white;
+  font-weight: bold;
   font-size: 13px;
   white-space: nowrap;
-  font-weight: bold;
+  background: var(--mainColor);
+  border-radius: 2px;
   transform: translate(-50%);
   pointer-events: none;
 }
@@ -124,11 +114,11 @@
 .datav-guide {
   position: absolute;
   display: flex;
-  justify-content: center;
   align-items: center;
-  user-select: none;
+  justify-content: center;
   color: #fff;
+  background: var(--datav-ruler-tag-bg) !important;
   border-radius: 1px;
   box-shadow: 0 0 5px -3px #000;
-  background: var(--datav-ruler-tag-bg) !important;
+  user-select: none;
 }

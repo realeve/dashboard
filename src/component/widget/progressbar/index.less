@@ -12,60 +12,61 @@
   //   text-align: left;
   // }
   .progress-bar-warpper {
-    width: 100%;
-    height: 100%;
     display: flex;
-    align-items: center; 
+    align-items: center;
+    width: 100%;
+    height: 100%; 
 
     .progress-bar {
-      width: 90%;
       position: relative;
-      border-radius: 50%;
+      width: 90%;
       height: 10px;
-      border-radius: 10px;
       background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-radius: 10px;
 
       &-bar {
-        height: 100%;
         display: flex;
         justify-content: flex-end;
-        border-radius: 10px;
-        background: linear-gradient(to right, #24cbff 30%, #7760f6 100%);
         width: 0;
+        height: 100%;
+        background: linear-gradient(to right, #24cbff 30%, #7760f6 100%);
+        border-radius: 10px;
         transition: width 0.8s;
       }
 
       &-bar-light {
         width: 6px;
         height: 6px;
-        border-radius: 6px;
         margin: 2px;
         background: #fff;
+        border-radius: 6px;
       }
 
       &-tip {
         position: absolute;
-        line-height: 1.2;
-        width: 100%;
-        text-align: center;
-        font-family: 'Microsoft Yahei';
-        font-size: 24px;
-        font-weight: bold;
-        color: #fff;
         top: -30.8px;
-        margin-left: -50%;
         left: 0;
+        width: 100%;
+        margin-left: -50%;
+        color: #fff;
+        font-weight: bold;
+        font-size: 24px;
+        font-family: 'Microsoft Yahei';
+        line-height: 1.2;
+        text-align: center;
         transition: left 0.8s;
       }
 
       &-triangle {
         @triangleSize: 5px;
+
         position: absolute;
         top: 12px;
+        left: 0;
+        border-right: @triangleSize solid transparent;
         border-bottom: @triangleSize solid #fff;
         border-left: @triangleSize solid transparent;
-        border-right: @triangleSize solid transparent;
-        left: 0;
         transition: left 0.8s;
       }
 

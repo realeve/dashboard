@@ -7,9 +7,9 @@
 html,
 body,
 #root {
+  height: 100%;
   margin: 0;
   background: #222e4e;
-  height: 100%;
 }
 .ant-layout {
   height: 100%;
@@ -22,8 +22,8 @@ body,
 
 // 1234567890.￥%+-_—¥
 @font-face {
-  font-family: 'Acens';
   font-weight: normal;
+  font-family: 'Acens';
   src: url('./component/widget/fonts/Acens.woff');
 }
 
@@ -38,42 +38,40 @@ body,
 }
 
 .data_input {
+  display: block;
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 82px;
+  min-width: 82px;
+  height: 30px;
+  margin: 0;
+  padding-left: 7px;
   color: var(--datav-gui-font-color-1);
+  font-size: 12px; 
+  line-height: 30px;
+  text-align: start;
   background: var(--datav-gui-component-background-color);
   border: 1px solid var(--datav-gui-component-border-color);
-  text-align: start;
-  font-size: 12px;
-  min-width: 82px;
-  width: 82px;
-  flex: 1;
-  height: 30px;
-  display: block;
-  line-height: 30px;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   resize: none;
-  padding-left: 7px;
+  caret-color: var(--datav-main-color);
   &:hover,
   &:active,
   &:focus {
+    color: var(--datav-gui-font-color-1);
+    font-size: var(--datav-gui-font-size-base);
     background: var(--datav-gui-component-background-hover-color);
     border: 1px solid var(--datav-gui-primary-color);
-    font-size: var(--datav-gui-font-size-base);
-    color: var(--datav-gui-font-color-1);
     outline: none;
     box-shadow: none;
   }
-
-  caret-color: var(--datav-main-color);
-  box-sizing: border-box;
-  box-shadow: none;
-  margin: 0;
-  outline: none;
-  border-radius: 0;
-  font-size: 12px;
-  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
 }
 
 .disabled {
@@ -98,8 +96,8 @@ body,
   color: #ddd !important;
 }
 .ant-select-selector {
-  background-color: #1c1f25 !important;
   color: #ddd;
+  background-color: #1c1f25 !important;
 }
 
 .rc-color-picker-wrap {

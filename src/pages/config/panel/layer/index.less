@@ -1,24 +1,24 @@
 @import '~@/style/theme.less';
 .layer-panel-wp {
-  flex: none;
   position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  background: #1d1f26;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
+  background: #1d1f26;
   border-right: 1px solid #000;
   .selected {
     color: var(--datav-main-color);
   }
   .layer-manager-top {
-    background: var(--datav-panel-title-bg);
-    text-indent: 10px;
+    position: relative;
     height: 30px;
     color: #bcc9d4;
     line-height: 30px;
-    position: relative;
+    text-indent: 10px;
+    background: var(--datav-panel-title-bg);
     user-select: none;
     .layer-num {
       line-height: 30px;
@@ -33,79 +33,79 @@
     }
   }
   .toolbar {
-    border-bottom: 1px solid var(--datav-panel-border-color);
-    height: 30px;
     display: flex;
+    flex: none;
     align-items: center;
     justify-content: center;
+    height: 30px;
     padding: 0 18px;
     background: #20242a;
-    flex: none;
+    border-bottom: 1px solid var(--datav-panel-border-color);
     .layer-toolbar-icon {
-      transition: background 0.2s;
-      background: var(--datav-panel-border-color);
-      color: #bcc9d4;
-      border-radius: 1px;
-      margin: 0 9px;
-      font-size: 16px;
-      text-align: center;
-      line-height: 20px;
-      height: 20px;
       width: 20px;
-      opacity: 0.3;
+      height: 20px;
+      margin: 0 9px;
+      color: #bcc9d4;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      background: var(--datav-panel-border-color);
+      border-radius: 1px;
       cursor: not-allowed;
+      opacity: 0.3;
+      transition: background 0.2s;
     }
     .enable {
-      opacity: 1;
       cursor: pointer;
+      opacity: 1;
     }
   }
   .ul {
-    flex: auto;
-    overflow-y: scroll;
+    position: relative;
     display: flex;
+    flex: auto;
     flex-direction: column;
     width: 100%;
+    overflow-y: scroll;
     color: #bcc9d4;
     font-size: 12px;
-    list-style: none;
     line-height: 2;
-    user-select: none;
-    position: relative;
+    list-style: none;
     background: var(--datav-panel-color);
+    user-select: none;
     margin-block-start: 0;
   }
   .layerWrap {
     height: 100%;
     .ul;
     li {
-      padding-left: 8px;
-      width: 100%;
-      box-sizing: border-box;
+      position: relative;
       display: flex;
+      flex: none;
       align-items: center;
+      box-sizing: border-box;
+      width: 100%;
       min-height: 32px;
       padding: 0 6px;
-      position: relative;
+      padding-left: 8px;
       background: var(--datav-panel-item-bg);
-      transition: background 0.2s;
       cursor: pointer;
-      flex: none;
+      transition: background 0.2s;
       :global {
         .react-contextmenu-wrapper {
-          width: 100%;
-          height: 100%;
+          position: relative;
           display: flex;
           align-items: center;
-          position: relative;
+          width: 100%;
+          height: 100%;
         }
         .fold-toggle-btn {
-          font-size: 10px;
-          transform-origin: 50% 50%;
-          transform: rotate(90deg) scale(0.8);
-          transition: transform 0.2s ease;
           height: 100%;
+          font-size: 10px;
           line-height: 48px;
+          transform: rotate(90deg) scale(0.8);
+          transform-origin: 50% 50%;
+          transition: transform 0.2s ease;
         }
         .icon-fold {
           transform: rotate(0) scale(0.8);
@@ -115,35 +115,35 @@
         flex: auto;
         margin-left: 6px;
         overflow: hidden;
-        text-overflow: ellipsis;
         white-space: nowrap;
+        text-overflow: ellipsis;
         span {
           flex: auto;
-          text-indent: 7px;
           overflow: hidden;
-          text-overflow: ellipsis;
           white-space: nowrap;
+          text-indent: 7px;
+          text-overflow: ellipsis;
           &[contenteditable]:focus {
-            outline: none;
             padding: 0 10px 3px 0;
             border-bottom: 1px solid #fff;
+            outline: none;
           }
         }
       }
       .img {
+        display: block;
+        flex: none;
         width: 53px;
         height: 34px;
-        flex: none;
-        display: block;
-        border: 1px solid #3a4659;
         background: #282a30;
+        border: 1px solid #3a4659;
       }
 
       .layer-thumbail-item {
         position: absolute;
-        line-height: 1;
-        right: 4px;
         top: 3px;
+        right: 4px;
+        line-height: 1;
       }
       &:hover {
         background-color: var(--datav-item-hover-color);
@@ -172,14 +172,14 @@
       background: var(--datav-main-hover-color);
     }
     .selected {
-      background: var(--datav-sub-main-color);
       color: #fff;
+      background: var(--datav-sub-main-color);
       &:hover,
       &:focus {
         background-color: var(--datav-sub-main-color);
         border: none;
-        box-shadow: none;
         outline: none;
+        box-shadow: none;
       }
     }
     .thumbnail {
@@ -194,27 +194,27 @@
     border-top: 1px solid var(--datav-panel-border-color);
   }
   .layer-toolbar {
-    height: 30px;
     display: flex;
+    flex: none;
     align-items: center;
     justify-content: center;
+    height: 30px;
     padding: 0 18px;
     background: #20242a;
-    flex: none;
     :global {
       .datav-icon {
-        transition: background 0.2s;
-        color: #bcc9d4;
-        margin: 0 5px;
-        border: 1px solid transparent;
-        width: 20px;
-        height: 20px;
-        font-size: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+        color: #bcc9d4;
+        font-size: 16px;
+        border: 1px solid transparent;
         border-radius: 1px;
         opacity: 0.3;
+        transition: background 0.2s;
       }
       .enable {
         opacity: 1;
@@ -224,39 +224,39 @@
 }
 :global {
   .react-contextmenu {
-    z-index: 4;
-    background: var(--datav-context-menu-bg);
-    color: var(--datav-font-color);
     position: fixed;
+    z-index: 4;
+    color: var(--datav-font-color);
+    background: var(--datav-context-menu-bg);
     user-select: none;
     .datav-icon {
       margin-right: 3px;
     }
     &-item {
-      padding: 0 6px;
-      line-height: 28px;
+      display: flex;
       height: 28px;
+      padding: 0 6px;
+      padding-right: 3em;
+      overflow: hidden;
+      line-height: 28px;
       border-left: 2px solid transparent;
       cursor: pointer;
-      overflow: hidden;
-      padding-right: 3em;
-      display: flex;
       &--divider {
-        height: 1px;
         width: 100%;
+        height: 1px;
         background-color: var(--datav-context-menu-line);
       }
       &:hover,
       &:focus {
-        background-color: var(--datav-context-menu-hover);
         color: var(--datav-main-color);
+        background-color: var(--datav-context-menu-hover);
         border-left: 2px solid var(--datav-main-color);
       }
     }
     .disabled {
       color: #576369;
-      pointer-events: none;
       cursor: auto;
+      pointer-events: none;
     }
   }
 }

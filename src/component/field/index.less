@@ -2,29 +2,29 @@
 @import '~@/global.less';
 
 .field {
-  width: 100%;
-  display: flex;
   position: relative;
+  display: flex;
+  width: 100%;
   padding-right: var(--datav-gui-field-padding-right);
+  padding-left: var(--datav-gui-field-padding-left-level-1);
+  color: var(--datav-gui-font-color-1);
+  font-size: var(--datav-gui-font-size-base);
+  background: rgba(28, 32, 38, 0.603); // var(--datav-gui-background-color-front);
   transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+  user-select: none;
   &:not(.--basic) {
     padding-bottom: 6px;
   }
   &:first-child {
     padding-top: 16px;
   }
-  user-select: none;
-  font-size: var(--datav-gui-font-size-base);
-  color: var(--datav-gui-font-color-1);
-  padding-left: var(--datav-gui-field-padding-left-level-1);
-  background: rgba(28, 32, 38, 0.603); // var(--datav-gui-background-color-front);
 
   .title {
-    line-height: var(--datav-gui-component-height);
     width: 100px;
     padding-right: 5px;
-    white-space: nowrap;
     overflow: hidden;
+    line-height: var(--datav-gui-component-height);
+    white-space: nowrap;
     text-overflow: ellipsis;
     cursor: help;
   }
@@ -35,19 +35,18 @@
     // width: var(--datav-gui-component-container-width);
     flex: 1;
     .component {
-      width: 100%;
-      min-height: var(--datav-gui-component-height);
-
-      font-size: var(--datav-gui-font-size-base);
-      color: var(--datav-gui-font-color-1);
-      outline: none;
-      box-shadow: none;
+      position: relative;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      position: relative;
+      width: 100%;
+      min-height: var(--datav-gui-component-height);
+      color: var(--datav-gui-font-color-1);
+      font-size: var(--datav-gui-font-size-base);
       line-height: var(--datav-gui-component-height);
+      outline: none;
+      box-shadow: none;
     }
   }
 

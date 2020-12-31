@@ -8,16 +8,16 @@
   border: none;
 
   &-header {
-    color: #bcc9d4 !important;
-    background: #111;
-    height: 40px;
-    border-bottom: 1px solid #2c2e33 !important;
-    border-bottom: var(--datav-cp-border) !important;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    font-size: 14px;
+    height: 40px;
     padding: 0 16px 0 6px !important;
+    color: #bcc9d4 !important;
+    font-size: 14px;
+    background: #111;
+    border-bottom: 1px solid #2c2e33 !important;
+    border-bottom: var(--datav-cp-border) !important;
+    cursor: pointer;
     span {
       margin-right: 5px;
       font-size: 12px;
@@ -48,9 +48,9 @@
     background-color: transparent !important;
     border-top: none !important;
     &-box {
+      box-sizing: border-box;
       padding: 0 !important;
       overflow: hidden;
-      box-sizing: border-box;
     }
   }
 }

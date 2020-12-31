@@ -5,14 +5,14 @@
   --back2: #2a2a2a;
 
   position: relative;
-  height: var(--menu);
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0px 5px;
-  user-select: none;
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--menu);
+  padding: 0 5px;
+  user-select: none;
 }
 
 .scena-menu svg,
@@ -23,19 +23,18 @@
 .scena-icon {
   position: relative;
   display: block;
-  font-size: 0;
-  padding: 3px;
   box-sizing: border-box;
-  cursor: pointer;
-  border: 1px solid transparent;
-  margin-bottom: 5px;
-  border-radius: 3px;
-  transition: all ease 0.2s;
-
   min-width: 26px;
   height: 26px;
-  background: #303640;
   margin: 0 5px;
+  margin-bottom: 5px;
+  padding: 3px;
+  font-size: 0;
+  background: #303640;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all ease 0.2s;
 }
 
 .scena-menu .scena-selected {
@@ -55,75 +54,76 @@
   position: absolute;
   right: 2px;
   bottom: 2px;
-  border-bottom: 5px solid #eee;
   border-right: 0;
+  border-bottom: 5px solid #eee;
   border-left: 5px solid transparent;
 }
 
 .scena-extends-container {
   position: absolute;
-  left: 110%;
   top: -30px;
+  left: 110%;
+  z-index: 1;
+  display: none;
   background: var(--back2);
+
   /* width: 200px;
         height: 200px; */
   border-radius: 5px;
-  z-index: 1;
-  transform: translate(10px) translateZ(2px);
   box-shadow: 1px 1px 2px var(--back1);
-  display: none;
+  transform: translate(10px) translateZ(2px);
 }
 
 .scena-sub-icon {
-  white-space: nowrap;
-  padding: 0px 7px;
   margin: 7px 10px;
+  padding: 0 7px;
+  white-space: nowrap;
 }
 
 .scena-sub-icon .scena-icon {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
   width: 25px;
   height: 25px;
   margin: 0;
+  vertical-align: middle;
 }
 
 .scena-sub-icon-label {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 0;
   margin: 0;
   margin-left: 5px;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 .scena-keyboard {
-  background: #fff;
-  border-radius: 3px;
+  box-sizing: border-box;
   width: 90%;
   height: 15px;
-  margin: 3px 0px 7px;
-  text-align: center;
-  box-sizing: border-box;
+  margin: 3px 0 7px;
   padding: 2px;
+  text-align: center;
+  background: #fff;
+  border-radius: 3px;
 }
 
 .scena-key {
   display: inline-block;
   width: 2px;
   height: 2px;
-  background: var(--back2);
   margin: 1px;
+  background: var(--back2);
 }
 .scena-space {
   display: inline-block;
   width: 12px;
   height: 2px;
-  background: var(--back2);
   margin: 1px;
+  background: var(--back2);
   border-radius: 1px;
 }

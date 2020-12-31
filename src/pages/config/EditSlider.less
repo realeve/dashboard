@@ -1,24 +1,24 @@
 @import '~@/style/theme.less';
 
 .edit-slider {
-  background: #222528;
-  height: 30px;
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  position: absolute;
-  left: 0px;
-  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: #222528;
   box-shadow: 0 -1px #000;
+  transition: 0.3s ease;
   user-select: none;
-  z-index: 99;
   .toggle-thumbnail {
-    cursor: pointer;
     padding-right: 8px;
     color: #bcc9d4;
+    cursor: pointer;
   }
-  transition: 0.3s ease;
 }
 
 .toolbox-hide {

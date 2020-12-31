@@ -1,36 +1,35 @@
 @import '~@/style/theme.less';
 .thumbnail-show {
-  transform: scale(1);
   width: 192px;
   height: 108px;
+  transform: scale(1);
 }
 .thumbnail-hide {
-  transform: scale(0);
   width: 0;
   height: 0;
+  transform: scale(0);
 }
 .thumbnail {
-  transition: 0.3s all cubic-bezier(0.22, 0.61, 0.36, 1);
   position: absolute;
   right: 5px;
   bottom: 35px;
-
   background: #0a0028; //rgb(8, 9, 10)
+  transition: 0.3s all cubic-bezier(0.22, 0.61, 0.36, 1);
   .datav-thumbnail {
     position: relative;
-    user-select: none;
     width: 100%;
     height: 100%;
     outline: 1px solid #444;
+    user-select: none;
 
     .select-span {
-      transform: translate(0px, 0px);
+      position: absolute;
+      z-index: 2;
       width: 192px;
       height: 108px;
       outline: 1px solid var(--datav-main-color);
       box-shadow: 0 0 30px 0 #000;
-      z-index: 2;
-      position: absolute;
+      transform: translate(0, 0);
       transform-origin: left top;
       cursor: move;
     }
