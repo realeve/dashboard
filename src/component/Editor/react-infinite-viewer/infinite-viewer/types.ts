@@ -1,5 +1,4 @@
-import type { PROPERTIES, METHODS} from './consts';
-import { OPTIONS } from './consts';
+import type { PROPERTIES, METHODS } from './consts';
 import type InfiniteViewer from './InfiniteViewer';
 
 /**
@@ -30,7 +29,7 @@ export type InfiniteViewerOptions = {
   scrollAreaElement: HTMLElement;
   verticalScrollElement: HTMLElement;
   horizontalScrollElement: HTMLElement;
-}
+};
 
 /**
  * @typedef
@@ -39,14 +38,14 @@ export type InfiniteViewerOptions = {
 export type OnScroll = {
   scrollLeft: number;
   scrollTop: number;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
 export type OnAbortPinch = {
   inputEvent: any;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
@@ -54,14 +53,14 @@ export type OnAbortPinch = {
 export type OnDragStart = {
   inputEvent: any;
   stop: () => void;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
 export type OnDrag = {
   inputEvent: any;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
@@ -70,7 +69,7 @@ export type OnDragEnd = {
   isDrag: boolean;
   isDouble: boolean;
   inputEvent: any;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
@@ -78,7 +77,7 @@ export type OnDragEnd = {
 export type OnPinchStart = {
   inputEvent: any;
   stop: () => void;
-}
+};
 /**
  * @typedef
  * @memberof InfiniteViewer
@@ -88,7 +87,7 @@ export type OnPinch = {
   scale: number;
   zoom: number;
   inputEvent: any;
-}
+};
 export type InfiniteViewerEvents = {
   scroll: OnScroll;
   abortPinch: OnAbortPinch;
@@ -97,7 +96,7 @@ export type InfiniteViewerEvents = {
   dragEnd: OnDragEnd;
   pinchStart: OnPinchStart;
   pinch: OnPinch;
-}
+};
 export type InfiniteViewerProperties = {
   [P in typeof PROPERTIES[number]]: InfiniteViewerOptions[P];
 };

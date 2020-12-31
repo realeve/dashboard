@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Tooltip } from 'antd';
 import type { IHideProps, TFnHide } from '../panel/setting';
 import qs from 'querystring';
-import pinyin from '@/utils/pinyin.js';
+import pinyin from '@/utils/pinyin';
 import type { FnOnLoadConfig } from './Actions';
 import Actions from './Actions';
 

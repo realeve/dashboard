@@ -1,7 +1,12 @@
 import type { Chart } from '@antv/g2';
 import { textColor } from '../index';
 import * as R from 'ramda';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 export const mock: IChartMock = {
@@ -102,9 +107,9 @@ export const defaultOption = {
 export const onMount = (
   {
     data: { data, header },
-    legend = 0,
-    x = 1,
-    y = 2,
+    legend: _legend = 0,
+    x: _x = 1,
+    y: _y = 2,
     showLegend = false,
     direction = 'vertical',
     theme = 'cbpc',
@@ -112,12 +117,13 @@ export const onMount = (
   }: IChartProps,
   chart: Chart,
 ) => {
-  legend = String(legend);
-  x = String(x);
-  y = String(y);
-  const isVertical = direction === 'vertical';
+  let legend = String(_legend),
+    x = String(_x),
+    y = String(_y);
 
-  const xLen = R.map<any[], number>((item) => item.length)(R.pluck([x])(data));
+  const isVertical = direction === 'vertical';
+  let arr = R.pluck<number[]>([x], data);
+  const xLen = R.map<any[], number>((item) => item.length)(arr);
 
   const yConfig = {
     nice: false,
@@ -208,11 +214,11 @@ export const onMount = (
         .interval()
         .position(`${x}*${y}`)
         .color(legend, color)
-        .label(y, function (val, a) {
+        .label(y, function () {
           if (!isVertical) {
             return {
               position: 'top',
-              offsetY: facetIndex == 1 ? 30 : 7,
+              offsetY: facetIndex === 1 ? 30 : 7,
               style: {
                 fill: textColor,
               },
@@ -221,12 +227,12 @@ export const onMount = (
 
           return {
             position: 'right',
-            offset: facetIndex == 0 ? -4 : 4,
+            offset: facetIndex === 0 ? -4 : 4,
             style: {
               fill: textColor,
               shadowBlur: 0,
               shadowColor: 'rgba(0, 0, 0, .45)',
-              textAlign: facetIndex == 0 ? 'end' : 'start',
+              textAlign: facetIndex === 0 ? 'end' : 'start',
             },
           };
         });

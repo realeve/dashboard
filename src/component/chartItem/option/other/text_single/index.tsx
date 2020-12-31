@@ -127,18 +127,18 @@ export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => 
 
   // 此处像正常的react组件处理，返回对应的信息即可
   const textShadow =
-    textShadowBlur == 0
+    Number(textShadowBlur) === 0
       ? {}
       : {
           textShadow: `${textShadowOffsetX}px ${textShadowOffsetY}px ${textShadowBlur}px ${textShadowColor}`,
         };
 
-  const updateContent = (content = '') => {
+  const updateContent = (detail = '') => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
         idx: chartid,
-        attrib: { componentConfig: { ...componentConfig, content } },
+        attrib: { componentConfig: { ...componentConfig, content: detail } },
       },
     });
   };
@@ -187,7 +187,7 @@ export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => 
       {marquee ? (
         <div
           className={styles.marquee}
-          style={{ ...textStyle, animationDuration: `${animationDuration  }s` }}
+          style={{ ...textStyle, animationDuration: `${animationDuration}s` }}
         >
           {content}
           <span /> {content}
@@ -201,7 +201,7 @@ export default ({ option: { data, ...componentConfig }, chartid, dispatch }) => 
           onBlur={handleBlur}
           onChange={handleChange}
           suppressContentEditableWarning={true}
-          disabled={pathname == '/'}
+          disabled={pathname === '/'}
         />
       )}
     </div>

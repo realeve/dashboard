@@ -68,7 +68,7 @@ type ITimeChartProps = {
   datetype: string;
   flexDirection: boolean;
   breakWeekday: boolean;
-}
+};
 
 export default ({
   option: {
@@ -89,7 +89,9 @@ export default ({
 
   useInterval(() => {
     setNow(moment().format(datetype));
-    showWeekday && setWeek(moment().format('dddd'));
+    if (showWeekday) {
+      setWeek(moment().format('dddd'));
+    }
   }, 1000);
 
   return (

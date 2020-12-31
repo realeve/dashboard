@@ -12,7 +12,7 @@ export { FormItem } from './FormItem';
  * @param configs 组件对外导出的配置项
  * @param componentConfig 组件默认存储的设置信息
  */
-export const getDefaultState = (configs: IChartConfig[] = [], componentConfig: {}) => {
+export const getDefaultState = (configs: IChartConfig[] = [], componentConfig: Object) => {
   const res = {};
   configs.forEach((item) => {
     res[item.key] = typeof item.defaultValue === 'undefined' ? '' : item.defaultValue;

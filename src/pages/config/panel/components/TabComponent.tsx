@@ -8,7 +8,7 @@ import type { IComponentItem, IComponent } from './db';
 import * as lib from '@/utils/lib';
 import type { ISearchState } from './SearchPanel';
 import SearchPanel from './SearchPanel';
-import pinyin from '@/utils/pinyin.js';
+import pinyin from '@/utils/pinyin';
 import type { IBusinessState } from '../business/TabBusiness';
 import { Confirm } from '@/component/Editor/Popup/Popup';
 import { useSetState } from 'react-use';
@@ -67,7 +67,7 @@ export const ComponentList = ({
     const arr: ISearchState[] = [];
     state.forEach(({ title, list }) =>
       list.forEach((row) => {
-        if (row.title == '全部') {
+        if (row.title === '全部') {
           return;
         }
         const category = `${title} / ${row.title} /`;
@@ -88,12 +88,7 @@ export const ComponentList = ({
   }, [state]);
 
   useEffect(() => {
-    if (val.trim().length === 0) {
-      setVisible(false);
-      return;
-    }
-
-    !visible && setVisible(true);
+    setVisible(val.trim().length > 0);
   }, [val]);
 
   const inputRef = useRef(null);

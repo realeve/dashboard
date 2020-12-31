@@ -19,7 +19,7 @@ function restoreRender(id: string, state: IObject<any>, prevState: IObject<any>,
     console.error('No Element');
     return false;
   }
-  const {moveableData} = editor;
+  const { moveableData } = editor;
   const frame = moveableData.getFrame(el);
 
   frame.clear();
@@ -65,7 +65,7 @@ function redoRenders({ infos }: IObject<any>, editor: Editor) {
 
 export type DimensionViewableProps = {
   dimensionViewable?: boolean;
-}
+};
 const DimensionViewable = {
   name: 'dimensionViewable',
   props: {
@@ -237,7 +237,7 @@ export default class MoveableManager extends React.PureComponent<{
             if (!e.datas.isRender) {
               return;
             }
-            const {prevDatas} = e.datas;
+            const { prevDatas } = e.datas;
             const infos = e.targets.map((target, i) => {
               return {
                 id: getId(target),
@@ -281,4 +281,5 @@ export default class MoveableManager extends React.PureComponent<{
     this.getMoveable().updateRect();
   }
 }
-export default type MoveableManager = {} & EditorInterface
+
+export default interface MoveableManager extends EditorInterface {}

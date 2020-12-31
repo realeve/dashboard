@@ -67,24 +67,6 @@ const appendConfig: IChartConfig[] = [
   },
 ];
 
-export default (props) => {
-  if (!chartList.includes(props.panel.key)) {
-    return <p>组件配置信息异常，请联系管理员。</p>;
-  }
-
-  const [chartLib, setChartLib] = useState(null);
-  useEffect(() => {
-    import(`../../../../component/chartItem/charts/${props.panel.key}`).then((res) => {
-      setChartLib({ ...res.default });
-    });
-  }, []);
-
-  if (!chartLib) {
-    return <Spin spinning />;
-  }
-  return <ApiSetting {...props} chartLib={chartLib} />;
-};
-
 const ApiSetting = ({
   onChange,
   panel: { api },
@@ -187,4 +169,22 @@ const ApiSetting = ({
       </div>
     </div>
   );
+};
+
+export default (props) => {
+  if (!chartList.includes(props.panel.key)) {
+    return <p>组件配置信息异常，请联系管理员。</p>;
+  }
+
+  const [chartLib, setChartLib] = useState(null);
+  useEffect(() => {
+    import(`../../../../component/chartItem/charts/${props.panel.key}`).then((res) => {
+      setChartLib({ ...res.default });
+    });
+  }, []);
+
+  if (!chartLib) {
+    return <Spin spinning />;
+  }
+  return <ApiSetting {...props} chartLib={chartLib} />;
 };

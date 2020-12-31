@@ -2,7 +2,8 @@ import * as React from 'react';
 import type {
   InfiniteViewerOptions,
   InfiniteViewerProperties,
-  InfiniteViewerMethods} from './infinite-viewer';
+  InfiniteViewerMethods,
+} from './infinite-viewer';
 import VanillaInfiniteViewer, {
   CLASS_NAME,
   OPTIONS,
@@ -10,7 +11,7 @@ import VanillaInfiniteViewer, {
   EVENTS,
   METHODS,
 } from './infinite-viewer';
-import type { MethodInterface} from 'framework-utils';
+import type { MethodInterface } from 'framework-utils';
 import { ref, withMethods } from 'framework-utils';
 import type { InfiniteViewerProps } from './types';
 import { REACT_EVENTS } from './consts';
@@ -24,7 +25,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
   private horizontalScrollElement!: HTMLElement;
   private verticalScrollElement!: HTMLElement;
   public render() {
-    const {className} = this.props;
+    const { className } = this.props;
 
     return (
       <div className={`${className || ''} ${CLASS_NAME}`} ref={ref(this, 'containerElement')}>
@@ -48,7 +49,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
     );
   }
   public componentDidMount() {
-    const {props} = this;
+    const { props } = this;
     const options: Partial<InfiniteViewerOptions> = {};
 
     OPTIONS.forEach((name) => {
@@ -80,8 +81,8 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
     });
   }
   public componentDidUpdate(prevProps: Partial<InfiniteViewerProperties>) {
-    const {props} = this;
-    const {infiniteViewer} = this;
+    const { props } = this;
+    const { infiniteViewer } = this;
 
     PROPERTIES.forEach((name) => {
       if (name in props && infiniteViewer[name] !== props[name]) {
@@ -96,5 +97,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
     return this.containerElement;
   }
 }
+
 // tslint:disable-next-line: max-line-length
-export default type InfiniteViewer = {} & MethodInterface<InfiniteViewerMethods, VanillaInfiniteViewer, InfiniteViewer>
+export default interface InfiniteViewer
+  extends MethodInterface<InfiniteViewerMethods, VanillaInfiniteViewer, InfiniteViewer> {}

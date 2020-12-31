@@ -2,9 +2,13 @@ import Component from '@egjs/component';
 import Gesto from 'gesto';
 import type { InjectResult } from 'css-styled';
 import { Properties } from 'framework-utils';
-import type { IObject} from '@daybrush/utils';
+import type { IObject } from '@daybrush/utils';
 import { camelize, addEvent, removeEvent, addClass } from '@daybrush/utils';
-import type { InfiniteViewerOptions, InfiniteViewerProperties, InfiniteViewerEvents } from './types';
+import type {
+  InfiniteViewerOptions,
+  InfiniteViewerProperties,
+  InfiniteViewerEvents,
+} from './types';
 import {
   PROPERTIES,
   injector,
@@ -106,7 +110,7 @@ class InfiniteViewer extends Component {
     this.verticalScrollbar.destroy();
     this.horizontalScrollbar.destroy();
     this.injectResult.destroy();
-    const {containerElement} = this;
+    const { containerElement } = this;
 
     removeEvent(window, 'resize', this.resize);
     removeEvent(this.wrapperElement, 'scroll', this.onScroll);
@@ -157,7 +161,7 @@ class InfiniteViewer extends Component {
   public scrollCenter() {
     this.resize();
 
-    const {zoom} = this;
+    const { zoom } = this;
     const left = -(this.containerWidth / zoom - this.viewportWidth) / 2;
     const top = -(this.containerHeight / zoom - this.viewportHeight) / 2;
 
@@ -189,7 +193,7 @@ class InfiniteViewer extends Component {
    */
   public scrollTo(x: number, y: number) {
     const {
-      zoom = DEFAULT_OPTIONS.zoom||1,
+      zoom = DEFAULT_OPTIONS.zoom || 1,
       margin = DEFAULT_OPTIONS.margin,
       threshold = DEFAULT_OPTIONS.threshold,
       scrollLeft: prevScrollLeft,
@@ -360,8 +364,8 @@ class InfiniteViewer extends Component {
     // infinite-viewer(container)
     // viewport
     // children
-    const {containerElement} = this;
-    const {options} = this;
+    const { containerElement } = this;
+    const { options } = this;
     addClass(containerElement, CLASS_NAME);
 
     // vanilla
@@ -525,7 +529,7 @@ class InfiniteViewer extends Component {
             inputEvent: e.inputEvent,
           });
           measureSpeed(e);
-          const {zoom} = this;
+          const { zoom } = this;
           this.scrollBy(-e.deltaX / zoom, -e.deltaY / zoom);
         } else if (!this.dragFlag && e.movement > options.pinchThreshold) {
           this.dragFlag = true;
@@ -615,7 +619,7 @@ class InfiniteViewer extends Component {
     );
   }
   private move(scrollLeft: number, scrollTop: number) {
-    const {wrapperElement} = this;
+    const { wrapperElement } = this;
 
     wrapperElement.scrollLeft = scrollLeft;
     wrapperElement.scrollTop = scrollTop;
@@ -636,7 +640,7 @@ class InfiniteViewer extends Component {
     this.scrollTo(viewerScrollLeft + deltaX / zoom, viewerScrollTop + deltaY / zoom);
   };
   private onWheel = (e: WheelEvent) => {
-    const {options} = this;
+    const { options } = this;
 
     if (e.ctrlKey) {
       const distance = -e.deltaY;
@@ -653,10 +657,10 @@ class InfiniteViewer extends Component {
         inputEvent: e,
       });
     } else if (IS_SAFARI || options.useForceWheel) {
-      const {zoom} = this;
+      const { zoom } = this;
 
-      let {deltaX} = e;
-      let {deltaY} = e;
+      let { deltaX } = e;
+      let { deltaY } = e;
 
       if (e.shiftKey && !deltaX) {
         deltaX = deltaY;
@@ -678,7 +682,7 @@ class InfiniteViewer extends Component {
       this.tempScale = 0;
       return;
     }
-    const {scale} = e;
+    const { scale } = e;
 
     this.trigger('pinch', {
       distance: 0,
@@ -733,12 +737,14 @@ class InfiniteViewer extends Component {
   }
 }
 
-type InfiniteViewer = {
+interface InfiniteViewer extends Component, InfiniteViewerProperties {
   // tslint:disable-next-line: max-line-length
-  on: (<T extends keyof InfiniteViewerEvents>(
+  on<T extends keyof InfiniteViewerEvents>(
     eventName: T,
     handlerToAttach: (event: InfiniteViewerEvents[T]) => any,
-  ) => this) & ((eventName: string, handlerToAttach: (event: Record<string, any>) => any) => this) & ((events: Record<string, (event: Record<string, any>) => any>) => this);
-} & Component & InfiniteViewerProperties
+  ): this;
+  on(eventName: string, handlerToAttach: (event: { [key: string]: any }) => any): this;
+  on(events: { [key: string]: (event: { [key: string]: any }) => any }): this;
+}
 
 export default InfiniteViewer;

@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import { getTargetsById } from '@/component/Editor/utils/utils';
 import { getThumbnail } from '@/component/Editor/lib';
 
-const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected == item.id);
+const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected === item.id);
 
 export type IHideProps = {
   components: boolean;
@@ -67,7 +67,7 @@ const Index = ({
 
   let pageChart = selectedPanel.length === 1;
   if (pageChart) {
-    const config = panel.find((item) => item.id == selectedPanel[0]);
+    const config = panel.find((item) => item.id === selectedPanel[0]);
     pageChart = config && config?.key !== GROUP_COMPONENT_KEY;
   }
 
@@ -95,7 +95,8 @@ const Index = ({
     const haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
 
     setShouldSave(!haseBusiness);
-  }, [selectedPanel.length]);
+  }, [selectedPanel.join(''), panel.map((item) => item.id).join('')]);
+  //  [selectedPanel.length]);
 
   return (
     <div

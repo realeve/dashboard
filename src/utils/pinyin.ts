@@ -21,15 +21,16 @@ function chnToPy(l1, shortMode) {
 }
 
 function arraySearch(l1, l2, shortMode) {
-  for (const name in PinYin) {
-    if (PinYin[name].indexOf(l1) !== -1) {
-      return ucfirst(name, shortMode);
+  let res: boolean | string = false;
+  Object.keys(PinYin).forEach((name) => {
+    if (!res && PinYin[name].indexOf(l1) !== -1) {
+      res = ucfirst(name, shortMode);
     }
-  }
-  return false;
+  });
+  return res;
 }
 
-function ucfirst(l1, shortMode) {
+function ucfirst(l1: string, shortMode: boolean) {
   // if (l1.length > 0)
   // {
   const first = l1.substr(0, 1).toUpperCase();
@@ -40,5 +41,5 @@ function ucfirst(l1, shortMode) {
 
 export default {
   toPinYin: (str) => chnToPy(str, true),
-  toPinYinFull: (str) => chnToPy(str, false)
+  toPinYinFull: (str) => chnToPy(str, false),
 };

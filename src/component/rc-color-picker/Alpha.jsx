@@ -1,3 +1,4 @@
+import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
@@ -61,7 +62,7 @@ export default class Alpha extends React.Component {
 
   pointMoveTo = (coords) => {
     const rect = findDOMNode(this).getBoundingClientRect();
-    const {width} = rect;
+    const { width } = rect;
     let left = coords.x - rect.left;
 
     left = Math.max(0, left);

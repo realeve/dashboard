@@ -1,9 +1,9 @@
-import color from '@/component/echarts/themeColor';
+import colors from '@/component/echarts/themeColor';
 
 export type circlePos = 'inner' | 'outter';
 export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
-  const _color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...color.COLOR_PLATE_8];
-  const data = value.map(item => ({
+  const color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...colors.COLOR_PLATE_8];
+  const data = value.map((item) => ({
     value: item[y],
     name: item[x],
   }));
@@ -24,7 +24,7 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c} ({d}%)',
     },
-    color: _color,
+    color,
     grid: {
       right: '10%',
     },
@@ -38,7 +38,7 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
         color: '#f2f2f2',
       },
     },
-    series: [ 
+    series: [
       {
         radius: radius[0],
         center: ['50%', '50%'],

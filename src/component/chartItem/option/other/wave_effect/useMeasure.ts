@@ -43,7 +43,7 @@ const useMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> 
     observer.observe(element);
     ref.current = element;
     return () => {
-      observer.disconnect();
+      return observer.disconnect();
     };
   }, [element]);
 

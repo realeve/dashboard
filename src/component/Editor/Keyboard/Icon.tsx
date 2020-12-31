@@ -9,7 +9,7 @@ export type Maker = {
   tag: string;
   attrs: IObject<any>;
   style: IObject<any>;
-}
+};
 
 @connectEditorProps
 export default abstract class Icon extends React.PureComponent<{
@@ -39,7 +39,7 @@ export default abstract class Icon extends React.PureComponent<{
   };
 
   public componentDidMount() {
-    const {keys} = this;
+    const { keys } = this;
     if (keys.length) {
       this.keyManager.keydown(
         keys,
@@ -55,4 +55,4 @@ export default abstract class Icon extends React.PureComponent<{
   }
 }
 
-export default type Icon = {} & EditorInterface
+export default interface Icon extends EditorInterface {}

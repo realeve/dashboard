@@ -1,5 +1,5 @@
 export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7' }) => {
-  const getItem = (percent, color = '#30c3a7') => ({
+  const getItem = (percent, lineColor = '#30c3a7') => ({
     // 绿色刻度，蓝色刻度precent值是1
     type: 'gauge',
     animation: true,
@@ -19,9 +19,9 @@ export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7'
     splitNumber: 0.36 * percent,
     splitLine: {
       show: true,
-      length: `${length  }%`,
+      length: `${length}%`,
       lineStyle: {
-        color,
+        color: lineColor,
         width,
       },
     },

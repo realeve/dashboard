@@ -153,7 +153,7 @@ export const OPTION_TYPES: { [key in keyof InfiniteViewerOptions]: any } = {
   threshold: Number,
   zoom: Number,
   zoomRange: [Number, Number],
-  onZoom: (scale: number) => null,
+  onZoom: () => null,
   wrapperElement: Object,
   scrollAreaElement: Object,
   verticalScrollElement: Object,

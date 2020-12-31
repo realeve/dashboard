@@ -61,8 +61,8 @@ export const defaultOption = {
 
 export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, barWidth = 40 }) => {
   const value = _data.data[0][x];
-  const {title} = _data;
-  let _title = {
+  const { title } = _data;
+  let prevTitle = {
     text: value,
     textStyle: {
       color: '#01c4a3',
@@ -71,10 +71,13 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
     itemGap: -10, // 主副标题距离
     left: 'center',
     top: 'center',
+    subtext: '',
+    subtextStyle: {},
   };
+
   if (title.length > 0 && titleFontSize > 0) {
-    _title = {
-      ..._title,
+    prevTitle = {
+      ...prevTitle,
       subtext: title,
       subtextStyle: {
         color: '#f2f2f2',
@@ -84,7 +87,7 @@ export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, ba
   }
 
   return {
-    title: _title,
+    title: prevTitle,
     angleAxis: {
       max: 100,
       clockwise: true, // 逆时针

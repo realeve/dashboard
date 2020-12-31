@@ -1,5 +1,5 @@
 import type { IChartConfig, IChartMock } from '@/component/chartItem/interface';
-import type { IG2Plot} from '../../g2plot/line';
+import type { IG2Plot } from '../../g2plot/line';
 import { lineConfig, getLineConfig } from '../../g2plot/line';
 import type { ChartConfig } from '@/component/g2plot';
 import * as _ from '@antv/util';
@@ -55,7 +55,7 @@ export const config: IChartConfig = [
 ];
 
 export default ({ option }: { option: IG2Plot }) => {
-  const { ...config }: ChartConfig = getLineConfig(option) as ChartConfig;
+  const config: ChartConfig = getLineConfig(option) as ChartConfig;
   const props = _.pick<{
     data: IChartMock;
     x: number;

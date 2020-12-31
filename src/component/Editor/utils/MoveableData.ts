@@ -4,7 +4,8 @@ import { getId } from './utils';
 
 export default class MoveableData extends MoveableHelper {
   public selectedTargets: (HTMLElement | SVGElement)[] = [];
-  constructor(private memory: Memory) {
+  private memory: Memory;
+  constructor() {
     super({
       createAuto: true,
     });
@@ -54,7 +55,7 @@ export default class MoveableData extends MoveableHelper {
   }
   public getProperties(properties: string[][], defaultValues: any[]) {
     const frames = this.getSelectedFrames();
-    const {memory} = this;
+    const { memory } = this;
 
     if (!frames.length) {
       return properties.map((property, i) => memory.get(property.join('///')) || defaultValues[i]);

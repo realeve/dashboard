@@ -54,8 +54,8 @@ export const defaultOption = {
   renderer: 'svg',
 };
 
-export default ({ data, x = 0, y = 1, showSplit = true }) => {
-  const res = handleData(data, { x, y });
+export default ({ data: srcData, x = 0, y = 1, showSplit = true }) => {
+  const res = handleData(srcData, { x, y });
   const series = [];
   res.series.forEach(({ name, arr: data }) => {
     series.push({

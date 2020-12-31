@@ -19,7 +19,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     eqeqeq: 'warn',
-    // 'no-plusplus': 0,
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     // 'import/newline-after-import': 0,
   },
 };
