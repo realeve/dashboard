@@ -2,7 +2,7 @@ import Pie from '@/component/widget/Pie';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['体育技能', 17],
     ['体育行为', 23],

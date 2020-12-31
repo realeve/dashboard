@@ -7,7 +7,7 @@ import ContentEditable from 'react-contenteditable';
 import classnames from 'classnames';
 import { useLocation } from 'react-use';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
   header: ['指标值'],
@@ -53,7 +53,7 @@ export const config: IChartConfig[] = [
     key: 'textShadowColor',
     defaultValue: 'rgba(39 ,228, 247 , 0.85)',
     title: '阴影颜色',
-    type: 'purecolor', 
+    type: 'purecolor',
   },
   {
     key: 'textShadowOffsetX',

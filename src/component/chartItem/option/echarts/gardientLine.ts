@@ -7,7 +7,7 @@ import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import { handleData } from './line';
 import * as lib from '../lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   title: '渐变面积图_MOCK数据',
   header: ['legend', 'x', 'y'],
   rows: 147,

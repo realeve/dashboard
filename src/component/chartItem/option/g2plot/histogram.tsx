@@ -2,7 +2,7 @@ import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/inte
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { value: 1.2, type: 'a' },
     { value: 3.4, type: 'b' },
@@ -120,7 +120,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/02_linebar.json',
   interval: 5,
-  cache:2,
+  cache: 2,
   config: [
     {
       key: 'x',

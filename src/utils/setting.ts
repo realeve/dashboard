@@ -1,9 +1,9 @@
-export let themeName = 'dashboard';
+export const themeName = 'dashboard';
 
-export let DEV: boolean = process.env.NODE_ENV === 'test' //|| process.env.NODE_ENV === 'development';
+export const DEV: boolean = process.env.NODE_ENV === 'test'; //|| process.env.NODE_ENV === 'development';
 
 // 前台资源部署域名，默认头像图片资源调用域名
-export let config = {
+export const config = {
   chengdu: {
     company: '成都印钞有限公司',
     api: 'http://10.8.1.25:100',
@@ -29,11 +29,11 @@ export let config = {
 
 export const CUR_COMPANY = 'chengdu';
 
-export let AUTHOR = config[CUR_COMPANY].footer;
+export const AUTHOR = config[CUR_COMPANY].footer;
 
-export let ORG = config[CUR_COMPANY].org;
-export let uap = config[CUR_COMPANY].uap;
-export let company = config[CUR_COMPANY].company;
+export const ORG = config[CUR_COMPANY].org;
+export const uap = config[CUR_COMPANY].uap;
+export const company = config[CUR_COMPANY].company;
 
 let domain: string = config[CUR_COMPANY].api;
 // 后台api部署域名

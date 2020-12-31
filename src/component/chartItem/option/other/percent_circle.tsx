@@ -1,6 +1,6 @@
 import Percent from '@/component/widget/Percent';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
   header: ['指标值'],

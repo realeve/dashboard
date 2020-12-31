@@ -1,5 +1,5 @@
 export default ({ fill = '#69bffe', speed = 40 }) => {
-  let center = 30.09;
+  const center = 30.09;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${center} ${center}`}>
       <g>

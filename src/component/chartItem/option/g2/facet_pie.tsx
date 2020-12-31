@@ -4,7 +4,7 @@ import * as lib from '@/component/chartItem/option/lib';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { ShapeAttrs } from '@antv/g-base/lib/types';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['2A', 92.4],
     ['3A', 88.6],

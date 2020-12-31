@@ -7,7 +7,7 @@ import { getColors, getAntThemePanel } from '../../g2plot/lib';
 // 参考 @antv/data-set 源码 https://github.com/antvis/data-set/blob/master/src/transform/hierarchy/treemap.ts
 import { transform, Node } from './transform';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { name: '分类 1', value: 560 },
     { name: '分类 2', value: 500 },

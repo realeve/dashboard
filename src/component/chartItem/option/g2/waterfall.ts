@@ -1,7 +1,7 @@
 import { registerShape, Chart } from '@antv/g2';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
-const isArray = arr => R.type(arr) == 'Array';
+const isArray = (arr) => R.type(arr) == 'Array';
 
 /**
  * g2 组件需要导入的函数
@@ -14,7 +14,7 @@ const isArray = arr => R.type(arr) == 'Array';
  * 6.onMount/default：首次渲染的函数，不设置onMount时调用默认项
  *
  */
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   header: ['类别', '数值'],
   data: [
     ['日用品', 120],

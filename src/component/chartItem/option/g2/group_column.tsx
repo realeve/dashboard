@@ -3,7 +3,7 @@ import { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/inte
 import * as R from 'ramda';
 import { textColor } from '@/component/chartItem/option';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['办公用品', '收纳', 340],
     ['办公用品', '笔', 20760],

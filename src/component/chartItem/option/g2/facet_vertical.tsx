@@ -6,14 +6,14 @@ import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 import * as R from 'ramda';
 
-export let chartType = {
+export const chartType = {
   bar: 'interval',
   line: 'line',
   point: 'point',
   column: 'interval',
 };
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['转基因作物种植面积', '印度', 10.8],
     ['转基因作物种植面积', '美国', 72.9],

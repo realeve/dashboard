@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['2016 年', '乌拉圭', 1.3],
     ['2017 年', '乌拉圭', 1.8],

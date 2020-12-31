@@ -3,7 +3,7 @@ import { handleData } from '@/component/chartItem/option/echarts/line';
 
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['Sun', 175],
     ['Mon', 210],

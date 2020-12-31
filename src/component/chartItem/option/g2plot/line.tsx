@@ -4,7 +4,7 @@ import { palette } from '@/component/g2plot';
 import { getAnnotations } from './lib';
 import defaultTheme from '@/component/g2plot/theme';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     {
       year: '1850',

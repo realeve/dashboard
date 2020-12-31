@@ -8,7 +8,7 @@ import * as R from 'ramda';
 const defaultTheme = getTheme();
 const color = ['#00c0ff', '#3de7c9', '#fff', '#00c0ff', '#3de7c9', ...defaultTheme.colors10];
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['监控系统', 93],
     ['收费系统', 65],

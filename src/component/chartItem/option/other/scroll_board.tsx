@@ -3,7 +3,7 @@ import ScrollBoard, { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as R from 'ramda';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   header: ['列1', '列2', '列3'],
   data: [
     ['23', '行1列2', '行1列3'],
@@ -165,10 +165,9 @@ export default ({
     [JSON.stringify(config), data?.hash],
   );
 
-
 // 使用 PureComponent实现
 
-// class ScrollTable extends React.PureComponent<IScrollTable> { 
+// class ScrollTable extends React.PureComponent<IScrollTable> {
 //   shouldComponentUpdate({ option: { data, ...nextConfig } }: IScrollTable) {
 //     let dataChange = data.hash !== this.props.option.data.hash;
 //     let { data: _data, ...prevConfig } = this.props.option;

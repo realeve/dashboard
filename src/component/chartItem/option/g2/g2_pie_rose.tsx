@@ -5,7 +5,7 @@ import { getColors, getAntThemePanel } from '../g2plot/lib';
 import { getPercent } from '../lib';
 
 // 注意：该图形只支持 object的data项，不支持数组，在饼图下渲染异常
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { type: '分类一', value: 47 },
     { type: '分类二', value: 35 },

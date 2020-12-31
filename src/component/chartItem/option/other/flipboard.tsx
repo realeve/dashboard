@@ -4,7 +4,7 @@ import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/inte
 import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[1336.467]],
   title: '进度条_MOCK数据',
   header: ['指标值'],

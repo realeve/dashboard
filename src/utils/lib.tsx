@@ -14,7 +14,7 @@ export const ymd = () => moment().format('YYYYMMDD');
  * @param {回调函数} callback
  * @desc 将file图像文件对象转换为BASE64
  */
-export let loadDataFile: (file: File | Blob) => Promise<null | string | ArrayBuffer> = async (
+export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayBuffer> = async (
   file: File,
 ) => {
   // if (typeof FileReader === 'undefined') {

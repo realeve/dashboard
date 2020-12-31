@@ -3,7 +3,7 @@ import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/c
 import * as R from 'ramda';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { x: '07-01', min: 14.5, avg: 22.1, max: 27.8 },
     { x: '07-02', min: 15.5, avg: 23, max: 29.6 },

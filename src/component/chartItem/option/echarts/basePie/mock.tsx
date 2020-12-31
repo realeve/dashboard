@@ -1,7 +1,7 @@
-import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 export { config } from './config';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['1月', 175],
     ['2月', 125],

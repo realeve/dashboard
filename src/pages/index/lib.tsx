@@ -139,7 +139,7 @@ let getScale = (page, resizeType: EResizeType) => {
 };
 
 // 获取背景
-export let getBackground = (page) => {
+export const getBackground = (page) => {
   let { width, height, ...background } = getDashboardStyle(page);
   return background;
 };

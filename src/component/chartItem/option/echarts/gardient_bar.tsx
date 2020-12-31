@@ -2,7 +2,7 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['新能源智能汽车', 23],
     ['航天航空', 12],

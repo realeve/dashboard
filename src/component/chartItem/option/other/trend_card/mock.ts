@@ -1,5 +1,5 @@
 import { IChartMock } from '@/component/chartItem/interface';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     {
       year: '1850',

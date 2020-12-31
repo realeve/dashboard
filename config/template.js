@@ -118,7 +118,7 @@ const handleComponents = () => {
 
 const getTemplateFile = () => {
   const mockStr = `
-export let mock: IChartMock = {
+export const mock: IChartMock = {
     data: [
     ['类目1', '1月', 175],
     ['类目2', '1月', 210],
@@ -371,7 +371,7 @@ import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/inte
 import * as lib from '@/component/chartItem/option/lib';
 import { textColor } from '@/component/chartItem/option';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
   header: ['指标值'],
@@ -412,7 +412,7 @@ import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/inte
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['1851', 54],
     ['1852', 57],

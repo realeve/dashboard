@@ -209,7 +209,7 @@ interface IAxiosConfig extends Omit<AxiosRequestConfig, 'url'> {
 }
 
 // 自动处理token更新，data 序列化等
-export let axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosState<T>> = ({
+export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosState<T>> = ({
   baseURL = host,
   ..._option
 }) => {

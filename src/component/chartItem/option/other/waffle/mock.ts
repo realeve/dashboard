@@ -1,5 +1,5 @@
 import { IChartMock } from '@/component/chartItem/interface';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { title: 'AJ0000', value: '1', type: '0002T', url: '2035A000' },
     { title: 'AJ0040', value: '1', type: '0002T', url: '2035A001' },
@@ -123,7 +123,7 @@ export let mock: IChartMock = {
   hash: 'W/"fdfc20d423b1a4a03b7a76f2794a9b2a"',
 };
 
-export let mock1: IChartMock = {
+export const mock1: IChartMock = {
   data: [
     ['9602T', 'AG**', '1', '480', '12', '12', '12', '11', '0'],
     ['9602T', 'BB**', '1', '10000', '250', '250', '250', '1', '0'],

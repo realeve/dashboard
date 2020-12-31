@@ -17,3 +17,6 @@ mock
 .ttf
 .woff
 .gitkeep
+echarts.min.js
+echarts-liquidfill.min.js
+.min.js

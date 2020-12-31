@@ -4,7 +4,7 @@ import { textColor } from '@/component/chartItem/option';
 import Background from './background';
 import styles from './index.less';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[45.7]],
   title: '进度条_MOCK数据',
   header: ['指标值'],

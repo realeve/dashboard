@@ -1,5 +1,5 @@
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[45.7]],
   title: '水球图_MOCK数据',
   header: ['指标值'],

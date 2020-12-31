@@ -6,7 +6,7 @@ import panel from '@/component/echarts/themeColor';
 
 let color = panel.COLOR_PLATE_16;
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['问题 1', 0.21],
     ['问题 2', 0.4],

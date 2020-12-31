@@ -3,7 +3,7 @@ import DigitalScroll from '@/component/widget/DigitalScroll';
 import { ICountUp } from '@/component/widget/DigitalScroll';
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[138248]],
   title: '进度条_MOCK数据',
   header: ['指标值'],

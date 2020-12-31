@@ -3,7 +3,7 @@ import * as lib from '../lib';
 
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['类目1', '1月', 175],
     ['类目2', '1月', 210],

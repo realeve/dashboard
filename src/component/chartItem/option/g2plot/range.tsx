@@ -1,6 +1,6 @@
 import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { type: '分类一', min: 76, max: 100 },
     { type: '分类二', min: 56, max: 108 },

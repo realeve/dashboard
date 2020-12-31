@@ -8,7 +8,7 @@ import { useMeasure, useSetState } from 'react-use';
 
 const CountUp = React.lazy(() => import('react-countup'));
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [[85.7]],
   title: 'MOCK数据',
   header: ['指标值'],

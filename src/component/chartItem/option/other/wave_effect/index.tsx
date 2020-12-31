@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as THREE from 'three';
 import useMeasure from './useMeasure';
-export let mock = {};
+export const mock = {};
 
 export const config: IChartConfig[] = [
   {

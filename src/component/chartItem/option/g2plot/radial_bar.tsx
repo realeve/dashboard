@@ -1,6 +1,6 @@
 import { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['Zombieland', 9],
     ['Wieners', 8],
@@ -78,7 +78,7 @@ export const config = [
     key: 'transpose',
     defaultValue: false,
     title: 'X/Y轴互换',
-    type: 'switch', 
+    type: 'switch',
   },
   {
     key: 'color',

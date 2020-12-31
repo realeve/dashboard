@@ -22,7 +22,7 @@ export interface IChart {
 
 export type TChartConfig = Array<IChart>;
 
-export let uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
+export const uniq: <T>(arr: Array<T>) => Array<T> = (arr) => R.uniq(arr);
 export interface ITooltipFormatter {
   series: { name: string; value: string | number; seriesName: string; color: string }[];
   unit: string | boolean;
@@ -155,7 +155,7 @@ export const handleSimpleMode = (option, config) => {
 };
 
 // 字符串转日期
-export let str2Date: (str: string) => string = (str) => {
+export const str2Date: (str: string) => string = (str) => {
   str = String(str);
   let needConvert: boolean = /^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(0[1-9]|1[0-2])$/.test(
     str,
@@ -171,7 +171,7 @@ export let str2Date: (str: string) => string = (str) => {
   return dates.join('-');
 };
 
-export let str2Num: (str: string) => number | string = (str) => {
+export const str2Num: (str: string) => number | string = (str) => {
   if (/^(|\-)[0-9]+.[0-9]+$/.test(str)) {
     return parseFloat(parseFloat(str).toFixed(3));
   }
@@ -181,22 +181,22 @@ export let str2Num: (str: string) => number | string = (str) => {
   return str;
 };
 
-export let isDate: (dateStr: string) => boolean = (dateStr) => {
+export const isDate: (dateStr: string) => boolean = (dateStr) => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/.test(
     dateStr,
   );
 };
 
-export let needConvertDate: (dateStr: string) => boolean = (dateStr) => {
+export const needConvertDate: (dateStr: string) => boolean = (dateStr) => {
   return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])|^[1-9]\d{3}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$|^[1-9]\d{3}(-|)(0[1-9]|1[0-2])$/.test(
     dateStr,
   );
 };
 
-export let getDataByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
+export const getDataByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
   R.pluck(key)(data);
 
-export let getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
+export const getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, data }) =>
   R.uniq(
     getDataByIdx({
       key,
@@ -204,7 +204,7 @@ export let getUniqByIdx: ({ key: string, data: any }) => Array<any> = ({ key, da
     }),
   );
 
-export let getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
+export const getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
   let _data: {}[] = R.project(keys)(data);
   return R.map(R.values)(_data);
 };
@@ -369,7 +369,7 @@ export const rgb2hex = (str) => {
   return '#' + val.map(toHex).join('');
 };
 
-export let getLegendData: <T>(
+export const getLegendData: <T>(
   arr: Array<T>,
 ) => Array<{
   icon: string;
@@ -390,9 +390,9 @@ export type tGl =
   | 'paralell'
   | 'calendar'
   | EChartsSeriesType;
-export let chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
+export const chartGL: Array<tGl> = ['bar3d', 'line3d', 'scatter3d', 'surface'];
 
-export let getRenderer: (params: {
+export const getRenderer: (params: {
   render?: tRender;
   type: string;
   histogram?: string;
@@ -407,7 +407,7 @@ export interface Iparams {
 }
 
 // 处理minmax值至最佳刻度，需要考虑 >10 及 <10 两种场景以及负数的情况
-export let handleMinMax: (params: {
+export const handleMinMax: (params: {
   min: number;
   max: number;
 }) => {

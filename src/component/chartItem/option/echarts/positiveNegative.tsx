@@ -27,7 +27,7 @@ import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/c
  * 默认option项，如g2中的padding,renderer等信息，将注入到配置中
  */
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['收入', '周一', 320],
     ['付出', '周一', 120],

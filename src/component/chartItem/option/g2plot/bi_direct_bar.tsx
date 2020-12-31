@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
 import { getTheme } from './lib';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { country: '乌拉圭', '2016年耕地总面积': 13.4, '2016年转基因种植面积': 12.3 },
     { country: '巴拉圭', '2016年耕地总面积': 14.4, '2016年转基因种植面积': 6.3 },

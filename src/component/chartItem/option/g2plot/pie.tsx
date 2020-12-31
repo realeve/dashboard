@@ -4,7 +4,7 @@ import { getTheme } from './lib';
 import { tooltip } from '@/component/g2plot/theme';
 import { textColor } from '@/component/chartItem/option';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     { type: '分类一', value: 47 },
     { type: '分类二', value: 45 },

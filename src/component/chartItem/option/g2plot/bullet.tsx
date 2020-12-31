@@ -1,5 +1,5 @@
 import { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['A', 80, 85, 100],
     ['B', 60, 85, 100],
@@ -49,7 +49,7 @@ export const apiConfig: IApiConfig = {
   type: 'url',
   url: 'http://localhost:8000/mock/02_linebar.json',
   interval: 5,
-  cache:2,
+  cache: 2,
   config: [
     {
       key: 'x',

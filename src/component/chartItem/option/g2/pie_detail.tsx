@@ -6,7 +6,7 @@ import { getColors, getAntThemePanel } from '../g2plot/lib';
 
 import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
 
-export let mock: IChartMock = {
+export const mock: IChartMock = {
   data: [
     ['微博1', 13.33],
     ['微博2', 23.33],
