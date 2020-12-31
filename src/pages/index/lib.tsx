@@ -1,4 +1,4 @@
-import { axios } from '@/utils/axios';
+import { axios, IAxiosState } from '@/utils/axios';
 import { getDashboardStyle } from '@/component/Editor/lib';
 import { message } from 'antd';
 import { IPage, IPanelConfig } from '@/models/common';
@@ -61,11 +61,11 @@ export const getConfig = async (url) => {
         baseURL: window.location.origin,
       };
     }
-    return axios(option).then((config) => {
+    return axios(option).then((config: IAxiosState | string) => {
       if (typeof config === 'string' && config.slice(0, 15) == '<!DOCTYPE html>') {
         return { type: 'notExist' };
       }
-      return { type: 'online', ...config };
+      return { type: 'online', ...(config as IAxiosState) };
     });
   }
   return getLocalConfig();

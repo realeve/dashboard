@@ -99,6 +99,7 @@ export type TPanelItemStyle = Omit<React.CSSProperties, 'transform'>;
 // transform 需要单独处理
 export interface IPanelItemStyle extends TPanelItemStyle {
   transform: { translate: string };
+  'transform-origin'?:string;
 }
 export interface IPanelConfig {
   key?: string;

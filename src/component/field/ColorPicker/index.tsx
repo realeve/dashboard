@@ -49,7 +49,7 @@ const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
   );
 };
 
-const getInitVal = (value) => {
+const getInitVal = (value:string) => {
   if (value.slice(0, 6) == 'linear') {
     return value
       .replace('%)', '%')
@@ -64,7 +64,7 @@ const getInitVal = (value) => {
   ];
 };
 
-const getGardient = (_color) => {
+const getGardient = (_color: string[][]) => {
   let color = R.sort((a, b) => Number(a[1]) - Number(b[1]), _color);
   return `linear-gradient(90deg, ${color[0].join(' ')}%, ${color[1].join(' ')}%, ${color[2].join(
     ' ',
@@ -76,7 +76,7 @@ const getGardient = (_color) => {
  */
 const GardientPicker = ({ value, onChange, disabled = false }) => {
   // https://zh-hans.reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
-  const [color, setColor] = useState(()=>getInitVal(value));
+  const [color, setColor] = useState(() => getInitVal(value));
   useEffect(() => {
     const nextGardient = getGardient(color);
     if (value === nextGardient) {

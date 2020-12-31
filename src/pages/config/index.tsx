@@ -57,7 +57,7 @@ export const addPanel = (
       className={classnames(styles.chartWrapper, {
         scenaIgnore: SCREEN_EDGE_KEY == config.key,
       })}
-      style={{ ...style, transformOrigin }}
+      style={{ ...R.omit(['transform'], style), transformOrigin }}
     >
       <ChartItem chartid={config.id} />
     </div>,
@@ -92,6 +92,9 @@ const Index = ({
   let panel = history[curHistoryIdx]?.panel || _panel;
   let panelIds = R.pluck('id', panel);
 
+  useEffect(() => {
+    console.log(curTool);
+  }, []);
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
 
@@ -102,7 +105,7 @@ const Index = ({
     });
   }, []);
 
-  const [hash, setHash] = useState(()=>generateId());
+  const [hash, setHash] = useState(() => generateId());
 
   const [zoom, setZoom] = useState(0.7);
 
@@ -247,7 +250,7 @@ const Index = ({
   const getLockedPanel = () =>
     panel.filter((item) => item.lock || item.hide).map((item) => item.id);
 
-  const calcNextSelectedPanel = (selectedPanel) => {
+  const calcNextSelectedPanel = (selectedPanel:string[]) => {
     // 此处处理多个组件共同选择的问题；
     let nextPanel = selectedPanel;
     let lockedPanel = getLockedPanel();
