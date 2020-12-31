@@ -12,17 +12,17 @@ export const getRGB = (color: string) =>
     .replace(/(rgba)|(rgb)| |\(|\)/g, '')
     .split(',')
     .slice(0, 3)
-    .map((item) => parseInt(item));
+    .map((item) => parseInt(item, 10));
 
 /**
  * 获取颜色中文名
  * @param color 颜色，支持 rgb/hex
  */
-export const getColorName = (color: string) => {
-  if (color[0] === '#') {
-    color = hex2rgb(color);
+export const getColorName = (colorCode: string) => {
+  if (colorCode[0] === '#') {
+    colorCode = hex2rgb(colorCode);
   }
-  const colors = getRGB(color);
+  const colors = getRGB(colorCode);
   const res = colorList.map(({ title, color }) => {
     const delta = Math.sqrt(
       (color[0] - colors[0]) ** 2 + (color[1] - colors[1]) ** 2 + (color[2] - colors[2]) ** 2,

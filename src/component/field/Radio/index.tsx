@@ -34,8 +34,8 @@ export default ({ value, onChange, config = [], disabled, className }: IRadioPro
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
-        {handleConfig(config).map(({ title, value }) => (
-          <Radio.Button key={value + title} value={value}>
+        {handleConfig(config).map(({ title, value: val }) => (
+          <Radio.Button key={val + title} value={val}>
             {title}
           </Radio.Button>
         ))}

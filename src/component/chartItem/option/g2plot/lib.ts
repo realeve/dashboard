@@ -89,6 +89,34 @@ export const sort = (a, b) => {
 // };
 
 /**
+ * 处理堆叠数据尾部标签位置
+ * @param annotations 配置项
+ */
+export const handleStackPosition = (annotations, isArea) => {
+  let legendVal = annotations.map((item) => item.position[1]);
+
+  legendVal = legendVal.reverse();
+
+  for (let i = 1; i < legendVal.length; i++) {
+    legendVal[i] = legendVal[i] + legendVal[i - 1];
+  }
+  legendVal = [0, ...legendVal];
+
+  // 处理堆叠数据
+  const position = annotations
+    .map((item, idx) => {
+      // 显示在两组数据居中的位置
+      const val = isArea ? (legendVal[idx] + legendVal[idx + 1]) / 2 : legendVal[idx + 1];
+      return [item.position[0], val];
+    })
+    .reverse();
+  return annotations.map((item, idx) => ({
+    ...item,
+    position: position[idx],
+  }));
+};
+
+/**
  * 获取 annotations 配置项
  * @param data {Array} 原始数据，建议传入的数据自行处理对x轴数据的排序，此处只处理月份/星期/日期类型/数值型几种场景。
  * @param xField {String} x字段
@@ -147,34 +175,6 @@ export const getAnnotations = (
     return annotations;
   }
   return handleStackPosition(annotations, isArea);
-};
-
-/**
- * 处理堆叠数据尾部标签位置
- * @param annotations 配置项
- */
-export const handleStackPosition = (annotations, isArea) => {
-  let legendVal = annotations.map((item) => item.position[1]);
-
-  legendVal = legendVal.reverse();
-
-  for (let i = 1; i < legendVal.length; i++) {
-    legendVal[i] = legendVal[i] + legendVal[i - 1];
-  }
-  legendVal = [0, ...legendVal];
-
-  // 处理堆叠数据
-  const position = annotations
-    .map((item, idx) => {
-      // 显示在两组数据居中的位置
-      const val = isArea ? (legendVal[idx] + legendVal[idx + 1]) / 2 : legendVal[idx + 1];
-      return [item.position[0], val];
-    })
-    .reverse();
-  return annotations.map((item, idx) => ({
-    ...item,
-    position: position[idx],
-  }));
 };
 
 export const getTheme: (theme: number | string) => { theme?: { colors10: string[] } | 'cbpc' } = (

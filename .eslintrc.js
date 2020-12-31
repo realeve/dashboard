@@ -47,5 +47,8 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     '@typescript-eslint/no-invalid-this': 'off',
     'import/newline-after-import': 'off',
+    'no-continue': 'off',
+    'no-console': 'off',
+    'func-names': ['warn', 'as-needed'],
   },
 };

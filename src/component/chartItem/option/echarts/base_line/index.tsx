@@ -6,6 +6,36 @@ import type { ISeries, IEchartsBaselineProps } from './interface';
 
 export { config, mock, apiConfig, defaultOption } from './mock';
 
+const getMarkpoint = (showMarkpoint: false | 'min' | 'max' | 'minmax') => {
+  let markpointData;
+  if (showMarkpoint === 'minmax') {
+    markpointData = [
+      {
+        name: '最大值',
+        type: 'max',
+      },
+      {
+        name: '最小值',
+        type: 'min',
+      },
+    ];
+  } else if (showMarkpoint === 'max') {
+    markpointData = [
+      {
+        name: '最大值',
+        type: 'max',
+      },
+    ];
+  } else {
+    markpointData = [
+      {
+        name: '最小值',
+        type: 'min',
+      },
+    ];
+  }
+  return markpointData;
+};
 /**
  * 2020-11-30
  * ECharts 曲线图/面积图/柱状图/堆叠图/条形图/极坐标系/百分比图 等常见图表的综合组件
@@ -105,10 +135,12 @@ export default ({
     fontSize: 16,
   };
 
-  let series: ISeries[] = res.series.map(({ name, arr: data }, idx: number) => ({
+  let markpointData = getMarkpoint(showMarkpoint);
+
+  let series: ISeries[] = res.series.map(({ name, arr: seriesData }, idx: number) => ({
     name,
     coordinateSystem: isPolar ? 'polar' : 'cartesian2d',
-    data: isReverse ? data.reverse() : data,
+    data: isReverse ? seriesData.reverse() : seriesData,
     stack: isStack,
     type: chartType,
     step: isStep,
@@ -135,31 +167,7 @@ export default ({
       ? {
           markPoint: {
             silent: true,
-            data:
-              showMarkpoint === 'minmax'
-                ? [
-                    {
-                      name: '最大值',
-                      type: 'max',
-                    },
-                    {
-                      name: '最小值',
-                      type: 'min',
-                    },
-                  ]
-                : showMarkpoint === 'max'
-                ? [
-                    {
-                      name: '最大值',
-                      type: 'max',
-                    },
-                  ]
-                : [
-                    {
-                      name: '最小值',
-                      type: 'min',
-                    },
-                  ],
+            data: markpointData,
           },
         }
       : {}),

@@ -1,12 +1,9 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 
 export default class Ribbon extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillUnmount() {
     this.removeListeners();
   }
@@ -50,7 +47,7 @@ export default class Ribbon extends React.Component {
 
   pointMoveTo = (coords) => {
     const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
-    const {width} = rect;
+    const { width } = rect;
     let left = coords.x - rect.left;
     left = Math.max(0, left);
     left = Math.min(left, width);
@@ -78,7 +75,7 @@ export default class Ribbon extends React.Component {
 
   render() {
     const prefixCls = this.getPrefixCls();
-    const {hue} = this.props.color;
+    const { hue } = this.props.color;
     const per = (hue / 360) * 100;
 
     return (

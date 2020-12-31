@@ -59,13 +59,13 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
     // }
 
     if (typeof item.value !== 'undefined' && item.value !== '-') {
-      str +=
-        `<div class="ex_tooltip"><div class="icon" style="background-color:${
-          item.color
-        };"></div><span>${item.seriesName || axisName}：${
-          typeof item.value === 'string' ? Number(item.value) : item.value
-        } </span></div>${ 
-        append ? `<div class="ex_tooltip_append">${append[item.seriesName]}</div>` : ''}`;
+      str += `<div class="ex_tooltip"><div class="icon" style="background-color:${
+        item.color
+      };"></div><span>${item.seriesName || axisName}：${
+        typeof item.value === 'string' ? Number(item.value) : item.value
+      } </span></div>${
+        append ? `<div class="ex_tooltip_append">${append[item.seriesName]}</div>` : ''
+      }`;
     }
   });
   if (unit) {
@@ -332,21 +332,17 @@ export function hex2rgb(hexVal: string): string {
   hexVal = hexVal.includes('#') ? hexVal.slice(1) : hexVal;
   switch (hexVal.length) {
     case 3:
-      result =
-        `${parseInt(`${hexVal[0]  }${  hexVal[0]}`, 16) 
-        },${ 
-        parseInt(`${hexVal[1]  }${  hexVal[1]}`, 16) 
-        },${ 
-        parseInt(`${hexVal[2]  }${  hexVal[2]}`, 16)}`;
+      result = `${parseInt(`${hexVal[0]}${hexVal[0]}`, 16)},${parseInt(
+        `${hexVal[1]}${hexVal[1]}`,
+        16,
+      )},${parseInt(`${hexVal[2]}${hexVal[2]}`, 16)}`;
       break;
     case 6:
     default:
-      result =
-        `${parseInt(`${hexVal[0]  }${  hexVal[1]}`, 16) 
-        },${ 
-        parseInt(`${hexVal[2]  }${  hexVal[3]}`, 16) 
-        },${ 
-        parseInt(`${hexVal[4]  }${  hexVal[5]}`, 16)}`;
+      result = `${parseInt(`${hexVal[0]}${hexVal[1]}`, 16)},${parseInt(
+        `${hexVal[2]}${hexVal[3]}`,
+        16,
+      )},${parseInt(`${hexVal[4]}${hexVal[5]}`, 16)}`;
       break;
   }
   return result;
@@ -366,7 +362,7 @@ export const rgb2hex = (str) => {
   const val = str.replace(/(rgb|a|\(|\))/g, '').split(',');
   const alpha = val.length === 4 ? Math.ceil(Number(val[3]) * 255) : 255;
   val[3] = alpha;
-  return `#${  val.map(toHex).join('')}`;
+  return `#${val.map(toHex).join('')}`;
 };
 
 export const getLegendData: <T>(
@@ -824,7 +820,7 @@ export function getPercentWithPrecision(
   }
 
   const digits = Math.pow(10, precision);
-  const votesPerQuota = valueList.map(W
+  const votesPerQuota = valueList.map(
     (val: number | '-') => ((isNaN(val) || val === '-' ? 0 : val) / sum) * digits * 100,
   );
   const targetSeats = digits * 100;

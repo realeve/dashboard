@@ -18,11 +18,11 @@ import { meta, axis } from '@antv/g2plot/lib/plots/radial-bar/adaptor';
  */
 function geometry(params: Params<RadialBarOptions>): Params<RadialBarOptions> {
   const { chart, options } = params;
-  const { data, barStyle: style, color, tooltip, colorField, type, xField, yField } = options;
+  const { data, barStyle: style, color, tooltip: tp, colorField, type, xField, yField } = options;
   chart.data(data);
   const p = deepAssign({}, params, {
     options: {
-      tooltip,
+      tooltip: tp,
       seriesField: colorField,
       interval: {
         style,
@@ -44,10 +44,10 @@ function geometry(params: Params<RadialBarOptions>): Params<RadialBarOptions> {
  */
 function coordinate(params: Params<RadialBarOptions>): Params<RadialBarOptions> {
   const { chart, options } = params;
-  const { radius, innerRadius, coordinate = 'polar', transpose = true } = options;
+  const { radius, innerRadius, coordinate: coordType = 'polar', transpose = true } = options;
 
   const coord = chart.coordinate({
-    type: coordinate,
+    type: coordType,
     cfg: {
       radius,
       innerRadius,

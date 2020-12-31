@@ -28,15 +28,15 @@ export function getContentElement(el: HTMLElement): HTMLElement | null {
 }
 
 export function connectEditorProps(component: any) {
-  const {prototype} = component;
+  const { prototype } = component;
   Object.defineProperty(prototype, 'editor', {
-    get () {
+    get() {
       return this.props.editor;
     },
   });
   EDITOR_PROPERTIES.forEach((name) => {
     Object.defineProperty(prototype, name, {
-      get () {
+      get() {
         return this.props.editor[name];
       },
     });
@@ -62,7 +62,7 @@ export function checkInput(target: HTMLElement | SVGElement) {
 }
 export function checkImageLoaded(el: HTMLElement | SVGElement): Promise<any> {
   if (el.tagName.toLowerCase() !== 'img') {
-    return Promise.all([].slice.call(el.querySelectorAll('img')).map((el) => checkImageLoaded(el)));
+    return Promise.all([].slice.call(el.querySelectorAll('img')).map(checkImageLoaded));
   }
   return new Promise((resolve) => {
     if ((el as HTMLImageElement).complete) {
@@ -99,8 +99,8 @@ export function makeScenaFunctionComponent<T = IObject<any>>(
 }
 
 export function getScenaAttrs(el: HTMLElement | SVGElement) {
-  const {attributes} = el;
-  const {length} = attributes;
+  const { attributes } = el;
+  const { length } = attributes;
   const attrs: IObject<any> = {};
 
   for (let i = 0; i < length; ++i) {

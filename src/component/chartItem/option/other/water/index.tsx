@@ -16,7 +16,7 @@ export default ({ option: props }) => {
   const [chart, setChart] = useState(null);
 
   useEffect(() => {
-    let dom = ref.current;
+    const dom = ref.current;
     if (!dom) {
       return;
     }

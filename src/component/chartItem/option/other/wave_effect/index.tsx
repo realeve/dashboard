@@ -101,11 +101,11 @@ export default ({
 }) => {
   const [domRef, { width, height }] = useMeasure();
 
-  const getColor = ({ ratio, blue_offset }) => {
+  const getColor = ({ ratio, blue_offset: offset }) => {
     const color = {
       r: 0,
       g: Math.floor(255 - ratio * 255),
-      b: Math.floor(blue_offset + blue_offset * ratio),
+      b: Math.floor(offset + offset * ratio),
     };
 
     return new THREE.Color(
@@ -189,7 +189,8 @@ export default ({
           const scale =
             (Math.sin((x + count) * 0.3) + 1) * MAXSIZE +
             (Math.sin((y + count) * 0.5) + 1) * MAXSIZE;
-          particle.scale.x = particle.scale.y = scale;
+          particle.scale.y = scale;
+          particle.scale.x = scale;
         }
       }
       renderer.render(scene, camera);

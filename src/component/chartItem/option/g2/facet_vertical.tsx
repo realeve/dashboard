@@ -1,5 +1,10 @@
 import type { Chart } from '@antv/g2';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 
 import { textColor } from '@/component/chartItem/option';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
@@ -142,9 +147,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export const defaultOption = (config) => {
+export const defaultOption = ({ transpose }) => {
   return {
-    padding: config.transpose ? [20, 0, 0, 10] : [20, 20, 30, 0],
+    padding: transpose ? [20, 0, 0, 10] : [20, 20, 30, 0],
     renderer: 'svg',
   };
 };

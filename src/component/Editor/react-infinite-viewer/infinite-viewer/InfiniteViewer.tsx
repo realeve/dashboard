@@ -697,7 +697,7 @@ class InfiniteViewer extends Component {
       return;
     }
     const a = -0.0006;
-    const easing = (x) => 1 - Math.pow(1 - x, 3);
+    const easing = (x) => 1 - (1 - x) ** 3;
     const duration = getDuration(speed, a);
     const destPos = getDestPos(speed, a);
     const startTime = Date.now();
@@ -742,7 +742,9 @@ interface InfiniteViewer extends Component, InfiniteViewerProperties {
   on: (<T extends keyof InfiniteViewerEvents>(
     eventName: T,
     handlerToAttach: (event: InfiniteViewerEvents[T]) => any,
-  ) => this) & ((eventName: string, handlerToAttach: (event: Record<string, any>) => any) => this) & ((events: Record<string, (event: Record<string, any>) => any>) => this);
+  ) => this) &
+    ((eventName: string, handlerToAttach: (event: Record<string, any>) => any) => this) &
+    ((events: Record<string, (event: Record<string, any>) => any>) => this);
 }
 
 export default InfiniteViewer;
