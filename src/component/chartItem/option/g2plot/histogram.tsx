@@ -143,7 +143,7 @@ type IG2Plot = {
   offsetX: number;
   binWidth: number;
   [key: string]: any;
-} & IG2PlotProps
+} & IG2PlotProps;
 
 export default ({
   data: { data, header },
@@ -168,7 +168,7 @@ export default ({
       : {
           binWidth,
         };
-  const noLegend = typeof legend === 'undefined' || header.length == 1;
+  const noLegend = typeof legend === 'undefined' || header.length === 1;
   const stackCfg = noLegend
     ? {
         label: {
@@ -204,7 +204,7 @@ export default ({
               value: count,
             }
           : {
-              name: `${props[header[legend]]  } (${name}) `,
+              name: `${props[header[legend]]} (${name}) `,
               value: count,
             };
       },

@@ -43,7 +43,7 @@ type IComponentList = {
   error: null | string;
   isBusiness?: boolean;
   onRefresh?: () => void;
-}
+};
 
 export const ComponentList = ({
   onAdd,
@@ -88,7 +88,7 @@ export const ComponentList = ({
   }, [state]);
 
   useEffect(() => {
-    if (val.trim().length == 0) {
+    if (val.trim().length === 0) {
       setVisible(false);
       return;
     }
@@ -301,7 +301,7 @@ export const ComponentList = ({
             autoComplete="false"
             onBlur={(e) => {
               // drawer弹出时会获得焦点，此时Input失去焦点，需要hack重新获取焦点
-              if (val.trim().length == 1) {
+              if (val.trim().length === 1) {
                 inputRef?.current?.focus();
               }
             }}

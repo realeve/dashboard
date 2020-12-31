@@ -1,3 +1,4 @@
+import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
@@ -162,14 +163,14 @@ export default class ColorPicker extends React.Component {
   }
 
   render() {
-    const {props} = this;
-    const {state} = this;
+    const { props } = this;
+    const { state } = this;
     const classes = [`${props.prefixCls}-wrap`, props.className];
     if (state.open) {
       classes.push(`${props.prefixCls}-open`);
     }
 
-    let {children} = props;
+    let { children } = props;
 
     const [r, g, b] = new Color(this.state.color).RGB;
     const RGBA = [r, g, b];

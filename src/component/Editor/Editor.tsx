@@ -141,7 +141,7 @@ export type IEditorProps = {
 
   /** 被遮挡区域的总宽度 */
   hideWidth?: number;
-}
+};
 /**
  * @param page 全局page设置
  * @param debug 调试模式
@@ -268,7 +268,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     const { curTool: selectedMenu } = this.props;
     const { width: _width, height: _height } = this.props.page;
     const width = Number(_width);
-      const height = Number(_height);
+    const height = Number(_height);
 
     const horizontalSnapGuides = [
       // 0,
@@ -419,8 +419,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
             if (selectedMenu === 'hand') {
               return;
             }
-            const {inputEvent} = e;
-            const {target} = inputEvent;
+            const { inputEvent } = e;
+            const { target } = inputEvent;
             this.checkBlur();
 
             if (
@@ -443,11 +443,11 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
             // 计算画布移动的百分比
             const lenX = zoomRange.x[1] - zoomRange.x[0];
-              const lenY = zoomRange.y[1] - zoomRange.y[0];
+            const lenY = zoomRange.y[1] - zoomRange.y[0];
             const posX = pos.nextX - zoomRange.x[0];
-              const posY = pos.nextY - zoomRange.y[0];
+            const posY = pos.nextY - zoomRange.y[0];
             let x = 0;
-              let y = 0;
+            let y = 0;
             if (lenX > 0) {
               x = (posX * 100) / lenX;
             }
@@ -504,7 +504,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['h'],
-      (e) => {
+      () => {
         handleSelectMode('hand');
       },
       '移动工具：移动屏幕位置',
@@ -512,7 +512,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['m'],
-      (e) => {
+      () => {
         this.infiniteViewer.current!.scrollCenter();
       },
       '画布居中',
@@ -520,7 +520,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     this.keyManager.keydown(
       ['v'],
-      (e) => {
+      () => {
         handleSelectMode('MoveTool');
       },
       '选择工具：选择屏幕中的组件',
@@ -789,7 +789,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
   public removeFrames(targets: (HTMLElement | SVGElement)[]) {
     const frameMap: IObject<any> = {};
-    const {moveableData} = this;
+    const { moveableData } = this;
     const viewport = this.getViewport();
 
     targets.forEach(function removeFrame(target) {
@@ -810,7 +810,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
   public restoreFrames(infos: ElementInfo[], frameMap: IObject<any>) {
     const viewport = this.getViewport();
-    const {moveableData} = this;
+    const { moveableData } = this;
 
     infos.forEach(function registerFrame(info) {
       info.frame = frameMap[info.id!];
@@ -880,7 +880,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   }
   public saveTargets(targets: (HTMLElement | SVGElement)[]): SavedScenaData[] {
     const viewport = this.getViewport();
-    const {moveableData} = this;
+    const { moveableData } = this;
     this.console.log('save targets', targets);
     return targets
       .map((target) => viewport.getInfoByElement(target))

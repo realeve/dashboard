@@ -138,16 +138,16 @@ export const apiConfig: IApiConfig = {
 
 export type IScrollBoard = {
   data: IChartMock;
-} & Omit<IScrollBoardProps, 'data' | 'header'>
+} & Omit<IScrollBoardProps, 'data' | 'header'>;
 type IScrollTable = {
   option: IScrollBoard;
   onClick?: (e: any) => void;
   style: React.CSSProperties;
-}
+};
 // TODO 讲述如何引进页面重新渲染
 export default ({
   option: { data, waitTime = 4, ...config },
-  onClick = (e) => {},
+  onClick = () => {},
   style = {},
 }: IScrollTable) =>
   useMemo(

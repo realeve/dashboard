@@ -5,7 +5,7 @@ import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import * as R from 'ramda';
 import { connect } from 'react-redux';
 import type { ICommon } from '@/models/common';
-import type { IPanelItem} from './lib';
+import type { IPanelItem } from './lib';
 import { diff } from './lib';
 
 import * as zrender from 'zrender/esm/zrender';
@@ -34,7 +34,7 @@ export type IThumbProps = {
   /** 边框颜色 * */
   stroke: string;
   [key: string]: any;
-} & Pick<ICommon, 'page' | 'history' | 'panel' | 'curHistoryIdx' | 'selectedPanel'>
+} & Pick<ICommon, 'page' | 'history' | 'panel' | 'curHistoryIdx' | 'selectedPanel'>;
 const Index = ({
   fill = '#999',
   stroke = '#2681ff',
@@ -127,7 +127,7 @@ const Index = ({
   };
 
   const changeRect = (rect: IPanelItem[]) => {
-    if (rect.length == 0) return;
+    if (rect.length === 0) return;
 
     rect.forEach(({ id, ...shape }) => {
       const el = getRectEl(id);
@@ -143,7 +143,7 @@ const Index = ({
   };
   // 移除面板
   const removeRect = (rectid: string[]) => {
-    if (rectid.length == 0) return;
+    if (rectid.length === 0) return;
     rects.forEach((item) => {
       if (rectid.includes(item.id)) {
         instanse.remove(item.rect);
@@ -153,7 +153,7 @@ const Index = ({
 
   // 增加矩形面板
   const addRect = (rect: IPanelItem[]) => {
-    if (rect.length == 0) return;
+    if (rect.length === 0) return;
     const style = { fill, stroke };
     const nextRects = rect.map((item) => {
       return getRect(item, selectedPanel.includes(item.id) ? activeStyle : style);

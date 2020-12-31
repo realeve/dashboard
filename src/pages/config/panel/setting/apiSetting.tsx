@@ -98,7 +98,7 @@ const ApiSetting = ({
 }) => {
   const configs = chartLib.apiConfig as IApiConfig;
 
-  if (R.type(configs) != 'Object') {
+  if (R.type(configs) !== 'Object') {
     return <p>该组件无数据请求，无需配置接口信息</p>;
   }
 
@@ -165,7 +165,7 @@ const ApiSetting = ({
         {state.show &&
           configs.config.map((config, idx) => (
             <FormItem
-              style={{ paddingTop: idx == 0 ? 10 : 0 }}
+              style={{ paddingTop: idx === 0 ? 10 : 0 }}
               key={config.key || Math.random().toString(16).slice(2, 8)}
               value={state[config.key]}
               onChange={(res) => {

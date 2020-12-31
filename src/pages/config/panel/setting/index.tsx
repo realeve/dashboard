@@ -7,10 +7,9 @@ import type {
   IPanelConfig,
   IPage,
   IBusinessCategory,
-  IHistoryProps} from '@/models/common';
-import {
-  GROUP_COMPONENT_KEY
+  IHistoryProps,
 } from '@/models/common';
+import { GROUP_COMPONENT_KEY } from '@/models/common';
 import Config from './config';
 import type { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
@@ -25,7 +24,7 @@ export type IHideProps = {
   config: boolean;
   layer: boolean;
   toolbox: boolean;
-}
+};
 
 export type TFnHide = (
   patch: Partial<IHideProps> | ((prevState: IHideProps) => Partial<IHideProps>),
@@ -40,7 +39,7 @@ export type ISettingProps = {
   page: IPage;
   dispatch: Dispatch;
   businessCategory: IBusinessCategory[];
-} & IHistoryProps
+} & IHistoryProps;
 const Index = ({
   setHide,
   hide,
@@ -66,7 +65,7 @@ const Index = ({
   //   setPageChart(valid);
   // }, [panel, selectedPanel]);
 
-  let pageChart = selectedPanel.length == 1;
+  let pageChart = selectedPanel.length === 1;
   if (pageChart) {
     const config = panel.find((item) => item.id == selectedPanel[0]);
     pageChart = config && config?.key !== GROUP_COMPONENT_KEY;
@@ -141,7 +140,7 @@ const Index = ({
         businessCategory={businessCategory}
       />
 
-      {selectedPanel.length == 1 && (
+      {selectedPanel.length === 1 && (
         <div
           className={styles.bottom}
           onClick={() => {

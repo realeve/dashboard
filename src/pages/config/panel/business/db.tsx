@@ -3,13 +3,8 @@ import { axios, DEV, _commonData } from '@/utils/axios';
 import * as R from 'ramda';
 import { api } from '@/utils/setting';
 import * as lib from '@/utils/lib';
-import type {
-  IPanelConfig,
-  IBusinessCategory} from '@/models/common';
-import {
-  GROUP_COMPONENT_KEY,
-  getGroupRect
-} from '@/models/common';
+import type { IPanelConfig, IBusinessCategory } from '@/models/common';
+import { GROUP_COMPONENT_KEY, getGroupRect } from '@/models/common';
 
 import { message } from 'antd';
 import type { IScreenItem } from '@/pages/list/';
@@ -28,7 +23,7 @@ export type IBusinessProps = {
   create_time: string;
   useage_times: number;
   update_time: string;
-}
+};
 
 /**
  *   @database: { 微信开发 }
@@ -66,7 +61,7 @@ export type IBusinessEditProps = {
   config: string;
   is_hide: string;
   _id: string;
-}
+};
 /**
 *   @database: { 接口管理 }
 *   @desc:     { 编辑业务组件 } 
@@ -106,7 +101,7 @@ const addLocaleBusiness = async (params: IBusinessProps) => {
   const { data, rows } = await getLocalBusiness();
   const startId = rows + 1;
   const nextParams = [...data, { id: startId, ...params }];
-  return localforage.setItem(BUSINESS_KEY, nextParams).then((e) => true);
+  return localforage.setItem(BUSINESS_KEY, nextParams).then(() => true);
 };
 
 /**
@@ -133,7 +128,7 @@ export const getTblBusiness = async () => {
 
 // 获取基础配置：缩略图、标题
 export const getImage = (panels: IPanelConfig[]) => {
-  if (panels.length == 1) {
+  if (panels.length === 1) {
     return { image: panels[0].image, title: panels[0].title };
   }
   const item =
@@ -224,5 +219,5 @@ export const getSaveOption: (
  */
 export const getTblBusinessCategory = () =>
   axios<IBusinessCategory>({
-    url: `${window.location.origin  }/business_category.json`,
+    url: `${window.location.origin}/business_category.json`,
   }).then(({ data }) => data);

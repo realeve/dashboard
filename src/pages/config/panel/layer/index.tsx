@@ -32,7 +32,7 @@ type ILayerProps = {
   className: string;
   hide: IHideProps;
   [key: string]: any;
-} & IHistoryProps
+} & IHistoryProps;
 const Index = ({
   hide,
   setHide,
@@ -114,7 +114,7 @@ ILayerProps) => {
         payload: {
           panel: distPanel,
           recordHistory: true,
-          historyTitle: `调整组件层级 - ${  distPanel[0].title}`,
+          historyTitle: `调整组件层级 - ${distPanel[0].title}`,
         },
       });
       return;
@@ -125,8 +125,8 @@ ILayerProps) => {
     const groupPanels = R.pluck('id', _groupPanel);
 
     let groupId = null;
-      const distId = items[to].id;
-      const groupItem = items[to].group;
+    const distId = items[to].id;
+    const groupItem = items[to].group;
     // 处理将图层拖入分组的场景；
     if (to > 1) {
       const prevItem = items[to - 1];
@@ -160,7 +160,7 @@ ILayerProps) => {
       payload: {
         panel: _nextPanel,
         recordHistory: true,
-        historyTitle: `调整组件层级 - ${  _nextPanel[0].title}`,
+        historyTitle: `调整组件层级 - ${_nextPanel[0].title}`,
       },
     });
     setSelected([to]);
@@ -187,14 +187,15 @@ ILayerProps) => {
   };
 
   const handleClick = (data) => {
-    const {action} = data;
-    const {idx} = data;
+    const { action } = data;
+    const { idx } = data;
     handleAction(action, idx);
   };
   const handleAction = (action, arr: number[]) => {
     if (typeof arr === 'undefined') {
       return;
-    } if (typeof arr === 'number') {
+    }
+    if (typeof arr === 'number') {
       contextMenuHandler(action, arr);
       return;
     }
@@ -286,7 +287,7 @@ ILayerProps) => {
 
       case MENU_ACTIONS.UN_GROUP:
         // 当前选择项
-        if (selected.length == 0) {
+        if (selected.length === 0) {
           return true;
         }
         choosedItem = showPanel[selected[0]];
@@ -296,14 +297,14 @@ ILayerProps) => {
         return typeof choosedItem.group !== 'string';
       case MENU_ACTIONS.TOP:
       case MENU_ACTIONS.MOVE_PREV:
-        if (selected.length == 0) {
+        if (selected.length === 0) {
           return true;
         }
         return selected[0] == 0;
 
       case MENU_ACTIONS.BOTTOM:
       case MENU_ACTIONS.MOVE_NEXT:
-        if (selected.length == 0) {
+        if (selected.length === 0) {
           return true;
         }
         return R.last(selected) == showPanel.length - 1;
@@ -422,7 +423,7 @@ ILayerProps) => {
                         })}
                         onClick={(e) => {
                           const CTRL_CLICK = e.ctrlKey;
-                            const SHIFT_CLICK = e.shiftKey;
+                          const SHIFT_CLICK = e.shiftKey;
                           let nextPanel = [item.id];
 
                           if (CTRL_CLICK) {
@@ -553,7 +554,7 @@ ILayerProps) => {
               payload: {
                 panel: nextPanel,
                 recordHistory: true,
-                historyTitle: `整理面板 - ${  nextPanel[0].title}`,
+                historyTitle: `整理面板 - ${nextPanel[0].title}`,
               },
             });
           }}
