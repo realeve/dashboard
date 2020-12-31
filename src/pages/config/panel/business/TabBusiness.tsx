@@ -8,7 +8,7 @@ import { GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
 
-export type IBusinessState = {
+export interface IBusinessState {
   list: {
     title: string;
     list: IBusinessProps[];
@@ -16,7 +16,7 @@ export type IBusinessState = {
   title: string;
   icon: string;
 }
-type IBusinessTabProps = {
+interface IBusinessTabProps {
   onAddPanel: (e: IPanelConfig[]) => void;
   businessCategory: IBusinessCategory[];
 }

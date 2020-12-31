@@ -3,7 +3,7 @@ import styles from '../ColorPicker/index.less';
 import classnames from 'classnames';
 import { isString } from '@antv/util';
 
-export type IRadioProps = {
+export interface IRadioProps {
   value: string | number;
   onChange: (e: string) => void;
   disabled?: boolean;

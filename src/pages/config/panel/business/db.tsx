@@ -12,7 +12,7 @@ import localforage from 'localforage';
 
 // （id/名称/业务分类,二级 /业务json配置文件([object,object]）/创建人/创建时间/使用次数/更新时间
 // [ x ] 业务组件数据结构定义
-export type IBusinessProps = {
+export interface IBusinessProps {
   id?: number; // 服务端 生成
   title: string; // 标题(弹出面板)
   category_main: string; // 一级分类(弹出面板)
@@ -23,7 +23,7 @@ export type IBusinessProps = {
   create_time: string;
   useage_times: number;
   update_time: string;
-};
+}
 
 /**
  *   @database: { 微信开发 }
@@ -53,7 +53,7 @@ export const addDashboardList = (params: { title: string; img: string; file: str
     params,
   }).then(({ data: [{ affected_rows }] }) => affected_rows > 0);
 
-export type IBusinessEditProps = {
+export interface IBusinessEditProps {
   title: string;
   category_main: string;
   category_sub: string;
@@ -61,7 +61,7 @@ export type IBusinessEditProps = {
   config: string;
   is_hide: string;
   _id: string;
-};
+}
 /**
 *   @database: { 接口管理 }
 *   @desc:     { 编辑业务组件 } 

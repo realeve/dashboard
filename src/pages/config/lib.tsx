@@ -48,7 +48,7 @@ export const calcTranslate = ({
 };
 
 // 默认样式
-export type IRect = {
+export interface IRect {
   top: number;
   left: number;
   width: number;
@@ -60,7 +60,7 @@ type IRectPos = {
 } & IRect
 
 // 放置组件后围成的矩形区域
-type IDistRect = {
+interface IDistRect {
   x1: number;
   y1: number;
   x2: number;
@@ -71,14 +71,14 @@ type IPanelStyleProps = {
   width: number;
   height: number;
 } & IDistRect
-type IPage = {
+interface IPage {
   width: number | string;
   height: number | string;
 }
 
 export type TPanelStyle = Pick<IPanel, 'style' | 'key'>;
 
-type IFnAutoPosition = {
+interface IFnAutoPosition {
   panel: TPanelStyle[];
   page?: IPage;
   padding?: number;

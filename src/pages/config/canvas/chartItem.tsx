@@ -31,7 +31,7 @@ const Index = ({ chartid, page: _page, history, curHistoryIdx, panel: _panel }: 
 
 export default connect(({ common }: { common: ICommon }) => common)(Index);
 
-type IChartItemProps = {
+interface IChartItemProps {
   page: IPage;
   config: IPanelConfig;
 }

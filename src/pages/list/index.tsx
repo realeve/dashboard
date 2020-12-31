@@ -6,7 +6,7 @@ import { api } from '@/utils/setting';
 import useFetch from '@/component/hooks/useFetch';
 import DNA from '@/pages/index/dna';
 
-export type IScreenItem = {
+export interface IScreenItem {
   file: string;
   id: number;
   img: string;

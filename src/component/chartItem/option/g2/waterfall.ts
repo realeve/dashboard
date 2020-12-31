@@ -1,9 +1,14 @@
 import type { Chart } from '@antv/g2';
 import { registerShape } from '@antv/g2';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 import * as R from 'ramda';
 
-const isArray = (arr) => R.type(arr) == 'Array';
+const isArray = (arr) => R.type(arr) === 'Array';
 
 /**
  * g2 组件需要导入的函数
@@ -188,7 +193,7 @@ export const handleAxisStyle = (chart, { x, y }) => {
 };
 
 // 数据转换器，外部数据变更时，将计算结果注入至source
-export const transformer = ({ data: val, x, y }) => {
+export const transformer = ({ data: val, y }) => {
   const sum = val.reduce((a, b) => a + b[1], 0);
   const data = [...R.clone(val), ['总计', sum]];
 

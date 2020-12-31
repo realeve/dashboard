@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import Chart from '@jiaminghi/charts';
 
 import { useMeasure } from 'react-use';
-
+import { IChartOption } from './';
 import './style.less';
 
 export default ({
@@ -13,7 +13,7 @@ export default ({
   className,
   style,
 }: {
-  option: Object;
+  option: Partial<IChartOption>;
   className?: string;
   style?: React.CSSProperties;
 }) => {

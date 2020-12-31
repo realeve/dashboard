@@ -4,7 +4,7 @@ import { getField } from './option-parser';
 
 const { Node } = hierarchy;
 export { Node };
-type HierarchyApi = {
+interface HierarchyApi {
   root?: any;
   rows?: any;
   children?: any;
@@ -30,7 +30,7 @@ const DEFAULT_OPTIONS: Options = {
   as: ['x', 'y'],
 };
 
-export type Options = {
+export interface Options {
   /**
    * 字段名 默认为 value
    */

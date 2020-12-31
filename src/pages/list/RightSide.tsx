@@ -30,7 +30,7 @@ const NewScreen = () => (
   </div>
 );
 
-type IShowProps = {
+interface IShowProps {
   visible: boolean;
   type: string;
   id: number;
@@ -160,7 +160,7 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
   );
 };
 
-export type IScreenListProps = {
+export interface IScreenListProps {
   data: IScreenItem[];
   onRefresh?: () => void;
 }

@@ -72,14 +72,14 @@ export const getGroupRect: () => IPanelConfig = () => {
 };
 
 const namespace = 'common';
-export type IPanelStyle = {
+export interface IPanelStyle {
   width: number;
   height: number;
   // rotate: number | string;
   transform: string;
 }
 
-export type IApiProps = {
+export interface IApiProps {
   legend?: number;
   x?: number;
   y?: number;
@@ -102,7 +102,7 @@ export type IPanelItemStyle = {
   transform: { translate: string };
   'transform-origin'?: string;
 } & TPanelItemStyle
-export type IPanelConfig = {
+export interface IPanelConfig {
   key?: string;
   edit_id?: number; // 编辑状态下的业务组件 id;
   engine?: TChartEngine;
@@ -131,7 +131,7 @@ export type IPanelConfig = {
 
   [key: string]: any;
 }
-export type ICommonConfig = {
+export interface ICommonConfig {
   border: string; // 边框样式
   borderRadius: [number, number, number, number]; // 边框半角弧度
   chartBackground: string; // 卡片背景
@@ -153,7 +153,7 @@ export type IPage = {
  * panel:面板配置
  * rec_time:创建时间
  */
-export type IDashboard = {
+export interface IDashboard {
   page: IPage;
   panel: IPanelConfig[];
   rec_time?: string;
@@ -194,13 +194,13 @@ const screenEdgePanel: IPanelConfig = {
   api: {},
 };
 
-export type IBusinessCategory = {
+export interface IBusinessCategory {
   title: string;
   icon: string;
   list: string[];
 }
 
-export type IHistoryProps = {
+export interface IHistoryProps {
   history: { panel: IPanelConfig[]; title: string | null }[]; // 历史记录，只记录panel变更情况
   curHistoryIdx: number; // 当前历史记录的指针
 }

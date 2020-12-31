@@ -12,7 +12,7 @@ import './style.less';
 
 export type ExpandIconPosition = 'left' | 'right' | undefined;
 
-export type CollapseProps = {
+export interface CollapseProps {
   activeKey?: (string | number)[] | string | number;
   defaultActiveKey?: (string | number)[] | string | number;
   /** 手风琴效果 */
@@ -28,7 +28,7 @@ export type CollapseProps = {
   ghost?: boolean;
 }
 
-type PanelProps = {
+interface PanelProps {
   isActive?: boolean;
   header?: React.ReactNode;
   className?: string;

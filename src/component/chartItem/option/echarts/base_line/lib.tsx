@@ -47,7 +47,7 @@ export const getMarkAreaData: (
     offset: number[];
     color: string;
   };
-  itemStyle?: Object;
+  itemStyle?: { color: string };
   yAxis: number;
 }[] = (markTitle, markArea) => {
   if (markTitle.length > 0) {
@@ -112,8 +112,8 @@ export const handlePercent = (series: ISeries[]) => {
   });
 
   return R.map((item) => {
-    let data = item.data.map((td, i) =>
-      arrSum[i] == 0 ? 0 : Number(((100 * +td) / arrSum[i]).toFixed(2)),
+    const data = item.data.map((td, i) =>
+      arrSum[i] === 0 ? 0 : Number(((100 * +td) / arrSum[i]).toFixed(2)),
     );
     return { ...item, data };
   }, series);
@@ -143,10 +143,11 @@ export const getMarkAreaInfo = ({
     markData = [...markData, getMarkAreaData(markTitle5, markArea5)];
     markData = markData.filter((item) => item.length);
     markData = markData.filter((item, i) => {
-      if (i % 2 == 1) {
-        item[0].itemStyle = { color: markAreaColor2 };
+      let nextItem = R.clone(item);
+      if (i % 2 === 1) {
+        nextItem[0].itemStyle = { color: markAreaColor2 };
       }
-      return item;
+      return nextItem;
     });
     markAreaInfo = {
       markArea: {

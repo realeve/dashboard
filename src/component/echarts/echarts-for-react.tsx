@@ -5,7 +5,7 @@ import theme from './theme';
 import * as echarts from 'echarts';
 import { equals as isEqual } from 'ramda';
 
-type IChartProps = {
+interface IChartProps {
   option: any; // eslint-disable-line react/forbid-prop-types
   echarts?: any; // eslint-disable-line react/forbid-prop-types
   notMerge: boolean;
@@ -23,7 +23,7 @@ type IChartProps = {
     width?: number | 'auto';
     height?: number | 'auto';
   };
-};
+}
 
 export default class EchartsReactCore extends Component<IChartProps> {
   static defaultProps = {

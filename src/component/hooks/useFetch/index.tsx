@@ -21,7 +21,7 @@ export const callback = <T extends {}>(data: Record<string, any>): T => Object.v
 
 const { CancelToken } = http;
 
-export type IFetchProps<T> = {
+export interface IFetchProps<T> {
   param?: AxiosRequestConfig | null;
   initData?: T;
   valid?: (e?: any) => boolean;

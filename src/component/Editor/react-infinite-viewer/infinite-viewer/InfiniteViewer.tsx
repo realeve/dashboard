@@ -739,12 +739,10 @@ class InfiniteViewer extends Component {
 
 interface InfiniteViewer extends Component, InfiniteViewerProperties {
   // tslint:disable-next-line: max-line-length
-  on<T extends keyof InfiniteViewerEvents>(
+  on: (<T extends keyof InfiniteViewerEvents>(
     eventName: T,
     handlerToAttach: (event: InfiniteViewerEvents[T]) => any,
-  ): this;
-  on(eventName: string, handlerToAttach: (event: { [key: string]: any }) => any): this;
-  on(events: { [key: string]: (event: { [key: string]: any }) => any }): this;
+  ) => this) & ((eventName: string, handlerToAttach: (event: Record<string, any>) => any) => this) & ((events: Record<string, (event: Record<string, any>) => any>) => this);
 }
 
 export default InfiniteViewer;

@@ -125,7 +125,7 @@ export type IBidirectionalBar = {
   y2: number;
   direction: 'horizontal' | 'vertical';
   limitYaxis?: boolean;
-} & IG2PlotProps
+} & IG2PlotProps;
 export default ({
   data: { data, header },
   x = 0,
@@ -158,13 +158,17 @@ export default ({
     },
     label: {
       position: (e) => {
-        return direction == 'vertical'
-          ? e.type == header[y]
-            ? 'top'
-            : 'middle'
-          : e.type == header[y2]
-          ? 'right'
-          : 'middle';
+        if (direction === 'vertical') {
+          return e.type === header[y] ? 'top' : 'middle';
+        }
+        return e.type === header[y2] ? 'right' : 'middle';
+        // return direction === 'vertical'
+        //   ? e.type === header[y]
+        //     ? 'top'
+        //     : 'middle'
+        //   : e.type === header[y2]
+        //   ? 'right'
+        //   : 'middle';
       },
       style: {
         fill: '#ddd',

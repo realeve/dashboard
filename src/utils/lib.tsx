@@ -75,7 +75,7 @@ export const noncer = () => Math.random().toString(16).slice(2);
 
 export const {getType} = axios;
 
-export type Store = {
+export interface Store {
   payload: any;
 }
 export const setStore: <T = ICommon>(prevState: T, store: Store) => T = (

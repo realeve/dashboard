@@ -5,7 +5,7 @@ import type InfiniteViewer from './InfiniteViewer';
  * @typedef
  * @memberof InfiniteViewer
  */
-export type InfiniteViewerOptions = {
+export interface InfiniteViewerOptions {
   margin: number;
   threshold: number;
   zoom: number;
@@ -29,66 +29,66 @@ export type InfiniteViewerOptions = {
   scrollAreaElement: HTMLElement;
   verticalScrollElement: HTMLElement;
   horizontalScrollElement: HTMLElement;
-};
+}
 
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnScroll = {
+export interface OnScroll {
   scrollLeft: number;
   scrollTop: number;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnAbortPinch = {
+export interface OnAbortPinch {
   inputEvent: any;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnDragStart = {
+export interface OnDragStart {
   inputEvent: any;
   stop: () => void;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnDrag = {
+export interface OnDrag {
   inputEvent: any;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnDragEnd = {
+export interface OnDragEnd {
   isDrag: boolean;
   isDouble: boolean;
   inputEvent: any;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnPinchStart = {
+export interface OnPinchStart {
   inputEvent: any;
   stop: () => void;
-};
+}
 /**
  * @typedef
  * @memberof InfiniteViewer
  */
-export type OnPinch = {
+export interface OnPinch {
   distance: number;
   scale: number;
   zoom: number;
   inputEvent: any;
-};
-export type InfiniteViewerEvents = {
+}
+export interface InfiniteViewerEvents {
   scroll: OnScroll;
   abortPinch: OnAbortPinch;
   dragStart: OnDragStart;
@@ -96,7 +96,7 @@ export type InfiniteViewerEvents = {
   dragEnd: OnDragEnd;
   pinchStart: OnPinchStart;
   pinch: OnPinch;
-};
+}
 export type InfiniteViewerProperties = {
   [P in typeof PROPERTIES[number]]: InfiniteViewerOptions[P];
 };

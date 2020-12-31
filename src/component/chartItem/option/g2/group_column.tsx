@@ -139,7 +139,7 @@ export const onMount = (
   const legendData: string[] = R.compose(R.uniq, R.pluck(legend))(data);
 
   legendData.forEach((legendItem) => {
-    const item = data.find((item) => item[legend] == legendItem);
+    const item = data.find((dataItem) => dataItem[legend] === legendItem);
     chart.annotation().text({
       top: true,
       position: [item[x], 'min'],

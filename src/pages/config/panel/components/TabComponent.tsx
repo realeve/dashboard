@@ -36,14 +36,14 @@ const useGetComponents: <T>() => { loading: boolean; state: T[]; error: null | s
   return { loading, state, error };
 };
 
-type IComponentList = {
+interface IComponentList {
   onAdd: (e, isEdit?: boolean) => void;
   loading: boolean;
   state: (IComponent | IBusinessState)[];
   error: null | string;
   isBusiness?: boolean;
   onRefresh?: () => void;
-};
+}
 
 export const ComponentList = ({
   onAdd,
@@ -294,7 +294,7 @@ export const ComponentList = ({
               setVal(e.target.value);
             }}
             autoComplete="false"
-            onBlur={(e) => {
+            onBlur={() => {
               // drawer弹出时会获得焦点，此时Input失去焦点，需要hack重新获取焦点
               if (val.trim().length === 1) {
                 inputRef?.current?.focus();

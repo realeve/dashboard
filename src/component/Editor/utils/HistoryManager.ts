@@ -2,10 +2,10 @@ import type { IObject } from '@daybrush/utils';
 import type Editor from '../Editor';
 
 export type RestoreCallback = (props: any, editor: Editor) => any;
-export type HistoryAction = {
+export interface HistoryAction {
   type: string;
   props: IObject<any>;
-};
+}
 export default class HistoryManager {
   private undoStack: HistoryAction[] = [];
   private redoStack: HistoryAction[] = [];

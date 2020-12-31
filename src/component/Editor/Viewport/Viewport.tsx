@@ -13,23 +13,23 @@ import {
 import { DATA_SCENA_ELEMENT_ID } from '../consts';
 import type { ScenaJSXElement, ScenaComponent, ScenaJSXType } from '../types';
 
-export type AddedInfo = {
+export interface AddedInfo {
   added: ElementInfo[];
 }
-export type RemovedInfo = {
+export interface RemovedInfo {
   removed: ElementInfo[];
 }
-export type MovedInfo = {
+export interface MovedInfo {
   info: ElementInfo;
   parentInfo: ElementInfo;
   prevInfo?: ElementInfo;
 }
-export type MovedResult = {
+export interface MovedResult {
   moved: ElementInfo[];
   prevInfos: MovedInfo[];
   nextInfos: MovedInfo[];
 }
-export type ElementInfo = {
+export interface ElementInfo {
   jsx: ScenaJSXType;
   name: string;
   frame?: IObject<any>;

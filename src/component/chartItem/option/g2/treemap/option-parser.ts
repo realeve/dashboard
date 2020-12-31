@@ -3,7 +3,7 @@ import { isArray, isString } from '@antv/util';
 const INVALID_FIELD_ERR_MSG = 'Invalid field: it must be a string!';
 const INVALID_FIELDS_ERR_MSG = 'Invalid fields: it must be an array!';
 
-type Options = {
+interface Options {
   field?: string | string[];
   fields?: string | string[];
 }

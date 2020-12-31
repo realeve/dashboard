@@ -112,7 +112,7 @@ export type IEchartsBaselineProps = {
   readonly axisPointer: 'shadow' | 'cross' | 'line';
 } & ILegendProps & IApiProps
 
-export type ISeries = {
+export interface ISeries {
   name: string;
   coordinateSystem: string;
   data: (number | string)[];

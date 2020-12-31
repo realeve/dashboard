@@ -63,9 +63,9 @@ function redoRenders({ infos }: IObject<any>, editor: Editor) {
   editor.eventBus.trigger('render');
 }
 
-export type DimensionViewableProps = {
+export interface DimensionViewableProps {
   dimensionViewable?: boolean;
-};
+}
 const DimensionViewable = {
   name: 'dimensionViewable',
   props: {

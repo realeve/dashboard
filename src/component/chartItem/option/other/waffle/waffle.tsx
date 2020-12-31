@@ -9,7 +9,7 @@ import { Tooltip } from 'antd';
 import { useInterval } from 'react-use';
 import { SEARCH_PREFIX } from '@/utils/setting';
 import classnames from 'classnames';
-import {handleData} from './util'
+import { handleData } from './util';
 
 export { mock } from './mock';
 // title:冠字华夫图
@@ -195,7 +195,7 @@ const WaffleChart = ({
   ]);
 
   const containerStyle: React.CSSProperties =
-    direction == 'vertical'
+    direction === 'vertical'
       ? {
           flexDirection: 'row',
         }
@@ -239,7 +239,7 @@ const WaffleChart = ({
           const Item = (
             <div
               className={classnames(styles.box, {
-                [styles.active]: item._warn && visibleIdx == item._warnIdx,
+                [styles.active]: item._warn && visibleIdx === item._warnIdx,
               })}
               style={{
                 width: boxSize,
@@ -283,7 +283,7 @@ const WaffleChart = ({
                 </div>
               }
               key={item.title}
-              visible={visibleIdx == item._warnIdx || curIdx == i}
+              visible={visibleIdx === item._warnIdx || curIdx === i}
               overlayStyle={{ transform: `translate(0,-10px)` }}
             >
               {Item}

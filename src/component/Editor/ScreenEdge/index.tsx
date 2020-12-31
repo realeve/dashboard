@@ -27,7 +27,7 @@ const getEdgeArr = (
   return arr;
 };
 
-type EdgeLineProps = {
+interface EdgeLineProps {
   direction?: 'horizontal' | 'vertical';
   data: any[];
   screen_edge_width: number;
@@ -77,7 +77,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
   },
 );
 
-export type IScreenEdgeProps = {
+export interface IScreenEdgeProps {
   screen_edge_background: string;
   screen_edge_width: number;
   screen_x: number;

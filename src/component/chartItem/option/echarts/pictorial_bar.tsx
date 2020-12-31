@@ -192,7 +192,7 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
   
 };
 
-export type IPictorialBar = {
+export interface IPictorialBar {
   data: {
     data: (number | string)[][];
   };

@@ -8,7 +8,7 @@ import localforage from 'localforage';
 
 export { DEV } from './setting';
 
-export type GlobalAxios = {
+export interface GlobalAxios {
   host: string;
   token: string;
 }
@@ -16,7 +16,7 @@ export type GlobalAxios = {
 /**
  * @param affected_rows 数据写操作返回的成功条数
  */
-export type TDbWrite = { affected_rows?: number; id?: number; [key: string]: any };
+export interface TDbWrite { affected_rows?: number; id?: number; [key: string]: any }
 export type TAxiosData = TDbWrite | any[];
 /**
  * @param title:标题
@@ -30,7 +30,7 @@ export type TAxiosData = TDbWrite | any[];
  * @param serverTime 服务器时间
  * @param hash 当前数据的hash值，数据变更时hash变更
  */
-export type IAxiosState<T = TAxiosData> = {
+export interface IAxiosState<T = TAxiosData> {
   title: string;
   rows: number;
   data: T[];
@@ -130,7 +130,7 @@ const saveToken = () => {
     token: window.g_axios.token,
   });
 };
-export type AxiosError = {
+export interface AxiosError {
   message: string;
   description: string;
   url: string;

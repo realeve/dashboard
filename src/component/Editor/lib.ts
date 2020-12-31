@@ -111,8 +111,8 @@ export const getThumbnail = async (
        * */
       if (filename) {
         canvas.toBlob(
-          function (blob) {
-            saveAs(blob, `${filename  }.webp`);
+          (blob) => {
+            saveAs(blob, `${filename}.webp`);
           },
           imageType,
           quality,

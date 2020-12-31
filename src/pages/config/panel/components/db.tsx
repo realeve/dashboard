@@ -1,7 +1,7 @@
 import { axios } from '@/utils/axios';
 import * as R from 'ramda';
 
-export type IChartConfig = {
+export interface IChartConfig {
   type: string;
   title: string;
   image: string;
@@ -17,13 +17,13 @@ export type IChartConfig = {
   showTitle?: number;
   [key: string]: any;
 }
-export type IComponentItem = {
+export interface IComponentItem {
   title: string;
   icon: string;
   num?: number;
   list: IChartConfig[];
 }
-export type IComponent = {
+export interface IComponent {
   title: string;
   icon: string;
   list: IComponentItem[];

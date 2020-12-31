@@ -9,7 +9,7 @@ import styles from './index.less';
 
 export const emojiList = ['🥇', '🥈', '🥉'];
 
-export type IScrollBoardProps = {
+export interface IScrollBoardProps {
   header: string[];
   data: string[][];
   rowNum: number;

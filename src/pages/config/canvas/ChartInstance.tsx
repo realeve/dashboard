@@ -33,7 +33,7 @@ const getRange = ({ dateType = '本月' }: { dateType: string }) => {
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
 };
 
-type ChartInstanceProps = {
+interface ChartInstanceProps {
   config: IPanelConfig;
   style?: React.CSSProperties;
   title?: string;

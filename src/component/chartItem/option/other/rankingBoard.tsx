@@ -140,7 +140,7 @@ export const apiConfig: IApiConfig = {
   config: [],
 };
 
-export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...config } }) => {
+export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...props } }) => {
   const data = json2Array(_data);
   return (
     <ScrollRankingBoard
@@ -151,7 +151,7 @@ export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...con
         align: ['center'],
         carousel,
         waitTime: waitTime * 1000,
-        ...config,
+        ...props,
       }}
     />
   );

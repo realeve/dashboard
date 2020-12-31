@@ -133,7 +133,7 @@ export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
   return { data, other, otherOffsetAngle };
 };
 
-type IPieOther = {
+interface IPieOther {
   pieItem?: number;
   otherChart?: 'pie' | 'bar';
   theme: string | number;

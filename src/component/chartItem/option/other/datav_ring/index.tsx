@@ -6,7 +6,14 @@ import Charts from './chart';
 import * as R from 'ramda';
 
 const defaultTheme = getTheme();
-const color = ['#00c0ff', '#3de7c9', '#fff', '#00c0ff', '#3de7c9', ...defaultTheme.colors10];
+const color: string[] = [
+  '#00c0ff',
+  '#3de7c9',
+  '#fff',
+  '#00c0ff',
+  '#3de7c9',
+  ...defaultTheme.colors10,
+];
 
 export const mock: IChartMock = {
   data: [
@@ -83,12 +90,13 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-const getRadius = (radius, max = 12) => `${Math.floor(Math.random() * max + radius)  }%`;
+const getRadius = (radius, max = 12) => `${Math.floor(Math.random() * max + radius)}%`;
 const formatRadius = ({ radius, innerRadius, max }) => {
-  while (radius[0] == radius[1]) {
-    radius[0] = getRadius(innerRadius, max);
+  let nextRadius = R.clone(radius);
+  while (radius[0] === radius[1]) {
+    nextRadius[0] = getRadius(innerRadius, max);
   }
-  return radius;
+  return nextRadius;
 };
 
 export default ({
@@ -134,3 +142,19 @@ export default ({
 
   return <Charts option={option} />;
 };
+
+export interface IChartOption {
+  color: string[];
+  series: {
+    type: string;
+    data: any;
+    outsideLabel: {
+      labelLineEndLength: number;
+      formatter: string;
+      style: {
+        fill: string;
+        fontSize: number;
+      };
+    };
+  }[];
+}

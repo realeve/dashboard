@@ -12,7 +12,7 @@ import { nice, quantity } from 'echarts/lib/util/number';
 
 export type tRender = 'canvas' | 'svg';
 
-export type IChart = {
+export interface IChart {
   key?: string;
   title: string;
   default?: string | number;
@@ -23,7 +23,7 @@ export type IChart = {
 export type TChartConfig = IChart[];
 
 export const uniq: <T>(arr: T[]) => T[] = (arr) => R.uniq(arr);
-export type ITooltipFormatter = {
+export interface ITooltipFormatter {
   series: { name: string; value: string | number; seriesName: string; color: string }[];
   unit: string | boolean;
   axisName: string;
@@ -400,7 +400,7 @@ export const getRenderer: (params: {
   params.render ||
   (['paralell', ...chartGL].includes(params.type) || params.histogram ? 'canvas' : 'svg');
 
-export type Iparams = {
+export interface Iparams {
   type: tGl;
   height?: string | number;
   size?: number;
@@ -431,7 +431,7 @@ export const handleMinMax: (params: {
   };
 };
 
-type IPositionConfig = {
+interface IPositionConfig {
   key?: string;
   defaultValue?: string | number | boolean;
   title: string;

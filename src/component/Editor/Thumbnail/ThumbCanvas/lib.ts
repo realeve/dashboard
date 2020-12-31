@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 
-export type IPanelItem = {
+export interface IPanelItem {
   id: string;
   x: number;
   y: number;

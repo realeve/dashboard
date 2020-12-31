@@ -19,12 +19,12 @@ import { getThumbnail } from '@/component/Editor/lib';
 
 const getSelectedPanelConfig = (panel, selected) => panel.findIndex((item) => selected === item.id);
 
-export type IHideProps = {
+export interface IHideProps {
   components: boolean;
   config: boolean;
   layer: boolean;
   toolbox: boolean;
-};
+}
 
 export type TFnHide = (
   patch: Partial<IHideProps> | ((prevState: IHideProps) => Partial<IHideProps>),
@@ -95,7 +95,7 @@ const Index = ({
     const haseBusiness = panel.find((item) => selectedPanel.includes(item.id) && item.business);
 
     setShouldSave(!haseBusiness);
-  }, [selectedPanel.join(''), panel.map((item) => item.id).join('')]);
+  }, [selectedPanel.join(''), JSON.stringify(panel)]);
   //  [selectedPanel.length]);
 
   return (

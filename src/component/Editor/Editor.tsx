@@ -92,7 +92,7 @@ export const calcDragPos = (
   };
 };
 
-export type IEditorProps = {
+export interface IEditorProps {
   // width: string;
   // height: string;
   // background?: string;
@@ -141,7 +141,7 @@ export type IEditorProps = {
 
   /** 被遮挡区域的总宽度 */
   hideWidth?: number;
-};
+}
 /**
  * @param page 全局page设置
  * @param debug 调试模式

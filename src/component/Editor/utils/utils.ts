@@ -159,7 +159,7 @@ export const calcDefaultGuidline = ({ width, height, padding }: IPage) => {
   };
 };
 
-export type IGuideProps = {
+export interface IGuideProps {
   h: number[];
   v: number[];
 }

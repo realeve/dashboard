@@ -5,7 +5,7 @@ import * as R from 'ramda';
 import type { EChartOption } from 'echarts';
 
 export type tRender = 'canvas' | 'svg';
-type IProp = {
+interface IProp {
   renderer?: tRender;
   option: EChartOption;
   /** 是否轮询切换显示项，用于动态饼图 */
@@ -14,7 +14,7 @@ type IProp = {
   /** 设置切换项 */
   setToggleIdx?: (e: number) => void;
   [key: string]: any;
-};
+}
 
 /**
  * 将第idx个项目设为选中状态
@@ -22,7 +22,7 @@ type IProp = {
  * @param idx 序号
  */
 const toggleSeriesItem = (prevOption, idx) => {
-  let option = R.clone(prevOption);
+  const option = R.clone(prevOption);
   const len = option.series[0].data.length;
   option.series[0].data = option.series[0].data.map((item, i) => {
     const flag = i === idx % len;

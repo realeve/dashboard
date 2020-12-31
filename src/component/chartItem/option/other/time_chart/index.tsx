@@ -58,7 +58,7 @@ export const config: IChartConfig[] = [
     defaultValue: true,
   },
 ];
-type ITimeChartProps = {
+interface ITimeChartProps {
   fontSize: number;
   fontWeight: number | 'bold' | 'normal' | 'bolder' | 'lighter';
   fontColor: string;
@@ -68,7 +68,7 @@ type ITimeChartProps = {
   datetype: string;
   flexDirection: boolean;
   breakWeekday: boolean;
-};
+}
 
 export default ({
   option: {

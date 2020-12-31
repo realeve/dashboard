@@ -7,12 +7,12 @@ import type { ChartConfig } from '@/component/g2plot';
 import G2Plot from '@/component/g2plot';
 import { useSetState } from 'react-use';
 
-type ITrendChartState = {
+interface ITrendChartState {
   tooltipItems: any[];
   activeTooltipTitle: any;
   activeSeriesList: any[];
-};
-type ITrendChartProps = {
+}
+interface ITrendChartProps {
   data: IChartMock;
   config: ChartConfig;
   x: number;
@@ -20,7 +20,7 @@ type ITrendChartProps = {
   legend: number;
   cardPosition: 'left' | 'right';
   [key: string]: any;
-};
+}
 
 export default ({
   data: { data, header, hash },

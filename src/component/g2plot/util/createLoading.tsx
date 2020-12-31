@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-type Props = {
+interface Props {
   type?: string;
   loadingTemplate?: React.ReactElement;
 }

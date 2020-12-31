@@ -11,7 +11,7 @@ export { apiConfig } from '../scroll_board';
 export { mock1 as mock } from './mock';
 
 export const config = [...mainConfig, ...detailConfig];
-type IWaffleState = {
+interface IWaffleState {
   prod?: string;
   gz?: string;
   procname?: string;
@@ -38,7 +38,7 @@ const ScrollTable = ({ config, onClick }) => {
   );
 };
 
-export type IBoxProp = {
+export interface IBoxProp {
   boxSize: number;
   boxShape: 'circle' | 'rect' | 'roundRect';
   detailApi: string;

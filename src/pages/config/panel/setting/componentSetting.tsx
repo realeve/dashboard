@@ -31,11 +31,6 @@ export default ({
   const [configs, setConfigs] = useState<IChartConfig[]>(null);
   const [state, setState] = useState({});
 
-  // 当key变更时，重新载入默认值
-  useEffect(() => {
-    init();
-  }, [id]);
-
   const init = async () => {
     const { default: res } = await import(`../../../../component/chartItem/charts/${key}`);
     if (!res) {
@@ -46,11 +41,16 @@ export default ({
     setState(getDefaultState(res.config, componentConfig));
   };
 
+  // 当key变更时，重新载入默认值
+  useEffect(() => {
+    init();
+  }, [id]);
+
   if (!configs) {
     return <p>组件配置信息异常，请联系管理员。</p>;
   }
 
-  if (R.type(configs) != 'Array' || configs.length === 0) {
+  if (R.type(configs) !== 'Array' || configs.length === 0) {
     return <p>该组件未设置参数</p>;
   }
 

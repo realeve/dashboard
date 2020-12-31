@@ -8,7 +8,7 @@ import type { TChartEngine } from '@/models/common';
 import type { Dispatch } from 'redux';
 import { useLocation } from 'react-use';
 
-export type WidgetBorder = {
+export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
   children: ScenaJSXElement;

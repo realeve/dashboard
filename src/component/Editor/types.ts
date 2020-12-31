@@ -11,7 +11,7 @@ import type React from 'react';
 
 export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
 
-export type ScenaEditorState = {
+export interface ScenaEditorState {
   selectedTargets: (SVGElement | HTMLElement)[];
   horizontalGuides: number[];
   verticalGuides: number[];
@@ -23,14 +23,14 @@ export type ScenaEditorState = {
   guideVisible?: boolean;
 }
 
-export type TagAppendInfo = {
+export interface TagAppendInfo {
   tag: any;
   props: IObject<any>;
   name: string;
   frame: IObject<any>;
 }
 
-export type EditorInterface = {
+export interface EditorInterface {
   editor: Editor;
   memory: Memory;
   eventBus: EventBus;
@@ -41,15 +41,15 @@ export type EditorInterface = {
   moveableManager: React.RefObject<MoveableManager>;
 }
 
-export type Clipboard = {
+export interface Clipboard {
   write: (items: ClipboardItem[]) => Promise<void>;
 }
-export type ClipboardItem = {
+export interface ClipboardItem {
   types: string[];
   getType: (type: string) => Promise<Blob>;
 }
 
-export type SavedScenaData = {
+export interface SavedScenaData {
   name: string;
   jsxId: string;
   componentId: string;
@@ -60,7 +60,7 @@ export type SavedScenaData = {
   frame: IObject<any>;
   children: SavedScenaData[];
 }
-export type ScenaProps = {
+export interface ScenaProps {
   scenaElementId?: string;
   scenaAttrs?: IObject<any>;
   scenaText?: string;

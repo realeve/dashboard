@@ -308,10 +308,10 @@ export const ComponentConfig = ({
 );
 
 // 页面配置
-type IPageProps = {
+interface IPageProps {
   page: IPage;
   dispatch: Dispatch;
-};
+}
 export default ({ page, dispatch }: IPageProps) => {
   const updatePage = (nextPage) => {
     dispatch({

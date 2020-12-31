@@ -96,12 +96,12 @@ export const config: IChartConfig[] = [
     max: 60,
     step: 2,
   },
-  {
-    key: 'intervalData',
-    defaultValue: true,
-    title: '变换数据',
-    type: 'switch',
-  },
+  // {
+  //   key: 'intervalData',
+  //   defaultValue: true,
+  //   title: '变换数据',
+  //   type: 'switch',
+  // },
   {
     type: 'label',
     title: '坐标系切换需刷新页面',
@@ -154,7 +154,7 @@ export const onMount = (
     // color = 'rainbow',
     theme = 'cbpc',
     needRerverse,
-    intervalData = true,
+    // intervalData = true,
     coordinate = 'polar',
     fontSize = 16,
   }: IChartProps,

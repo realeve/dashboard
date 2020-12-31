@@ -2,7 +2,7 @@ import type { RulerProps } from '@scena/react-ruler/declaration/types';
 import type { IObject } from '@daybrush/utils';
 import type { ReactText } from 'react';
 
-export type GuidesState = {
+export interface GuidesState {
   guides: number[];
   dragPos: number | ReactText;
 }
@@ -19,10 +19,10 @@ export type GuideOptions = {
 export type GuidesProps = {
   onChangeGuides?: (e: OnChangeGuides) => any;
 } & GuideOptions
-export type OnChangeGuides = {
+export interface OnChangeGuides {
   guides: number[];
 }
-export type GuidesInterface = {
+export interface GuidesInterface {
   getGuides: () => number[];
   scroll: (pos: number) => void;
   scrollGuides: (pos: number) => void;

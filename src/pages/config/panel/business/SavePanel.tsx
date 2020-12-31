@@ -20,13 +20,13 @@ const Field = ({ children, ...props }) => (
   </FieldComponent>
 );
 
-type ISavePanelProps = {
+interface ISavePanelProps {
   onClose: () => void;
   selectedPanel: string[];
   panel: IPanelConfig[];
   businessCategory: IBusinessCategory[];
   dispatch: Dispatch;
-};
+}
 export default ({ onClose, selectedPanel, panel, businessCategory, dispatch }: ISavePanelProps) => {
   const [option, setOption] = useSetState<IBusinessProps | null>(null);
 

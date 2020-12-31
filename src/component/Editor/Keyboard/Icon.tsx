@@ -5,11 +5,11 @@ import type Memory from '../utils/Memory';
 import type Editor from '../Editor';
 import type { EditorInterface, ScenaJSXType } from '../types';
 
-export type Maker = {
+export interface Maker {
   tag: string;
   attrs: IObject<any>;
   style: IObject<any>;
-};
+}
 
 @connectEditorProps
 export default abstract class Icon extends React.PureComponent<{

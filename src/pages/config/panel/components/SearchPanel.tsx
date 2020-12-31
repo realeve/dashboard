@@ -1,7 +1,7 @@
 import styles from './index.less';
 import classnames from 'classnames';
 
-export type ISearchState = {
+export interface ISearchState {
   category: string; // 类目
   title: string; // 标题
   image: string; // 缩略图

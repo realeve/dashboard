@@ -13,7 +13,7 @@ import { useDebounce } from 'react-use';
 
 type IFormItemValue = string | number | boolean | (number | string)[];
 
-type IFormItemProps = {
+interface IFormItemProps {
   config: IChartConfig;
   value?: IFormItemValue;
   onChange?: (e: IFormItemValue) => void;

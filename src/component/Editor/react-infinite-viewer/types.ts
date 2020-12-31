@@ -1,6 +1,6 @@
 import type { InfiniteViewerEvents, InfiniteViewerProperties } from "infinite-viewer";
 
-export type InfiniteViewerEventNames = {
+export interface InfiniteViewerEventNames {
     onScroll: "scroll";
     onDragStart: "dragStart";
     onDrag: "drag";

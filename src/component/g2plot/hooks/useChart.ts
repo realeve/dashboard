@@ -6,7 +6,7 @@ import type { Plot, Options as G2PlotConfig } from '@antv/g2plot'; // , Tooltip 
 import createNode from '../util/createNode';
 import type { TooltipOptions } from '@antv/g2plot/lib/types/tooltip';
 
-export type ContainerProps = {
+export interface ContainerProps {
   style?: React.CSSProperties;
   className?: string;
   loading?: boolean;

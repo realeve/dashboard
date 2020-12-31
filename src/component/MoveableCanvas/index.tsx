@@ -19,7 +19,7 @@ const Moveable = React.lazy(() => import('react-moveable'));
   </MoveableCanvas>
 
  */
-type IMoveableCanvas = {
+interface IMoveableCanvas {
   /** 内部需要拖拽的画布 */
   children?: React.ReactNode;
   /** 设置外层边框的样式 */

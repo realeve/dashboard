@@ -80,7 +80,7 @@ type IG2Plot = {
   fill: string;
   reverseXY: boolean;
   [key: string]: any;
-} & IG2PlotProps
+} & IG2PlotProps;
 
 export default ({
   data: { data, header },
@@ -98,7 +98,7 @@ export default ({
     value: [item[header[y]], item[header[y2]]],
   }));
 
-  const config = reverseXY
+  const props = reverseXY
     ? {
         chartType: 'bar',
         yField: xField,
@@ -111,7 +111,7 @@ export default ({
       };
 
   return {
-    ...config,
+    ...props,
     color,
     renderer,
     data: _data,

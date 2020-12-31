@@ -26,7 +26,7 @@ const getThumbnailParam = (x: number) => {
 const SCALE_PARAM = 10;
 
 // -[x] 拖动缩略图
-type IThumbnailProps = {
+interface IThumbnailProps {
   visible: boolean;
   zoom: number;
   dragPercent: { x: number; y: number };

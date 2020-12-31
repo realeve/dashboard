@@ -3,7 +3,7 @@ import RcCollapse from 'rc-collapse';
 import classNames from 'classnames';
 import { ConfigContext } from 'antd/lib/config-provider';
 
-export type CollapsePanelProps = {
+export interface CollapsePanelProps {
   key: string | number;
   header: React.ReactNode;
   disabled?: boolean;
