@@ -14,6 +14,13 @@ export default ({
   option: { x = 0, y = 1, data, titleFontSize = 16, valueFontSize = 30, ...option },
 }) => {
   const [sum, setSum] = useState(null);
+
+  const [val, setVal] = useSetState({
+    start: 0,
+    end: 0,
+    name: data.data[0][x],
+  });
+
   useEffect(() => {
     const count = R.sum(data.data.map((item) => item[y]));
     setSum(count || 1);
@@ -21,13 +28,7 @@ export default ({
       start: 0,
       end: Number(((data.data[0][y] / count) * 100).toFixed(2)),
     });
-  }, [data]);
-
-  let [val, setVal] = useSetState({
-    start: 0,
-    end: 0,
-    name: data.data[0][x],
-  });
+  }, [data, y]);
 
   return (
     <div className={styles.pie}>

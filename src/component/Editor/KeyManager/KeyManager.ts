@@ -3,8 +3,8 @@ import { checkInput } from '../utils/utils';
 import KeyController from 'keycon';
 
 function check(e: any) {
-  const {inputEvent} = e;
-  const {target} = inputEvent;
+  const { inputEvent } = e;
+  const { target } = inputEvent;
 
   if (checkInput(target)) {
     return false;
@@ -51,7 +51,7 @@ export default class KeyManager {
     description?: string,
   ) {
     // 过滤key
-    if (this.keylist.filter(item => item[0].join(',') === keys.join(',')).length > 0) {
+    if (this.keylist.filter((item) => item[0].join(',') === keys.join(',')).length > 0) {
       return;
     }
     if (description) {
@@ -66,6 +66,7 @@ export default class KeyManager {
       if (result !== false && description) {
         this.console.log(`${type}: ${keys.join(' + ')}`, description);
       }
+      return true;
     };
   }
 }

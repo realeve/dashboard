@@ -36,5 +36,8 @@ module.exports = {
     // 允许  a && b这种形式
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     // 'import/newline-after-import': 0,
+
+    // 允许空函数，如catch
+    'no-empty': ['error', { allowEmptyCatch: true }],
   },
 };

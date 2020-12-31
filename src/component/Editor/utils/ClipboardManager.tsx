@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ClipboardItem, SavedScenaData } from '../types';
+import type { ClipboardItem, SavedScenaData as TSavedScenaData } from '../types';
 import type Editor from '../Editor';
 import { checkInput } from './utils';
 import { TYPE_SCENA_LAYERS } from '../consts';
@@ -41,7 +41,7 @@ export default class ClipboardManager {
     e.preventDefault();
 
     const clipboardData = (e as any).clipboardData as DataTransfer;
-    const {moveableData} = this.editor;
+    const { moveableData } = this.editor;
     const targets = moveableData.getSelectedTargets();
     const SavedScenaData = this.editor.saveTargets(targets);
 
@@ -59,11 +59,11 @@ export default class ClipboardManager {
     e.preventDefault();
   };
   private readDataTransfter(data: DataTransfer) {
-    const {types} = data;
+    const { types } = data;
     const hasScena = types.indexOf(TYPE_SCENA_LAYERS) > -1;
 
     if (hasScena) {
-      const scenaDatas = JSON.parse(data.getData(TYPE_SCENA_LAYERS)) as SavedScenaData[];
+      const scenaDatas = JSON.parse(data.getData(TYPE_SCENA_LAYERS)) as TSavedScenaData[];
 
       this.editor.console.log('paste scena data', scenaDatas);
 
@@ -81,7 +81,7 @@ export default class ClipboardManager {
     let hasText = false;
     const isPaste =
       clipboardItems.filter((item) => {
-        const {types} = item;
+        const { types } = item;
 
         const hasImage = types.indexOf('image/png') > -1;
         hasText = hasText || types.indexOf('text/plain') > -1;
@@ -106,5 +106,6 @@ export default class ClipboardManager {
         },
       ]);
     }
+    return true;
   }
 }

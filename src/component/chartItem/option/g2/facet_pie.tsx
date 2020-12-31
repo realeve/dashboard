@@ -106,7 +106,7 @@ export const onMount = (
     y = 1,
     max = 100,
     innerPercent = 60,
-    facet = 'list',
+    facet: facetConfig = 'list',
     outterPercent = 100,
     fontSize = 16,
     textAlign,
@@ -133,12 +133,12 @@ export const onMount = (
 
   chart.tooltip(false);
   const colors = getColors(theme, needRerverse);
-  chart.facet(facet, {
+  chart.facet(facetConfig, {
     fields: ['type'],
     cols,
     showTitle: false,
     eachView: function eachView(view, facet) {
-      const {data} = facet;
+      const { data } = facet;
       data.push({ type: '其他', value: max - data[0].value });
       view.data(data);
       view.coordinate('theta', {
@@ -162,15 +162,14 @@ export const onMount = (
       view.annotation().text({
         position: ['50%', '50%'],
         content: (obj) => {
-          return `${obj[0].type  }\n${  obj[0].value  }%`;
+          return `${obj[0].type}\n${obj[0].value}%`;
         },
         style: {
           fill: fontColor,
           fontSize,
-          textAlign,
           fontWeight,
           stroke: null,
-          textAlign: 'center',
+          textAlign: textAlign || 'center',
         } as ShapeAttrs,
       });
     },
