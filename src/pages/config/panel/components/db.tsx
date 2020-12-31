@@ -30,16 +30,6 @@ export interface IComponent {
   [key: string]: any;
 }
 
-export const getComponentList: () => Promise<IComponent[]> = () =>
-  axios({
-    url: `${window.location.origin  }/components.json`,
-  }).then((res) =>
-    res.map((item) => {
-      item.list = handleList(item.list);
-      return item;
-    }),
-  );
-
 const handleList = (list: IComponentItem[]) => {
   const all = {
     title: '全部',
@@ -48,11 +38,12 @@ const handleList = (list: IComponentItem[]) => {
     list: [],
   };
   let res = R.clone(list).map((item) => {
+    let num = 0;
     if (item.list[0] && item.list[0].title != '全部') {
-      item.num = item.list.length;
+      num = item.list.length;
       all.list = [...all.list, ...item.list];
     }
-    return item;
+    return { ...item, num };
   });
   all.num = all.list.length;
   if (all.num === 0) {
@@ -61,3 +52,12 @@ const handleList = (list: IComponentItem[]) => {
   res = [all, ...res].filter((item) => item.title.length > 0);
   return res;
 };
+
+export const getComponentList: () => Promise<IComponent[]> = () =>
+  axios({
+    url: `${window.location.origin}/components.json`,
+  }).then((res) =>
+    res.map((item) => {
+      return { ...item, list: handleList(item.list) };
+    }),
+  );

@@ -114,9 +114,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
     ) {
       try {
         echartObj.resize();
-      } catch (e) {
-        console.error(e);
-      }
+      } catch (e) {}
     }
   }
 
@@ -126,13 +124,16 @@ export default class EchartsReactCore extends Component<IChartProps> {
   }
 
   // return the echart object
-  getEchartsInstance = () =>
-    this.echartsInstance ||
-    (this.echartsInstance = this.echartsLib.init(
-      this.echartsElement,
-      this.props.theme,
-      this.props.opts,
-    ));
+  getEchartsInstance = () => {
+    if (!this.echartsInstance) {
+      this.echartsInstance = this.echartsLib.init(
+        this.echartsElement,
+        this.props.theme,
+        this.props.opts,
+      );
+    }
+    return this.echartsInstance;
+  };
 
   // dispose echarts and element-resize-event
   dispose = () => {

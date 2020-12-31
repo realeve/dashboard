@@ -142,11 +142,14 @@ const getColor: (len: number, type?: string) => string[] = (len, type = '') => {
   if (type === 'pie') {
     return len > 8 ? COLOR_PIE_16 : COLOR_PIE;
   }
-  return len <= 8 ? COLOR_PLATE_8 : len <= 16 ? COLOR_PLATE_16 : COLOR_PLATE_24;
+  if (len <= 8) {
+    return COLOR_PLATE_8;
+  }
+  return len <= 16 ? COLOR_PLATE_16 : COLOR_PLATE_24;
 };
 
-const hex2rgb = (str, alpha = 1) => {
-  str = str.slice(1);
+const hex2rgb = (src: string, alpha: number = 1) => {
+  const str = src.slice(1);
   if (str.length > 3) {
     const r = parseInt(str.slice(0, 2), 16);
     const g = parseInt(str.slice(2, 4), 16);
@@ -159,7 +162,6 @@ const hex2rgb = (str, alpha = 1) => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
-
 export default {
   COLOR_PLATE_8,
   COLOR_PLATE_16,
@@ -170,5 +172,5 @@ export default {
   ANTV,
   FLAT_UI_COLOR,
   getColor,
-  hex2rgb, 
+  hex2rgb,
 };

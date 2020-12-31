@@ -143,7 +143,7 @@ export const getMarkAreaInfo = ({
     markData = [...markData, getMarkAreaData(markTitle5, markArea5)];
     markData = markData.filter((item) => item.length);
     markData = markData.filter((item, i) => {
-      let nextItem = R.clone(item);
+      const nextItem = R.clone(item);
       if (i % 2 === 1) {
         nextItem[0].itemStyle = { color: markAreaColor2 };
       }

@@ -10,6 +10,7 @@ import { prefix } from './utils';
 import { hasClass, addClass, removeClass } from '@daybrush/utils';
 import type { GuidesState, GuidesProps, GuidesInterface } from './types';
 import './guides.less';
+import * as R from 'ramda';
 
 const GuidesElement = styled('div', GUIDES_CSS);
 
@@ -90,7 +91,7 @@ export default class Guides
   public renderGuides() {
     const { type, zoom } = this.props as Required<GuidesProps>;
     const translateName = type === 'horizontal' ? 'translateY' : 'translateX';
-    const {guides} = this.state;
+    const guides = R.uniq(this.state.guides);
 
     this.guideElements = [];
     return guides.map((pos, i) => {
@@ -98,7 +99,7 @@ export default class Guides
         <div
           className={prefix('guide', type)}
           ref={refs(this, 'guideElements', i)}
-          key={i}
+          key={pos}
           data-index={i}
           data-pos={pos}
           style={{
@@ -115,8 +116,8 @@ export default class Guides
     this.dragger = new Dragger(this.manager.getElement(), {
       container: document.body,
       dragstart: (e) => {
-        const {target} = e.inputEvent;
-        const {datas} = e;
+        const { target } = e.inputEvent;
+        const { datas } = e;
 
         if (target === this.ruler.canvasElement) {
           e.datas.fromRuler = true;
@@ -160,12 +161,12 @@ export default class Guides
    */
   public scrollGuides(pos: number) {
     const { zoom } = this.props as Required<GuidesProps>;
-    const {guidesElement} = this;
+    const { guidesElement } = this;
 
     this.scrollPos = pos;
     guidesElement.style.transform = `${this.getTranslateName()}(${-pos * zoom}px)`;
 
-    const {guides} = this.state;
+    const { guides } = this.state;
     this.guideElements.forEach((el, i) => {
       if (!el) {
         return;
@@ -233,7 +234,7 @@ export default class Guides
   };
   private onDragEnd = ({ datas, clientX, clientY, isDouble }: OnDragEnd) => {
     const pos = this.onDrag({ datas, clientX, clientY });
-    const {guides} = this.state;
+    const { guides } = this.state;
     const { setGuides, onChangeGuides, zoom, displayDragPos } = this.props;
     const guidePos = Math.round(pos / zoom!);
 

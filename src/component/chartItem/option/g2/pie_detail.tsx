@@ -110,15 +110,12 @@ export const defaultOption = {
   renderer: 'svg',
 };
 
-export const transformer = ({ data: { data: val }, x, y, pieItem }, chart) => {
+export const transformer = ({ data: { data: val }, x, y, pieItem }) => {
   let _data = R.map((item) => ({ type: item[x], value: item[y], percent: 0 }))(val);
   _data = _data.sort((b, a) => a.value - b.value);
 
   const sum = _data.reduce((a, b) => a + b.value, 0);
-  _data = _data.map((item) => {
-    item.percent = item.value / sum;
-    return item;
-  });
+  _data = _data.map((item) => ({ ...item, percent: item.value / sum }));
 
   // 前N个数值
   const data = R.take(pieItem, _data);
@@ -200,7 +197,7 @@ export const onMount = (
           fontSize,
         },
         content: (obj) => {
-          return `${obj.type  }\n${  (100 * obj.percent).toFixed(2)  }%`;
+          return `${obj.type}\n${(100 * obj.percent).toFixed(2)}%`;
         },
       };
     });
@@ -247,7 +244,7 @@ export const onMount = (
         fontSize,
       },
       content: (obj) => {
-        return `${obj.type  } ${  (100 * obj.percent).toFixed(2)  }%`;
+        return `${obj.type} ${(100 * obj.percent).toFixed(2)}%`;
       },
     });
 
@@ -255,9 +252,7 @@ export const onMount = (
 
   drawLinkArea();
 
-  chart.on('afterpaint', function () {
-    drawLinkArea();
-  });
+  chart.on('afterpaint', drawLinkArea);
 
   /* ---------绘制连接区间-----------*/
   function drawLinkArea() {

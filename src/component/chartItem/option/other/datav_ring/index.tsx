@@ -92,7 +92,7 @@ export const apiConfig: IApiConfig = {
 
 const getRadius = (radius, max = 12) => `${Math.floor(Math.random() * max + radius)}%`;
 const formatRadius = ({ radius, innerRadius, max }) => {
-  let nextRadius = R.clone(radius);
+  const nextRadius = R.clone(radius);
   while (radius[0] === radius[1]) {
     nextRadius[0] = getRadius(innerRadius, max);
   }

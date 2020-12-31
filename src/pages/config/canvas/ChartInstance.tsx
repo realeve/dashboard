@@ -29,7 +29,7 @@ const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
 const getRange = ({ dateType = '本月' }: { dateType: string }) => {
   const [start, end]: [Dayjs, Dayjs] = ranges[dateType];
   const tstart = start.format('YYYYMMDD');
-    const tend = end.format('YYYYMMDD');
+  const tend = end.format('YYYYMMDD');
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
 };
 
@@ -43,7 +43,7 @@ interface ChartInstanceProps {
 
 type ChartRenderProps = {
   chartLib: any;
-} & ChartInstanceProps
+} & ChartInstanceProps;
 
 const ChartRender = ({
   config,
@@ -75,7 +75,8 @@ const ChartRender = ({
       params: { ...getRange(api), cache: api.cache ?? 2 },
     },
     valid: () => valid,
-    interval: typeof api.interval === 'undefined' ? 0 : parseInt(`${  Number(api.interval) * 60}`),
+    interval:
+      typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
     callback(e) {
       if (e && e.title) {
         onLoad(e.title);
@@ -105,7 +106,7 @@ const ChartRender = ({
   let appendConfig: { renderer: tRender } = { renderer: 'canvas' };
 
   if (defaultOption) {
-    appendConfig = R.type(defaultOption) == 'Function' ? defaultOption(config) : defaultOption;
+    appendConfig = R.type(defaultOption) === 'Function' ? defaultOption(config) : defaultOption;
   }
 
   // 合并后的属性
@@ -116,9 +117,8 @@ const ChartRender = ({
     ...api,
   };
 
-
   if (config.engine === 'echarts') {
-    const chart = ref?.current?.echartsInstance;  
+    const chart = ref?.current?.echartsInstance;
     return (
       <Suspense fallback={<Spin spinning />}>
         <Echarts
@@ -129,7 +129,8 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } if (config.engine === 'g2plot') {
+  }
+  if (config.engine === 'g2plot') {
     const option = method({
       ...injectProps,
       autoFit: true,
@@ -152,7 +153,8 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } if (config.engine === 'g2') {
+  }
+  if (config.engine === 'g2') {
     return (
       <Suspense fallback={<Spin spinning />}>
         <G2
@@ -165,7 +167,8 @@ const ChartRender = ({
         />
       </Suspense>
     );
-  } if (config.engine === 'other') {
+  }
+  if (config.engine === 'other') {
     const Item = method;
     return <Item panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />;
   }

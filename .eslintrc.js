@@ -31,13 +31,21 @@ module.exports = {
 
     // 类型定义，优先用interface
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['current'] }],
+    'no-param-reassign': ['warn', { props: true, ignorePropertyModificationsFor: ['current'] }],
 
     // 允许  a && b这种形式
-    'no-unused-expressions': ['error', { allowShortCircuit: true }],
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true },
+    ],
     // 'import/newline-after-import': 0,
 
     // 允许空函数，如catch
     'no-empty': ['error', { allowEmptyCatch: true }],
+    'consistent-return': 'off',
+    '@typescript-eslint/consistent-type-imports': 'off',
+    '@typescript-eslint/no-invalid-this': 'off',
+    'import/newline-after-import': 'off',
   },
 };

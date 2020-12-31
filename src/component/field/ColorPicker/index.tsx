@@ -7,7 +7,6 @@ import { hex2rgb, rgb2hex } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
 import Draggable from 'react-draggable';
 import paletteList from './palette';
-import classnames from 'classnames';
 import * as colorLib from '@/utils/colors/lib';
 
 enum EColorType {
@@ -50,7 +49,7 @@ const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
 };
 
 const getInitVal = (value: string) => {
-  if (value.slice(0, 6) == 'linear') {
+  if (value.slice(0, 6) === 'linear') {
     return value
       .replace('%)', '%')
       .split(', ')
@@ -82,8 +81,9 @@ const GardientPicker = ({ value, onChange, disabled = false }) => {
     if (value === nextGardient) {
       return;
     }
-    onChange(getGardient(color));
+    onChange(nextGardient);
   }, [color]);
+
   const [show, setShow] = useState(false);
 
   return (

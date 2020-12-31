@@ -66,7 +66,7 @@ const Index = ({
       height: Number(String(setting?.style?.height).replace('px', '')),
     };
     setSize(_size);
-  }, [selectedIdx, JSON.stringify(panel)]);
+  }, [JSON.stringify(panel[selectedIdx])]);
 
   // 通用配置
   const [general, setGeneral] = useState(null);
@@ -76,14 +76,12 @@ const Index = ({
     setGeneral(next);
   }, [JSON.stringify(panel[selectedIdx]), page.head, page.chartBackground, page.border]);
 
-  const updateAttrib = (res: Object, recordHistory = true, historyTitle = '') => {
+  const updateAttrib = (attrib: any, recordHistory = true, historyTitle = '') => {
     dispatch({
       type: 'common/updatePanelAttrib',
       payload: {
         idx: panel[selectedIdx].id,
-        attrib: {
-          ...res,
-        },
+        attrib,
         recordHistory,
         historyTitle,
       },
@@ -116,7 +114,7 @@ const Index = ({
         style={{ color: '#eee', height: '100%' }}
       >
         <div className={styles.pageconfig} style={{ height: '100%' }}>
-          {currentPanel.key == SCREEN_EDGE_KEY ? (
+          {currentPanel.key === SCREEN_EDGE_KEY ? (
             <div className={styles['datav-gui']}>
               <FormField
                 config={{ title: '请在组件配置中设置屏幕分割线的配置项', type: 'divider' }}
@@ -292,7 +290,7 @@ const Index = ({
           <ApiSetting
             onChange={(api) => {
               // console.log(api);
-              updateAttrib({ api }, true, '调整接口配置项' + ` - ${panel[selectedIdx].title}`);
+              updateAttrib({ api }, true, `调整接口配置项 - ${panel[selectedIdx].title}`);
             }}
             panel={currentPanel}
             isBusiness={currentPanel?.business && !currentPanel.edit_id}

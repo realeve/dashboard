@@ -55,7 +55,7 @@ export const config: IChartConfig = [
 ];
 
 export default ({ option }: { option: IG2Plot }) => {
-  const lineConfig: ChartConfig = getLineConfig(option) as ChartConfig;
+  const base: ChartConfig = getLineConfig(option) as ChartConfig;
   const props = _.pick<{
     data: IChartMock;
     x: number;
@@ -67,7 +67,7 @@ export default ({ option }: { option: IG2Plot }) => {
       {...props}
       cardPosition={option.cardPosition}
       config={{
-        ...lineConfig,
+        ...base,
         legend: false,
         yAxis: {
           grid: {

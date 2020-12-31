@@ -39,7 +39,7 @@ interface IShowProps {
 }
 type IProps = {
   setShow: (e: IShowProps) => void;
-} & IScreenItem
+} & IScreenItem;
 
 const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setShow }: IProps) => {
   const [screenTitle, setScreenTitle] = useState(title);
@@ -139,7 +139,7 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
               value={screenTitle}
               onChange={(e) => {
                 const _title = e.target.value;
-                if (_title != title) {
+                if (_title !== title) {
                   setScreenTitle(_title);
                 }
               }}
@@ -149,10 +149,10 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
             <span
               className={classnames(
                 styles['name-icon'],
-                publish == 1 ? styles['color-publish'] : styles['color-notpublish'],
+                publish === 1 ? styles['color-publish'] : styles['color-notpublish'],
               )}
             />
-            <span>{publish == 1 ? '已' : '未'}发布</span>
+            <span>{publish === 1 ? '已' : '未'}发布</span>
           </div>
         </div>
       </div>
@@ -196,14 +196,14 @@ const RightSide = ({ data, onRefresh }: IScreenListProps) => {
     <div className={styles.projectList}>
       {show.visible && (
         <Confirm
-          title={show.type == 'del' ? '删除大屏' : '复制当前大屏'}
+          title={show.type === 'del' ? '删除大屏' : '复制当前大屏'}
           style={{ width: 400, minHeight: 230, height: 'auto' }}
           onCancel={() => {
             setShow({ visible: false });
           }}
           onOk={() => {
             setShow({ visible: false });
-            if (show.type == 'del') {
+            if (show.type === 'del') {
               setDashboardList({
                 _id: show.id,
                 title: show.title,
@@ -219,7 +219,7 @@ const RightSide = ({ data, onRefresh }: IScreenListProps) => {
             copyDashboardByFile();
           }}
         >
-          {show.type == 'del' ? (
+          {show.type === 'del' ? (
             <p style={{ margin: '20px 0' }}>删除后将不可恢复，是否继续？</p>
           ) : (
             <p style={{ margin: '20px 0' }}>
@@ -241,10 +241,10 @@ const RightSide = ({ data, onRefresh }: IScreenListProps) => {
           <ScreenItem
             {...props}
             key={props.id}
-            setShow={(show) => {
+            setShow={(prop) => {
               setShow({
-                ...show,
-                file: `./data/${  props.file}`,
+                ...prop,
+                file: `./data/${props.file}`,
               });
             }}
           />

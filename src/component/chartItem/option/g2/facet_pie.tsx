@@ -1,8 +1,8 @@
 import type { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
-
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 import type { ShapeAttrs } from '@antv/g-base/lib/types';
+import * as R from 'ramda';
 
 export const mock: IChartMock = {
   data: [
@@ -138,9 +138,9 @@ export const onMount = (
     cols,
     showTitle: false,
     eachView: function eachView(view, facet) {
-      const { data } = facet;
-      data.push({ type: '其他', value: max - data[0].value });
-      view.data(data);
+      const facetData = R.clone(facet.data);
+      facetData.push({ type: '其他', value: max - facetData[0].value });
+      view.data(facetData);
       view.coordinate('theta', {
         radius: outterPercent / 100,
         innerRadius: innerPercent / 100,

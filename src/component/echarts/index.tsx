@@ -1,4 +1,4 @@
-import { useEffect, useState, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import ReactEcharts from './echarts-for-react';
 import { useInterval } from 'react-use';
 import * as R from 'ramda';
@@ -25,13 +25,11 @@ const toggleSeriesItem = (prevOption, idx) => {
   const option = R.clone(prevOption);
   const len = option.series[0].data.length;
   option.series[0].data = option.series[0].data.map((item, i) => {
-    const flag = i === idx % len;
-    item.selected = flag;
+    const selected = i === idx % len;
     // item.label = { show: flag };
-    return item;
+    return { ...item, selected };
   });
-  idx = (idx + 1) % len;
-  return { option, idx };
+  return { option, idx: (idx + 1) % len };
 };
 
 const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
