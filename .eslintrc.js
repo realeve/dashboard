@@ -22,6 +22,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+    'no-param-reassign': ['error', { props: false, ignorePropertyModificationsFor: ['current'] }],
     // 'import/newline-after-import': 0,
   },
 };
