@@ -556,7 +556,7 @@ export type IG2Plot = {
   pointColor: string;
   pointShape: string;
   stepType: string;
-} & IG2PlotProps
+} & IG2PlotProps;
 
 export const getLineConfig = ({
   data: { data, header },
@@ -585,7 +585,7 @@ export const getLineConfig = ({
   renderer,
 }: IG2Plot) => {
   const isBarChart = ['column', 'bar'].includes(chartType);
-  const reverseXY = chartType == 'bar';
+  const reverseXY = chartType === 'bar';
 
   const seriesField: { seriesField?: string } =
     header.length < 3 || typeof legend === 'undefined'
@@ -593,7 +593,8 @@ export const getLineConfig = ({
       : {
           seriesField: header[legend],
         };
-  const stepOption = stepType == '无' || stepType == '' ? { smooth } : { stepType, smooth: false };
+  const stepOption =
+    stepType === '无' || stepType === '' ? { smooth } : { stepType, smooth: false };
 
   const slider =
     !reverseXY && showSlider
@@ -628,7 +629,7 @@ export const getLineConfig = ({
             offsetX: 8,
             needSort: false,
             isStack,
-            isArea: chartType == 'area',
+            isArea: chartType === 'area',
             xAxisOffset: 0,
             maxLabelLength: 15,
           },

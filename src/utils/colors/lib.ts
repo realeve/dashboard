@@ -19,7 +19,7 @@ export const getRGB = (color: string) =>
  * @param color 颜色，支持 rgb/hex
  */
 export const getColorName = (color: string) => {
-  if (color[0] == '#') {
+  if (color[0] === '#') {
     color = hex2rgb(color);
   }
   const colors = getRGB(color);

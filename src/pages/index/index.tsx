@@ -30,7 +30,8 @@ const ScaleBackground = ({
         <div style={getAutoSizeStyle(page, resizeType)}>{children}</div>
       </div>
     );
-  } if (resizeType === EResizeType.MOVIE) {
+  }
+  if (resizeType === EResizeType.MOVIE) {
     const autosize = getAutoSizeStyle(page, resizeType);
     const bg = getBackground(page);
     const bgStyle = bg.background
@@ -44,19 +45,19 @@ const ScaleBackground = ({
         </div>
       </div>
     );
-  } if (resizeType === EResizeType.COMPONENT) {
+  }
+  if (resizeType === EResizeType.COMPONENT) {
     return (
       <div className={styles.dashboard} style={getDashboardStyle(page)}>
         {children}
       </div>
     );
-  } 
-    return (
-      <div className={styles.dashboard} style={getDashboardStyle(page)}>
-        {children}
-      </div>
-    );
-  
+  }
+  return (
+    <div className={styles.dashboard} style={getDashboardStyle(page)}>
+      {children}
+    </div>
+  );
 };
 /**
  *
@@ -79,8 +80,8 @@ const Index = () => {
     return <DNA />;
   }
   const { page, panel, type } = config;
-    const autoSize = location?.query?.autoresize;
-  if (type == 'notExist') {
+  const autoSize = location?.query?.autoresize;
+  if (type === 'notExist') {
     return <DNA title={`文件${location?.query?.id}加载失败，请检查是否上传!`} />;
   }
 

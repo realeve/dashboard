@@ -97,7 +97,7 @@ ILayerProps) => {
     // 跨组件移动,需要判断目标组件是否被分组，如果是则合并分组
 
     // 拖动分组组件
-    const isDragingGroupRect = showPanel[from].key == GROUP_COMPONENT_KEY;
+    const isDragingGroupRect = showPanel[from].key === GROUP_COMPONENT_KEY;
     // console.log(JSON.stringify(showPanel[from]), JSON.stringify(showPanel[to]));
     if (showPanel[to].group) {
       // 2020-11-12 此处需要判断对应的类型是否为分组，暂时不支持多层分组；取消此处即可打开，但需要处理点击页面时父组件的选择；
@@ -141,13 +141,13 @@ ILayerProps) => {
     let _nextPanel: IPanelConfig[] = [];
 
     _panel.forEach((item: IPanelConfig) => {
-      if (distId == item.id && groupId && item.key != GROUP_COMPONENT_KEY) {
+      if (distId === item.id && groupId && item.key !== GROUP_COMPONENT_KEY) {
         item.group = groupId;
       }
       if (item.key === GROUP_COMPONENT_KEY) {
         // 处理组内移动
         const childrenPanel: IPanelConfig[] = R.filter(R.propEq<string>('group', item.id))(
-          groupItem == item.id ? items : panel,
+          groupItem === item.id ? items : panel,
         ) as IPanelConfig[];
         _nextPanel = [..._nextPanel, item, ...childrenPanel];
       } else {
@@ -291,7 +291,7 @@ ILayerProps) => {
           return true;
         }
         choosedItem = showPanel[selected[0]];
-        if (choosedItem.key == GROUP_COMPONENT_KEY) {
+        if (choosedItem.key === GROUP_COMPONENT_KEY) {
           return false;
         }
         return typeof choosedItem.group !== 'string';
@@ -300,14 +300,14 @@ ILayerProps) => {
         if (selected.length === 0) {
           return true;
         }
-        return selected[0] == 0;
+        return selected[0] === 0;
 
       case MENU_ACTIONS.BOTTOM:
       case MENU_ACTIONS.MOVE_NEXT:
         if (selected.length === 0) {
           return true;
         }
-        return R.last(selected) == showPanel.length - 1;
+        return R.last(selected) === showPanel.length - 1;
     }
     return false;
   };
@@ -449,9 +449,9 @@ ILayerProps) => {
                           }
 
                           // 需处理分组的逻辑，存在互斥；
-                          if (item.key == GROUP_COMPONENT_KEY) {
+                          if ((item.key = GROUP_COMPONENT_KEY)) {
                             const childrenPanel = panel
-                              .filter((panelItem) => panelItem.group == item.id)
+                              .filter((panelItem) => panelItem.group === item.id)
                               .map((panelItem) => panelItem.id);
                             nextPanel = R.uniq([...nextPanel, ...childrenPanel]);
                           }
@@ -509,7 +509,7 @@ ILayerProps) => {
           const id = e.detail.data.idx;
 
           // 当选中多个时或在当前选中项点击右键，不执行后续操作；
-          if (selected.length > 1 || selected.join(',') == id) {
+          if (selected.length > 1 || selected.join(',') === id) {
             return;
           }
 

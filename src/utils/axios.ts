@@ -16,7 +16,11 @@ export interface GlobalAxios {
 /**
  * @param affected_rows 数据写操作返回的成功条数
  */
-export interface TDbWrite { affected_rows?: number; id?: number; [key: string]: any }
+export interface TDbWrite {
+  affected_rows?: number;
+  id?: number;
+  [key: string]: any;
+}
 export type TAxiosData = TDbWrite | any[];
 /**
  * @param title:标题
@@ -106,7 +110,7 @@ type TypeList =
 export const getType: (data: any) => TypeList = (data) => R.type(data).toLowerCase() as TypeList;
 
 export const loadUserInfo = (user) => {
-  if (user == null) {
+  if (user === null) {
     window.g_axios.token = refreshNoncer;
     saveToken();
     return {
@@ -151,7 +155,7 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
     return null;
   }
 
-  config.url += `${id ? `${id  }/${  nonce}` : ''}?${qs.stringify(params)}`;
+  config.url += `${id ? `${id}/${nonce}` : ''}?${qs.stringify(params)}`;
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
@@ -173,7 +177,8 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
       url: error.config.url || '',
       params,
     });
-  } if (error.request) {
+  }
+  if (error.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
@@ -207,7 +212,7 @@ export const handleUrl = (option) => {
 
 type IAxiosConfig = {
   url?: string | IAxiosState;
-} & Omit<AxiosRequestConfig, 'url'>
+} & Omit<AxiosRequestConfig, 'url'>;
 
 // 自动处理token更新，data 序列化等
 export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosState<T>> = ({

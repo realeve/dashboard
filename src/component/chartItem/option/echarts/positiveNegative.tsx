@@ -1,7 +1,12 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 import * as R from 'ramda';
 import * as lib from '@/component/chartItem/option/lib';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 
 /**
  * // 自定义组件文档说明 更新自2020-08-31
@@ -62,7 +67,7 @@ const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   legendArr.map((name, idx) => {
     const arr = [];
     xArr.forEach((xItem) => {
-      const item = data.find((item) => item[legend] == name && item[x] == xItem);
+      const item = data.find((item) => item[legend] === name && item[x] === xItem);
       arr.push(item ? Number(item[y]) * (idx === 0 ? -1 : 1) : '-');
     });
     series.push({

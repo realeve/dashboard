@@ -124,11 +124,11 @@ export const handleSimpleMode = (option, config) => {
     option = Object.assign(option, { xAxis, yAxis });
   }
 
-  if (config.simple == CHART_MODE.HIDE_DESC) {
+  if (config.simple === CHART_MODE.HIDE_DESC) {
     // Reflect.deleteProperty(option, 'toolbox');
     const [title]: string = option.title;
     option.title = title;
-  } else if (config.simple == CHART_MODE.HIDE_ALL) {
+  } else if (config.simple === CHART_MODE.HIDE_ALL) {
     option.title = {};
     option.toolbox = {};
     option.grid = {
@@ -138,7 +138,7 @@ export const handleSimpleMode = (option, config) => {
       bottom: 20,
     };
     Reflect.deleteProperty(option, 'dataZoom');
-  } else if (config.simple == CHART_MODE.SHOW_TITLE) {
+  } else if (config.simple === CHART_MODE.SHOW_TITLE) {
     const [title]: string = option.title;
     option.title = title;
     option.toolbox = {};
@@ -569,10 +569,10 @@ export const getG2LegendOption = ({
   // position：top | top-left | top-right | right | right-top | right-bottom | left | left-top | left-bottom | bottom | bottom-left | bottom-right
   let position = '';
   if (['top', 'bottom'].includes(legendPosition)) {
-    const vPos = legendAlign == 'center' ? '' : `-${legendAlign}`;
+    const vPos = legendAlign === 'center' ? '' : `-${legendAlign}`;
     position = legendPosition + vPos;
   } else {
-    const vPos = legendPosition == 'center' ? '' : `${legendPosition}`;
+    const vPos = legendPosition === 'center' ? '' : `${legendPosition}`;
     position = vPos + { left: '-top', right: '-bottom', center: '' }[legendAlign];
   }
   return {
@@ -736,7 +736,7 @@ export const getAntThemePanel: () => IChartConfig = () => ({
   title: '主题色',
   type: 'antselect',
   option: palette.map((item, idx) => {
-    if (idx == palette.length - 1) {
+    if (idx === palette.length - 1) {
       return item;
     }
     return {
@@ -824,8 +824,8 @@ export function getPercentWithPrecision(
   }
 
   const digits = Math.pow(10, precision);
-  const votesPerQuota = valueList.map(
-    (val: number | '-') => ((isNaN(val) || val == '-' ? 0 : val) / sum) * digits * 100,
+  const votesPerQuota = valueList.map(W
+    (val: number | '-') => ((isNaN(val) || val === '-' ? 0 : val) / sum) * digits * 100,
   );
   const targetSeats = digits * 100;
 

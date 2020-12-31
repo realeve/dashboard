@@ -46,7 +46,7 @@ const HistoryPanel = ({
           <HistoryItem
             value={`${idx + 1}.${item.title}` || `第${idx + 1}步`}
             key={idx}
-            active={idx == curHistoryIdx}
+            active={idx === curHistoryIdx}
             onUpdate={() => {
               dispatch({
                 type: 'common/setStore',

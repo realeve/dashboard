@@ -103,7 +103,7 @@ export default ({
   legendPosition = 'top',
   legendOrient = 'horizontal',
 }) => {
-  if (String(legend) == '') {
+  if (String(legend) === '') {
     return {};
   }
   const res = handleData(data, { legend, x, y });

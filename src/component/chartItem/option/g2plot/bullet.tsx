@@ -92,7 +92,7 @@ export default ({
   legendShow = true,
 }: IG2Plot) => {
   const res = data[0];
-  const isHorizontal = direction == 'horizontal';
+  const isHorizontal = direction === 'horizontal';
 
   const bulletData = data.map((res) => ({
     title: res[x],

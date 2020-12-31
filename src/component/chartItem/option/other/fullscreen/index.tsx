@@ -26,7 +26,7 @@ const FullScreen = ({ option: { fill = '#e6e6e6' }, curTool }) => {
       <div
         onClick={() => {
           // 当前配置界面，且可拖动组件时，不允许切换全屏状态（屏蔽该功能）
-          if (pathname == '/config' && curTool == 'MoveTool') {
+          if (pathname === '/config' && curTool === 'MoveTool') {
             return;
           }
           toggle();

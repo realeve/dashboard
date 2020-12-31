@@ -86,7 +86,7 @@ function baseClamp(number, lower, upper) {
  */
 function isObject(value) {
   const type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
+  return !!value && (type === 'object' || type === 'function');
 }
 
 /**
@@ -136,7 +136,7 @@ function isObjectLike(value) {
  */
 function isSymbol(value) {
   return (
-    typeof value === 'symbol' || (isObjectLike(value) && objectToString.call(value) == symbolTag)
+    typeof value === 'symbol' || (isObjectLike(value) && objectToString.call(value) === symbolTag)
   );
 }
 
@@ -172,7 +172,7 @@ function toNumber(value) {
   }
   if (isObject(value)) {
     const other = typeof value.valueOf === 'function' ? value.valueOf() : value;
-    value = isObject(other) ? `${other  }` : other;
+    value = isObject(other) ? `${other}` : other;
   }
   if (typeof value !== 'string') {
     return value === 0 ? value : +value;

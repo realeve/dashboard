@@ -3,7 +3,7 @@
  * 本函数用于在画布的空余区域搜索最佳放置的位置
  */
 import * as R from 'ramda';
-import type { IPanelConfig as IPanel} from '@/models/common';
+import type { IPanelConfig as IPanel } from '@/models/common';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 
 const rectPadding = 12;
@@ -44,7 +44,7 @@ export const calcTranslate = ({
     left += arr[0];
     top += arr[1];
   }
-  return { left: parseInt(`${  left}`), top: parseInt(`${  top}`) };
+  return { left: parseInt(`${left}`), top: parseInt(`${top}`) };
 };
 
 // 默认样式
@@ -57,7 +57,7 @@ export interface IRect {
 
 type IRectPos = {
   isFind: boolean;
-} & IRect
+} & IRect;
 
 // 放置组件后围成的矩形区域
 interface IDistRect {
@@ -70,7 +70,7 @@ interface IDistRect {
 type IPanelStyleProps = {
   width: number;
   height: number;
-} & IDistRect
+} & IDistRect;
 interface IPage {
   width: number | string;
   height: number | string;
@@ -118,7 +118,7 @@ export const findPosition = (
 
     // 如果放在当前位置，所围成的矩形
     const rect1: IDistRect =
-      direction == 'right'
+      direction === 'right'
         ? {
             x1: item.x2, // 向右放置，起始点从x2起，y轴不变
             y1: item.y1,
@@ -133,7 +133,7 @@ export const findPosition = (
           };
 
     const xAllowed = isXAllowed(item, page);
-      const yAllowed = isYAllowed(item, page);
+    const yAllowed = isYAllowed(item, page);
 
     // x/y轴未越界
     if (!xAllowed || !yAllowed) {
@@ -163,9 +163,9 @@ export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyle
 }) => {
   const dist = panel.map(({ style }) => {
     const width = parseStyle(style.width);
-      const height = parseStyle(style.height);
-      let top = parseStyle(style.top);
-      let left = parseStyle(style.left);
+    const height = parseStyle(style.height);
+    let top = parseStyle(style.top);
+    let left = parseStyle(style.left);
     const res = calcTranslate({ translate: style?.transform?.translate, left, top });
     (left = res.left), (top = res.top);
     return {
@@ -237,7 +237,7 @@ export const calcPanelPosition = ({
  */
 export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
   let i = 0;
-    let allowed = true;
+  let allowed = true;
   while (allowed && i < panel.length) {
     allowed = !isRectCross(panel[i++], rect);
   }

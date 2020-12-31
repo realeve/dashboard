@@ -46,7 +46,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
         if (!value[3]) {
           return;
         }
-        const {url} = value[3];
+        const { url } = value[3];
         window.open(SEARCH_PREFIX + url, '_blank');
       }}
       option={{
@@ -54,7 +54,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
         xAxis: { show: false },
         yAxis: { show: false },
         tooltip: {
-          trigger: 'item', 
+          trigger: 'item',
           axisPointer: false,
           formatter: ({ value }) => {
             if (!value[3]) {
@@ -67,7 +67,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
             冠字:${title}<br/>
             生产状态:${tip}
             ${
-              value[2] == EStatus.ERROR
+              value[2] === EStatus.ERROR
                 ? '<br/><span style="font-weight:bold;color:#e23;">(点击查看车号详情)</span>'
                 : ''
             }`;
@@ -98,7 +98,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
             type: 'effectScatter',
             symbol: boxShape,
             symbolSize: boxSize * 0.75,
-            data: data.filter((item) => item[2] == EStatus.ERROR),
+            data: data.filter((item) => item[2] === EStatus.ERROR),
             itemStyle: {
               color: '#f23',
             },

@@ -48,7 +48,7 @@ export const handleData = (
   if (typeof legend === 'undefined') {
     const arr = [];
     xArr.forEach((xItem) => {
-      const item = data.find((item) => item[x] == xItem);
+      const item = data.find((item) => item[x] === xItem);
       arr.push(item ? item[y] : '-');
     });
     series.push({
@@ -60,7 +60,7 @@ export const handleData = (
     legendArr.map((name, idx) => {
       const arr = [];
       xArr.forEach((xItem) => {
-        const item = data.find((item) => item[legend] == name && item[x] == xItem);
+        const item = data.find((item) => item[legend] === name && item[x] === xItem);
         arr.push(item ? item[y] : '-');
       });
       series.push({
@@ -156,7 +156,7 @@ export default ({
   area_opacity = 1,
   lineWidth = 2,
 }) => {
-  if (String(legend) == '') {
+  if (String(legend) === '') {
     return {};
   }
   const res = handleData(data, { legend, x, y });

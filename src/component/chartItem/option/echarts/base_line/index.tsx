@@ -59,7 +59,7 @@ export default ({
   roundCap,
   axisPointer = 'shadow',
 }: IEchartsBaselineProps) => {
-  if (String(legend) == '') {
+  if (String(legend) === '') {
     return {};
   }
   const res = handleData(data, { legend, x, y });
@@ -129,14 +129,14 @@ export default ({
     },
 
     // 只在第一组数据显示标记区域
-    ...(idx == 0 ? markAreaInfo : {}),
+    ...(idx === 0 ? markAreaInfo : {}),
     ...(isArea ? { areaStyle: { opacity: area_opacity } } : {}),
     ...(showMarkpoint
       ? {
           markPoint: {
             silent: true,
             data:
-              showMarkpoint == 'minmax'
+              showMarkpoint === 'minmax'
                 ? [
                     {
                       name: '最大值',
@@ -147,7 +147,7 @@ export default ({
                       type: 'min',
                     },
                   ]
-                : showMarkpoint == 'max'
+                : showMarkpoint === 'max'
                 ? [
                     {
                       name: '最大值',
@@ -213,7 +213,7 @@ export default ({
       trigger: 'axis',
       axisPointer: {
         type: axisPointer,
-      } 
+      },
     },
     legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {

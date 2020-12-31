@@ -9,14 +9,8 @@ import { generateId } from '@/component/Editor/utils/utils';
 import ChartItem from './canvas/chartItem';
 import type { IChartConfig } from './panel/components/db';
 import { connect } from 'react-redux';
-import type {
-  ICommon,
-  IPage,
-  IPanelConfig} from '@/models/common';
-import {
-  GROUP_COMPONENT_KEY,
-  SCREEN_EDGE_KEY
-} from '@/models/common';
+import type { ICommon, IPage, IPanelConfig } from '@/models/common';
+import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import * as R from 'ramda';
 
 import type { Dispatch } from 'redux';
@@ -40,7 +34,7 @@ export type IPanelItem = {
   style: React.CSSProperties;
   id: string;
   title: string;
-} & IChartConfig
+} & IChartConfig;
 
 // 添加组件
 // 当属性名中有 scenaIgnore 时，禁止selectTo选中
@@ -56,7 +50,7 @@ export const addPanel = (
   editor?.current?.append(
     <div
       className={classnames(styles.chartWrapper, {
-        scenaIgnore: SCREEN_EDGE_KEY == config.key,
+        scenaIgnore: SCREEN_EDGE_KEY === config.key,
       })}
       style={{ ...R.omit(['transform'], style), transformOrigin }}
     >
@@ -193,7 +187,7 @@ const Index = ({
   // 更新当前的菜单
   const setCurTool = (curTool: TQuickTool) => {
     let append = {};
-    if (curTool == 'hand') {
+    if (curTool === 'hand') {
       append = { selectedPanel: [] };
     }
     dispatch({
@@ -261,7 +255,7 @@ const Index = ({
 
       panel.filter((item) => {
         if (selectedPanel.includes(item.id) && item.group) {
-          const items = panel.filter((p) => p.group == item.group);
+          const items = panel.filter((p) => p.group === item.group);
           const groupPanel = items.map((p) => p.id);
           const groupId = items.map((p) => p.group);
           nextPanel = [...nextPanel, ...groupPanel];
@@ -371,7 +365,7 @@ const Index = ({
                 payload: {
                   panel: [...panel, ...business],
                   recordHistory: true,
-                  historyTitle: `添加业务组件 - ${  business[0].title}`,
+                  historyTitle: `添加业务组件 - ${business[0].title}`,
                 },
               });
               // business.forEach((nextPanel) => {
@@ -456,7 +450,7 @@ const Index = ({
                 // 调整大小
                 if (type === 'size') {
                   const key = Object.keys(e);
-                  editor?.current.setProperty(key, `${Object.values(e)[0]  }px`, true);
+                  editor?.current.setProperty(key, `${Object.values(e)[0]}px`, true);
                 }
                 // console.log(e, type);
               }}

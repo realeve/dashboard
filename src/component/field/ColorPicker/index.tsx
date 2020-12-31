@@ -193,7 +193,7 @@ export default ({ value, onChange, disabled = false }) => {
         onChange={(e) => {
           const val = e.target.value;
           setTab(val);
-          if (val == 0) {
+          if (val === 0) {
             onChange('transparent');
           }
         }}
@@ -203,10 +203,10 @@ export default ({ value, onChange, disabled = false }) => {
         <Radio.Button value="1">纯色</Radio.Button>
         <Radio.Button value="2">渐变</Radio.Button>
       </Radio.Group>
-      {tab == EColorType.COLOR && (
+      {tab === EColorType.COLOR && (
         <PureColor disabled={disabled} value={value} onChange={onChange} />
       )}
-      {tab == EColorType.GARDIENT && (
+      {tab === EColorType.GARDIENT && (
         <GardientPicker disabled={disabled} value={value} onChange={onChange} />
       )}
     </div>

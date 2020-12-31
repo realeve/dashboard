@@ -73,7 +73,7 @@ const Index = ({
   }, []);
 
   useEffect(() => {
-    if (instanse == null) {
+    if (instanse === null) {
       return;
     }
     const nextItem: IPanelItem[] = panel
@@ -93,7 +93,7 @@ const Index = ({
 
     setPrevItem(nextItem);
     updateRect(result);
-  }, [instanse == null, nextIds]);
+  }, [instanse === null, nextIds]);
 
   const getRectEl = (id: string) => {
     const el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };

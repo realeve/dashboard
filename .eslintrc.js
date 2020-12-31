@@ -31,7 +31,7 @@ module.exports = {
 
     // 类型定义，优先用interface
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-    'no-param-reassign': ['warn', { props: true, ignorePropertyModificationsFor: ['current'] }],
+    'no-param-reassign': ['off', { props: true, ignorePropertyModificationsFor: ['current'] }],
 
     // 允许  a && b这种形式
     'no-unused-expressions': 'off',

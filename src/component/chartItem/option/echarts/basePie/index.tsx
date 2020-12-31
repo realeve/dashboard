@@ -37,7 +37,7 @@ export default (
   const color = getColors(theme);
 
   const rose =
-    chartType == 'pie'
+    chartType === 'pie'
       ? {}
       : {
           roseType: chartType,
@@ -85,7 +85,7 @@ export default (
           length2: 0,
           maxSurfaceAngle: 80,
         },
-        labelLayout (params) {
+        labelLayout(params) {
           const isLeft = params.labelRect.x < chartWidth / 2;
           const points = params.labelLinePoints;
           if (!points) {

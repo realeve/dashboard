@@ -65,9 +65,11 @@ const monthOrWeekKeys = Object.keys(dict);
 export const sort = (a, b) => {
   if (isNumber(a)) {
     return a - b;
-  } if (isDate(a)) {
+  }
+  if (isDate(a)) {
     return String(a).localeCompare(String(b));
-  } if (monthOrWeekKeys.includes(a)) {
+  }
+  if (monthOrWeekKeys.includes(a)) {
     return dict[a] - dict[b];
   }
 };
@@ -122,7 +124,7 @@ export const getAnnotations = (
 
   const annotations = legend.map((content, idx) => {
     // 获取每个legend项的数组
-    let arr = data.filter((item) => item[seriesField] == content);
+    let arr = data.filter((item) => item[seriesField] === content);
 
     // 根据X轴逆序排序，取出第0个为最后一项的Y值
     // 如果输入数据已经对X轴做过排序，直接将取出的值逆序即可；

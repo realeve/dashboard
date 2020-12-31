@@ -1,5 +1,10 @@
 import type { Chart } from '@antv/g2';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 import * as R from 'ramda';
 import { getColors, getAntThemePanel } from '../g2plot/lib';
 
@@ -157,11 +162,11 @@ export const onMount = (
   chart: Chart,
 ) => {
   const x = header[_x];
-    const min = header[_min];
-    const avg = header[_avg];
-    const max = header[_max];
+  const min = header[_min];
+  const avg = header[_avg];
+  const max = header[_max];
   const showAverage = !R.isNil(max);
-    const isBar = chartType == 'interval';
+  const isBar = chartType === 'interval';
   chart.scale({
     y: {
       sync: true,
@@ -192,7 +197,7 @@ export const onMount = (
     .tooltip('y', (y) => {
       return {
         name: '数据区间',
-        value: `${y?.[0]  } 至 ${  y?.[1]}`,
+        value: `${y?.[0]} 至 ${y?.[1]}`,
       };
     });
 

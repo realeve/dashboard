@@ -63,17 +63,17 @@ export const thouandsNum: {
   const numStr: string = Number(num).toLocaleString();
   if (numStr.includes('.')) {
     const [integer, decimal] = numStr.split('.');
-    return `${integer  }.${  decimal.padEnd(decimalLength, '0')}`;
+    return `${integer}.${decimal.padEnd(decimalLength, '0')}`;
   }
   if (decimalLength === 0) {
     return numStr;
   }
-  return `${numStr  }.${  ''.padEnd(decimalLength, '0')}`;
+  return `${numStr}.${''.padEnd(decimalLength, '0')}`;
 };
 
 export const noncer = () => Math.random().toString(16).slice(2);
 
-export const {getType} = axios;
+export const { getType } = axios;
 
 export interface Store {
   payload: any;
@@ -90,8 +90,8 @@ export const setStore: <T = ICommon>(prevState: T, store: Store) => T = (
   const nextState = R.clone(prevState);
   Object.keys(payload).forEach((key) => {
     const val = payload[key];
-    if (getType(val) == 'object') {
-      nextState[key] = { ...nextState[key], ...val};
+    if (getType(val) === 'object') {
+      nextState[key] = { ...nextState[key], ...val };
     } else {
       nextState[key] = val;
     }
@@ -106,7 +106,7 @@ export const handleHistoryPanel: (
 ) => ICommon = (prevState, nextState, store: Store) => {
   const panel = store.payload?.panel;
   // 需要记录历史记录
-  const recordHistory = store.payload?.recordHistory == true;
+  const recordHistory = store.payload?.recordHistory === true;
 
   // console.log({ recordHistory, panel });
 
@@ -141,7 +141,7 @@ export const handleHistoryPanel: (
 export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) => IAxiosState<T> = (
   data: IAxiosState,
 ) => {
-  if (data.rows == 0) {
+  if (data.rows === 0) {
     return data;
   }
   const res = data.data[0];

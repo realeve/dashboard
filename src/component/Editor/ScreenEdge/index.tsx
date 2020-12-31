@@ -14,12 +14,12 @@ const getEdgeArr = (
   lineWidth: string | number = 2,
 ) => {
   const width = Math.ceil(Number(_width));
-  if (Number(screenNum) < 2 || width == 0) {
+  if (Number(screenNum) < 2 || width === 0) {
     return [];
   }
   const step = width / Number(screenNum);
-    const arr = [];
-    const lWidth = Number(lineWidth);
+  const arr = [];
+  const lWidth = Number(lineWidth);
   for (let i = 1; step * i < width; i++) {
     // 此处需要考虑线的宽度，让分割线居中
     arr.push(i * step - Math.floor(lWidth / 2));
@@ -47,7 +47,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
     },
     ref,
   ) => {
-    const isHorizontal = direction == 'horizontal';
+    const isHorizontal = direction === 'horizontal';
     return (
       <div
         ref={ref}
@@ -57,8 +57,8 @@ const EdgeLine: React.ForwardRefExoticComponent<
         <div className="datav-guides" style={{ transform: 'translateX(-10px)', height: '100%' }}>
           {data.map((item) => (
             <div
-              className={`${styles.screenEdge  } datav-${direction}`}
-              key={`${item  }px`}
+              className={`${styles.screenEdge} datav-${direction}`}
+              key={`${item}px`}
               style={{
                 transform: !isHorizontal
                   ? `translate(${item}px,-30px)`

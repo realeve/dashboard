@@ -92,9 +92,9 @@ export default ({
     ? origin
     : {
         ...origin,
-        animationDuration: `${rotateTime  }s`,
+        animationDuration: `${rotateTime}s`,
         animationName: reverse,
-        animationDirection: reverse == 'heartBeat' ? 'alternate' : 'normal',
+        animationDirection: reverse === 'heartBeat' ? 'alternate' : 'normal',
       };
 
   return (

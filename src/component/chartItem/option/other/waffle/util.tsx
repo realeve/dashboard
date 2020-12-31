@@ -33,7 +33,7 @@ export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) =
   const res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
-  const id = R.reverse(data).findIndex((item) => item[y] == 1);
+  const id = R.reverse(data).findIndex((item) => item[y] === 1);
   const idx = res.length - id;
 
   const template = getTemplate(prod);
@@ -45,7 +45,7 @@ export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) =
       return temp;
     }
     let status = Number(item[y]);
-    if (j < idx && status == 0) {
+    if (j < idx && status === 0) {
       status = EStatus.ERROR;
     }
     (temp[2] = status), (temp[3] = item);
@@ -64,15 +64,15 @@ export const handleData = ({
 }) => {
   const dataType = isArray(data[0]);
   const x = dataType ? _x : header[_x];
-    const y = dataType ? _y : header[_y];
-    const legend = dataType ? _legend : header[_legend];
-    const cart = dataType ? _cart : header[_cart];
+  const y = dataType ? _y : header[_y];
+  const legend = dataType ? _legend : header[_legend];
+  const cart = dataType ? _cart : header[_cart];
   const res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
   let idx = res.length;
   if (gzMode) {
-    const id = R.reverse(data).findIndex((item) => item[y] == 1);
+    const id = R.reverse(data).findIndex((item) => item[y] === 1);
     idx -= id;
   }
   let _warnIdx = -1;
@@ -82,7 +82,7 @@ export const handleData = ({
     let _warn = false;
     if (gzMode) {
       // 前面未印刷的产品，显示红色
-      if (i < idx && item[y] == 0) {
+      if (i < idx && item[y] === 0) {
         color = colorArr[2];
         _warn = true;
         _warnIdx++;

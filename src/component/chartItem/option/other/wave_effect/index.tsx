@@ -121,7 +121,7 @@ export default ({
 
     const container: HTMLElement = domRef.current;
 
-    if (!container || width * height == 0) {
+    if (!container || width * height === 0) {
       return;
     }
 
@@ -207,7 +207,7 @@ export default ({
         ANIMATE_ID = requestAnimationFrame(render);
       },
       stopAnimate,
-      onresize () {
+      onresize() {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);

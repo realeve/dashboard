@@ -44,7 +44,7 @@ export const getLocalConfig: () => Promise<null | {
   panel: IPanelConfig[];
 }> = async () => {
   const panel = JSON.parse(localStorage.getItem('panel') || '[]') as IPanelConfig[];
-    const page = JSON.parse(localStorage.getItem('page') || '[]') as IPage;
+  const page = JSON.parse(localStorage.getItem('page') || '[]') as IPage;
 
   if (!panel || !page) {
     message.error('当前页面未配置任何组件，预览失败');
@@ -63,7 +63,7 @@ export const getConfig = async (url) => {
       };
     }
     return axios(option).then((config: IAxiosState | string) => {
-      if (typeof config === 'string' && config.slice(0, 15) == '<!DOCTYPE html>') {
+      if (typeof config === 'string' && config.slice(0, 15) === '<!DOCTYPE html>') {
         return { type: 'notExist' };
       }
       return { type: 'online', ...(config as IAxiosState) };
@@ -91,21 +91,21 @@ export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
   top = parseStyle(top);
 
   let rotate = '';
-    let scale = '';
-    let _transform = {};
+  let scale = '';
+  let _transform = {};
 
   if (transform) {
     const res = calcTranslate({ translate: transform.translate, left, top });
     (left = res.left), (top = res.top);
 
     rotate = parseStyle(transform.rotate, 'deg') > 0 ? `rotate(${transform?.rotate}) ` : '';
-    scale = transform.scale == '1,1' ? '' : `scale(${transform?.scale})`;
+    scale = transform.scale === '1,1' ? '' : `scale(${transform?.scale})`;
     _transform = (rotate + scale).length > 0 ? { transform: rotate + scale } : {};
   }
 
   // 处理组件尺寸和位置缩放
   let width = parseStyle(style.width);
-    let height = parseStyle(style.height);
+  let height = parseStyle(style.height);
   if (resizeType === EResizeType.COMPONENT) {
     const { scaleX, scaleY } = getScale(page, resizeType);
     (top *= scaleY), (width *= scaleX), (left *= scaleX), (height *= scaleY);
@@ -127,7 +127,7 @@ let getScale = (page, resizeType: EResizeType) => {
   const { width, height } = page;
   const { innerWidth, innerHeight } = window;
   let scaleX = innerWidth / width;
-    let scaleY = innerHeight / height;
+  let scaleY = innerHeight / height;
 
   if (resizeType === EResizeType.MOVIE) {
     scaleX = scaleY = Math.min(scaleX, scaleY);

@@ -161,7 +161,7 @@ export default ({
   legendOrient,
 }: IG2Plot) => {
   const binConfig =
-    binWidth == 0
+    binWidth === 0
       ? {
           binNumber: binNumber - 1,
         }

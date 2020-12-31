@@ -1,4 +1,4 @@
-import type { Store} from '@/utils/lib';
+import type { Store } from '@/utils/lib';
 import { setStore, handleHistoryPanel } from '@/utils/lib';
 import * as db from '../services/db';
 import * as R from 'ramda';
@@ -37,7 +37,7 @@ const copyArray = (idx: number, array: IPanelConfig[]) => {
 
   // 处理成组组件复制的问题
   let childrenArr = [];
-    const isGroup = newItem.key === GROUP_COMPONENT_KEY;
+  const isGroup = newItem.key === GROUP_COMPONENT_KEY;
   if (isGroup) {
     childrenArr = R.filter<IPanelConfig>(R.propEq<string>('group', newItem.id))(
       _arr,
@@ -101,7 +101,7 @@ export type TPanelItemStyle = Omit<React.CSSProperties, 'transform'>;
 export type IPanelItemStyle = {
   transform: { translate: string };
   'transform-origin'?: string;
-} & TPanelItemStyle
+} & TPanelItemStyle;
 export interface IPanelConfig {
   key?: string;
   edit_id?: number; // 编辑状态下的业务组件 id;
@@ -146,7 +146,7 @@ export type IPage = {
   author: string; // 作者
   title: string; // 业务名称
   padding: number; // 辅助线边距
-} & ICommonConfig
+} & ICommonConfig;
 
 /**
  * page:页面配置
@@ -212,7 +212,7 @@ export type ICommon = {
   businessCategory: IBusinessCategory[]; // 业务组件两级分类
   history: { panel: IPanelConfig[]; title: string | null }[];
   curHistoryIdx: number;
-} & IHistoryProps
+} & IHistoryProps;
 
 const defaultState: ICommon = {
   history: [],
@@ -350,7 +350,7 @@ export default {
 
       let idx = R.findIndex<IPanelConfig>((item) => item.id === panel[0])(prevPanel);
       // :bug: 当只有1项时，idx-1 ==0，在最前方添加组
-      if (idx == 0) {
+      if (idx === 0) {
         idx = 1;
       }
 
@@ -415,7 +415,7 @@ export default {
       const prevPanel = yield select((state) => state[namespace].panel);
       let panelItem = R.clone<IPanelConfig>(panel);
 
-      const IS_EDGE_LINE = panel.key == SCREEN_EDGE_KEY;
+      const IS_EDGE_LINE = panel.key === SCREEN_EDGE_KEY;
       // console.log(panel);
       panelItem = {
         showTitle: true,
@@ -441,7 +441,7 @@ export default {
         // 默认选中最新添加的面板
         selectedPanel: [panel.id],
         recordHistory: true,
-        historyTitle: `添加组件 - ${  panelItem.title}`,
+        historyTitle: `添加组件 - ${panelItem.title}`,
       });
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
@@ -465,7 +465,7 @@ export default {
         call,
         put,
         recordHistory: true,
-        historyTitle: `删除组件 - ${  item.title}`,
+        historyTitle: `删除组件 - ${item.title}`,
         selectedPanel: [],
       });
     },
@@ -512,7 +512,7 @@ export default {
         call,
         put,
         recordHistory: true,
-        historyTitle: `复制组件 - ${  _panel[0].title}`,
+        historyTitle: `复制组件 - ${_panel[0].title}`,
       });
       // 页面需要刷新,使用 Editor 添加失败
       window.location.reload();
