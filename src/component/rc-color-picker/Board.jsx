@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
@@ -8,17 +9,13 @@ const WIDTH = 200;
 const HEIGHT = 150;
 
 export default class Board extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillUnmount() {
     this.removeListeners();
     this.removeTouchListeners();
   }
 
   onBoardMouseDown = (e) => {
-    const {buttons} = e;
+    const { buttons } = e;
 
     // only work on left click
     // @see https://developer.mozilla.org/en-US/docs/Web/Events/mousedown
@@ -136,7 +133,7 @@ export default class Board extends React.Component {
 
   render() {
     const prefixCls = this.getPrefixCls();
-    const {color} = this.props;
+    const { color } = this.props;
 
     const hueHsv = {
       h: color.hue,

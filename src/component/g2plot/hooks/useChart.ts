@@ -43,9 +43,9 @@ export default function useInit<T extends Base, U extends Options>(
    * @param {string} type A DOMString indicating the image format. The default format type is image/png.
    * @param {number} encoderOptions A Number between 0 and 1 indicating the image quality
    */
-  const toDataURL = (type = 'image/png', encoderOptions?: number) => {
-    return chart.current?.chart.canvas.cfg.el.toDataURL(type, encoderOptions);
-  };
+  // const toDataURL = (type = 'image/png', encoderOptions?: number) => {
+  //   return chart.current?.chart.canvas.cfg.el.toDataURL(type, encoderOptions);
+  // };
 
   /**
    * Download Iamge
@@ -53,30 +53,30 @@ export default function useInit<T extends Base, U extends Options>(
    * @param {string} type A DOMString indicating the image format. The default format type is image/png.
    * @param {number} encoderOptions A Number between 0 and 1 indicating the image quality
    */
-  const downloadImage = (name: string, type = 'image/png', encoderOptions?: number) => {
-    try {
-      // default png
-      if (name && name.indexOf('.') === -1) {
-        name = `${name}.png`;
-      }
-      let imageName = name;
-      if (!imageName) {
-        const _config = config as any;
-        // 默认值：图表 title -> 图表类型
-        imageName = `${_config?.title?.text || ChartClass?.name}.png`;
-      }
-      const base64 = chart.current?.chart.canvas.cfg.el.toDataURL(type, encoderOptions);
-      let a: HTMLAnchorElement | null = document.createElement('a');
-      a.href = base64;
-      a.download = imageName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      a = null;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const downloadImage = (name: string, type = 'image/png', encoderOptions?: number) => {
+  //   try {
+  //     // default png
+  //     if (name && name.indexOf('.') === -1) {
+  //       name = `${name}.png`;
+  //     }
+  //     let imageName = name;
+  //     if (!imageName) {
+  //       const _config = config as any;
+  //       // 默认值：图表 title -> 图表类型
+  //       imageName = `${_config?.title?.text || ChartClass?.name}.png`;
+  //     }
+  //     const base64 = chart.current?.chart.canvas.cfg.el.toDataURL(type, encoderOptions);
+  //     let a: HTMLAnchorElement | null = document.createElement('a');
+  //     a.href = base64;
+  //     a.download = imageName;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //     a = null;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const processConfig = () => {
     // @ts-ignore 该属性只有 Liquid 和 Dount 存在且配置不一致，类型定义先忽略
@@ -121,16 +121,16 @@ export default function useInit<T extends Base, U extends Options>(
       ...config,
     });
 
-    chartInstance.__proto__.toDataURL = (type: string, encoderOptions?: number) => {
-      return toDataURL(type, encoderOptions);
-    };
-    chartInstance.__proto__.downloadImage = (
-      name: string,
-      type: string,
-      encoderOptions?: number,
-    ) => {
-      return downloadImage(name, type, encoderOptions);
-    };
+    // chartInstance.__proto__.toDataURL = (type: string, encoderOptions?: number) => {
+    //   return toDataURL(type, encoderOptions);
+    // };
+    // chartInstance.__proto__.downloadImage = (
+    //   name: string,
+    //   type: string,
+    //   encoderOptions?: number,
+    // ) => {
+    //   return downloadImage(name, type, encoderOptions);
+    // };
     if (process.env.NODE_ENV !== 'test') {
       chartInstance.render();
     }

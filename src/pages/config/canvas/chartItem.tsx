@@ -7,26 +7,15 @@ import BorderItem from '@/component/widget/border';
 import { Spin } from 'antd';
 import { connect } from 'react-redux';
 
+const ChartInstance = React.lazy(() => import('./ChartInstance'));
+
 interface IChartItemProps {
   page: IPage;
   config: IPanelConfig;
 }
 export const ChartItem = ({ page, config }: IChartItemProps) => {
-  const [title, setTitle] = useState(config?.title);
+  let [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
 
-  useEffect(() => {
-    if (!config) {
-      return;
-    }
-    if (config?.api?.api_type === 'mock') {
-      try {
-        setTitle(JSON.parse(config.api.mock || '{}').title || title);
-      } catch (e) {
-        console.error('mock数据读取出错:', config.api.mock);
-        console.error(e);
-      }
-    }
-  }, [config?.api?.api_type]);
   if (!config || config.hide) {
     return null;
   }
@@ -56,7 +45,6 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
   );
 };
 
-const ChartInstance = React.lazy(() => import('./ChartInstance'));
 type IChartProps = {
   chartid: string;
   page: IPage;

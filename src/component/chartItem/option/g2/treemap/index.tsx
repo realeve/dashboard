@@ -1,5 +1,10 @@
 import type { Chart } from '@antv/g2';
-import type { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface';
+import type {
+  IChartMock,
+  IChartConfig,
+  IChartProps,
+  IApiConfig,
+} from '@/component/chartItem/interface';
 
 import { getColors, getAntThemePanel } from '../../g2plot/lib';
 
@@ -99,10 +104,12 @@ const getNodes = ({ data, x, y }) => {
   );
 
   // 将 DataSet 处理后的结果转换为 G2 接受的数据
-  const nodes = [];
-  for (const node of dv.getAllNodes()) {
+  const nodes = [],
+    nodeList = dv.getAllNodes();
+
+  nodeList.forEach((node) => {
     if (node.data.name === 'root') {
-      continue;
+      return;
     }
     const eachNode: any = {
       name: node.data[x],
@@ -112,7 +119,7 @@ const getNodes = ({ data, x, y }) => {
     };
 
     nodes.push(eachNode);
-  }
+  });
   return nodes;
 };
 
@@ -131,7 +138,7 @@ export const onMount = (
 ) => {
   const colors = getColors(theme, needRerverse);
   const x = header[_x];
-    const y = header[_y];
+  const y = header[_y];
 
   const nodes = getNodes({ data, x, y });
 
@@ -158,7 +165,7 @@ export const onMount = (
   chart.tooltip({
     showTitle: false,
     showMarkers: false,
-    itemTpl: '<li style="list-style: none;height:30px;">' + '{name}：{value}</span' + '</li>',
+    itemTpl: `<li style="list-style: none;height:30px;">{name}：{value}</span</li>`,
   });
   chart
     .polygon()

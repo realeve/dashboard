@@ -72,10 +72,6 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
   const [error, setError] = useState<string | null>(null);
   const [itemList, setItemList] = useState<IBusinessState[]>([]);
 
-  useEffect(() => {
-    refreshBusiness();
-  }, [businessCategory.length]);
-
   const refreshBusiness = () => {
     if (businessCategory.length === 0) {
       return;
@@ -120,6 +116,10 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    refreshBusiness();
+  }, [businessCategory.length, refreshBusiness]);
 
   return (
     <ComponentList

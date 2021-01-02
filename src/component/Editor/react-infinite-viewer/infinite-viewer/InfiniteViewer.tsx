@@ -23,7 +23,7 @@ import {
 } from './consts';
 import { measureSpeed, getDuration, getDestPos, abs, getRange } from './utils';
 import ScrollBar from './ScrollBar';
-import clamp from './clamp';
+import * as R from 'ramda';
 
 @Properties(PROPERTIES as any, (prototype, property) => {
   const attributes: IObject<any> = {
@@ -646,7 +646,7 @@ class InfiniteViewer extends Component {
       const distance = -e.deltaY;
       const scale = Math.max(1 + distance * (options.wheelScale || 0.01), TINY_NUM);
       const [min, max] = options.zoomRange;
-      const nextZoom = clamp(this.zoom * scale, min, max);
+      const nextZoom = R.clamp(min, max, this.zoom * scale);
       options?.onZoom(nextZoom);
 
       this.trigger('pinch', {

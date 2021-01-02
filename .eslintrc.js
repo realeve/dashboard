@@ -35,10 +35,7 @@ module.exports = {
 
     // 允许  a && b这种形式
     'no-unused-expressions': 'off',
-    '@typescript-eslint/no-unused-expressions': [
-      'error',
-      { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true },
-    ],
+    '@typescript-eslint/no-unused-expressions': 'off',
     // 'import/newline-after-import': 0,
 
     // 允许空函数，如catch
@@ -59,5 +56,6 @@ module.exports = {
 
     'ban-types': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+    'prefer-destructuring': 'off',
   },
 };

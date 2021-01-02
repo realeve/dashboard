@@ -48,7 +48,8 @@ export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) =
     if (j < idx && status === 0) {
       status = EStatus.ERROR;
     }
-    (temp[2] = status), (temp[3] = item);
+    temp[2] = status;
+    temp[3] = item;
     return temp;
   });
 };
@@ -85,7 +86,7 @@ export const handleData = ({
       if (i < idx && item[y] === 0) {
         color = colorArr[2];
         _warn = true;
-        _warnIdx++;
+        _warnIdx += 1;
       }
     }
     return {

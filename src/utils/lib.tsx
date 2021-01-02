@@ -24,9 +24,9 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
 
   const reader: FileReader = new FileReader();
 
-  //   　1、readAsText，以纯文本的形式读取文件，将读取到的文件保存到result属性中；
-  // 　　2、readAsDataURL，读取文件，并将文件数据URL保存到result属性中；
-  // 　　3、readAsArrayBuffer，读取文件，并将
+  // 1、readAsText，以纯文本的形式读取文件，将读取到的文件保存到result属性中；
+  // 2、readAsDataURL，读取文件，并将文件数据URL保存到result属性中；
+  // 3、readAsArrayBuffer，读取文件，并将
 
   reader.readAsText(file);
 

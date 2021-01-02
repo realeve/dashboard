@@ -25,7 +25,7 @@ export type G2PlotChartProps = {
   readonly renderer?: 'canvas' | 'svg';
 } & ContainerProps;
 
-const G2PlotChart = (props, ref) => {
+const G2PlotChart = (props) => {
   const {
     chartRef,
     style = {
@@ -37,6 +37,7 @@ const G2PlotChart = (props, ref) => {
     errorTemplate,
     option: { chartType = 'Area', ...option },
     renderer = 'canvas',
+    ref,
   } = props;
 
   const instance = lib[utils.camelCase(chartType)];
