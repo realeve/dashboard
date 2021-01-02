@@ -56,24 +56,25 @@ export const mock: IChartMock = {
 };
 
 const handleData = ({ data }: IChartMock, { legend, x, y }) => {
-  (legend = Number(legend)), (x = Number(x)), (y = Number(y));
+  legend = Number(legend);
+  x = Number(x);
+  y = Number(y);
   const arr = R.pluck<string, Record<string, any>>(String(y), data);
   const max = Math.max(...arr);
 
   const result = lib.handleMinMax({ min: 0, max });
   const legendArr = lib.getUniqByIdx({ key: legend, data });
   const xArr = lib.getUniqByIdx({ key: x, data });
-  const series = [];
-  legendArr.map((name, idx) => {
+  const series = legendArr.map((name, idx) => {
     const arr = [];
     xArr.forEach((xItem) => {
-      const item = data.find((item) => item[legend] === name && item[x] === xItem);
+      const item = data.find((dataItem) => dataItem[legend] === name && dataItem[x] === xItem);
       arr.push(item ? Number(item[y]) * (idx === 0 ? -1 : 1) : '-');
     });
-    series.push({
+    return {
       name,
       arr,
-    });
+    };
   });
 
   return {

@@ -80,10 +80,6 @@ const ApiSetting = ({
 }) => {
   const configs = chartLib.apiConfig as IApiConfig;
 
-  if (R.type(configs) !== 'Object') {
-    return <p>该组件无数据请求，无需配置接口信息</p>;
-  }
-
   const [state, setState] = useSetState(initState(configs, api));
   useEffect(() => {
     setState(initState(configs, api));
@@ -186,5 +182,9 @@ export default (props) => {
   if (!chartLib) {
     return <Spin spinning />;
   }
+  if (R.type(props.configs) !== 'Object') {
+    return null;
+  }
+
   return <ApiSetting {...props} chartLib={chartLib} />;
 };

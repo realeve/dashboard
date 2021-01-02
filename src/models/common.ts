@@ -8,6 +8,10 @@ import { getTblBusinessCategory } from '@/pages/config/panel/business/db';
 import { reorderPanel } from '@/pages/config/panel/layer';
 import { getConfig as getDashboardConfigByUrl } from '@/pages/index/lib';
 
+// 分组组件的key
+export const GROUP_COMPONENT_KEY = 'group_rect';
+export const SCREEN_EDGE_KEY = 'screen_edge';
+
 // 删除、复制组件的功能需要调整
 const updatePanel = function* ({ panel, call, put, ...props }) {
   yield call(db.savePanel(), panel);
@@ -54,10 +58,6 @@ const copyArray = (idx: number, array: IPanelConfig[]) => {
 
   return [...arr, newItem, ...childrenArr];
 };
-
-// 分组组件的key
-export const GROUP_COMPONENT_KEY = 'group_rect';
-export const SCREEN_EDGE_KEY = 'screen_edge';
 
 export const getGroupRect: () => IPanelConfig = () => {
   const id = lib.noncer();
@@ -247,7 +247,7 @@ export default {
     },
   },
   effects: {
-    *loadBusinessCategory({}, { put, call }) {
+    *loadBusinessCategory(_, { put, call }) {
       const businessCategory = yield call(getTblBusinessCategory);
       yield put({
         type: 'setStore',
@@ -256,7 +256,7 @@ export default {
         },
       });
     },
-    *loadPanel({}, { put, call }) {
+    *loadPanel(_, { put, call }) {
       const panel = yield call(db.loadPanel);
       yield put({
         type: 'setStore',
@@ -276,7 +276,7 @@ export default {
         historyTitle,
       });
     },
-    *loadPage({}, { put, call }) {
+    *loadPage(_, { put, call }) {
       const page = yield call(() => db.loadPanel('page'));
       if (!page.width) {
         return;
@@ -311,7 +311,7 @@ export default {
     },
 
     // 清空页面数据
-    *clearPage({}, { put, call }) {
+    *clearPage(_, { put, call }) {
       const { page } = R.clone(defaultState);
       yield call(db.savePanel('page'), page);
       yield call(db.savePanel('panel'), [screenEdgePanel]);
@@ -446,12 +446,12 @@ export default {
     },
     *removePanel({ payload: { idx } }, { put, call, select }) {
       const prevPanel: IPanelConfig[] = yield select((state) => state[namespace].panel);
-      const item = R.find<IPanelConfig>((item) => idx.includes(item.id))(prevPanel);
+      const item = R.find<IPanelConfig>((panelItem) => idx.includes(panelItem.id))(prevPanel);
       // 移除打包组件需要考虑一并移除子组件
       // 此处需要以item.group来判断 ，否则会导致全部删除的bug
       const idList = item?.group ? [...idx, item.group] : idx;
       const nextPanel = R.reject<IPanelConfig>(
-        (item) => idList.includes(item.id) || idList.includes(item.group),
+        (nextItem) => idList.includes(nextItem.id) || idList.includes(nextItem.group),
       )(prevPanel);
 
       // 默认选中最新添加的面板
@@ -479,7 +479,7 @@ export default {
 
       if (typeof idx === 'string') {
         const id = R.findIndex(R.propEq('id', idx))(panel);
-        let _item: {} = R.nth(id)(panel);
+        let _item: Record<string, any> = R.nth(id)(panel);
         _item = {
           ..._item,
           ...attrib,

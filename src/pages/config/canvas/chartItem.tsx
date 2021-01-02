@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import type { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
 // import styles from './chartItem.less';
 import * as R from 'ramda';
@@ -14,7 +14,7 @@ interface IChartItemProps {
   config: IPanelConfig;
 }
 export const ChartItem = ({ page, config }: IChartItemProps) => {
-  let [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
+  const [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
 
   if (!config || config.hide) {
     return null;

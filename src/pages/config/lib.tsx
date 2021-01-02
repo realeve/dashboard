@@ -21,7 +21,7 @@ export const defaultRect = {
  */
 export const parseStyle = (style: string | number, unit = 'px') => {
   const reg = RegExp(unit, 'g');
-  return parseInt(String(style).replace(reg, ''));
+  return parseInt(String(style).replace(reg, ''), 10);
 };
 
 /**
@@ -44,7 +44,7 @@ export const calcTranslate = ({
     left += arr[0];
     top += arr[1];
   }
-  return { left: parseInt(`${left}`), top: parseInt(`${top}`) };
+  return { left: parseInt('' + left, 10), top: parseInt('' + top, 10) };
 };
 
 // 默认样式
@@ -92,6 +92,67 @@ export const isYAllowed = (item: IPanelStyleProps, page: IPage, rect: IRect = de
   item.y1 + rect.height < Number(page.height);
 
 /**
+ * 判断两个矩形是否相交
+  (x1,y1)
+  ┏━━━━W1━━━━┓ 
+  ┃          ┃     
+  H1   ❶─────┼──W──────┐   
+  ┃          ┃         │
+  ┗━━━━━━━━━━┛(x2,y2)  │
+                       H
+           (a1,b1)┏━━━━┼━━━━━┓ 
+                  ┃    │     ┃     
+                  H2   ❷     ┃     
+                  ┃          ┃     
+                  ┗━━━━W2━━━━┛(a2,b2)
+  两个矩形相交，则需满足以下条件：              
+  1.W > (W1+W2)/2
+  2.H > (H1+H2)/2
+  据此推导出以下的结果。
+  
+ * 原理：判断中心点的位置与距离：/public/doc/rect cross.png
+ * @param r1 矩形
+ * @param r2 矩形
+ * 
+ * 以下公式中，除以2可省去
+  Math.abs((r1.x1 + r1.x2) / 2 - (r2.x1 + r2.x2) / 2) < (r1.x2 + r2.x2 - r1.x1 - r2.x1) / 2 &&
+  Math.abs((r1.y1 + r1.y2) / 2 - (r2.y1 + r2.y2) / 2) < (r1.y2 + r2.y2 - r1.y1 - r2.y1) / 2;
+ */
+export const isRectCross = (r1: IDistRect, r2: IDistRect) =>
+  Math.abs(r1.x1 + r1.x2 - r2.x1 - r2.x2) < r1.x2 + r2.x2 - r1.x1 - r2.x1 &&
+  Math.abs(r1.y1 + r1.y2 - r2.y1 - r2.y2) < r1.y2 + r2.y2 - r1.y1 - r2.y1;
+
+/** 
+(x1,y1)                (x3,y3)
+┏━━━━━━━━━┓            ┏━━━━━━━━━┓       
+┃   X1    ┃            ┃   X3    ┃       
+┃         ┃            ┃         ┃       
+┗━━━━━━━━━┛(x2,y2)     ┗━━━━━━━━━┛(x4,y4)
+
+            (a1,b1)
+            ┏━━━━━━━━━┓       
+            ┃   A     ┃       
+            ┃         ┃       
+            ┗━━━━━━━━━┛(a2,b2)
+矩形A只有与X1,X3都不相交时，允许放置在它所在的位置
+*/
+/**
+ *
+ * 当前的rect是否允许放在目标区域
+ * @param rect 需要判断的矩形区域
+ * @param panel 当前组件列表的位置及尺寸
+ */
+export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
+  let i = 0;
+  let allowed = true;
+  while (allowed && i < panel.length) {
+    allowed = !isRectCross(panel[i], rect);
+    i += 1;
+  }
+  return allowed;
+};
+
+/**
  * 当前所围成的矩形区域是否与其它组件重叠；
  * @param page 页面设置，用于判断是否越界
  * @param panelStyle 需要判断的现有panel
@@ -111,7 +172,7 @@ export const findPosition = (
   }
   let newPosition = R.clone<IRectPos>(distPos);
   // 开始轮询，计算是否有位置放置
-  panelStyle.forEach((item, idx) => {
+  panelStyle.forEach((item) => {
     if (newPosition.isFind) {
       return;
     }
@@ -167,7 +228,8 @@ export const convertPanel: (param: Omit<IFnAutoPosition, 'page'>) => IPanelStyle
     let top = parseStyle(style.top);
     let left = parseStyle(style.left);
     const res = calcTranslate({ translate: style?.transform?.translate, left, top });
-    (left = res.left), (top = res.top);
+    left = res.left;
+    top = res.top;
     return {
       width,
       height,
@@ -214,63 +276,3 @@ export const calcPanelPosition = ({
   const { isFind, ...props } = distPos;
   return props as IRect;
 };
-
-/** 
-(x1,y1)                (x3,y3)
-  ┏━━━━━━━━━┓            ┏━━━━━━━━━┓       
-  ┃   X1    ┃            ┃   X3    ┃       
-  ┃         ┃            ┃         ┃       
-  ┗━━━━━━━━━┛(x2,y2)     ┗━━━━━━━━━┛(x4,y4)
-  
-              (a1,b1)
-              ┏━━━━━━━━━┓       
-              ┃   A     ┃       
-              ┃         ┃       
-              ┗━━━━━━━━━┛(a2,b2)
-  矩形A只有与X1,X3都不相交时，允许放置在它所在的位置
- */
-/**
- *
- * 当前的rect是否允许放在目标区域
- * @param rect 需要判断的矩形区域
- * @param panel 当前组件列表的位置及尺寸
- */
-export const shouldRectPosIn = (rect: IDistRect, panel: IPanelStyleProps[]) => {
-  let i = 0;
-  let allowed = true;
-  while (allowed && i < panel.length) {
-    allowed = !isRectCross(panel[i++], rect);
-  }
-  return allowed;
-};
-
-/**
- * 判断两个矩形是否相交
-  (x1,y1)
-  ┏━━━━W1━━━━┓ 
-  ┃          ┃     
-  H1   ❶─────┼──W──────┐   
-  ┃          ┃         │
-  ┗━━━━━━━━━━┛(x2,y2)  │
-                       H
-           (a1,b1)┏━━━━┼━━━━━┓ 
-                  ┃    │     ┃     
-                  H2   ❷     ┃     
-                  ┃          ┃     
-                  ┗━━━━W2━━━━┛(a2,b2)
-  两个矩形相交，则需满足以下条件：              
-  1.W > (W1+W2)/2
-  2.H > (H1+H2)/2
-  据此推导出以下的结果。
-  
- * 原理：判断中心点的位置与距离：/public/doc/rect cross.png
- * @param r1 矩形
- * @param r2 矩形
- * 
- * 以下公式中，除以2可省去
-  Math.abs((r1.x1 + r1.x2) / 2 - (r2.x1 + r2.x2) / 2) < (r1.x2 + r2.x2 - r1.x1 - r2.x1) / 2 &&
-  Math.abs((r1.y1 + r1.y2) / 2 - (r2.y1 + r2.y2) / 2) < (r1.y2 + r2.y2 - r1.y1 - r2.y1) / 2;
- */
-export const isRectCross = (r1: IDistRect, r2: IDistRect) =>
-  Math.abs(r1.x1 + r1.x2 - r2.x1 - r2.x2) < r1.x2 + r2.x2 - r1.x1 - r2.x1 &&
-  Math.abs(r1.y1 + r1.y2 - r2.y1 - r2.y2) < r1.y2 + r2.y2 - r1.y1 - r2.y1;

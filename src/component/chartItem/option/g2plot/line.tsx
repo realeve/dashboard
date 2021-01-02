@@ -643,13 +643,14 @@ export const getLineConfig = ({
         };
   // 百分比显示数据
   const formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
+  let pos = reverseXY ? 'right' : 'top';
   const label =
     !isBarChart || !showLabel
       ? {}
       : {
           // 可手动配置 label 数据标签位置
           label: {
-            position: isStack ? 'middle' : reverseXY ? 'right' : 'top', // 'top', 'middle', 'bottom'
+            position: isStack ? 'middle' : pos, // 'top', 'middle', 'bottom'
             ...formatter,
           },
         };
@@ -679,7 +680,7 @@ export const getLineConfig = ({
         },
       };
 
-  const config = {
+  return {
     chartType,
     renderer,
     appendPadding: [0, endLabel && !isBarChart && !isPercent ? 100 : 0, 0, 0],
@@ -726,8 +727,6 @@ export const getLineConfig = ({
       shared: true,
     },
   };
-
-  return config;
 };
 
 export default getLineConfig;

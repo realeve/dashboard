@@ -5,18 +5,18 @@
 
 const Panel = function (name, fg, bg) {
   let min = Infinity;
-    let max = 0;
-    const {round} = Math;
+  let max = 0;
+  const { round } = Math;
   const PR = round(window.devicePixelRatio || 1);
 
   const WIDTH = 80 * PR;
-    const HEIGHT = 48 * PR;
-    const TEXT_X = 3 * PR;
-    const TEXT_Y = 2 * PR;
-    const GRAPH_X = 3 * PR;
-    const GRAPH_Y = 15 * PR;
-    const GRAPH_WIDTH = 74 * PR;
-    const GRAPH_HEIGHT = 30 * PR;
+  const HEIGHT = 48 * PR;
+  const TEXT_X = 3 * PR;
+  const TEXT_Y = 2 * PR;
+  const GRAPH_X = 3 * PR;
+  const GRAPH_Y = 15 * PR;
+  const GRAPH_WIDTH = 74 * PR;
+  const GRAPH_HEIGHT = 30 * PR;
 
   const canvas = document.createElement('canvas');
   canvas.width = WIDTH;
@@ -24,7 +24,7 @@ const Panel = function (name, fg, bg) {
   canvas.style.cssText = 'width:80px;height:48px';
 
   const context = canvas.getContext('2d');
-  context.font = `bold ${  9 * PR  }px Helvetica,Arial,sans-serif`;
+  context.font = `bold ${9 * PR}px Helvetica,Arial,sans-serif`;
   context.textBaseline = 'top';
 
   context.fillStyle = bg;
@@ -41,7 +41,7 @@ const Panel = function (name, fg, bg) {
   return {
     dom: canvas,
 
-    update (value, maxValue) {
+    update(value, maxValue) {
       min = Math.min(min, value);
       max = Math.max(max, value);
 
@@ -49,11 +49,7 @@ const Panel = function (name, fg, bg) {
       context.globalAlpha = 1;
       context.fillRect(0, 0, WIDTH, GRAPH_Y);
       context.fillStyle = fg;
-      context.fillText(
-        `${round(value)  } ${  name  } (${  round(min)  }-${  round(max)  })`,
-        TEXT_X,
-        TEXT_Y,
-      );
+      context.fillText(`${round(value)} ${name} (${round(min)}-${round(max)})`, TEXT_X, TEXT_Y);
 
       context.drawImage(
         canvas,
@@ -81,7 +77,7 @@ const Panel = function (name, fg, bg) {
   };
 };
 
-export default function (container) {
+export default function ReactStats(container) {
   function addPanel(panel) {
     container.appendChild(panel.dom);
     return panel;
@@ -93,15 +89,15 @@ export default function (container) {
     }
   }
 
-  let beginTime = (performance || Date).now();
-    let prevTime = beginTime;
-    let frames = 0;
+  let beginTime = (window.performance || Date).now();
+  let prevTime = beginTime;
+  let frames = 0;
 
   const fpsPanel = addPanel(new Panel('FPS', '#0ff', '#002'));
   const msPanel = addPanel(new Panel('MS', '#0f0', '#020'));
-
-  if (self.performance && self.performance.memory) {
-    var memPanel = addPanel(new Panel('MB', '#f08', '#201'));
+  let memPanel = null;
+  if (window.performance && window.performance.memory) {
+    memPanel = addPanel(new Panel('MB', '#f08', '#201'));
   }
 
   showPanel(0);
@@ -109,13 +105,13 @@ export default function (container) {
   return {
     addPanel,
     showPanel,
-    begin () {
-      beginTime = (performance || Date).now();
+    begin() {
+      beginTime = (window.performance || Date).now();
     },
-    end () {
-      frames++;
+    end() {
+      frames += 1;
 
-      const time = (performance || Date).now();
+      const time = (window.performance || Date).now();
 
       msPanel.update(time - beginTime, 200);
 
@@ -126,7 +122,7 @@ export default function (container) {
         frames = 0;
 
         if (memPanel) {
-          const {memory} = performance;
+          const { memory } = window.performance;
           memPanel.update(memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576);
         }
       }
@@ -134,7 +130,7 @@ export default function (container) {
       return time;
     },
 
-    update () {
+    update() {
       beginTime = this.end();
     },
   };

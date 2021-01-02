@@ -35,15 +35,7 @@ interface IThumbnailProps {
   onScroll: (e: { x: number; y: number }) => void;
   showConfig: boolean;
 }
-export default ({
-  zoom,
-  dragPercent,
-  visible,
-  page,
-  onScroll,
-  panel,
-  showConfig,
-}: IThumbnailProps) => {
+export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThumbnailProps) => {
   const thumbnailSize = {
     width: Number(page.width) / SCALE_PARAM,
     height: Number(page.height) / SCALE_PARAM,
@@ -51,23 +43,20 @@ export default ({
   // 缩放比
   // const scale = rangeCfg.min / zoom;
 
-  let offset; let moveParam; let res;
+  let res;
   if (zoom < 0.7) {
     res = getThumbnailParam(1);
-    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 0.8) {
     res = getThumbnailParam(2);
-    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 1.0) {
     res = getThumbnailParam(3);
-    (offset = res.x), (moveParam = res.y);
   } else if (zoom < 1.2) {
     res = getThumbnailParam(4);
-    (offset = res.x), (moveParam = res.y);
   } else if (zoom <= 1.6) {
     res = getThumbnailParam(5);
-    (offset = res.x), (moveParam = res.y);
   }
+  let offset = res.x,
+    moveParam = res.y;
 
   const [frame, setFrame] = useSetState({
     translate: [0, 0],
@@ -85,7 +74,7 @@ export default ({
       translate: beforeTranslate,
     });
     ref.current.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
-  }, [dragPercent, offset]);
+  }, [dragPercent, offset, thumbnailSize.width, thumbnailSize.height]);
 
   return (
     <div

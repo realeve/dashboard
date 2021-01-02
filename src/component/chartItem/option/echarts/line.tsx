@@ -40,7 +40,7 @@ export const mock: IChartMock = {
 };
 
 export const handleData = (
-  { data },
+  { data, header },
   { legend, x, y }: { legend?: number | string; x: number | string; y: number | string },
 ) => {
   const xArr = lib.getUniqByIdx({ key: x, data });
@@ -48,19 +48,19 @@ export const handleData = (
   if (typeof legend === 'undefined') {
     const arr = [];
     xArr.forEach((xItem) => {
-      const item = data.find((item) => item[x] === xItem);
+      const item = data.find((dataItem) => dataItem[x] === xItem);
       arr.push(item ? item[y] : '-');
     });
     series.push({
-      name,
+      name: header[y],
       arr,
     });
   } else {
     const legendArr = lib.getUniqByIdx({ key: legend, data });
-    legendArr.map((name, idx) => {
+    legendArr.map((name) => {
       const arr = [];
       xArr.forEach((xItem) => {
-        const item = data.find((item) => item[legend] === name && item[x] === xItem);
+        const item = data.find((itemData) => itemData[legend] === name && itemData[x] === xItem);
         arr.push(item ? item[y] : '-');
       });
       series.push({

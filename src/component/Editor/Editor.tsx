@@ -53,18 +53,18 @@ function restoreElements({ infos }: IObject<any>, editor: Editor) {
     true,
   );
 }
-function undoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
+function undoSelectTargets({ prevs }: IObject<any>, editor: Editor) {
   editor.setSelectedTargets(editor.viewport.current!.getElements(prevs), true);
 }
-function redoSelectTargets({ prevs, nexts }: IObject<any>, editor: Editor) {
+function redoSelectTargets({ nexts }: IObject<any>, editor: Editor) {
   editor.setSelectedTargets(editor.viewport.current!.getElements(nexts), true);
 }
-function undoChangeText({ prev, next, id }: IObject<any>, editor: Editor) {
+function undoChangeText({ prev, id }: IObject<any>, editor: Editor) {
   const info = editor.getViewport().getInfo(id)!;
   info.innerText = prev;
   info.el!.innerText = prev;
 }
-function redoChangeText({ prev, next, id }: IObject<any>, editor: Editor) {
+function redoChangeText({ next, id }: IObject<any>, editor: Editor) {
   const info = editor.getViewport().getInfo(id)!;
   info.innerText = next;
   info.el!.innerText = next;
@@ -126,7 +126,7 @@ export interface IEditorProps {
   onRemove?: (name: string[]) => void;
 
   // 元素属性变更
-  onChange?: (name: { id: string; next: {} }[]) => void;
+  onChange?: (name: { id: string; next: Record<string, any> }[]) => void;
 
   // 辅助线变更
   onGuidesChange?: (e: IGuideProps) => void;
@@ -210,7 +210,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       }
     }
 
-    if (this.props.zoom != nextProps.zoom) {
+    if (this.props.zoom !== nextProps.zoom) {
       this.setState({ zoom: nextProps.zoom });
     }
   }
@@ -818,9 +818,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
       info.children!.forEach(registerFrame);
     });
-    for (const id in frameMap) {
+
+    Object.keys(frameMap).forEach((id) => {
       moveableData.createFrame(viewport.getInfo(id).el!, frameMap[id]);
-    }
+    });
   }
   public removeElements(targets: (HTMLElement | SVGElement)[], isRestore?: boolean) {
     const viewport = this.getViewport();

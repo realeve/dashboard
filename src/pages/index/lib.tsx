@@ -72,56 +72,6 @@ export const getConfig = async (url) => {
   return getLocalConfig();
 };
 
-/**
- * 计算主页渲染的样式
- * @param style 在config中配置的样式，计算为主页渲染所需的样式
- * @param page 页面宽高配置
- * @param autoResize 是否启动自动调整页面大小
- */
-export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
-  if (!style) {
-    return {};
-  }
-
-  // STEP 1.将transform中的translate部分转换为left和top
-  // 将transform中的内容优化
-  let { left = '0', top = '0', transform } = style;
-
-  left = parseStyle(left);
-  top = parseStyle(top);
-
-  let rotate = '';
-  let scale = '';
-  let _transform = {};
-
-  if (transform) {
-    const res = calcTranslate({ translate: transform.translate, left, top });
-    (left = res.left), (top = res.top);
-
-    rotate = parseStyle(transform.rotate, 'deg') > 0 ? `rotate(${transform?.rotate}) ` : '';
-    scale = transform.scale === '1,1' ? '' : `scale(${transform?.scale})`;
-    _transform = (rotate + scale).length > 0 ? { transform: rotate + scale } : {};
-  }
-
-  // 处理组件尺寸和位置缩放
-  let width = parseStyle(style.width);
-  let height = parseStyle(style.height);
-  if (resizeType === EResizeType.COMPONENT) {
-    const { scaleX, scaleY } = getScale(page, resizeType);
-    (top *= scaleY), (width *= scaleX), (left *= scaleX), (height *= scaleY);
-  }
-
-  return {
-    ...style,
-    left,
-    top,
-    width,
-    height,
-    ..._transform,
-    position: 'absolute',
-  };
-};
-
 // 获取缩放系数
 let getScale = (page, resizeType: EResizeType) => {
   const { width, height } = page;
@@ -137,6 +87,61 @@ let getScale = (page, resizeType: EResizeType) => {
   const ratio = width / height;
 
   return { scaleX, scaleY, ratio };
+};
+
+/**
+ * 计算主页渲染的样式
+ * @param style 在config中配置的样式，计算为主页渲染所需的样式
+ * @param page 页面宽高配置
+ * @param autoResize 是否启动自动调整页面大小
+ */
+export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
+  if (!style) {
+    return {};
+  }
+
+  // STEP 1.将transform中的translate部分转换为left和top
+  // 将transform中的内容优化
+  let { left = '0', top = '0' } = style;
+  const transform = style.transform;
+
+  left = parseStyle(left);
+  top = parseStyle(top);
+
+  let rotate = '';
+  let scale = '';
+  let _transform = {};
+
+  if (transform) {
+    const res = calcTranslate({ translate: transform.translate, left, top });
+    left = res.left;
+    top = res.top;
+
+    rotate = parseStyle(transform.rotate, 'deg') > 0 ? `rotate(${transform?.rotate}) ` : '';
+    scale = transform.scale === '1,1' ? '' : `scale(${transform?.scale})`;
+    _transform = (rotate + scale).length > 0 ? { transform: rotate + scale } : {};
+  }
+
+  // 处理组件尺寸和位置缩放
+  let width = parseStyle(style.width);
+  let height = parseStyle(style.height);
+  if (resizeType === EResizeType.COMPONENT) {
+    const { scaleX, scaleY } = getScale(page, resizeType);
+    top *= scaleY;
+    width *= scaleX;
+    left *= scaleX;
+    height *= scaleY;
+  }
+
+  return {
+    ...style,
+    left,
+    top,
+    width,
+    height,
+    ..._transform,
+    position: 'absolute',
+  };
 };
 
 // 获取背景

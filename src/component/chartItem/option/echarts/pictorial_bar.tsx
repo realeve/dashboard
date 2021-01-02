@@ -95,12 +95,12 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
   const itemData = [];
 
   // 取出每一条数据value,作为显示数据
-  data.forEach(function (items, index) {
+  data.forEach((items) => {
     itemData.push(items.value);
   });
 
   // 取出所有数据最大值,作为背景象形柱图数据
-  data.forEach(function (items, index) {
+  data.forEach((items) => {
     bgData.push({
       name: items.name,
       value: Math.max.apply(null, itemData),
@@ -124,7 +124,7 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
       show: true,
       position: 'top',
       distance: 5,
-      formatter (params) {
+      formatter(params) {
         return data[params.dataIndex].value;
       },
       color: config.fontColor || '#ffc72b',
@@ -162,34 +162,33 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
         ...animate,
       },
     ];
-  } 
-    return [
-      // 背景
-      {
-        type: 'pictorialBar',
-        barWidth: '45%',
-        symbol: `image://${  bgImg}`,
-        symbolClip: false,
-        symbolBoundingData: max,
-        data: bgData,
-        itemStyle: {
-          opacity: 0.18,
-        },
-        ...label,
-        ...animate,
+  }
+  return [
+    // 背景
+    {
+      type: 'pictorialBar',
+      barWidth: '45%',
+      symbol: `image://${bgImg}`,
+      symbolClip: false,
+      symbolBoundingData: max,
+      data: bgData,
+      itemStyle: {
+        opacity: 0.18,
       },
-      {
-        type: 'pictorialBar',
-        barWidth: '45%',
-        barGap: '-100%',
-        data,
-        symbol: `image://${  fillImg}`,
-        symbolClip: true,
-        symbolBoundingData: max,
-        ...animate,
-      },
-    ];
-  
+      ...label,
+      ...animate,
+    },
+    {
+      type: 'pictorialBar',
+      barWidth: '45%',
+      barGap: '-100%',
+      data,
+      symbol: `image://${fillImg}`,
+      symbolClip: true,
+      symbolBoundingData: max,
+      ...animate,
+    },
+  ];
 };
 
 export interface IPictorialBar {
@@ -232,14 +231,7 @@ export default ({
     xAxis: [
       {
         type: 'category',
-        data: (function (data) {
-          const arr = [];
-          data.forEach(function (items) {
-            arr.push(items.name);
-          });
-          return arr;
-        })(chartData),
-
+        data: ((xData) => xData.map((items) => items.name))(chartData),
         // boundaryGap: ['20%', '20%'],
         splitLine: {
           show: false,
