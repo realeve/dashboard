@@ -217,16 +217,16 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   }
 
   function calcData() {
-    const nextConfig = R.merge(R.clone(defaultConfig), config || {});]
-    const nextRows = calcRows(nextConfig); 
+    const nextConfig = R.merge(R.clone(defaultConfig), config || {});
+    const nextRows = calcRows(nextConfig);
 
     const data = {
-      mergedConfig:nextConfig,
-      header:calcHeaderData(nextConfig),
-      rows:nextRows,
-      widths:calcWidths(nextConfig, stateRef.current.rowsData),
-      aligns:calcAligns(nextConfig, header),
-      heights:calcHeights(nextConfig, header),
+      mergedConfig: nextConfig,
+      header: calcHeaderData(nextConfig),
+      rows: nextRows,
+      widths: calcWidths(nextConfig, stateRef.current.rowsData),
+      aligns: calcAligns(nextConfig, header),
+      heights: calcHeights(nextConfig, header),
     };
 
     Object.assign(stateRef.current, data, {
@@ -257,7 +257,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   function calcHeights({ headerHeight, rowNum, data }, head) {
     let allHeight = height;
 
-    if (head.length){ allHeight -= headerHeight;}
+    if (head.length) {
+      allHeight -= headerHeight;
+    }
 
     const avgHeight = allHeight / rowNum;
 
@@ -267,15 +269,12 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   }
 
   function* animation(start = false) {
-    let { 
-      animationIndex, 
-    } = stateRef.current;
+    let { animationIndex } = stateRef.current;
     const {
-      
-      avgHeight, 
+      avgHeight,
       mergedConfig: { waitTime, carousel, rowNum },
       rowsData,
-    }= stateRef.current;
+    } = stateRef.current;
 
     const rowLength = rowsData.length;
 
