@@ -57,7 +57,7 @@ export const handleData = (
     });
   } else {
     const legendArr = lib.getUniqByIdx({ key: legend, data });
-    legendArr.map((name) => {
+    legendArr.forEach((name) => {
       const arr = [];
       xArr.forEach((xItem) => {
         const item = data.find((itemData) => itemData[legend] === name && itemData[x] === xItem);

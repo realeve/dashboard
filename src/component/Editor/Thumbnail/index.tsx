@@ -55,8 +55,8 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
   } else if (zoom <= 1.6) {
     res = getThumbnailParam(5);
   }
-  let offset = res.x,
-    moveParam = res.y;
+  const offset = res.x;
+  const moveParam = res.y;
 
   const [frame, setFrame] = useSetState({
     translate: [0, 0],
@@ -74,7 +74,7 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
       translate: beforeTranslate,
     });
     ref.current.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
-  }, [dragPercent, offset, thumbnailSize.width, thumbnailSize.height]);
+  }, [dragPercent.x, dragPercent.y, offset, thumbnailSize.width, thumbnailSize.height]);
 
   return (
     <div

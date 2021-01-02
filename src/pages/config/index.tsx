@@ -87,9 +87,6 @@ const Index = ({
   const panel = history[curHistoryIdx]?.panel || _panel;
   const panelIds = R.pluck('id', panel);
 
-  useEffect(() => {
-    console.log(curTool);
-  }, []);
   // 面板默认显示状态设置
   const [hide, setHide] = useSetState(initState);
 
@@ -104,25 +101,13 @@ const Index = ({
 
   const [zoom, setZoom] = useState(0.7);
 
-  const updateZoom = (zoom: number) => {
-    localforage.setItem('zoom', zoom);
-    setZoom(zoom);
+  const updateZoom = (nextZoom: number) => {
+    localforage.setItem('zoom', nextZoom);
+    setZoom(nextZoom);
   };
 
   const editor = React.useRef<any>(null);
   const [instance, setInstance] = React.useState<any | null>(null);
-
-  useEffect(() => {
-    if (!editor.current || instance) {
-      return;
-    }
-    localforage.getItem('zoom').then((e: number) => {
-      setZoom(e || 1);
-    });
-    setInstance(editor.current);
-    initSelectedPanel();
-    initPanel();
-  }, [editor.current]);
 
   // 当前editor上的keys
 
@@ -146,6 +131,7 @@ const Index = ({
     // 每次添加后，都设置为最近一次的panelId
     setPanelKeys(nextKeys);
   };
+  useEffect(initPanel, [panelIds.join(',')]);
 
   const initSelectedPanel = () => {
     editor?.current?.setSelectedTargets(
@@ -153,11 +139,20 @@ const Index = ({
       true,
     );
   };
-
-  useEffect(initPanel, [panelIds.join(',')]);
-
   // 选择组件
   useEffect(initSelectedPanel, [selectedPanel.join(',')]);
+
+  useEffect(() => {
+    if (!editor.current || instance) {
+      return;
+    }
+    localforage.getItem('zoom').then((e: number) => {
+      setZoom(e || 1);
+    });
+    setInstance(editor.current);
+    initSelectedPanel();
+    initPanel();
+  }, [editor.current]);
 
   // const [prevHistory, setPrevHistory] = useState(curHistoryIdx);
   // useEffect(() => {
@@ -185,15 +180,15 @@ const Index = ({
   }, [hide]);
 
   // 更新当前的菜单
-  const setCurTool = (curTool: TQuickTool) => {
+  const setCurTool = (tool: TQuickTool) => {
     let append = {};
-    if (curTool === 'hand') {
+    if (tool === 'hand') {
       append = { selectedPanel: [] };
     }
     dispatch({
       type: 'common/setStore',
       payload: {
-        curTool,
+        curTool: tool,
         ...append,
       },
     });
@@ -245,16 +240,16 @@ const Index = ({
   const getLockedPanel = () =>
     panel.filter((item) => item.lock || item.hide).map((item) => item.id);
 
-  const calcNextSelectedPanel = (selectedPanel: string[]) => {
+  const calcNextSelectedPanel = (curSelectedPanel: string[]) => {
     // 此处处理多个组件共同选择的问题；
-    let nextPanel = selectedPanel;
+    let nextPanel = curSelectedPanel;
     const lockedPanel = getLockedPanel();
-    if (selectedPanel.length > 0) {
+    if (curSelectedPanel.length > 0) {
       // 2020-11-11 group所在ID的组件需要一并被选择
       let groupIds: string[] = [];
 
-      panel.filter((item) => {
-        if (selectedPanel.includes(item.id) && item.group) {
+      panel.forEach((item) => {
+        if (curSelectedPanel.includes(item.id) && item.group) {
           const items = panel.filter((p) => p.group === item.group);
           const groupPanel = items.map((p) => p.id);
           const groupId = items.map((p) => p.group);
@@ -298,12 +293,12 @@ const Index = ({
   );
 
   // 载入json配置文件手动编辑
-  const onLoadConfig = ({ page, panel }) => {
+  const onLoadConfig = ({ page: localPage, panel: localPanel }) => {
     dispatch({
       type: 'common/setStore',
       payload: {
-        page,
-        panel,
+        page: localPage,
+        panel: localPanel,
         history: [],
         curHistoryIdx: 0,
         recordHistory: false,
@@ -398,11 +393,11 @@ const Index = ({
                 hideWidth={hideWidth}
                 lockedPanel={getLockedPanel()}
                 calcNextSelectedPanel={calcNextSelectedPanel}
-                onSelect={(selectedPanel) => {
+                onSelect={(nextPanel) => {
                   dispatch({
                     type: 'common/setStore',
                     payload: {
-                      selectedPanel: calcNextSelectedPanel(selectedPanel),
+                      selectedPanel: calcNextSelectedPanel(nextPanel),
                     },
                   });
                 }}

@@ -643,7 +643,7 @@ export const getLineConfig = ({
         };
   // 百分比显示数据
   const formatter = !isPercent ? {} : { formatter: ({ value }) => `${(value * 100).toFixed(2)}%` };
-  let pos = reverseXY ? 'right' : 'top';
+  const pos = reverseXY ? 'right' : 'top';
   const label =
     !isBarChart || !showLabel
       ? {}

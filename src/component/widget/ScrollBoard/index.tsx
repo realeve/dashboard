@@ -27,7 +27,7 @@ export interface IScrollBoardProps {
   fontWeight: string;
   fontColor: string;
   formatIndex: boolean;
-  
+
   hoverColumns?: number[];
 }
 const defaultConfig: IScrollBoardProps = {
@@ -206,44 +206,35 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   function onResize() {
     if (!mergedConfig) return;
 
-    const widths = calcWidths(mergedConfig, stateRef.current.rowsData);
+    const width = calcWidths(mergedConfig, stateRef.current.rowsData);
 
-    const heights = calcHeights(mergedConfig, header);
+    const height = calcHeights(mergedConfig, header);
 
-    const data = { widths, heights };
+    const data = { widths: width, heights: height };
 
     Object.assign(stateRef.current, data);
-    setState((state) => ({ ...state, ...data }));
+    setState((prevState) => ({ ...prevState, ...data }));
   }
 
   function calcData() {
-    const mergedConfig = R.merge(R.clone(defaultConfig), config || {});
-
-    const header = calcHeaderData(mergedConfig);
-
-    const rows = calcRows(mergedConfig);
-
-    const widths = calcWidths(mergedConfig, stateRef.current.rowsData);
-
-    const heights = calcHeights(mergedConfig, header);
-
-    const aligns = calcAligns(mergedConfig, header);
+    const nextConfig = R.merge(R.clone(defaultConfig), config || {});]
+    const nextRows = calcRows(nextConfig); 
 
     const data = {
-      mergedConfig,
-      header,
-      rows,
-      widths,
-      aligns,
-      heights,
+      mergedConfig:nextConfig,
+      header:calcHeaderData(nextConfig),
+      rows:nextRows,
+      widths:calcWidths(nextConfig, stateRef.current.rowsData),
+      aligns:calcAligns(nextConfig, header),
+      heights:calcHeights(nextConfig, header),
     };
 
     Object.assign(stateRef.current, data, {
-      rowsData: rows,
+      rowsData: nextRows,
       animationIndex: 0,
     });
 
-    setState((state) => ({ ...state, ...data }));
+    setState((prevState) => ({ ...prevState, ...data }));
   }
 
   function calcWidths({ columnWidth, header }, rowsData) {
@@ -258,15 +249,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const avgWidth = (width - usedWidth) / (columnNum - columnWidth.length);
 
-    const widths = new Array(columnNum).fill(avgWidth);
+    const nextWidth = new Array(columnNum).fill(avgWidth);
 
-    return R.merge(widths, columnWidth);
+    return R.merge(nextWidth, columnWidth);
   }
 
-  function calcHeights({ headerHeight, rowNum, data }, header) {
+  function calcHeights({ headerHeight, rowNum, data }, head) {
     let allHeight = height;
 
-    if (header.length) allHeight -= headerHeight;
+    if (head.length){ allHeight -= headerHeight;}
 
     const avgHeight = allHeight / rowNum;
 
@@ -276,12 +267,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   }
 
   function* animation(start = false) {
-    let {
-      avgHeight,
-      animationIndex,
+    let { 
+      animationIndex, 
+    } = stateRef.current;
+    const {
+      
+      avgHeight, 
       mergedConfig: { waitTime, carousel, rowNum },
       rowsData,
-    } = stateRef.current;
+    }= stateRef.current;
 
     const rowLength = rowsData.length;
 
@@ -293,7 +287,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     rows.push(...rowsData.slice(0, animationIndex));
 
     const heights = new Array(rowLength).fill(avgHeight);
-    setState((state) => ({ ...state, rows, heights }));
+    setState((prevState) => ({ ...prevState, rows, heights }));
 
     yield new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -306,7 +300,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
-    setState((state) => ({ ...state, heights: newHeights }));
+    setState((prevState) => ({ ...prevState, heights: newHeights }));
   }
 
   function emitEvent(ri, ci, row, ceil) {
@@ -413,7 +407,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
               }}
             >
               {row.ceils.map((ceil, ci) => {
-                const showDetail = (config?.hoverColumns || []).includes(ci - (config.index ? 1 : 0));
+                const showDetail = (config?.hoverColumns || []).includes(
+                  ci - (config.index ? 1 : 0),
+                );
                 const Item = (
                   <div
                     className={classnames(styles.ceil, {

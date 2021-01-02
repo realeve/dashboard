@@ -59,8 +59,8 @@ const handleData = ({ data }: IChartMock, { legend, x, y }) => {
   legend = Number(legend);
   x = Number(x);
   y = Number(y);
-  const arr = R.pluck<string, Record<string, any>>(String(y), data);
-  const max = Math.max(...arr);
+  const rest = R.pluck<string, Record<string, any>>(String(y), data);
+  const max = Math.max(...rest);
 
   const result = lib.handleMinMax({ min: 0, max });
   const legendArr = lib.getUniqByIdx({ key: legend, data });

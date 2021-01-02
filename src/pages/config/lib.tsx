@@ -44,7 +44,7 @@ export const calcTranslate = ({
     left += arr[0];
     top += arr[1];
   }
-  return { left: parseInt('' + left, 10), top: parseInt('' + top, 10) };
+  return { left: Number(left.toFixed(0)), top: Number(top.toFixed(0)) };
 };
 
 // 默认样式

@@ -54,18 +54,17 @@ ILayerProps) => {
   const [isThumb, setIsThumb] = useToggle(true);
 
   const [selected, setSelected] = useState<number[]>([]);
+  const [showPanel, setShowPanel] = useState<IPanelConfig[]>([]);
 
-  const getSelectedIdx = (selectedPanel) => {
+  const getSelectedIdx = (nextPanel) => {
     const _selected = [];
     showPanel.forEach((item, idx) => {
-      if (selectedPanel.includes(item.id)) {
+      if (nextPanel.includes(item.id)) {
         _selected.push(idx);
       }
     });
     return _selected;
   };
-
-  const [showPanel, setShowPanel] = useState<IPanelConfig[]>([]);
 
   useEffect(() => {
     const nextPanel = getShowedPanel(panel);
@@ -76,14 +75,6 @@ ILayerProps) => {
     const _selected = getSelectedIdx(selectedPanel);
     setSelected(_selected);
   }, [selectedPanel.join(''), showPanel.join(',')]);
-
-  const onDragEnd = (result) => {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-    moveLayerItem(result.source.index, result.destination.index);
-  };
 
   /**
    *
@@ -135,12 +126,12 @@ ILayerProps) => {
     }
 
     // 不包含子元素的列表
-    const _panel = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
+    const groupItems = R.reject<IPanelConfig>((item) => groupPanels.includes(item.group))(items);
 
     // 最终结果
     let _nextPanel: IPanelConfig[] = [];
 
-    _panel.forEach((item: IPanelConfig) => {
+    groupItems.forEach((item: IPanelConfig) => {
       if (distId === item.id && groupId && item.key !== GROUP_COMPONENT_KEY) {
         item.group = groupId;
       }
@@ -166,8 +157,16 @@ ILayerProps) => {
     setSelected([to]);
   };
 
+  const onDragEnd = (result) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    moveLayerItem(result.source.index, result.destination.index);
+  };
+
   // 更新第idx个数据的属性
-  const updatePanelItem = (idx: string, attrib: {}, isGroup) => {
+  const updatePanelItem = (idx: string, attrib: Record<string, any>, isGroup) => {
     // 处理整组数据的更新;
     let idxList = [idx];
     if (isGroup) {
@@ -183,24 +182,6 @@ ILayerProps) => {
         idx: idxList,
         attrib,
       },
-    });
-  };
-
-  const handleClick = (data) => {
-    const { action } = data;
-    const { idx } = data;
-    handleAction(action, idx);
-  };
-  const handleAction = (action, arr: number[]) => {
-    if (typeof arr === 'undefined') {
-      return;
-    }
-    if (typeof arr === 'number') {
-      contextMenuHandler(action, arr);
-      return;
-    }
-    arr.forEach((idx) => {
-      contextMenuHandler(action, idx);
     });
   };
 
@@ -279,6 +260,25 @@ ILayerProps) => {
     }
   };
 
+  const handleAction = (action, arr: number[]) => {
+    if (typeof arr === 'undefined') {
+      return;
+    }
+    if (typeof arr === 'number') {
+      contextMenuHandler(action, arr);
+      return;
+    }
+    arr.forEach((idx) => {
+      contextMenuHandler(action, idx);
+    });
+  };
+
+  const handleClick = (data) => {
+    const { action } = data;
+    const { idx } = data;
+    handleAction(action, idx);
+  };
+
   const getDisabled = (item) => {
     let choosedItem: IPanelConfig;
     switch (item.action) {
@@ -349,7 +349,7 @@ ILayerProps) => {
             'datav-icon datav-font icon-move-prev',
             styles['layer-toolbar-icon'],
             {
-              [styles.enable]: selected.length > 0 && selected.join('') != panel[0]?.id,
+              [styles.enable]: selected.length > 0 && selected.join('') !== panel[0]?.id,
             },
           )}
           title="上移一层"
@@ -363,7 +363,7 @@ ILayerProps) => {
             styles['layer-toolbar-icon'],
             {
               [styles.enable]:
-                selected.length > 0 && selected.join('') != panel[panel.length - 1]?.id,
+                selected.length > 0 && selected.join('') !== panel[panel.length - 1]?.id,
             },
           )}
           title="下移一层"
@@ -373,7 +373,7 @@ ILayerProps) => {
         />
         <i
           className={classnames('datav-icon datav-font icon-to-top', styles['layer-toolbar-icon'], {
-            [styles.enable]: selected.length > 0 && selected.join('') != panel[0]?.id,
+            [styles.enable]: selected.length > 0 && selected.join('') !== panel[0]?.id,
           })}
           title="置顶"
           onClick={() => {
@@ -386,7 +386,7 @@ ILayerProps) => {
             styles['layer-toolbar-icon'],
             {
               [styles.enable]:
-                selected.length >= 0 && selected.join('') != panel[panel.length - 1]?.id,
+                selected.length >= 0 && selected.join('') !== panel[panel.length - 1]?.id,
             },
           )}
           title="置底"
@@ -399,12 +399,12 @@ ILayerProps) => {
       <div className={styles.layerWrap}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
+            {(parentProvided) => (
               <div
                 // provided.droppableProps应用的相同元素.
-                {...provided.droppableProps}
+                {...parentProvided.droppableProps}
                 // 为了使 droppable 能够正常工作必须 绑定到最高可能的DOM节点中provided.innerRef.
-                ref={provided.innerRef}
+                ref={parentProvided.innerRef}
               >
                 {showPanel.map((item, idx) => (
                   <Draggable key={item.id} draggableId={item.id} index={idx}>
@@ -449,7 +449,7 @@ ILayerProps) => {
                           }
 
                           // 需处理分组的逻辑，存在互斥；
-                          if ((item.key = GROUP_COMPONENT_KEY)) {
+                          if (item.key == GROUP_COMPONENT_KEY) {
                             const childrenPanel = panel
                               .filter((panelItem) => panelItem.group === item.id)
                               .map((panelItem) => panelItem.id);
@@ -482,7 +482,7 @@ ILayerProps) => {
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
+                {parentProvided.placeholder}
               </div>
             )}
           </Droppable>

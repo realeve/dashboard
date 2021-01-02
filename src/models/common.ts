@@ -389,8 +389,8 @@ export default {
         : prevPanel;
 
       // 支持将组内的数据清除
-      unpackPanel = R.map(({ group, ...item }: IPanelConfig) =>
-        group === id || (!isGroupComponent && item.id === id) ? item : { group, ...item },
+      unpackPanel = R.map(({ group, ...rest }: IPanelConfig) =>
+        group === id || (!isGroupComponent && rest.id === id) ? rest : { group, ...rest },
       )(unpackPanel);
 
       // 判断从组内item取消时，是否有空组;

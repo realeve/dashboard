@@ -87,12 +87,6 @@ export const defaultOption = {
   renderer: 'svg',
 };
 
-// 数据转换器，外部数据变更时，将计算结果注入至source
-export const transformer = ({ data, header, x, y }) => {
-  const nodes = getNodes({ data, x: header[x], y: header[y] });
-  return { data: nodes };
-};
-
 const getNodes = ({ data, x, y }) => {
   const dv: typeof Node = transform(
     { dataType: 'hierarchy', children: data },
@@ -104,8 +98,8 @@ const getNodes = ({ data, x, y }) => {
   );
 
   // 将 DataSet 处理后的结果转换为 G2 接受的数据
-  const nodes = [],
-    nodeList = dv.getAllNodes();
+  const nodes = [];
+  const nodeList = dv.getAllNodes();
 
   nodeList.forEach((node) => {
     if (node.data.name === 'root') {
@@ -121,6 +115,12 @@ const getNodes = ({ data, x, y }) => {
     nodes.push(eachNode);
   });
   return nodes;
+};
+
+// 数据转换器，外部数据变更时，将计算结果注入至source
+export const transformer = ({ data, header, x, y }) => {
+  const nodes = getNodes({ data, x: header[x], y: header[y] });
+  return { data: nodes };
 };
 
 // g2 的默认组件需要2个参数，一是配置项，二是chart实例

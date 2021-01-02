@@ -72,6 +72,14 @@ const Index = ({
     setInstanse(zr);
   }, [renderer]);
 
+  const getRectEl = (id: string) => {
+    const el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
+    if (!el) {
+      return false;
+    }
+    return el.rect;
+  };
+
   const changeRect = (rect: IPanelItem[]) => {
     if (rect.length === 0) return;
 
@@ -136,14 +144,6 @@ const Index = ({
     setPrevItem(nextItem);
     updateRect(result);
   }, [instanse, page, panel, prevItem, nextIds]);
-
-  const getRectEl = (id: string) => {
-    const el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
-    if (!el) {
-      return false;
-    }
-    return el.rect;
-  };
 
   useEffect(() => {
     if (R.equals(selectedPanel, prevSelect)) {

@@ -48,7 +48,7 @@ export const tooltipFormatter: (param: ITooltipFormatter) => string | false = ({
   // let shouldDrill = window.location.hash.includes('dr0_id=');
   const drillTipText = shouldDrill ? '<div style="color:#e23;">( 点击查看详情 )</div>' : '';
 
-  p.forEach((item, idx) => {
+  p.forEach((item) => {
     if (!title) {
       title = item.name;
     }
@@ -107,7 +107,7 @@ export const handleSimpleMode = (option, config) => {
     return option;
   }
 
-  let { xAxis, yAxis } = option;
+  const { xAxis, yAxis } = option;
   if (yAxis && yAxis.name) {
     Reflect.deleteProperty(yAxis, 'name');
   }
@@ -172,10 +172,10 @@ export const str2Date: (str: string) => string = (str) => {
 };
 
 export const str2Num: (str: string) => number | string = (str) => {
-  if (/^(|\-)[0-9]+.[0-9]+$/.test(str)) {
+  if (/^(|-)[0-9]+.[0-9]+$/.test(str)) {
     return parseFloat(parseFloat(str).toFixed(3));
   }
-  if (/^(|\-)[0-9]+$/.test(str)) {
+  if (/^(|-)[0-9]+$/.test(str)) {
     return parseInt(str, 10);
   }
   return str;
@@ -204,8 +204,8 @@ export const getUniqByIdx: ({ key: string, data: any }) => any[] = ({ key, data 
     }),
   );
 
-export const getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) => {
-  const _data: {}[] = R.project(keys)(data);
+export const getDataByKeys = ({ keys, data }: { keys: string[]; data: Record<string, any>[] }) => {
+  const _data: Record<string, any>[] = R.project(keys)(data);
   return R.map(R.values)(_data);
 };
 
@@ -213,8 +213,7 @@ export const getDataByKeys = ({ keys, data }: { keys: string[]; data: {}[] }) =>
  * 判断颜色是否为色彩
  * @param str 颜色值
  */
-export const isColor = (str: string) =>
-  /^rgb\(|^rgba\(|^\#[\d|a-f]/.test(String(str).toLowerCase());
+export const isColor = (str: string) => /^rgb\(|^rgba\(|^#[\d|a-f]/.test(String(str).toLowerCase());
 
 export const colors: string[] = [
   '#da0d68',
@@ -401,31 +400,6 @@ export interface Iparams {
   height?: string | number;
   size?: number;
 }
-
-// 处理minmax值至最佳刻度，需要考虑 >10 及 <10 两种场景以及负数的情况
-export const handleMinMax: (params: {
-  min: number;
-  max: number;
-}) => {
-  min: number;
-  max: number;
-} = ({ min, max }) => {
-  // let exLength: number = String(Math.floor(max)).length - 1;
-  // if (max > 10) {
-  //   return {
-  //     max: Math.ceil(max / 10 ** exLength) * 10 ** exLength,
-  //     min: min - (min % 10 ** exLength),
-  //   };
-  // }
-  // return {
-  //   max: Math.ceil(max / 1) * 1,
-  //   min: min > 0 ? min - (min % 1) : Math.floor(min / 1) * 1,
-  // };
-  return {
-    min: getMin(min),
-    max: getMax(max),
-  };
-};
 
 interface IPositionConfig {
   key?: string;
@@ -779,6 +753,31 @@ export const getMin = (val: number | string) => {
   // return (Number(String(val)[0]) - 1) * pow;
 };
 
+// 处理minmax值至最佳刻度，需要考虑 >10 及 <10 两种场景以及负数的情况
+export const handleMinMax: (params: {
+  min: number;
+  max: number;
+}) => {
+  min: number;
+  max: number;
+} = ({ min, max }) => {
+  // let exLength: number = String(Math.floor(max)).length - 1;
+  // if (max > 10) {
+  //   return {
+  //     max: Math.ceil(max / 10 ** exLength) * 10 ** exLength,
+  //     min: min - (min % 10 ** exLength),
+  //   };
+  // }
+  // return {
+  //   max: Math.ceil(max / 1) * 1,
+  //   min: min > 0 ? min - (min % 1) : Math.floor(min / 1) * 1,
+  // };
+  return {
+    min: getMin(min),
+    max: getMax(max),
+  };
+};
+
 /**
  * 计算获取饼图百分比
  * @param param0
@@ -814,14 +813,14 @@ export function getPercentWithPrecision(
   valueList: (number | '-')[],
   precision: number = 2,
 ): number[] {
-  const sum = valueList.reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0);
+  const sum = valueList.reduce((acc, val) => acc + (Number.isNaN(val) ? 0 : val), 0);
   if (sum === 0) {
     return valueList.map(() => 0);
   }
 
-  const digits = Math.pow(10, precision);
+  const digits = 10 ** precision;
   const votesPerQuota = valueList.map(
-    (val: number | '-') => ((isNaN(val) || val === '-' ? 0 : val) / sum) * digits * 100,
+    (val: number | '-') => ((Number.isNaN(val) || val === '-' ? 0 : val) / sum) * digits * 100,
   );
   const targetSeats = digits * 100;
 
@@ -836,7 +835,7 @@ export function getPercentWithPrecision(
     // Find next largest remainder.
     let max = Number.NEGATIVE_INFINITY;
     let maxId = null;
-    for (let i = 0, len = remainder.length; i < len; ++i) {
+    for (let i = 0, len = remainder.length; i < len; i++) {
       if (remainder[i] > max) {
         max = remainder[i];
         maxId = i;
@@ -844,9 +843,9 @@ export function getPercentWithPrecision(
     }
 
     // Add a vote to max remainder.
-    ++seats[maxId];
+    seats[maxId] += 1;
     remainder[maxId] = 0;
-    ++currentSum;
+    currentSum += 1;
   }
 
   return seats.map((item) => item / digits);

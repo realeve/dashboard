@@ -14,7 +14,7 @@ import { useMeasure } from 'react-use';
 import * as R from 'ramda';
 
 const deepClone = R.clone;
-  const deepMerge = R.merge;
+const deepMerge = R.merge;
 
 const defaultConfig = {
   /**
@@ -61,10 +61,10 @@ function calcRows({ data, rowNum }) {
   data.sort(({ value: a }, { value: b }) => {
     if (a > b) return -1;
     if (a < b) return 1;
-    if (a === b) return 0;
+    return 0;
   });
 
-  const value = data.map(({ value }) => value);
+  const value = data.map(({ value: val }) => val);
 
   const max = Math.max(...value) || 0;
 
@@ -112,28 +112,28 @@ const ScrollRankingBoard = ({ config, className, style }) => {
   function onResize(onresize = false) {
     if (!mergedConfig) return;
 
-    const heights = calcHeights(mergedConfig, onresize);
+    const nextHeight = calcHeights(mergedConfig, onresize);
 
-    if (heights !== undefined) {
-      Object.assign(stateRef.current, { heights });
-      setState((state) => ({ ...state, heights }));
+    if (nextHeight !== undefined) {
+      Object.assign(stateRef.current, { heights: nextHeight });
+      setState((prevState) => ({ ...prevState, heights: nextHeight }));
     }
   }
 
   function calcData() {
-    const mergedConfig = deepMerge(deepClone(defaultConfig, true), config || {});
+    const nextConfig = deepMerge(deepClone(defaultConfig), config || {});
 
-    const rows = calcRows(mergedConfig);
+    const rows = calcRows(nextConfig);
 
-    const heights = calcHeights(mergedConfig);
+    const heights = calcHeights(nextConfig);
 
-    const data = { mergedConfig, rows };
+    const data = { mergedConfig: nextConfig, rows };
 
     heights !== undefined && Object.assign(data, { heights });
 
     Object.assign(stateRef.current, data, { rowsData: rows, animationIndex: 0 });
 
-    setState((state) => ({ ...state, ...data }));
+    setState((prevState) => ({ ...prevState, ...data }));
   }
 
   function calcHeights({ rowNum, data }, onresize = false) {
@@ -147,12 +147,9 @@ const ScrollRankingBoard = ({ config, className, style }) => {
   }
 
   function* animation(start = false) {
-    let {
-      avgHeight,
-      animationIndex,
-      mergedConfig: { waitTime, carousel, rowNum },
-      rowsData,
-    } = stateRef.current;
+    let { animationIndex } = stateRef.current;
+    const { avgHeight, rowsData } = stateRef.current;
+    const { carousel, rowNum, waitTime } = stateRef.current.mergedConfig;
 
     const rowLength = rowsData.length;
 
@@ -160,11 +157,11 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
-    const rows = rowsData.slice(animationIndex);
-    rows.push(...rowsData.slice(0, animationIndex));
+    const animatedRows = rowsData.slice(animationIndex);
+    animatedRows.push(...rowsData.slice(0, animationIndex));
 
-    const heights = new Array(rowLength).fill(avgHeight);
-    setState((state) => ({ ...state, rows, heights }));
+    const prevHeights = new Array(rowLength).fill(avgHeight);
+    setState((prevState) => ({ ...prevState, rows: animatedRows, heights: prevHeights }));
 
     yield new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -173,11 +170,11 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     const back = animationIndex - rowLength;
     if (back >= 0) animationIndex = back;
 
-    const newHeights = [...heights];
+    const newHeights = [...prevHeights];
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
-    setState((state) => ({ ...state, heights: newHeights }));
+    setState((prevState) => ({ ...prevState, heights: newHeights }));
   }
 
   useEffect(() => {
@@ -207,7 +204,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     if (rowNum >= rowLength) return;
 
     return co(loop);
-  }, [config, domRef.current]);
+  }, [calcData, config, domRef.current]);
 
   useEffect(() => {
     if (heightRef.current === 0 && height !== 0) {

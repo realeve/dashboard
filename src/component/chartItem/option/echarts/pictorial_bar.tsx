@@ -90,7 +90,7 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-const getSeries = ({ data, theme = 'rect', size, config }) => {
+const getSeries = ({ data, theme = 'rect', size, config: seriesConfig }) => {
   const bgData = [];
   const itemData = [];
 
@@ -127,9 +127,9 @@ const getSeries = ({ data, theme = 'rect', size, config }) => {
       formatter(params) {
         return data[params.dataIndex].value;
       },
-      color: config.fontColor || '#ffc72b',
-      fontSize: config.fontSize,
-      fontWeight: config.fontWeight,
+      color: seriesConfig.fontColor || '#ffc72b',
+      fontSize: seriesConfig.fontSize,
+      fontWeight: seriesConfig.fontWeight,
     },
   };
   if (theme === 'rect') {
@@ -200,6 +200,8 @@ export interface IPictorialBar {
   y?: number;
   yAxis?: boolean;
   theme?: 'rect' | 'round';
+  axisFontSize?: number;
+  fontSize?: number;
 }
 
 export default ({
@@ -210,7 +212,7 @@ export default ({
   yAxis = false,
   theme = 'rect',
   axisFontSize = 16,
-  ...config
+  ...props
 }: IPictorialBar) => {
   const chartData = data.map((item) => ({ name: item[x], value: item[y] }));
 
@@ -223,7 +225,7 @@ export default ({
     },
     grid: {
       left: '3%',
-      top: 10 + (config.fontSize || 16),
+      top: 10 + (props.fontSize || 16),
       right: '1%',
       bottom: '1%',
       containLabel: true,
@@ -276,6 +278,6 @@ export default ({
         },
       },
     ],
-    series: getSeries({ data: chartData, theme, size, config }),
+    series: getSeries({ data: chartData, theme, size, config: props }),
   };
 };

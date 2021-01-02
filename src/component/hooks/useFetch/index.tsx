@@ -17,7 +17,8 @@ import subscribeVisible from './windowVisible';
  * @example: callback({[key:string]:value}) === value
  * @return value 此处无论key为何值，
  */
-export const callback = <T extends {}>(data: Record<string, any>): T => Object.values(data)[0];
+export const callback = <T extends Record<string, any>>(data: Record<string, any>): T =>
+  Object.values(data)[0];
 
 const { CancelToken } = http;
 
@@ -27,8 +28,19 @@ export interface IFetchProps<T> {
   valid?: (e?: any) => boolean;
   callback?: (data: any) => T;
   interval?: number;
+  pollingWhenHidden?: boolean;
+  refreshOnWindowFocus?: boolean;
+  focusTimespan?: number;
   [key: string]: any;
 }
+export interface IFetchResponse<T> {
+  data: T | null;
+  loading: boolean;
+  error: AxiosError | null;
+  setData: (data: T) => void;
+  reFetch: () => void;
+}
+
 /**
  * React hooks，数据获取
  * @param param axios请求的参数
@@ -46,32 +58,16 @@ export interface IFetchProps<T> {
    @return setData 函数，手工设置data的数据值，如初始化的值
    @return reFetch 函数，手工强制刷新，由于是监听param的值(url,data,params)，在它们不变更的时候也应有刷新的机制
  */
-const useFetch = <T extends {} | void>({
+const useFetch = <T extends Record<string, any> | void>({
   param,
   initData,
-  callback = (e) => e,
+  callback: onFetchData = (e) => e,
   interval = 0,
-  valid = (e?: any) => true,
+  valid = () => true,
   refreshOnWindowFocus = true,
   pollingWhenHidden = false,
   focusTimespan = 5,
-}: IFetchProps<T>): {
-  data: T | null;
-  loading: boolean;
-  error: AxiosError | null;
-  setData: (data: T) => void;
-  reFetch: () => void;
-  pollingWhenHidden?: boolean;
-  refreshOnWindowFocus?: boolean;
-  focusTimespan?: number;
-} => {
-  // 同时未传时，返回空值
-  // 部分场景允许不设置param时，返回默认状态为空的数据
-  // 如，多个tab条的切换点击
-  if (R.isNil(param) || (!param && !initData)) {
-    return { data: null, loading: true, error: null, setData: () => {}, reFetch: () => {} };
-  }
-
+}: IFetchProps<T>): IFetchResponse<T> => {
   // 初始化数据
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -113,11 +109,11 @@ const useFetch = <T extends {} | void>({
 
     // 从后端发起请求
     axios(param as AxiosRequestConfig)
-      .then((data: any) => {
-        if (callback) {
-          setData(callback(data));
+      .then((response: any) => {
+        if (onFetchData) {
+          setData(onFetchData(response));
         } else {
-          setData(data);
+          setData(response);
         }
         setLoading(false);
       })
@@ -137,7 +133,14 @@ const useFetch = <T extends {} | void>({
       source.cancel();
     };
     // 监听axios数据请求中 url、get/post关键参数
-  }, [param.url, JSON.stringify(param.params), JSON.stringify(param.data), initData, innerTrigger]);
+  }, [
+    param.url,
+    JSON.stringify(param.params),
+    JSON.stringify(param.data),
+    initData,
+    innerTrigger,
+    valid,
+  ]);
 
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
@@ -185,4 +188,17 @@ const useFetch = <T extends {} | void>({
   };
 };
 
-export default useFetch;
+const fetchInstance: <T extends Record<string, any> | void>(
+  props: IFetchProps<T>,
+) => IFetchResponse<T> = (props) => {
+  let { param, initData } = props;
+  // 同时未传时，返回空值
+  // 部分场景允许不设置param时，返回默认状态为空的数据
+  // 如，多个tab条的切换点击
+  if (R.isNil(param) || (!param && !initData)) {
+    return { data: null, loading: true, error: null, setData: () => {}, reFetch: () => {} };
+  }
+  return useFetch(props);
+};
+
+export default fetchInstance;

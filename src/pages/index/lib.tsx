@@ -73,7 +73,7 @@ export const getConfig = async (url) => {
 };
 
 // 获取缩放系数
-let getScale = (page, resizeType: EResizeType) => {
+const getScale = (page, resizeType: EResizeType) => {
   const { width, height } = page;
   const { innerWidth, innerHeight } = window;
   let scaleX = innerWidth / width;
