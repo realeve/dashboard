@@ -10,7 +10,7 @@ export default function PerformanceStat({ style }) {
 
   useEffect(() => {
     if (!isReady()) {
-      return;
+      return false;
     }
     const stat = new Stats(ref.current);
     setStates(stat);
@@ -20,9 +20,7 @@ export default function PerformanceStat({ style }) {
       requestAnimationFrame(loop);
     });
 
-    return () => {
-      window.cancelAnimationFrame(requestId);
-    };
+    return () => window.cancelAnimationFrame(requestId);
   }, [isReady()]);
 
   useEffect(() => {

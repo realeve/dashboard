@@ -1,16 +1,3 @@
-// module.exports = {
-// extends: [
-// 'eslint-config-umi',
-// 'plugin:react-hooks/recommended',
-// require.resolve('@umijs/fabric/dist/eslint'),
-// ],
-// plugins: ['react-hooks'],
-// rules: {
-//   'react-hooks/rules-of-hooks': 'error',
-//   'react-hooks/exhaustive-deps': 'warn',
-// },
-// };
-
 // 0 = off, 1 = warn, 2 = error
 module.exports = {
   plugins: ['react-hooks'],
@@ -40,13 +27,18 @@ module.exports = {
     'no-param-reassign': ['off', { props: true, ignorePropertyModificationsFor: ['current'] }],
 
     // 允许  a && b这种形式
-    '@typescript-eslint/no-unused-expressions': 'off',
+    // https://cloud.tencent.com/developer/section/1135777
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true },
+    ],
 
     // 允许空函数，如catch
     'no-empty': ['error', { allowEmptyCatch: true }],
 
     // 必须返回内容，在clean effect时无法允许
-    'consistent-return': 'off',
+    // https://cloud.tencent.com/developer/section/1135600
+    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
 
     // 允许使用this
     '@typescript-eslint/no-invalid-this': 'off',

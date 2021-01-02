@@ -453,7 +453,7 @@ ILayerProps) => {
                           }
 
                           // 需处理分组的逻辑，存在互斥；
-                          if (item.key == GROUP_COMPONENT_KEY) {
+                          if (item.key === GROUP_COMPONENT_KEY) {
                             const childrenPanel = panel
                               .filter((panelItem) => panelItem.group === item.id)
                               .map((panelItem) => panelItem.id);

@@ -189,10 +189,9 @@ export default function useInit<T extends Base, U extends Options>(
   }, [config]);
 
   useEffect(() => {
-    if (!container.current) {
-      return () => null;
+    if (container.current) {
+      init();
     }
-    init();
   }, []);
 
   return {

@@ -128,6 +128,7 @@ export default class Guides
           datas.target = target;
         }
         this.onDragStart(e);
+        return true;
       },
       drag: this.onDrag,
       dragend: this.onDragEnd,

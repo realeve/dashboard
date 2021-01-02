@@ -117,7 +117,7 @@ export const getThumbnail = async (
           imageType,
           quality,
         );
-        return;
+        return null;
       }
 
       return canvas.toDataURL(imageType, quality);

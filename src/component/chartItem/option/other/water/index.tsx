@@ -18,7 +18,7 @@ export default ({ option: props }) => {
   useEffect(() => {
     const dom = ref.current;
     if (!dom) {
-      return;
+      return false;
     }
     const chartInstance = echarts.init(dom, { renderer: 'canvas' });
     setChart(chartInstance);

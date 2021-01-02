@@ -341,7 +341,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (rowNum >= rowLength) return;
+    if (rowNum >= rowLength) return false;
 
     return co(loop);
   }, [config, domRef.current]);

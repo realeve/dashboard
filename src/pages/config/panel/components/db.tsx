@@ -39,7 +39,7 @@ const handleList = (list: IComponentItem[]) => {
   };
   let res = R.clone(list).map((item) => {
     let num = 0;
-    if (item.list[0] && item.list[0].title != '全部') {
+    if (item.list[0] && item.list[0].title !== '全部') {
       num = item.list.length;
       all.list = [...all.list, ...item.list];
     }

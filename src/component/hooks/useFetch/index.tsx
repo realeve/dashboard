@@ -87,12 +87,12 @@ const useAxios = <T extends Record<string, any> | void>({
     // 如，多个tab条的切换点击
     if (R.isNil(param) || (!param && !initData)) {
       setData(null);
-      return;
+      return false;
     }
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
       setData(null);
-      return;
+      return false;
     }
 
     setLoading(true);
@@ -107,7 +107,7 @@ const useAxios = <T extends Record<string, any> | void>({
         setData(v);
         setLoading(false);
       });
-      return;
+      return false;
     }
 
     const source = CancelToken.source();
@@ -136,9 +136,7 @@ const useAxios = <T extends Record<string, any> | void>({
       });
 
     // 路由变更时，取消axios
-    return () => {
-      source.cancel();
-    };
+    return () => source.cancel();
     // 监听axios数据请求中 url、get/post关键参数
   }, [
     param.url,

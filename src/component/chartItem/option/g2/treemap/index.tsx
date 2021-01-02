@@ -190,6 +190,7 @@ export const onMount = (
         if (obj[x] !== 'root') {
           return obj[x];
         }
+        return null;
       },
     });
   chart.interaction('element-active');

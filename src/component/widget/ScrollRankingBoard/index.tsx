@@ -144,6 +144,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     if (!onresize) {
       return new Array(data.length).fill(avgHeight);
     }
+    return false;
   }
 
   function* animation(start = false) {
@@ -201,7 +202,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (rowNum >= rowLength) return;
+    if (rowNum >= rowLength) return false;
 
     return co(loop);
   }, [calcData, config, domRef.current]);

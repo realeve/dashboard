@@ -17,7 +17,7 @@ const useFullscreen = (on: boolean, onClose: (error?: Error) => void = noop): bo
 
   useIsomorphicLayoutEffect(() => {
     if (!on) {
-      return;
+      return false;
     }
 
     const onChange = () => {

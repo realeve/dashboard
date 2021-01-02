@@ -709,7 +709,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       const curIds = this.getEditorIds();
       if (curIds.includes(config.id)) {
         console.log('当前id', config.id, '已存在，添加失败');
-        return;
+        return false;
       }
     }
     const name = config.name || id;

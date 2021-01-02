@@ -122,7 +122,7 @@ export default ({
     const container: HTMLElement = domRef.current;
 
     if (!container || width * height === 0) {
-      return;
+      return false;
     }
 
     let camera = null;
@@ -213,9 +213,7 @@ export default ({
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
       },
-      reset: () => {
-        container.childNodes[0] && container.removeChild(container.childNodes[0]);
-      },
+      reset: () => container.childNodes[0] && container.removeChild(container.childNodes[0]),
     };
   };
 

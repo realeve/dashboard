@@ -222,7 +222,9 @@ export const onMount = (
   });
 
   const color = getColors(theme, needRerverse);
-  transpose && chart.coordinate().transpose();
+  if (transpose) {
+    chart.coordinate().transpose();
+  }
 
   chart.facet('list', {
     fields: [legend],

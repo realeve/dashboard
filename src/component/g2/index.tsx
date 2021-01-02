@@ -12,7 +12,7 @@ export default ({
   const [chart, setChart] = useState(null);
   useEffect(() => {
     if (!ref) {
-      return;
+      return false;
     }
 
     const _chart: Chart = new Chart({

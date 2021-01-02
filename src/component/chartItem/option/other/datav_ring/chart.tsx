@@ -24,7 +24,7 @@ export default ({
   const chartInstanceofRef = useRef(null);
 
   useEffect(() => {
-    chartInstanceofRef.current || (chartInstanceofRef.current = new Chart(chartRef.current));
+    !chartInstanceofRef.current || (chartInstanceofRef.current = new Chart(chartRef.current));
 
     chartInstanceofRef.current.setOption(option || {}, true);
   }, [option]);

@@ -48,6 +48,7 @@ export default abstract class Icon extends React.PureComponent<{
             return false;
           }
           this.onClick();
+          return true;
         },
         (this.constructor as any).title || (this.constructor as any).id,
       );

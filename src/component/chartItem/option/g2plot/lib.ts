@@ -72,6 +72,7 @@ export const sort = (a, b) => {
   if (monthOrWeekKeys.includes(a)) {
     return dict[a] - dict[b];
   }
+  return 0;
 };
 
 // export const handlePercent = (annotations, isPercent = false) => {

@@ -39,12 +39,10 @@ const useMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> 
   );
 
   useIsomorphicLayoutEffect(() => {
-    if (!element) return;
+    if (!element) return false;
     observer.observe(element);
     ref.current = element;
-    return () => {
-      return observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [element]);
 
   return [ref, rect];

@@ -47,12 +47,12 @@ export default class KeyManager {
   private addCallback(
     type: string,
     keys: string[],
-    callback: (e: any) => any,
+    callback: (e: any) => boolean,
     description?: string,
   ) {
     // 过滤key
     if (this.keylist.filter((item) => item[0].join(',') === keys.join(',')).length > 0) {
-      return;
+      return false;
     }
     if (description) {
       this.keylist.push([keys, description]);

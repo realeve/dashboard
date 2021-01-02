@@ -312,7 +312,7 @@ export default class Viewport extends React.PureComponent<{
       if (!isChild) {
         const parentInfo = this.getInfo(info.scopeId!);
         if (!parentInfo) {
-          return;
+          return null;
         }
         const parentChildren = parentInfo.children!;
         const index = parentChildren.indexOf(info);
