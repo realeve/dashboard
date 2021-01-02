@@ -53,7 +53,7 @@ module.exports = {
     'func-names': ['warn', 'as-needed'],
 
     // ts 中允许使用this
-    '@typescript-eslint/no-this-alias': 0,
+    '@typescript-eslint/no-this-alias': 'off',
 
     // 允许使用 a = b =2
     'no-multi-assign': 'off',
