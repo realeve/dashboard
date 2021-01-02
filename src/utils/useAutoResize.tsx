@@ -14,19 +14,21 @@ export function debounce(fn, delay = 600, runFirstFn = true) {
     // 清除定时器
     clearTimeout(timer);
     if (runFirstFn) {
+      // eslint-disable-next-line @typescript-eslint/no-invalid-this
       fn.apply(this, rest);
       runFirstFn = false;
       return;
     }
 
     // 设置定时器
+    // eslint-disable-next-line @typescript-eslint/no-invalid-this
     timer = setTimeout(fn.bind(this, ...rest), delay);
   };
 }
 
 export function observerDomResize(dom, callback) {
   const MutationObserver =
-    window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    window.MutationObserver || window?.WebKitMutationObserver || window?.MozMutationObserver;
 
   const observer = new MutationObserver(callback);
 

@@ -58,6 +58,7 @@ export interface Options {
 
 function getAllNodes() {
   const nodes: any[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-invalid-this
   const root = this;
   if (root && root.each) {
     // d3-hierarchy

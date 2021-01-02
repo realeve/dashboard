@@ -8,6 +8,7 @@ import placements from './placements';
 import Color from './helpers/color';
 
 function refFn(field, component) {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-this
   this[field] = component;
 }
 

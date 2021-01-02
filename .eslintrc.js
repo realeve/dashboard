@@ -1,4 +1,3 @@
-// 0 = off, 1 = warn, 2 = error
 module.exports = {
   plugins: ['react-hooks'],
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
@@ -6,9 +5,6 @@ module.exports = {
     // hooks
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-
-    // ===
-    eqeqeq: 'warn',
 
     // 变量名允许下划线
     'no-underscore-dangle': 'off',
@@ -39,9 +35,6 @@ module.exports = {
     // 必须返回内容，在clean effect时无法允许
     // https://cloud.tencent.com/developer/section/1135600
     'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
-
-    // 允许使用this
-    '@typescript-eslint/no-invalid-this': 'off',
 
     // import后换行
     'import/newline-after-import': 'off',
@@ -89,3 +82,5 @@ module.exports = {
 // /* eslint-disable */
 // consle.log("foo");
 // consle.log("bar");
+
+// 0 = off, 1 = warn, 2 = error
