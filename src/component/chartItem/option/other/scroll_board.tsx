@@ -163,7 +163,7 @@ export default ({
         style={style}
       />
     ),
-    [JSON.stringify(props), data?.hash],
+    [JSON.stringify(props), waitTime, style, data?.hash],
   );
 
 // 使用 PureComponent实现

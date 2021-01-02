@@ -716,9 +716,22 @@ export const getAntThemePanel: () => IChartConfig = () => ({
   }),
 });
 
-export const getBarMax = (data, y: number | string = 1) => {
-  const item = R.last(data)[y];
-  return getMax(item);
+/**
+ * 获取指定值的最低轴长度,用于根据数值手工计算Y轴最小值用于渲染
+ * @param val 数值
+ */
+export const getMin = (val: number | string) => {
+  val = Number(val);
+  if (val < 0) {
+    // eslint-disable-next-line
+    return -getMax(-val);
+  }
+  if (val < 10) {
+    return 0;
+  }
+  return val - (val % quantity(val));
+  // let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
+  // return (Number(String(val)[0]) - 1) * pow;
 };
 
 /**
@@ -736,23 +749,10 @@ export const getMax = (val: number | string) => {
   return nice(val);
 };
 
-/**
- * 获取指定值的最低轴长度,用于根据数值手工计算Y轴最小值用于渲染
- * @param val 数值
- */
-export const getMin = (val: number | string) => {
-  val = Number(val);
-  if (val < 0) {
-    return -getMax(-val);
-  }
-  if (val < 10) {
-    return 0;
-  }
-  return val - (val % quantity(val));
-  // let pow = 10 ** Math.floor(Math.log(val) / Math.log(10));
-  // return (Number(String(val)[0]) - 1) * pow;
+export const getBarMax = (data, y: number | string = 1) => {
+  const item = R.last(data)[y];
+  return getMax(item);
 };
-
 // 处理minmax值至最佳刻度，需要考虑 >10 及 <10 两种场景以及负数的情况
 export const handleMinMax: (params: {
   min: number;

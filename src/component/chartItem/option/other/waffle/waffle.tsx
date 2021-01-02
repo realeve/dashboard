@@ -185,6 +185,7 @@ const WaffleChart = ({
   style,
 }) => {
   // 在移动时，data将重新计算，此处可使用useMemo
+  /* eslint-disable */
   const { data, warnNum } = useMemo(() => handleData({ x, y, legend, cart, data: _data, gzMode }), [
     x,
     y,
@@ -193,6 +194,7 @@ const WaffleChart = ({
     _data.hash,
     gzMode,
   ]);
+  /* eslint-disable */
 
   const containerStyle: React.CSSProperties =
     direction === 'vertical'

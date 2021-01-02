@@ -105,11 +105,9 @@ export function getScenaAttrs(el: HTMLElement | SVGElement) {
 
   for (let i = 0; i < length; ++i) {
     const { name, value } = attributes[i];
-
-    if (name === DATA_SCENA_ELEMENT_ID || name === 'style') {
-      continue;
+    if (!['style', DATA_SCENA_ELEMENT_ID].includes(name)) {
+      attrs[name] = value;
     }
-    attrs[name] = value;
   }
 
   return attrs;

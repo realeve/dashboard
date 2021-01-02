@@ -13,7 +13,7 @@ export type ICountUp = {
   style?: React.CSSProperties;
   theme?: 'transparent' | 'theme1' | 'theme2';
   [key: string]: any;
-} & CountUpProps
+} & CountUpProps;
 
 const numId = {
   0: 0,
@@ -53,7 +53,7 @@ export default ({
       return;
     }
     setVal(value.toFixed(decimals));
-  }, [value]);
+  }, [value, decimals]);
 
   useEffect(() => {
     const timeId = setTimeout(() => {

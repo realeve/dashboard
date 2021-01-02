@@ -123,15 +123,15 @@ const ScrollRankingBoard = ({ config, className, style }) => {
   function calcData() {
     const nextConfig = deepMerge(deepClone(defaultConfig), config || {});
 
-    const rows = calcRows(nextConfig);
+    const nextRow = calcRows(nextConfig);
 
-    const heights = calcHeights(nextConfig);
+    const nextHeight = calcHeights(nextConfig);
 
-    const data = { mergedConfig: nextConfig, rows };
+    const data = { mergedConfig: nextConfig, rows: nextRow };
 
-    heights !== undefined && Object.assign(data, { heights });
+    nextHeight !== undefined && Object.assign(data, { heights: nextHeight });
 
-    Object.assign(stateRef.current, data, { rowsData: rows, animationIndex: 0 });
+    Object.assign(stateRef.current, data, { rowsData: nextRow, animationIndex: 0 });
 
     setState((prevState) => ({ ...prevState, ...data }));
   }

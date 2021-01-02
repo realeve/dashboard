@@ -98,7 +98,7 @@ export const ImgSelector = ({
 // 组件的通用样式设置
 export type IComponentConfig = {
   showTitle?: boolean;
-  onChange: (e: Object) => void;
+  onChange: (e: Record<string, any>) => void;
   defaultKey?: string;
   isPage?: boolean;
   page?: IPage;

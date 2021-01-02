@@ -207,15 +207,17 @@ ILayerProps) => {
           moveLayerItem(idx, idx + 1);
         }
         break;
-      case MENU_ACTIONS.LOCK:
+      case MENU_ACTIONS.LOCK: {
         const lock = item.lock || false;
         updatePanelItem(item.id, { lock: !lock }, item.key === GROUP_COMPONENT_KEY);
         break;
-      case MENU_ACTIONS.HIDE:
-        const hide = item.hide || false;
-        updatePanelItem(item.id, { hide: !hide }, item.key === GROUP_COMPONENT_KEY);
+      }
+      case MENU_ACTIONS.HIDE: {
+        const hideStatus = item.hide || false;
+        updatePanelItem(item.id, { hide: !hideStatus }, item.key === GROUP_COMPONENT_KEY);
         break;
-      case MENU_ACTIONS.COPY:
+      }
+      case MENU_ACTIONS.COPY: {
         const prevIndex = R.findIndex(R.propEq('id', index))(panel);
         dispatch({
           type: 'common/copyPanel',
@@ -224,6 +226,7 @@ ILayerProps) => {
           },
         });
         break;
+      }
       case MENU_ACTIONS.REMOVE:
         // 全局状态在父组件中更新；
         onRemove?.([index]);
@@ -304,6 +307,7 @@ ILayerProps) => {
 
       case MENU_ACTIONS.BOTTOM:
       case MENU_ACTIONS.MOVE_NEXT:
+      default:
         if (selected.length === 0) {
           return true;
         }

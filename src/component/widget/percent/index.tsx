@@ -17,7 +17,7 @@ export default ({ option }) => {
       start: val.end,
       end: option.value,
     });
-  }, [option.value]);
+  }, [option.value, val.end]);
 
   return (
     <div className={styles.pie}>

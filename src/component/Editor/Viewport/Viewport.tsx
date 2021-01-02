@@ -369,7 +369,7 @@ export default class Viewport extends React.PureComponent<{
 
       for (let i = 0; i < length; ++i) {
         if (a[i] === b[i]) {
-          continue;
+          continue; // eslint-disable-line
         }
         return a[i] - b[i];
       }

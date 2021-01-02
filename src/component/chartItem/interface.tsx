@@ -24,7 +24,7 @@ export interface IChartConfig {
   [key: string]: any; // 其余配置将全部注入到对应的组件中，如在input组件中可自行设置  min,max,step等
 }
 
-export type TChartMockData = (string | number)[] | {};
+export type TChartMockData = (string | number)[] | Record<string, any>;
 // 默认数据定义
 export interface IChartMock {
   data: TChartMockData[];

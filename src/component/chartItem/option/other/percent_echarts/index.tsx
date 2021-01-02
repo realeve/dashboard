@@ -129,7 +129,7 @@ export default ({
       start: val.end,
       end: data[0][x],
     });
-  }, [data]);
+  }, [data[0], x, val.end]);
 
   return (
     <div className={styles.pie_charts}>

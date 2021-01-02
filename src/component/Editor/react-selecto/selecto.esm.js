@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 Copyright (c) 2020 Daybrush
 name: selecto
@@ -31,16 +32,16 @@ and limitations under the License.
 ***************************************************************************** */
 
 /* global Reflect, Promise */
-var extendStatics = function(d, b) {
+var extendStatics = function (d, b) {
   extendStatics =
     Object.setPrototypeOf ||
     ({
       __proto__: [],
     } instanceof Array &&
-      function(d, b) {
+      function (d, b) {
         d.__proto__ = b;
       }) ||
-    function(d, b) {
+    function (d, b) {
       for (const p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     };
 
@@ -56,7 +57,7 @@ function __extends(d, b) {
 
   d.prototype = b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
-var __assign = function() {
+var __assign = function () {
   __assign =
     Object.assign ||
     function __assign(t) {
@@ -85,9 +86,9 @@ function __rest(s, e) {
 }
 function __decorate(decorators, target, key, desc) {
   const c = arguments.length;
-    let r =
-      c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc;
-    let d;
+  let r =
+    c < 3 ? target : desc === null ? (desc = Object.getOwnPropertyDescriptor(target, key)) : desc;
+  let d;
   if (typeof Reflect === 'object' && typeof Reflect.decorate === 'function')
     r = Reflect.decorate(decorators, target, key, desc);
   else
@@ -111,19 +112,18 @@ function getClient(e) {
       clientX: touch.clientX,
       clientY: touch.clientY,
     };
-  } 
-    return {
-      clientX: e.clientX,
-      clientY: e.clientY,
-    };
-  
+  }
+  return {
+    clientX: e.clientX,
+    clientY: e.clientY,
+  };
 }
 function createElement(jsx, prevTarget, container) {
-  const {tag} = jsx;
-    const {children} = jsx;
-    const {attributes} = jsx;
-    const {className} = jsx;
-    const {style} = jsx;
+  const { tag } = jsx;
+  const { children } = jsx;
+  const { attributes } = jsx;
+  const { className } = jsx;
+  const { style } = jsx;
   const el = prevTarget || document.createElement(tag);
 
   for (var name in attributes) {
@@ -131,12 +131,12 @@ function createElement(jsx, prevTarget, container) {
   }
 
   const elChildren = el.children;
-  children.forEach(function(child, i) {
+  children.forEach(function (child, i) {
     createElement(child, elChildren[i], el);
   });
 
   if (className) {
-    className.split(' ').forEach(function(name) {
+    className.split(' ').forEach(function (name) {
       if (!hasClass(el, name)) {
         addClass(el, name);
       }
@@ -165,11 +165,11 @@ function h(tag, attrs) {
   }
 
   const _a = attrs || {};
-    const _b = _a.className;
-    const className = _b === void 0 ? '' : _b;
-    const _c = _a.style;
-    const style = _c === void 0 ? {} : _c;
-    const attributes = __rest(_a, ['className', 'style']);
+  const _b = _a.className;
+  const className = _b === void 0 ? '' : _b;
+  const _c = _a.style;
+  const style = _c === void 0 ? {} : _c;
+  const attributes = __rest(_a, ['className', 'style']);
 
   return {
     tag,
@@ -186,12 +186,12 @@ function diffValue(prev, cur, func) {
 }
 function getRect(e) {
   const _a = e.distX;
-    const distX = _a === void 0 ? 0 : _a;
-    const _b = e.distY;
-    const distY = _b === void 0 ? 0 : _b;
-    const {datas} = e;
-  const {startX} = datas;
-    const {startY} = datas;
+  const distX = _a === void 0 ? 0 : _a;
+  const _b = e.distY;
+  const distY = _b === void 0 ? 0 : _b;
+  const { datas } = e;
+  const { startX } = datas;
+  const { startY } = datas;
   const tx = Math.min(0, distX);
   const ty = Math.min(0, distY);
   const width = Math.abs(distX);
@@ -215,7 +215,7 @@ const injector = styled(
  * @memberof Selecto
  */
 
-const CLASS_NAME = `selecto-selection ${  injector.className}`;
+const CLASS_NAME = `selecto-selection ${injector.className}`;
 const PROPERTIES = [
   'selectableTargets',
   'selectByClick',
@@ -286,7 +286,7 @@ const METHODS = ['clickTarget', 'setSelectedTargets', 'triggerDragStart'];
 
 const Selecto =
   /* #__PURE__ */
-  (function(_super) {
+  (function (_super) {
     __extends(Selecto, _super);
     /**
      *
@@ -303,24 +303,24 @@ const Selecto =
       _this.differ = new ChildrenDiffer();
       _this.dragScroll = new DragScroll();
 
-      _this.onDragStart = function(e, clickedTarget) {
-        const {datas} = e;
-          const {clientX} = e;
-          const {clientY} = e;
-          const {inputEvent} = e;
+      _this.onDragStart = function (e, clickedTarget) {
+        const { datas } = e;
+        const { clientX } = e;
+        const { clientY } = e;
+        const { inputEvent } = e;
         const _a = _this.options;
-          const {continueSelect} = _a;
-          const {selectFromInside} = _a;
-          const {selectByClick} = _a;
+        const { continueSelect } = _a;
+        const { selectFromInside } = _a;
+        const { selectByClick } = _a;
 
         const selectableTargets = _this.getSelectableTargets();
 
-        const selectableRects = selectableTargets.map(function(target) {
+        const selectableRects = selectableTargets.map(function (target) {
           const rect = target.getBoundingClientRect();
-          const {left} = rect;
-            const {top} = rect;
-            const {width} = rect;
-            const {height} = rect;
+          const { left } = rect;
+          const { top } = rect;
+          const { width } = rect;
+          const { height } = rect;
           return {
             left,
             top,
@@ -359,7 +359,7 @@ const Selecto =
           return false;
         }
 
-        const {type} = inputEvent;
+        const { type } = inputEvent;
         const isTrusted = type === 'mousedown' || type === 'touchstart';
         /**
          * When the drag starts, the dragStart event is called.
@@ -408,34 +408,34 @@ const Selecto =
         datas.startY = clientY;
         datas.selectedTargets = firstPassedTargets;
 
-        const {x} = _this.rectOffset;
-          const {y} = _this.rectOffset;
+        const { x } = _this.rectOffset;
+        const { y } = _this.rectOffset;
 
-        _this.target.style.cssText +=
-          `left:0px;top:0px;transform: translate(${  clientX - x  }px, ${  clientY - y  }px)`;
+        _this.target.style.cssText += `left:0px;top:0px;transform: translate(${clientX - x}px, ${
+          clientY - y
+        }px)`;
 
         if (isPreventSelect && selectByClick) {
           _this.onDragEnd(e);
 
           inputEvent.preventDefault();
           return false;
-        } 
-          if (type === 'touchstart') {
-            inputEvent.preventDefault();
-          }
+        }
+        if (type === 'touchstart') {
+          inputEvent.preventDefault();
+        }
 
-          const {scrollOptions} = _this.options;
+        const { scrollOptions } = _this.options;
 
-          if (scrollOptions && scrollOptions.container) {
-            _this.dragScroll.dragStart(e, scrollOptions);
-          }
+        if (scrollOptions && scrollOptions.container) {
+          _this.dragScroll.dragStart(e, scrollOptions);
+        }
 
-          return true;
-        
+        return true;
       };
 
-      _this.onDrag = function(e) {
-        const {scrollOptions} = _this.options;
+      _this.onDrag = function (e) {
+        const { scrollOptions } = _this.options;
 
         if (scrollOptions && scrollOptions.container) {
           if (_this.dragScroll.drag(e, scrollOptions)) {
@@ -446,25 +446,22 @@ const Selecto =
         _this.check(e);
       };
 
-      _this.onDragEnd = function(e) {
-        const {datas} = e;
+      _this.onDragEnd = function (e) {
+        const { datas } = e;
         const rect = getRect(e);
 
         _this.dragScroll.dragEnd();
 
         _this.target.style.cssText += 'display: none;';
 
-        _this.trigger(
-          'dragEnd',
-          {...e, rect,},
-        );
+        _this.trigger('dragEnd', { ...e, rect });
 
         _this.selectEnd(datas.startSelectedTargets, datas.selectedTargets, rect, e);
 
         _this.selectedTargets = datas.selectedTargets;
       };
 
-      _this.onKeyDown = function(e) {
+      _this.onKeyDown = function (e) {
         if (!_this.sameCombiKey(e)) {
           return;
         }
@@ -500,7 +497,7 @@ const Selecto =
         _this.trigger('keydown', {});
       };
 
-      _this.onKeyUp = function(e) {
+      _this.onKeyUp = function (e) {
         if (!_this.sameCombiKey(e)) {
           return;
         }
@@ -536,18 +533,18 @@ const Selecto =
         _this.trigger('keyup', {});
       };
 
-      _this.onBlur = function() {
+      _this.onBlur = function () {
         if (_this.toggleContinueSelect && _this.continueSelect) {
           _this.trigger('keyup', {});
         }
       };
 
-      _this.onDocumentSelectStart = function(e) {
+      _this.onDocumentSelectStart = function (e) {
         if (!_this.dragger.isFlag()) {
           return;
         }
 
-        let {dragContainer} = _this;
+        let { dragContainer } = _this;
 
         if (dragContainer === window) {
           dragContainer = document.documentElement;
@@ -555,8 +552,8 @@ const Selecto =
 
         const containers =
           dragContainer instanceof Element ? [dragContainer] : [].slice.call(dragContainer);
-        const {target} = e;
-        containers.some(function(container) {
+        const { target } = e;
+        containers.some(function (container) {
           if (container === target || container.contains(target)) {
             e.preventDefault();
             return true;
@@ -568,19 +565,19 @@ const Selecto =
       _this.container = options.container;
       _this.options = {
         target: null,
-          container: null,
-          dragContainer: null,
-          selectableTargets: [],
-          selectByClick: true,
-          selectFromInside: true,
-          hitRate: 100,
-          continueSelect: false,
-          toggleContinueSelect: null,
-          keyContainer: null,
-          scrollOptions: undefined,
-          checkInput: false,
-          preventDefault: false,
-          cspNonce: '',
+        container: null,
+        dragContainer: null,
+        selectableTargets: [],
+        selectByClick: true,
+        selectFromInside: true,
+        hitRate: 100,
+        continueSelect: false,
+        toggleContinueSelect: null,
+        keyContainer: null,
+        scrollOptions: undefined,
+        checkInput: false,
+        preventDefault: false,
+        cspNonce: '',
         ...options,
       };
 
@@ -598,39 +595,39 @@ const Selecto =
 
     const __proto = Selecto.prototype;
 
-    __proto.setSelectedTargets = function(selectedTargets) {
+    __proto.setSelectedTargets = function (selectedTargets) {
       this.selectedTargets = selectedTargets;
       this.differ = new ChildrenDiffer(selectedTargets);
       return this;
     };
 
-    __proto.setKeyContainer = function(keyContainer) {
+    __proto.setKeyContainer = function (keyContainer) {
       const _this = this;
 
-      const {options} = this;
-      diffValue(options.keyContainer, keyContainer, function() {
+      const { options } = this;
+      diffValue(options.keyContainer, keyContainer, function () {
         options.keyContainer = keyContainer;
 
         _this.setKeyController();
       });
     };
 
-    __proto.setToggleContinueSelect = function(toggleContinueSelect) {
+    __proto.setToggleContinueSelect = function (toggleContinueSelect) {
       const _this = this;
 
-      const {options} = this;
-      diffValue(options.toggleContinueSelect, toggleContinueSelect, function() {
+      const { options } = this;
+      diffValue(options.toggleContinueSelect, toggleContinueSelect, function () {
         options.toggleContinueSelect = toggleContinueSelect;
 
         _this.setKeyEvent();
       });
     };
 
-    __proto.setPreventDefault = function(value) {
+    __proto.setPreventDefault = function (value) {
       this.dragger.options.preventDefault = value;
     };
 
-    __proto.setCheckInput = function(value) {
+    __proto.setCheckInput = function (value) {
       this.dragger.options.checkInput = value;
     };
     /**
@@ -646,7 +643,7 @@ const Selecto =
      * });
      */
 
-    __proto.triggerDragStart = function(e) {
+    __proto.triggerDragStart = function (e) {
       this.dragger.triggerDragStart(e);
       return this;
     };
@@ -654,7 +651,7 @@ const Selecto =
      * Destroy elements, properties, and events.
      */
 
-    __proto.destroy = function() {
+    __proto.destroy = function () {
       this.off();
       this.keycon && this.keycon.destroy();
       this.dragger.unset();
@@ -673,10 +670,10 @@ const Selecto =
      * @params - Specify the clicked target directly.
      */
 
-    __proto.clickTarget = function(e, clickedTarget) {
+    __proto.clickTarget = function (e, clickedTarget) {
       const _a = getClient(e);
-        const {clientX} = _a;
-        const {clientY} = _a;
+      const { clientX } = _a;
+      const { clientY } = _a;
 
       const dragEvent = {
         datas: {},
@@ -692,10 +689,10 @@ const Selecto =
       return this;
     };
 
-    __proto.setKeyController = function() {
+    __proto.setKeyController = function () {
       const _a = this.options;
-        const {keyContainer} = _a;
-        const {toggleContinueSelect} = _a;
+      const { keyContainer } = _a;
+      const { toggleContinueSelect } = _a;
 
       if (this.keycon) {
         this.keycon.destroy();
@@ -704,15 +701,12 @@ const Selecto =
 
       if (toggleContinueSelect) {
         this.keycon = new KeyController(keyContainer || window);
-        this.keycon
-          .keydown(this.onKeyDown)
-          .keyup(this.onKeyUp)
-          .on('blur', this.onBlur);
+        this.keycon.keydown(this.onKeyDown).keyup(this.onKeyUp).on('blur', this.onBlur);
       }
     };
 
-    __proto.setKeyEvent = function() {
-      const {toggleContinueSelect} = this.options;
+    __proto.setKeyEvent = function () {
+      const { toggleContinueSelect } = this.options;
 
       if (!toggleContinueSelect || this.keycon) {
         return;
@@ -721,7 +715,7 @@ const Selecto =
       this.setKeyController();
     };
 
-    __proto.initElement = function() {
+    __proto.initElement = function () {
       this.target = createElement(
         h('div', {
           className: CLASS_NAME,
@@ -729,11 +723,11 @@ const Selecto =
         this.target,
         this.container,
       );
-      const {target} = this;
+      const { target } = this;
       const _a = this.options;
-        const {dragContainer} = _a;
-        const {checkInput} = _a;
-        const {preventDefault} = _a;
+      const { dragContainer } = _a;
+      const { checkInput } = _a;
+      const { preventDefault } = _a;
       this.dragContainer =
         typeof dragContainer === 'string'
           ? [].slice.call(document.querySelectorAll(dragContainer))
@@ -752,20 +746,20 @@ const Selecto =
       });
     };
 
-    __proto.hitTest = function(selectRect, clientX, clientY, targets, rects) {
+    __proto.hitTest = function (selectRect, clientX, clientY, targets, rects) {
       const _a = this.options;
-        const {hitRate} = _a;
-        const {selectByClick} = _a;
-      const {left} = selectRect;
-        const {top} = selectRect;
-        const {right} = selectRect;
-        const {bottom} = selectRect;
+      const { hitRate } = _a;
+      const { selectByClick } = _a;
+      const { left } = selectRect;
+      const { top } = selectRect;
+      const { right } = selectRect;
+      const { bottom } = selectRect;
       const passedTargets = [];
-      rects.forEach(function(rect, i) {
+      rects.forEach(function (rect, i) {
         const rectLeft = rect.left;
-          const rectTop = rect.top;
-          const rectRight = rect.right;
-          const rectBottom = rect.bottom;
+        const rectTop = rect.top;
+        const rectRight = rect.right;
+        const rectBottom = rect.bottom;
         const isStart =
           rectLeft <= clientX &&
           clientX <= rectRight &&
@@ -786,7 +780,9 @@ const Selecto =
           return;
         }
 
-        const rate = Math.round((((testRight - testLeft) * (testBottom - testTop)) / rectSize) * 100);
+        const rate = Math.round(
+          (((testRight - testLeft) * (testBottom - testTop)) / rectSize) * 100,
+        );
 
         if (rate >= hitRate) {
           passedTargets.push(targets[i]);
@@ -795,27 +791,27 @@ const Selecto =
       return passedTargets;
     };
 
-    __proto.initDragScroll = function() {
+    __proto.initDragScroll = function () {
       const _this = this;
 
       this.dragScroll
-        .on('scroll', function(_a) {
-          const {container} = _a;
-            const {direction} = _a;
+        .on('scroll', function (_a) {
+          const { container } = _a;
+          const { direction } = _a;
 
           _this.trigger('scroll', {
             container,
             direction,
           });
         })
-        .on('move', function(_a) {
-          const {offsetX} = _a;
-            const {offsetY} = _a;
-            const {inputEvent} = _a;
-          const {datas} = inputEvent;
+        .on('move', function (_a) {
+          const { offsetX } = _a;
+          const { offsetY } = _a;
+          const { inputEvent } = _a;
+          const { datas } = inputEvent;
           datas.startX -= offsetX;
           datas.startY -= offsetY;
-          datas.selectableRects.forEach(function(rect) {
+          datas.selectableRects.forEach(function (rect) {
             rect.top -= offsetY;
             rect.bottom -= offsetY;
             rect.left -= offsetX;
@@ -831,14 +827,14 @@ const Selecto =
         });
     };
 
-    __proto.getSelectableTargets = function() {
+    __proto.getSelectableTargets = function () {
       const selectableTargets = [];
-      this.options.selectableTargets.forEach(function(target) {
+      this.options.selectableTargets.forEach(function (target) {
         if (isObject(target)) {
           selectableTargets.push(target);
         } else {
           const elements = [].slice.call(document.querySelectorAll(target));
-          elements.forEach(function(el) {
+          elements.forEach(function (el) {
             selectableTargets.push(el);
           });
         }
@@ -846,30 +842,30 @@ const Selecto =
       return selectableTargets;
     };
 
-    __proto.getSelectedTargets = function(passedTargets) {
+    __proto.getSelectedTargets = function (passedTargets) {
       const _a = diff(this.selectedTargets, passedTargets);
-        const {list} = _a;
-        const {prevList} = _a;
-        const {added} = _a;
-        const {removed} = _a;
+      const { list } = _a;
+      const { prevList } = _a;
+      const { added } = _a;
+      const { removed } = _a;
 
       return added
-        .map(function(index) {
+        .map(function (index) {
           return list[index];
         })
         .concat(
-          removed.map(function(index) {
+          removed.map(function (index) {
             return prevList[index];
           }),
         );
     };
 
-    __proto.select = function(selectedTargets, rect, inputEvent, isStart) {
+    __proto.select = function (selectedTargets, rect, inputEvent, isStart) {
       const _a = this.differ.update(selectedTargets);
-        const {added} = _a;
-        const {removed} = _a;
-        const {prevList} = _a;
-        const {list} = _a;
+      const { added } = _a;
+      const { removed } = _a;
+      const { prevList } = _a;
+      const { list } = _a;
 
       if (isStart) {
         /**
@@ -904,10 +900,10 @@ const Selecto =
          */
         this.trigger('selectStart', {
           selected: selectedTargets,
-          added: added.map(function(index) {
+          added: added.map(function (index) {
             return list[index];
           }),
-          removed: removed.map(function(index) {
+          removed: removed.map(function (index) {
             return prevList[index];
           }),
           rect,
@@ -941,10 +937,10 @@ const Selecto =
          */
         this.trigger('select', {
           selected: selectedTargets,
-          added: added.map(function(index) {
+          added: added.map(function (index) {
             return list[index];
           }),
-          removed: removed.map(function(index) {
+          removed: removed.map(function (index) {
             return prevList[index];
           }),
           rect,
@@ -953,23 +949,23 @@ const Selecto =
       }
     };
 
-    __proto.selectEnd = function(startSelectedTargets, selectedTargets, rect, e) {
-      const {inputEvent} = e;
-        const {isDouble} = e;
+    __proto.selectEnd = function (startSelectedTargets, selectedTargets, rect, e) {
+      const { inputEvent } = e;
+      const { isDouble } = e;
 
       const _a = diff(startSelectedTargets, selectedTargets);
-        const {added} = _a;
-        const {removed} = _a;
-        const {prevList} = _a;
-        const {list} = _a;
+      const { added } = _a;
+      const { removed } = _a;
+      const { prevList } = _a;
+      const { list } = _a;
 
       const _b = diff(this.selectedTargets, selectedTargets);
-        const afterAdded = _b.added;
-        const afterRemoved = _b.removed;
-        const afterPrevList = _b.prevList;
-        const afterList = _b.list;
+      const afterAdded = _b.added;
+      const afterRemoved = _b.removed;
+      const afterPrevList = _b.prevList;
+      const afterList = _b.list;
 
-      const {type} = inputEvent;
+      const { type } = inputEvent;
       const isDragStart = type === 'mousedown' || type === 'touchstart';
       /**
        * When the select(dragEnd or click) ends, the selectEnd event is called.
@@ -1004,16 +1000,16 @@ const Selecto =
 
       this.trigger('selectEnd', {
         selected: selectedTargets,
-        added: added.map(function(index) {
+        added: added.map(function (index) {
           return list[index];
         }),
-        removed: removed.map(function(index) {
+        removed: removed.map(function (index) {
           return prevList[index];
         }),
-        afterAdded: afterAdded.map(function(index) {
+        afterAdded: afterAdded.map(function (index) {
           return afterList[index];
         }),
-        afterRemoved: afterRemoved.map(function(index) {
+        afterRemoved: afterRemoved.map(function (index) {
           return afterPrevList[index];
         }),
         isDragStart,
@@ -1023,25 +1019,24 @@ const Selecto =
       });
     };
 
-    __proto.check = function(e) {
-      const {datas} = e;
-        const {inputEvent} = e;
-        
+    __proto.check = function (e) {
+      const { datas } = e;
+      const { inputEvent } = e;
+
       // bug fix 修复父组件位置不为0，0时，rect偏移
-      const {x} = this.rectOffset;
-        const {y} = this.rectOffset;
+      const { x } = this.rectOffset;
+      const { y } = this.rectOffset;
 
       const rect = getRect(e);
       const top = rect.top - y;
-        const left = rect.left - x;
-        const {width} = rect;
-        const {height} = rect;
+      const left = rect.left - x;
+      const { width } = rect;
+      const { height } = rect;
 
       this.target.style.cssText +=
-        `${'display: block;' +
-        'left:0px;top:0px;'}` +
-        `transform: translate(${  left  }px, ${  top  }px);` +
-        `width:${  width  }px;height:${  height  }px;`;
+        `${'display: block;' + 'left:0px;top:0px;'}` +
+        `transform: translate(${left}px, ${top}px);` +
+        `width:${width}px;height:${height}px;`;
       const passedTargets = this.hitTest(
         rect,
         datas.startX,
@@ -1050,25 +1045,22 @@ const Selecto =
         datas.selectableRects,
       );
       const selectedTargets = this.getSelectedTargets(passedTargets);
-      this.trigger(
-        'drag',
-        {...e, rect,},
-      );
+      this.trigger('drag', { ...e, rect });
       this.select(selectedTargets, rect, inputEvent);
       datas.selectedTargets = selectedTargets;
     };
 
-    __proto.sameCombiKey = function(e) {
+    __proto.sameCombiKey = function (e) {
       const toggleContinueSelect = [].concat(this.options.toggleContinueSelect);
       const combi = getCombi(e.inputEvent, e.key);
-      return toggleContinueSelect.every(function(key) {
+      return toggleContinueSelect.every(function (key) {
         return combi.indexOf(key) > -1;
       });
     };
 
     Selecto = __decorate(
       [
-        Properties(PROPERTIES, function(prototype, property) {
+        Properties(PROPERTIES, function (prototype, property) {
           const attributes = {
             enumerable: true,
             configurable: true,
@@ -1076,14 +1068,14 @@ const Selecto =
               return this.options[property];
             },
           };
-          const setter = camelize(`set ${  property}`);
+          const setter = camelize(`set ${property}`);
 
           if (prototype[setter]) {
-            attributes.set = function(value) {
+            attributes.set = function (value) {
               this[setter](value);
             };
           } else {
-            attributes.set = function(value) {
+            attributes.set = function (value) {
               this.options[property] = value;
             };
           }

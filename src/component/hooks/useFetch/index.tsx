@@ -58,7 +58,7 @@ export interface IFetchResponse<T> {
    @return setData 函数，手工设置data的数据值，如初始化的值
    @return reFetch 函数，手工强制刷新，由于是监听param的值(url,data,params)，在它们不变更的时候也应有刷新的机制
  */
-const useFetch = <T extends Record<string, any> | void>({
+const useAxios = <T extends Record<string, any> | void>({
   param,
   initData,
   callback: onFetchData = (e) => e,
@@ -82,6 +82,13 @@ const useFetch = <T extends Record<string, any> | void>({
 
   // 首次加载
   useEffect(() => {
+    // 同时未传时，返回空值
+    // 部分场景允许不设置param时，返回默认状态为空的数据
+    // 如，多个tab条的切换点击
+    if (R.isNil(param) || (!param && !initData)) {
+      setData(null);
+      return;
+    }
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
       setData(null);
@@ -188,17 +195,4 @@ const useFetch = <T extends Record<string, any> | void>({
   };
 };
 
-const fetchInstance: <T extends Record<string, any> | void>(
-  props: IFetchProps<T>,
-) => IFetchResponse<T> = (props) => {
-  let { param, initData } = props;
-  // 同时未传时，返回空值
-  // 部分场景允许不设置param时，返回默认状态为空的数据
-  // 如，多个tab条的切换点击
-  if (R.isNil(param) || (!param && !initData)) {
-    return { data: null, loading: true, error: null, setData: () => {}, reFetch: () => {} };
-  }
-  return useFetch(props);
-};
-
-export default fetchInstance;
+export default useAxios;

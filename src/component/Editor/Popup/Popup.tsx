@@ -31,9 +31,9 @@ class Popup extends React.PureComponent<IPopup> {
   };
 }
 
-export default function ({ container = 'body', ...props }: IPopup) {
+export default ({ container = 'body', ...props }: IPopup) => {
   return ReactDOM.createPortal(<Popup {...props} />, document.querySelector(container));
-}
+};
 
 export const PopupFooter = ({ children, ...props }) => (
   <div

@@ -10,7 +10,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 export function debounce(fn, delay = 600, runFirstFn = true) {
   let timer = null;
 
-  return function(...rest) {
+  return function (...rest) {
     // 清除定时器
     clearTimeout(timer);
     if (runFirstFn) {

@@ -8,7 +8,7 @@ export const camelCase = (name: string) =>
  * @param {source} object 原始对象
  * @param {target} object 目标对象
  */
-export const checkChanged = (source: object, target: object) =>
+export const checkChanged = (source: Record<string, any>, target: Record<string, any>) =>
   JSON.stringify(source) === JSON.stringify(target);
 
 /**
@@ -24,7 +24,7 @@ export const isType = (value: any, type: string) => {
   return toString.call(value) === `[object ${type}]`;
 };
 
-export const clone = (source: Object) => {
+export const clone = (source: Record<string, any>) => {
   if (!source) {
     return source;
   }

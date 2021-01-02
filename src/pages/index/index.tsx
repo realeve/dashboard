@@ -70,7 +70,7 @@ const ScaleBackground = ({
 const Index = () => {
   const [config, setConfig] = useState(null);
 
-  const location = useLocation<{ query: {} }>();
+  const location = useLocation<{ query: Record<string, any> }>();
 
   useEffect(() => {
     setConfig(null);

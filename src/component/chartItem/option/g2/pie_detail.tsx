@@ -190,17 +190,15 @@ export const onMount = (
     .style({
       opacity: 1,
     })
-    .label('value', function () {
-      return {
-        offset: -10,
-        style: {
-          fontSize,
-        },
-        content: (obj) => {
-          return `${obj.type}\n${(100 * obj.percent).toFixed(2)}%`;
-        },
-      };
-    });
+    .label('value', () => ({
+      offset: -10,
+      style: {
+        fontSize,
+      },
+      content: (obj) => {
+        return `${obj.type}\n${(100 * obj.percent).toFixed(2)}%`;
+      },
+    }));
 
   const view2 = chart.createView({
     region: {

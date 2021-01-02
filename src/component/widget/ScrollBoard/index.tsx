@@ -206,11 +206,11 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   function onResize() {
     if (!mergedConfig) return;
 
-    const width = calcWidths(mergedConfig, stateRef.current.rowsData);
+    const nextWith = calcWidths(mergedConfig, stateRef.current.rowsData);
 
-    const height = calcHeights(mergedConfig, header);
+    const nextHeight = calcHeights(mergedConfig, header);
 
-    const data = { widths: width, heights: height };
+    const data = { widths: nextWith, heights: nextHeight };
 
     Object.assign(stateRef.current, data);
     setState((prevState) => ({ ...prevState, ...data }));
@@ -237,14 +237,14 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     setState((prevState) => ({ ...prevState, ...data }));
   }
 
-  function calcWidths({ columnWidth, header }, rowsData) {
+  function calcWidths({ columnWidth, header: colHeader }, rowsData) {
     const usedWidth = columnWidth.reduce((all, w) => all + w, 0);
 
     let columnNum = 0;
     if (rowsData[0]) {
       columnNum = rowsData[0].ceils.length;
-    } else if (header.length) {
-      columnNum = header.length;
+    } else if (colHeader.length) {
+      columnNum = colHeader.length;
     }
 
     const avgWidth = (width - usedWidth) / (columnNum - columnWidth.length);
@@ -282,11 +282,11 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
-    const rows = rowsData.slice(animationIndex);
-    rows.push(...rowsData.slice(0, animationIndex));
+    const nextRows = rowsData.slice(animationIndex);
+    nextRows.push(...rowsData.slice(0, animationIndex));
 
-    const heights = new Array(rowLength).fill(avgHeight);
-    setState((prevState) => ({ ...prevState, rows, heights }));
+    const nextHeights = new Array(rowLength).fill(avgHeight);
+    setState((prevState) => ({ ...prevState, rows: nextRows, heights }));
 
     yield new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -295,7 +295,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     const back = animationIndex - rowLength;
     if (back >= 0) animationIndex = back;
 
-    const newHeights = [...heights];
+    const newHeights = [...nextHeights];
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
