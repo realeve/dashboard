@@ -21,3 +21,4 @@ echarts.min.js
 echarts-liquidfill.min.js
 .min.js
 d.ts
+.eslintrc.js
