@@ -12,6 +12,7 @@ interface HierarchyApi {
   getAllNodes?: () => any[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface View extends HierarchyApi {}
 
 const HIERARCHY = 'hierarchy';
@@ -58,7 +59,7 @@ export interface Options {
 
 function getAllNodes() {
   const nodes: any[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-invalid-this
+  // eslint-disable-next-line
   const root = this;
   if (root && root.each) {
     // d3-hierarchy

@@ -1,4 +1,7 @@
 module.exports = {
+  parserOptions: {
+    project: './tsconfig.json',
+  },
   plugins: ['react-hooks'],
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
@@ -36,31 +39,11 @@ module.exports = {
     // https://cloud.tencent.com/developer/section/1135600
     'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
 
-    // import后换行
-    'import/newline-after-import': 'off',
-
     // 允许使用 console
     'no-console': 'off',
 
-    // 允许使用匿名函数，调试时可能不便
-    'func-names': ['warn', 'as-needed'],
-
-    // ts 中允许使用this
-    '@typescript-eslint/no-this-alias': 'off',
-
-    // 禁止使用 a = b =2
-    'no-multi-assign': 'error',
-
-    // 允许 {} 替代 Record<string,any>
-    '@typescript-eslint/ban-types': ['error'],
-
-    // 允许 interface中内容为空
-    '@typescript-eslint/no-empty-interface': 'off',
-
     // 优先使用解析，在部分场景如 var foo ='bar'; foo = baz[0]时会报错误
-    'prefer-destructuring': 'off',
-
-    'func-names': 'off',
+    // 'prefer-destructuring': 'off',
   },
 };
 

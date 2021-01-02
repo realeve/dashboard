@@ -84,6 +84,7 @@ export const handleData = ({
     if (gzMode) {
       // 前面未印刷的产品，显示红色
       if (i < idx && item[y] === 0) {
+        // eslint-disable-next-line prefer-destructuring
         color = colorArr[2];
         _warn = true;
         _warnIdx += 1;

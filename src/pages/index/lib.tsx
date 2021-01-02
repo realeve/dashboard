@@ -104,7 +104,7 @@ export const getStyle = ({ style, page, resizeType = EResizeType.NONE }) => {
   // STEP 1.将transform中的translate部分转换为left和top
   // 将transform中的内容优化
   let { left = '0', top = '0' } = style;
-  const transform = style.transform;
+  const { transform } = style;
 
   left = parseStyle(left);
   top = parseStyle(top);
