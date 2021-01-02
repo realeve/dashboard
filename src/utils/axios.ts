@@ -141,7 +141,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = async (error) => {
+export const handleError: (error: _AxiosError) => Error | null = (error) => {
   const config = error.config || {};
   const str = config.params || config.data || {};
   const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -170,16 +170,14 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
       description: errortext || '',
       duration: 10,
     });
-    return Promise.reject(
-      new Error(
-        JSON.stringify({
-          status,
-          message: `请求错误: ${config.url}`,
-          description: `${errortext || ''}`,
-          url: error.config.url || '',
-          params,
-        }),
-      ),
+    return new Error(
+      JSON.stringify({
+        status,
+        message: `请求错误: ${config.url}`,
+        description: `${errortext || ''}`,
+        url: error.config.url || '',
+        params,
+      }),
     );
   }
   if (error.request) {
@@ -188,12 +186,14 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
     // http.ClientRequest in node.js
     // console.log(error.request);
   }
-  return Promise.reject({
-    message: '请求错误',
-    description: error.message || '',
-    url: (config && config.url) || '',
-    params,
-  });
+  return new Error(
+    JSON.stringify({
+      message: '请求错误',
+      description: error.message || '',
+      url: (config && config.url) || '',
+      params,
+    }),
+  );
 };
 
 export const handleData: <T extends IAxiosState>({ data }: AxiosResponse<T>) => T = ({ data }) => {

@@ -124,7 +124,7 @@ export default class Panel extends React.Component {
 
     return (
       <div
-        ref={(ref) => (this.ref = ref)}
+        ref={this.ref}
         className={[prefixCls, this.props.className].join(' ')}
         style={{ color: '#233', ...this.props.style }}
         onFocus={this.onFocus}
