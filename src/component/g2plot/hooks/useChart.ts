@@ -1,4 +1,4 @@
-import type { ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import { useRef, useEffect } from 'react';
 import { isEqual } from '@antv/util';
 import { utils } from '../util';
@@ -17,18 +17,18 @@ export interface ContainerProps {
 export type Tooltip = {
   customContent?: (title: string, data: any[]) => ReactNode | string | void;
   container?: ReactNode;
-} & Omit<TooltipOptions, 'customContent' | 'container'>
+} & Omit<TooltipOptions, 'customContent' | 'container'>;
 
 export type Options = {
   tooltip?: false | Tooltip;
   data?: any;
   yAxis?: G2PlotConfig['yAxis'] | G2PlotConfig['yAxis'][];
   [key: string]: any;
-} & Omit<G2PlotConfig, 'tooltip' | 'data' | 'yAxis'>
+} & Omit<G2PlotConfig, 'tooltip' | 'data' | 'yAxis'>;
 
 export type Base = {
   __proto__?: any;
-} & Plot<any>
+} & Plot<any>;
 
 export default function useInit<T extends Base, U extends Options>(
   ChartClass: any,
@@ -103,7 +103,7 @@ export default function useInit<T extends Base, U extends Options>(
       }
 
       if (config.tooltip?.customContent) {
-        const {customContent} = config.tooltip;
+        const { customContent } = config.tooltip;
         config.tooltip.customContent = (title: string, items: any[]) => {
           const tooltipDom = customContent(title, items) || '';
           if (utils.isType(tooltipDom, 'HTMLDivElement')) {
@@ -115,6 +115,33 @@ export default function useInit<T extends Base, U extends Options>(
     }
   };
 
+  const init = () => {
+    processConfig();
+    const chartInstance: T = new (ChartClass as any)(container.current, {
+      ...config,
+    });
+
+    chartInstance.__proto__.toDataURL = (type: string, encoderOptions?: number) => {
+      return toDataURL(type, encoderOptions);
+    };
+    chartInstance.__proto__.downloadImage = (
+      name: string,
+      type: string,
+      encoderOptions?: number,
+    ) => {
+      return downloadImage(name, type, encoderOptions);
+    };
+    if (process.env.NODE_ENV !== 'test') {
+      chartInstance.render();
+    }
+    if (!chartOptions.current) {
+      chartOptions.current = config;
+    }
+    chart.current = utils.clone(chartInstance) as T;
+    return () => {
+      chartInstance.destroy();
+    };
+  };
   // 图表类型改变时，重新渲染
   useEffect(() => {
     if (!chart.current) {
@@ -161,33 +188,6 @@ export default function useInit<T extends Base, U extends Options>(
     }
   }, [config]);
 
-  const init = () => {
-    processConfig();
-    const chartInstance: T = new (ChartClass as any)(container.current, {
-      ...config,
-    });
-
-    chartInstance.__proto__.toDataURL = (type: string, encoderOptions?: number) => {
-      return toDataURL(type, encoderOptions);
-    };
-    chartInstance.__proto__.downloadImage = (
-      name: string,
-      type: string,
-      encoderOptions?: number,
-    ) => {
-      return downloadImage(name, type, encoderOptions);
-    };
-    if (process.env.NODE_ENV !== 'test') {
-      chartInstance.render();
-    }
-    if (!chartOptions.current) {
-      chartOptions.current = config;
-    }
-    chart.current = utils.clone(chartInstance) as T;
-    return () => {
-      chartInstance.destroy();
-    };
-  };
   useEffect(() => {
     if (!container.current) {
       return () => null;

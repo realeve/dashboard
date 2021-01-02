@@ -264,8 +264,8 @@ export const onMount = (
         .color(legend, color);
 
       if (type !== 'point') {
-        chartView.label(y, function (value) {
-          const offset = ['line', 'bar'].includes(type) ? 10 : value < 25 ? 10 : -4;
+        chartView.label(y, function callback(value) {
+          const offset = ['line', 'bar'].includes(type) || value < 25 ? 10 : -4;
           const fill = value < 25 ? textColor : '#ffffff';
           const textAlign = value < 25 ? 'start' : 'end';
           return {

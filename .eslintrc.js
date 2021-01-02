@@ -50,5 +50,14 @@ module.exports = {
     'no-continue': 'off',
     'no-console': 'off',
     'func-names': ['warn', 'as-needed'],
+
+    // ts 中允许使用this
+    '@typescript-eslint/no-this-alias': 0,
+
+    // 允许使用 a = b =2
+    'no-multi-assign': 'off',
+
+    'ban-types': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
 };

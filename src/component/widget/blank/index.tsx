@@ -10,11 +10,8 @@ const { Step } = Steps;
 export default ({ onChange, config }) => {
   const [show, setShow] = useToggle(false);
   const [current, setCurrent] = useState(0);
-  const [border, setBorder] = useState(config.border || null);
+  const [border] = useState(config.border || null);
   const [background, setBackground] = useState(config.background || null);
-  const [header, setHeader] = useState(config.header || null);
-  const [footer, setFooter] = useState(config.footer || null);
-
   return (
     <div className={styles.mock_guide}>
       <div style={{ marginBottom: 16 }}>
@@ -36,8 +33,8 @@ export default ({ onChange, config }) => {
           onChange({
             border,
             background,
-            header,
-            footer,
+            header: config.header || null,
+            footer: config.footer || null,
           });
         }}
         onCancel={() => {

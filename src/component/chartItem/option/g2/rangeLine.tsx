@@ -266,9 +266,9 @@ export const onMount = (
 
   chart.render();
 
-  const onChange = ({ data: nextData }) => {
-    const data = transform({ data: nextData, x, avg, min, max });
-    v1.changeData(data);
+  const onChange = ({ data: next }) => {
+    const v1Data = transform({ data: next, x, avg, min, max });
+    v1.changeData(v1Data);
 
     if (showAverage) {
       const data2 = data.map((item) => ({ x: item.x, y: item.y2 }));

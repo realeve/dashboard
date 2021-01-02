@@ -98,7 +98,7 @@ export const handleStackPosition = (annotations, isArea) => {
   legendVal = legendVal.reverse();
 
   for (let i = 1; i < legendVal.length; i++) {
-    legendVal[i] = legendVal[i] + legendVal[i - 1];
+    legendVal[i] += legendVal[i - 1];
   }
   legendVal = [0, ...legendVal];
 

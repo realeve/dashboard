@@ -20,8 +20,8 @@ export const sameArray = (source: any[], target: any[]): boolean =>
   new Set(source.concat(target)).size === source.length;
 
 export const isType = (value: any, type: string) => {
-  const {toString} = {};
-  return toString.call(value) === `[object ${  type  }]`;
+  const { toString } = {};
+  return toString.call(value) === `[object ${type}]`;
 };
 
 export const clone = (source: Object) => {
@@ -29,8 +29,8 @@ export const clone = (source: Object) => {
     return source;
   }
   const target = {};
-  for (const k in source) {
-    target[k] = source[k];
-  }
+  Object.entries(source).forEach(([key, val]) => {
+    target[key] = val;
+  });
   return target;
 };

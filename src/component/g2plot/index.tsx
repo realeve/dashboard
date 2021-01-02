@@ -15,7 +15,7 @@ export { palette } from './palette';
 export type ChartConfig = {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
   readonly chartType: TChartType;
-} & Options
+} & Options;
 
 export type G2PlotChartProps = {
   chartRef?: ChartRefOptions;
@@ -23,11 +23,9 @@ export type G2PlotChartProps = {
   option: ChartConfig;
   /** 使用 canvas 或 svg 渲染 */
   readonly renderer?: 'canvas' | 'svg';
-} & ContainerProps
+} & ContainerProps;
 
-const G2PlotChart: React.ForwardRefExoticComponent<
-  G2PlotChartProps & React.RefAttributes<HTMLDivElement>
-> = forwardRef((props, ref) => {
+const G2PlotChart = (props, ref) => {
   const {
     chartRef,
     style = {
@@ -66,6 +64,6 @@ const G2PlotChart: React.ForwardRefExoticComponent<
       <div className={classnames(className, styles.g2plot)} style={style} ref={container} />
     </ErrorBoundary>
   );
-});
+};
 
-export default G2PlotChart;
+export default forwardRef(G2PlotChart);

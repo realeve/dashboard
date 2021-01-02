@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -40,10 +41,10 @@ export default class Params extends React.Component {
         [0, 100],
       ],
     };
-    const {mode} = this.state;
+    const { mode } = this.state;
     const range = channelMap[mode][index];
     let result = parseInt(value, 10);
-    if (isNaN(result)) {
+    if (Number.isNaN(result)) {
       result = 0;
     }
     result = Math.max(range[0], result);
@@ -56,7 +57,7 @@ export default class Params extends React.Component {
   };
 
   handleHexBlur = () => {
-    const {hex} = this.state;
+    const { hex } = this.state;
 
     let color = null;
 
@@ -74,7 +75,7 @@ export default class Params extends React.Component {
   };
 
   handleHexPress = (event) => {
-    const {hex} = this.state;
+    const { hex } = this.state;
     if (event.nativeEvent.which === 13) {
       let color = null;
 
@@ -101,7 +102,7 @@ export default class Params extends React.Component {
   };
 
   handleModeChange = () => {
-    let {mode} = this.state;
+    let { mode } = this.state;
 
     const modeIndex = (modesMap.indexOf(mode) + 1) % modesMap.length;
 
@@ -115,7 +116,7 @@ export default class Params extends React.Component {
   handleAlphaHandler = (event) => {
     let alpha = parseInt(event.target.value, 10);
 
-    if (isNaN(alpha)) {
+    if (Number.isNaN(alpha)) {
       alpha = 0;
     }
     alpha = Math.max(0, alpha);
@@ -137,12 +138,12 @@ export default class Params extends React.Component {
         color.brightness = parseInt(value, 10) / 100;
       }
     } else if (channel === 'R') {
-        color.red = parseInt(value, 10);
-      } else if (channel === 'G') {
-        color.green = parseInt(value, 10);
-      } else if (channel === 'B') {
-        color.blue = parseInt(value, 10);
-      }
+      color.red = parseInt(value, 10);
+    } else if (channel === 'G') {
+      color.green = parseInt(value, 10);
+    } else if (channel === 'B') {
+      color.blue = parseInt(value, 10);
+    }
 
     return color;
   };

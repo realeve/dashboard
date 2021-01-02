@@ -109,6 +109,11 @@ type TypeList =
   | 'symbol';
 export const getType: (data: any) => TypeList = (data) => R.type(data).toLowerCase() as TypeList;
 
+const saveToken = () => {
+  localforage.setItem('user', {
+    token: window.g_axios.token,
+  });
+};
 export const loadUserInfo = (user) => {
   if (user === null) {
     window.g_axios.token = refreshNoncer;
@@ -129,11 +134,6 @@ export const loadUserInfo = (user) => {
 // return http.get(url).then(res => res.data.token);
 // };
 
-const saveToken = () => {
-  localforage.setItem('user', {
-    token: window.g_axios.token,
-  });
-};
 export interface AxiosError {
   message: string;
   description: string;
@@ -170,13 +170,17 @@ export const handleError: (error: _AxiosError) => Promise<AxiosError | null> = a
       description: errortext || '',
       duration: 10,
     });
-    return Promise.reject({
-      status,
-      message: `请求错误: ${config.url}`,
-      description: `${errortext || ''}`,
-      url: error.config.url || '',
-      params,
-    });
+    return Promise.reject(
+      new Error(
+        JSON.stringify({
+          status,
+          message: `请求错误: ${config.url}`,
+          description: `${errortext || ''}`,
+          url: error.config.url || '',
+          params,
+        }),
+      ),
+    );
   }
   if (error.request) {
     // The request was made but no response was received
@@ -245,7 +249,7 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
       baseURL,
       timeout: 30 * 1000,
       transformRequest: [
-        function (data) {
+        function transform(data) {
           const dataType = getType(data);
           switch (dataType) {
             case 'object':

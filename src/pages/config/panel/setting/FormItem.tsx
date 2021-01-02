@@ -48,13 +48,15 @@ export const FormField = ({
 
   if (type === 'divider') {
     return <Divider plain>{title}</Divider>;
-  } if (type === 'label') {
+  }
+  if (type === 'label') {
     return (
       <Field style={style} subTitle={subTitle}>
         <label style={{ color: '#6e7481' }}>{title}</label>
       </Field>
     );
-  } if (type === 'image') {
+  }
+  if (type === 'image') {
     return <ImgSelector onChange={onChange} value={value as string} title={title} {...config} />;
   }
 
@@ -76,7 +78,7 @@ export const FormField = ({
         />
       );
       break;
-    case 'radio':
+    case 'radio': {
       const { option, ...props } = config;
       return (
         <Radio
@@ -87,7 +89,7 @@ export const FormField = ({
           {...props}
         />
       );
-      break;
+    }
     case 'select':
       return (
         <Select
@@ -134,30 +136,36 @@ export const FormField = ({
       );
       break;
     case 'slider':
-      // 支持任意长度的slide排为一组
-      const len = config.length || 2;
-      const arr = R.range(0, len);
-      return (
-        <div className="alignRow">
-          {arr.map((id) => (
-            <React.Fragment key={id}>
-              <input
-                type="number"
-                className={classnames('data_input')}
-                value={innerValue?.[id] || 0}
-                onChange={(e) => {
-                  const val = R.update(id, Number(e.target.value), (innerValue as number[]).slice());
-                  setInnerValue(val);
-                }}
-                disabled={disabled}
-                readOnly={disabled}
-                {...config}
-              />
-              {id < len - 1 && <span style={{ margin: '0 5px' }}> {config.split ?? '~'} </span>}
-            </React.Fragment>
-          ))}
-        </div>
-      );
+      {
+        // 支持任意长度的slide排为一组
+        const len = config.length || 2;
+        const arr = R.range(0, len);
+        return (
+          <div className="alignRow">
+            {arr.map((id) => (
+              <React.Fragment key={id}>
+                <input
+                  type="number"
+                  className={classnames('data_input')}
+                  value={innerValue?.[id] || 0}
+                  onChange={(e) => {
+                    const val = R.update(
+                      id,
+                      Number(e.target.value),
+                      (innerValue as number[]).slice(),
+                    );
+                    setInnerValue(val);
+                  }}
+                  disabled={disabled}
+                  readOnly={disabled}
+                  {...config}
+                />
+                {id < len - 1 && <span style={{ margin: '0 5px' }}> {config.split ?? '~'} </span>}
+              </React.Fragment>
+            ))}
+          </div>
+        );
+      }
       break;
   }
 };

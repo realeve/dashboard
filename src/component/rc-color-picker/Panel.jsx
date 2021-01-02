@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Color from './helpers/color';
@@ -7,7 +8,6 @@ import Preview from './Preview';
 import Ribbon from './Ribbon';
 import Alpha from './Alpha';
 import Params from './Params';
-
 import typeColor from './utils/validationColor';
 import cx from 'classnames';
 

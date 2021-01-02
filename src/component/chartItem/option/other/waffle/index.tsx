@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ScrollBoard, { IScrollBoard } from '../scroll_board';
+import ScrollBoard from '../scroll_board';
 import { config as mainConfig } from '../scroll_board';
 import useFetch from '@/component/hooks/useFetch';
 import styles from './index.less';
@@ -17,14 +17,14 @@ interface IWaffleState {
   procname?: string;
 }
 
-const ScrollTable = ({ config, onClick }) => {
+const ScrollTable = ({ config: props, onClick }) => {
   const detailType = ['印码', '涂布', '检封', '装箱'];
   return (
     <ScrollBoard
       style={{ width: '100%', height: '50%' }}
       option={{
         hoverColumns: [5, 6, 7, 8],
-        ...config,
+        ...props,
       }}
       onClick={(e) => {
         const type = e.col - 5;
@@ -45,18 +45,18 @@ export interface IBoxProp {
 }
 type IWaffleProps = Record<string, any>;
 export default ({
-  option: { detailApi, boxSize, boxShape, ...config },
+  option: { detailApi, boxSize, boxShape, ...props },
 }: {
   option: IWaffleProps;
 }) => {
   const [state, setState] = useState<IWaffleState>(null);
   useEffect(() => {
-    if (!config.data) {
+    if (!props.data) {
       return;
     }
-    const [prod, gz] = config.data.data[0] as [string, string];
+    const [prod, gz] = props.data.data[0] as [string, string];
     setState({ prod, gz, procname: '印码' });
-  }, [config?.data?.hash]);
+  }, [props?.data?.hash]);
 
   const { data, loading } = useFetch({
     param: {
@@ -83,7 +83,7 @@ export default ({
             boxShape,
             data,
           }}
-          y={config.y}
+          y={props.y}
           prod={state.prod}
           style={{ height: 'auto', flex: 1 }}
         />

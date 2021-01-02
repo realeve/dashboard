@@ -55,4 +55,4 @@ export default abstract class Icon extends React.PureComponent<{
   }
 }
 
-export default interface Icon extends EditorInterface {}
+export interface IconProp extends EditorInterface {}

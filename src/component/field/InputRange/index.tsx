@@ -25,7 +25,7 @@ export default ({
   const percent = innerValue / props.max;
 
   useEffect(() => {
-    if (innerValue != props.value) {
+    if (innerValue !== props.value) {
       setInnerValue(props.value);
     }
   }, [props.value]);
@@ -44,7 +44,7 @@ export default ({
       {showValue && formatter(innerValue)}
       <i
         className="datav-icon datav-font icon-zoom-out slider-icon zoom-out "
-        onClick={(e) => {
+        onClick={() => {
           if (disabled) {
             return;
           }
@@ -76,7 +76,7 @@ export default ({
       </div>
       <i
         className="datav-icon datav-font icon-zoom-in slider-icon zoom-in"
-        onClick={(e) => {
+        onClick={() => {
           if (disabled) {
             return;
           }

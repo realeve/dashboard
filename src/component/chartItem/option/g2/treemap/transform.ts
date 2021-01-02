@@ -11,7 +11,8 @@ interface HierarchyApi {
   dataType: string;
   getAllNodes?: () => any[];
 }
-type View = {} & HierarchyApi
+
+interface View extends HierarchyApi {}
 
 const HIERARCHY = 'hierarchy';
 const DEFAULT_OPTIONS: Options = {
@@ -80,10 +81,10 @@ export function transform(dataView: View, options: Options): typeof Node {
     name: 'root',
     children: dataView.children,
   });
-  const {root} = dataView;
+  const { root } = dataView;
   options = assign({} as Options, DEFAULT_OPTIONS, options);
 
-  const {as} = options;
+  const { as } = options;
   if (!isArray(as) || as.length !== 2) {
     throw new TypeError('Invalid as: it must be an array with 2 strings (e.g. [ "x", "y" ])!');
   }

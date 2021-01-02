@@ -53,4 +53,4 @@ export default class Selecto extends React.PureComponent<Partial<SelectoProps>> 
   }
 }
 
-export default interface Selecto extends MethodInterface<SelectoMethods, VanillaSelecto, Selecto> {}
+export interface ISelecto extends MethodInterface<SelectoMethods, VanillaSelecto, Selecto> {}

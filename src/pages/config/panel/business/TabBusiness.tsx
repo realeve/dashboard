@@ -3,7 +3,7 @@ import { ComponentList } from '../components/TabComponent';
 import type { IBusinessProps } from './db';
 import { getTblBusiness } from './db';
 import { connect } from 'react-redux';
-import type { ICommon, IBusinessCategory, IPanelConfig} from '@/models/common';
+import type { ICommon, IBusinessCategory, IPanelConfig } from '@/models/common';
 import { GROUP_COMPONENT_KEY } from '@/models/common';
 import * as R from 'ramda';
 import * as lib from '@/utils/lib';
@@ -73,13 +73,13 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
   const [itemList, setItemList] = useState<IBusinessState[]>([]);
 
   useEffect(() => {
+    refreshBusiness();
+  }, [businessCategory.length]);
+
+  const refreshBusiness = () => {
     if (businessCategory.length === 0) {
       return;
     }
-    refreshBusiness();
-  }, [JSON.stringify(businessCategory)]);
-
-  const refreshBusiness = () => {
     setLoading(true);
     getTblBusiness()
       .then(({ data }: { data: IBusinessProps[] }) => {
@@ -89,10 +89,12 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
             data,
           );
           const list = item.list.map((title) => {
-            const list = R.filter<IBusinessProps>(R.propEq<string>('category_sub', title))(mainList);
+            const nextList = R.filter<IBusinessProps>(R.propEq<string>('category_sub', title))(
+              mainList,
+            );
             return {
               title,
-              list,
+              list: nextList,
               num: list.length,
             };
           });
@@ -111,7 +113,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
         })(businessCategory);
         setItemList(panels);
       })
-      .catch((e) => {
+      .catch(() => {
         setError('加载组件列表出错');
       })
       .finally(() => {

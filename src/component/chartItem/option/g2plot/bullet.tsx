@@ -1,4 +1,4 @@
-import type { IChartMock, IApiConfig, IG2PlotProps } from '@/component/chartItem/interface';
+import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
   data: [
@@ -91,7 +91,6 @@ export default ({
   renderer = 'canvas',
   legendShow = true,
 }: IG2Plot) => {
-  const res = data[0];
   const isHorizontal = direction === 'horizontal';
 
   const bulletData = data.map((res) => ({

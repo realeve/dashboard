@@ -121,7 +121,7 @@ export default ({
   colorType = 'gardient',
 }) => {
   const xData = [];
-    const yData = [];
+  const yData = [];
   const value = _data.data;
   value.forEach((item) => {
     xData.push(item[x]);
@@ -130,6 +130,7 @@ export default ({
 
   const max = Math.max(...yData);
   const result = lib.handleMinMax({ min: 0, max });
+  const name = _data.header[y];
 
   const append =
     colorType === 'gardient'
@@ -160,8 +161,8 @@ export default ({
           series: [
             {
               name,
-              data: yData.map((value, idx) => ({
-                value,
+              data: yData.map((val, idx) => ({
+                value: val,
                 itemStyle: {
                   color: color[idx % color.length],
                 },

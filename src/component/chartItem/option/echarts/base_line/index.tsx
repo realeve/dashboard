@@ -135,7 +135,7 @@ export default ({
     fontSize: 16,
   };
 
-  let markpointData = getMarkpoint(showMarkpoint);
+  const markpointData = getMarkpoint(showMarkpoint);
 
   let series: ISeries[] = res.series.map(({ name, arr: seriesData }, idx: number) => ({
     name,

@@ -80,7 +80,7 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
       });
     });
   }
-  public componentDidUpdate(prevProps: Partial<InfiniteViewerProperties>) {
+  public componentDidUpdate() {
     const { props } = this;
     const { infiniteViewer } = this;
 
@@ -99,5 +99,5 @@ export default class InfiniteViewer extends React.PureComponent<Partial<Infinite
 }
 
 // tslint:disable-next-line: max-line-length
-export default interface InfiniteViewer
+export interface InfiniteViewerProp
   extends MethodInterface<InfiniteViewerMethods, VanillaInfiniteViewer, InfiniteViewer> {}

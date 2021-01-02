@@ -212,7 +212,7 @@ export default class Guides
     });
 
     if (guideSnaps.length && Math.abs(guideSnaps[0] - guidePos) < snapThreshold!) {
-      guidePos = guideSnaps[0];
+      guidePos = R.head(guideSnaps);
       nextPos = guidePos * zoom!;
     }
     if (displayDragPos) {

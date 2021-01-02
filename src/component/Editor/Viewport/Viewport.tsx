@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IObject} from '@daybrush/utils';
+import type { IObject } from '@daybrush/utils';
 import { isString, isArray } from '@daybrush/utils';
 import {
   prefix,
@@ -80,7 +80,7 @@ export default class Viewport extends React.PureComponent<{
   }
   public renderChildren(children: ElementInfo[]): ScenaJSXElement[] {
     return children.map((info) => {
-      const {jsx} = info;
+      const { jsx } = info;
       const nextChildren = info.children!;
       const renderedChildren = this.renderChildren(nextChildren);
       const id = info.id!;
@@ -91,14 +91,16 @@ export default class Viewport extends React.PureComponent<{
       if (isString(jsx)) {
         props[DATA_SCENA_ELEMENT_ID] = id;
         return React.createElement(jsx, props, ...renderedChildren) as ScenaJSXElement;
-      } if (isScenaFunction(jsx)) {
+      }
+      if (isScenaFunction(jsx)) {
         props.scenaElementId = id;
         props.scenaAttrs = info.attrs || {};
         props.scenaText = info.innerText;
         props.scenaHTML = info.innerHTML;
 
         return React.createElement(jsx, props) as ScenaJSXElement;
-      } if (isString(jsx.type)) {
+      }
+      if (isString(jsx.type)) {
         props[DATA_SCENA_ELEMENT_ID] = id;
       } else {
         props.scenaElementId = id;
@@ -123,17 +125,18 @@ export default class Viewport extends React.PureComponent<{
   }
 
   public makeId(ids: IObject<any> = this.ids) {
-    while (true) {
-      const id = `scena${Math.floor(Math.random() * 100000000)}`;
-
-      if (ids[id]) {
-        continue;
+    let flag = false;
+    let id = '';
+    while (!flag) {
+      id = `scena${Math.floor(Math.random() * 100000000)}`;
+      if (!ids[id]) {
+        flag = true;
       }
-      return id;
     }
+    return id;
   }
   public setInfo(id: string, info: ElementInfo) {
-    const {ids} = this;
+    const { ids } = this;
 
     ids[id] = info;
   }
@@ -194,7 +197,7 @@ export default class Viewport extends React.PureComponent<{
   public registerChildren(jsxs: ElementInfo[], parentScopeId?: string) {
     return jsxs.map((info) => {
       const id = info.id || info.name || this.makeId();
-      const {jsx} = info;
+      const { jsx } = info;
       const children = info.children || [];
       const scopeId = parentScopeId || info.scopeId || 'viewport';
       const componentId = '';
@@ -254,10 +257,10 @@ export default class Viewport extends React.PureComponent<{
           const attrs = info.attrs || {};
 
           info.el = target;
+          Object.entries(attrs).forEach(([name, val]) => {
+            target.setAttribute(name, val);
+          });
 
-          for (const name in attrs) {
-            target.setAttribute(name, attrs[name]);
-          }
           info.attrs = getScenaAttrs(target);
           const children = info.children || [];
 
@@ -286,14 +289,14 @@ export default class Viewport extends React.PureComponent<{
   }
   public getIndex(id: string | HTMLElement) {
     const indexes = this.getIndexes(id);
-    const {length} = indexes;
+    const { length } = indexes;
     return length ? indexes[length - 1] : -1;
   }
   public getElements(ids: string[]) {
     return ids.map((id) => this.getElement(id)).filter((el) => el) as (HTMLElement | SVGElement)[];
   }
   public unregisterChildren(children: ElementInfo[], isChild?: boolean): ElementInfo[] {
-    const {ids} = this;
+    const { ids } = this;
 
     return children.slice(0).map((info) => {
       const target = info.el!;

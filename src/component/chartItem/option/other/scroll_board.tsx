@@ -3,7 +3,6 @@ import type { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import ScrollBoard from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-import * as R from 'ramda';
 
 export const mock: IChartMock = {
   header: ['列1', '列2', '列3'],
@@ -146,7 +145,7 @@ interface IScrollTable {
 }
 // TODO 讲述如何引进页面重新渲染
 export default ({
-  option: { data, waitTime = 4, ...config },
+  option: { data, waitTime = 4, ...props },
   onClick = () => {},
   style = {},
 }: IScrollTable) =>
@@ -158,13 +157,13 @@ export default ({
           columnWidth: [50],
           align: ['center'],
           waitTime: waitTime * 1000,
-          ...config,
+          ...props,
         }}
         onClick={onClick}
         style={style}
       />
     ),
-    [JSON.stringify(config), data?.hash],
+    [JSON.stringify(props), data?.hash],
   );
 
 // 使用 PureComponent实现

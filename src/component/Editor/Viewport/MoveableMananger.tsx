@@ -98,7 +98,7 @@ export default class MoveableManager extends React.PureComponent<{
   selectedMenu: string;
   verticalGuidelines: number[];
   horizontalGuidelines: number[];
-  onChange?: (name: { id: string; next: Object }[]) => void;
+  onChange?: (name: { id: string; next: Record<string, unknown> }[]) => void;
 }> {
   public moveable = React.createRef<typeof Moveable>();
   public getMoveable() {
@@ -282,4 +282,4 @@ export default class MoveableManager extends React.PureComponent<{
   }
 }
 
-export default interface MoveableManager extends EditorInterface {}
+export interface IMoveableManager extends EditorInterface {}
