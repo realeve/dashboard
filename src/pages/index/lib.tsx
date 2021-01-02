@@ -80,7 +80,8 @@ const getScale = (page, resizeType: EResizeType) => {
   let scaleY = innerHeight / height;
 
   if (resizeType === EResizeType.MOVIE) {
-    scaleX = scaleY = Math.min(scaleX, scaleY);
+    scaleY = Math.min(scaleX, scaleY);
+    scaleX = scaleY;
   }
 
   // 原画布比例

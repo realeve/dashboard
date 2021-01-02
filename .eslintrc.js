@@ -55,11 +55,11 @@ module.exports = {
     // ts 中允许使用this
     '@typescript-eslint/no-this-alias': 'off',
 
-    // 允许使用 a = b =2
-    'no-multi-assign': 'off',
+    // 禁止使用 a = b =2
+    'no-multi-assign': 'error',
 
     // 允许 {} 替代 Record<string,any>
-    'ban-types': 'off',
+    '@typescript-eslint/ban-types': ['error'],
 
     // 允许 interface中内容为空
     '@typescript-eslint/no-empty-interface': 'off',

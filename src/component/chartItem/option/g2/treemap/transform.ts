@@ -77,10 +77,11 @@ export function transform(dataView: View, options: Options): typeof Node {
   if (dataView.dataType !== HIERARCHY) {
     throw new TypeError('Invalid DataView: This transform is for Hierarchy data only!');
   }
-  dataView.rows = dataView.root = hierarchy({
+  dataView.root = hierarchy({
     name: 'root',
     children: dataView.children,
   });
+  dataView.rows = dataView.root;
   const { root } = dataView;
   options = assign({} as Options, DEFAULT_OPTIONS, options);
 
