@@ -182,7 +182,7 @@ export default function useInit<T extends Base, U extends Options>(
         chart.current.changeData(config?.[changeType] || []);
       } else {
         processConfig();
-        chart.current.update(config);
+        chart?.current?.update?.(config);
       }
       chartOptions.current = config;
     }

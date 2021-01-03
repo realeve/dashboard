@@ -70,7 +70,7 @@ const Index = ({
     }
     const zr = zrender.init(ref.current, { renderer });
     setInstanse(zr);
-  }, [renderer]);
+  }, []);
 
   const getRectEl = (id: string) => {
     const el = R.find(R.propEq('id', id))(rects) as { rect: any; id: string };
@@ -143,7 +143,7 @@ const Index = ({
 
     setPrevItem(nextItem);
     updateRect(result);
-  }, [instanse, page, panel, prevItem, nextIds]);
+  }, [instanse, page, panel, nextIds]);
 
   useEffect(() => {
     if (R.equals(selectedPanel, prevSelect)) {

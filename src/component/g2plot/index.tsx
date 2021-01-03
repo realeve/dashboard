@@ -23,9 +23,10 @@ export type G2PlotChartProps = {
   option: ChartConfig;
   /** 使用 canvas 或 svg 渲染 */
   readonly renderer?: 'canvas' | 'svg';
+  [key: string]: any;
 } & ContainerProps;
 
-const G2Plot = (props) => {
+const G2Plot = forwardRef((props: G2PlotChartProps, ref) => {
   const {
     chartRef,
     style = {
@@ -37,7 +38,6 @@ const G2Plot = (props) => {
     errorTemplate,
     option: { chartType = 'Area', ...option },
     renderer = 'canvas',
-    ref,
     instance,
   } = props;
 
@@ -61,9 +61,9 @@ const G2Plot = (props) => {
       <div className={classnames(className, styles.g2plot)} style={style} ref={container} />
     </ErrorBoundary>
   );
-};
+});
 
-const G2PlotChart = (props) => {
+export default (props) => {
   const chartType = props?.option?.chartType || 'Area';
   const instance = lib[utils.camelCase(chartType)];
   if (!instance) {
@@ -71,5 +71,3 @@ const G2PlotChart = (props) => {
   }
   return <G2Plot {...props} instance={instance} />;
 };
-
-export default forwardRef(G2PlotChart);
