@@ -6,6 +6,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 // umi test ./src/utils/axios.test.js  --runInBand --detectOpenHandles
+// --no-cache --inspect --watch
 const mockData = {
   rows: 2,
 };
@@ -50,15 +51,7 @@ test('reject', () => {
 });
 
 test('服务端数据读写', () => {
-  // expect.assertions(2);
   expect(readData()).resolves.toBeGreaterThan(0);
-
-  // window.localStorage.setItem(
-  //   'user',
-  //   '{"user":"develop","fullname":"管理员","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDM4NTI0NDcsIm5iZiI6MTU0Mzg1MjQ0NywiZXhwIjoxNTQzODU5NjQ3LCJ1cmwiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTBcL3B1YmxpY1wvbG9naW4uaHRtbCIsImV4dHJhIjp7InVpZCI6MSwiaXAiOiIwLjAuMC4wIn19.65tBJTAMZ-i2tkDDpu9DnVaroXera4h2QerH3x2fgTw"}',
-  // );
-
-  // expect(readData()).resolves.toBeGreaterThan(0);
 });
 
 test('post', () => {
@@ -75,26 +68,20 @@ test('post', () => {
   ).resolves.toBeGreaterThan(0);
 });
 
-test('401', () => {
+test('401', async () => {
   server.use(rest.post('https://api.cbpc.ltd/post', (req, res, ctx) => res(ctx.status(401))));
-  expect(
-    axios({
-      method: 'post',
-      url: 'https://api.cbpc.ltd/post',
-      data: {
-        id: 3,
-        nonce: 'e4e497e84943',
-      },
-    }),
-  ).rejects.toThrowErrorMatchingSnapshot();
+  const res = await axios({
+    method: 'post',
+    url: 'https://api.cbpc.ltd/post',
+    data: {
+      id: 3,
+      nonce: 'e4e497e84943',
+    },
+  }).catch((e) => e);
+  expect(res).toMatchSnapshot();
 });
 
-test('错误处理', async () => {
-  server.use(
-    rest.get('https://api.cbpc.ltd/get', (req, res, ctx) =>
-      res(ctx.status(401), ctx.json({ data: { msg: 401 } })),
-    ),
-  );
+test('错误处理', () => {
   let req = {
     config: {
       url: 'https://api.cbpc.ltd/get',
@@ -106,13 +93,7 @@ test('错误处理', async () => {
       status: 401,
     },
   };
-  // expect(handleError(req)).rejects.toMatchObject({
-  //   description: '用户没有权限（令牌、用户名、密码错误）。401',
-  //   message: '请求错误: http://127.0.0.1/_err_url?',
-  //   params: {},
-  //   status: 401,
-  //   url: 'http://127.0.0.1/_err_url?',
-  // });
+
   expect(handleError(req)).toMatchSnapshot();
 
   req = { description: '', message: '请求错误', params: {}, url: 'www.cdyc.cbpm' };
@@ -159,7 +140,7 @@ test('错误处理', async () => {
 test('loadUserInfo', () => {
   const user = loadUserInfo(null);
   expect(user.token.split('.')).toHaveLength(3);
-  expect(loadUserInfo(JSON.stringify({ token: 'token' }))).toMatchObject({ token: undefined });
+  expect(loadUserInfo(JSON.stringify({ token: 'token' })).token.split('.')).toHaveLength(3);
 });
 
 test('handleData', () => {

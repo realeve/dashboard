@@ -115,16 +115,17 @@ const saveToken = () => {
   });
 };
 export const loadUserInfo = (user) => {
-  if (user === null) {
+  if (user === null && process.env.NODE_ENV !== 'test') {
     window.g_axios.token = refreshNoncer;
     saveToken();
     return {
       token: refreshNoncer,
     };
   }
-
-  window.g_axios.token = user.token;
-  return { token: user.token };
+  if (process.env.NODE_ENV !== 'test') {
+    window.g_axios.token = user.token;
+  }
+  return { token: user?.token || refreshNoncer };
 };
 
 // let refreshNoncer = () => {
@@ -194,7 +195,7 @@ export const handleError: (error: _AxiosError) => AxiosError = (error) => {
 
 export const handleData: <T extends IAxiosState>({ data }: AxiosResponse<T>) => T = ({ data }) => {
   // 刷新token
-  if (typeof data.token !== 'undefined') {
+  if (typeof data.token !== 'undefined' && process.env.NODE_ENV !== 'test') {
     window.g_axios.token = data.token;
     saveToken();
     // 移除token
