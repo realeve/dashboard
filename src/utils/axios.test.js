@@ -1,5 +1,5 @@
 import { axios, handleError, handleUrl, loadUserInfo, handleData, mock, getType } from './axios';
-
+// umi test ./src/utils/axios.test.js
 const readData = () =>
   axios({
     url: 'http://api.cbpc.ltd/3/e4e497e849',
@@ -7,7 +7,7 @@ const readData = () =>
 
 test('handle url', () => {
   expect(handleUrl({ url: './test.json' })).toMatchObject({
-    url: 'http://localhost/test.json',
+    url: 'http://localhost:8000/test.json',
   });
 });
 
@@ -19,17 +19,15 @@ test('resolve', () =>
   }));
 
 test('reject', () => {
-  axios({
-    url: 'http://localhost/3/e4e497e849_err_token',
-  }).catch((e) => {
-    expect(e).toMatchObject({
-      // message: '请求错误',
-      // description: 'Request failed with status code 404',
-      description: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
-      message: '请求错误: http://localhost/3/e4e497e849_err_token?',
-      url: 'http://localhost/3/e4e497e849_err_token?',
-      params: {},
-    });
+  expect(
+    axios({
+      url: 'http://localhost:8000/3/e4e497e849_err_token',
+    }),
+  ).rejects.toMatchObject({
+    message: '请求错误',
+    description: 'Network Error',
+    url: 'http://localhost:8000/3/e4e497e849_err_token?',
+    params: {},
   });
 });
 
@@ -67,13 +65,6 @@ test('401', () => {
       id: 3,
       nonce: 'e4e497e84943',
     },
-  }).catch((e) => {
-    expect(e).toMatchObject({
-      description: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
-      message: '请求错误: http://api.cbpc.ltd/3/e4e497e84943?',
-      params: {},
-      url: 'http://api.cbpc.ltd/3/e4e497e84943?',
-    });
   });
 });
 
@@ -96,19 +87,13 @@ test('错误处理', async () => {
   //   status: 401,
   //   url: 'http://127.0.0.1/_err_url?',
   // });
-  let res = await handleError(req).catch((e) => e);
-  expect(res).toBeUndefined();
+  expect(handleError(req)).toBeNull();
 
   req = { description: '', message: '请求错误', params: {}, url: 'www.cdyc.cbpm' };
-  res = await handleError(req).catch((e) => e);
-  expect(res).toMatchObject({
-    description: '请求错误',
-    message: '请求错误',
-    params: {},
-    url: 'undefined?',
-  });
 
-  res = await handleError({
+  expect(handleError(req)).toMatchSnapshot();
+
+  req = {
     config: {
       params: '{"id":1,"nonce":2,}',
       response: {
@@ -117,15 +102,11 @@ test('错误处理', async () => {
       url: '1',
     },
     message: 'msg',
-  }).catch((e) => e);
-  expect(res).toMatchObject({
-    message: '请求错误',
-    description: 'msg',
-    url: '1?%7B%22id%22%3A1%2C%22nonce%22%3A2%2C%7D=',
-    params: { '{"id":1,"nonce":2,}': '' },
-  });
+  };
 
-  res = await handleError({
+  expect(handleError(req)).toMatchSnapshot();
+
+  req = {
     config: {
       params: '{"id":1,"nonce":2,}',
       response: {
@@ -134,24 +115,19 @@ test('错误处理', async () => {
       url: null,
     },
     message: 'msg',
-  }).catch((e) => e);
+  };
+
+  expect(handleError(req)).toMatchSnapshot();
 
   req = {
     request: '请求出错',
   };
-  res = await handleError(req).catch((e) => e);
-  expect(res).toBeUndefined();
+  expect(handleError(req)).toBeNull();
 
   req = {
     message: '内容出错',
   };
-  res = await handleError(req).catch((e) => e);
-  expect(res).toMatchObject({
-    description: '内容出错',
-    message: '请求错误',
-    params: {},
-    url: 'undefined?',
-  });
+  expect(handleError(req)).toMatchSnapshot();
 });
 
 test('loadUserInfo', () => {
@@ -166,10 +142,9 @@ test('handleData', () => {
   expect(handleData({ data: { rows: 1 } })).toMatchObject({ rows: 1 });
 });
 
-test('mock', async () => {
+test('mock', () => {
   // mock增加require后会报循环调用的错误，同时打包会存在问题，故取消，只允许传数据
-  const a = await mock('a', 1000);
-  expect(a).toBe('a');
+  expect(mock('a', 1000)).resolves.toBe('a');
   expect(mock({ rows: 2 })).resolves.toMatchObject({ rows: 2 });
 });
 

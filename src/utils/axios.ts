@@ -141,7 +141,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError: (error: _AxiosError) => Error | null = (error) => {
+export const handleError: (error: _AxiosError) => AxiosError | null = (error) => {
   const config = error.config || {};
   const str = config.params || config.data || {};
   const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -155,7 +155,7 @@ export const handleError: (error: _AxiosError) => Error | null = (error) => {
     return null;
   }
 
-  config.url += `${id ? `${id}/${nonce}` : ''}?${qs.stringify(params)}`;
+  config.url += `${id ? `${id}/${nonce}` : ''}${params ? `?${qs.stringify(params)}` : ''}`;
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
@@ -170,15 +170,13 @@ export const handleError: (error: _AxiosError) => Error | null = (error) => {
       description: errortext || '',
       duration: 10,
     });
-    return new Error(
-      JSON.stringify({
-        status,
-        message: `请求错误: ${config.url}`,
-        description: `${errortext || ''}`,
-        url: error.config.url || '',
-        params,
-      }),
-    );
+    return {
+      status,
+      message: `请求错误: ${config.url}`,
+      description: `${errortext || ''}`,
+      url: error.config.url || '',
+      params,
+    };
   }
   if (error.request) {
     // The request was made but no response was received
@@ -186,14 +184,12 @@ export const handleError: (error: _AxiosError) => Error | null = (error) => {
     // http.ClientRequest in node.js
     // console.log(error.request);
   }
-  return new Error(
-    JSON.stringify({
-      message: '请求错误',
-      description: error.message || '',
-      url: (config && config.url) || '',
-      params,
-    }),
-  );
+  return {
+    message: '请求错误',
+    description: error.message || '',
+    url: (config && config.url) || '',
+    params,
+  };
 };
 
 export const handleData: <T extends IAxiosState>({ data }: AxiosResponse<T>) => T = ({ data }) => {
@@ -264,5 +260,5 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
       ],
     })(option)
     .then(handleData)
-    .catch(handleError);
+    .catch((e) => Promise.reject(handleError(e)));
 };

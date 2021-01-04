@@ -107,7 +107,8 @@ export const handleSimpleMode = (option, config) => {
     return option;
   }
 
-  const { xAxis, yAxis } = option;
+  const { yAxis } = option;
+  let { xAxis } = option;
   if (yAxis && yAxis.name) {
     Reflect.deleteProperty(yAxis, 'name');
   }
@@ -813,7 +814,8 @@ export function getPercentWithPrecision(
   valueList: (number | '-')[],
   precision: number = 2,
 ): number[] {
-  const sum = valueList.reduce((acc, val) => acc + (Number.isNaN(val) ? 0 : val), 0);
+  const sum = valueList.reduce((acc, val) => acc + (Number.isNaN(val) || val === '-' ? 0 : val), 0);
+  // console.log(sum);
   if (sum === 0) {
     return valueList.map(() => 0);
   }

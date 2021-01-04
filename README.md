@@ -1,6 +1,8 @@
 # dashboard
 [dashboard manager](https://github.com/realeve/dashboard)
 
+[![Coverage Status](https://coveralls.io/repos/github/realeve/dashboard/badge.svg?branch=master)](https://coveralls.io/github/realeve/dashboard?branch=master)
+
 ## 图表配置页面
 
 [http://localhost:8000/config](http://localhost:8000/config)

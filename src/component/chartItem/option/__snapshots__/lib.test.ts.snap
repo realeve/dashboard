@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFontConfig 1`] = `
+Array [
+  Object {
+    "title": "文字样式",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": 18,
+    "key": "fontSize",
+    "max": 100,
+    "min": 12,
+    "step": 1,
+    "title": "字号",
+    "type": "range",
+  },
+  Object {
+    "defaultValue": "normal",
+    "key": "fontWeight",
+    "option": Array [
+      Object {
+        "title": <div
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "lighter",
+            }
+          }
+        >
+          Aa
+        </div>,
+        "value": "lighter",
+      },
+      Object {
+        "title": <div
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "normal",
+            }
+          }
+        >
+          Aa
+        </div>,
+        "value": "normal",
+      },
+      Object {
+        "title": <div
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Aa
+        </div>,
+        "value": "bold",
+      },
+      Object {
+        "title": <div
+          style={
+            Object {
+              "fontSize": 18,
+              "fontWeight": "bolder",
+            }
+          }
+        >
+          Aa
+        </div>,
+        "value": "bolder",
+      },
+    ],
+    "title": "加粗",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": "center",
+    "key": "textAlign",
+    "option": Array [
+      Object {
+        "title": <AlignLeftIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "left",
+      },
+      Object {
+        "title": <AlignCenterIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "center",
+      },
+      Object {
+        "title": <AlignRightIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "right",
+      },
+    ],
+    "title": "对齐",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": "#f2f2f2",
+    "key": "fontColor",
+    "title": "颜色",
+    "type": "purecolor",
+  },
+  Object {
+    "defaultValue": 0,
+    "key": "letterSpacing",
+    "max": 100,
+    "min": 0,
+    "step": 1,
+    "title": "字间距",
+    "type": "range",
+  },
+]
+`;

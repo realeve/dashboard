@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`错误处理 1`] = `
+Object {
+  "description": "请求错误",
+  "message": "请求错误",
+  "params": Object {},
+  "url": "undefined?",
+}
+`;
+
+exports[`错误处理 2`] = `
+Object {
+  "description": "msg",
+  "message": "请求错误",
+  "params": Object {
+    "{\\"id\\":1,\\"nonce\\":2,}": "",
+  },
+  "url": "1?%7B%22id%22%3A1%2C%22nonce%22%3A2%2C%7D=",
+}
+`;
+
+exports[`错误处理 3`] = `
+Object {
+  "description": "msg",
+  "message": "请求错误",
+  "params": Object {
+    "{\\"id\\":1,\\"nonce\\":2,}": "",
+  },
+  "url": "null?%7B%22id%22%3A1%2C%22nonce%22%3A2%2C%7D=",
+}
+`;
+
+exports[`错误处理 4`] = `
+Object {
+  "description": "内容出错",
+  "message": "请求错误",
+  "params": Object {},
+  "url": "undefined?",
+}
+`;

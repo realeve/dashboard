@@ -531,7 +531,7 @@ test('getLegendOption ', () => {
 });
 
 test('getFontConfig', () => {
-  expect(lib.getFontConfig()).toHaveLength(5);
+  expect(lib.getFontConfig()).toMatchSnapshot();
 });
 
 test('getPositionConfig', () => {
