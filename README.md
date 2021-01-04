@@ -14,11 +14,13 @@
 > npm run build
 ## 路由列表
 
-[图表配置页面](http://localhost:8000/config)
+[图表配置页面](http://localhost:8000/config):http://localhost:8000/config
 
-[首页](http://localhost:8000/)
+[首页](http://localhost:8000/):http://localhost:8000/
 
-[大屏列表](http://localhost:8000/list)
+http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
+
+[大屏列表](http://localhost:8000/list):http://localhost:8000/list
   
 ----
 ## 开发时，添加组件

@@ -537,3 +537,10 @@ test('getFontConfig', () => {
 test('getPositionConfig', () => {
   expect(lib.getPositionConfig().length).toBeGreaterThan(4);
 });
+
+test('isColor', () => {
+  expect(lib.isColor('#223344')).toBeTruthy();
+  expect(lib.isColor('rgb(2,3,4)')).toBeTruthy();
+  expect(lib.isColor('rgba(2,3,4,1)')).toBeTruthy();
+  expect(lib.isColor('rgbas(2,3,4,1)')).toBeFalsy();
+});
