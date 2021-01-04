@@ -9,6 +9,7 @@ mock
 .test.js
 .test.ts
 .test.tsx
+*.test.*
 .png
 .gif
 .webp

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Radio } from 'antd';
 import styles from '../ColorPicker/index.less';
 import classnames from 'classnames';
@@ -7,7 +8,7 @@ export interface IRadioProps {
   value: string | number;
   onChange: (e: string) => void;
   disabled?: boolean;
-  config: { title: string | React.ReactNode; value: string }[];
+  config?: { title: string | React.ReactNode; value: string }[];
   className?: string;
 }
 

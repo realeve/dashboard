@@ -1,0 +1,2882 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`绘画板 1`] = `
+Array [
+  Object {
+    "color": "rgb(255, 255, 255)",
+    "title": "白色",
+  },
+  Object {
+    "color": "rgb(250, 250, 250)",
+    "title": "雪花白",
+  },
+  Object {
+    "color": "rgb(245, 245, 245)",
+    "title": "炊烟白",
+  },
+  Object {
+    "color": "rgb(232, 232, 232)",
+    "title": "马鞭草紫",
+  },
+  Object {
+    "color": "rgb(217, 217, 217)",
+    "title": "泰坦白",
+  },
+  Object {
+    "color": "rgb(191, 191, 191)",
+    "title": "银白色",
+  },
+  Object {
+    "color": "rgb(140, 140, 140)",
+    "title": "明灰",
+  },
+  Object {
+    "color": "rgb(89, 89, 89)",
+    "title": "狼烟灰",
+  },
+  Object {
+    "color": "rgb(38, 38, 38)",
+    "title": "象牙黑",
+  },
+  Object {
+    "color": "rgb(0, 0, 0)",
+    "title": "黑色",
+  },
+  Object {
+    "color": "rgb(255, 241, 240)",
+    "title": "汉白玉",
+  },
+  Object {
+    "color": "rgb(255, 204, 199)",
+    "title": "淡桃红",
+  },
+  Object {
+    "color": "rgb(255, 163, 158)",
+    "title": "牡丹粉红",
+  },
+  Object {
+    "color": "rgb(255, 120, 117)",
+    "title": "鲑红",
+  },
+  Object {
+    "color": "rgb(255, 77, 79)",
+    "title": "桂红",
+  },
+  Object {
+    "color": "rgb(245, 34, 45)",
+    "title": "秋海棠红",
+  },
+  Object {
+    "color": "rgb(207, 19, 34)",
+    "title": "鹅冠红",
+  },
+  Object {
+    "color": "rgb(168, 7, 26)",
+    "title": "探戈红",
+  },
+  Object {
+    "color": "rgb(130, 0, 20)",
+    "title": "殷红",
+  },
+  Object {
+    "color": "rgb(92, 0, 17),s",
+    "title": "石竹紫",
+  },
+  Object {
+    "color": "rgb(255, 251, 230)",
+    "title": "花卉白",
+  },
+  Object {
+    "color": "rgb(255, 241, 184)",
+    "title": "豆汁黄",
+  },
+  Object {
+    "color": "rgb(255, 229, 143)",
+    "title": "篾黄",
+  },
+  Object {
+    "color": "rgb(255, 214, 102)",
+    "title": "淡密黄",
+  },
+  Object {
+    "color": "rgb(255, 197, 61)",
+    "title": "雅梨黄",
+  },
+  Object {
+    "color": "rgb(250, 173, 20)",
+    "title": "淡橘橙",
+  },
+  Object {
+    "color": "rgb(212, 136, 6)",
+    "title": "芥黄",
+  },
+  Object {
+    "color": "rgb(173, 104, 0)",
+    "title": "秋枫褐",
+  },
+  Object {
+    "color": "rgb(135, 77, 0)",
+    "title": "芒果棕",
+  },
+  Object {
+    "color": "rgb(97, 52, 0),s",
+    "title": "咖啡色",
+  },
+  Object {
+    "color": "rgb(232, 245, 233)",
+    "title": "嫩菊绿",
+  },
+  Object {
+    "color": "rgb(201, 229, 202)",
+    "title": "淡翠绿",
+  },
+  Object {
+    "color": "rgb(166, 213, 169)",
+    "title": "嘉陵水绿",
+  },
+  Object {
+    "color": "rgb(131, 198, 134)",
+    "title": "夏绿色",
+  },
+  Object {
+    "color": "rgb(105, 186, 109)",
+    "title": "淡绿",
+  },
+  Object {
+    "color": "rgb(80, 174, 85)",
+    "title": "玉髓绿",
+  },
+  Object {
+    "color": "rgb(70, 159, 75)",
+    "title": "鲜绿",
+  },
+  Object {
+    "color": "rgb(60, 141, 64)",
+    "title": "宫殿绿",
+  },
+  Object {
+    "color": "rgb(50, 124, 54)",
+    "title": "薄荷绿",
+  },
+  Object {
+    "color": "rgb(30, 93, 35)",
+    "title": "荷叶绿",
+  },
+  Object {
+    "color": "rgb(230, 247, 255)",
+    "title": "爱丽丝蓝",
+  },
+  Object {
+    "color": "rgb(186, 231, 255)",
+    "title": "海天蓝",
+  },
+  Object {
+    "color": "rgb(145, 213, 255)",
+    "title": "蓝松石",
+  },
+  Object {
+    "color": "rgb(105, 192, 255)",
+    "title": "霁青",
+  },
+  Object {
+    "color": "rgb(64, 169, 255)",
+    "title": "道奇蓝",
+  },
+  Object {
+    "color": "rgb(24, 144, 255)",
+    "title": "道奇蓝",
+  },
+  Object {
+    "color": "rgb(9, 109, 217)",
+    "title": "群青",
+  },
+  Object {
+    "color": "rgb(0, 80, 179)",
+    "title": "飞燕草蓝",
+  },
+  Object {
+    "color": "rgb(0, 58, 140)",
+    "title": "鷃蓝",
+  },
+  Object {
+    "color": "rgb(0, 39, 102)",
+    "title": "酷黑",
+  },
+  Object {
+    "color": "rgb(243, 229, 245)",
+    "title": "银白",
+  },
+  Object {
+    "color": "rgb(224, 191, 230)",
+    "title": "淡青紫",
+  },
+  Object {
+    "color": "rgb(205, 149, 214)",
+    "title": "凤信紫",
+  },
+  Object {
+    "color": "rgb(185, 107, 198)",
+    "title": "青蛤壳紫",
+  },
+  Object {
+    "color": "rgb(170, 76, 186)",
+    "title": "豆蔻紫",
+  },
+  Object {
+    "color": "rgb(155, 47, 174)",
+    "title": "芥花紫",
+  },
+  Object {
+    "color": "rgb(141, 44, 168)",
+    "title": "桔梗紫",
+  },
+  Object {
+    "color": "rgb(122, 39, 160)",
+    "title": "桔梗紫",
+  },
+  Object {
+    "color": "rgb(105, 35, 152)",
+    "title": "桔梗紫",
+  },
+  Object {
+    "color": "rgb(74, 28, 138)",
+    "title": "铁兰紫",
+  },
+  Object {
+    "color": "rgb(70,72,95)",
+    "title": "胜色",
+  },
+  Object {
+    "color": "rgb(66,106,179)",
+    "title": "杜若色",
+  },
+  Object {
+    "color": "rgb(42,92,170)",
+    "title": "琉璃色",
+  },
+  Object {
+    "color": "rgb(129,119,110)",
+    "title": "深灰",
+  },
+  Object {
+    "color": "rgb(128,118,110)",
+    "title": "雁灰",
+  },
+  Object {
+    "color": "rgb(132,124,116)",
+    "title": "夜灰",
+  },
+  Object {
+    "color": "rgb(134,126,118)",
+    "title": "瓦灰",
+  },
+  Object {
+    "color": "rgb(187,181,172)",
+    "title": "中灰",
+  },
+  Object {
+    "color": "rgb(218,212,203)",
+    "title": "浅灰",
+  },
+  Object {
+    "color": "rgb(228,223,215)",
+    "title": "珍珠灰",
+  },
+  Object {
+    "color": "rgb(247,244,237)",
+    "title": "鱼肚白",
+  },
+  Object {
+    "color": "rgb(255,254,249)",
+    "title": "雪白",
+  },
+  Object {
+    "color": "rgb(248,244,237)",
+    "title": "汉白玉",
+  },
+  Object {
+    "color": "rgb(255,254,248)",
+    "title": "象牙白",
+  },
+  Object {
+    "color": "rgb(91,174,35)",
+    "title": "鹦鹉绿",
+  },
+  Object {
+    "color": "rgb(190,201,54)",
+    "title": "橄榄黄绿",
+  },
+  Object {
+    "color": "rgb(226,216,73)",
+    "title": "蝶黄",
+  },
+  Object {
+    "color": "rgb(150,194,78)",
+    "title": "芽绿",
+  },
+  Object {
+    "color": "rgb(186,207,101)",
+    "title": "苹果绿",
+  },
+  Object {
+    "color": "rgb(210,217,122)",
+    "title": "槐花黄绿",
+  },
+  Object {
+    "color": "rgb(183,208,122)",
+    "title": "芦苇绿",
+  },
+  Object {
+    "color": "rgb(140,194,105)",
+    "title": "水绿",
+  },
+  Object {
+    "color": "rgb(178,207,135)",
+    "title": "橄榄石绿",
+  },
+  Object {
+    "color": "rgb(208,222,170)",
+    "title": "姚黄",
+  },
+  Object {
+    "color": "rgb(226,231,191)",
+    "title": "海沬绿",
+  },
+  Object {
+    "color": "rgb(65,174,60)",
+    "title": "宝石绿",
+  },
+  Object {
+    "color": "rgb(67,178,68)",
+    "title": "鲜绿",
+  },
+  Object {
+    "color": "rgb(65,179,73)",
+    "title": "玉髓绿",
+  },
+  Object {
+    "color": "rgb(173,213,162)",
+    "title": "嘉陵水绿",
+  },
+  Object {
+    "color": "rgb(223,236,213)",
+    "title": "艾背绿",
+  },
+  Object {
+    "color": "rgb(240,245,229)",
+    "title": "嫩菊绿",
+  },
+  Object {
+    "color": "rgb(43,49,44)",
+    "title": "槲寄生绿",
+  },
+  Object {
+    "color": "rgb(55,56,52)",
+    "title": "蒽油绿",
+  },
+  Object {
+    "color": "rgb(57,55,51)",
+    "title": "河豚灰",
+  },
+  Object {
+    "color": "rgb(72,91,77)",
+    "title": "白屈菜绿",
+  },
+  Object {
+    "color": "rgb(94,102,91)",
+    "title": "田螺绿",
+  },
+  Object {
+    "color": "rgb(26,104,64)",
+    "title": "荷叶绿",
+  },
+  Object {
+    "color": "rgb(110,139,116)",
+    "title": "瓦松绿",
+  },
+  Object {
+    "color": "rgb(32,127,76)",
+    "title": "薄荷绿",
+  },
+  Object {
+    "color": "rgb(87,149,114)",
+    "title": "蛋白石绿",
+  },
+  Object {
+    "color": "rgb(131,167,141)",
+    "title": "松霜绿",
+  },
+  Object {
+    "color": "rgb(32,137,77)",
+    "title": "宫殿绿",
+  },
+  Object {
+    "color": "rgb(60,149,102)",
+    "title": "蟾绿",
+  },
+  Object {
+    "color": "rgb(202,211,195)",
+    "title": "艾绿",
+  },
+  Object {
+    "color": "rgb(34,148,83)",
+    "title": "孔雀绿",
+  },
+  Object {
+    "color": "rgb(64,160,112)",
+    "title": "葱绿",
+  },
+  Object {
+    "color": "rgb(97,172,133)",
+    "title": "淡绿",
+  },
+  Object {
+    "color": "rgb(32,161,98)",
+    "title": "翠绿",
+  },
+  Object {
+    "color": "rgb(104,184,142)",
+    "title": "田园绿",
+  },
+  Object {
+    "color": "rgb(158,204,171)",
+    "title": "明绿",
+  },
+  Object {
+    "color": "rgb(198,223,200)",
+    "title": "淡翠绿",
+  },
+  Object {
+    "color": "rgb(20,30,27)",
+    "title": "莽丛绿",
+  },
+  Object {
+    "color": "rgb(31,38,35)",
+    "title": "苷蓝绿",
+  },
+  Object {
+    "color": "rgb(54,52,51)",
+    "title": "长石灰",
+  },
+  Object {
+    "color": "rgb(26,59,50)",
+    "title": "深海绿",
+  },
+  Object {
+    "color": "rgb(34,62,54)",
+    "title": "苍绿",
+  },
+  Object {
+    "color": "rgb(49,74,67)",
+    "title": "绿灰",
+  },
+  Object {
+    "color": "rgb(93,101,95)",
+    "title": "狼烟灰",
+  },
+  Object {
+    "color": "rgb(73,117,104)",
+    "title": "飞泉绿",
+  },
+  Object {
+    "color": "rgb(112,136,125)",
+    "title": "淡绿灰",
+  },
+  Object {
+    "color": "rgb(138,152,142)",
+    "title": "明灰",
+  },
+  Object {
+    "color": "rgb(159,163,154)",
+    "title": "镍灰",
+  },
+  Object {
+    "color": "rgb(66,134,117)",
+    "title": "亚丁绿",
+  },
+  Object {
+    "color": "rgb(36,128,103)",
+    "title": "海王绿",
+  },
+  Object {
+    "color": "rgb(146,179,165)",
+    "title": "浪花绿",
+  },
+  Object {
+    "color": "rgb(105,167,148)",
+    "title": "梧枝绿",
+  },
+  Object {
+    "color": "rgb(154,190,175)",
+    "title": "草原远绿",
+  },
+  Object {
+    "color": "rgb(44,150,120)",
+    "title": "青矾绿",
+  },
+  Object {
+    "color": "rgb(164,202,182)",
+    "title": "玉簪绿",
+  },
+  Object {
+    "color": "rgb(19,44,51)",
+    "title": "深灰蓝",
+  },
+  Object {
+    "color": "rgb(33,55,61)",
+    "title": "灰蓝",
+  },
+  Object {
+    "color": "rgb(71,75,76)",
+    "title": "黄昏灰",
+  },
+  Object {
+    "color": "rgb(19,72,87)",
+    "title": "苍蓝",
+  },
+  Object {
+    "color": "rgb(97,113,114)",
+    "title": "夏云灰",
+  },
+  Object {
+    "color": "rgb(115,124,123)",
+    "title": "垩灰",
+  },
+  Object {
+    "color": "rgb(18,110,130)",
+    "title": "玉鈫蓝",
+  },
+  Object {
+    "color": "rgb(59,129,140)",
+    "title": "蜻蜓蓝",
+  },
+  Object {
+    "color": "rgb(100,142,147)",
+    "title": "晚波蓝",
+  },
+  Object {
+    "color": "rgb(134,157,157)",
+    "title": "虾壳青",
+  },
+  Object {
+    "color": "rgb(164,172,167)",
+    "title": "冰山蓝",
+  },
+  Object {
+    "color": "rgb(124,171,177)",
+    "title": "闪蓝",
+  },
+  Object {
+    "color": "rgb(20,145,168)",
+    "title": "樫鸟蓝",
+  },
+  Object {
+    "color": "rgb(15,149,176)",
+    "title": "胆矾蓝",
+  },
+  Object {
+    "color": "rgb(30,158,179)",
+    "title": "翠蓝",
+  },
+  Object {
+    "color": "rgb(196,215,214)",
+    "title": "穹灰",
+  },
+  Object {
+    "color": "rgb(18,161,130)",
+    "title": "蓝绿",
+  },
+  Object {
+    "color": "rgb(27,167,132)",
+    "title": "竹绿",
+  },
+  Object {
+    "color": "rgb(43,174,133)",
+    "title": "铜绿",
+  },
+  Object {
+    "color": "rgb(69,183,135)",
+    "title": "蛙绿",
+  },
+  Object {
+    "color": "rgb(85,187,138)",
+    "title": "麦苗绿",
+  },
+  Object {
+    "color": "rgb(93,190,138)",
+    "title": "蔻梢绿",
+  },
+  Object {
+    "color": "rgb(102,193,140)",
+    "title": "毛绿",
+  },
+  Object {
+    "color": "rgb(18,170,156)",
+    "title": "美蝶绿",
+  },
+  Object {
+    "color": "rgb(131,203,172)",
+    "title": "粉绿",
+  },
+  Object {
+    "color": "rgb(185,222,201)",
+    "title": "竹篁绿",
+  },
+  Object {
+    "color": "rgb(87,195,194)",
+    "title": "石绿",
+  },
+  Object {
+    "color": "rgb(16,174,194)",
+    "title": "甸子蓝",
+  },
+  Object {
+    "color": "rgb(14,176,201)",
+    "title": "孔雀蓝",
+  },
+  Object {
+    "color": "rgb(41,183,203)",
+    "title": "蔚蓝",
+  },
+  Object {
+    "color": "rgb(81,196,211)",
+    "title": "瀑布蓝",
+  },
+  Object {
+    "color": "rgb(147,213,220)",
+    "title": "清水蓝",
+  },
+  Object {
+    "color": "rgb(198,230,232)",
+    "title": "海天蓝",
+  },
+  Object {
+    "color": "rgb(238,247,242)",
+    "title": "月白",
+  },
+  Object {
+    "color": "rgb(16,31,48)",
+    "title": "暗蓝",
+  },
+  Object {
+    "color": "rgb(20,35,52)",
+    "title": "钢青",
+  },
+  Object {
+    "color": "rgb(28,41,56)",
+    "title": "鸽蓝",
+  },
+  Object {
+    "color": "rgb(43,51,62)",
+    "title": "青灰",
+  },
+  Object {
+    "color": "rgb(71,72,76)",
+    "title": "瓦罐灰",
+  },
+  Object {
+    "color": "rgb(73,92,105)",
+    "title": "战舰灰",
+  },
+  Object {
+    "color": "rgb(116,120,122)",
+    "title": "嫩灰",
+  },
+  Object {
+    "color": "rgb(249,244,220)",
+    "title": "乳白",
+  },
+  Object {
+    "color": "rgb(247,232,170)",
+    "title": "杏仁黄",
+  },
+  Object {
+    "color": "rgb(248,223,114)",
+    "title": "茉莉黄",
+  },
+  Object {
+    "color": "rgb(248,223,112)",
+    "title": "麦秆黄",
+  },
+  Object {
+    "color": "rgb(251,218,65)",
+    "title": "油菜花黄",
+  },
+  Object {
+    "color": "rgb(254,215,26)",
+    "title": "佛手黄",
+  },
+  Object {
+    "color": "rgb(247,222,152)",
+    "title": "篾黄",
+  },
+  Object {
+    "color": "rgb(248,216,106)",
+    "title": "葵扇黄",
+  },
+  Object {
+    "color": "rgb(252,211,55)",
+    "title": "柠檬黄",
+  },
+  Object {
+    "color": "rgb(252,210,23)",
+    "title": "金瓜黄",
+  },
+  Object {
+    "color": "rgb(255,209,17)",
+    "title": "藤黄",
+  },
+  Object {
+    "color": "rgb(246,222,173)",
+    "title": "酪黄",
+  },
+  Object {
+    "color": "rgb(247,218,148)",
+    "title": "香水玫瑰黄",
+  },
+  Object {
+    "color": "rgb(249,211,103)",
+    "title": "淡密黄",
+  },
+  Object {
+    "color": "rgb(251,205,49)",
+    "title": "大豆黄",
+  },
+  Object {
+    "color": "rgb(252,203,22)",
+    "title": "素馨黄",
+  },
+  Object {
+    "color": "rgb(254,204,17)",
+    "title": "向日葵黄",
+  },
+  Object {
+    "color": "rgb(251,200,47)",
+    "title": "雅梨黄",
+  },
+  Object {
+    "color": "rgb(252,197,21)",
+    "title": "黄连黄",
+  },
+  Object {
+    "color": "rgb(252,195,7)",
+    "title": "金盏黄",
+  },
+  Object {
+    "color": "rgb(248,195,135)",
+    "title": "蛋壳黄",
+  },
+  Object {
+    "color": "rgb(247,193,115)",
+    "title": "肉色",
+  },
+  Object {
+    "color": "rgb(251,185,41)",
+    "title": "鹅掌黄",
+  },
+  Object {
+    "color": "rgb(251,182,18)",
+    "title": "鸡蛋黄",
+  },
+  Object {
+    "color": "rgb(252,183,10)",
+    "title": "鼬黄",
+  },
+  Object {
+    "color": "rgb(249,166,51)",
+    "title": "榴萼黄",
+  },
+  Object {
+    "color": "rgb(251,164,20)",
+    "title": "淡橘橙",
+  },
+  Object {
+    "color": "rgb(252,161,6)",
+    "title": "枇杷黄",
+  },
+  Object {
+    "color": "rgb(252,161,4)",
+    "title": "橙皮黄",
+  },
+  Object {
+    "color": "rgb(252,140,35)",
+    "title": "北瓜黄",
+  },
+  Object {
+    "color": "rgb(242,142,22)",
+    "title": "杏黄",
+  },
+  Object {
+    "color": "rgb(255,153,0)",
+    "title": "雄黄",
+  },
+  Object {
+    "color": "rgb(251,139,5)",
+    "title": "万寿菊黄",
+  },
+  Object {
+    "color": "rgb(233,221,182)",
+    "title": "菊蕾白",
+  },
+  Object {
+    "color": "rgb(238,208,69)",
+    "title": "秋葵黄",
+  },
+  Object {
+    "color": "rgb(242,206,43)",
+    "title": "硫华黄",
+  },
+  Object {
+    "color": "rgb(241,202,23)",
+    "title": "柚黄",
+  },
+  Object {
+    "color": "rgb(221,200,113)",
+    "title": "芒果黄",
+  },
+  Object {
+    "color": "rgb(223,194,67)",
+    "title": "蒿黄",
+  },
+  Object {
+    "color": "rgb(226,192,39)",
+    "title": "姜黄",
+  },
+  Object {
+    "color": "rgb(228,191,17)",
+    "title": "香蕉黄",
+  },
+  Object {
+    "color": "rgb(210,180,44)",
+    "title": "草黄",
+  },
+  Object {
+    "color": "rgb(210,177,22)",
+    "title": "新禾绿",
+  },
+  Object {
+    "color": "rgb(183,174,143)",
+    "title": "月灰",
+  },
+  Object {
+    "color": "rgb(173,158,95)",
+    "title": "淡灰绿",
+  },
+  Object {
+    "color": "rgb(142,128,75)",
+    "title": "草灰绿",
+  },
+  Object {
+    "color": "rgb(136,115,34)",
+    "title": "苔绿",
+  },
+  Object {
+    "color": "rgb(134,112,24)",
+    "title": "碧螺春绿",
+  },
+  Object {
+    "color": "rgb(104,94,72)",
+    "title": "燕羽灰",
+  },
+  Object {
+    "color": "rgb(105,94,69)",
+    "title": "蟹壳灰",
+  },
+  Object {
+    "color": "rgb(100,88,34)",
+    "title": "潭水绿",
+  },
+  Object {
+    "color": "rgb(94,83,20)",
+    "title": "橄榄绿",
+  },
+  Object {
+    "color": "rgb(249,241,219)",
+    "title": "蚌肉白",
+  },
+  Object {
+    "color": "rgb(248,232,193)",
+    "title": "豆汁黄",
+  },
+  Object {
+    "color": "rgb(249,215,112)",
+    "title": "淡茧黄",
+  },
+  Object {
+    "color": "rgb(255,201,12)",
+    "title": "乳鸭黄",
+  },
+  Object {
+    "color": "rgb(242,230,206)",
+    "title": "荔肉白",
+  },
+  Object {
+    "color": "rgb(240,214,149)",
+    "title": "象牙黄",
+  },
+  Object {
+    "color": "rgb(244,206,105)",
+    "title": "炒米黄",
+  },
+  Object {
+    "color": "rgb(246,196,48)",
+    "title": "鹦鹉冠黄",
+  },
+  Object {
+    "color": "rgb(249,193,22)",
+    "title": "木瓜黄",
+  },
+  Object {
+    "color": "rgb(249,189,16)",
+    "title": "浅烙黄",
+  },
+  Object {
+    "color": "rgb(229,211,170)",
+    "title": "莲子白",
+  },
+  Object {
+    "color": "rgb(232,176,4)",
+    "title": "谷黄",
+  },
+  Object {
+    "color": "rgb(235,177,13)",
+    "title": "栀子黄",
+  },
+  Object {
+    "color": "rgb(217,164,14)",
+    "title": "芥黄",
+  },
+  Object {
+    "color": "rgb(181,170,144)",
+    "title": "银鼠灰",
+  },
+  Object {
+    "color": "rgb(182,164,118)",
+    "title": "尘灰",
+  },
+  Object {
+    "color": "rgb(183,141,18)",
+    "title": "枯绿",
+  },
+  Object {
+    "color": "rgb(135,114,62)",
+    "title": "鲛青",
+  },
+  Object {
+    "color": "rgb(135,104,24)",
+    "title": "粽叶绿",
+  },
+  Object {
+    "color": "rgb(138,105,19)",
+    "title": "灰绿",
+  },
+  Object {
+    "color": "rgb(74,64,53)",
+    "title": "鹤灰",
+  },
+  Object {
+    "color": "rgb(77,64,48)",
+    "title": "淡松烟",
+  },
+  Object {
+    "color": "rgb(88,71,23)",
+    "title": "暗海水绿",
+  },
+  Object {
+    "color": "rgb(91,73,19)",
+    "title": "棕榈绿",
+  },
+  Object {
+    "color": "rgb(249,233,205)",
+    "title": "米色",
+  },
+  Object {
+    "color": "rgb(248,224,176)",
+    "title": "淡肉色",
+  },
+  Object {
+    "color": "rgb(249,210,125)",
+    "title": "麦芽糖黄",
+  },
+  Object {
+    "color": "rgb(254,186,7)",
+    "title": "琥珀黄",
+  },
+  Object {
+    "color": "rgb(243,191,76)",
+    "title": "甘草黄",
+  },
+  Object {
+    "color": "rgb(248,188,49)",
+    "title": "初熟杏黄",
+  },
+  Object {
+    "color": "rgb(226,193,124)",
+    "title": "浅驼色",
+  },
+  Object {
+    "color": "rgb(229,183,81)",
+    "title": "沙石黄",
+  },
+  Object {
+    "color": "rgb(234,173,26)",
+    "title": "虎皮黄",
+  },
+  Object {
+    "color": "rgb(214,160,29)",
+    "title": "土黄",
+  },
+  Object {
+    "color": "rgb(180,169,146)",
+    "title": "百灵鸟灰",
+  },
+  Object {
+    "color": "rgb(183,139,38)",
+    "title": "山鸡黄",
+  },
+  Object {
+    "color": "rgb(130,107,72)",
+    "title": "龟背黄",
+  },
+  Object {
+    "color": "rgb(128,99,50)",
+    "title": "苍黄",
+  },
+  Object {
+    "color": "rgb(129,95,37)",
+    "title": "莱阳梨黄",
+  },
+  Object {
+    "color": "rgb(131,94,29)",
+    "title": "蜴蜊绿",
+  },
+  Object {
+    "color": "rgb(79,64,50)",
+    "title": "松鼠灰",
+  },
+  Object {
+    "color": "rgb(80,62,42)",
+    "title": "橄榄灰",
+  },
+  Object {
+    "color": "rgb(81,60,32)",
+    "title": "蟹壳绿",
+  },
+  Object {
+    "color": "rgb(83,60,27)",
+    "title": "古铜绿",
+  },
+  Object {
+    "color": "rgb(85,59,24)",
+    "title": "焦茶绿",
+  },
+  Object {
+    "color": "rgb(251,242,227)",
+    "title": "粉白",
+  },
+  Object {
+    "color": "rgb(249,232,208)",
+    "title": "落英淡粉",
+  },
+  Object {
+    "color": "rgb(249,203,139)",
+    "title": "瓜瓤粉",
+  },
+  Object {
+    "color": "rgb(251,185,87)",
+    "title": "蜜黄",
+  },
+  Object {
+    "color": "rgb(255,166,15)",
+    "title": "金叶黄",
+  },
+  Object {
+    "color": "rgb(244,168,58)",
+    "title": "金莺黄",
+  },
+  Object {
+    "color": "rgb(227,189,141)",
+    "title": "鹿角棕",
+  },
+  Object {
+    "color": "rgb(231,162,63)",
+    "title": "凋叶棕",
+  },
+  Object {
+    "color": "rgb(218,164,90)",
+    "title": "玳瑁黄",
+  },
+  Object {
+    "color": "rgb(222,158,68)",
+    "title": "软木黄",
+  },
+  Object {
+    "color": "rgb(220,145,35)",
+    "title": "风帆黄",
+  },
+  Object {
+    "color": "rgb(192,147,81)",
+    "title": "桂皮淡棕",
+  },
+  Object {
+    "color": "rgb(151,132,108)",
+    "title": "猴毛灰",
+  },
+  Object {
+    "color": "rgb(152,101,36)",
+    "title": "山鸡褐",
+  },
+  Object {
+    "color": "rgb(102,70,42)",
+    "title": "驼色",
+  },
+  Object {
+    "color": "rgb(93,61,33)",
+    "title": "茶褐",
+  },
+  Object {
+    "color": "rgb(92,55,25)",
+    "title": "古铜褐",
+  },
+  Object {
+    "color": "rgb(251,236,222)",
+    "title": "荷花白",
+  },
+  Object {
+    "color": "rgb(248,179,127)",
+    "title": "玫瑰粉",
+  },
+  Object {
+    "color": "rgb(249,125,28)",
+    "title": "橘橙",
+  },
+  Object {
+    "color": "rgb(250,126,35)",
+    "title": "美人焦橙",
+  },
+  Object {
+    "color": "rgb(247,205,188)",
+    "title": "润红",
+  },
+  Object {
+    "color": "rgb(246,206,193)",
+    "title": "淡桃红",
+  },
+  Object {
+    "color": "rgb(240,148,93)",
+    "title": "海螺橙",
+  },
+  Object {
+    "color": "rgb(240,173,160)",
+    "title": "桃红",
+  },
+  Object {
+    "color": "rgb(238,170,156)",
+    "title": "颊红",
+  },
+  Object {
+    "color": "rgb(238,160,140)",
+    "title": "淡罂粟红",
+  },
+  Object {
+    "color": "rgb(234,137,88)",
+    "title": "晨曦红",
+  },
+  Object {
+    "color": "rgb(242,118,53)",
+    "title": "蟹壳红",
+  },
+  Object {
+    "color": "rgb(248,107,29)",
+    "title": "金莲花橙",
+  },
+  Object {
+    "color": "rgb(239,111,72)",
+    "title": "草莓红",
+  },
+  Object {
+    "color": "rgb(239,99,43)",
+    "title": "龙睛鱼红",
+  },
+  Object {
+    "color": "rgb(241,68,29)",
+    "title": "蜻蜓红",
+  },
+  Object {
+    "color": "rgb(240,75,34)",
+    "title": "大红",
+  },
+  Object {
+    "color": "rgb(242,72,27)",
+    "title": "柿红",
+  },
+  Object {
+    "color": "rgb(243,71,24)",
+    "title": "榴花红",
+  },
+  Object {
+    "color": "rgb(244,62,6)",
+    "title": "银朱",
+  },
+  Object {
+    "color": "rgb(237,81,38)",
+    "title": "朱红",
+  },
+  Object {
+    "color": "rgb(240,156,90)",
+    "title": "鲑鱼红",
+  },
+  Object {
+    "color": "rgb(242,107,31)",
+    "title": "金黄",
+  },
+  Object {
+    "color": "rgb(217,145,86)",
+    "title": "鹿皮褐",
+  },
+  Object {
+    "color": "rgb(219,133,64)",
+    "title": "醉瓜肉",
+  },
+  Object {
+    "color": "rgb(222,118,34)",
+    "title": "麂棕",
+  },
+  Object {
+    "color": "rgb(193,178,163)",
+    "title": "淡银灰",
+  },
+  Object {
+    "color": "rgb(190,126,74)",
+    "title": "淡赭",
+  },
+  Object {
+    "color": "rgb(193,101,26)",
+    "title": "槟榔综",
+  },
+  Object {
+    "color": "rgb(145,128,114)",
+    "title": "银灰",
+  },
+  Object {
+    "color": "rgb(154,136,120)",
+    "title": "海鸥灰",
+  },
+  Object {
+    "color": "rgb(148,88,51)",
+    "title": "淡咖啡",
+  },
+  Object {
+    "color": "rgb(150,77,34)",
+    "title": "岩石棕",
+  },
+  Object {
+    "color": "rgb(149,68,22)",
+    "title": "芒果棕",
+  },
+  Object {
+    "color": "rgb(98,73,65)",
+    "title": "石板灰",
+  },
+  Object {
+    "color": "rgb(100,72,61)",
+    "title": "珠母灰",
+  },
+  Object {
+    "color": "rgb(113,54,29)",
+    "title": "丁香棕",
+  },
+  Object {
+    "color": "rgb(117,49,23)",
+    "title": "咖啡",
+  },
+  Object {
+    "color": "rgb(115,46,18)",
+    "title": "筍皮棕",
+  },
+  Object {
+    "color": "rgb(252,99,21)",
+    "title": "燕颔红",
+  },
+  Object {
+    "color": "rgb(232,180,154)",
+    "title": "玉粉红",
+  },
+  Object {
+    "color": "rgb(228,104,40)",
+    "title": "金驼",
+  },
+  Object {
+    "color": "rgb(216,89,22)",
+    "title": "铁棕",
+  },
+  Object {
+    "color": "rgb(183,160,145)",
+    "title": "蛛网灰",
+  },
+  Object {
+    "color": "rgb(183,81,29)",
+    "title": "淡可可棕",
+  },
+  Object {
+    "color": "rgb(139,97,77)",
+    "title": "中红灰",
+  },
+  Object {
+    "color": "rgb(140,75,49)",
+    "title": "淡土黄",
+  },
+  Object {
+    "color": "rgb(135,61,36)",
+    "title": "淡豆沙",
+  },
+  Object {
+    "color": "rgb(136,58,30)",
+    "title": "椰壳棕",
+  },
+  Object {
+    "color": "rgb(91,66,58)",
+    "title": "淡铁灰",
+  },
+  Object {
+    "color": "rgb(96,61,48)",
+    "title": "中灰驼",
+  },
+  Object {
+    "color": "rgb(103,52,36)",
+    "title": "淡栗棕",
+  },
+  Object {
+    "color": "rgb(101,43,28)",
+    "title": "可可棕",
+  },
+  Object {
+    "color": "rgb(105,42,27)",
+    "title": "柞叶棕",
+  },
+  Object {
+    "color": "rgb(251,153,104)",
+    "title": "野蔷薇红",
+  },
+  Object {
+    "color": "rgb(252,121,48)",
+    "title": "菠萝红",
+  },
+  Object {
+    "color": "rgb(237,195,174)",
+    "title": "藕荷",
+  },
+  Object {
+    "color": "rgb(225,103,35)",
+    "title": "陶瓷红",
+  },
+  Object {
+    "color": "rgb(212,196,183)",
+    "title": "晓灰",
+  },
+  Object {
+    "color": "rgb(207,117,67)",
+    "title": "余烬红",
+  },
+  Object {
+    "color": "rgb(205,98,39)",
+    "title": "火砖红",
+  },
+  Object {
+    "color": "rgb(170,106,76)",
+    "title": "火泥棕",
+  },
+  Object {
+    "color": "rgb(166,82,44)",
+    "title": "绀红",
+  },
+  Object {
+    "color": "rgb(119,61,49)",
+    "title": "橡树棕",
+  },
+  Object {
+    "color": "rgb(72,51,50)",
+    "title": "海报灰",
+  },
+  Object {
+    "color": "rgb(75,46,43)",
+    "title": "玫瑰灰",
+  },
+  Object {
+    "color": "rgb(72,37,34)",
+    "title": "火山棕",
+  },
+  Object {
+    "color": "rgb(72,30,28)",
+    "title": "豆沙",
+  },
+  Object {
+    "color": "rgb(251,238,226)",
+    "title": "淡米粉",
+  },
+  Object {
+    "color": "rgb(246,220,206)",
+    "title": "初桃粉红",
+  },
+  Object {
+    "color": "rgb(247,207,186)",
+    "title": "介壳淡粉红",
+  },
+  Object {
+    "color": "rgb(246,173,143)",
+    "title": "淡藏花红",
+  },
+  Object {
+    "color": "rgb(246,140,96)",
+    "title": "瓜瓤红",
+  },
+  Object {
+    "color": "rgb(249,114,61)",
+    "title": "芙蓉红",
+  },
+  Object {
+    "color": "rgb(250,93,25)",
+    "title": "莓酱红",
+  },
+  Object {
+    "color": "rgb(238,128,85)",
+    "title": "法螺红",
+  },
+  Object {
+    "color": "rgb(207,72,19)",
+    "title": "落霞红",
+  },
+  Object {
+    "color": "rgb(184,148,133)",
+    "title": "淡玫瑰灰",
+  },
+  Object {
+    "color": "rgb(177,75,40)",
+    "title": "蟹蝥红",
+  },
+  Object {
+    "color": "rgb(134,48,32)",
+    "title": "火岩棕",
+  },
+  Object {
+    "color": "rgb(134,38,23)",
+    "title": "赭石",
+  },
+  Object {
+    "color": "rgb(89,38,32)",
+    "title": "暗驼棕",
+  },
+  Object {
+    "color": "rgb(90,31,27)",
+    "title": "酱棕",
+  },
+  Object {
+    "color": "rgb(92,30,25)",
+    "title": "栗棕",
+  },
+  Object {
+    "color": "rgb(244,199,186)",
+    "title": "洋水仙红",
+  },
+  Object {
+    "color": "rgb(241,118,102)",
+    "title": "谷鞘红",
+  },
+  Object {
+    "color": "rgb(241,86,66)",
+    "title": "苹果红",
+  },
+  Object {
+    "color": "rgb(245,57,28)",
+    "title": "铁水红",
+  },
+  Object {
+    "color": "rgb(242,90,71)",
+    "title": "桂红",
+  },
+  Object {
+    "color": "rgb(243,59,31)",
+    "title": "极光红",
+  },
+  Object {
+    "color": "rgb(242,185,178)",
+    "title": "粉红",
+  },
+  Object {
+    "color": "rgb(241,151,144)",
+    "title": "舌红",
+  },
+  Object {
+    "color": "rgb(240,90,70)",
+    "title": "曲红",
+  },
+  Object {
+    "color": "rgb(242,62,35)",
+    "title": "红汞红",
+  },
+  Object {
+    "color": "rgb(242,202,201)",
+    "title": "淡绯",
+  },
+  Object {
+    "color": "rgb(239,175,173)",
+    "title": "无花果红",
+  },
+  Object {
+    "color": "rgb(241,144,140)",
+    "title": "榴子红",
+  },
+  Object {
+    "color": "rgb(240,63,36)",
+    "title": "胭脂红",
+  },
+  Object {
+    "color": "rgb(240,161,168)",
+    "title": "合欢红",
+  },
+  Object {
+    "color": "rgb(241,147,156)",
+    "title": "春梅红",
+  },
+  Object {
+    "color": "rgb(240,124,130)",
+    "title": "香叶红",
+  },
+  Object {
+    "color": "rgb(240,74,58)",
+    "title": "珊瑚红",
+  },
+  Object {
+    "color": "rgb(241,60,34)",
+    "title": "萝卜红",
+  },
+  Object {
+    "color": "rgb(231,124,142)",
+    "title": "淡茜红",
+  },
+  Object {
+    "color": "rgb(237,90,101)",
+    "title": "艳红",
+  },
+  Object {
+    "color": "rgb(237,72,69)",
+    "title": "淡菽红",
+  },
+  Object {
+    "color": "rgb(237,59,47)",
+    "title": "鱼鳃红",
+  },
+  Object {
+    "color": "rgb(237,51,33)",
+    "title": "樱桃红",
+  },
+  Object {
+    "color": "rgb(238,72,102)",
+    "title": "淡蕊香红",
+  },
+  Object {
+    "color": "rgb(238,72,99)",
+    "title": "石竹红",
+  },
+  Object {
+    "color": "rgb(239,71,93)",
+    "title": "草茉莉红",
+  },
+  Object {
+    "color": "rgb(238,63,77)",
+    "title": "茶花红",
+  },
+  Object {
+    "color": "rgb(237,51,51)",
+    "title": "枸枢红",
+  },
+  Object {
+    "color": "rgb(236,43,36)",
+    "title": "秋海棠红",
+  },
+  Object {
+    "color": "rgb(235,38,26)",
+    "title": "丽春红",
+  },
+  Object {
+    "color": "rgb(222,42,24)",
+    "title": "夕阳红",
+  },
+  Object {
+    "color": "rgb(212,37,23)",
+    "title": "鹤顶红",
+  },
+  Object {
+    "color": "rgb(171,55,47)",
+    "title": "鹅血石红",
+  },
+  Object {
+    "color": "rgb(172,31,24)",
+    "title": "覆盆子红",
+  },
+  Object {
+    "color": "rgb(93,49,49)",
+    "title": "貂紫",
+  },
+  Object {
+    "color": "rgb(92,34,35)",
+    "title": "暗玉紫",
+  },
+  Object {
+    "color": "rgb(90,25,27)",
+    "title": "栗紫",
+  },
+  Object {
+    "color": "rgb(90,18,22)",
+    "title": "葡萄酱紫",
+  },
+  Object {
+    "color": "rgb(238,162,164)",
+    "title": "牡丹粉红",
+  },
+  Object {
+    "color": "rgb(237,85,106)",
+    "title": "山茶红",
+  },
+  Object {
+    "color": "rgb(240,55,82)",
+    "title": "海棠红",
+  },
+  Object {
+    "color": "rgb(192,72,81)",
+    "title": "玉红",
+  },
+  Object {
+    "color": "rgb(192,44,56)",
+    "title": "高粱红",
+  },
+  Object {
+    "color": "rgb(167,83,90)",
+    "title": "满江红",
+  },
+  Object {
+    "color": "rgb(124,24,35)",
+    "title": "枣红",
+  },
+  Object {
+    "color": "rgb(76,31,36)",
+    "title": "葡萄紫",
+  },
+  Object {
+    "color": "rgb(77,16,24)",
+    "title": "酱紫",
+  },
+  Object {
+    "color": "rgb(238,39,70)",
+    "title": "淡曙红",
+  },
+  Object {
+    "color": "rgb(222,28,49)",
+    "title": "唐菖蒲红",
+  },
+  Object {
+    "color": "rgb(209,26,45)",
+    "title": "鹅冠红",
+  },
+  Object {
+    "color": "rgb(196,90,101)",
+    "title": "莓红",
+  },
+  Object {
+    "color": "rgb(194,31,48)",
+    "title": "枫叶红",
+  },
+  Object {
+    "color": "rgb(166,27,41)",
+    "title": "苋菜红",
+  },
+  Object {
+    "color": "rgb(137,78,84)",
+    "title": "烟红",
+  },
+  Object {
+    "color": "rgb(130,32,43)",
+    "title": "暗紫苑红",
+  },
+  Object {
+    "color": "rgb(130,17,31)",
+    "title": "殷红",
+  },
+  Object {
+    "color": "rgb(84,30,36)",
+    "title": "猪肝紫",
+  },
+  Object {
+    "color": "rgb(80,10,22)",
+    "title": "金鱼紫",
+  },
+  Object {
+    "color": "rgb(248,235,230)",
+    "title": "草珠红",
+  },
+  Object {
+    "color": "rgb(236,118,150)",
+    "title": "淡绛红",
+  },
+  Object {
+    "color": "rgb(239,52,115)",
+    "title": "品红",
+  },
+  Object {
+    "color": "rgb(234,114,147)",
+    "title": "凤仙花红",
+  },
+  Object {
+    "color": "rgb(236,155,173)",
+    "title": "粉团花红",
+  },
+  Object {
+    "color": "rgb(235,80,126)",
+    "title": "夹竹桃红",
+  },
+  Object {
+    "color": "rgb(237,47,106)",
+    "title": "榲桲红",
+  },
+  Object {
+    "color": "rgb(238,184,195)",
+    "title": "姜红",
+  },
+  Object {
+    "color": "rgb(234,81,127)",
+    "title": "莲瓣红",
+  },
+  Object {
+    "color": "rgb(241,196,205)",
+    "title": "水红",
+  },
+  Object {
+    "color": "rgb(236,138,164)",
+    "title": "报春红",
+  },
+  Object {
+    "color": "rgb(206,87,119)",
+    "title": "月季红",
+  },
+  Object {
+    "color": "rgb(237,157,178)",
+    "title": "豇豆红",
+  },
+  Object {
+    "color": "rgb(239,130,160)",
+    "title": "霞光红",
+  },
+  Object {
+    "color": "rgb(235,60,112)",
+    "title": "松叶牡丹红",
+  },
+  Object {
+    "color": "rgb(236,44,100)",
+    "title": "喜蛋红",
+  },
+  Object {
+    "color": "rgb(227,180,184)",
+    "title": "鼠鼻红",
+  },
+  Object {
+    "color": "rgb(204,22,58)",
+    "title": "尖晶玉红",
+  },
+  Object {
+    "color": "rgb(194,124,136)",
+    "title": "山黎豆红",
+  },
+  Object {
+    "color": "rgb(191,53,83)",
+    "title": "锦葵红",
+  },
+  Object {
+    "color": "rgb(115,87,92)",
+    "title": "鼠背灰",
+  },
+  Object {
+    "color": "rgb(98,22,36)",
+    "title": "甘蔗紫",
+  },
+  Object {
+    "color": "rgb(99,7,28)",
+    "title": "石竹紫",
+  },
+  Object {
+    "color": "rgb(54,40,43)",
+    "title": "苍蝇灰",
+  },
+  Object {
+    "color": "rgb(48,22,28)",
+    "title": "卵石紫",
+  },
+  Object {
+    "color": "rgb(43,18,22)",
+    "title": "李紫",
+  },
+  Object {
+    "color": "rgb(45,12,19)",
+    "title": "茄皮紫",
+  },
+  Object {
+    "color": "rgb(206,94,138)",
+    "title": "吊钟花红",
+  },
+  Object {
+    "color": "rgb(236,78,138)",
+    "title": "兔眼红",
+  },
+  Object {
+    "color": "rgb(238,44,121)",
+    "title": "紫荆红",
+  },
+  Object {
+    "color": "rgb(149,28,72)",
+    "title": "菜头紫",
+  },
+  Object {
+    "color": "rgb(98,29,52)",
+    "title": "鹞冠紫",
+  },
+  Object {
+    "color": "rgb(98,16,46)",
+    "title": "葡萄酒红",
+  },
+  Object {
+    "color": "rgb(56,33,41)",
+    "title": "磨石紫",
+  },
+  Object {
+    "color": "rgb(56,25,36)",
+    "title": "檀紫",
+  },
+  Object {
+    "color": "rgb(51,20,30)",
+    "title": "火鹅紫",
+  },
+  Object {
+    "color": "rgb(49,15,27)",
+    "title": "墨紫",
+  },
+  Object {
+    "color": "rgb(238,166,183)",
+    "title": "晶红",
+  },
+  Object {
+    "color": "rgb(239,73,139)",
+    "title": "扁豆花红",
+  },
+  Object {
+    "color": "rgb(222,120,151)",
+    "title": "白芨红",
+  },
+  Object {
+    "color": "rgb(222,63,124)",
+    "title": "嫩菱红",
+  },
+  Object {
+    "color": "rgb(209,60,116)",
+    "title": "菠根红",
+  },
+  Object {
+    "color": "rgb(197,112,139)",
+    "title": "酢酱草红",
+  },
+  Object {
+    "color": "rgb(168,69,107)",
+    "title": "洋葱紫",
+  },
+  Object {
+    "color": "rgb(75,30,47)",
+    "title": "海象紫",
+  },
+  Object {
+    "color": "rgb(70,22,41)",
+    "title": "绀紫",
+  },
+  Object {
+    "color": "rgb(68,14,37)",
+    "title": "古铜紫",
+  },
+  Object {
+    "color": "rgb(240,201,207)",
+    "title": "石蕊红",
+  },
+  Object {
+    "color": "rgb(235,160,179)",
+    "title": "芍药耕红",
+  },
+  Object {
+    "color": "rgb(236,45,122)",
+    "title": "藏花红",
+  },
+  Object {
+    "color": "rgb(225,108,150)",
+    "title": "初荷红",
+  },
+  Object {
+    "color": "rgb(237,227,231)",
+    "title": "马鞭草紫",
+  },
+  Object {
+    "color": "rgb(233,215,223)",
+    "title": "丁香淡紫",
+  },
+  Object {
+    "color": "rgb(210,86,140)",
+    "title": "丹紫红",
+  },
+  Object {
+    "color": "rgb(210,53,125)",
+    "title": "玫瑰红",
+  },
+  Object {
+    "color": "rgb(209,194,211)",
+    "title": "淡牵牛紫",
+  },
+  Object {
+    "color": "rgb(200,173,196)",
+    "title": "凤信紫",
+  },
+  Object {
+    "color": "rgb(192,142,175)",
+    "title": "萝兰紫",
+  },
+  Object {
+    "color": "rgb(186,47,123)",
+    "title": "玫瑰紫",
+  },
+  Object {
+    "color": "rgb(128,118,163)",
+    "title": "藤萝紫",
+  },
+  Object {
+    "color": "rgb(128,109,158)",
+    "title": "槿紫",
+  },
+  Object {
+    "color": "rgb(129,92,148)",
+    "title": "蕈紫",
+  },
+  Object {
+    "color": "rgb(133,109,114)",
+    "title": "芦灰",
+  },
+  Object {
+    "color": "rgb(242,231,229)",
+    "title": "淡藤萝紫",
+  },
+  Object {
+    "color": "rgb(36,139,204)",
+    "title": "苏黎世蓝",
+  },
+  Object {
+    "color": "rgb(202,102,65)",
+    "title": "中红",
+  },
+  Object {
+    "color": "rgb(21,85,154)",
+    "title": "海涛蓝",
+  },
+  Object {
+    "color": "rgb(155,30,100)",
+    "title": "苋菜紫",
+  },
+  Object {
+    "color": "rgb(224,200,209)",
+    "title": "淡青紫",
+  },
+  Object {
+    "color": "rgb(34,32,46)",
+    "title": "暗龙胆紫",
+  },
+  Object {
+    "color": "rgb(50,47,59)",
+    "title": "龙葵紫",
+  },
+  Object {
+    "color": "rgb(62,56,65)",
+    "title": "剑锋紫",
+  },
+  Object {
+    "color": "rgb(48,47,75)",
+    "title": "野葡萄紫",
+  },
+  Object {
+    "color": "rgb(122,115,116)",
+    "title": "锌灰",
+  },
+  Object {
+    "color": "rgb(46,49,124)",
+    "title": "满天星紫",
+  },
+  Object {
+    "color": "rgb(82,82,136)",
+    "title": "野菊紫",
+  },
+  Object {
+    "color": "rgb(207,204,201)",
+    "title": "玛瑙灰",
+  },
+  Object {
+    "color": "rgb(116,117,155)",
+    "title": "螺甸紫",
+  },
+  Object {
+    "color": "rgb(97,100,159)",
+    "title": "山梗紫",
+  },
+  Object {
+    "color": "rgb(167,168,189)",
+    "title": "淡蓝紫",
+  },
+  Object {
+    "color": "rgb(255,227,2)",
+    "title": "鲜黄色",
+  },
+  Object {
+    "color": "rgb(247,13,26)",
+    "title": "鲜红色",
+  },
+  Object {
+    "color": "rgb(255,95,0)",
+    "title": "鲜橙色",
+  },
+  Object {
+    "color": "rgb(196,203,207)",
+    "title": "大理石灰",
+  },
+  Object {
+    "color": "rgb(22,97,171)",
+    "title": "靛青",
+  },
+  Object {
+    "color": "rgb(143,178,201)",
+    "title": "晴山蓝",
+  },
+  Object {
+    "color": "rgb(48,101,142)",
+    "title": "瓦拉塔蓝",
+  },
+  Object {
+    "color": "rgb(211,0,63)",
+    "title": "犹他州深红",
+  },
+  Object {
+    "color": "rgb(141,178,85)",
+    "title": "乌苏木绿",
+  },
+  Object {
+    "color": "rgb(174,32,41)",
+    "title": "厄普斯代尔红",
+  },
+  Object {
+    "color": "rgb(91,146,229)",
+    "title": "联合国蓝",
+  },
+  Object {
+    "color": "rgb(0,105,148)",
+    "title": "海蓝",
+  },
+  Object {
+    "color": "rgb(34,162,195)",
+    "title": "海青",
+  },
+  Object {
+    "color": "rgb(139,111,112)",
+    "title": "暮色紫红色",
+  },
+  Object {
+    "color": "rgb(124,72,72)",
+    "title": "托斯卡纳红",
+  },
+  Object {
+    "color": "rgb(14,124,97)",
+    "title": "青绿色",
+  },
+  Object {
+    "color": "rgb(0,255,239)",
+    "title": "蓝绿色",
+  },
+  Object {
+    "color": "rgb(230,194,111)",
+    "title": "特纳黄",
+  },
+  Object {
+    "color": "rgb(230,210,213)",
+    "title": "蓟粉红",
+  },
+  Object {
+    "color": "rgb(204,85,149)",
+    "title": "龙须红",
+  },
+  Object {
+    "color": "rgb(111,140,105)",
+    "title": "草坪绿",
+  },
+  Object {
+    "color": "rgb(128,84,102)",
+    "title": "郁金香木",
+  },
+  Object {
+    "color": "rgb(227,172,61)",
+    "title": "郁金香树",
+  },
+  Object {
+    "color": "rgb(255,135,141)",
+    "title": "郁金香",
+  },
+  Object {
+    "color": "rgb(240,91,114)",
+    "title": "蔷薇色",
+  },
+  Object {
+    "color": "rgb(31,32,64)",
+    "title": "晶石紫",
+  },
+  Object {
+    "color": "rgb(19,17,36)",
+    "title": "暗蓝紫",
+  },
+  Object {
+    "color": "rgb(164,52,93)",
+    "title": "牡丹",
+  },
+  Object {
+    "color": "rgb(55,78,136)",
+    "title": "托里蓝",
+  },
+  Object {
+    "color": "rgb(0,147,139)",
+    "title": "托里德绿松石",
+  },
+  Object {
+    "color": "rgb(231,158,136)",
+    "title": "托尼斯粉",
+  },
+  Object {
+    "color": "rgb(178,24,7)",
+    "title": "番茄酱",
+  },
+  Object {
+    "color": "rgb(197,51,70)",
+    "title": "番茄泥",
+  },
+  Object {
+    "color": "rgb(109,88,67)",
+    "title": "烟草棕",
+  },
+  Object {
+    "color": "rgb(238,230,0)",
+    "title": "钛黄",
+  },
+  Object {
+    "color": "rgb(221,214,225)",
+    "title": "泰坦白",
+  },
+  Object {
+    "color": "rgb(50,67,54)",
+    "title": "木绿色",
+  },
+  Object {
+    "color": "rgb(86,52,116)",
+    "title": "铁兰紫",
+  },
+  Object {
+    "color": "rgb(200,168,158)",
+    "title": "茶点紫红色",
+  },
+  Object {
+    "color": "rgb(231,202,195)",
+    "title": "多汁塔菲",
+  },
+  Object {
+    "color": "rgb(172,14,46)",
+    "title": "探戈红",
+  },
+  Object {
+    "color": "rgb(254,205,1)",
+    "title": "橘黄色",
+  },
+  Object {
+    "color": "rgb(255,158,75)",
+    "title": "探戈橘",
+  },
+  Object {
+    "color": "rgb(145,220,232)",
+    "title": "蓝松石",
+  },
+  Object {
+    "color": "rgb(112,126,132)",
+    "title": "泰利森蓝",
+  },
+  Object {
+    "color": "rgb(159,82,51)",
+    "title": "大沙红",
+  },
+  Object {
+    "color": "rgb(234,215,149)",
+    "title": "染金",
+  },
+  Object {
+    "color": "rgb(170,208,186)",
+    "title": "太妃糖",
+  },
+  Object {
+    "color": "rgb(254,166,200)",
+    "title": "太妃糖粉",
+  },
+  Object {
+    "color": "rgb(238,145,141)",
+    "title": "甜粉色",
+  },
+  Object {
+    "color": "rgb(168,55,49)",
+    "title": "甜棕色",
+  },
+  Object {
+    "color": "rgb(0,126,177)",
+    "title": "瑞典蓝",
+  },
+  Object {
+    "color": "rgb(247,241,226)",
+    "title": "华纳白",
+  },
+  Object {
+    "color": "rgb(223,239,135)",
+    "title": "青柠",
+  },
+  Object {
+    "color": "rgb(126,22,113)",
+    "title": "魏紫",
+  },
+  Object {
+    "color": "rgb(143,182,156)",
+    "title": "夏绿色",
+  },
+  Object {
+    "color": "rgb(192,53,67)",
+    "title": "醒目红",
+  },
+  Object {
+    "color": "rgb(148,78,135)",
+    "title": "醒目紫",
+  },
+  Object {
+    "color": "rgb(61,60,124)",
+    "title": "光谱蓝",
+  },
+  Object {
+    "color": "rgb(247,183,24)",
+    "title": "光谱黄",
+  },
+  Object {
+    "color": "rgb(0,155,140)",
+    "title": "光谱绿",
+  },
+  Object {
+    "color": "rgb(199,210,212)",
+    "title": "鸥蓝",
+  },
+  Object {
+    "color": "rgb(132,32,0)",
+    "title": "红褐色",
+  },
+  Object {
+    "color": "rgb(202,44,146)",
+    "title": "紫红色",
+  },
+  Object {
+    "color": "rgb(94,97,109)",
+    "title": "鱼尾灰",
+  },
+  Object {
+    "color": "rgb(54,41,47)",
+    "title": "古鼎灰",
+  },
+  Object {
+    "color": "rgb(99,187,208)",
+    "title": "霁青",
+  },
+  Object {
+    "color": "rgb(36,134,185)",
+    "title": "宝石蓝",
+  },
+  Object {
+    "color": "rgb(23,114,180)",
+    "title": "群青",
+  },
+  Object {
+    "color": "rgb(92,179,204)",
+    "title": "碧青",
+  },
+  Object {
+    "color": "rgb(102,169,201)",
+    "title": "涧石蓝",
+  },
+  Object {
+    "color": "rgb(138,188,209)",
+    "title": "秋波蓝",
+  },
+  Object {
+    "color": "rgb(41,131,187)",
+    "title": "潮蓝",
+  },
+  Object {
+    "color": "rgb(176,213,223)",
+    "title": "湖水蓝",
+  },
+  Object {
+    "color": "rgb(139,38,113)",
+    "title": "青莲",
+  },
+  Object {
+    "color": "rgb(56,174,205)",
+    "title": "河蓝",
+  },
+  Object {
+    "color": "rgb(176,224,230)",
+    "title": "粉蓝色",
+  },
+  Object {
+    "color": "rgb(23,129,181)",
+    "title": "釉蓝",
+  },
+  Object {
+    "color": "rgb(79,56,62)",
+    "title": "暮云灰",
+  },
+  Object {
+    "color": "rgb(192,196,195)",
+    "title": "月影白",
+  },
+  Object {
+    "color": "rgb(17,101,154)",
+    "title": "搪磁蓝",
+  },
+  Object {
+    "color": "rgb(71,81,100)",
+    "title": "鲸鱼灰",
+  },
+  Object {
+    "color": "rgb(255,254,250)",
+    "title": "海参灰",
+  },
+  Object {
+    "color": "rgb(195,215,223)",
+    "title": "井天蓝",
+  },
+  Object {
+    "color": "rgb(181,152,161)",
+    "title": "隐红灰",
+  },
+  Object {
+    "color": "rgb(221,173,175)",
+    "title": "浅栗色",
+  },
+  Object {
+    "color": "rgb(52,108,156)",
+    "title": "海军蓝",
+  },
+  Object {
+    "color": "rgb(192,111,152)",
+    "title": "樱草紫",
+  },
+  Object {
+    "color": "rgb(33,119,184)",
+    "title": "虹蓝",
+  },
+  Object {
+    "color": "rgb(137,66,118)",
+    "title": "芓紫",
+  },
+  Object {
+    "color": "rgb(43,115,175)",
+    "title": "品蓝",
+  },
+  Object {
+    "color": "rgb(34,58,94)",
+    "title": "深牡丹蓝",
+  },
+  Object {
+    "color": "rgb(15,89,164)",
+    "title": "飞燕草蓝",
+  },
+  Object {
+    "color": "rgb(205,209,211)",
+    "title": "银鱼白",
+  },
+  Object {
+    "color": "rgb(45,46,54)",
+    "title": "牛角灰",
+  },
+  Object {
+    "color": "rgb(47,47,53)",
+    "title": "水牛灰",
+  },
+  Object {
+    "color": "rgb(129,60,133)",
+    "title": "桔梗紫",
+  },
+  Object {
+    "color": "rgb(178,187,190)",
+    "title": "星灰",
+  },
+  Object {
+    "color": "rgb(102,221,170)",
+    "title": "中等海蓝",
+  },
+  Object {
+    "color": "rgb(0,144,168)",
+    "title": "地中海蓝",
+  },
+  Object {
+    "color": "rgb(79,132,196)",
+    "title": "船坞蓝",
+  },
+  Object {
+    "color": "rgb(210,118,163)",
+    "title": "菱锰红",
+  },
+  Object {
+    "color": "rgb(255,174,66)",
+    "title": "橙黄色",
+  },
+  Object {
+    "color": "rgb(78,124,161)",
+    "title": "蝶翅蓝",
+  },
+  Object {
+    "color": "rgb(86,152,195)",
+    "title": "睛蓝",
+  },
+  Object {
+    "color": "rgb(53,51,60)",
+    "title": "沙鱼灰",
+  },
+  Object {
+    "color": "rgb(188,132,168)",
+    "title": "青蛤壳紫",
+  },
+  Object {
+    "color": "rgb(0,88,94)",
+    "title": "暗云杉绿",
+  },
+  Object {
+    "color": "rgb(15,20,35)",
+    "title": "钢蓝",
+  },
+  Object {
+    "color": "rgb(39,117,182)",
+    "title": "景泰蓝",
+  },
+  Object {
+    "color": "rgb(154,151,56)",
+    "title": "青柠金",
+  },
+  Object {
+    "color": "rgb(72,41,54)",
+    "title": "斑鸠灰",
+  },
+  Object {
+    "color": "rgb(35,118,183)",
+    "title": "花青",
+  },
+  Object {
+    "color": "rgb(204,204,214)",
+    "title": "远山紫",
+  },
+  Object {
+    "color": "rgb(97,154,195)",
+    "title": "羽扇豆蓝",
+  },
+  Object {
+    "color": "rgb(195,86,145)",
+    "title": "电气石红",
+  },
+  Object {
+    "color": "rgb(186,204,217)",
+    "title": "云水蓝",
+  },
+  Object {
+    "color": "rgb(30,19,29)",
+    "title": "乌梅紫",
+  },
+  Object {
+    "color": "rgb(0,46,99)",
+    "title": "酷黑",
+  },
+  Object {
+    "color": "rgb(163,92,143)",
+    "title": "扁豆紫",
+  },
+  Object {
+    "color": "rgb(65,28,53)",
+    "title": "荸荠紫",
+  },
+  Object {
+    "color": "rgb(78,42,64)",
+    "title": "龙睛鱼紫",
+  },
+  Object {
+    "color": "rgb(18,107,174)",
+    "title": "柏林蓝",
+  },
+  Object {
+    "color": "rgb(226,225,228)",
+    "title": "芡食白",
+  },
+  Object {
+    "color": "rgb(241,240,237)",
+    "title": "银白",
+  },
+  Object {
+    "color": "rgb(28,13,26)",
+    "title": "深牵牛紫",
+  },
+  Object {
+    "color": "rgb(19,24,36)",
+    "title": "燕颔蓝",
+  },
+  Object {
+    "color": "rgb(93,63,81)",
+    "title": "紫灰",
+  },
+  Object {
+    "color": "rgb(104,23,82)",
+    "title": "牵牛紫",
+  },
+  Object {
+    "color": "rgb(26,193,221)",
+    "title": "加勒比海蓝",
+  },
+  Object {
+    "color": "rgb(198,143,101)",
+    "title": "奶油兰姆酒棕",
+  },
+  Object {
+    "color": "rgb(173,101,152)",
+    "title": "豆蔻紫",
+  },
+  Object {
+    "color": "rgb(195,33,72)",
+    "title": "明栗色",
+  },
+  Object {
+    "color": "rgb(189,174,173)",
+    "title": "芦穗灰",
+  },
+  Object {
+    "color": "rgb(49,112,167)",
+    "title": "安安蓝",
+  },
+  Object {
+    "color": "rgb(176,48,96)",
+    "title": "栗色",
+  },
+  Object {
+    "color": "rgb(218,65,61)",
+    "title": "石榴红",
+  },
+  Object {
+    "color": "rgb(78,75,81)",
+    "title": "黑珍珠",
+  },
+  Object {
+    "color": "rgb(46,24,59)",
+    "title": "黑加仑",
+  },
+  Object {
+    "color": "rgb(92,44,53)",
+    "title": "陈年波特褐",
+  },
+  Object {
+    "color": "rgb(44,45,60)",
+    "title": "黑石",
+  },
+  Object {
+    "color": "rgb(21,139,184)",
+    "title": "鸢尾蓝",
+  },
+  Object {
+    "color": "rgb(235,206,213)",
+    "title": "芭蕾鞋粉",
+  },
+  Object {
+    "color": "rgb(196,98,21)",
+    "title": "秋枫褐",
+  },
+  Object {
+    "color": "rgb(126,32,101)",
+    "title": "葛巾紫",
+  },
+  Object {
+    "color": "rgb(247,187,125)",
+    "title": "浅黄色",
+  },
+  Object {
+    "color": "rgb(216,227,231)",
+    "title": "云峰白",
+  },
+  Object {
+    "color": "rgb(208,223,230)",
+    "title": "远天蓝",
+  },
+  Object {
+    "color": "rgb(36,116,181)",
+    "title": "尼罗蓝",
+  },
+  Object {
+    "color": "rgb(22,119,179)",
+    "title": "天蓝",
+  },
+  Object {
+    "color": "rgb(78,110,129)",
+    "title": "爱琴海蓝",
+  },
+  Object {
+    "color": "rgb(20,74,116)",
+    "title": "鷃蓝",
+  },
+  Object {
+    "color": "rgb(94,121,135)",
+    "title": "淡蓝灰",
+  },
+  Object {
+    "color": "rgb(105,105,105)",
+    "title": "深灰色",
+  },
+  Object {
+    "color": "rgb(169,169,169)",
+    "title": "暗灰色",
+  },
+  Object {
+    "color": "rgb(128,128,128)",
+    "title": "灰色",
+  },
+  Object {
+    "color": "rgb(250,240,230)",
+    "title": "亚麻色",
+  },
+  Object {
+    "color": "rgb(192,192,192)",
+    "title": "银白色",
+  },
+  Object {
+    "color": "rgb(255,250,240)",
+    "title": "花卉白",
+  },
+  Object {
+    "color": "rgb(255,235,205)",
+    "title": "杏仁白",
+  },
+  Object {
+    "color": "rgb(250,235,215)",
+    "title": "古董白",
+  },
+  Object {
+    "color": "rgb(245,245,245)",
+    "title": "炊烟白",
+  },
+  Object {
+    "color": "rgb(255,250,250)",
+    "title": "雪花白",
+  },
+  Object {
+    "color": "rgb(47,144,185)",
+    "title": "云山蓝",
+  },
+  Object {
+    "color": "rgb(255,255,255)",
+    "title": "白色",
+  },
+  Object {
+    "color": "rgb(59,60,54)",
+    "title": "橄榄黑",
+  },
+  Object {
+    "color": "rgb(41,36,33)",
+    "title": "象牙黑",
+  },
+  Object {
+    "color": "rgb(41,53,66)",
+    "title": "炭黑",
+  },
+  Object {
+    "color": "rgb(0,0,0)",
+    "title": "黑色",
+  },
+  Object {
+    "color": "rgb(153,107,31)",
+    "title": "卡其色",
+  },
+  Object {
+    "color": "rgb(77,57,0)",
+    "title": "咖啡色",
+  },
+  Object {
+    "color": "rgb(240,230,140)",
+    "title": "黄棕色",
+  },
+  Object {
+    "color": "rgb(165,42,42)",
+    "title": "棕色",
+  },
+  Object {
+    "color": "rgb(255,140,0)",
+    "title": "深橙色",
+  },
+  Object {
+    "color": "rgb(255,165,0)",
+    "title": "橙色",
+  },
+  Object {
+    "color": "rgb(245,245,220)",
+    "title": "米黄",
+  },
+  Object {
+    "color": "rgb(255,164,0)",
+    "title": "橙黄",
+  },
+  Object {
+    "color": "rgb(255,128,0)",
+    "title": "桔黄",
+  },
+  Object {
+    "color": "rgb(233,204,211)",
+    "title": "芝兰紫",
+  },
+  Object {
+    "color": "rgb(255,153,18)",
+    "title": "镉黄",
+  },
+  Object {
+    "color": "rgb(255,255,0)",
+    "title": "黄色",
+  },
+  Object {
+    "color": "rgb(138,43,226)",
+    "title": "蓝紫色",
+  },
+  Object {
+    "color": "rgb(139,0,255)",
+    "title": "紫罗兰",
+  },
+  Object {
+    "color": "rgb(140,67,86)",
+    "title": "绛紫色",
+  },
+  Object {
+    "color": "rgb(128,0,128)",
+    "title": "紫色",
+  },
+  Object {
+    "color": "rgb(240,248,255)",
+    "title": "爱丽丝蓝",
+  },
+  Object {
+    "color": "rgb(30,144,255)",
+    "title": "道奇蓝",
+  },
+  Object {
+    "color": "rgb(17,119,176)",
+    "title": "牵牛花蓝",
+  },
+  Object {
+    "color": "rgb(0,127,255)",
+    "title": "湛蓝",
+  },
+  Object {
+    "color": "rgb(26,148,188)",
+    "title": "钴蓝",
+  },
+  Object {
+    "color": "rgb(0,49,83)",
+    "title": "普蓝",
+  },
+  Object {
+    "color": "rgb(0,0,255)",
+    "title": "蓝色",
+  },
+  Object {
+    "color": "rgb(0,255,255)",
+    "title": "青色",
+  },
+  Object {
+    "color": "rgb(128,128,0)",
+    "title": "橄榄色",
+  },
+  Object {
+    "color": "rgb(127,255,212)",
+    "title": "碧绿色",
+  },
+  Object {
+    "color": "rgb(154,205,50)",
+    "title": "黄绿色",
+  },
+  Object {
+    "color": "rgb(153,230,77)",
+    "title": "草绿色",
+  },
+  Object {
+    "color": "rgb(34,139,34)",
+    "title": "深林绿",
+  },
+  Object {
+    "color": "rgb(50,205,50)",
+    "title": "柠檬绿",
+  },
+  Object {
+    "color": "rgb(0,255,0)",
+    "title": "绿色",
+  },
+  Object {
+    "color": "rgb(255,20,147)",
+    "title": "深粉色",
+  },
+  Object {
+    "color": "rgb(255,192,203)",
+    "title": "粉色",
+  },
+  Object {
+    "color": "rgb(255,99,71)",
+    "title": "番茄红",
+  },
+  Object {
+    "color": "rgb(250,128,114)",
+    "title": "鲑红",
+  },
+  Object {
+    "color": "rgb(152,54,128)",
+    "title": "芥花紫",
+  },
+  Object {
+    "color": "rgb(205,92,92)",
+    "title": "印度红",
+  },
+  Object {
+    "color": "rgb(255,33,33)",
+    "title": "中国红",
+  },
+  Object {
+    "color": "rgb(200,60,35)",
+    "title": "绯红",
+  },
+  Object {
+    "color": "rgb(147,181,207)",
+    "title": "星蓝",
+  },
+  Object {
+    "color": "rgb(255,0,255)",
+    "title": "洋红",
+  },
+  Object {
+    "color": "rgb(139,0,0)",
+    "title": "暗红",
+  },
+  Object {
+    "color": "rgb(255,0,0)",
+    "title": "红色",
+  },
+]
+`;
