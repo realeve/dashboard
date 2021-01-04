@@ -136,12 +136,12 @@ export const loadUserInfo = (user) => {
 
 export interface AxiosError {
   message: string;
-  description: string;
+  description?: string;
   url: string;
   params: any;
   status?: number;
 }
-export const handleError: (error: _AxiosError) => AxiosError | null = (error) => {
+export const handleError: (error: _AxiosError) => AxiosError = (error) => {
   const config = error.config || {};
   const str = config.params || config.data || {};
   const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -152,7 +152,7 @@ export const handleError: (error: _AxiosError) => AxiosError | null = (error) =>
 
   if (typeof error.message === 'undefined') {
     // 路由取消
-    return null;
+    return { message: '未知错误', url: (config && config.url) || '', params };
   }
 
   config.url += `${id ? `${id}/${nonce}` : ''}${params ? `?${qs.stringify(params)}` : ''}`;
@@ -260,5 +260,7 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
       ],
     })(option)
     .then(handleData)
-    .catch((e) => Promise.reject(handleError(e)));
+    .catch((e) => {
+      throw new Error(JSON.stringify(handleError(e)));
+    });
 };

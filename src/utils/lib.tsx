@@ -28,7 +28,11 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
   // 2、readAsDataURL，读取文件，并将文件数据URL保存到result属性中；
   // 3、readAsArrayBuffer，读取文件，并将
 
-  reader.readAsText(file);
+  try {
+    reader.readAsText(file);
+  } catch (e) {
+    return Promise.reject(e.message);
+  }
 
   return new Promise((resolve) => {
     reader.onload = ({ target: { result } }: { target: { result: string | ArrayBuffer } }) => {
@@ -40,10 +44,12 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
 // 数字
 export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
-export const loadDashboard = async (file: File | Blob) => {
-  const str = (await loadDataFile(file)) as string;
-  return JSON.parse(str as string);
-};
+export const loadDashboard = async (file: File | Blob) =>
+  loadDataFile(file)
+    .then((str) => JSON.parse(str as string))
+    .catch((e) => {
+      return Promise.reject(e);
+    });
 
 export const encodeBase64 = (str: string) => window.btoa(unescape(encodeURIComponent(str)));
 export const decodeBase64 = (str: string) => decodeURIComponent(escape(window.atob(str)));
