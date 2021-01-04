@@ -13,10 +13,8 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    
     "precommit": "lint-staged"
   },
-  
   "dependencies": {
     "@ant-design/css-animation": "^1.7.3",
     "@antv/g2": "^4.0.15",
@@ -64,6 +62,8 @@
     "zrender": "^5.0.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.2.2",
     "@types/classnames": "^2.2.11",
     "@types/echarts": "^4.9.3",
     "@types/element-resize-event": "^2.0.0",
@@ -99,7 +99,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "umi": "^3.3.3",
     "umi-types": "^0.5.14"
-  }, 
+  },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",

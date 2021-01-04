@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import G2Plot from '@/component/g2plot';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 const config = {
   chartType: 'bar',
@@ -26,30 +27,20 @@ const config = {
 // umi test ./src/component/g2plot/index.test.js
 describe('g2plot', () => {
   test('初始化以及销毁', async () => {
-    const ref = React.createRef();
-    mount(<G2Plot option={config} ref={ref} />);
-    expect(ref.current).not.toBeNull();
-    const chart = ref.current.getChart();
-    // chart的render会报canvas相关错误，故destroy,download等均无效
-    // console.log(chart);
-    expect(chart.chart.destroyed).toBe(false);
-    const a = chart.getChartSize();
-    expect(a).toMatchObject({ width: 400, height: 400 });
-    expect(chart.toDataURL()).toBeNull();
-  });
-  test('g2plot loading', () => {
-    const wrapper = mount(<G2Plot option={config} loading />);
-    expect(wrapper.find('svg')).toHaveLength(1);
-  });
+    const { container, rerender } = render(<G2Plot renderer="svg" option={config} />);
+    expect(container.innerHTML).toMatchSnapshot();
 
-  test('g2plot default chartType', () => {
+    rerender(<G2Plot renderer="svg" option={config} loading />);
+
+    expect(container.querySelector('title')).toHaveTextContent('Loading...');
+
     const { chartType, ...option } = config;
-    const ref = React.createRef();
-    mount(<G2Plot option={option} ref={ref} loading />);
-    const chart = ref.current.getChart();
-    expect(chart.getDefaultOptions().isStack).toBeTruthy();
+    rerender(<G2Plot renderer="svg" option={option} />);
 
-    const wrapper = mount(<G2Plot option={{ chartType: 'unknown', ...option }} loading />);
-    expect(wrapper.find('h5').text()).toContain('图表类型无效');
+    expect(container.innerHTML).toMatchSnapshot();
+
+    rerender(<G2Plot renderer="svg" option={{ chartType: 'unknown', ...option }} />);
+
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

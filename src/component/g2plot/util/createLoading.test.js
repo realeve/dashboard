@@ -1,15 +1,18 @@
+import React from 'react';
 import ChartLoading from './createLoading';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 // umi test ./src/component/g2plot/util/createLoading.test.js
 // 详情可参考学习：https://enzymejs.github.io/enzyme/docs/installation/index.html
 test('<ChartLoading/>', () => {
-  const wrapper1 = mount(<ChartLoading type="bar" />);
-  expect(wrapper1.find('svg')).toHaveLength(1);
+  const { container, rerender } = render(<ChartLoading type="bar" />);
 
-  const wrapper2 = mount(<ChartLoading loadingTemplate={'a'} />);
-  expect(wrapper2.find('svg')).toHaveLength(0);
+  expect(container.querySelector('title')).toHaveTextContent('Loading...');
 
-  const wrapper3 = mount(<ChartLoading type="unknown" />);
-  expect(wrapper3.find('rect')).toHaveLength(11);
+  rerender(<ChartLoading loadingTemplate={'a'} />);
+  expect(container.firstChild.innerHTML).toBe('a');
+
+  rerender(<ChartLoading type="unknown" />);
+  expect(container.querySelectorAll('rect')).toHaveLength(11);
 });

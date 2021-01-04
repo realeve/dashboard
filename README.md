@@ -199,9 +199,7 @@ https://web.raykite.com/square
 ---
 
 # 单元测试资料
-[jest](https://jestjs.io/)
- 
-[enzyme](https://enzymejs.github.io/enzyme/docs/installation/index.html)
+[jest](https://jestjs.io/) 
 
 [react-testing-library](https://github.com/testing-library/react-testing-library)
 

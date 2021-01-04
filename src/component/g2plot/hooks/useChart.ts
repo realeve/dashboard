@@ -144,10 +144,10 @@ export default function useInit<T extends Base, U extends Options>(
   };
   // 图表类型改变时，重新渲染
   useEffect(() => {
-    if (!chart.current) {
+    if (!chart?.current) {
       return;
     }
-    chart.current.destroy();
+    chart?.current?.destroy?.();
     init();
   }, [chartType]);
 
