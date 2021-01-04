@@ -1,0 +1,1267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础线型图配置项 1`] = `
+Array [
+  Object {
+    "defaultValue": "cbpc",
+    "key": "theme",
+    "option": Array [
+      Object {
+        "desc": "分类色板1",
+        "theme": Object {
+          "colors10": Array [
+            "#5B8FF9",
+            "#61DDAA",
+            "#65789B",
+            "#F6BD16",
+            "#6F5EF9",
+            "#78D3F8",
+            "#9661BC",
+            "#F6903D",
+            "#008685",
+            "#F08BB4",
+          ],
+          "colors20": Array [
+            "#5B8FF9",
+            "#CDDDFD",
+            "#61DDAA",
+            "#CDF3E4",
+            "#65789B",
+            "#CED4DE",
+            "#F6BD16",
+            "#FCEBB9",
+            "#6F5EF9",
+            "#D3CEFD",
+            "#78D3F8",
+            "#D3EEF9",
+            "#9661BC",
+            "#DECFEA",
+            "#F6903D",
+            "#FFE0C7",
+            "#008685",
+            "#BBDEDE",
+            "#F08BB4",
+            "#FFE0ED",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette0.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 0,
+      },
+      Object {
+        "desc": "分类色板2",
+        "theme": Object {
+          "colors10": Array [
+            "#FF6B3B",
+            "#626681",
+            "#FFC100",
+            "#9FB40F",
+            "#76523B",
+            "#DAD5B5",
+            "#0E8E89",
+            "#E19348",
+            "#F383A2",
+            "#247FEA",
+          ],
+          "colors20": Array [
+            "#FF6B3B",
+            "#626681",
+            "#FFC100",
+            "#9FB40F",
+            "#76523B",
+            "#DAD5B5",
+            "#0E8E89",
+            "#E19348",
+            "#F383A2",
+            "#247FEA",
+            "#2BCB95",
+            "#B1ABF4",
+            "#1D42C2",
+            "#1D9ED1",
+            "#D64BC0",
+            "#255634",
+            "#8C8C47",
+            "#8CDAE5",
+            "#8E283B",
+            "#791DC9",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette1.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 1,
+      },
+      Object {
+        "desc": "分类色板3",
+        "theme": Object {
+          "colors10": Array [
+            "#025DF4",
+            "#DB6BCF",
+            "#2498D1",
+            "#BBBDE6",
+            "#4045B2",
+            "#21A97A",
+            "#FF745A",
+            "#007E99",
+            "#FFA8A8",
+            "#2391FF",
+          ],
+          "colors20": Array [
+            "#025DF4",
+            "#DB6BCF",
+            "#2498D1",
+            "#BBBDE6",
+            "#4045B2",
+            "#21A97A",
+            "#FF745A",
+            "#007E99",
+            "#FFA8A8",
+            "#2391FF",
+            "#FFC328",
+            "#A0DC2C",
+            "#946DFF",
+            "#626681",
+            "#EB4185",
+            "#CD8150",
+            "#36BCCB",
+            "#327039",
+            "#803488",
+            "#83BC99",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette2.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 2,
+      },
+      Object {
+        "desc": "分类色板4",
+        "theme": Object {
+          "colors10": Array [
+            "#FF4500",
+            "#1AAF8B",
+            "#406C85",
+            "#F6BD16",
+            "#B40F0F",
+            "#2FB8FC",
+            "#4435FF",
+            "#FF5CA2",
+            "#BBE800",
+            "#FE8A26",
+          ],
+          "colors20": Array [
+            "#FF4500",
+            "#1AAF8B",
+            "#406C85",
+            "#F6BD16",
+            "#B40F0F",
+            "#2FB8FC",
+            "#4435FF",
+            "#FF5CA2",
+            "#BBE800",
+            "#FE8A26",
+            "#946DFF",
+            "#6C3E00",
+            "#6193FF",
+            "#FF988E",
+            "#36BCCB",
+            "#004988",
+            "#FFCF9D",
+            "#CCDC8A",
+            "#8D00A1",
+            "#1CC25E",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette3.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 3,
+      },
+      Object {
+        "desc": "顺序色板1",
+        "theme": Object {
+          "colors10": Array [
+            "#B8E1FF",
+            "#9AC5FF",
+            "#7DAAFF",
+            "#5B8FF9",
+            "#3D76DD",
+            "#085EC0",
+            "#0047A5",
+            "#00318A",
+            "#001D70",
+          ],
+          "colors20": Array [
+            "#B8E1FF",
+            "#9AC5FF",
+            "#7DAAFF",
+            "#5B8FF9",
+            "#3D76DD",
+            "#085EC0",
+            "#0047A5",
+            "#00318A",
+            "#001D70",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette4.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 4,
+      },
+      Object {
+        "desc": "顺序色板2",
+        "theme": Object {
+          "colors10": Array [
+            "#9DF5CA",
+            "#61DDAA",
+            "#42C090",
+            "#19A576",
+            "#008A5D",
+            "#006F45",
+            "#00562F",
+            "#003E19",
+            "#002800",
+          ],
+          "colors20": Array [
+            "#9DF5CA",
+            "#61DDAA",
+            "#42C090",
+            "#19A576",
+            "#008A5D",
+            "#006F45",
+            "#00562F",
+            "#003E19",
+            "#002800",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette5.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 5,
+      },
+      Object {
+        "desc": "发散色板1",
+        "theme": Object {
+          "colors10": Array [
+            "#215B77",
+            "#1B9CD0",
+            "#61C9FF",
+            "#ABDFFF",
+            "#EFF3DE",
+            "#FFDE94",
+            "#FFC741",
+            "#D09C10",
+            "#795B16",
+          ],
+          "colors20": Array [
+            "#215B77",
+            "#227BA2",
+            "#1B9CD0",
+            "#22BAED",
+            "#61C9FF",
+            "#8AD4FF",
+            "#ABDFFF",
+            "#C9E9FF",
+            "#EFF3DE",
+            "#FFE9B8",
+            "#FFDE94",
+            "#FFD470",
+            "#FFC741",
+            "#EDB40A",
+            "#D09C10",
+            "#A37B16",
+            "#795B16",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette6.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 6,
+      },
+      Object {
+        "desc": "发散色板2",
+        "theme": Object {
+          "colors10": Array [
+            "#014c63",
+            "#168575",
+            "#0bc286",
+            "#96dcb0",
+            "#F2EAEA",
+            "#FFA884",
+            "#FF6836",
+            "#D13808",
+            "#7A270E",
+          ],
+          "colors20": Array [
+            "#014c63",
+            "#10686c",
+            "#168575",
+            "#16a37e",
+            "#0bc286",
+            "#65cf9b",
+            "#96dcb0",
+            "#c1e8c5",
+            "#F2EAEA",
+            "#FFC5AC",
+            "#FFA884",
+            "#FF895D",
+            "#FF6836",
+            "#F3470D",
+            "#D13808",
+            "#A4300C",
+            "#7A270E",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette7.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 7,
+      },
+      Object {
+        "desc": "顺序色板3",
+        "theme": Object {
+          "colors10": Array [
+            "#d0e3ff",
+            "#b4c7ec",
+            "#99acd0",
+            "#7f91b4",
+            "#657899",
+            "#4c5f7f",
+            "#344766",
+            "#1c314e",
+          ],
+          "colors20": Array [
+            "#d0e3ff",
+            "#b4c7ec",
+            "#99acd0",
+            "#7f91b4",
+            "#657899",
+            "#4c5f7f",
+            "#344766",
+            "#1c314e",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette8.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 8,
+      },
+      Object {
+        "desc": "顺序色板4",
+        "theme": Object {
+          "colors10": Array [
+            "#ffe244",
+            "#f6bd16",
+            "#d7a300",
+            "#b98800",
+            "#9c6f00",
+            "#7f5700",
+            "#633f00",
+            "#482900",
+          ],
+          "colors20": Array [
+            "#ffe244",
+            "#f6bd16",
+            "#d7a300",
+            "#b98800",
+            "#9c6f00",
+            "#7f5700",
+            "#633f00",
+            "#482900",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette9.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 9,
+      },
+      Object {
+        "desc": "顺序色板5",
+        "theme": Object {
+          "colors10": Array [
+            "#8bf4f2",
+            "#6ed8d6",
+            "#50bcba",
+            "#2fa19f",
+            "#008685",
+            "#006c6c",
+            "#005354",
+            "#003c3d",
+          ],
+          "colors20": Array [
+            "#8bf4f2",
+            "#6ed8d6",
+            "#50bcba",
+            "#2fa19f",
+            "#008685",
+            "#006c6c",
+            "#005354",
+            "#003c3d",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette10.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 10,
+      },
+      Object {
+        "desc": "顺序色板6",
+        "theme": Object {
+          "colors10": Array [
+            "#ffbb97",
+            "#ff9f7c",
+            "#ff8363",
+            "#e8684b",
+            "#c94d33",
+            "#aa311c",
+            "#8c1004",
+            "#6f0000",
+          ],
+          "colors20": Array [
+            "#ffbb97",
+            "#ff9f7c",
+            "#ff8363",
+            "#e8684b",
+            "#c94d33",
+            "#aa311c",
+            "#8c1004",
+            "#6f0000",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette11.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 11,
+      },
+      Object {
+        "desc": "顺序色板7",
+        "theme": Object {
+          "colors10": Array [
+            "#fdd5ff",
+            "#ddb6ff",
+            "#be99f7",
+            "#a27fda",
+            "#8765be",
+            "#6c4da3",
+            "#523588",
+            "#391e6f",
+          ],
+          "colors20": Array [
+            "#fdd5ff",
+            "#ddb6ff",
+            "#be99f7",
+            "#a27fda",
+            "#8765be",
+            "#6c4da3",
+            "#523588",
+            "#391e6f",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette12.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 12,
+      },
+      Object {
+        "desc": "顺序色板8",
+        "theme": Object {
+          "colors10": Array [
+            "#ffcffa",
+            "#ffabd5",
+            "#ef8bb4",
+            "#d27099",
+            "#b55680",
+            "#993c67",
+            "#7d214f",
+            "#620038",
+          ],
+          "colors20": Array [
+            "#ffcffa",
+            "#ffabd5",
+            "#ef8bb4",
+            "#d27099",
+            "#b55680",
+            "#993c67",
+            "#7d214f",
+            "#620038",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette13.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 13,
+      },
+      Object {
+        "desc": "顺序色板9",
+        "theme": Object {
+          "colors10": Array [
+            "#fdedbe",
+            "#ffdf80",
+            "#ffcb33",
+            "#ffb200",
+            "#ff8c00",
+            "#ff6500",
+            "#e6450f",
+            "#b22c00",
+            "#661900",
+          ],
+          "colors20": Array [
+            "#fdedbe",
+            "#ffdf80",
+            "#ffcb33",
+            "#ffb200",
+            "#ff8c00",
+            "#ff6500",
+            "#e6450f",
+            "#b22c00",
+            "#661900",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette14.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 14,
+      },
+      Object {
+        "desc": "顺序色板10",
+        "theme": Object {
+          "colors10": Array [
+            "#ffebb0",
+            "#ffdf80",
+            "#faca3e",
+            "#e6b80b",
+            "#b5ac23",
+            "#6a9a48",
+            "#20876b",
+            "#06746b",
+            "#044e48",
+          ],
+          "colors20": Array [
+            "#ffebb0",
+            "#ffdf80",
+            "#faca3e",
+            "#e6b80b",
+            "#b5ac23",
+            "#6a9a48",
+            "#20876b",
+            "#06746b",
+            "#044e48",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette15.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 15,
+      },
+      Object {
+        "desc": "顺序色板11",
+        "theme": Object {
+          "colors10": Array [
+            "#d2edc8",
+            "#a9dacc",
+            "#75c6d1",
+            "#42b3d5",
+            "#3993c2",
+            "#3073ae",
+            "#27539b",
+            "#1e3388",
+            "#171e6d",
+          ],
+          "colors20": Array [
+            "#d2edc8",
+            "#a9dacc",
+            "#75c6d1",
+            "#42b3d5",
+            "#3993c2",
+            "#3073ae",
+            "#27539b",
+            "#1e3388",
+            "#171e6d",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette16.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 16,
+      },
+      Object {
+        "desc": "顺序色板12",
+        "theme": Object {
+          "colors10": Array [
+            "#facdaa",
+            "#f4a49e",
+            "#ee7b91",
+            "#e85285",
+            "#be408c",
+            "#942d93",
+            "#6a1b9a",
+            "#56167d",
+            "#42105f",
+          ],
+          "colors20": Array [
+            "#facdaa",
+            "#f4a49e",
+            "#ee7b91",
+            "#e85285",
+            "#be408c",
+            "#942d93",
+            "#6a1b9a",
+            "#56167d",
+            "#42105f",
+          ],
+        },
+        "title": <img
+          src="/img/palette/palette17.png.webp"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 17,
+      },
+      Object {
+        "colors10": Array [
+          "#5B8FF9",
+          "#5AD8A6",
+          "#5D7092",
+          "#F6BD16",
+          "#E86452",
+          "#6DC8EC",
+          "#945FB9",
+          "#FF9845",
+          "#1E9493",
+          "#FF99C3",
+        ],
+        "colors20": Array [
+          "#5B8FF9",
+          "#CDDDFD",
+          "#5AD8A6",
+          "#CDF3E4",
+          "#5D7092",
+          "#CED4DE",
+          "#F6BD16",
+          "#FCEBB9",
+          "#E86452",
+          "#F8D0CB",
+          "#6DC8EC",
+          "#D3EEF9",
+          "#945FB9",
+          "#DECFEA",
+          "#FF9845",
+          "#FFE0C7",
+          "#1E9493",
+          "#BBDEDE",
+          "#FF99C3",
+          "#FFE0ED",
+        ],
+        "desc": "cbpc",
+        "theme": "cbpc",
+        "title": <img
+          src="默认"
+          style={
+            Object {
+              "height": 30,
+            }
+          }
+        />,
+        "value": 18,
+      },
+      Object {
+        "desc": "ECharts5",
+        "theme": Object {
+          "colors10": Array [
+            "#5470c6",
+            "#91cc75",
+            "#fac858",
+            "#ee6666",
+            "#73c0de",
+            "#3ba272",
+            "#fc8452",
+            "#9a60b4",
+            "#ea7ccc",
+          ],
+          "colors20": Array [
+            "#5470c6",
+            "#91cc75",
+            "#fac858",
+            "#ee6666",
+            "#73c0de",
+            "#3ba272",
+            "#fc8452",
+            "#9a60b4",
+            "#ea7ccc",
+          ],
+        },
+        "title": "ECharts5",
+        "value": 19,
+      },
+    ],
+    "title": "主题色",
+    "type": "antselect",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "needRerverse",
+    "title": "翻转颜色表",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": "line",
+    "key": "chartType",
+    "option": Array [
+      Object {
+        "title": "柱状图",
+        "value": "bar",
+      },
+      Object {
+        "title": "曲线图",
+        "value": "line",
+      },
+    ],
+    "title": "图表类型",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isPolar",
+    "title": "极坐标系",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isArea",
+    "title": "面积图",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isStack",
+    "title": "堆叠",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isPercent",
+    "title": "百分比图",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isStep",
+    "option": Array [
+      Object {
+        "title": "起始点",
+        "value": "start",
+      },
+      Object {
+        "title": "中间点",
+        "value": "middle",
+      },
+      Object {
+        "title": "结束点",
+        "value": "end",
+      },
+      Object {
+        "title": "关闭",
+        "valud": false,
+      },
+    ],
+    "title": "阶梯图",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": true,
+    "key": "showEndlabel",
+    "title": "尾部跟随标签",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "showLabel",
+    "title": "显示标签",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "isReverse",
+    "title": "交换XY轴",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": "shadow",
+    "key": "axisPointer",
+    "option": Array [
+      Object {
+        "title": "直线",
+        "value": "line",
+      },
+      Object {
+        "title": "阴影",
+        "value": "shadow",
+      },
+      Object {
+        "title": "十字准星",
+        "value": "cross",
+      },
+    ],
+    "title": "指示器样式",
+    "type": "radio",
+  },
+  Object {
+    "title": "数据点标记设置(曲线图有效)",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "showSymbol",
+    "title": "显示",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": 4,
+    "key": "symbolSize",
+    "max": 40,
+    "min": 0,
+    "step": 1,
+    "title": "大小",
+    "type": "range",
+  },
+  Object {
+    "defaultValue": "circle",
+    "key": "symbol",
+    "option": "circle,rect,roundRect,triangle,diamond,pin,arrow,none",
+    "title": "形状",
+    "type": "select",
+  },
+  Object {
+    "title": "图例配置",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": true,
+    "key": "legendShow",
+    "title": "显示图例",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": "center",
+    "key": "legendAlign",
+    "option": Array [
+      Object {
+        "title": <AlignLeftIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "left",
+      },
+      Object {
+        "title": <AlignCenterIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "center",
+      },
+      Object {
+        "title": <AlignRightIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        />,
+        "value": "right",
+      },
+    ],
+    "title": "对齐",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": "top",
+    "key": "legendPosition",
+    "option": Array [
+      Object {
+        "title": <TopIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+          title="上方"
+        />,
+        "value": "top",
+      },
+      Object {
+        "title": <RightIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+          title="右方"
+        />,
+        "value": "right",
+      },
+      Object {
+        "title": <BottomIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+          title="下方"
+        />,
+        "value": "bottom",
+      },
+      Object {
+        "title": <LeftIcon
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+          title="左方"
+        />,
+        "value": "left",
+      },
+    ],
+    "title": "位置",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": "horizontal",
+    "key": "legendOrient",
+    "option": Array [
+      Object {
+        "title": "水平",
+        "value": "horizontal",
+      },
+      Object {
+        "title": "垂直",
+        "value": "vertical",
+      },
+    ],
+    "title": "排列方式",
+    "type": "radio",
+  },
+  Object {
+    "title": "拆线图样式",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": true,
+    "key": "smooth",
+    "option": Array [
+      Object {
+        "title": <i
+          className="datav-icon gui-icons datav-gui-icon-smooth-line datav-gui-icon"
+        />,
+        "value": true,
+      },
+      Object {
+        "title": <i
+          className="datav-icon gui-icons datav-gui-icon-poly-line datav-gui-icon"
+        />,
+        "value": false,
+      },
+    ],
+    "title": "曲线类型",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": 1,
+    "key": "area_opacity",
+    "max": 1,
+    "min": 0,
+    "step": 0.1,
+    "title": "面积图透明度",
+    "type": "range",
+  },
+  Object {
+    "defaultValue": 2,
+    "key": "lineWidth",
+    "max": 20,
+    "min": 1,
+    "step": 1,
+    "title": "线宽",
+    "type": "range",
+  },
+  Object {
+    "title": "柱状图设置",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": 20,
+    "key": "barWidth",
+    "max": 40,
+    "min": 10,
+    "step": 2,
+    "title": "宽度",
+    "type": "range",
+  },
+  Object {
+    "defaultValue": true,
+    "key": "showBackground",
+    "title": "显示背景",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": "rgba(140,150,200,0.2)",
+    "key": "barBackgroundColor",
+    "title": "背景颜色",
+    "type": "purecolor",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "roundCap",
+    "title": "极坐标柱形圆弧效果",
+    "type": "switch",
+  },
+  Object {
+    "title": "数据标记设置",
+    "type": "divider",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "showMarkpoint",
+    "option": Array [
+      Object {
+        "title": "最大值",
+        "value": "max",
+      },
+      Object {
+        "title": "最小值",
+        "value": "min",
+      },
+      Object {
+        "title": "同时显示",
+        "value": "minmax",
+      },
+      Object {
+        "title": "不显示",
+        "value": false,
+      },
+    ],
+    "title": "显示标记点",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "showMarkline",
+    "option": Array [
+      Object {
+        "title": "平均值",
+        "value": "average",
+      },
+      Object {
+        "title": "不显示",
+        "value": false,
+      },
+    ],
+    "title": "显示标记线",
+    "type": "radio",
+  },
+  Object {
+    "defaultValue": false,
+    "key": "showMarkArea",
+    "title": "显示标记区域",
+    "type": "switch",
+  },
+  Object {
+    "defaultValue": "rgba(255,255,255,0.1)",
+    "key": "markAreaColor",
+    "position": "bottom",
+    "title": "标记区域颜色",
+    "type": "purecolor",
+  },
+  Object {
+    "defaultValue": "rgba(255,255,255,0.3)",
+    "key": "markAreaColor2",
+    "position": "bottom",
+    "title": "标记区域颜色2",
+    "type": "purecolor",
+  },
+  Object {
+    "defaultValue": "",
+    "key": "markTitle1",
+    "title": "区域1标题",
+    "type": "input",
+    "valueType": "text",
+  },
+  Object {
+    "defaultValue": Array [
+      10,
+      20,
+    ],
+    "key": "markArea1",
+    "split": "~",
+    "step": 1,
+    "title": "区域1范围",
+    "type": "slider",
+  },
+  Object {
+    "defaultValue": "",
+    "key": "markTitle2",
+    "title": "区域2标题",
+    "type": "input",
+    "valueType": "text",
+  },
+  Object {
+    "defaultValue": Array [
+      10,
+      20,
+    ],
+    "key": "markArea2",
+    "split": "~",
+    "step": 1,
+    "title": "区域2范围",
+    "type": "slider",
+  },
+  Object {
+    "defaultValue": "",
+    "key": "markTitle3",
+    "title": "区域3标题",
+    "type": "input",
+    "valueType": "text",
+  },
+  Object {
+    "defaultValue": Array [
+      10,
+      20,
+    ],
+    "key": "markArea3",
+    "split": "~",
+    "step": 1,
+    "title": "区域3范围",
+    "type": "slider",
+  },
+  Object {
+    "defaultValue": "",
+    "key": "markTitle4",
+    "title": "区域4标题",
+    "type": "input",
+    "valueType": "text",
+  },
+  Object {
+    "defaultValue": Array [
+      10,
+      20,
+    ],
+    "key": "markArea4",
+    "split": "~",
+    "step": 1,
+    "title": "区域4范围",
+    "type": "slider",
+  },
+  Object {
+    "defaultValue": "",
+    "key": "markTitle5",
+    "title": "区域5标题",
+    "type": "input",
+    "valueType": "text",
+  },
+  Object {
+    "defaultValue": Array [
+      10,
+      20,
+    ],
+    "key": "markArea5",
+    "split": "~",
+    "step": 1,
+    "title": "区域5范围",
+    "type": "slider",
+  },
+]
+`;

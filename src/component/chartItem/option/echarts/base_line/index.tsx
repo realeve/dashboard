@@ -6,7 +6,7 @@ import type { ISeries, IEchartsBaselineProps } from './interface';
 
 export { config, mock, apiConfig, defaultOption } from './mock';
 
-const getMarkpoint = (showMarkpoint: false | 'min' | 'max' | 'minmax') => {
+export const getMarkpoint = (showMarkpoint: false | 'min' | 'max' | 'minmax') => {
   let markpointData;
   if (showMarkpoint === 'minmax') {
     markpointData = [
