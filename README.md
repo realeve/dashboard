@@ -37,6 +37,12 @@ http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
 ## 测试
 > npm test
 
+## 开发期间单元测试
+
+1. 安装 jestrunner 插件
+2. 打开配置，将配置项【jestrunner.jestCommand】设为【umi test 】
+3. 在单个测试的上方将显示  run/debug,点击即可
+
 ## 代码规范分析
 
 > npm run lint:js
