@@ -54,6 +54,9 @@ test('文件读写', async () => {
   const testResult = '{"a":1}';
   const blob = new Blob([testResult], { type: 'text/plain;charset=utf-8' });
   const res = await lib.loadDashboard(blob);
-  expect(lib.loadDashboard()).toMatchObject({});
+  const res2 = await lib.loadDashboard().catch((e) => e.message);
+  expect(res2).toContain(
+    `Failed to execute 'readAsText' on 'FileReader': parameter 1 is not of type 'Blob'`,
+  );
   expect(res).toMatchObject(JSON.parse(testResult));
 });
