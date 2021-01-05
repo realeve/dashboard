@@ -2,7 +2,7 @@ import React from 'react';
 import { prefix } from '../utils/utils';
 import './Popup.less';
 import * as ReactDOM from 'react-dom';
-import { Spin, Button } from 'Antd';
+import { Spin, Button } from 'antd';
 
 export interface IPopup {
   container?: string;

@@ -20,7 +20,7 @@ import localforage from 'localforage';
 
 import { calcPanelPosition } from './lib';
 import classnames from 'classnames';
-import { Spin } from 'Antd';
+import { Spin } from 'antd';
 import { Prompt } from 'umi';
 
 const Editor = React.lazy(() => import('@/component/Editor/Editor'));
