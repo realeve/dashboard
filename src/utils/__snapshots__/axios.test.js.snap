@@ -1,14 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`401 1`] = `[Error: {"status":401,"message":"请求错误: https://api.cbpc.ltd/post3/e4e497e84943?","description":"用户没有权限（令牌、用户名、密码错误）。","url":"https://api.cbpc.ltd/post3/e4e497e84943?","params":{}}]`;
+exports[`401 1`] = `undefined`;
 
-exports[`错误处理 1`] = `
-Object {
-  "message": "未知错误",
-  "params": Object {},
-  "url": "https://api.cbpc.ltd/get",
-}
-`;
+exports[`错误处理 1`] = `null`;
 
 exports[`错误处理 2`] = `
 Object {
@@ -41,13 +35,7 @@ Object {
 }
 `;
 
-exports[`错误处理 5`] = `
-Object {
-  "message": "未知错误",
-  "params": Object {},
-  "url": "",
-}
-`;
+exports[`错误处理 5`] = `null`;
 
 exports[`错误处理 6`] = `
 Object {

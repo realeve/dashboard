@@ -144,7 +144,6 @@ interface IScrollTable {
   style: React.CSSProperties;
 }
 // TODO 讲述如何引进页面重新渲染
-// TODO 当翻至第2页时会出现高度异常
 export default ({
   option: { data, waitTime = 4, ...props },
   onClick = () => {},

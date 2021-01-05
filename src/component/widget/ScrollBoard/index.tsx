@@ -27,9 +27,9 @@ export interface IScrollBoardProps {
   fontWeight: string;
   fontColor: string;
   formatIndex: boolean;
-
   hoverColumns?: number[];
 }
+
 const defaultConfig: IScrollBoardProps = {
   /**
    * @description Board header
@@ -151,15 +151,15 @@ function calcRows({ data, index, headerBGC, rowNum, formatIndex = true }: IScrol
     });
   }
 
-  data = data.map((ceils, i) => ({ ceils, rowIndex: i }));
+  let nextData = data.map((ceils, i) => ({ ceils, rowIndex: i }));
 
-  const rowLength = data.length;
+  const rowLength = nextData.length;
 
   if (rowLength > rowNum && rowLength < 2 * rowNum) {
-    data = [...data, ...data];
+    nextData = [...nextData, ...nextData];
   }
 
-  return data.map((d, i) => ({ ...d, scroll: i }));
+  return nextData.map((d, i) => ({ ...d, scroll: i }));
 }
 
 function calcAligns(mergedConfig, header) {
@@ -192,7 +192,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     aligns: [],
   });
 
-  const { mergedConfig, header, rows, widths, heights, aligns } = state;
+  // const { mergedConfig, header, rows, widths, heights, aligns } = state;
 
   const stateRef = useRef({
     ...state,
@@ -204,6 +204,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   Object.assign(stateRef.current, state);
 
   function onResize() {
+    const { mergedConfig, header } = state;
     if (!mergedConfig) return;
 
     const nextWith = calcWidths(mergedConfig, stateRef.current.rowsData);
@@ -213,12 +214,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     const data = { widths: nextWith, heights: nextHeight };
 
     Object.assign(stateRef.current, data);
+
     setState((prevState) => ({ ...prevState, ...data }));
   }
 
   function calcData() {
     const nextConfig = R.merge(R.clone(defaultConfig), config || {});
     const nextRows = calcRows(nextConfig);
+
+    const { header } = state;
 
     const data = {
       mergedConfig: nextConfig,
@@ -278,6 +282,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const rowLength = rowsData.length;
 
+    // 等待事先设定的时长
     if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
@@ -286,8 +291,10 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     nextRows.push(...rowsData.slice(0, animationIndex));
 
     const nextHeights = new Array(rowLength).fill(avgHeight);
-    setState((prevState) => ({ ...prevState, rows: nextRows, heights }));
 
+    setState((prevState) => ({ ...prevState, rows: nextRows, heights: nextHeights }));
+
+    // 等待300 ms 动画加载
     yield new Promise((resolve) => setTimeout(resolve, 300));
 
     animationIndex += animationNum;
@@ -299,6 +306,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     newHeights.splice(0, animationNum, ...new Array(animationNum).fill(0));
 
     Object.assign(stateRef.current, { animationIndex });
+
     setState((prevState) => ({ ...prevState, heights: newHeights }));
   }
 
@@ -315,9 +323,12 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
   }
 
   const getBackgroundColor = (rowIndex) =>
-    mergedConfig[rowIndex % 2 === 0 ? 'evenRowBGC' : 'oddRowBGC'];
+    state.mergedConfig[rowIndex % 2 === 0 ? 'evenRowBGC' : 'oddRowBGC'];
 
   useEffect(() => {
+    if (height === 0) {
+      return;
+    }
     calcData();
 
     let start = true;
@@ -344,9 +355,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     if (rowNum >= rowLength) return;
 
     return co(loop);
-  }, [JSON.stringify(config)]);
+  }, [JSON.stringify(config), height]);
 
-  useEffect(onResize, [width, height]);
+  useEffect(() => height > 0 && onResize(), [width, height]);
 
   const classNames = useMemo(() => classnames(styles['dv-scroll-board'], className), [className]);
 
@@ -356,48 +367,48 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
       style={{ ...style, fontFamily: config.beautyFont ? 'inherit' : 'Acens' }}
       ref={domRef}
     >
-      {!!header.length && !!mergedConfig && (
+      {!!state.header.length && !!state.mergedConfig && (
         <div
           className={styles.header}
           style={{
-            backgroundColor: `${mergedConfig.headerBGC}`,
+            backgroundColor: `${state.mergedConfig.headerBGC}`,
             fontSize: config.fontSize,
             fontWeight: config.fontWeight,
             color: config.fontColor,
             textAlign: config.textAlign,
           }}
         >
-          {header.map((headerItem, i) => (
+          {state.header.map((headerItem, i) => (
             <div
               className={styles['header-item']}
               key={headerItem + i}
               style={{
-                height: `${mergedConfig.headerHeight}px`,
-                lineHeight: `${mergedConfig.headerHeight}px`,
-                width: `${widths[i]}px`,
+                height: `${state.mergedConfig.headerHeight}px`,
+                lineHeight: `${state.mergedConfig.headerHeight}px`,
+                width: `${state.widths[i]}px`,
                 flex: config.index && i === 0 ? 'unset' : 1,
               }}
-              align={aligns[i]}
+              align={state.aligns[i]}
               dangerouslySetInnerHTML={{ __html: headerItem }}
             />
           ))}
         </div>
       )}
 
-      {!!mergedConfig && (
+      {!!state.mergedConfig && (
         <div
           className={styles.rows}
           style={{
-            height: `${height - (header.length ? mergedConfig.headerHeight : 0)}px`,
+            height: `${height - (state.header.length ? state.mergedConfig.headerHeight : 0)}px`,
           }}
         >
-          {rows.map((row, ri) => (
+          {state.rows.map((row, ri) => (
             <div
               className={styles['row-item']}
               key={row.toString() + row.scroll}
               style={{
-                height: `${heights[ri]}px`,
-                lineHeight: `${heights[ri]}px`,
+                height: `${state.heights[ri]}px`,
+                lineHeight: `${state.heights[ri]}px`,
                 backgroundColor: `${getBackgroundColor(row.rowIndex)}`,
                 fontSize: config.fontSize,
                 fontWeight: config.fontWeight,
@@ -417,10 +428,10 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
                     title={showDetail ? '点击查看详情' : ''}
                     key={ceil + ri + ci}
                     style={{
-                      width: `${widths[ci]}px`,
+                      width: `${state.widths[ci]}px`,
                       flex: config.index && ci === 0 ? 'unset' : 1,
                     }}
-                    align={aligns[ci]}
+                    align={state.aligns[ci]}
                     dangerouslySetInnerHTML={{ __html: ceil }}
                     onClick={() => showDetail && emitEvent(ri, ci, row, ceil)}
                   />
