@@ -91,7 +91,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
             return {
               title,
               list: nextList,
-              num: list.length,
+              num: item.list.length,
             };
           });
 
@@ -109,7 +109,8 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
         })(businessCategory);
         setItemList(panels);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         setError('加载组件列表出错');
       })
       .finally(() => {
@@ -119,7 +120,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
 
   useEffect(() => {
     refreshBusiness();
-  }, [businessCategory.length, refreshBusiness]);
+  }, [businessCategory.length]);
 
   return (
     <ComponentList

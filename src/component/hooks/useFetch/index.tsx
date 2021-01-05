@@ -58,7 +58,7 @@ export interface IFetchResponse<T> {
    @return setData 函数，手工设置data的数据值，如初始化的值
    @return reFetch 函数，手工强制刷新，由于是监听param的值(url,data,params)，在它们不变更的时候也应有刷新的机制
  */
-const useAxios = <T extends Record<string, any> | void>({
+const useAxios = <T extends {} | void>({
   param,
   initData,
   callback: onFetchData = (e) => e,
@@ -68,6 +68,9 @@ const useAxios = <T extends Record<string, any> | void>({
   pollingWhenHidden = false,
   focusTimespan = 5,
 }: IFetchProps<T>): IFetchResponse<T> => {
+  // unmounted时才更新数据
+  let unmounted = false;
+
   // 初始化数据
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -86,16 +89,16 @@ const useAxios = <T extends Record<string, any> | void>({
     // 部分场景允许不设置param时，返回默认状态为空的数据
     // 如，多个tab条的切换点击
     if (R.isNil(param) || (!param && !initData)) {
-      setData(null);
-      return false;
+      !unmounted && setData(null);
+      return;
     }
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
-      setData(null);
-      return false;
+      !unmounted && setData(null);
+      return;
     }
 
-    setLoading(true);
+    !unmounted && setLoading(true);
 
     // 数据mock
     if (initData) {
@@ -104,10 +107,10 @@ const useAxios = <T extends Record<string, any> | void>({
         // if (v.length === 0) {
         //   return;
         // }
-        setData(v);
-        setLoading(false);
+        !unmounted && setData(v);
+        !unmounted && setLoading(false);
       });
-      return false;
+      return;
     }
 
     const source = CancelToken.source();
@@ -117,6 +120,9 @@ const useAxios = <T extends Record<string, any> | void>({
     // 从后端发起请求
     axios(param as AxiosRequestConfig)
       .then((response: any) => {
+        if (unmounted) {
+          return;
+        }
         if (onFetchData) {
           setData(onFetchData(response));
         } else {
@@ -125,8 +131,8 @@ const useAxios = <T extends Record<string, any> | void>({
         setLoading(false);
       })
       .catch((e: any) => {
-        setError(e);
-        setLoading(false);
+        !unmounted && setError(e);
+        !unmounted && setLoading(false);
         throw e;
       })
       .finally(() => {
@@ -136,16 +142,13 @@ const useAxios = <T extends Record<string, any> | void>({
       });
 
     // 路由变更时，取消axios
-    return () => source.cancel();
+    // eslint-disable-next-line
+    return () => {
+      unmounted = true;
+      source.cancel();
+    };
     // 监听axios数据请求中 url、get/post关键参数
-  }, [
-    param.url,
-    JSON.stringify(param.params),
-    JSON.stringify(param.data),
-    initData,
-    innerTrigger,
-    valid,
-  ]);
+  }, [param.url, JSON.stringify(param.params), JSON.stringify(param.data), initData, innerTrigger]);
 
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会
@@ -177,12 +180,7 @@ const useAxios = <T extends Record<string, any> | void>({
   }, []);
 
   // 定时自动刷新
-  useInterval(
-    () => {
-      reFetch();
-    },
-    pollingWhenVisibleFlag && interval > 0 ? interval * 1000 : null,
-  );
+  useInterval(reFetch, pollingWhenVisibleFlag && interval > 0 ? interval * 1000 : null);
 
   return {
     data,
