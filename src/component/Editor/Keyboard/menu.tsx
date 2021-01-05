@@ -1,6 +1,6 @@
 import React from 'react';
 import { prefix } from '../utils/utils';
-import MoveToolIcon from './MoveToolIcon';
+import MoveToolIcon from './MovetoolIcon';
 import './Menu.less';
 import type Icon from './Icon';
 import type Editor from '../Editor';
