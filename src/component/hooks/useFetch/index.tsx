@@ -142,7 +142,6 @@ const useAxios = <T extends {} | void>({
       });
 
     // 路由变更时，取消axios
-    // eslint-disable-next-line
     return () => {
       unmounted = true;
       source.cancel();
