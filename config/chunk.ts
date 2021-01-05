@@ -1,7 +1,5 @@
 const DEV = process.env.NODE_ENV == 'development';
 
-console.log({ DEV });
-
 // 提取后会将提取的包注入到页面，如echarts,g2，无论是否引用都会被提取。此处暂时关闭
 let chain =
   true || DEV

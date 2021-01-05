@@ -3,6 +3,9 @@ import { isColor } from '@/component/chartItem/option/lib';
 import { saveAs } from 'file-saver';
 import assets from '@/component/widget/assets';
 
+// 缩放的范围
+export const rangeCfg = { min: 0.4, max: 2, step: 0.1 };
+
 export const getDefaultStyle = (style?: React.CSSProperties) => {
   const rect = {
     ...defaultRect,

@@ -4,6 +4,7 @@
     "start": "umi dev",
     "build": "umi build",
     "test": "umi test --runInBand --detectOpenHandles",
+    "test:coveralls":"umi test --online",
     "add": "node ./config/template.js",
     "preview": "http-server --port=8080 ./dist -o /config",
     "cover": "http-server --port=8081 ./coverage/lcov-report -o /",

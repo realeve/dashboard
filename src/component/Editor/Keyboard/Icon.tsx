@@ -41,7 +41,7 @@ export default abstract class Icon extends React.PureComponent<{
   public componentDidMount() {
     const { keys } = this;
     if (keys.length) {
-      this.keyManager.keydown(
+      this?.keyManager?.keydown(
         keys,
         (e) => {
           if (e.ctrlKey || e.metaKey) {

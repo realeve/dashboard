@@ -280,7 +280,7 @@ const METHODS = ['clickTarget', 'setSelectedTargets', 'triggerDragStart'];
 
 /**
  * Selecto.js is a component that allows you to select elements in the drag area using the mouse or touch.
- * @sort 1
+ 
  * @extends eg.Component
  */
 

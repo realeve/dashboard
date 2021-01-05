@@ -1,9 +1,9 @@
+import React from 'react';
 import styles from './EditSlider.less';
 import ToolMenu from './ToolMenu';
 import InputRange from '@/component/field/InputRange';
 import classnames from 'classnames';
-
-import { rangeCfg } from '@/component/Editor/Editor';
+import { rangeCfg } from '@/component/Editor/lib';
 
 export default ({
   editor,

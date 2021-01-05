@@ -45,9 +45,6 @@ import * as R from 'ramda';
   }
   Object.defineProperty(prototype, property, attributes);
 })
-/**
- * @sort 1
- */
 class InfiniteViewer extends Component {
   public options: InfiniteViewerOptions;
   private injectResult!: InjectResult;
@@ -68,9 +65,7 @@ class InfiniteViewer extends Component {
   private dragFlag = false;
   private tempScale = 1;
   private isLoop = false;
-  /**
-   * @sort 1
-   */
+
   constructor(
     private containerElement: HTMLElement,
     private viewportElement: HTMLElement,

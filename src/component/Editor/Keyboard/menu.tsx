@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { prefix } from '../utils/utils';
 import MoveToolIcon from './MoveToolIcon';
 import './Menu.less';
@@ -32,12 +32,12 @@ export default class Menu extends React.PureComponent<{
     }
   }
   public renderMenus() {
-    const {selected} = this.state;
-    const {menuRefs} = this;
-    const {editor} = this.props;
+    const { selected } = this.state;
+    const { menuRefs } = this;
+    const { editor } = this.props;
 
     return MENUS.map((MenuClass, i) => {
-      const {id} = MenuClass;
+      const { id } = MenuClass;
       if (!menuRefs[i]) {
         menuRefs[i] = React.createRef();
       }
@@ -59,7 +59,7 @@ export default class Menu extends React.PureComponent<{
     this.props?.onSelect?.(id);
   };
   public getSelected(): typeof Icon | undefined {
-    const {selected} = this.state;
+    const { selected } = this.state;
     return MENUS.filter((m) => m.id === selected)[0];
   }
 }

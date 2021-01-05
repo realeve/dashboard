@@ -28,10 +28,7 @@ import * as R from 'ramda';
 import type { IPage } from '@/models/common';
 import type { Dispatch } from 'redux';
 
-import { getDefaultStyle, getDashboardStyle, calcCanvasRange, getThumbnail } from './lib';
-
-// 缩放的范围
-export const rangeCfg = { min: 0.4, max: 2, step: 0.1 };
+import { getDefaultStyle, getDashboardStyle, calcCanvasRange, getThumbnail, rangeCfg } from './lib';
 
 function undoCreateElements({ infos, prevSelected }: IObject<any>, editor: Editor) {
   const res = editor.removeByIds(
