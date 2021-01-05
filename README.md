@@ -1,7 +1,7 @@
 # dashboard
 [![Coverage Status](https://coveralls.io/repos/github/realeve/dashboard/badge.svg?branch=master)](https://coveralls.io/github/realeve/dashboard?branch=master)
 [![Build Status](https://api.travis-ci.com/realeve/dashboard.svg?branch=master&status=passed)](https://travis-ci.com/realeve/dashboard)
-![](https://img.shields.io/github/last-commit/realeve/sheet_manager/master.svg)
+![](https://img.shields.io/github/last-commit/realeve/dashboard/master.svg)
 
 ## 资源文件所在的配套项目
 

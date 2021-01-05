@@ -240,20 +240,30 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     }
   }
 
-  componentWillMount() {
-    setTimeout(async () => {
-      // 载入辅助线
-      const initGuides: IGuideProps = await guideDb.load(this.props.page);
-      this.setState({
-        horizontalGuides: initGuides.h,
-        verticalGuides: initGuides.v,
-      });
+  // TODO fix warning
+  /**
+   *  react-dom.development.js:67 Warning: componentWillMount has been renamed, and is not recommended for use. 
+   * See https://zh-hans.reactjs.org/blog/2018/03/27/update-on-async-rendering.html for details.
 
-      this.horizontalGuides?.current?.loadGuides(initGuides.h);
-      this.verticalGuides?.current?.loadGuides(initGuides.v);
+      Move code with side effects to componentDidMount, and set initial state in the constructor.
+      Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. 
+      In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, 
+      you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
 
-      this.props.onGuidesChange?.(initGuides);
-    }, 0);
+    
+   */
+  async loadGuideLine() {
+    // 载入辅助线
+    const initGuides: IGuideProps = await guideDb.load(this.props.page);
+    this.setState({
+      horizontalGuides: initGuides.h,
+      verticalGuides: initGuides.v,
+    });
+
+    this.horizontalGuides?.current?.loadGuides(initGuides.h);
+    this.verticalGuides?.current?.loadGuides(initGuides.v);
+
+    this.props.onGuidesChange?.(initGuides);
   }
 
   toggleGuides = () => {
@@ -505,6 +515,8 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     );
   }
   public componentDidMount() {
+    this.loadGuideLine();
+
     const { infiniteViewer, memory, eventBus } = this;
     memory.set('background-color', '#4af');
 

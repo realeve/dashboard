@@ -1,9 +1,8 @@
-@import './style/theme.less';
+@import './style/global.less';
+@import './style/root.less';
 @import './style/icon/datav.less';
 @import './style/icon/comfont.less';
 @import './style/icon/gui.less';
-@import './style/center.less';
-@import './style/root.less';
 html,
 body,
 #root {
@@ -34,7 +33,7 @@ body,
 
 @font-face {
   font-family: 'Unica One';
-  src: url('/fonts/Unica-One.ttf');
+  src: url('./component/widget/fonts/Unica-One.ttf');
 }
 
 .data_input {
@@ -51,7 +50,7 @@ body,
   margin: 0;
   padding-left: 7px;
   color: var(--datav-gui-font-color-1);
-  font-size: 12px; 
+  font-size: 12px;
   line-height: 30px;
   text-align: start;
   background: var(--datav-gui-component-background-color);
@@ -110,7 +109,7 @@ body,
 //   height: 100%;
 // }
 
-// .echarts-tooltip {  
+// .echarts-tooltip {
 //   background-color: rgba(48, 54, 64, 0.8);
 //   color: rgb(224, 224, 227);
 //   font-size: 12px ;
@@ -121,6 +120,6 @@ body,
 //   padding: 12px;
 //   box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;
 //   border-radius: 3px;
-//   border: none; 
+//   border: none;
 //   backdrop-filter: saturate(180%) blur(20px);
 // }

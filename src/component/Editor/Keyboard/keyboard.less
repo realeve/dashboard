@@ -11,6 +11,8 @@
   transition: all ease 0.2s;
 }
 
+@back2: #2a2a2a;
+
 .scena-keyboard {
   box-sizing: border-box;
   width: 90%;
@@ -21,21 +23,19 @@
   background: #fff;
   border-radius: 3px;
 
-  --back2: #2a2a2a;
-}
-
-.scena-key {
-  display: inline-block;
-  width: 2px;
-  height: 2px;
-  margin: 1px;
-  background: var(--back2);
-}
-.scena-space {
-  display: inline-block;
-  width: 12px;
-  height: 2px;
-  margin: 1px;
-  background: var(--back2);
-  border-radius: 1px;
+  .scena-key {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    margin: 1px;
+    background: @back2;
+  }
+  .scena-space {
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    margin: 1px;
+    background: @back2;
+    border-radius: 1px;
+  }
 }

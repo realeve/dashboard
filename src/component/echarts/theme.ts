@@ -17,9 +17,10 @@ export default {
     type: 'time',
     axisTick: {},
     axisLabel: {
-      textStyle: {
-        color: '#222',
-      },
+      color: '#222',
+      // textStyle: {
+      //   color: '#222',
+      // },
     },
     axisLine: {
       lineStyle: {
@@ -69,7 +70,7 @@ export default {
     textStyle: {
       color: '#E0E0E3',
       fontSize: 12,
-      lineHeight: 1.5
+      lineHeight: 1.5,
     },
     trigger: 'axis',
     axisPointer: {
@@ -113,9 +114,10 @@ export default {
       color: '#555',
     },
     axisLabel: {
-      textStyle: {
-        color: '#222',
-      },
+      color: '#222',
+      // textStyle: {
+      //   color: '#222',
+      // },
     },
     splitArea: {
       show: false,
@@ -129,9 +131,10 @@ export default {
       show: false,
     },
     axisLabel: {
-      textStyle: {
-        color: '#222',
-      },
+      color: '#222',
+      // textStyle: {
+      //   color: '#222',
+      // },
     },
     nameTextStyle: {
       fontSize: 16,
@@ -154,12 +157,13 @@ export default {
       color: 'rgb(38,185,139)',
     },
     controlStyle: {
-      normal: {
-        color: 'rgb(38,185,139)',
-      },
-      emphasis: {
-        color: 'rgb(38,185,139)',
-      },
+      color: 'rgb(38,185,139)',
+      // normal: {
+      //   color: 'rgb(38,185,139)',
+      // },
+      // emphasis: {
+      //   color: 'rgb(38,185,139)',
+      // },
     },
   },
   bar: {
