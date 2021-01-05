@@ -133,7 +133,7 @@ exports[`编辑器右下角缩放 3`] = `
     className="scena-menu"
   >
     <div
-      className="scena-icon scena-selected"
+      className="scena-icon "
       onClick={[Function]}
       title="选择工具：选择屏幕中的组件"
     >
@@ -156,7 +156,7 @@ exports[`编辑器右下角缩放 3`] = `
       </svg>
     </div>
     <div
-      className="scena-icon "
+      className="scena-icon scena-selected"
       onClick={[Function]}
       title="移动工具：移动屏幕位置"
     >
