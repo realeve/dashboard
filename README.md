@@ -49,6 +49,11 @@ http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
 
 > npm run lint:style
  
+## 代码提交 
+
+提交时会进行校验，如果校验失败需要强制提交时：
+
+> git commit --no-verify -m "移除控制台所有warning信息"
 ## 数据库层初始化
 
 基于mysql,资源项目中对应的  ./public/tbl_business.sql
