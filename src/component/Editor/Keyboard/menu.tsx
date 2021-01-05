@@ -17,28 +17,26 @@ export default class Menu extends React.PureComponent<{
   onSelect?: (id: string) => any;
   curTool?: TQuickTool;
 }> {
-  public state = {
-    selected: 'MoveTool',
-  };
   public menuRefs: React.RefObject<Icon>[] = [];
   public render() {
     return <div className={prefix('menu')}>{this.renderMenus()}</div>;
   }
 
+  // https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html?
+
   // remove componentWillReceiveProps
-  static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.curTool !== state.selected) {
-      return {
-        selected: nextProps.curTool,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, state) {
+  //   if (nextProps.curTool !== state.selected) {
+  //     return {
+  //       selected: nextProps.curTool,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   public renderMenus() {
-    const { selected } = this.state;
     const { menuRefs } = this;
-    const { editor } = this.props;
+    const { editor, onSelect, curTool } = this.props;
 
     return MENUS.map((MenuClass, i) => {
       const { id } = MenuClass;
@@ -50,20 +48,13 @@ export default class Menu extends React.PureComponent<{
           ref={menuRefs[i]}
           key={id}
           editor={editor}
-          selected={selected === id}
-          onSelect={this.select}
+          selected={curTool === id}
+          onSelect={onSelect}
         />
       );
     });
   }
-  public select = (id: string) => {
-    this.setState({
-      selected: id,
-    });
-    this.props?.onSelect?.(id);
-  };
   public getSelected(): typeof Icon | undefined {
-    const { selected } = this.state;
-    return MENUS.filter((m) => m.id === selected)[0];
+    return MENUS.filter((m) => m.id === this.props.curTool)[0];
   }
 }

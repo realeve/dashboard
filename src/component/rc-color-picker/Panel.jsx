@@ -34,19 +34,23 @@ export default class Panel extends React.Component {
     this.props.onMount(this.ref);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.color) {
-      const color = new Color(nextProps.color);
-      this.setState({
-        color,
-      });
-    }
-    if (nextProps.alpha !== undefined) {
-      this.setState({
-        alpha: nextProps.alpha,
-      });
-    }
-  }
+  // static getDerivedStateFromProps({ defaultColor, alpha }, state) {
+  //   let nextState = null;
+
+  //   if (!R.equals(defaultColor, `#${state.color.hex}`)) {
+  //     const color = new Color(defaultColor);
+  //     nextState = {
+  //       color,
+  //     };
+  //   }
+  //   if (alpha !== state.alpha) {
+  //     nextState = {
+  //       ...nextState,
+  //       alpha,
+  //     };
+  //   }
+  //   return nextState;
+  // }
 
   onSystemColorPickerOpen = (e) => {
     // only work with broswer which support color input
@@ -107,6 +111,7 @@ export default class Panel extends React.Component {
     color.alpha = alpha;
 
     this.setState({ color });
+
     this.props.onChange({
       color: color.toHexString(),
       alpha: color.alpha,

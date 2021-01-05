@@ -54,18 +54,19 @@ export default class ColorPicker extends React.Component {
     this.saveTriggerRef = refFn.bind(this, 'triggerInstance');
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.color) {
-      this.setState({
-        color: nextProps.color,
-      });
-    }
-    if (nextProps.alpha !== null && nextProps.alpha !== undefined) {
-      this.setState({
-        alpha: nextProps.alpha,
-      });
-    }
-  }
+  // static getDerivedStateFromProps(_, state) {
+  //   let nextState = null;
+  //   if (state.alpha) {
+  //     nextState = {
+  //       alpha: state.alpha,
+  //     };
+  //   }
+
+  //   if (state.color) {
+  //     nextState = { ...nextState, color: state.color };
+  //   }
+  //   return nextState;
+  // }
 
   onTriggerClick() {
     this.setState({
@@ -96,11 +97,13 @@ export default class ColorPicker extends React.Component {
     this.props.onVisibleChange && this.props.onVisibleChange(open);
   }
 
-  onPanelMount(panelDOMRef) {
+  onPanelMount() {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const panelDOMRef = this;
     if (this.state.open) {
       setTimeout(() => {
         panelDOMRef.focus();
-      }, 1);
+      }, 0);
     }
   }
 
@@ -132,7 +135,6 @@ export default class ColorPicker extends React.Component {
   }
 
   getPickerElement() {
-    // const state = this.state;
     return (
       <ColorPickerPanel
         onMount={this.onPanelMount}

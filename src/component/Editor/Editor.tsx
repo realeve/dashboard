@@ -192,6 +192,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.setState({
       rectOffset,
     });
+    return { rectOffset };
   };
 
   // Warning: componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
@@ -201,21 +202,41 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
   // * Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
   // *
   // *
-  componentWillReceiveProps(nextProps) {
-    if (this.props.domHash !== nextProps.domHash) {
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   if (this.props.domHash !== nextProps.domHash) {
+  //     // hash变更
+  //     let s = this.getEditorPosition();
+  //     console.log(s);
+  //     return;
+  //   }
+
+  //   if (this.props.curTool !== nextProps.curTool) {
+  //     if (nextProps.curTool === 'home') {
+  //       this.infiniteViewer.current!.scrollCenter();
+  //     }
+  //   }
+
+  //   if (this.props.zoom !== nextProps.zoom) {
+  //     this.setState({ zoom: nextProps.zoom });
+  //   }
+  // }
+
+  // https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate
+  componentDidUpdate(prevProps: IEditorProps) {
+    if (this.props.domHash !== prevProps.domHash) {
       // hash变更
       this.getEditorPosition();
       return;
     }
 
-    if (this.props.curTool !== nextProps.curTool) {
-      if (nextProps.curTool === 'home') {
+    if (this.props.curTool !== prevProps.curTool) {
+      if (this.props.curTool === 'home') {
         this.infiniteViewer.current!.scrollCenter();
       }
     }
 
-    if (this.props.zoom !== nextProps.zoom) {
-      this.setState({ zoom: nextProps.zoom });
+    if (this.props.zoom !== prevProps.zoom) {
+      this.setState({ zoom: this.props.zoom });
     }
   }
 
@@ -299,7 +320,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
       lineColor: '#364152',
       textColor: '#808e9b',
       unit: 100,
-      dragPosFormat: (e) => e - 44,
+      dragPosFormat: (e: number) => e - 44,
     };
 
     const zoomRange = calcCanvasRange({ width, hideWidth: this.props.hideWidth, height }, zoom);
@@ -419,7 +440,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
           toggleContinueSelect={['shift']}
           preventDefault={true}
           rectOffset={this.state.rectOffset}
-          onDragStart={(e) => {
+          onDragStart={(e: { isTrusted?: any; stop?: any; inputEvent?: any }) => {
             if (selectedMenu === 'hand') {
               return;
             }
@@ -965,7 +986,10 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 export default Editor;
 
 // 旋转组件
-export const rotateJSX = (moveableData, { id, rotate }) => {
+export const rotateJSX = (
+  moveableData: { getFrame: (arg0: HTMLElement) => any },
+  { id, rotate }: any,
+) => {
   const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
   const frame = moveableData.getFrame(target);
   frame.set('transform', 'rotate', `${rotate}deg`);

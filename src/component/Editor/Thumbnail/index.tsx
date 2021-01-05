@@ -54,6 +54,8 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
     res = getThumbnailParam(4);
   } else if (zoom <= 1.6) {
     res = getThumbnailParam(5);
+  } else {
+    res = getThumbnailParam(6);
   }
   const offset = res.x;
   const moveParam = res.y;

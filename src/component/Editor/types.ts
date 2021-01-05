@@ -9,7 +9,7 @@ import type HistoryManager from './utils/HistoryManager';
 import type Debugger from './utils/Debugger';
 import type React from 'react';
 
-export type TQuickTool = 'MoveTool' | 'hand' | 'Text';
+export type TQuickTool = 'MoveTool' | 'hand' | 'Text' | 'home';
 
 export interface ScenaEditorState {
   selectedTargets: (SVGElement | HTMLElement)[];

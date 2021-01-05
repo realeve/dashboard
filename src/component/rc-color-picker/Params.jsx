@@ -4,29 +4,39 @@ import cx from 'classnames';
 
 import Color from './helpers/color';
 import percentage from './helpers/percentage';
+import * as R from 'ramda';
 
 const modesMap = ['RGB', 'HSB'];
 
-export default class Params extends React.Component {
+export default class Params extends React.PureComponent {
   constructor(props) {
     super(props);
 
     // 管理 input 的状态
     this.state = {
       mode: props.mode,
-      hex: props.color.hex,
-      color: props.color, // instanceof tinycolor
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { color: nextColor } = nextProps;
+  // https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html?
+  // static getDerivedStateFromProps({ color }, state) {
+  //   if (!R.equals(color, state.color)) {
+  //     return {
+  //       color,
+  //       hex: color.hex,
+  //     };
+  //   }
+  //   return null;
+  // }
 
-    this.setState({
-      color: nextColor,
-      hex: nextColor.hex,
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const { color: nextColor } = nextProps;
+
+  //   this.setState({
+  //     color: nextColor,
+  //     hex: nextColor.hex,
+  //   });
+  // }
 
   getChannelInRange = (value, index) => {
     const channelMap = {
@@ -57,7 +67,7 @@ export default class Params extends React.Component {
   };
 
   handleHexBlur = () => {
-    const { hex } = this.state;
+    const { hex } = this.props.color;
 
     let color = null;
 
@@ -66,16 +76,12 @@ export default class Params extends React.Component {
     }
 
     if (color !== null) {
-      this.setState({
-        color,
-        hex,
-      });
       this.props.onChange(color, false);
     }
   };
 
   handleHexPress = (event) => {
-    const { hex } = this.state;
+    const { hex } = this.props.color;
     if (event.nativeEvent.which === 13) {
       let color = null;
 
@@ -84,10 +90,6 @@ export default class Params extends React.Component {
       }
 
       if (color !== null) {
-        this.setState({
-          color,
-          hex,
-        });
         this.props.onChange(color, false);
       }
     }
@@ -95,8 +97,10 @@ export default class Params extends React.Component {
 
   handleHexChange = (event) => {
     const hex = event.target.value;
+    const nextColor = R.clone(this.props.color);
 
-    this.setState({
+    this.props.onChange({
+      ...nextColor,
       hex,
     });
   };
@@ -155,22 +159,14 @@ export default class Params extends React.Component {
 
     const color = this.updateColorByChanel(channel, value);
 
-    this.setState(
-      {
-        hex: color.hex,
-        color,
-      },
-      () => {
-        this.props.onChange(color, false);
-      },
-    );
+    this.props.onChange(color, false);
   };
 
   render() {
     const prefixCls = this.getPrefixCls();
 
-    const { enableAlpha } = this.props;
-    const { mode, color } = this.state;
+    const { enableAlpha, color } = this.props;
+    const { mode } = this.state;
     const colorChannel = color[mode];
 
     if (mode === 'HSB') {
@@ -194,7 +190,7 @@ export default class Params extends React.Component {
             onKeyPress={this.handleHexPress}
             onBlur={this.handleHexBlur}
             onChange={this.handleHexChange}
-            value={this.state.hex.toLowerCase()}
+            value={this.props.color.hex.toLowerCase()}
           />
           <input
             type="number"
