@@ -68,7 +68,7 @@ export default ({
 
   return (
     <div className={styles.waffleContainer}>
-      <ScrollTable config={config} onClick={setState} />
+      <ScrollTable config={props} onClick={setState} />
       <Spin spinning={loading}>
         {state && (
           <div className={styles.waffleTitle}>

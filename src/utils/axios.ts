@@ -142,7 +142,7 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError: (error: _AxiosError) => AxiosError = (error) => {
+export const handleError: (error: _AxiosError) => AxiosError | null = (error) => {
   const config = error.config || {};
   const str = config.params || config.data || {};
   const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
@@ -153,7 +153,7 @@ export const handleError: (error: _AxiosError) => AxiosError = (error) => {
 
   if (typeof error.message === 'undefined') {
     // 路由取消
-    return { message: '未知错误', url: (config && config.url) || '', params };
+    return null;
   }
 
   config.url += `${id ? `${id}/${nonce}` : ''}${params ? `?${qs.stringify(params)}` : ''}`;
@@ -262,6 +262,9 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
     })(option)
     .then(handleData)
     .catch((e) => {
+      if (e) {
+        return;
+      }
       throw new Error(JSON.stringify(handleError(e)));
     });
 };

@@ -42,6 +42,8 @@ module.exports = {
     // 允许使用 console
     'no-console': 'off',
 
+    'react/no-array-index-key': 'off',
+
     // 优先使用解析，在部分场景如 var foo ='bar'; foo = baz[0]时会报错误
     // 'prefer-destructuring': 'off',
   },

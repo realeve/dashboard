@@ -33,8 +33,9 @@ export const handleScatterData = ({ y: _y = 1, data: { data, header }, prod }) =
   const res = R.clone(data);
 
   // 从此id开始产品未印刷，小于它的视为跳号
-  const id = R.reverse(data).findIndex((item) => item[y] === 1);
-  const idx = res.length - id;
+  const id = R.reverse(data).findIndex((item) => item[y] === '1');
+  // 如果一万未印刷，不置错误
+  const idx = id === 0 ? 0 : res.length - id;
 
   const template = getTemplate(prod);
 

@@ -341,12 +341,12 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (rowNum >= rowLength) return false;
+    if (rowNum >= rowLength) return;
 
     return co(loop);
-  }, [config, domRef.current]);
+  }, [JSON.stringify(config)]);
 
-  useEffect(onResize, [width, height, domRef.current]);
+  useEffect(onResize, [width, height]);
 
   const classNames = useMemo(() => classnames(styles['dv-scroll-board'], className), [className]);
 
