@@ -24,13 +24,17 @@ export default class Menu extends React.PureComponent<{
   public render() {
     return <div className={prefix('menu')}>{this.renderMenus()}</div>;
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.curTool !== this.state.selected) {
-      this.setState({
+
+  // remove componentWillReceiveProps
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.curTool !== state.selected) {
+      return {
         selected: nextProps.curTool,
-      });
+      };
     }
+    return null;
   }
+
   public renderMenus() {
     const { selected } = this.state;
     const { menuRefs } = this;

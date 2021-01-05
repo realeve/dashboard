@@ -194,6 +194,13 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     });
   };
 
+  // Warning: componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.
+
+  // * Move data fetching code or side effects to componentDidUpdate.
+  // * If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state
+  // * Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+  // *
+  // *
   componentWillReceiveProps(nextProps) {
     if (this.props.domHash !== nextProps.domHash) {
       // hash变更
