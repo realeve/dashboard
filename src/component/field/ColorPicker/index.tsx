@@ -30,6 +30,7 @@ const ColorItem = ({ value = '', onChange, position, onVisibleChange }) => {
     return null;
   }
   const val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
+
   return (
     <ColorPicker
       color={rgb2hex(value).slice(0, 7)}
@@ -144,7 +145,6 @@ export const PureColor = ({
 }) => {
   const val = value.replace(/([a-zA-Z]|\(|\))/g, '').split(',');
 
-  // , { [styles.noAnimation]: noAnimation }
   return (
     <div className={styles.colorItem}>
       <div className={styles.colorPanel} style={{ backgroundColor: value }}>

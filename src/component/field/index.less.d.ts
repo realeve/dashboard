@@ -11,6 +11,7 @@ interface CssExports {
   'ant-select-item-option-disabled': string;
   'ant-select-item-option-selected': string;
   'ant-select-selector': string;
+  'cbpc_data_input': string;
   'center': string;
   'com-font': string;
   'component': string;
@@ -266,7 +267,6 @@ interface CssExports {
   'icon-zoom-out': string;
   'marqueeAnimation': string;
   'notitle': string;
-  'rc-color-picker-wrap': string;
   'root': string;
   'rotateCustom': string;
   'rotateX': string;

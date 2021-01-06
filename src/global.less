@@ -36,22 +36,8 @@ body,
   src: url('./component/widget/fonts/Unica-One.ttf');
 }
 
-.data_input {
-  display: block;
-  display: flex;
-  flex: 1;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  width: 82px;
-  min-width: 82px;
-  height: 30px;
-  margin: 0;
-  padding-left: 7px;
+.cbpc_data_input {
   color: var(--datav-gui-font-color-1);
-  font-size: 12px;
-  line-height: 30px;
   text-align: start;
   background: var(--datav-gui-component-background-color);
   border: 1px solid var(--datav-gui-component-border-color);
@@ -61,6 +47,7 @@ body,
   transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   resize: none;
   caret-color: var(--datav-main-color);
+  padding-left: 7px;
   &:hover,
   &:active,
   &:focus {
@@ -71,6 +58,22 @@ body,
     outline: none;
     box-shadow: none;
   }
+}
+
+.data_input {
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 82px;
+  min-width: 82px;
+  height: 30px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 30px;
+  .cbpc_data_input;
 }
 
 .disabled {
@@ -97,10 +100,6 @@ body,
 .ant-select-selector {
   color: #ddd;
   background-color: #1c1f25 !important;
-}
-
-.rc-color-picker-wrap {
-  flex: 1;
 }
 
 // .ka-wrapper,

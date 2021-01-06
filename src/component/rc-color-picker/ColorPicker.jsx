@@ -20,20 +20,14 @@ export default class ColorPicker extends React.Component {
   constructor(props) {
     super(props);
 
-    const alpha =
-      typeof props.alpha === 'undefined'
-        ? props.defaultAlpha
-        : Math.min(props.alpha, props.defaultAlpha);
-
     this.state = {
       color: props.color || props.defaultColor,
-      alpha,
+      alpha: props.alpha,
       open: false,
     };
 
     const events = [
       'onTriggerClick',
-      'onChange',
       'onMouseUp',
       'onBlur',
       'getPickerElement',
@@ -54,38 +48,14 @@ export default class ColorPicker extends React.Component {
     this.saveTriggerRef = refFn.bind(this, 'triggerInstance');
   }
 
-  // static getDerivedStateFromProps(_, state) {
-  //   let nextState = null;
-  //   if (state.alpha) {
-  //     nextState = {
-  //       alpha: state.alpha,
-  //     };
-  //   }
-
-  //   if (state.color) {
-  //     nextState = { ...nextState, color: state.color };
-  //   }
-  //   return nextState;
-  // }
-
   onTriggerClick() {
     this.setState({
       open: !this.state.open,
     });
   }
 
-  onChange(colors) {
-    this.setState(
-      {
-        ...colors,
-      },
-      () => {
-        this.props.onChange(this.state);
-      },
-    );
-  }
   onMouseUp() {
-    this.props.onMouseUp && this.props.onMouseUp(this.state);
+    this.props?.onMouseUp?.(this.state);
   }
 
   onBlur() {
@@ -138,11 +108,11 @@ export default class ColorPicker extends React.Component {
     return (
       <ColorPickerPanel
         onMount={this.onPanelMount}
-        defaultColor={this.state.color}
+        color={this.state.color}
         alpha={this.state.alpha}
         enableAlpha={this.props.enableAlpha}
         prefixCls={`${this.props.prefixCls}-panel`}
-        onChange={this.onChange}
+        onChange={(e) => this.setState(e)}
         onMouseUp={this.onMouseUp}
         onBlur={this.onBlur}
         mode={this.props.mode}
@@ -168,18 +138,32 @@ export default class ColorPicker extends React.Component {
   render() {
     const { props } = this;
     const { state } = this;
-    const classes = [`${props.prefixCls}-wrap`, props.className];
+
+    const {
+      prefixCls,
+      placement,
+      style,
+      getCalendarContainer,
+      align,
+      animation,
+      disabled,
+      transitionName,
+      color,
+      alpha,
+      className,
+    } = props;
+
+    const classes = [`${prefixCls}-wrap`, className];
     if (state.open) {
-      classes.push(`${props.prefixCls}-open`);
+      classes.push(`${prefixCls}-open`);
     }
 
-    let { children } = props;
-
-    const [r, g, b] = new Color(this.state.color).RGB;
+    const [r, g, b] = new Color(color).RGB;
     const RGBA = [r, g, b];
 
-    RGBA.push(this.state.alpha / 100);
+    RGBA.push(alpha / 100);
 
+    let { children } = props;
     if (children) {
       children = React.cloneElement(children, {
         ref: this.saveTriggerRef,
@@ -191,17 +175,6 @@ export default class ColorPicker extends React.Component {
         onMouseDown: prevent,
       });
     }
-
-    const {
-      prefixCls,
-      placement,
-      style,
-      getCalendarContainer,
-      align,
-      animation,
-      disabled,
-      transitionName,
-    } = props;
 
     return (
       <div className={classes.join(' ')}>
@@ -249,6 +222,8 @@ ColorPicker.propTypes = {
 ColorPicker.defaultProps = {
   defaultColor: '#F00',
   defaultAlpha: 100,
+  alpha: 100,
+  color: '#f00',
   onMouseUp() {},
   onChange() {},
   onOpen() {},

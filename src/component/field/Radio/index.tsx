@@ -54,7 +54,7 @@ export const Select = ({ value, onChange, disabled, config = [] }: IRadioProps) 
       className="data_input"
     >
       {handleConfig(config).map(({ title, value: val }) => (
-        <option key={value} value={val}>
+        <option key={value + title} value={val}>
           {title}
         </option>
       ))}
