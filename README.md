@@ -12,6 +12,10 @@
 
 ## 编译
 > npm run build
+
+## 编译+部署
+> npm run deploy
+
 ## 路由列表
 
 [图表配置页面](http://localhost:8000/config):http://localhost:8000/config

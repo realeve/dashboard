@@ -1,7 +1,8 @@
 export const themeName = 'dashboard';
 
-export const DEV: boolean =
-  process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'development';
+export const DEV: boolean = process.env.NODE_ENV === 'test';
+
+// || process.env.NODE_ENV === 'development';
 
 // 前台资源部署域名，默认头像图片资源调用域名
 export const config = {
@@ -112,5 +113,5 @@ export const api = {
 
 // 静态资源所在地址，用于背景/边框/图片资源等；
 
-export const ASSETS_HOST = '//127.0.0.1:9999/';
+export const ASSETS_HOST = DEV ? '//127.0.0.1:9999/' : '//10.8.1.35:9999/';
 export const ASSETS_URL = `${ASSETS_HOST}assets/`;

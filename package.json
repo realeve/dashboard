@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build",
+    "build": "umi build && hash.bat",
     "test": "umi test --runInBand --detectOpenHandles",
     "test:coveralls": "umi test --online | coveralls",
     "add": "node ./config/template.js",
@@ -15,7 +15,8 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy":"hash.bat && deploy.bat"
   },
   "dependencies": {
     "@ant-design/css-animation": "^1.7.3",
