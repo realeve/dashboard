@@ -158,3 +158,32 @@ export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) =
   const _data = R.clone(data.data).map((item) => Object.values(item));
   return { ...data, data: _data };
 };
+
+// array2json
+export const array2Json: <T extends any[] | axios.TDbWrite>(data: IAxiosState) => IAxiosState<T> = (
+  data: IAxiosState,
+) => {
+  if (data.rows === 0) {
+    return data;
+  }
+  const res = data.data[0];
+  if (!isArray(res)) {
+    return data;
+  }
+  const { header } = data;
+  const _data = R.clone(data.data).map((item) => {
+    const obj = {};
+    item.forEach((td, i) => {
+      obj[header[i]] = td;
+    });
+    return obj;
+  });
+  return { ...data, data: _data };
+};
+
+export const getDataType = (mock: IAxiosState) => {
+  if (!mock || !mock.data) {
+    return 'array';
+  }
+  return isArray(mock.data[0]) ? 'array' : 'json';
+};

@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect, useRef } from 'react';
+import React, { useState, Suspense, useEffect, useRef, useMemo } from 'react';
 
 import type { IPanelConfig, IApiProps } from '@/models/common';
 
@@ -9,7 +9,7 @@ import useFetch from '@/component/hooks/useFetch';
 import { isArray } from '@antv/util';
 import type { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
-
+import qs from 'qs';
 import { chartList } from '@/component/chartItem/option';
 
 export type tRender = 'canvas' | 'svg';
@@ -18,7 +18,7 @@ const Echarts = React.lazy(() => import('@/component/echarts'));
 const G2 = React.lazy(() => import('@/component/g2'));
 const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
-const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
+export const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   const obj = {};
   arr.forEach((item) => {
     item.key && (obj[item.key] = item.defaultValue);
@@ -26,11 +26,69 @@ const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   return obj;
 };
 
-const getRange = ({ dateType = '本月' }: { dateType: string }) => {
-  const [start, end]: [Dayjs, Dayjs] = ranges[dateType];
+export const getRange = ({ dateType = '本月' }: { dateType?: string }) => {
+  const currentRange = ranges[dateType];
+  if (!currentRange) {
+    return {};
+  }
+  const [start, end]: [Dayjs, Dayjs] = currentRange;
   const tstart = start.format('YYYYMMDD');
   const tend = end.format('YYYYMMDD');
   return { tstart, tend, tstart2: tstart, tend2: tend, tstart3: tstart, tend3: tend };
+};
+
+/**
+ * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
+ */
+export const getApiConfig = (config, lib) => {
+  let api: IApiProps = config.api || { dateType: '本月' };
+
+  const objComponent = getDefaultValue(lib?.config);
+  const objApi = getDefaultValue(lib?.apiConfig?.config);
+  api = { ...objComponent, ...(config.componentConfig || {}), ...objApi, ...api };
+  return api;
+};
+
+/**
+ *
+ * @param api 基础设置
+ */
+export const getAxiosParam = (api: {
+  api_type: 'url' | 'mock';
+  url: string;
+  dateType: string;
+  dataType: 'array' | 'json';
+  cache?: number;
+  appendParam?: string;
+}) => {
+  const params = { ...getRange(api), cache: api.cache ?? 2 };
+  let url = api?.api_type === 'url' ? api?.url : null;
+  if (!url) {
+    return { url, params };
+  }
+
+  let append = api?.appendParam || '';
+  if (append[0] === '?') {
+    append = append.slice(1);
+  }
+
+  // 处理追加的参数
+  let param = qs.parse(append);
+  // 处理url中的参数
+  if (url.includes('?')) {
+    const [_url, _append] = url.split('?');
+    const param2 = qs.parse(_append);
+    param = { ...param, ...param2 };
+    url = _url;
+  }
+
+  // url中不包含数据类型  array/json的
+  if (!/(.*)+(\.|\/)(array|json)$/.test(url)) {
+    if (api.dataType === 'array') {
+      url += '/array';
+    }
+  }
+  return { url, params: { ...params, ...param } };
 };
 
 interface ChartInstanceProps {
@@ -58,22 +116,23 @@ const ChartRender = ({
 
   const { default: method, defaultOption = {}, ...lib } = chartLib;
 
-  let api: IApiProps = config.api || { dateType: '本月' };
-  /**
-   * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
-   */
-  const objComponent = getDefaultValue(lib?.config);
-  const objApi = getDefaultValue(lib?.apiConfig?.config);
-  api = { ...objApi, ...api };
+  const api: IApiProps = getApiConfig(config, lib);
 
-  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   const valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
 
+  const param = useMemo(() => {
+    return getAxiosParam({
+      api_type: api.api_type,
+      url: api.url,
+      dataType: api.dataType,
+      dateType: api.dateType,
+      cache: api.cache,
+      appendParam: api.appendParam,
+    });
+  }, [api.api_type, api.url, api.dateType, api.cache, api.appendParam]);
+
   const { data, loading, error } = useFetch({
-    param: {
-      url: api?.api_type === 'url' ? api?.url : null,
-      params: { ...getRange(api), cache: api.cache ?? 2 },
-    },
+    param,
     valid: () => valid,
     interval:
       typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
@@ -109,11 +168,10 @@ const ChartRender = ({
     appendConfig = R.type(defaultOption) === 'Function' ? defaultOption(config) : defaultOption;
   }
 
+  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
   // 合并后的属性
   const injectProps = {
     data: valid ? data : mock,
-    ...objComponent,
-    ...(config.componentConfig || {}),
     ...api,
   };
 

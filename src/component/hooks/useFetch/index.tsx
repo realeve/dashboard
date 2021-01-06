@@ -6,7 +6,7 @@ import http from 'axios';
 import * as R from 'ramda';
 import { useInterval } from 'react-use';
 
-import { isDocumentVisible, limit } from './lib';
+import { isDocumentVisible, limit, handleTitle } from './lib';
 import { now } from '@/utils/lib';
 import subscribeFocus from './windowFocus';
 import subscribeVisible from './windowVisible';
@@ -115,18 +115,20 @@ const useAxios = <T extends {} | void>({
 
     const source = CancelToken.source();
 
-    param.cancelToken = source.token;
-
     // 从后端发起请求
-    axios(param as AxiosRequestConfig)
+    axios({
+      ...param,
+      cancelToken: source.token,
+    } as AxiosRequestConfig)
       .then((response: any) => {
         if (unmounted) {
           return;
         }
+        const title = handleTitle(response, param);
         if (onFetchData) {
-          setData(onFetchData(response));
+          setData(onFetchData({ ...response, title }));
         } else {
-          setData(response);
+          setData({ ...response, title });
         }
         setLoading(false);
       })

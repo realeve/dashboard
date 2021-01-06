@@ -202,7 +202,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
 
     const rowLength = rowsData.length;
 
-    if (rowNum >= rowLength) return false;
+    if (rowNum >= rowLength) return;
 
     return co(loop);
   }, [calcData, config, domRef.current]);

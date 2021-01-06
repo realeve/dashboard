@@ -313,7 +313,6 @@ ILayerProps) => {
         }
         return R.last(selected) === showPanel.length - 1;
     }
-    return false;
   };
 
   // console.log(selectedPanel, selected, showPanel);

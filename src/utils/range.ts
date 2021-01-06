@@ -35,6 +35,7 @@ const range = {
   前天: [moment().subtract(2, 'day'), moment().subtract(2, 'day')],
   三天前: [moment().subtract(3, 'day'), moment().subtract(3, 'day')],
   过去一年: [moment().subtract(1, 'year'), moment()],
+  不设置: false,
 };
 export default range;
 

@@ -43,7 +43,7 @@ export interface IAxiosState<T = TAxiosData> {
   date?: string[];
   source?: string;
   time?: number;
-  serverTime: string;
+  serverTime?: string;
   hash: string;
   token?: string;
   [key: string]: any;

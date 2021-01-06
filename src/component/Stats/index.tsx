@@ -10,7 +10,7 @@ export default function PerformanceStat({ style }) {
 
   useEffect(() => {
     if (!isReady()) {
-      return false;
+      return;
     }
     const stat = new Stats(ref.current);
     setStates(stat);

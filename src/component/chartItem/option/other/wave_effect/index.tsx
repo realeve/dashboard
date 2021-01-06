@@ -122,7 +122,7 @@ export default ({
     const container: HTMLElement = domRef.current;
 
     if (!container || width * height === 0) {
-      return false;
+      return;
     }
 
     let camera = null;
@@ -221,6 +221,9 @@ export default ({
 
   const refresh = () => {
     const _canvas = wave();
+    if (!_canvas) {
+      return;
+    }
     _canvas?.render();
     setCanvas(_canvas);
   };

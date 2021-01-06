@@ -11,12 +11,14 @@ import { rangeConfig } from '@/utils/range';
 import { Spin } from 'antd';
 import { chartList } from '@/component/chartItem/option';
 
-const initState = (configs: IApiConfig, api: any) => {
+import { getDataType } from '@/utils/lib';
+
+const initState = (configs: IApiConfig, api: any, dataType: 'array' | 'json' = 'array') => {
   const { config, type, ...props } = configs;
   // 配置项中的信息
   const setting = getDefaultState(config, api);
 
-  return { ...props, api_type: type, ...setting, ...api };
+  return { dataType, ...props, api_type: type, ...setting, ...api };
 };
 const cacheConfig: IChartConfig = { defaultValue: 2, min: 0, step: 0.5, max: 10, type: 'range' };
 const appendConfig: IChartConfig[] = [
@@ -51,9 +53,36 @@ const appendConfig: IChartConfig[] = [
     ],
   },
   {
+    title: '数据类型',
+    key: 'dataType',
+    type: 'radio',
+    defaultValue: 'array',
+    option: [
+      {
+        title: '数组',
+        value: 'array',
+      },
+      {
+        title: 'JSON',
+        value: 'json',
+      },
+    ],
+  },
+  {
     key: 'url',
+    title: '接口URL',
+    subTitle: '默认为json，建议指定数据类型',
     valueType: 'text',
-    placeholder: '在此填入接口地址',
+    placeholder: '接口地址',
+  },
+  {
+    title: '附加参数',
+    subTitle: '自动附加到接口中，可不填',
+    key: 'appendParam',
+    type: 'input',
+    valueType: 'text',
+    defaultValue: '',
+    placeholder: 'prefix=9607T&suffix=2&b=3',
   },
   rangeConfig,
   {
@@ -80,7 +109,7 @@ const ApiSetting = ({
 }) => {
   const configs = chartLib.apiConfig as IApiConfig;
 
-  const [state, setState] = useSetState(initState(configs, api));
+  const [state, setState] = useSetState(initState(configs, api, getDataType(chartLib.mock)));
   useEffect(() => {
     setState(initState(configs, api));
   }, [JSON.stringify(configs)]);
@@ -107,7 +136,7 @@ const ApiSetting = ({
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        {[0, 1, 2, 4, 5].map(
+        {[0, 1, 2, 4, 5, 6, 7].map(
           (i) =>
             (i < 2 || state.show) && (
               <FormItem
@@ -177,14 +206,15 @@ export default (props) => {
     import(`../../../../component/chartItem/charts/${props.panel.key}`).then((res) => {
       setChartLib({ ...res.default });
     });
-  }, []);
+  }, [props.panel.key]);
 
   if (!chartLib) {
     return <Spin spinning />;
   }
-  if (R.type(props.configs) !== 'Object') {
-    return null;
-  }
+  // TODO 此处注释后可能会存在BUG，待观察
+  // if (R.type(props.configs) !== 'Object') {
+  //   return null;
+  // }
 
   return <ApiSetting {...props} chartLib={chartLib} />;
 };

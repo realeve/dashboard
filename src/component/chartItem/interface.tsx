@@ -53,6 +53,7 @@ export interface IApiConfig {
   config?: IChartConfig[];
   cache?: number; // 缓存时长
   interval?: number;
+  dataType?: 'array' | 'json';
 }
 
 export interface IG2PlotProps {
