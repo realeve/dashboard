@@ -1,5 +1,5 @@
 {
-  "rec_time": "2021-01-07 16:24:55",
+  "rec_time": "2021-01-07 16:37:09",
   "panel": [{
     "showTitle": false,
     "showBorder": false,
@@ -697,12 +697,12 @@
     "image": "/img/icons/01_barChartPositiveNegative.png",
     "style": {
       "transform": {
-        "translate": "491.3004285714288px,651.0004285714286px",
+        "translate": "491.3004285714288px,660.0004285714286px",
         "rotate": "0deg",
         "scale": "1,1"
       },
       "width": "938px",
-      "height": "409px",
+      "height": "400px",
       "position": "absolute"
     },
     "title": "机检实际开包量汇总",
@@ -775,13 +775,13 @@
     "ajax": true,
     "style": {
       "transform": {
-        "translate": "1444.0000000000011px,276.20004444445163px",
+        "translate": "1444.0000000000011px,276.2000444444516px",
         "rotate": "0deg",
         "scale": "1,1"
       },
       "position": "absolute",
       "width": "455.188px",
-      "height": "372.188px"
+      "height": "384.188px"
     },
     "name": "echarts.base_line",
     "key": "base_line",
@@ -887,12 +887,12 @@
     "image": "/img/icons/43_baseline.png.webp",
     "style": {
       "transform": {
-        "translate": "1443.9953846153817px,651.0002111111171px",
+        "translate": "1443.9953846153817px,660.0002111111171px",
         "rotate": "0deg",
         "scale": "1,1"
       },
       "width": "455.188px",
-      "height": "409.188px",
+      "height": "400.188px",
       "position": "absolute"
     },
     "title": "行业成本对比",
@@ -985,7 +985,7 @@
         "scale": "1,1"
       },
       "width": "938px",
-      "height": "518px"
+      "height": "547px"
     },
     "title": "冠字完工状态",
     "engine": "other",
