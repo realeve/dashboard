@@ -22,7 +22,7 @@
 
 [首页](http://localhost:8000/):http://localhost:8000/
 
-http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
+http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=movie
 
 [大屏列表](http://localhost:8000/list):http://localhost:8000/list
   
