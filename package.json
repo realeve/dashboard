@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
-    "lint:style": "stylelint --fix \"src/**/*.less\" --no-error-on-unmatched-pattern --syntax less",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "precommit": "lint-staged",
     "deploy":"hash.bat && deploy.bat"
   },
