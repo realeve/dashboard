@@ -105,6 +105,7 @@
     "umi-types": "^0.5.14"
   },
   "lint-staged": {
+    "**/*.less": "stylelint --fix --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
