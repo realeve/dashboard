@@ -30,9 +30,9 @@ export const getDashboardStyle = (page: { width: string; height: string; backgro
   const background = isColor(url)
     ? { background: url, backgroundRepeat: 'repeat' }
     : {
-        backgroundImage: page.background
-          ? `url('${assets.backgrounds[page.background].url}')`
-          : 'url(/img/panel/panelbg.png.webp)',
+        ...(page.background
+          ? { backgroundImage: `url('${assets.backgrounds[page.background].url}')` }
+          : { backgroundColor: '#0d2a42' }),
         backgroundSize: 'auto',
         backgroundRepeat: 'repeat',
         ...backgroundStyle,

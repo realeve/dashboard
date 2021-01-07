@@ -321,11 +321,7 @@
             "showBorder": false,
             "showTitle": false,
             "showBackground": false,
-            "ajax": false,
-            "style": {
-              "width": 64,
-              "height": 64
-            }
+            "ajax": false
           },
           {
             "name": "other.screen_edge",
