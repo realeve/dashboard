@@ -9,7 +9,7 @@ import { generateId } from '@/component/Editor/utils/utils';
 import ChartItem from './canvas/chartItem';
 import type { IChartConfig } from './panel/components/db';
 import { connect } from 'react-redux';
-import type { ICommon, IPage, IPanelConfig } from '@/models/common';
+import type { ICommon, IPage, IPanelConfig, IPanelItemStyle } from '@/models/common';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import * as R from 'ramda';
 
@@ -124,7 +124,11 @@ const Index = ({
         return;
       }
       nextKeys = [...nextKeys, item.id];
-      addPanel(editor, item);
+
+      // 移除top ,left
+      const { style = {} } = item;
+      const { left, top, ...newStyle } = style as IPanelItemStyle;
+      addPanel(editor, { ...item, style: newStyle });
     });
     // console.log({ nextKeys, panelIds });
     nextKeys = R.uniq(nextKeys);

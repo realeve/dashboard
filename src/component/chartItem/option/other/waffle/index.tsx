@@ -3,7 +3,7 @@ import ScrollBoard from '../scroll_board';
 import { config as mainConfig } from '../scroll_board';
 import useFetch from '@/component/hooks/useFetch';
 import styles from './index.less';
-import ScatterWaffle, { config as detailConfig } from './ScatterWaffle';
+import ScatterWaffle, { config as detailConfig, statusColor } from './ScatterWaffle';
 import { DEV } from '@/utils/setting';
 import { Spin } from 'antd';
 
@@ -67,27 +67,47 @@ export default ({
   });
 
   return (
-    <div className={styles.waffleContainer}>
+    <div className={styles.waffleContainer} style={{ height: `calc(100% - 50px)` }}>
       <ScrollTable config={props} onClick={setState} />
-      <Spin spinning={loading}>
-        {state && (
-          <div className={styles.waffleTitle}>
-            {state.prod}品 {state.procname}工序 {state.gz}冠字 生产详情
-          </div>
+      <div className={styles.detailContainer}>
+        <Spin spinning={loading}>
+          {state && (
+            <div className={styles.waffleTitle}>
+              <span>
+                {state.prod}品 {state.procname}工序 {state.gz}冠字 生产详情
+              </span>
+              <div className={styles.legend}>
+                <div className={styles.legendItem}>
+                  <div className={styles.dot} style={{ backgroundColor: statusColor[1] }}></div>正常
+                </div>
+                <div className={styles.legendItem}>
+                  <div className={styles.dot} style={{ backgroundColor: statusColor[2] }}></div>跳号
+                </div>
+                <div className={styles.legendItem}>
+                  <div className={styles.dot} style={{ backgroundColor: statusColor[0] }}></div>
+                  未生产
+                </div>
+                <div className={styles.legendItem}>
+                  <div className={styles.dot} style={{ backgroundColor: statusColor[3] }}></div>
+                  未印码
+                </div>
+              </div>
+            </div>
+          )}
+        </Spin>
+        {data && (
+          <ScatterWaffle
+            {...{
+              boxSize,
+              boxShape,
+              data,
+            }}
+            y={props.y}
+            prod={state.prod}
+            style={{ height: 'auto', flex: 1 }}
+          />
         )}
-      </Spin>
-      {data && (
-        <ScatterWaffle
-          {...{
-            boxSize,
-            boxShape,
-            data,
-          }}
-          y={props.y}
-          prod={state.prod}
-          style={{ height: 'auto', flex: 1 }}
-        />
-      )}
+      </div>
     </div>
   );
 };

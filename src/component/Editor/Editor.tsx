@@ -558,7 +558,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.keyManager.keydown(
       ['left'],
       (e) => {
-        this.move(-10, 0);
+        this.move(-1, 0);
         e.inputEvent.preventDefault();
       },
       '向左移动',
@@ -566,7 +566,7 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.keyManager.keydown(
       ['up'],
       (e) => {
-        this.move(0, -10);
+        this.move(0, -1);
         e.inputEvent.preventDefault();
       },
       '向上移动',
@@ -574,13 +574,48 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
     this.keyManager.keydown(
       ['right'],
       (e) => {
-        this.move(10, 0);
+        this.move(1, 0);
         e.inputEvent.preventDefault();
       },
       '向右移动',
     );
     this.keyManager.keydown(
       ['down'],
+      (e) => {
+        this.move(0, 1);
+        e.inputEvent.preventDefault();
+      },
+      '向下移动',
+    );
+
+    // 移动10像素
+
+    this.keyManager.keydown(
+      ['shift', 'left'],
+      (e) => {
+        this.move(-10, 0);
+        e.inputEvent.preventDefault();
+      },
+      '向左移动',
+    );
+    this.keyManager.keydown(
+      ['shift', 'up'],
+      (e) => {
+        this.move(0, -10);
+        e.inputEvent.preventDefault();
+      },
+      '向上移动',
+    );
+    this.keyManager.keydown(
+      ['shift', 'right'],
+      (e) => {
+        this.move(10, 0);
+        e.inputEvent.preventDefault();
+      },
+      '向右移动',
+    );
+    this.keyManager.keydown(
+      ['shift', 'down'],
       (e) => {
         this.move(0, 10);
         e.inputEvent.preventDefault();

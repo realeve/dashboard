@@ -19,7 +19,7 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
   if (!config || config.hide) {
     return null;
   }
-
+  const instanceHeight = config.showTitle ? `calc(100% - 50px)` : '100%';
   return (
     <ErrorBoundary>
       {config.showTitle && <div style={page.head}>{title}</div>}
@@ -29,7 +29,7 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
         style={{
           background: config.showBackground ? page.chartBackground : 'unset',
           width: '100%',
-          height: config.showTitle ? `calc(100% - 50px)` : '100%',
+          height: instanceHeight,
           borderRadius: (config?.general?.borderRadius || [0, 0, 0, 0])
             .map((item) => `${item}px`)
             .join(' '),
@@ -38,7 +38,13 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
         showBorder={config.showBorder}
       >
         <Suspense fallback={<Spin spinning />}>
-          <ChartInstance config={config} title={title} onLoad={setTitle} chartid={config.id} />
+          <ChartInstance
+            style={{ height: config.showBorder ? '100%' : instanceHeight }}
+            config={config}
+            title={title}
+            onLoad={setTitle}
+            chartid={config.id}
+          />
         </Suspense>
       </BorderItem>
     </ErrorBoundary>

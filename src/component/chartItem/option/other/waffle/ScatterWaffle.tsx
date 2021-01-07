@@ -5,6 +5,7 @@ import { SEARCH_PREFIX } from '@/utils/setting';
 import type { IChartConfig } from '@/component/chartItem/interface';
 
 const starableAnimate = (idx) => idx * Math.random() * 10;
+export const statusColor = ['#ddd', '#749cff', '#fb0348', '#333'];
 
 export const config: IChartConfig[] = [
   {
@@ -74,7 +75,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
           },
         },
         grid: {
-          top: 20,
+          top: 5,
           bottom: 0,
           left: 0,
           right: 20,
@@ -88,7 +89,7 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
             type: 'scatter',
             itemStyle: {
               color: ({ value }) => {
-                return ['#ddd', '#749cff', '#fb0348', '#333'][value[2]];
+                return statusColor[value[2]];
               },
             },
             animationDelay: starableAnimate,

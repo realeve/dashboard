@@ -38,8 +38,39 @@
   height: 100%;
 }
 .waffleTitle {
-  margin:10px 0 0 10px;
-  color: #FFC107;
+  margin: 10px 0 0 10px;
+  color: #ffc107;
   font-weight: bold;
   font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .legend {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &Item {
+      display: flex;
+      flex-direction: row;
+      color: #ddd;
+      font-weight: normal;
+      font-size: 12px;
+      user-select: none;
+      justify-content: center;
+      align-items: center;
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

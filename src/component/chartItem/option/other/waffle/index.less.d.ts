@@ -5,6 +5,10 @@ interface CssExports {
   'bounce': string;
   'box': string;
   'container': string;
+  'detailContainer': string;
+  'dot': string;
+  'legend': string;
+  'legendItem': string;
   'waffleContainer': string;
   'waffleTitle': string;
 }

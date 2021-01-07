@@ -16,7 +16,7 @@
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "precommit": "lint-staged",
-    "deploy":"hash.bat && deploy.bat"
+    "deploy":"umi build && hash.bat && deploy.bat"
   },
   "dependencies": {
     "@ant-design/css-animation": "^1.7.3",
@@ -105,7 +105,6 @@
     "umi-types": "^0.5.14"
   },
   "lint-staged": {
-    "**/*.less": "stylelint --fix --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
