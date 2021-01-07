@@ -40,8 +40,8 @@ export const config: IChartConfig[] = [
     key: 'screen_edge_background',
     title: '拼接线颜色',
     type: 'purecolor',
-    position: 'top', 
-    defaultValue: 'rgba(0,0,0,0.5)',
+    position: 'top',
+    defaultValue: 'rgba(240,240,240,0.5)',
   },
   {
     key: 'showEdgeTag',

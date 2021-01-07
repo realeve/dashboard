@@ -47,6 +47,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
     },
     ref,
   ) => {
+    // transform: 'translateX(-10px)',
     const isHorizontal = direction === 'horizontal';
     return (
       <div
@@ -54,7 +55,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
         className={`scena-guides scena-${direction}`}
         style={{ width: '100%', height: '100%' }}
       >
-        <div className="datav-guides" style={{ transform: 'translateX(-10px)', height: '100%' }}>
+        <div className="datav-guides" style={{ height: '100%' }}>
           {data.map((item) => (
             <div
               className={`${styles.screenEdge} datav-${direction}`}
@@ -62,7 +63,7 @@ const EdgeLine: React.ForwardRefExoticComponent<
               style={{
                 transform: !isHorizontal
                   ? `translate(${item}px,-30px)`
-                  : `translate(-20px,${item}px)`,
+                  : `translate(-30px,${item}px)`,
                 [isHorizontal ? 'height' : 'width']: screen_edge_width,
                 [!isHorizontal ? 'height' : 'width']: '100%',
                 background: screen_edge_background,
