@@ -63,3 +63,29 @@ http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=movie
 基于mysql,资源项目中对应的  ./public/tbl_business.sql
  
  
+## 部署后的性能优化
+
+1. IIS配置缓存/增加GZIP压缩
+
+2. 载入第三方字体时，启用 font-display 特性
+
+https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools
+
+https://web.dev/preload-optional-fonts/
+
+3. 缩短调用链：暂时移除 log.js文件
+
+4. 图片增加默认宽高，减少页面抖动
+
+https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=devtools#images-without-dimensions
+
+```html
+<style>
+    img {
+        aspect-ratio: attr(width) / attr(height);
+    }
+</style>
+
+<!-- set a 640:360 i.e a 16:9 - aspect ratio -->
+<img src="puppy.jpg" width="640" height="360" alt="Puppy with balloons">
+```
