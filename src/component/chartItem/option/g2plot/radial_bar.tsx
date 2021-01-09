@@ -128,7 +128,7 @@ export default ({
   transpose = true,
 }) => {
   return {
-    chartType: 'cbpc_radial_bar',
+    chartType: 'radial_bar',
     data,
     coordinate,
     transpose,

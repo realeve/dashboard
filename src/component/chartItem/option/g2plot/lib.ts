@@ -1,7 +1,6 @@
 import { uniq, isNumber, isDate } from '@antv/util';
 
-import defaultTheme from '@/component/g2plot/theme';
-import { palette } from '@/component/g2plot';
+import { palette } from '@/component/g2plot/palette';
 import * as R from 'ramda';
 
 export { getAntThemePanel } from '@/component/chartItem/option/lib';
@@ -182,17 +181,30 @@ export const getTheme: (theme: number | string) => { theme?: { colors10: string[
   theme: number | string,
 ) => {
   const isDefaultTheme = theme === 'cbpc';
-  const themeCfg: { colors10: string[] } | 'cbpc' = isDefaultTheme
-    ? defaultTheme
-    : palette[theme].theme;
+  if (isDefaultTheme) {
+    return {};
+  }
+  const themeCfg: { colors10: string[] } | 'cbpc' = palette[theme].theme;
   return isDefaultTheme ? {} : { theme: themeCfg };
 };
 
 // 获取默认主题色列表
 export const getColors = (theme: number | string, needReverse = false) => {
   const color = getTheme(theme);
+  const defaultColors = [
+    '#5B8FF9',
+    '#5AD8A6',
+    '#5D7092',
+    '#F6BD16',
+    '#E86452',
+    '#6DC8EC',
+    '#945FB9',
+    '#FF9845',
+    '#1E9493',
+    '#FF99C3',
+  ];
   const colors = [theme, color?.theme].includes('cbpc')
-    ? defaultTheme.colors10
+    ? defaultColors
     : color?.colors10 || color?.theme?.colors10;
 
   return needReverse ? R.clone(colors).reverse() : colors;

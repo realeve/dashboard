@@ -1,16 +1,18 @@
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
 import lib from './plot';
+// import * as lib from './plot/g2plot.min';
+// import  lib from '@antv/g2plot';
 import type { ContainerProps, Base, Options } from './hooks/useChart';
 import useChart from './hooks/useChart';
 import { getChart, utils } from './util';
 import type { ChartRefOptions, TChartType } from './interface';
 import { ErrorBoundary } from './base';
 import ChartLoading from './util/createLoading';
-import './theme';
 import styles from './index.less';
 import classnames from 'classnames';
+import cbpcTheme from './cbpc';
 
-export { palette } from './palette';
+lib.G2.registerTheme('cbpc', cbpcTheme);
 
 export type ChartConfig = {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */
@@ -63,11 +65,52 @@ const G2Plot = forwardRef((props: G2PlotChartProps, ref) => {
   );
 });
 
+const g2PlotCharts = [
+  'G2',
+  'Plot',
+  'Line',
+  'Area',
+  'Column',
+  'Bar',
+  'Pie',
+  'Rose',
+  'WordCloud',
+  'Scatter',
+  'Radar',
+  'DualAxes',
+  'TinyLine',
+  'TinyColumn',
+  'TinyArea',
+  'Histogram',
+  'Progress',
+  'RingProgress',
+  'Heatmap',
+  'Box',
+  'Stock',
+  'Funnel',
+  'Liquid',
+  'Bullet',
+  'Sunburst',
+  'Gauge',
+  'Waterfall',
+  'RadialBar',
+  'BidirectionalBar',
+  'Sankey',
+  'Chord',
+  'flow',
+  'measureTextWidth',
+  'line',
+  'interval',
+  'area',
+  'point',
+  'polygon',
+  'Lab',
+];
+
 export default (props) => {
   const chartType = props?.option?.chartType || 'Area';
-  const instance = lib[utils.camelCase(chartType)];
-  if (!instance) {
+  if (!g2PlotCharts.includes(utils.camelCase(chartType))) {
     return <h5>图表类型无效</h5>;
   }
-  return <G2Plot {...props} instance={instance} />;
+  return <G2Plot {...props} instance={lib[utils.camelCase(chartType)]} />;
 };

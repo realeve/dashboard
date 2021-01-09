@@ -1,13 +1,11 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import type { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
 
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';
-import { Spin } from 'antd';
 import { connect } from 'react-redux';
-
-const ChartInstance = React.lazy(() => import('./ChartInstance'));
+import ChartInstance from './ChartInstance';
 
 interface IChartItemProps {
   page: IPage;
@@ -37,15 +35,13 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
         showBackground={config.showBackground}
         showBorder={config.showBorder}
       >
-        <Suspense fallback={<Spin spinning />}>
-          <ChartInstance
-            style={{ height: config.showBorder ? '100%' : instanceHeight }}
-            config={config}
-            title={title}
-            onLoad={setTitle}
-            chartid={config.id}
-          />
-        </Suspense>
+        <ChartInstance
+          style={{ height: config.showBorder ? '100%' : instanceHeight }}
+          config={config}
+          title={title}
+          onLoad={setTitle}
+          chartid={config.id}
+        />
       </BorderItem>
     </ErrorBoundary>
   );

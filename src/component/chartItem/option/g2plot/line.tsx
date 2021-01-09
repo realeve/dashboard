@@ -1,6 +1,6 @@
 import type { IApiConfig, IG2PlotProps, IChartMock } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
-import { palette } from '@/component/g2plot';
+import { palette } from '@/component/g2plot/palette';
 import { getAnnotations } from './lib';
 import defaultTheme from '@/component/g2plot/theme';
 

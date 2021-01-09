@@ -14,9 +14,9 @@ import { chartList } from '@/component/chartItem/option';
 
 export type tRender = 'canvas' | 'svg';
 
-// const Echarts = React.lazy(() => import('@/component/echarts'));
-// const G2 = React.lazy(() => import('@/component/g2'));
-// const G2Plot = React.lazy(() => import('@/component/g2plot'));
+const Echarts = React.lazy(() => import('@/component/echarts'));
+const G2 = React.lazy(() => import('@/component/g2'));
+const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
 export const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   const obj = {};
@@ -144,13 +144,6 @@ const ChartRender = ({
     },
   });
 
-  // let ChartInst = null;
-  // if (config.engine === 'other') {
-  //   ChartInst = method;
-  // } else {
-  //   ChartInst = React.lazy(() => import(`../../../component/${config.engine}`));
-  // }
-
   if (error) {
     return <div style={{ color: '#eee' }}>数据请求出错</div>;
   }
@@ -183,7 +176,6 @@ const ChartRender = ({
 
   if (config.engine === 'echarts') {
     const chart = ref?.current?.echartsInstance;
-    const Echarts = React.lazy(() => import('@/component/echarts'));
     return (
       <Suspense fallback={<Spin spinning />}>
         <Echarts
@@ -196,7 +188,6 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'g2plot') {
-    const G2Plot = React.lazy(() => import('@/component/g2plot'));
     const option = method({
       ...injectProps,
       autoFit: true,
@@ -221,7 +212,6 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'g2') {
-    const G2 = React.lazy(() => import('@/component/g2'));
     return (
       <Suspense fallback={<Spin spinning />}>
         <G2
