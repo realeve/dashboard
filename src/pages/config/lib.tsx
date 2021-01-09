@@ -19,7 +19,10 @@ export const defaultRect = {
  * @param style 样式内容
  * @param unit 单位
  */
-export const parseStyle = (style: string | number, unit = 'px') => {
+export const parseStyle = (style: string | number | null, unit = 'px') => {
+  if (!style) {
+    return 0;
+  }
   const reg = RegExp(unit, 'g');
   return parseInt(String(style).replace(reg, ''), 10);
 };

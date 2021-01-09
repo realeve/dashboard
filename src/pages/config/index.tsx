@@ -347,8 +347,10 @@ const Index = ({
             hide={hide}
             onAddPanel={(newPanel) => {
               const autoStyle = calcPanelPosition({ panel, page });
-              // console.log(autoStyle);
+
               const style = getDefaultStyle(autoStyle);
+              console.log(style);
+
               // 2020-12-12 根据当前的panel项自动计算合适的位置
               const nextPanel = { style, ...newPanel };
               dispatch({

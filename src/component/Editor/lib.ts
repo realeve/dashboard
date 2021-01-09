@@ -13,12 +13,17 @@ export const getDefaultStyle = (style?: React.CSSProperties) => {
   };
 
   return {
-    top: `${rect.top}px`,
-    left: `${rect.left}px`,
+    // top: `${rect.top}px`,
+    // left: `${rect.left}px`,
+    transform: {
+      translate: `${rect.left}px,${rect.top}px`,
+      rotate: '0deg',
+      scale: '1,1',
+    },
     position: 'absolute',
     width: `${rect.width}px`,
     height: `${rect.height}px`,
-  } as React.CSSProperties;
+  };
 };
 
 const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
@@ -32,7 +37,7 @@ export const getDashboardStyle = (page: { width: string; height: string; backgro
     : {
         ...(page.background
           ? { backgroundImage: `url('${assets.backgrounds[page.background].url}')` }
-          : { backgroundColor: '#0d2a42' }),
+          : { backgroundColor: '#080226' }),
         backgroundSize: 'auto',
         backgroundRepeat: 'repeat',
         ...backgroundStyle,
