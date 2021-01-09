@@ -14,8 +14,8 @@ import { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPan
 
 import { LayerItem } from './LayerItem';
 
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 export { reorder, MENU_ACTIONS, MENU_LIST, MENU_TYPE, reorderPanel, getShowedPanel } from './lib';
 
@@ -43,13 +43,13 @@ const Index = ({
   history,
   curHistoryIdx,
   panel: _panel,
-}: // DragDropContext,
-// Droppable,
-// Draggable,
-// ContextMenu,
-// MenuItem,
-// ContextMenuTrigger,
-ILayerProps) => {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  ContextMenu,
+  MenuItem,
+  ContextMenuTrigger,
+}: ILayerProps) => {
   const panel = history[curHistoryIdx]?.panel || _panel;
   const [isThumb, setIsThumb] = useToggle(true);
 

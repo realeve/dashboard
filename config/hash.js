@@ -18,14 +18,12 @@ const decodeHtmlHash = () => {
     return hash();
   }
 
+  // <script src="http://cdn.cdyc.cbpm/lib/cbpc_log.min.js"></script>
   // const path = require('path');
   // 注入log文件
   // umi.js 3.0中已经支持在配置项中注入
-  //   file = file.replace(
-  //     '<head>',
-  //     '<head><script src="http://cdn.cdyc.cbpm/lib/cbpc_log.min.js"></script>',
-  //   );
-  //   fs.writeFileSync(`${getDir()}/dist/index.html`, file, 'utf8');
+  file = file.replace('<head>', '<head><link rel="preload" href="/fonts/Unica-One.ttf"/>');
+  fs.writeFileSync(`${getDir()}/dist/index.html`, file, 'utf8');
 
   let res = file.match(/(script src="\/umi.)(\w)+/);
   return res[0].replace(res[1], '');
