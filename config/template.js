@@ -280,7 +280,7 @@ export const mock: IChartMock = {
     return str;
   }
   str = `
-  import { Chart } from '@antv/g2';
+  import type { Chart } from '@antv/g2';
   import { IChartMock, IChartConfig, IChartProps, IApiConfig } from '@/component/chartItem/interface'; 
   
   import * as lib from '@/component/chartItem/option/lib';
@@ -365,7 +365,7 @@ export const mock: IChartMock = {
   }
   str = `
 // 此处导入你所需要的自定义组件
-import ProgressBar from '@/component/widget/ProgressBar'; 
+import ProgressBar from '@/component/widget/progressbar'; 
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface'; 
 
 import * as lib from '@/component/chartItem/option/lib';

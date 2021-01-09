@@ -1,6 +1,6 @@
 import useFullscreen from './useFullscreen';
 import { useToggle, useLocation } from 'react-use';
-import Icon from './icon';
+import Icon from './Icon';
 import { Tooltip } from 'antd';
 import type { IChartConfig } from '@/component/chartItem/interface';
 import { connect } from 'react-redux';

@@ -138,9 +138,7 @@ const getSeries = ({ data, theme = 'rect', size, config: seriesConfig }) => {
         type: 'pictorialBar',
         symbol: 'rect',
         itemStyle: {
-          normal: {
-            color: 'rgba(54,215,182,0.15)',
-          },
+          color: 'rgba(54,215,182,0.15)',
         },
         barWidth: 8,
         symbolRepeat: true,
@@ -152,10 +150,8 @@ const getSeries = ({ data, theme = 'rect', size, config: seriesConfig }) => {
         type: 'pictorialBar',
         symbol: 'rect',
         barWidth: 8,
-        itemStyle: {
-          normal: {
-            color: '#36d7b6',
-          },
+        itemStyle: { 
+            color: '#36d7b6', 
         },
         symbolRepeat: true,
         data,

@@ -1,4 +1,4 @@
-import Percent from '@/component/widget/Percent';
+import Percent from '@/component/widget/percent';
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {

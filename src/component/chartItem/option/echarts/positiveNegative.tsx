@@ -238,19 +238,17 @@ export default ({
         },
         smooth,
         itemStyle: {
-          normal: {
-            barBorderRadius: roundBorder ? [barWidth / 2, 0, 0, barWidth / 2] : 0,
-            color: new LinearGradient(0, 0, 1, 0, [
-              {
-                offset: 0,
-                color: '#ef00ff',
-              },
-              {
-                offset: 1,
-                color: '#ba00ff',
-              },
-            ]),
-          },
+          borderRadius: roundBorder ? [barWidth / 2, 0, 0, barWidth / 2] : 0,
+          color: new LinearGradient(0, 0, 1, 0, [
+            {
+              offset: 0,
+              color: '#ef00ff',
+            },
+            {
+              offset: 1,
+              color: '#ba00ff',
+            },
+          ]),
         },
         data: res.series[0].arr,
       },
@@ -266,19 +264,17 @@ export default ({
         },
         smooth,
         itemStyle: {
-          normal: {
-            barBorderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,
-            color: new LinearGradient(0, 0, 1, 0, [
-              {
-                offset: 0,
-                color: '#2846ff',
-              },
-              {
-                offset: 1,
-                color: '#00baff',
-              },
-            ]),
-          },
+          borderRadius: roundBorder ? [0, barWidth / 2, barWidth / 2, 0] : 0,
+          color: new LinearGradient(0, 0, 1, 0, [
+            {
+              offset: 0,
+              color: '#2846ff',
+            },
+            {
+              offset: 1,
+              color: '#00baff',
+            },
+          ]),
         },
         data: res.series[1].arr,
       },

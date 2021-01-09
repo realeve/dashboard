@@ -165,9 +165,7 @@ export default ({
         },
         color: ['rgba(31, 222, 225, 0.6)', 'rgba(31, 222, 225, .4)', 'rgba(58, 71, 212, 0.2)'],
         label: {
-          normal: {
-            formatter: '',
-          },
+          formatter: '',
         },
       },
     ],

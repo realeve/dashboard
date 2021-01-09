@@ -1,18 +1,25 @@
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 // import { textColor } from '@/component/chartItem/option';
-import { getTheme } from '@antv/g2';
 import Charts from './chart';
 import * as R from 'ramda';
 
-const defaultTheme = getTheme();
 const color: string[] = [
   '#00c0ff',
   '#3de7c9',
   '#fff',
   '#00c0ff',
   '#3de7c9',
-  ...defaultTheme.colors10,
+  '#5B8FF9',
+  '#5AD8A6',
+  '#5D7092',
+  '#F6BD16',
+  '#6F5EF9',
+  '#6DC8EC',
+  '#945FB9',
+  '#FF9845',
+  '#1E9493',
+  '#FF99C3',
 ];
 
 export const mock: IChartMock = {

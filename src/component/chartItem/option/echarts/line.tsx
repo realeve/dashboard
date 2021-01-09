@@ -170,19 +170,17 @@ export default ({
       barWidth,
       smooth,
       itemStyle: {
-        normal: {
-          barBorderRadius: [barWidth / 2, barWidth / 2, 0, 0],
-          color: new LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: '#ff69fa',
-            },
-            {
-              offset: 1,
-              color: '#ff05c4',
-            },
-          ]),
-        },
+        borderRadius: [barWidth / 2, barWidth / 2, 0, 0],
+        color: new LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: '#ff69fa',
+          },
+          {
+            offset: 1,
+            color: '#ff05c4',
+          },
+        ]),
       },
       lineStyle: {
         width: lineWidth,
@@ -195,19 +193,17 @@ export default ({
       barWidth,
       smooth,
       itemStyle: {
-        normal: {
-          barBorderRadius: [barWidth / 2, barWidth / 2, 0, 0],
-          color: new LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 1,
-              color: '#2846ff',
-            },
-            {
-              offset: 0,
-              color: '#229dfb',
-            },
-          ]),
-        },
+        borderRadius: [barWidth / 2, barWidth / 2, 0, 0],
+        color: new LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 1,
+            color: '#2846ff',
+          },
+          {
+            offset: 0,
+            color: '#229dfb',
+          },
+        ]),
       },
       lineStyle: {
         width: lineWidth,
@@ -222,9 +218,7 @@ export default ({
       ...lib.getChartType(chart3, area_opacity),
       smooth,
       itemStyle: {
-        normal: {
-          color: '#11dddc',
-        },
+        color: '#11dddc',
       },
       lineStyle: {
         width: lineWidth,

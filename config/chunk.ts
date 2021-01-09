@@ -4,19 +4,19 @@ const DEV = process.env.NODE_ENV == 'development';
 let chain =
   true || DEV
     ? {
-        chainWebpack: function (config) {
-          config.optimization.splitChunks({
-            cacheGroups: {
-              styles: {
-                name: 'styles',
-                test: /\.(css|less)$/,
-                chunks: 'async',
-                minChunks: 1,
-                minSize: 0,
-              },
-            },
-          });
-        },
+        // chainWebpack: function (config) {
+        //   config.optimization.splitChunks({
+        //     cacheGroups: {
+        //       styles: {
+        //         name: 'styles',
+        //         test: /\.(css|less)$/,
+        //         chunks: 'async',
+        //         minChunks: 1,
+        //         minSize: 0,
+        //       },
+        //     },
+        //   });
+        // },
       }
     : {
         chunks: ['vendors', 'antv_g2', 'echarts', 'umi'],

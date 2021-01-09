@@ -46,9 +46,7 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
         z: 0,
         roseType,
         labelLine: {
-          normal: {
-            show: false,
-          },
+          show: false,
         },
         animation: true,
         label: {
@@ -62,17 +60,13 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
         z: 1,
         type: 'pie',
         label: {
-          normal: {
-            show: false,
-          },
+          show: false,
           emphasis: {
             show: false,
           },
         },
         labelLine: {
-          normal: {
-            show: false,
-          },
+          show: false,
           emphasis: {
             show: false,
           },
@@ -82,10 +76,8 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
           show: false,
         },
         itemStyle: {
-          normal: {
-            color: '#fff',
-            opacity: 0.5,
-          },
+          color: '#fff',
+          opacity: 0.5,
         },
         data: [
           {

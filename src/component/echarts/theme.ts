@@ -168,11 +168,9 @@ export default {
   },
   bar: {
     itemStyle: {
-      normal: {
-        barBorderRadius: 1,
-      },
+      borderRadius: 1,
       emphasis: {
-        barBorderRadius: 1,
+        borderRadius: 1,
       },
     },
   },
@@ -181,19 +179,17 @@ export default {
     symbol: 'emptyCircle',
     symbolSize: 6,
     itemStyle: {
-      normal: {
-        barBorderColor: 'rgba(0,0,0,0)',
-        label: {
-          show: true,
-        },
-        lineStyle: {
-          width: 8,
-          type: 'solid',
-          shadowColor: 'rgba(0,0,0,0.3)',
-          shadowBlur: 5,
-          shadowOffsetX: 5,
-          shadowOffsetY: 5,
-        },
+      barBorderColor: 'rgba(0,0,0,0)',
+      label: {
+        show: true,
+      },
+      lineStyle: {
+        width: 8,
+        type: 'solid',
+        shadowColor: 'rgba(0,0,0,0.3)',
+        shadowBlur: 5,
+        shadowOffsetX: 5,
+        shadowOffsetY: 5,
       },
       emphasis: {
         label: {
@@ -202,14 +198,12 @@ export default {
       },
     },
     lineStyle: {
-      normal: {
-        width: 8,
-        type: 'solid',
-        shadowColor: 'rgba(0,0,0,0.3)',
-        shadowBlur: 5,
-        shadowOffsetX: 5,
-        shadowOffsetY: 5,
-      },
+      width: 8,
+      type: 'solid',
+      shadowColor: 'rgba(0,0,0,0.3)',
+      shadowBlur: 5,
+      shadowOffsetX: 5,
+      shadowOffsetY: 5,
     },
     showAllSymbol: true,
   },
@@ -218,21 +212,19 @@ export default {
     legendHoverLink: true,
     polarIndex: 0,
     itemStyle: {
-      normal: {
-        label: {
-          show: false,
-        },
-        lineStyle: {
-          width: 2,
-          type: 'solid',
-          shadowColor: 'rgba(0,0,0,0.3)',
-          shadowBlur: 1,
-          shadowOffsetX: 1,
-          shadowOffsetY: 1,
-        },
-        areaStyle: {
-          type: 'default',
-        },
+      label: {
+        show: false,
+      },
+      lineStyle: {
+        width: 2,
+        type: 'solid',
+        shadowColor: 'rgba(0,0,0,0.3)',
+        shadowBlur: 1,
+        shadowOffsetX: 1,
+        shadowOffsetY: 1,
+      },
+      areaStyle: {
+        type: 'default',
       },
       emphasis: {
         label: {
@@ -258,24 +250,22 @@ export default {
     minAngle: 0,
     selectedOffset: 10,
     itemStyle: {
-      normal: {
-        borderColor: 'rgba(0,0,0,0)',
-        borderWidth: 1,
-        label: {
-          show: true,
-          position: 'inner',
-          formatter: '{b}',
-          textStyle: {
-            fontSize: 12,
-          },
+      borderColor: 'rgba(0,0,0,0)',
+      borderWidth: 1,
+      label: {
+        show: true,
+        position: 'inner',
+        formatter: '{b}',
+        textStyle: {
+          fontSize: 12,
         },
-        labelLine: {
-          show: false,
-          length: 20,
-          lineStyle: {
-            width: 1,
-            type: 'solid',
-          },
+      },
+      labelLine: {
+        show: false,
+        length: 20,
+        lineStyle: {
+          width: 1,
+          type: 'solid',
         },
       },
       emphasis: {

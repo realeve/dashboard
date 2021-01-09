@@ -6,7 +6,7 @@ import { chain, DEV } from './config/chunk';
 import theme from './config/theme';
 import { routes } from './config/routes';
 // 注入自动日志;
-let headScripts = DEV ? [] : ['http://cdn.cdyc.cbpm/lib/cbpc_log.min.js'];
+let headScripts = []; // DEV ? [] : ['http://cdn.cdyc.cbpm/lib/cbpc_log.min.js'];
 
 // ref: https://umijs.org/config/
 

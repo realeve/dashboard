@@ -67,29 +67,27 @@ export default ({ data: srcData, x = 0, y = 1, showSplit = true }) => {
       type: 'bar',
       barWidth: 24.5,
       itemStyle: {
-        normal: {
-          color: new LinearGradient(
-            0,
-            1,
-            0,
-            0,
-            [
-              {
-                offset: 0,
-                color: '#0B4EC3', // 0% 处的颜色
-              },
-              {
-                offset: 0.6,
-                color: '#138CEB', // 60% 处的颜色
-              },
-              {
-                offset: 1,
-                color: '#17AAFE', // 100% 处的颜色
-              },
-            ],
-            false,
-          ),
-        },
+        color: new LinearGradient(
+          0,
+          1,
+          0,
+          0,
+          [
+            {
+              offset: 0,
+              color: '#0B4EC3', // 0% 处的颜色
+            },
+            {
+              offset: 0.6,
+              color: '#138CEB', // 60% 处的颜色
+            },
+            {
+              offset: 1,
+              color: '#17AAFE', // 100% 处的颜色
+            },
+          ],
+          false,
+        ),
       },
       barGap: 0,
     });
@@ -98,29 +96,27 @@ export default ({ data: srcData, x = 0, y = 1, showSplit = true }) => {
       type: 'bar',
       barWidth: 8,
       itemStyle: {
-        normal: {
-          color: new LinearGradient(
-            0,
-            1,
-            0,
-            0,
-            [
-              {
-                offset: 0,
-                color: '#09337C', // 0% 处的颜色
-              },
-              {
-                offset: 0.6,
-                color: '#0761C0', // 60% 处的颜色
-              },
-              {
-                offset: 1,
-                color: '#0575DE', // 100% 处的颜色
-              },
-            ],
-            false,
-          ),
-        },
+        color: new LinearGradient(
+          0,
+          1,
+          0,
+          0,
+          [
+            {
+              offset: 0,
+              color: '#09337C', // 0% 处的颜色
+            },
+            {
+              offset: 0.6,
+              color: '#0761C0', // 60% 处的颜色
+            },
+            {
+              offset: 1,
+              color: '#0575DE', // 100% 处的颜色
+            },
+          ],
+          false,
+        ),
       },
       barGap: 0,
       data: sideData,

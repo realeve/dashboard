@@ -14,9 +14,9 @@ import { chartList } from '@/component/chartItem/option';
 
 export type tRender = 'canvas' | 'svg';
 
-const Echarts = React.lazy(() => import('@/component/echarts'));
-const G2 = React.lazy(() => import('@/component/g2'));
-const G2Plot = React.lazy(() => import('@/component/g2plot'));
+// const Echarts = React.lazy(() => import('@/component/echarts'));
+// const G2 = React.lazy(() => import('@/component/g2'));
+// const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
 export const getDefaultValue = (arr: { key?: string; defaultValue: any }[] = []) => {
   const obj = {};
@@ -144,6 +144,13 @@ const ChartRender = ({
     },
   });
 
+  let ChartInst;
+  if (config.engine === 'other') {
+    ChartInst = method;
+  } else {
+    ChartInst = React.lazy(() => import(`../../../component/${config.engine}`));
+  }
+
   if (error) {
     return <div style={{ color: '#eee' }}>数据请求出错</div>;
   }
@@ -153,10 +160,9 @@ const ChartRender = ({
   //   onLoad(mock.title);
   // }
 
-  if (valid && ((loading && !inited) || !data)) {
+  if (!ChartInst || (valid && ((loading && !inited) || !data))) {
     return <Skeleton />;
   }
-  // console.log({ data, valid, inited });
 
   if (!inited) {
     setInited(true);
@@ -179,7 +185,7 @@ const ChartRender = ({
     const chart = ref?.current?.echartsInstance;
     return (
       <Suspense fallback={<Spin spinning />}>
-        <Echarts
+        <ChartInst
           ref={ref}
           option={method(injectProps, chart)}
           renderer={appendConfig.renderer || 'canvas'}
@@ -204,7 +210,7 @@ const ChartRender = ({
     }
     return (
       <Suspense fallback={<Spin spinning />}>
-        <G2Plot
+        <ChartInst
           option={{ ...option, appendPadding }}
           renderer={appendConfig.renderer || 'canvas'}
           style={style}
@@ -215,7 +221,7 @@ const ChartRender = ({
   if (config.engine === 'g2') {
     return (
       <Suspense fallback={<Spin spinning />}>
-        <G2
+        <ChartInst
           option={{
             onMount: method,
             transformer: lib.transformer || null,
@@ -227,8 +233,9 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'other') {
-    const Item = method;
-    return <Item panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />;
+    return (
+      <ChartInst panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />
+    );
   }
 
   return <div style={{ color: '#fff', fontSize: 20, ...style }}>{title}</div>;

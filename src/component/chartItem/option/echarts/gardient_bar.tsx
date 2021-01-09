@@ -55,7 +55,7 @@ export const apiConfig: IApiConfig = {
 
 export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
   const xData = [];
-    const yData = [];
+  const yData = [];
   const value = _data.data;
   value.forEach((item) => {
     xData.push(item[x]);
@@ -113,57 +113,53 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
         data: yData,
         barWidth,
         itemStyle: {
-          normal: {
-            color: new LinearGradient(
-              0,
-              0,
-              0,
-              1,
-              [
-                {
-                  offset: 0,
-                  color: 'rgba(0,244,255,1)', // 0% 处的颜色
-                },
-                {
-                  offset: 1,
-                  color: 'rgba(0,77,167,1)', // 100% 处的颜色
-                },
-              ],
-              false,
-            ),
-            barBorderRadius: [barWidth * 1.5, barWidth * 1.5, barWidth * 1.5, barWidth * 1.5],
-            shadowColor: 'rgba(0,160,221,1)',
-            shadowBlur: 4,
-          },
+          color: new LinearGradient(
+            0,
+            0,
+            0,
+            1,
+            [
+              {
+                offset: 0,
+                color: 'rgba(0,244,255,1)', // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: 'rgba(0,77,167,1)', // 100% 处的颜色
+              },
+            ],
+            false,
+          ),
+          borderRadius: [barWidth * 1.5, barWidth * 1.5, barWidth * 1.5, barWidth * 1.5],
+          shadowColor: 'rgba(0,160,221,1)',
+          shadowBlur: 4,
         },
         label: {
-          normal: {
-            show: true,
-            lineHeight: 30,
-            width: 80,
-            height: 30,
-            backgroundColor: 'rgba(0,160,221,0.1)',
-            borderRadius: 200,
-            // 此处位置X的设置: 增加一个参数barPosition,记录barWidth在10 20 30 40 50 60时的最佳位置，
-            // 在excel中添加曲线图，添加趋势线及公式，得到 positionX = 0.5 * barWidth - 16
-            position: [barWidth / 2 - 16, '-60'],
-            distance: 1,
-            formatter: ['    {d|●}', ' {a|{c}}     \n', '    {b|}'].join(','),
-            rich: {
-              d: {
-                color: '#3CDDCF',
-              },
-              a: {
-                color: '#fff',
-                align: 'center',
-              },
-              b: {
-                width: 1,
-                height: 30,
-                borderWidth: 1,
-                borderColor: '#234e6c',
-                align: 'left',
-              },
+          show: true,
+          lineHeight: 30,
+          width: 80,
+          height: 30,
+          backgroundColor: 'rgba(0,160,221,0.1)',
+          borderRadius: 200,
+          // 此处位置X的设置: 增加一个参数barPosition,记录barWidth在10 20 30 40 50 60时的最佳位置，
+          // 在excel中添加曲线图，添加趋势线及公式，得到 positionX = 0.5 * barWidth - 16
+          position: [barWidth / 2 - 16, '-60'],
+          distance: 1,
+          formatter: ['    {d|●}', ' {a|{c}}     \n', '    {b|}'].join(','),
+          rich: {
+            d: {
+              color: '#3CDDCF',
+            },
+            a: {
+              color: '#fff',
+              align: 'center',
+            },
+            b: {
+              width: 1,
+              height: 30,
+              borderWidth: 1,
+              borderColor: '#234e6c',
+              align: 'left',
             },
           },
         },

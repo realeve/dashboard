@@ -1,4 +1,4 @@
-import Pie from '@/component/widget/Pie';
+import Pie from '@/component/widget/pie';
 
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 

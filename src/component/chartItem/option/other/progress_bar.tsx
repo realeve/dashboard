@@ -1,4 +1,4 @@
-import ProgressBar from '@/component/widget/ProgressBar';
+import ProgressBar from '@/component/widget/progressbar';
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
 export const mock: IChartMock = {
