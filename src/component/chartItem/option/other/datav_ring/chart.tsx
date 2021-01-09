@@ -26,11 +26,11 @@ export default ({
   useEffect(() => {
     !chartInstanceofRef.current || (chartInstanceofRef.current = new Chart(chartRef.current));
 
-    chartInstanceofRef.current.setOption(option || {}, true);
+    chartInstanceofRef.current?.setOption(option || {}, true);
   }, [option]);
 
   useEffect(() => {
-    chartInstanceofRef.current.resize();
+    chartInstanceofRef.current?.resize();
   }, [width, height]);
 
   const classNames = useMemo(() => classnames('dv-charts-container', className), [className]);

@@ -52,7 +52,7 @@ const EChart: React.ForwardRefExoticComponent<IProp> = forwardRef(
         setToggleIdx?.(idx);
         const { option, idx: id } = toggleSeriesItem(R.clone(props.option), idx);
         setIdx(id);
-        chart.setOption(option, true);
+        chart?.setOption(option, true);
       },
       toggleItem ? 3000 : null,
     );

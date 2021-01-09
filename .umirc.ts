@@ -24,10 +24,10 @@ export default defineConfig({
   },
   title: 'dashboard',
   theme,
-  cssModulesTypescriptLoader: {
-    // 对按照 css modules 方式引入的 css 或 less 等样式文件，自动生成 ts 类型定义文件。
-    mode: 'emit',
-  },
+  // cssModulesTypescriptLoader: {
+  //   // 对按照 css modules 方式引入的 css 或 less 等样式文件，自动生成 ts 类型定义文件。
+  //   mode: 'emit',
+  // },
   terserOptions: {
     compress: {
       drop_console: !DEV,

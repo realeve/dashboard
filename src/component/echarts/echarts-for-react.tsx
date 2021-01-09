@@ -80,7 +80,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
     if (this.echartsElement) {
       const echartObj = this.renderEchartDom();
       elementResizeEvent(this.echartsElement, () => {
-        echartObj.resize();
+        echartObj?.resize();
       });
     }
   }
@@ -113,7 +113,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
       !isEqual(prevProps.className, this.props.className)
     ) {
       try {
-        echartObj.resize();
+        echartObj?.resize();
       } catch (e) {}
     }
   }
@@ -191,7 +191,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
     const echartObj = this.getEchartsInstance();
 
     // set the echart option
-    echartObj.setOption(
+    echartObj?.setOption(
       { darkMode: true, ...this.props.option },
       this.props.notMerge || false,
       this.props.lazyUpdate || false,

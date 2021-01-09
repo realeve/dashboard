@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react';
 import type { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
-// import styles from './chartItem.less';
+
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';

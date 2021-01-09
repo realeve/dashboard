@@ -150,8 +150,8 @@ const getSeries = ({ data, theme = 'rect', size, config: seriesConfig }) => {
         type: 'pictorialBar',
         symbol: 'rect',
         barWidth: 8,
-        itemStyle: { 
-            color: '#36d7b6', 
+        itemStyle: {
+          color: '#36d7b6',
         },
         symbolRepeat: true,
         data,

@@ -144,12 +144,12 @@ const ChartRender = ({
     },
   });
 
-  let ChartInst;
-  if (config.engine === 'other') {
-    ChartInst = method;
-  } else {
-    ChartInst = React.lazy(() => import(`../../../component/${config.engine}`));
-  }
+  // let ChartInst = null;
+  // if (config.engine === 'other') {
+  //   ChartInst = method;
+  // } else {
+  //   ChartInst = React.lazy(() => import(`../../../component/${config.engine}`));
+  // }
 
   if (error) {
     return <div style={{ color: '#eee' }}>数据请求出错</div>;
@@ -160,7 +160,7 @@ const ChartRender = ({
   //   onLoad(mock.title);
   // }
 
-  if (!ChartInst || (valid && ((loading && !inited) || !data))) {
+  if (valid && ((loading && !inited) || !data)) {
     return <Skeleton />;
   }
 
@@ -183,9 +183,10 @@ const ChartRender = ({
 
   if (config.engine === 'echarts') {
     const chart = ref?.current?.echartsInstance;
+    const Echarts = React.lazy(() => import('@/component/echarts'));
     return (
       <Suspense fallback={<Spin spinning />}>
-        <ChartInst
+        <Echarts
           ref={ref}
           option={method(injectProps, chart)}
           renderer={appendConfig.renderer || 'canvas'}
@@ -195,6 +196,7 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'g2plot') {
+    const G2Plot = React.lazy(() => import('@/component/g2plot'));
     const option = method({
       ...injectProps,
       autoFit: true,
@@ -210,7 +212,7 @@ const ChartRender = ({
     }
     return (
       <Suspense fallback={<Spin spinning />}>
-        <ChartInst
+        <G2Plot
           option={{ ...option, appendPadding }}
           renderer={appendConfig.renderer || 'canvas'}
           style={style}
@@ -219,9 +221,10 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'g2') {
+    const G2 = React.lazy(() => import('@/component/g2'));
     return (
       <Suspense fallback={<Spin spinning />}>
-        <ChartInst
+        <G2
           option={{
             onMount: method,
             transformer: lib.transformer || null,
@@ -233,6 +236,7 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'other') {
+    const ChartInst = method;
     return (
       <ChartInst panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />
     );
