@@ -170,10 +170,8 @@ export default ({
         show: false,
       },
       axisLabel: {
-        textStyle: {
-          fontSize: 14,
-          color: textColor,
-        },
+        fontSize: 14,
+        color: textColor,
       },
     },
     yAxis: {
@@ -194,10 +192,8 @@ export default ({
       },
       axisLabel: {
         show: yAxis,
-        textStyle: {
-          color: textColor,
-          fontSize: 14,
-        },
+        color: textColor,
+        fontSize: 14,
       },
     },
     tooltip: {},

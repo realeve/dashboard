@@ -2,7 +2,7 @@ import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem
 import { getMax } from '../lib';
 import { textColor } from '../index';
 import * as lib from '@/component/chartItem/option/lib';
-
+import 'echarts/lib/chart/pictorialBar';
 import * as R from 'ramda';
 
 const bgImg =
@@ -241,10 +241,8 @@ export default ({
           show: false,
         },
         axisLabel: {
-          textStyle: {
-            fontSize: axisFontSize,
-            color: textColor,
-          },
+          fontSize: axisFontSize,
+          color: textColor,
         },
       },
     ],
@@ -267,10 +265,8 @@ export default ({
         },
         axisLabel: {
           show: yAxis,
-          textStyle: {
-            color: textColor,
-            fontSize: axisFontSize,
-          },
+          color: textColor,
+          fontSize: axisFontSize,
         },
       },
     ],

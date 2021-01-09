@@ -1,6 +1,6 @@
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import { handleData } from '@/component/chartItem/option/echarts/line';
-
+import 'echarts/lib/chart/pictorialBar';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 export const mock: IChartMock = {
@@ -50,9 +50,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export const defaultOption = {
-  renderer: 'svg',
-};
+// export const defaultOption = {
+//   renderer: 'svg',
+// };
 
 export default ({ data: srcData, x = 0, y = 1, showSplit = true }) => {
   const res = handleData(srcData, { x, y });

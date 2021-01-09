@@ -4,6 +4,9 @@ import { handleScatterData, EStatus } from './util';
 import { SEARCH_PREFIX } from '@/utils/setting';
 import type { IChartConfig } from '@/component/chartItem/interface';
 
+import 'echarts/lib/chart/scatter';
+import 'echarts/lib/chart/effectScatter';
+
 const starableAnimate = (idx) => idx * Math.random() * 10;
 export const statusColor = ['#ddd', '#749cff', '#fb0348', '#333'];
 

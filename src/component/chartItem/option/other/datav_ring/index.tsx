@@ -3,6 +3,7 @@ import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem
 // import { textColor } from '@/component/chartItem/option';
 import Charts from './chart';
 import * as R from 'ramda';
+import 'echarts/lib/chart/pie';
 
 const color: string[] = [
   '#00c0ff',

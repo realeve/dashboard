@@ -87,9 +87,7 @@ export default ({ data: _data, x = 0, y = 1, barWidth = 20 }) => {
         axisLabel: {
           margin: 10,
           color: '#e2e9ff',
-          textStyle: {
-            fontSize: 14,
-          },
+          fontSize: 14,
         },
       },
     ],

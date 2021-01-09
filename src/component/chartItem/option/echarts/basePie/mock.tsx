@@ -47,6 +47,6 @@ export const apiConfig: IApiConfig = {
 /**
  * 默认渲染引擎
  */
-export const defaultOption = {
-  renderer: 'svg',
-};
+// export const defaultOption = {
+//   renderer: 'svg',
+// };

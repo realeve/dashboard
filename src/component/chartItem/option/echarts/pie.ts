@@ -1,5 +1,7 @@
 import colors from '@/component/echarts/themeColor';
 
+import 'echarts/lib/chart/pie';
+
 export type circlePos = 'inner' | 'outter';
 export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' }) => {
   const color = ['#afa3f5', '#00d488', '#3feed4', '#3bafff', '#f1bb4c', ...colors.COLOR_PLATE_8];

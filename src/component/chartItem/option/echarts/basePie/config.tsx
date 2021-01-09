@@ -90,7 +90,7 @@ export const config = [
     key: 'borderColor',
     defaultValue: '#070125',
     title: '边框线颜色',
-    type: 'purecolor', 
+    type: 'purecolor',
   },
   {
     key: 'borderRadiusInner',

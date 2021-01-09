@@ -3,6 +3,7 @@ import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem
 import { textColor } from '..';
 
 import panel from '@/component/echarts/themeColor';
+import 'echarts/lib/component/polar';
 
 const color = panel.COLOR_PLATE_16;
 
@@ -105,9 +106,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export const defaultOption = {
-  renderer: 'svg',
-};
+// export const defaultOption = {
+//   renderer: 'svg',
+// };
 
 export default ({
   data: _data,

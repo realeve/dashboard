@@ -10,10 +10,10 @@ import { diff } from './lib';
 
 import * as zrender from 'zrender/esm/zrender';
 import 'zrender/esm/canvas/canvas';
-import * as graphic from 'echarts/esm/util/graphic';
+import { Rect } from 'echarts/esm/util/graphic';
 
 const getRect = (option: IPanelItem, { fill, stroke }) => ({
-  rect: new graphic.Rect({
+  rect: new Rect({
     shape: option,
     style: {
       fill,

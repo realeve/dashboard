@@ -3,8 +3,9 @@ import * as lib from '../../lib';
 import { getColors } from '../../g2plot/lib';
 import { textColor } from '@/component/chartItem/option';
 import type { IBasePieProps } from './interface';
+import 'echarts/lib/chart/pie';
 
-export { mock, apiConfig, defaultOption } from './mock';
+export { mock, apiConfig } from './mock';
 export { config } from './config';
 
 export default (

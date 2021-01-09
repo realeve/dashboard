@@ -3,8 +3,11 @@ import * as lib from '@/component/chartItem/option/lib';
 import { getColors } from '../../g2plot/lib';
 import * as utils from './lib';
 import type { ISeries, IEchartsBaselineProps } from './interface';
+import 'echarts/lib/component/markPoint';
+import 'echarts/lib/component/markLine';
+import 'echarts/lib/component/markArea';
 
-export { config, mock, apiConfig, defaultOption } from './mock';
+export { config, mock, apiConfig } from './mock';
 
 export const getMarkpoint = (showMarkpoint: false | 'min' | 'max' | 'minmax') => {
   let markpointData;
@@ -91,6 +94,11 @@ export default ({
 }: IEchartsBaselineProps) => {
   if (String(legend) === '') {
     return {};
+  }
+
+  // 极坐标系
+  if (isPolar) {
+    import('echarts/lib/component/polar');
   }
   const res = handleData(data, { legend, x, y });
 

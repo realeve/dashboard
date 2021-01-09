@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
-import lib from './plot';
+import * as lib from './plot';
 // import * as lib from './plot/g2plot.min';
 // import  lib from '@antv/g2plot';
 import type { ContainerProps, Base, Options } from './hooks/useChart';
@@ -11,8 +11,9 @@ import ChartLoading from './util/createLoading';
 import styles from './index.less';
 import classnames from 'classnames';
 import cbpcTheme from './cbpc';
+import { registerTheme } from '@antv/g2/lib/theme';
 
-lib.G2.registerTheme('cbpc', cbpcTheme);
+registerTheme('cbpc', cbpcTheme);
 
 export type ChartConfig = {
   /** 图表类型 area | bar | box | bullet | column | funnel | histogram | line | liquid | heatmap | pie | progress | radar | ringprogress | rose | scatter | tinyarea | tinycolumn | tinyline | waterfall | wordcloud | sunburst | dualaxes | stock | radialbar | gauge */

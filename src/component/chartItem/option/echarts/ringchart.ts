@@ -1,6 +1,8 @@
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 
+import 'echarts/lib/component/polar';
+
 export const mock: IChartMock = {
   data: [[45.7]],
   title: '百分比环图_MOCK数据',
@@ -55,9 +57,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-export const defaultOption = {
-  renderer: 'svg',
-};
+// export const defaultOption = {
+//   renderer: 'svg',
+// };
 
 export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, barWidth = 40 }) => {
   const value = _data.data[0][x];

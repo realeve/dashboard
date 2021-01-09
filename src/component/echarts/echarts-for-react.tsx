@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import elementResizeEvent from 'element-resize-event';
 import theme from './theme';
-import * as echarts from 'echarts';
+import * as echarts from './echarts-simple';
 import { equals as isEqual } from 'ramda';
 
 interface IChartProps {
@@ -37,7 +37,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
     showLoading: false,
     loadingOption: null,
     onEvents: {},
-    opts: { renderer: 'svg' },
+    opts: { renderer: 'canvas' },
   };
 
   static propTypes = {
