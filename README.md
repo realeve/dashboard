@@ -89,3 +89,51 @@ https://web.dev/optimize-cls/?utm_source=lighthouse&utm_medium=devtools#images-w
 <!-- set a 640:360 i.e a 16:9 - aspect ratio -->
 <img src="puppy.jpg" width="640" height="360" alt="Puppy with balloons">
 ```
+
+5. 增加缓存时长为365天
+
+```httpd.conf
+<IfModule expires_module>
+
+    #打开缓存
+    #文件缓存 A31536000/3600/24=365天
+
+    ExpiresActive on 
+
+    ExpiresByType text/css A31536000 
+    ExpiresByType application/x-javascript A31536000 
+    ExpiresByType application/javascript A31536000 
+    # ExpiresByType text/html A31536000 
+    ExpiresByType image/jpeg A31536000 
+    ExpiresByType image/gif A31536000 
+    ExpiresByType image/png A31536000 
+    ExpiresByType image/x-icon A31536000 
+	ExpiresByType application/x-font-ttf A31536000  
+	ExpiresByType image/svg+xml A31536000
+	ExpiresByType image/webp A31536000 
+</IfModule>
+```
+
+6. preload
+
+```html
+    <link rel="preload" href="/fonts/Unica-One.ttf"/>
+```
+
+7. 拆分包大小，按需引用 (尽量减少文件的交叉引用)
+
+```ts
+
+// BAD
+// g2plot.ts
+export {palette} from './palette'
+export * from './index'
+
+// index.ts
+import palette from '@/component/g2plot'
+
+//  ---
+
+// GOOD
+import { palette } from '@/component/g2plot/palette';
+```
