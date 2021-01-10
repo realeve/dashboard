@@ -1298,12 +1298,6 @@ Array [
 
 exports[`数据模拟 3`] = `
 Object {
-  "renderer": "svg",
-}
-`;
-
-exports[`数据模拟 4`] = `
-Object {
   "data": Array [
     Array [
       "类目1",

@@ -3,7 +3,7 @@ import React, { useState, Suspense, useEffect, useRef, useMemo } from 'react';
 import type { IPanelConfig, IApiProps } from '@/models/common';
 
 import * as R from 'ramda';
-import { Skeleton, Spin } from 'antd';
+import { Skeleton, Spin, Carousel } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
 
 import { isArray } from '@antv/util';
@@ -11,6 +11,7 @@ import type { Dayjs } from 'dayjs';
 import ranges from '@/utils/range';
 import qs from 'qs';
 import { chartList } from '@/component/chartItem/option';
+import { getDataType } from '@/utils/lib';
 
 export type tRender = 'canvas' | 'svg';
 
@@ -144,6 +145,40 @@ const ChartRender = ({
     },
   });
 
+  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
+  // 合并后的属性
+  const injectProps = {
+    data: valid ? data : mock,
+    ...api,
+  };
+  const isCarousel = config.api.isCarousel || false;
+
+  // 缓存数据内容
+  const carouselData = useMemo(() => {
+    if (!isCarousel || !injectProps.data) {
+      return [];
+    }
+
+    // 处理数据滚动逻辑
+    const arrayRow = getDataType(injectProps.data) === 'array';
+    const keyName: string = arrayRow
+      ? config.api.carouselKey
+      : injectProps.data.header[config.api.carouselKey];
+    const groupData = R.groupBy<any[]>(R.prop<string>(keyName))(injectProps.data.data);
+    const nextCarouselData = Object.entries(groupData).map(([name, value]: [string, []]) => ({
+      ...injectProps.data,
+      title: `${injectProps.data.title}(${name})`,
+      data: value,
+      rows: value.length,
+      key: name,
+    }));
+
+    // 第一组数据的标题更新
+    onLoad(nextCarouselData[0].title);
+
+    return nextCarouselData;
+  }, [injectProps.data?.hash, isCarousel, config.api.carouselKey]);
+
   if (error) {
     return <div style={{ color: '#eee' }}>数据请求出错</div>;
   }
@@ -167,15 +202,30 @@ const ChartRender = ({
     appendConfig = R.type(defaultOption) === 'Function' ? defaultOption(config) : defaultOption;
   }
 
-  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
-  // 合并后的属性
-  const injectProps = {
-    data: valid ? data : mock,
-    ...api,
-  };
-
   if (config.engine === 'echarts') {
     const chart = ref?.current?.echartsInstance;
+    if (isCarousel) {
+      return (
+        <Suspense fallback={<Spin spinning />}>
+          <Carousel
+            autoplay
+            afterChange={(current) => {
+              onLoad(carouselData[current]?.title);
+            }}
+          >
+            {carouselData.map((item) => (
+              <Echarts
+                ref={ref}
+                key={item.key}
+                option={method({ data: item, ...api }, chart)}
+                renderer={appendConfig.renderer || 'canvas'}
+                style={style}
+              />
+            ))}
+          </Carousel>
+        </Suspense>
+      );
+    }
     return (
       <Suspense fallback={<Spin spinning />}>
         <Echarts

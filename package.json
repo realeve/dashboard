@@ -16,7 +16,7 @@
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "precommit": "lint-staged",
-    "deploy":"umi build && hash.bat && deploy.bat"
+    "deploy": "umi build && hash.bat && deploy.bat"
   },
   "dependencies": {
     "@ant-design/css-animation": "^1.7.3",
@@ -29,7 +29,7 @@
     "@jiaminghi/charts": "^0.2.17",
     "@scena/dragscroll": "^0.2.1",
     "@scena/react-ruler": "^0.6.1",
-    "antd": "^4.7.0",
+    "antd": "^4.10.1",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "counterup2": "^1.0.4",

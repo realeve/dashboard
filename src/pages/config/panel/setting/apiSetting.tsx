@@ -94,6 +94,19 @@ const appendConfig: IChartConfig[] = [
     max: 10,
     type: 'range',
   },
+  {
+    key: 'isCarousel',
+    title: '循环滚动',
+    defaultValue: false,
+    type: 'switch',
+  },
+  {
+    key: 'carouselKey',
+    subTitle: '启用循环滚动后，以哪个字段作为分组',
+    title: '滚动分组字段',
+    defaultValue: '0',
+    valueType: 'number',
+  },
 ];
 
 const ApiSetting = ({
@@ -133,10 +146,12 @@ const ApiSetting = ({
       });
   };
 
+  const arrSettings = state.isCarousel ? [0, 1, 2, 4, 5, 6, 7, 8, 9] : [0, 1, 2, 4, 5, 6, 7, 8];
+
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
       <div className={styles['datav-gui']}>
-        {[0, 1, 2, 4, 5, 6, 7].map(
+        {arrSettings.map(
           (i) =>
             (i < 2 || state.show) && (
               <FormItem

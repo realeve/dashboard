@@ -125,3 +125,33 @@ body,
 //   border: none;
 //   backdrop-filter: saturate(180%) blur(20px);
 // }
+
+.ant-carousel {
+  height: 100%;
+  .slick {
+    &-slider {
+      height: 100%;
+    }
+    &-list {
+      height: 100%;
+    }
+    &-track {
+      height: 100%;
+    }
+  }
+  .slick-slide {
+    height: 100%;
+    > div {
+      height: 100%;
+    }
+  }
+  li button {
+    background: #cfcfcf !important;
+  }
+  li.slick-active button {
+    background: #fff;
+  }
+  .slick-dots-bottom {
+    bottom: -20px !important;
+  }
+}

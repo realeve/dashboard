@@ -137,3 +137,13 @@ import palette from '@/component/g2plot'
 // GOOD
 import { palette } from '@/component/g2plot/palette';
 ```
+
+8. 其它细节
+
+useMemo
+
+事件响应，rerender
+
+不推荐的生命周期
+
+getDerivedStateFromProps
