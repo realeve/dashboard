@@ -11,8 +11,11 @@ export default ({
   data: IAxiosState[];
   Slide: (e: { dataItem: IAxiosState }) => React.ReactElement;
 }) => {
-  const hash = !data ? 'unknown' : data[0].hash;
+  if (!data?.[0]) {
+    return <Slide />;
+  }
 
+  const hash = data?.[0]?.hash;
   // TODO 减少重绘
   return useMemo(() => {
     if (data?.length === 1 || !data) {
