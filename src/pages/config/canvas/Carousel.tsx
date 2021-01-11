@@ -9,7 +9,7 @@ export default ({
 }: {
   onLoad: (e: string) => void;
   data: IAxiosState[];
-  Slide: (e: IAxiosState) => React.ReactElement;
+  Slide: (e: { dataItem: IAxiosState }) => React.ReactElement;
 }) => {
   const hash = !data ? 'unknown' : data[0].hash;
 

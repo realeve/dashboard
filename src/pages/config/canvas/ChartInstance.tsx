@@ -1,6 +1,7 @@
 import React, { useState, Suspense, useEffect, useRef, useMemo } from 'react';
 
 import type { IPanelConfig, IApiProps } from '@/models/common';
+import type { IAxiosState } from '@/utils/axios';
 
 import * as R from 'ramda';
 import { Skeleton, Spin } from 'antd';
@@ -131,7 +132,7 @@ const handleCarouselData = (data, { isCarousel, onLoad, carouselKey }) => {
   // 处理数据滚动逻辑
   const arrayRow = getDataType(data) === 'array';
   const keyName: string = arrayRow ? carouselKey : data.header[carouselKey];
-  const groupData = R.groupBy<any[]>(R.prop<string>(keyName))(data.data);
+  const groupData = R.groupBy<IAxiosState>(R.prop<string>(keyName))(data.data);
   const nextCarouselData = Object.entries(groupData).map(([name, value]: [string, []]) => ({
     ...data,
     title: `${data.title}(${name})`,
