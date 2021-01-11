@@ -114,10 +114,14 @@ const useAxios = <T extends {} | void>({
     !unmounted && setLoading(true);
 
     const source = CancelToken.source();
-
+    let { url } = param;
+    if (url?.includes('@/mock/')) {
+      url = url.replace('@', window.location.origin);
+    }
     // 从后端发起请求
     axios({
       ...param,
+      url,
       cancelToken: source.token,
     } as AxiosRequestConfig)
       .then((response: any) => {
