@@ -1,4 +1,5 @@
-import assets from '../assets';
+import borders from '../assets/borders';
+import pics from '../assets/pics';
 import styles from './index.less';
 import classnames from 'classnames';
 
@@ -8,10 +9,10 @@ export interface WidgetDecoration {
   children?: React.ReactNode;
   [key: string]: any;
 }
-export const borderNames = Object.keys(assets.borders);
+export const borderNames = Object.keys(borders);
 
 export default ({ name, children, style, className, ...props }: WidgetDecoration) => {
-  const { url, animate } = assets.pics[name] || {};
+  const { url, animate } = pics[name] || {};
 
   return (
     <div

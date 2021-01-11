@@ -1,4 +1,4 @@
-import assets from '../assets';
+import borders from '../assets/borders';
 import styles from './index.less';
 import classnames from 'classnames';
 import * as R from 'ramda';
@@ -16,7 +16,7 @@ export interface WidgetBorder {
   dispatch?: Dispatch;
   [key: string]: any;
 }
-export const borderNames = Object.keys(assets.borders);
+export const borderNames = Object.keys(borders);
 
 export default ({
   name,
@@ -30,7 +30,7 @@ export default ({
   ...props
 }: WidgetBorder) => {
   const { pathname } = useLocation();
-  const { url, ...img } = assets.borders[name] || {};
+  const { url, ...img } = borders[name] || {};
 
   // 11-12
   // 只在首页直接显示，在config配置页需要显示父层div，否则无法编辑

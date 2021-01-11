@@ -1,7 +1,7 @@
 // 此处导入你所需要的自定义组件
 import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
-import assets from '@/component/widget/assets';
+import pics from '@/component/widget/assets/pics';
 import classnames from 'classnames';
 import styles from './index.less';
 
@@ -86,7 +86,7 @@ export default ({
   },
   panelStyle,
 }) => {
-  const url = assets.pics[imgname]?.url;
+  const url = pics[imgname]?.url;
   const origin = { transformOrigin: panelStyle?.['transform-origin'] };
   const animation = !rotate
     ? origin

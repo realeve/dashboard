@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import Field from '@/component/field';
 import type { IPage, ICommonConfig } from '@/models/common';
 import type { Dispatch } from 'redux';
-import assets from '@/component/widget/assets';
+
+import { picList } from '@/component/widget/assets/pics';
 import Popup from '@/component/Editor/Popup/Popup';
 import { AssetItem } from '@/component/widget/blank/config';
 import ColorPicker, { PureColor } from '@/component/field/ColorPicker';
 import Radio from '@/component/field/Radio';
 import Align from '@/component/field/Align';
 
-import { Tabs } from 'antd';
+import { Tabs, Spin } from 'antd';
 import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
@@ -34,7 +35,18 @@ export const ImgSelector = ({
   style?: React.CSSProperties;
 }) => {
   const [show, setShow] = useState(false);
-  const val = assets[imgtype][value]?.url;
+  const [assets, setAssets] = useState(null);
+  useEffect(() => {
+    import(`../../../../component/widget/assets/${imgtype}`).then(({ default: assetItem }) =>
+      setAssets(assetItem),
+    );
+  }, [imgtype]);
+  if (!assets) {
+    return <Spin spinning />;
+  }
+
+  // 待优化
+  const val = assets[value]?.url;
   return (
     <Field title={title} style={{ ...style, height: 116 }}>
       {isColor(val) ? (
@@ -70,14 +82,14 @@ export const ImgSelector = ({
         >
           {imgtype !== 'pics' ? (
             <AssetItem
-              assets={assets[imgtype]}
+              assets={assets}
               style={{ overflowY: 'auto', height: 'calc(100% - 30px)' }}
               value={value}
               onChange={onChange}
             />
           ) : (
             <Tabs>
-              {assets.picList.map((picItem) => (
+              {picList.map((picItem) => (
                 <TabPane tab={picItem.title} key={picItem.title}>
                   <AssetItem
                     assets={picItem.data}
