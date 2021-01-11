@@ -106,9 +106,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-// export const defaultOption = {
-//   renderer: 'svg',
-// };
+export const defaultOption = {
+  renderer: 'svg',
+};
 
 export default ({
   data: _data,

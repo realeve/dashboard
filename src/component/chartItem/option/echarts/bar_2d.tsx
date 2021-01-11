@@ -50,9 +50,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-// export const defaultOption = {
-//   renderer: 'svg',
-// };
+export const defaultOption = {
+  renderer: 'svg',
+};
 
 export default ({ data: srcData, x = 0, y = 1, showSplit = true }) => {
   const res = handleData(srcData, { x, y });

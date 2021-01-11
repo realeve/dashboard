@@ -53,7 +53,7 @@ import 'echarts/lib/component/legend';
 // import 'echarts/lib/component/visualMapPiecewise';
 // import 'echarts/lib/component/aria';
 
-// import 'zrender/lib/svg/svg';
+import 'zrender/lib/svg/svg';
 
 export * from 'echarts/lib/echarts';
 export * from 'echarts/lib/export';

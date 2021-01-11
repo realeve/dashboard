@@ -1,6 +1,4 @@
-import * as RadialBar from './cbpc-radial-bar';
-
-export { RadialBar };
+export { RadialBar, RadialBarOptions } from './cbpc-radial-bar';
 
 // import * as G2 from '@antv/g2';
 // export { G2 };

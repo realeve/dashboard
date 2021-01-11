@@ -57,9 +57,9 @@ export const apiConfig: IApiConfig = {
   ],
 };
 
-// export const defaultOption = {
-//   renderer: 'svg',
-// };
+export const defaultOption = {
+  renderer: 'svg',
+};
 
 export default ({ data: _data, x = 0, valueFontSize = 40, titleFontSize = 16, barWidth = 40 }) => {
   const value = _data.data[0][x];

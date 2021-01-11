@@ -1,3 +1,5 @@
+import 'echarts/lib/chart/gauge';
+
 export default ({ value, half = false, width = 2, length = 10, color = '#30c3a7' }) => {
   const getItem = (percent, lineColor = '#30c3a7') => ({
     // 绿色刻度，蓝色刻度precent值是1

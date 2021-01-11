@@ -117,6 +117,7 @@ export default function useInit<T extends Base, U extends Options>(
 
   const init = () => {
     processConfig();
+    console.log(ChartClass);
     const chartInstance: T = new (ChartClass as any)(container.current, {
       ...config,
     });

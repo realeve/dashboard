@@ -9,7 +9,7 @@ export { RadialBarOptions };
 /**
  * 玉珏图
  */
-export class CbpcRadialBar extends Plot<RadialBarOptions> {
+export class RadialBar extends Plot<RadialBarOptions> {
   /** 图表类型 */
   public type: string = 'radial-bar';
 
