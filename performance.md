@@ -177,3 +177,45 @@ export default Class Index extends React.PureComponent{
     }
 }  
 ```
+
+---
+
+## 单元测试相关
+
+1. travis 中授权 git oAuth2
+2. 项目中添加 .travis.yml 文件，示例
+
+```yaml
+language: node_js
+node_js:
+  - '14'
+sudo: required
+before_script:
+  - npm install
+script: npm run test:coveralls 
+```
+
+package.json
+``` json 
+{
+    "scripts":{
+        "test:coveralls": "umi test --online | coveralls",
+    }
+} 
+```
+
+3. git推送代码 ———— travis 自动测试 ———— 测试结果传送至  coveralls
+
+4. coveralls.io 绑定 git
+5. 增加文件 .coveralls.yml
+```yaml
+service_name: travis-pro
+repo_token: 你项目的token
+```
+6. coveralls中自动显示测试覆盖率
+
+---
+
+## 快照测试
+
+参考资料： https://jestjs.io/docs/en/tutorial-react#snapshot-testing
