@@ -85,13 +85,26 @@ const useAxios = <T extends {} | void>({
 
   // 首次加载
   useEffect(() => {
+    if (initData) {
+      mock<T>(initData).then((v) => {
+        // 如果为空就不再进行设置
+        // if (v.length === 0) {
+        //   return;
+        // }
+        !unmounted && setData(onFetchData ? onFetchData(v) : v);
+        !unmounted && setLoading(false);
+      });
+      return;
+    }
+
     // 同时未传时，返回空值
     // 部分场景允许不设置param时，返回默认状态为空的数据
     // 如，多个tab条的切换点击
-    if (R.isNil(param) || (!param && !initData)) {
+    if (R.isNil(param)) {
       !unmounted && setData(null);
       return;
     }
+
     // 数据请求前校验
     if (typeof param.url === 'undefined' || !param.url || param.url.length === 0 || !valid()) {
       !unmounted && setData(null);
@@ -99,19 +112,6 @@ const useAxios = <T extends {} | void>({
     }
 
     !unmounted && setLoading(true);
-
-    // 数据mock
-    if (initData) {
-      mock<T>(initData).then((v) => {
-        // 如果为空就不再进行设置
-        // if (v.length === 0) {
-        //   return;
-        // }
-        !unmounted && setData(v);
-        !unmounted && setLoading(false);
-      });
-      return;
-    }
 
     const source = CancelToken.source();
 
@@ -149,7 +149,13 @@ const useAxios = <T extends {} | void>({
       source.cancel();
     };
     // 监听axios数据请求中 url、get/post关键参数
-  }, [param.url, JSON.stringify(param.params), JSON.stringify(param.data), initData, innerTrigger]);
+  }, [
+    param.url,
+    JSON.stringify(param.params),
+    JSON.stringify(param.data),
+    initData?.hash,
+    innerTrigger,
+  ]);
 
   const reFetch = () => {
     // 数据刷新的场景中，重置innerTrigger，在useFetch中会

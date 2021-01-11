@@ -3,7 +3,7 @@ import React, { useState, Suspense, useEffect, useRef, useMemo } from 'react';
 import type { IPanelConfig, IApiProps } from '@/models/common';
 
 import * as R from 'ramda';
-import { Skeleton, Spin, Carousel } from 'antd';
+import { Skeleton, Spin } from 'antd';
 import useFetch from '@/component/hooks/useFetch';
 
 import { isArray } from '@antv/util';
@@ -12,6 +12,8 @@ import ranges from '@/utils/range';
 import qs from 'qs';
 import { chartList } from '@/component/chartItem/option';
 import { getDataType } from '@/utils/lib';
+
+import Carousel from './Carousel';
 
 export type tRender = 'canvas' | 'svg';
 
@@ -104,6 +106,33 @@ type ChartRenderProps = {
   chartLib: any;
 } & ChartInstanceProps;
 
+const handleCarouselData = (data, { isCarousel, onLoad, carouselKey }) => {
+  if (!data) {
+    return data;
+  }
+  if (!isCarousel) {
+    onLoad(data.title);
+    return [data];
+  }
+
+  // 处理数据滚动逻辑
+  const arrayRow = getDataType(data) === 'array';
+  const keyName: string = arrayRow ? carouselKey : data.header[carouselKey];
+  const groupData = R.groupBy<any[]>(R.prop<string>(keyName))(data.data);
+  const nextCarouselData = Object.entries(groupData).map(([name, value]: [string, []]) => ({
+    ...data,
+    title: `${data.title}(${name})`,
+    data: value,
+    rows: value.length,
+    key: name,
+  }));
+
+  // 第一组数据的标题更新
+  onLoad(nextCarouselData[0].title);
+
+  return nextCarouselData;
+};
+
 const ChartRender = ({
   config,
   title,
@@ -119,7 +148,8 @@ const ChartRender = ({
 
   const api: IApiProps = getApiConfig(config, lib);
 
-  const valid = config.ajax && api?.api_type === 'url' && api?.url?.length > 0;
+  const valid =
+    config.ajax && (api?.api_type === 'mock' || (api?.api_type === 'url' && api?.url?.length > 0));
 
   const param = useMemo(() => {
     return getAxiosParam({
@@ -132,65 +162,40 @@ const ChartRender = ({
     });
   }, [api.api_type, api.url, api.dateType, api.cache, api.appendParam]);
 
+  const isCarousel = config.api.isCarousel || false;
+
+  const mock = api.mock ? JSON.parse(api.mock) || lib?.mock : null;
   const { data, loading, error } = useFetch({
     param,
+    initData: mock,
     valid: () => valid,
     interval:
       typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
-    callback(e) {
-      if (e && e.title) {
-        onLoad(e.title);
-      }
-      return e;
-    },
+    callback: (e) =>
+      handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad }),
   });
 
-  const mock = api.mock ? JSON.parse(api.mock) : lib?.mock;
+  if (valid && ((loading && !inited) || !data)) {
+    return <Skeleton />;
+  }
+
+  if (error) {
+    return <div style={{ color: '#eee' }}>数据请求出错</div>;
+  }
+  if (!data) {
+    return null;
+  }
+
   // 合并后的属性
   const injectProps = {
     data: valid ? data : mock,
     ...api,
   };
-  const isCarousel = config.api.isCarousel || false;
-
-  // 缓存数据内容
-  const carouselData = useMemo(() => {
-    if (!isCarousel || !injectProps.data) {
-      return [];
-    }
-
-    // 处理数据滚动逻辑
-    const arrayRow = getDataType(injectProps.data) === 'array';
-    const keyName: string = arrayRow
-      ? config.api.carouselKey
-      : injectProps.data.header[config.api.carouselKey];
-    const groupData = R.groupBy<any[]>(R.prop<string>(keyName))(injectProps.data.data);
-    const nextCarouselData = Object.entries(groupData).map(([name, value]: [string, []]) => ({
-      ...injectProps.data,
-      title: `${injectProps.data.title}(${name})`,
-      data: value,
-      rows: value.length,
-      key: name,
-    }));
-
-    // 第一组数据的标题更新
-    onLoad(nextCarouselData[0].title);
-
-    return nextCarouselData;
-  }, [injectProps.data?.hash, isCarousel, config.api.carouselKey]);
-
-  if (error) {
-    return <div style={{ color: '#eee' }}>数据请求出错</div>;
-  }
 
   // 在callback中会触发该效果，无需再次调用
   // if (api?.api_type === 'mock' && mock && mock.title) {
   //   onLoad(mock.title);
   // }
-
-  if (valid && ((loading && !inited) || !data)) {
-    return <Skeleton />;
-  }
 
   if (!inited) {
     setInited(true);
@@ -204,59 +209,53 @@ const ChartRender = ({
 
   if (config.engine === 'echarts') {
     const chart = ref?.current?.echartsInstance;
-    if (isCarousel) {
-      return (
-        <Suspense fallback={<Spin spinning />}>
-          <Carousel
-            autoplay
-            afterChange={(current) => {
-              onLoad(carouselData[current]?.title);
-            }}
-          >
-            {carouselData.map((item) => (
-              <Echarts
-                ref={ref}
-                key={item.key}
-                option={method({ data: item, ...api }, chart)}
-                renderer={appendConfig.renderer || 'canvas'}
-                style={style}
-              />
-            ))}
-          </Carousel>
-        </Suspense>
-      );
-    }
     return (
       <Suspense fallback={<Spin spinning />}>
-        <Echarts
-          ref={ref}
-          option={method(injectProps, chart)}
-          renderer={appendConfig.renderer || 'canvas'}
-          style={style}
+        <Carousel
+          data={injectProps.data}
+          onLoad={onLoad}
+          Slide={({ dataItem }) => (
+            <Echarts
+              ref={ref}
+              key={dataItem.key}
+              option={method({ data: dataItem, ...api }, chart)}
+              renderer={appendConfig.renderer || 'canvas'}
+              style={style}
+            />
+          )}
         />
       </Suspense>
     );
   }
   if (config.engine === 'g2plot') {
-    const option = method({
-      ...injectProps,
-      autoFit: true,
-    });
-
     let appendPadding = config.showBorder ? 20 : 0;
 
-    // 处理边距
-    if (option.appendPadding) {
-      appendPadding = isArray(option.appendPadding)
-        ? option.appendPadding.map((item) => item + appendPadding)
-        : appendPadding + option.appendPadding;
-    }
     return (
       <Suspense fallback={<Spin spinning />}>
-        <G2Plot
-          option={{ ...option, appendPadding }}
-          renderer={appendConfig.renderer || 'canvas'}
-          style={style}
+        <Carousel
+          data={injectProps.data}
+          onLoad={onLoad}
+          Slide={({ dataItem }) => {
+            const option = method({
+              data: dataItem,
+              ...api,
+              autoFit: true,
+            });
+
+            // 处理边距
+            if (option.appendPadding) {
+              appendPadding = isArray(option.appendPadding)
+                ? option.appendPadding.map((item) => item + appendPadding)
+                : appendPadding + option.appendPadding;
+            }
+            return (
+              <G2Plot
+                option={{ ...option, appendPadding }}
+                renderer={appendConfig.renderer || 'canvas'}
+                style={style}
+              />
+            );
+          }}
         />
       </Suspense>
     );
@@ -264,13 +263,20 @@ const ChartRender = ({
   if (config.engine === 'g2') {
     return (
       <Suspense fallback={<Spin spinning />}>
-        <G2
-          option={{
-            onMount: method,
-            transformer: lib.transformer || null,
-            ...injectProps,
-          }}
-          style={style}
+        <Carousel
+          data={injectProps.data}
+          onLoad={onLoad}
+          Slide={({ dataItem }) => (
+            <G2
+              option={{
+                onMount: method,
+                transformer: lib.transformer || null,
+                data: dataItem,
+                ...api,
+              }}
+              style={style}
+            />
+          )}
         />
       </Suspense>
     );
@@ -278,7 +284,18 @@ const ChartRender = ({
   if (config.engine === 'other') {
     const ChartInst = method;
     return (
-      <ChartInst panelStyle={config.style} option={injectProps} chartid={chartid} style={style} />
+      <Carousel
+        data={injectProps.data}
+        onLoad={onLoad}
+        Slide={({ dataItem }) => (
+          <ChartInst
+            panelStyle={config.style}
+            option={{ data: dataItem, ...api }}
+            chartid={chartid}
+            style={style}
+          />
+        )}
+      />
     );
   }
 
