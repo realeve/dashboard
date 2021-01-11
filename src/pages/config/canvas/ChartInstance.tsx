@@ -44,12 +44,25 @@ export const getRange = ({ dateType = '本月' }: { dateType?: string }) => {
  * 从默认的config列表中提取defaultValue，注入到组件中，这样不用再到组件中重复定义默认值
  */
 export const getApiConfig = (config, lib) => {
-  let api: IApiProps = config.api || { dateType: '本月' };
+  const api: IApiProps = config.api || { dateType: '本月' };
 
   const objComponent = getDefaultValue(lib?.config);
   const objApi = getDefaultValue(lib?.apiConfig?.config);
-  api = { ...objComponent, ...(config.componentConfig || {}), ...objApi, ...api };
-  return api;
+  const initApi = {
+    url: lib?.apiConfig?.url,
+    cache: lib?.apiConfig?.cache,
+    interval: lib?.apiConfig?.interval,
+    dataType: getDataType(lib.mock),
+    api_type: lib?.apiConfig?.type,
+  };
+
+  return {
+    ...initApi,
+    ...objComponent,
+    ...(config.componentConfig || {}),
+    ...objApi,
+    ...api,
+  };
 };
 
 /**
@@ -149,7 +162,7 @@ const ChartRender = ({
   const api: IApiProps = getApiConfig(config, lib);
 
   const valid =
-    config.ajax && (api?.api_type === 'mock' || (api?.api_type === 'url' && api?.url?.length > 0));
+    api?.api_type === 'mock' || (config.ajax && api?.api_type === 'url' && api?.url?.length > 0);
 
   const param = useMemo(() => {
     return getAxiosParam({
@@ -164,8 +177,12 @@ const ChartRender = ({
 
   const isCarousel = config.api.isCarousel || false;
 
-  const mock = api.mock ? JSON.parse(api.mock) || lib?.mock : null;
-  const { data, loading, error } = useFetch({
+  const mock =
+    api?.api_type === 'mock' || !config.ajax
+      ? (api.mock && JSON.parse(api.mock)) || lib?.mock
+      : null;
+
+  const { data, error } = useFetch({
     param,
     initData: mock,
     valid: () => valid,
@@ -175,15 +192,15 @@ const ChartRender = ({
       handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad }),
   });
 
-  if (valid && ((loading && !inited) || !data)) {
+  if (valid && !data && !inited) {
     return <Skeleton />;
   }
 
   if (error) {
     return <div style={{ color: '#eee' }}>数据请求出错</div>;
   }
-  if (!data) {
-    return null;
+  if (!inited) {
+    setInited(true);
   }
 
   // 合并后的属性
@@ -197,9 +214,6 @@ const ChartRender = ({
   //   onLoad(mock.title);
   // }
 
-  if (!inited) {
-    setInited(true);
-  }
   // defaultOption 可能为函数，由config计算得出
   let appendConfig: { renderer: tRender } = { renderer: 'canvas' };
 
@@ -217,7 +231,7 @@ const ChartRender = ({
           Slide={({ dataItem }) => (
             <Echarts
               ref={ref}
-              key={dataItem.key}
+              key={dataItem.key || dataItem.hash}
               option={method({ data: dataItem, ...api }, chart)}
               renderer={appendConfig.renderer || 'canvas'}
               style={style}
