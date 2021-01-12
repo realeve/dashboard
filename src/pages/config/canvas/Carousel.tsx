@@ -4,12 +4,12 @@ import { Carousel, Tooltip } from 'antd';
 
 export default ({
   onLoad,
-  data,
+  injectProps: { data, ...props },
   Slide,
 }: {
   onLoad: (e: string) => void;
-  data: IAxiosState[];
-  Slide: (e: { dataItem: IAxiosState }) => React.ReactElement;
+  injectProps: { data: IAxiosState[] };
+  Slide: (e: { dataItem?: IAxiosState }) => React.ReactElement;
 }) => {
   if (!data?.[0]) {
     return <Slide />;
@@ -44,5 +44,5 @@ export default ({
         ))}
       </Carousel>
     );
-  }, [hash]);
+  }, [hash, JSON.stringify(props)]);
 };

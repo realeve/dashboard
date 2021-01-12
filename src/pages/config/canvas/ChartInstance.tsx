@@ -227,7 +227,7 @@ const ChartRender = ({
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
-          data={injectProps.data}
+          injectProps={injectProps}
           onLoad={onLoad}
           Slide={({ dataItem }) => (
             <Echarts
@@ -248,7 +248,7 @@ const ChartRender = ({
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
-          data={injectProps.data}
+          injectProps={injectProps}
           onLoad={onLoad}
           Slide={({ dataItem }) => {
             const option = method({
@@ -279,7 +279,7 @@ const ChartRender = ({
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
-          data={injectProps.data}
+          injectProps={injectProps}
           onLoad={onLoad}
           Slide={({ dataItem }) => (
             <G2
@@ -300,7 +300,7 @@ const ChartRender = ({
     const ChartInst = method;
     return (
       <Carousel
-        data={injectProps.data}
+        injectProps={injectProps}
         onLoad={onLoad}
         Slide={({ dataItem }) => (
           <ChartInst

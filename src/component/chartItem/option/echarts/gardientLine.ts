@@ -116,29 +116,29 @@ export default ({
     smooth,
     itemStyle: {
       color: color[idx % res.series.length],
-      borderWidth: 4,
-      areaStyle: {
-        // 渐变色的设置
-        color: new LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: util.hex2rgb(color[idx % res.series.length], 0.9),
-          },
-          {
-            offset: 0.5,
-            color: util.hex2rgb(color[idx % res.series.length], 0.4),
-          },
-          {
-            offset: 1,
-            color: util.hex2rgb(color[idx % res.series.length], 0.05),
-          },
-        ]),
-        opacity: area_opacity,
-      },
-      lineStyle: {
-        color: color[idx % res.series.length],
-        width: lineWidth,
-      },
+      borderWidth: lineWidth,
+    },
+    areaStyle: {
+      // 渐变色的设置
+      color: new LinearGradient(0, 0, 0, 1, [
+        {
+          offset: 0,
+          color: util.hex2rgb(color[idx % res.series.length], 0.9),
+        },
+        {
+          offset: 0.5,
+          color: util.hex2rgb(color[idx % res.series.length], 0.4),
+        },
+        {
+          offset: 1,
+          color: util.hex2rgb(color[idx % res.series.length], 0.05),
+        },
+      ]),
+      opacity: area_opacity,
+    },
+    lineStyle: {
+      color: color[idx % res.series.length],
+      width: lineWidth,
     },
     label: {
       show: true,
