@@ -49,7 +49,7 @@ export const handleData = (
     const arr = [];
     xArr.forEach((xItem) => {
       const item = data.find((dataItem) => dataItem[x] === xItem);
-      arr.push(item ? item[y] : '-');
+      arr.push(item?.[y] ?? '-');
     });
     series.push({
       name: header[y],
@@ -61,7 +61,7 @@ export const handleData = (
       const arr = [];
       xArr.forEach((xItem) => {
         const item = data.find((itemData) => itemData[legend] === name && itemData[x] === xItem);
-        arr.push(item ? item[y] : '-');
+        arr.push(item?.[y] ?? '-');
       });
       series.push({
         name,

@@ -1,0 +1,76 @@
+:global {
+  .ant-carousel {
+    height: 100%;
+
+    &:hover {
+      .slick-prev,
+      .slick-next,
+      .slick-dots {
+        opacity: 1;
+      }
+    }
+
+    .slick {
+      &-slider {
+        height: 100%;
+      }
+      &-list {
+        height: 100%;
+      }
+      &-track {
+        height: 100%;
+      }
+      &-prev {
+        left: 0;
+        z-index: 100;
+        border-top: 3px solid #373737;
+        border-left: 3px solid #373737;
+        transform: rotate(-45deg);
+        opacity: 0;
+        transition: opacity 0.3s linear;
+        &:focus,
+        &:hover {
+          border-top-color: #6b6b6b;
+          border-left-color: #6b6b6b;
+        }
+      }
+      &-next {
+        right: 0;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.3s linear;
+        &:focus,
+        &:hover {
+          border-top-color: #6b6b6b;
+          border-right-color: #6b6b6b;
+        }
+        border-top: 3px solid #373737;
+        border-right: 3px solid #373737;
+        transform: rotate(45deg);
+      }
+      &-dots {
+        opacity: 0.2;
+        transition: opacity 0.3s linear;
+        &-bottom {
+          bottom: -20px;
+        }
+      }
+    }
+    .slick-slide {
+      height: 100%;
+      > div {
+        height: 100%;
+      }
+    }
+    li button {
+      background: #cfcfcf !important;
+    }
+    li.slick-active,
+    li {
+      width: 12px !important;
+      button {
+        background: #fff !important;
+      }
+    }
+  }
+}
