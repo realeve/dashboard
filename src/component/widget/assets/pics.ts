@@ -1592,7 +1592,8 @@ const picList = [
   },
 ];
 
-const pics = {};
+// eslint-disable-next-line
+let pics = {};
 picList.forEach((item) => {
   pics = {
     ...pics,

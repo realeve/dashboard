@@ -112,6 +112,7 @@ export const api = {
 };
 
 // 静态资源所在地址，用于背景/边框/图片资源等；
-
-export const ASSETS_HOST = DEV ? '//127.0.0.1:9999/' : '//10.8.1.35:9999/';
+const ASSETS_LIST = ['//127.0.0.1:9999/', '//10.8.1.35:9999/'];
+export const ASSETS_HOST = DEV ? ASSETS_LIST[0] : ASSETS_LIST[1];
 export const ASSETS_URL = `${ASSETS_HOST}assets/`;
+export const ASSETS_URL_LIST = ASSETS_LIST.map((item) => `${item}assets/`);

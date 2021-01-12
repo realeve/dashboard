@@ -1,6 +1,7 @@
 import styles from './index.less';
 import classnames from 'classnames';
 import { isColor } from '@/component/chartItem/option/lib';
+import { ASSETS_URL_LIST } from '@/utils/setting';
 
 export default ({ value, style = {}, onChange, assets }) => {
   return (
@@ -10,10 +11,16 @@ export default ({ value, style = {}, onChange, assets }) => {
           <div
             key={name}
             className={classnames(styles.item, {
-              [styles.itemActive]: value === name,
+              [styles.itemActive]: value === assets[name].url,
             })}
             onClick={() => {
-              onChange(name);
+              const { url, top = 0, right = 0, bottom = 0, left = 0 } = assets[name];
+              onChange(url.replace(ASSETS_URL_LIST[0], '').replace(ASSETS_URL_LIST[1], ''), [
+                top,
+                right,
+                bottom,
+                left,
+              ]);
             }}
           >
             <div className={styles.img}>

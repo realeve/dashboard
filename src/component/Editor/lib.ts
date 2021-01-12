@@ -1,7 +1,7 @@
 import { defaultRect } from '@/pages/config/lib';
 import { isColor } from '@/component/chartItem/option/lib';
 import { saveAs } from 'file-saver';
-import backgrounds from '@/component/widget/assets/backgrounds';
+import { ASSETS_URL } from '@/utils/setting';
 
 // 缩放的范围
 export const rangeCfg = { min: 0.4, max: 2, step: 0.1 };
@@ -29,14 +29,12 @@ export const getDefaultStyle = (style?: React.CSSProperties) => {
 const backgroundStyle = { backgroundRepeat: 'repeat', backgroundPosition: 'top center' }; // backgroundRepeat: 'no-repeat',
 
 export const getDashboardStyle = (page: { width: string; height: string; background: string }) => {
-  const url = page.background
-    ? backgrounds[page.background].url
-    : 'url(/img/panel/panelbg.png.webp)';
+  const url = page.background || 'url(/img/panel/panelbg.png.webp)';
   const background = isColor(url)
     ? { background: url, backgroundRepeat: 'repeat' }
     : {
         ...(page.background
-          ? { backgroundImage: `url('${backgrounds[page.background].url}')` }
+          ? { backgroundImage: `url('${ASSETS_URL + url}')` }
           : { backgroundColor: '#080226' }),
         backgroundSize: 'auto',
         backgroundRepeat: 'repeat',

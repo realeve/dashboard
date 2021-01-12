@@ -133,6 +133,7 @@ export interface IPanelConfig {
 }
 export interface ICommonConfig {
   border: string; // 边框样式
+  borderSlice: [number, number, number, number]; // 边框裁减距离
   borderRadius: [number, number, number, number]; // 边框半角弧度
   chartBackground: string; // 卡片背景
   head: React.CSSProperties; // 卡片标题栏
@@ -160,7 +161,8 @@ export interface IDashboard {
 }
 
 const panelGeneral: ICommonConfig = {
-  border: '边框29', // 边框12,
+  border: `border_29.svg`, // 边框12,
+  borderSlice: [8, 8, 8, 8],
   borderRadius: [0, 0, 0, 0],
   chartBackground: 'rgba(3,11,31,0.8)', // 'rgba(38,42,50,0.6)'
   head: {
@@ -228,7 +230,7 @@ const defaultState: ICommon = {
   page: {
     width: '1920',
     height: '1080',
-    background: '默认',
+    background: `bg_03.png.webp`,
     author: '管理员',
     title: '仪表盘',
     padding: 15, // 边距

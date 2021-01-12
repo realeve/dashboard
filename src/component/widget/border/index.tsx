@@ -19,7 +19,8 @@ export interface WidgetBorder {
 export const borderNames = Object.keys(borders);
 
 export default ({
-  name,
+  name: url,
+  borderSlice: img = [0, 0, 0, 0],
   children,
   style,
   showBorder = true,
@@ -30,7 +31,6 @@ export default ({
   ...props
 }: WidgetBorder) => {
   const { pathname } = useLocation();
-  const { url, ...img } = borders[name] || {};
 
   // 11-12
   // 只在首页直接显示，在config配置页需要显示父层div，否则无法编辑
@@ -51,8 +51,8 @@ export default ({
       style={{
         borderImageSource: `url(${url})`,
         ...style,
-        borderImageSlice: `${img.top} ${img.right} ${img.bottom} ${img.left} fill`,
-        borderWidth: `${img.top}px ${img.right}px ${img.bottom}px ${img.left}px`, // img.borderWidth || Math.min(25, max),
+        borderImageSlice: `${img.join(' ')} fill`,
+        borderWidth: img.map((item) => `${item} px`).join(' '), // img.borderWidth || Math.min(25, max),
         borderStyle: 'solid',
       }}
       {...props}

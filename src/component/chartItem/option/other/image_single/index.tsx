@@ -1,7 +1,6 @@
 // 此处导入你所需要的自定义组件
 import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-
-import pics from '@/component/widget/assets/pics';
+import { ASSETS_URL } from '@/utils/setting';
 import classnames from 'classnames';
 import styles from './index.less';
 
@@ -10,7 +9,7 @@ export const config: IChartConfig[] = [
     key: 'imgname',
     type: 'image',
     imgtype: 'pics',
-    defaultValue: '旋转gif',
+    defaultValue: `02.gif`,
     title: '图片选择',
   },
   {
@@ -77,7 +76,7 @@ export const apiConfig: IApiConfig = {};
 
 export default ({
   option: {
-    imgname = '旋转gif',
+    imgname = `02.gif`,
     rotate = false,
     rotateTime = 20,
     reverse = 'rotateZ',
@@ -86,7 +85,6 @@ export default ({
   },
   panelStyle,
 }) => {
-  const url = pics[imgname]?.url;
   const origin = { transformOrigin: panelStyle?.['transform-origin'] };
   const animation = !rotate
     ? origin
@@ -100,7 +98,7 @@ export default ({
   return (
     <div className={classnames(styles.imgWrapper, { [styles.rotate]: rotate })} style={animation}>
       <img
-        src={url}
+        src={ASSETS_URL + imgname}
         style={{
           width: '100%',
           height: autoHeight ? 'auto' : '100%',

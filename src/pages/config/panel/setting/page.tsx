@@ -16,6 +16,7 @@ import InputRange from '@/component/field/InputRange';
 import Collapse from '@/component/collapse';
 import { FormItem, FormField } from '@/pages/config/panel/setting/FormItem';
 import { isColor } from '@/component/chartItem/option/lib';
+import { ASSETS_URL } from '@/utils/setting';
 
 const { Panel } = Collapse;
 
@@ -31,7 +32,7 @@ export const ImgSelector = ({
   title: string | React.ReactNode;
   imgtype?: 'backgrounds' | 'borders' | 'pics';
   value: string;
-  onChange: (e: string) => void;
+  onChange: (e: string, borderSlice?: number[]) => void;
   style?: React.CSSProperties;
 }) => {
   const [show, setShow] = useState(false);
@@ -45,15 +46,13 @@ export const ImgSelector = ({
     return <Spin spinning />;
   }
 
-  // 待优化
-  const val = assets[value]?.url;
   return (
     <Field title={title} style={{ ...style, height: 116 }}>
-      {isColor(val) ? (
+      {isColor(value) ? (
         <div
           className={styles.img}
           style={{
-            background: val,
+            background: value,
             color: '#ddd',
             width: '100%',
             textAlign: 'center',
@@ -68,7 +67,7 @@ export const ImgSelector = ({
       ) : (
         <img
           className={styles.img}
-          src={val}
+          src={value}
           onClick={() => {
             setShow(!show);
           }}
@@ -114,7 +113,7 @@ export type IComponentConfig = {
   defaultKey?: string;
   isPage?: boolean;
   page?: IPage;
-} & ICommonConfig;
+} & Omit<ICommonConfig, 'borderSlice'>;
 export const ComponentConfig = ({
   border,
   borderRadius = [0, 0, 0, 0],
@@ -142,7 +141,7 @@ export const ComponentConfig = ({
         />
         <ImgSelector
           title="背景"
-          value={page.background}
+          value={ASSETS_URL + page.background}
           imgtype="backgrounds"
           onChange={(background) => {
             updatePage({
@@ -191,11 +190,12 @@ export const ComponentConfig = ({
     <Panel header="组件" key="组件">
       <ImgSelector
         title="边框"
-        value={border}
+        value={ASSETS_URL + border}
         imgtype="borders"
-        onChange={(nextBorder) => {
+        onChange={(nextBorder, borderSlice) => {
           updatePage({
             border: nextBorder,
+            borderSlice,
           });
         }}
       />

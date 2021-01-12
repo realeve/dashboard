@@ -6,6 +6,7 @@ import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';
 import { connect } from 'react-redux';
 import ChartInstance from './ChartInstance';
+import { ASSETS_URL } from '@/utils/setting';
 
 interface IChartItemProps {
   page: IPage;
@@ -18,14 +19,16 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
     return null;
   }
   const instanceHeight = config.showTitle ? `calc(100% - 50px)` : '100%';
+
   return (
     <ErrorBoundary>
       {config.showTitle && <div style={page.head}>{title}</div>}
       <BorderItem
         engine={config.engine}
-        name={page.border}
+        borderSlice={page.borderSlice}
+        name={ASSETS_URL + page.border}
         style={{
-          background: config.showBackground ? page.chartBackground : 'unset',
+          background: config.showBackground ? ASSETS_URL + page.chartBackground : 'unset',
           width: '100%',
           height: instanceHeight,
           borderRadius: (config?.general?.borderRadius || [0, 0, 0, 0])

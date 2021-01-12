@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styles from './index.less';
 import { useToggle } from 'react-use';
 import { Modal, Steps } from 'antd';
-import { AssetItem } from './config';
-import backgrounds from '@/component/widget/assets/backgrounds';
+// import { AssetItem } from './config';
+// import backgrounds from '@/component/widget/assets/backgrounds';
 
 const { Step } = Steps;
 
@@ -11,7 +11,7 @@ export default ({ onChange, config }) => {
   const [show, setShow] = useToggle(false);
   const [current, setCurrent] = useState(0);
   const [border] = useState(config.border || null);
-  const [background, setBackground] = useState(config.background || null);
+  const [background] = useState(config.background || null);
   return (
     <div className={styles.mock_guide}>
       <div style={{ marginBottom: 16 }}>
@@ -58,9 +58,9 @@ export default ({ onChange, config }) => {
           <Step title="接口" />
         </Steps>
         <div className={styles.content}>
-          {current === 0 && (
+          {/* {current === 0 && (
             <AssetItem assets={backgrounds} value={background} onChange={setBackground} />
-          )}
+          )} */}
           {/* {current === 1 && <AssetItem assetKey="borders" value={border} onChange={setBorder} />}
           {current === 2 && <AssetItem assetKey="headers" value={header} onChange={setHeader} />}
           {current === 3 && <AssetItem assetKey="footers" value={footer} onChange={setFooter} />} */}

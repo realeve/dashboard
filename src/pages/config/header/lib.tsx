@@ -31,7 +31,7 @@ pause`;
 
   const blob = new Blob([str], { type: 'text/plain;charset=ansi' });
   const { saveAs } = await import('file-saver');
-  saveAs(blob, `${title  }_deploy.bat`);
+  saveAs(blob, `${title}_deploy.bat`);
 };
 
 export const onCopy = async (title) => {
@@ -56,5 +56,5 @@ export const onCopy = async (title) => {
 
   const json = beautify(JSON.stringify(dashboard), beautyOption);
   const blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
-  saveAs(blob, `${title  }.json`);
+  saveAs(blob, `${title}.json`);
 };
