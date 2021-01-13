@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Icon from './Icon';
 import { prefix } from '../utils/utils';
 import Popup from '../Popup/Popup';
@@ -12,7 +12,7 @@ export default class KeyboardIcon extends Icon {
   };
   public renderIcon() {
     return (
-      <div className={prefix('i')} style={{ width: 28 }} title={`${this.constructor.id  }(s)`}>
+      <div className={prefix('i')} style={{ width: 28 }} title={`${this.constructor.id}(s)`}>
         <div className={prefix('keyboard')}>
           <div className={prefix('key')} />
           <div className={prefix('key')} />

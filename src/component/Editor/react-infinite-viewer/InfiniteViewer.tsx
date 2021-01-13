@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import type { InfiniteViewerOptions, InfiniteViewerMethods } from './infinite-viewer';
 import VanillaInfiniteViewer, {
   CLASS_NAME,

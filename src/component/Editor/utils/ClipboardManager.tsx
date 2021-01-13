@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import type { ClipboardItem, SavedScenaData as TSavedScenaData } from '../types';
 import type Editor from '../Editor';
 import { checkInput } from './utils';

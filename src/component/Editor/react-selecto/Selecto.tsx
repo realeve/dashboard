@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import type { SelectoOptions, SelectoProperties, SelectoMethods } from './selecto.esm.js';
 import VanillaSelecto, { CLASS_NAME, OPTIONS, PROPERTIES, EVENTS, METHODS } from './selecto.esm.js';
 
