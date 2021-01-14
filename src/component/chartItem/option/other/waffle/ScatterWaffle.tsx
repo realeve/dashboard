@@ -78,10 +78,11 @@ export default ({ style, data: _data, boxShape, boxSize = 20, y, prod }) => {
           },
         },
         grid: {
-          top: 5,
+          top: 20,
           bottom: 0,
           left: 0,
           right: 20,
+          height: 12 * boxSize + 20,
         },
         animationEasing: 'cubicInOut',
         series: [

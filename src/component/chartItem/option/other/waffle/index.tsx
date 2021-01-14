@@ -17,11 +17,11 @@ interface IWaffleState {
   procname?: string;
 }
 
-const ScrollTable = ({ config: props, onClick }) => {
+const ScrollTable = ({ config: props, onClick, style }) => {
   const detailType = ['印码', '涂布', '检封', '装箱'];
   return (
     <ScrollBoard
-      style={{ width: '100%', height: '50%' }}
+      style={style}
       option={{
         hoverColumns: [5, 6, 7, 8],
         ...props,
@@ -69,16 +69,20 @@ export default ({
   const boxStyle = { width: boxSize, height: boxSize };
 
   return (
-    <div className={styles.waffleContainer} style={{ height: `calc(100% - 50px)` }}>
-      <ScrollTable config={props} onClick={setState} />
-      <div className={styles.detailContainer}>
+    <div className={styles.waffleContainer} style={{ height: '100%' }}>
+      <ScrollTable
+        config={props}
+        onClick={setState}
+        style={{ width: '100%', height: `calc(100% - ${boxSize * 12 + 80}px )` }}
+      />
+      <div className={styles.detailContainer} style={{ height: boxSize * 12 + 80 }}>
         <Spin spinning={loading}>
           {state && (
             <div className={styles.waffleTitle}>
               <span>
                 {state.prod}品 {state.procname}工序 {state.gz}冠字 生产详情
               </span>
-              <div className={styles.legend} style={{ fontSize: Math.max(boxSize - 10, 12) }}>
+              <div className={styles.legend} style={{ fontSize: props.fontSize || 12 }}>
                 <div className={styles.legendItem}>
                   <div
                     className={styles.dot}
@@ -120,7 +124,7 @@ export default ({
             }}
             y={props.y}
             prod={state.prod}
-            style={{ height: 'auto', flex: 1 }}
+            style={{ height: '100%', flex: 1 }}
           />
         )}
       </div>

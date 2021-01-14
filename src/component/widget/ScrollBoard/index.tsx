@@ -264,8 +264,8 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     if (head.length) {
       allHeight -= headerHeight;
     }
-
-    const avgHeight = allHeight / rowNum;
+    const totalRows = Math.min(data.length + 1, rowNum + 1);
+    const avgHeight = allHeight / totalRows;
 
     Object.assign(stateRef.current, { avgHeight });
 
