@@ -14,7 +14,7 @@ import * as R from 'ramda';
 import type { Dispatch } from 'redux';
 
 const FieldStyle = { background: 'unset' };
-const Field = ({ children, ...props }) => (
+export const Field = ({ children, ...props }) => (
   <FieldComponent {...props} style={FieldStyle} titleWidth={80}>
     {children}
   </FieldComponent>

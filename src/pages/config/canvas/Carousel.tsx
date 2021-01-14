@@ -23,7 +23,7 @@ export default ({
     }
     return (
       <Carousel
-        autoplaySpeed={5000}
+        autoplaySpeed={(props?.carouselTime || 5) * 1000}
         speed={800}
         dots
         pauseOnDotsHover

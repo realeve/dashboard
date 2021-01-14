@@ -13,6 +13,7 @@ import { GROUP_COMPONENT_KEY } from '@/models/common';
 import Config from './config';
 import type { Dispatch } from 'redux';
 import SavePanel from '../business/SavePanel';
+import SizePanel from '../business/SizePanel';
 import { connect } from 'react-redux';
 import { getTargetsById } from '@/component/Editor/utils/utils';
 import { getThumbnail } from '@/component/Editor/lib';
@@ -54,6 +55,8 @@ const Index = ({
 }: ISettingProps) => {
   // let panel = history[curHistoryIdx]?.panel || _panel;
   const [show, setShow] = useState<boolean>(false);
+
+  const [show_size, setShowSize] = useState(false);
 
   // const [pageChart, setPageChart] = useState(selectedPanel.length == 1);
   // useEffect(() => {
@@ -141,6 +144,16 @@ const Index = ({
           businessCategory={businessCategory}
         />
       )}
+      {show_size && (
+        <SizePanel
+          onClose={() => {
+            setShowSize(false);
+          }}
+          dispatch={dispatch}
+          panel={panel}
+          selectedPanel={selectedPanel}
+        />
+      )}
 
       {selectedPanel.length === 1 && (
         <div
@@ -153,6 +166,18 @@ const Index = ({
           style={{ outline: '1px solid #aaa', background: 'transparent' }}
         >
           获取组件缩略图
+        </div>
+      )}
+
+      {selectedPanel.length > 1 && (
+        <div
+          className={styles.bottom}
+          onClick={() => {
+            setShowSize(true);
+          }}
+          style={{ outline: '1px solid #aaa', background: 'transparent' }}
+        >
+          批量调整尺寸
         </div>
       )}
 
