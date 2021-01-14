@@ -164,7 +164,7 @@ export const mock: IChartMock = {
   export const apiConfig: IApiConfig = {
     show: true,
     type: 'url',
-    url: 'http://localhost:8000/mock/${nextIndex}_${dirName}.json',
+    url: '/mock/${nextIndex}_${dirName}.json',
     interval: 5,
     cache:2,
     config: [
@@ -190,7 +190,7 @@ export const mock: IChartMock = {
   };
   
   export const defaultOption = {
-    renderer: 'svg',
+    renderer: 'canvas',
   };
   
   export default ({
@@ -315,7 +315,7 @@ export const mock: IChartMock = {
   export const apiConfig: IApiConfig = {
     show: true,
     type: 'url',
-    url: 'http://localhost:8000/mock/${nextIndex}_${dirName}.json',
+    url: '/mock/${nextIndex}_${dirName}.json',
     interval: 60,
     config: [
       {
@@ -384,7 +384,7 @@ export const config: IChartConfig[] = [];
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/${nextIndex}_${dirName}.json',
+  url: '/mock/${nextIndex}_${dirName}.json',
   interval: 5,
   cache:2,
   config: [
@@ -443,7 +443,7 @@ export const config = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/02_linebar.json',
+  url: '/mock/02_linebar.json',
   interval: 5,
   cache:2,
   config: [

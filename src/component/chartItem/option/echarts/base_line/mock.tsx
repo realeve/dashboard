@@ -24,7 +24,7 @@ export const mock: IChartMock = {
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/34_base_line.json',
+  url: '/mock/34_base_line.json',
   interval: 5,
   cache: 2,
   config: [

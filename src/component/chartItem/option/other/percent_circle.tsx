@@ -45,7 +45,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/13_percent_circle.json',
+  url: '/mock/13_percent_circle.json',
   interval: 5,
   cache: 2,
   config: [

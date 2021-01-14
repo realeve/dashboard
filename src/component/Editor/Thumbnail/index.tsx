@@ -72,7 +72,7 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
       (R.clamp(0, maxOffset, dragPercent.x) * thumbnailSize.width) / 100,
       (R.clamp(0, maxOffset, dragPercent.y) * thumbnailSize.height) / 100,
     ];
-    console.log(beforeTranslate);
+
     setFrame({
       translate: beforeTranslate,
     });

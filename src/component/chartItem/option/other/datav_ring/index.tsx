@@ -85,7 +85,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/23_datav_ring.json',
+  url: '/mock/23_datav_ring.json',
   interval: 5,
   cache: 2,
   config: [

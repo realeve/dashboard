@@ -74,7 +74,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/18_whirlwind.json',
+  url: '/mock/18_whirlwind.json',
   interval: 60,
   config: [
     {

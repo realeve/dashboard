@@ -193,13 +193,20 @@ const ChartRender = ({
       handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad }),
   });
 
+  if (error) {
+    return (
+      <div style={{ color: '#eee', fontSize: 18 }}>
+        数据请求出错
+        <br />
+        {error}
+      </div>
+    );
+  }
+
   if (valid && !data && !inited) {
     return <Skeleton />;
   }
 
-  if (error) {
-    return <div style={{ color: '#eee' }}>数据请求出错</div>;
-  }
   if (!inited) {
     setInited(true);
   }

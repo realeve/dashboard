@@ -123,7 +123,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/21_facet_vertical.json',
+  url: '/mock/21_facet_vertical.json',
   interval: 60,
   config: [
     {

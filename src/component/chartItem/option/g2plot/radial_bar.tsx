@@ -92,7 +92,7 @@ export const config = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/32_radial_bar.json',
+  url: '/mock/32_radial_bar.json',
   interval: 5,
   cache: 2,
   config: [

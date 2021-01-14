@@ -35,7 +35,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/22_group_column.json',
+  url: '/mock/22_group_column.json',
   interval: 60,
   config: [
     {

@@ -142,8 +142,11 @@ export interface AxiosError {
   params: any;
   status?: number;
 }
-export const handleError: (error: _AxiosError) => AxiosError | null = (error) => {
-  const config = error.config || {};
+export const handleError: (error: _AxiosError, option: AxiosRequestConfig) => AxiosError | null = (
+  error,
+  option,
+) => {
+  const config = error.config || option || {};
   const str = config.params || config.data || {};
   const { id, nonce, ...params } = typeof str === 'string' ? qs.parse(str) : str;
   Reflect.deleteProperty(params, 'tstart2');
@@ -205,8 +208,8 @@ export const handleData: <T extends IAxiosState>({ data }: AxiosResponse<T>) => 
 };
 
 export const handleUrl = (option) => {
-  if (option.url && option.url[0] === '.') {
-    option.url = window.location.origin + option.url.slice(1);
+  if (option.url && (option.url[0] === '.' || option.url.slice(0, 6) === '/mock/')) {
+    option.url = window.location.origin + option.url.slice(option.url[0] === '.' ? 1 : 1);
   }
   return option;
 };
@@ -262,9 +265,9 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
     })(option)
     .then(handleData)
     .catch((e) => {
-      if (e) {
+      if (!e) {
         return;
       }
-      throw new Error(JSON.stringify(handleError(e)));
+      throw new Error(JSON.stringify(handleError(e, option)));
     });
 };

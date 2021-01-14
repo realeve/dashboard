@@ -93,7 +93,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/25_percent_echarts.json',
+  url: '/mock/25_percent_echarts.json',
   interval: 5,
   cache: 2,
   config: [

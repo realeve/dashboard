@@ -118,7 +118,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/16_g2_pie_rose.json',
+  url: '/mock/16_g2_pie_rose.json',
   interval: 60,
   config: [
     {

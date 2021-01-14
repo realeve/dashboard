@@ -31,7 +31,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/30_bar_2d.json',
+  url: '/mock/30_bar_2d.json',
   interval: 5,
   cache: 2,
   config: [

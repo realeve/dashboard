@@ -112,7 +112,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/41_rangeLine.json',
+  url: '/mock/41_rangeLine.json',
   interval: 60,
   config: [
     {

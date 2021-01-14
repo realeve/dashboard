@@ -89,7 +89,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/20_scroll_digit.json',
+  url: '/mock/20_scroll_digit.json',
   interval: 5,
   cache: 2,
   config: [
@@ -105,7 +105,7 @@ export const apiConfig: IApiConfig = {
 type IScrollConfig = {
   data: { data: any[][] };
   x: number;
-} & ICountUp
+} & ICountUp;
 export default ({ option: { data, x = 0, ...props } }: { option: IScrollConfig }) => {
   const value = Number(data.data[0][x]);
   return <DigitalScroll value={value} {...props} />;

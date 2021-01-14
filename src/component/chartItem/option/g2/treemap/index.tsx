@@ -64,7 +64,7 @@ export const config: IChartConfig[] = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/42_treemap.json',
+  url: '/mock/42_treemap.json',
   interval: 60,
   config: [
     {

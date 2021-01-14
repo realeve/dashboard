@@ -42,7 +42,7 @@ export const config = [
 export const apiConfig: IApiConfig = {
   show: true,
   type: 'url',
-  url: 'http://localhost:8000/mock/04_progress_bar.json',
+  url: '/mock/04_progress_bar.json',
   interval: 5,
   cache: 2,
   config: [

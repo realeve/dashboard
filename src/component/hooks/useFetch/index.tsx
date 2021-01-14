@@ -137,9 +137,8 @@ const useAxios = <T extends {} | void>({
         setLoading(false);
       })
       .catch((e: any) => {
-        !unmounted && setError(e);
+        !unmounted && setError(e.message);
         !unmounted && setLoading(false);
-        throw e;
       })
       .finally(() => {
         // 如果屏幕隐藏，并且 !pollingWhenHidden, 则停止轮询，并记录 flag，等 visible 时，继续轮询
