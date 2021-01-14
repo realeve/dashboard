@@ -1021,6 +1021,19 @@ class Editor extends React.PureComponent<IEditorProps, Partial<ScenaEditorState>
 
     return result;
   }
+
+  /**
+   * 对指定id列表调整样式
+   * @param targetList id列表
+   */
+  public updateTargetByIds(targetList) {
+    targetList.forEach(({ id, style }) => {
+      const target = document.querySelector<HTMLElement>(`[${DATA_SCENA_ELEMENT_ID}="${id}"]`)!;
+      const frame = this.moveableData.getFrame(target);
+      frame.set(style);
+      target.style.cssText += frame.toCSS();
+    });
+  }
 }
 export default Editor;
 

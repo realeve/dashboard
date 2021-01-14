@@ -40,6 +40,7 @@ export type ISettingProps = {
   page: IPage;
   dispatch: Dispatch;
   businessCategory: IBusinessCategory[];
+  editor: React.MutableRefObject<any>;
 } & IHistoryProps;
 const Index = ({
   setHide,
@@ -49,6 +50,7 @@ const Index = ({
   page,
   businessCategory,
   dispatch,
+  editor,
   // history,
   // curHistoryIdx,
   panel, // : _panel,
@@ -149,6 +151,7 @@ const Index = ({
           onClose={() => {
             setShowSize(false);
           }}
+          editor={editor}
           dispatch={dispatch}
           panel={panel}
           selectedPanel={selectedPanel}

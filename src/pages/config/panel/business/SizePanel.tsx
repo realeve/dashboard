@@ -7,13 +7,13 @@ import type { Dispatch } from 'redux';
 import { Field } from './SavePanel';
 import * as R from 'ramda';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
-import { getTargetsById } from '@/component/Editor/utils/utils';
 
 interface ISavePanelProps {
   onClose: () => void;
   selectedPanel: string[];
   panel: IPanelConfig[];
   dispatch: Dispatch;
+  editor: React.MutableRefObject<any>;
 }
 
 const panelConfig = [
@@ -31,10 +31,10 @@ const panelConfig = [
   },
 ];
 
-export default ({ onClose, selectedPanel, panel, dispatch }: ISavePanelProps) => {
+export default ({ onClose, selectedPanel, panel, dispatch, editor }: ISavePanelProps) => {
   const [option, setOption] = useState('2');
+  const distId = selectedPanel[0];
   const saveComponent = () => {
-    const distId = selectedPanel[0];
     const distStyle = R.find<IPanelConfig>(R.propEq<string>('id', distId))(panel);
     let needUpdateStyle: { width?: string | number; height?: string | number } = {};
     switch (option) {
@@ -83,11 +83,14 @@ export default ({ onClose, selectedPanel, panel, dispatch }: ISavePanelProps) =>
       },
     });
     onClose();
-    R.tail(selectedPanel).forEach((id) => {
-      const el = getTargetsById(id);
-      needUpdateStyle.width && (el.style.width = String(needUpdateStyle.width));
-      needUpdateStyle.height && (el.style.height = String(needUpdateStyle.height));
-    });
+
+    // 更新样式
+    editor.current.updateTargetByIds(
+      R.tail(selectedPanel).map((id) => ({
+        id,
+        style: needUpdateStyle,
+      })),
+    );
   };
 
   return (

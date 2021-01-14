@@ -1,0 +1,130 @@
+{
+  "rec_time": "2021-01-14 13:41:40",
+  "panel": [
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "style": {
+        "width": "100%",
+        "height": "100%",
+        "zIndex": 1000,
+        "pointerEvents": "none",
+        "transform": {
+          "translate": ""
+        }
+      },
+      "name": "other.screen_edge",
+      "key": "screen_edge",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "屏幕分割线",
+      "image": "/img/icons/45_screen_edge.jpg",
+      "id": "def1389e24e9e",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {},
+      "useGeneralStyle": false,
+      "lock": true,
+      "componentConfig": {
+        "showEdge": true,
+        "screen_x": 2,
+        "screen_y": 2,
+        "screen_edge_width": 6,
+        "screen_edge_background": "rgba(240,240,240,0.5)",
+        "showEdgeTag": true
+      },
+      "api": {},
+      "hide": true
+    },
+    {
+      "id": "09a82a713eb9",
+      "api": {
+        "url": "1197/54d0a53345.array",
+        "show": true,
+        "cache": 10,
+        "api_type": "url",
+        "dataType": "array",
+        "dateType": "不设置",
+        "interval": 10,
+        "appendParam": "status=0"
+      },
+      "key": "waffle",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.waffle",
+      "type": "regular_bar",
+      "image": "/img/icons/45_waffle.png.webp",
+      "style": {
+        "transform": {
+          "translate": "15px,15.000000000000114px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "1874px",
+        "height": "1065px"
+      },
+      "title": "冠字完工状态",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "边框29",
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "business": true,
+      "showTitle": true,
+      "showBorder": false,
+      "showBackground": false,
+      "componentConfig": {
+        "waitTime": 10,
+        "carousel": "page",
+        "rowNum": 10,
+        "index": true,
+        "formatIndex": false,
+        "beautyFont": true,
+        "undefined": "",
+        "fontSize": 20,
+        "fontWeight": "normal",
+        "textAlign": "left",
+        "fontColor": "#f2f2f2",
+        "letterSpacing": 0,
+        "headerBGC": "#0d5dff",
+        "headerHeight": 35,
+        "oddRowBGC": "rgba(255,255,255,0.1)",
+        "evenRowBGC": "transparent",
+        "detailApi": "/1199/3f5aca42dd",
+        "boxSize": 25,
+        "boxShape": "roundRect"
+      },
+      "useGeneralStyle": true
+    }
+  ],
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "bg_03.png.webp",
+    "author": "管理员",
+    "title": "冠字列表",
+    "padding": 15,
+    "border": "border_29.svg",
+    "borderSlice": [8, 8, 8, 8],
+    "borderRadius": [0, 0, 0, 0],
+    "chartBackground": "rgba(3,11,31,0.8)",
+    "head": {
+      "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+      "fontSize": 20,
+      "color": "#aec1f9",
+      "textAlign": "left",
+      "padding": 10
+    },
+    "thumbnail": "./GuanZiLieBiao.jpg"
+  }
+}

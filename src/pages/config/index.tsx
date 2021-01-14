@@ -445,6 +445,7 @@ const Index = ({
 
           <Suspense fallback={<Spin spinning />}>
             <Setting
+              editor={editor}
               setHide={setHide}
               hide={hide}
               onChange={(e, type) => {
