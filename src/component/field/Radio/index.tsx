@@ -8,7 +8,7 @@ export interface IRadioProps {
   value: string | number;
   onChange: (e: string) => void;
   disabled?: boolean;
-  config?: { title: string | React.ReactNode; value: string }[];
+  config?: { title: string | React.ReactNode; value: string }[] | string;
   className?: string;
 }
 

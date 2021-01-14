@@ -1,5 +1,5 @@
 {
-  "rec_time": "2021-01-14 13:59:11",
+  "rec_time": "2021-01-14 15:45:42",
   "panel": [
     {
       "id": "ae913e6d83e08",
@@ -137,12 +137,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "510.70003636363595px,25.30000000000024px",
+          "translate": "510.70003636363595px,25.30000000000061px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "418.188px",
-        "height": "480.188px",
+        "width": "435.188px",
+        "height": "484.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",
@@ -238,12 +238,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "987.9636363636364px,37.100000000000705px",
+          "translate": "987.9636363636364px,25.30000000000061px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "459.188px",
-        "height": "468.188px",
+        "width": "435.188px",
+        "height": "484.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",
@@ -339,12 +339,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "1455.4636363636364px,32.40000000000032px",
+          "translate": "1455.4636363636364px,25.30000000000061px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "450.188px",
-        "height": "473.188px",
+        "width": "435.188px",
+        "height": "484.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",
@@ -550,12 +550,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "510.6996363636364px,560.0999999999989px",
+          "translate": "510.6996363636364px,550.5500000000004px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "418.188px",
-        "height": "483.188px",
+        "width": "435.188px",
+        "height": "499.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",
@@ -651,12 +651,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "988.0036363636357px,565.0000000000005px",
+          "translate": "988.0036363636357px,550.5500000000004px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "451.188px",
-        "height": "478.188px",
+        "width": "435.188px",
+        "height": "499.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",
@@ -752,12 +752,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "1455.7036363636364px,565.0000000000007px",
+          "translate": "1455.7036363636364px,550.5500000000004px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "450.188px",
-        "height": "485.188px",
+        "width": "435.188px",
+        "height": "499.188px",
         "position": "absolute"
       },
       "title": "印钞成本对比",

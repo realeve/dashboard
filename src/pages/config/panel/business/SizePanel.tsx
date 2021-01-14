@@ -33,10 +33,25 @@ const panelConfig = [
 
 export default ({ onClose, selectedPanel, panel, dispatch, editor }: ISavePanelProps) => {
   const [option, setOption] = useState('2');
-  const distId = selectedPanel[0];
+  const [align, setAlign] = useState('不处理');
+
   const saveComponent = () => {
+    // 如果是分组选择，id不对
+    const nextSelectedPanel = panel
+      .filter((item) => ![GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY].includes(item.key))
+      .map((item) => item.id);
+
+    const validPanels = selectedPanel.filter((item) => nextSelectedPanel.includes(item));
+
+    const distId = validPanels[0];
+
     const distStyle = R.find<IPanelConfig>(R.propEq<string>('id', distId))(panel);
-    let needUpdateStyle: { width?: string | number; height?: string | number } = {};
+
+    let needUpdateStyle: {
+      width?: string | number;
+      height?: string | number;
+      transform?: { translate: string };
+    } = {};
     switch (option) {
       case '0':
         needUpdateStyle = { width: distStyle.style.width };
@@ -50,15 +65,35 @@ export default ({ onClose, selectedPanel, panel, dispatch, editor }: ISavePanelP
         break;
     }
 
+    const [transX, transY] = distStyle.style.transform.translate.split(',');
+
     // 更新后的面板尺寸
     const nextPanel = panel.map((item) => {
       // 分组、屏幕分割线组件、当前组件、未选中的组件不处理宽高逻辑
-      const isSelected = !selectedPanel.includes(item.id);
+      const isSelected = !validPanels.includes(item.id);
       const isIgnoredComponents = [GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY].includes(item.type);
       if (isIgnoredComponents || item.id === distId || isSelected) {
         return item;
       }
       const nextStyle = R.clone(item.style);
+
+      const currentTranslate = nextStyle.transform.translate.split(',');
+
+      if (align === '左侧') {
+        currentTranslate[0] = transX;
+      } else if (align === '顶部') {
+        currentTranslate[1] = transY;
+      }
+
+      // 左侧和顶部对齐
+      needUpdateStyle = {
+        ...needUpdateStyle,
+        transform: {
+          ...nextStyle.transform,
+          translate: currentTranslate.join(','),
+        },
+      };
+
       return {
         ...item,
         style: {
@@ -79,18 +114,18 @@ export default ({ onClose, selectedPanel, panel, dispatch, editor }: ISavePanelP
     dispatch({
       type: 'common/setStore',
       payload: {
-        selectedPanel: [],
+        selectedPanel: [distId],
       },
     });
-    onClose();
 
     // 更新样式
     editor.current.updateTargetByIds(
-      R.tail(selectedPanel).map((id) => ({
+      R.tail(validPanels).map((id) => ({
         id,
         style: needUpdateStyle,
       })),
     );
+    onClose();
   };
 
   return (
@@ -110,6 +145,17 @@ export default ({ onClose, selectedPanel, panel, dispatch, editor }: ISavePanelP
             config={panelConfig}
           />
         </Field>
+
+        <Field title="对齐">
+          <Radio
+            value={align}
+            onChange={(v) => {
+              setAlign(v);
+            }}
+            config="不处理,左侧,顶部"
+          />
+        </Field>
+        <p>组件对齐调整后可能出现位置异常，刷新页面即可</p>
       </div>
     </Confirm>
   );
