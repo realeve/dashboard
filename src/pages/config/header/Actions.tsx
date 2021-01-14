@@ -50,8 +50,8 @@ const Actions = ({
 
       success = await addDashboardList({
         title,
-        file: `${title  }.json`,
-        img: `${title  }.webp`,
+        file: `${fileTitle}.json`,
+        img: `${fileTitle}.webp`,
       });
     } else {
       message.success('请执行批处理文件并替换服务端现有配置文件以更新内容');

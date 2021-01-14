@@ -99,7 +99,7 @@ export const api = {
   editDashboardBusiness: '/15/15748d590e.json',
 
   // 业务部署路径，自动化脚本使用
-  deployDir: DEV ? '.\\test' : `\\\\10.8.1.25\\d$\\dashboard\\data\\`,
+  deployDir: DEV ? '.\\test' : `\\\\10.8.1.35\\dist\\data\\`,
 
   // 添加大屏
   addDashboardList: '/12/08c544a6a4',

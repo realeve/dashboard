@@ -72,6 +72,7 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
       (R.clamp(0, maxOffset, dragPercent.x) * thumbnailSize.width) / 100,
       (R.clamp(0, maxOffset, dragPercent.y) * thumbnailSize.height) / 100,
     ];
+    console.log(beforeTranslate);
     setFrame({
       translate: beforeTranslate,
     });
@@ -110,6 +111,9 @@ export default ({ zoom, dragPercent, visible, page, onScroll, showConfig }: IThu
               set(frame.translate);
             }}
             onDrag={({ target, beforeTranslate }) => {
+              if (zoom < 0.7) {
+                return;
+              }
               setFrame({ translate: beforeTranslate });
               target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
 
