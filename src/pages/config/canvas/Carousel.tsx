@@ -16,7 +16,7 @@ export default ({
   }
 
   const hash = data?.[0]?.hash;
-  // TODO 减少重绘
+
   return useMemo(() => {
     if (data?.length === 1 || !data) {
       return <Slide dataItem={data?.[0]} />;

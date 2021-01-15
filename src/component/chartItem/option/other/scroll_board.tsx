@@ -143,7 +143,7 @@ interface IScrollTable {
   onClick?: (e: any) => void;
   style: React.CSSProperties;
 }
-// TODO 讲述如何引进页面重新渲染
+
 export default ({
   option: { data, waitTime = 4, ...props },
   onClick = () => {},
