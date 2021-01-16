@@ -48,4 +48,5 @@ export const chartList = [
   'screen_edge',
   'waffle',
   'basePie',
+  'sunburst',
 ];

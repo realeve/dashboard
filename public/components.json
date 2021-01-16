@@ -138,6 +138,14 @@
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
         "list": [
           {
+            "name": "echarts.sunburst",
+            "key": "sunburst",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "旭日图",
+            "image": "/img/icons/47_sunburst.webp"
+          },
+          {
             "name": "echarts.basePie",
             "key": "basePie",
             "engine": "echarts",

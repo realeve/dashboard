@@ -26,7 +26,7 @@ import 'echarts/lib/chart/bar';
 // import 'echarts/lib/chart/heatmap';
 
 // import 'echarts/lib/chart/themeRiver';
-// import 'echarts/lib/chart/sunburst';
+
 // import 'echarts/lib/chart/custom';
 import 'echarts/lib/component/grid';
 // import 'echarts/lib/component/geo';

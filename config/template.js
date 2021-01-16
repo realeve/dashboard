@@ -51,6 +51,7 @@ const handleOptionIndex = () => {
     名称：你的图表名称
 */ 
 import * as ${dirName} from '../option/${chartType}/${dirName}';
+
 export default ${dirName}; 
 `;
   if (DEBUG_MODE) {
