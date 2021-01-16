@@ -15,5 +15,5 @@ export const routes = [
   { path: '/', component: '../pages/index', title: '数据大屏' },
   { path: '/config', component: '../pages/config', title: '页面配置' },
   { path: '/list', component: '../pages/list', title: '大屏列表' },
-  { path: '/demo', component: '../pages/demo', title: 'demo' },
+  // { path: '/demo', component: '../pages/demo', title: 'demo' },
 ];

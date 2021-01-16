@@ -1,9 +1,10 @@
-import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-
+import { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as lib from '@/component/chartItem/option/lib';
-
 import * as R from 'ramda';
 import 'echarts/lib/chart/sunburst';
+import { getColors } from '../g2plot/lib';
+
+export { mock } from './sunburst.mock';
 
 type TChartMockData = (string | number)[];
 
@@ -85,13 +86,12 @@ const handleSunBrustData = (data: TChartMockData[], header: string[], config: IS
   });
 };
 
-const getLevels = (len, showBorder = true) => {
+const getLevels = (len, from = 15, showBorder = true) => {
   if (len < 2) {
     return null;
   }
 
-  const from = 15;
-  const to = 70;
+  const to = 85;
   const levels = seq(from, to, len + (showBorder ? 0 : 1));
   const res = [];
   levels.forEach((r0, i) => {
@@ -132,275 +132,38 @@ const getLevels = (len, showBorder = true) => {
   return [{}, ...res];
 };
 
-export const mock: IChartMock = {
-  data: [
-    {
-      品种: '1112T',
-      数量: '731',
-    },
-    {
-      品种: '1112T',
-      工序: '白纸',
-      数量: '197',
-    },
-    {
-      品种: '1112T',
-      工序: '凹一印',
-      数量: '23',
-    },
-    {
-      品种: '1112T',
-      工序: '印码',
-      数量: '99',
-    },
-    {
-      品种: '1112T',
-      工序: '涂布',
-      数量: '339',
-    },
-    {
-      品种: '1112T',
-      工序: '胶二印',
-      数量: '140',
-    },
-    {
-      品种: '1113A',
-      工序: '印码',
-      数量: '1',
-    },
-    {
-      品种: '1113T',
-      工序: '钞票纸',
-      数量: '707',
-    },
-    {
-      品种: '1113T',
-      工序: '白纸',
-      数量: '2',
-    },
-    {
-      品种: '1113T',
-      工序: '胶一印',
-      数量: '340',
-    },
-    {
-      品种: '1113T',
-      工序: '凹二印',
-      数量: '16',
-    },
-    {
-      品种: '1113T',
-      工序: '印码',
-      数量: '65',
-    },
-    {
-      品种: '1113T',
-      工序: '涂布',
-      数量: '22',
-    },
-    {
-      品种: '1114T',
-      工序: '钞票纸',
-      数量: '581',
-    },
-    {
-      品种: '1114T',
-      工序: '白纸',
-      数量: '178',
-    },
-    {
-      品种: '1114T',
-      工序: '胶一印',
-      数量: '51',
-    },
-    {
-      品种: '1114T',
-      工序: '凹一印',
-      数量: '10',
-    },
-    {
-      品种: '1114T',
-      工序: '凹二印',
-      数量: '257',
-    },
-    {
-      品种: '1114T',
-      工序: '印码',
-      数量: '84',
-    },
-    {
-      品种: '1114T',
-      工序: '涂布',
-      数量: '101',
-    },
-    {
-      品种: '1116T',
-      工序: '钞票纸',
-      数量: '762',
-    },
-    {
-      品种: '1116T',
-      工序: '白纸',
-      数量: '196',
-    },
-    {
-      品种: '1116T',
-      工序: '胶一印',
-      数量: '147',
-    },
-    {
-      品种: '1116T',
-      工序: '凹一印',
-      数量: '70',
-    },
-    {
-      品种: '1116T',
-      工序: '凹二印',
-      数量: '158',
-    },
-    {
-      品种: '1116T',
-      工序: '印码',
-      数量: '112',
-    },
-    {
-      品种: '1116T',
-      工序: '涂布',
-      数量: '277',
-    },
-    {
-      品种: '1117T',
-      工序: '钞票纸',
-      数量: '1555',
-    },
-    {
-      品种: '1117T',
-      工序: '白纸',
-      数量: '433',
-    },
-    {
-      品种: '1117T',
-      工序: '胶一印',
-      数量: '209',
-    },
-    {
-      品种: '1117T',
-      工序: '丝印',
-      数量: '221',
-    },
-    {
-      品种: '1117T',
-      工序: '凹一印',
-      数量: '16',
-    },
-    {
-      品种: '1117T',
-      工序: '凹二印',
-      数量: '134',
-    },
-    {
-      品种: '1117T',
-      工序: '印码',
-      数量: '357',
-    },
-    {
-      品种: 'NRB10',
-      工序: '钞票纸',
-      数量: '121',
-    },
-    {
-      品种: 'NRB10',
-      工序: '白纸',
-      数量: '152',
-    },
-    {
-      品种: 'NRB10',
-      工序: '胶一印',
-      数量: '92',
-    },
-    {
-      品种: 'NRB10',
-      工序: '凹二印',
-      数量: '3',
-    },
-    {
-      品种: 'NRB10',
-      工序: '涂布',
-      数量: '7',
-    },
-    {
-      品种: 'NRB10',
-      工序: '胶二印',
-      数量: '10',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-网罩',
-      数量: '35',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-隔板',
-      数量: '7',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-十字扣',
-      数量: '13',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-布罩',
-      数量: '11',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-网罩+十字扣',
-      数量: '2',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-空托盘组',
-      数量: '178',
-    },
-    {
-      品种: '辅料',
-      工序: '辅料-收纳箱',
-      数量: '18',
-    },
-    {
-      品种: '空货位',
-      工序: '闲置',
-      数量: '3454',
-    },
-  ],
-  rows: 48,
-  dates: [],
-  ip: '10.8.60.203',
-  header: ['品种', '工序', '数量'],
-  title: '立体库货位使用情况汇总',
-  time: '143.937ms',
-  serverTime: '2021-01-15 14:43:42',
-  source: '数据来源：ASRS',
-  hash: 'W/"0e64c995f5d72933d11fd0852d7a390c"',
-};
-
 export const config: IChartConfig[] = [
+  lib.getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
   {
     key: 'border',
     type: 'switch',
     defaultValue: true,
     title: '最外侧显示线条',
   },
-  // {
-  //   key: 'innerRadius',
-  //   defaultValue: 0,
-  //   title: '圆环大小',
-  //   type: 'range',
-  //   min: 0,
-  //   max: 300,
-  //   step: 5,
-  // },
+  {
+    key: 'innerRadius',
+    defaultValue: 0,
+    title: '圆环大小',
+    type: 'range',
+    min: 0,
+    max: 80,
+    step: 2,
+  },
+  {
+    key: 'fontSize',
+    defaultValue: 12,
+    title: '标签字号',
+    step: 1,
+    type: 'range',
+    min: 12,
+    max: 50,
+  },
   {
     key: 'borderWidth',
     defaultValue: 1,
@@ -415,6 +178,7 @@ export const config: IChartConfig[] = [
     defaultValue: '#080226',
     title: '边框线颜色',
     type: 'purecolor',
+    position: 'bottom',
   },
   {
     key: 'borderRadiusInner',
@@ -446,44 +210,47 @@ export const apiConfig: IApiConfig = {
 };
 
 export const defaultOption = {
-  renderer: 'canvas',
+  renderer: 'svg',
 };
 
 export default ({
   data: { header, data },
+  theme = 15,
+  needRerverse,
   border,
+  fontSize,
   innerRadius = 0,
   borderWidth = 1,
   borderColor = '#080226',
   borderRadiusInner,
   borderRadiusOutter,
 }) => {
+  const color = getColors(theme, needRerverse);
   const props = { borderWidth, borderColor, borderRadiusInner, borderRadiusOutter };
   const seriesData = handleSunBrustData(data, header, props);
-  const levels = getLevels(header.length - 1, border);
-
-  const series = {
-    radius: [innerRadius, '90%'],
-    type: 'sunburst',
-    data: seriesData,
-    sort: null,
-    levels,
-    label: {
-      formatter: (param) => {
-        if (param.treePathInfo.length === 2) {
-          return `${param.name}\n——\n${param.value}`;
-        }
-        return param.name;
-      },
-    },
-    // highlightPolicy: 'ancestor',
-    // emphasis: {
-    //   focus: 'ancestor',
-    // },
-  };
+  const levels = getLevels(header.length - 1, innerRadius, border);
 
   return {
-    series,
+    color,
+    series: {
+      type: 'sunburst',
+      data: seriesData,
+      // sort: null,
+      levels,
+      label: {
+        fontSize,
+        formatter: (param) => {
+          if (param.treePathInfo.length === 2) {
+            return `${param.name}\n——\n${param.value}`;
+          }
+          return param.name;
+        },
+      },
+      // highlightPolicy: 'ancestor',
+      // emphasis: {
+      //   focus: 'ancestor',
+      // },
+    },
     tooltip: {
       trigger: 'item',
     },

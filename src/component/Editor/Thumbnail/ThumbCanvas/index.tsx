@@ -9,8 +9,9 @@ import type { IPanelItem } from './lib';
 import { diff } from './lib';
 
 import * as zrender from 'zrender/esm/zrender';
-import 'zrender/esm/canvas/canvas';
-import { Rect } from 'echarts/esm/util/graphic';
+import 'zrender/esm/svg/svg';
+
+import Rect from 'zrender/lib/graphic/shape/Rect';
 
 const getRect = (option: IPanelItem, { fill, stroke }) => ({
   rect: new Rect({
@@ -44,7 +45,7 @@ const Index = ({
   curHistoryIdx,
   style = {},
   selectedPanel,
-  renderer = 'canvas',
+  renderer = 'svg',
 }: IThumbProps) => {
   const ref = useRef(null);
   const panel = history[curHistoryIdx]?.panel || _panel;

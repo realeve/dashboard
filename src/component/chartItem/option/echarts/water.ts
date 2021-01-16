@@ -1,5 +1,6 @@
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import 'echarts/lib/component/title';
+import './echarts-liquidfill.min';
 
 export const mock: IChartMock = {
   data: [[45.7]],

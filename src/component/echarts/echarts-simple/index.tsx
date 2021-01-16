@@ -56,4 +56,4 @@ import 'echarts/lib/component/legend';
 import 'zrender/lib/svg/svg';
 
 export * from 'echarts/lib/echarts';
-export * from 'echarts/lib/export';
+// export * from 'echarts/esm/export';

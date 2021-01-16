@@ -706,7 +706,7 @@ export const getAntThemePanel: () => IChartConfig = () => ({
   title: '主题色',
   type: 'antselect',
   option: palette.map((item, idx) => {
-    if (idx === palette.length - 1) {
+    if (idx > palette.length - 3) {
       return item;
     }
     return {
