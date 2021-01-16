@@ -42,17 +42,25 @@ interface ISunburstConfig {
   borderColor: string;
   borderRadiusInner: number;
   borderRadiusOutter: number;
+  legend: number;
+  valkey: string;
 }
 
-const handleSunBrustData = (data: TChartMockData[], header: string[], config: ISunburstConfig) => {
+const handleSunBrustData = (
+  data: TChartMockData[],
+  header: string[],
+  config: ISunburstConfig,
+  level = 1,
+) => {
   // 剩余待处理的header
-  const _header = R.tail(header);
+  const _header = level === 1 ? R.remove(config.legend, 1, header) : R.tail(header);
 
   // 当前字段
-  const key = R.head(header);
+  const key = level === 1 ? header[config.legend] : R.head(header);
 
   // 数据列所在字段
-  const valKey = R.last(header);
+  const valKey = config.valkey;
+  // 数据列所在字段
 
   // 当前字段共几个非重复元素
   const itemList: string[] = lib.getUniqByIdx({
@@ -80,7 +88,7 @@ const handleSunBrustData = (data: TChartMockData[], header: string[], config: IS
     // }
 
     if (_header.length > 1) {
-      res.children = handleSunBrustData(_data, _header, config);
+      res.children = handleSunBrustData(_data, _header, config, level + 1);
     }
     return res;
   });
@@ -206,7 +214,20 @@ export const apiConfig: IApiConfig = {
   url: '/mock/47_sunburst.json',
   interval: 5,
   cache: 2,
-  config: [],
+  config: [
+    {
+      key: 'legend',
+      title: 'legend 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: '数据值 字段',
+      defaultValue: 2,
+      min: 0,
+    },
+  ],
 };
 
 export const defaultOption = {
@@ -219,6 +240,8 @@ export default ({
   needRerverse,
   border,
   fontSize,
+  legend,
+  y,
   innerRadius = 0,
   borderWidth = 1,
   borderColor = '#080226',
@@ -226,7 +249,14 @@ export default ({
   borderRadiusOutter,
 }) => {
   const color = getColors(theme, needRerverse);
-  const props = { borderWidth, borderColor, borderRadiusInner, borderRadiusOutter };
+  const props = {
+    borderWidth,
+    borderColor,
+    borderRadiusInner,
+    borderRadiusOutter,
+    legend,
+    valkey: header[y],
+  };
   const seriesData = handleSunBrustData(data, header, props);
   const levels = getLevels(header.length - 1, innerRadius, border);
 
