@@ -17,11 +17,8 @@ export default ({
 
   const hash = data?.[0]?.hash;
 
-  return useMemo(() => {
-    if (data?.length === 1 || !data) {
-      return <Slide dataItem={data?.[0]} />;
-    }
-    return (
+  return useMemo(
+    () => (
       <Carousel
         autoplaySpeed={(props?.carouselTime || 5) * 1000}
         speed={800}
@@ -43,6 +40,7 @@ export default ({
           <Slide dataItem={item} key={item.key} />
         ))}
       </Carousel>
-    );
-  }, [hash, JSON.stringify(props)]);
+    ),
+    [hash, JSON.stringify(props)],
+  );
 };

@@ -231,6 +231,18 @@ const ChartRender = ({
 
   if (config.engine === 'echarts') {
     const chart = ref?.current?.echartsInstance;
+    if (injectProps?.data?.length === 1) {
+      return (
+        <Suspense fallback={<Spin spinning />}>
+          <Echarts
+            ref={ref}
+            option={method({ data: injectProps.data[0], ...api }, chart)}
+            renderer={appendConfig.renderer || 'canvas'}
+            style={style}
+          />
+        </Suspense>
+      );
+    }
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
@@ -252,6 +264,30 @@ const ChartRender = ({
   if (config.engine === 'g2plot') {
     let appendPadding = config.showBorder ? 20 : 0;
 
+    if (injectProps?.data?.length === 1) {
+      const option = method({
+        data: injectProps.data[0],
+        ...api,
+        autoFit: true,
+      });
+
+      // 处理边距
+      if (option.appendPadding) {
+        appendPadding = isArray(option.appendPadding)
+          ? option.appendPadding.map((item) => item + appendPadding)
+          : appendPadding + option.appendPadding;
+      }
+
+      return (
+        <Suspense fallback={<Spin spinning />}>
+          <G2Plot
+            option={{ ...option, appendPadding }}
+            renderer={appendConfig.renderer || 'canvas'}
+            style={style}
+          />
+        </Suspense>
+      );
+    }
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
@@ -283,6 +319,22 @@ const ChartRender = ({
     );
   }
   if (config.engine === 'g2') {
+    if (injectProps?.data?.length === 1) {
+      return (
+        <Suspense fallback={<Spin spinning />}>
+          <G2
+            option={{
+              onMount: method,
+              transformer: lib.transformer || null,
+              data: injectProps.data[0],
+              ...api,
+            }}
+            style={style}
+          />
+        </Suspense>
+      );
+    }
+
     return (
       <Suspense fallback={<Spin spinning />}>
         <Carousel
@@ -305,6 +357,18 @@ const ChartRender = ({
   }
   if (config.engine === 'other') {
     const ChartInst = method;
+    if (injectProps?.data?.length === 1) {
+      return (
+        <Suspense fallback={<Spin spinning />}>
+          <ChartInst
+            panelStyle={config.style}
+            option={{ data: injectProps.data[0], ...api }}
+            chartid={chartid}
+            style={style}
+          />
+        </Suspense>
+      );
+    }
     return (
       <Carousel
         injectProps={injectProps}
