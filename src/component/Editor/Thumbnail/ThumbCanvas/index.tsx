@@ -9,9 +9,10 @@ import type { IPanelItem } from './lib';
 import { diff } from './lib';
 
 import * as zrender from 'zrender/esm/zrender';
-import 'zrender/esm/svg/svg';
-
 import Rect from 'zrender/lib/graphic/shape/Rect';
+import { registerPainter } from 'zrender/esm/zrender';
+import SVGPainter from 'zrender/esm/svg/Painter';
+registerPainter('svg', SVGPainter);
 
 const getRect = (option: IPanelItem, { fill, stroke }) => ({
   rect: new Rect({
