@@ -4,6 +4,8 @@ import type { IAxiosState } from '@/utils/axios';
 import styles from './Report.less';
 import { TableOutlined } from '@ant-design/icons';
 import { Confirm } from '@/component/Editor/Popup/Popup';
+import HandsonTable from '@/component/HandsonTable';
+import { json2Array } from '@/utils/lib';
 
 export default ({ data }: { data: IAxiosState }) => {
   const [show, setShow] = useState(false);
@@ -19,7 +21,13 @@ export default ({ data }: { data: IAxiosState }) => {
           }}
           showFooter={false}
         >
-          <div style={{ paddingTop: 20 }}>{data.rows}</div>
+          <div style={{ paddingTop: 20 }}>
+            <HandsonTable
+              style={{ width: '100%', height: '100%' }}
+              data={json2Array(data)}
+              sheetHeight={800}
+            />
+          </div>
         </Confirm>
       )}
       <Button

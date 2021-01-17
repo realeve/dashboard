@@ -1,0 +1,81 @@
+@dark: #282b3d;
+@dark-mid: #33353f;
+@dark-light: #30354d;
+
+/*
+  table sheet 
+  */
+.htContextMenu table.htCore {
+  td {
+    background: @dark-mid;
+    &.current {
+      background: @dark-mid;
+    }
+    &.htDisabled:hover {
+      background: @dark-mid;
+    }
+  }
+}
+
+.htDropdownMenu table {
+  &.htCore {
+    td {
+      background: @dark;
+      &.htCustomMenuRenderer {
+        background: @dark!important;
+        background-color: @dark!important;
+      }
+    }
+  }
+  tbody tr td.htDisabled:hover {
+    background: @dark-mid;
+  }
+}
+.htDropdownMenu table tbody tr td.current {
+  background: @dark-mid;
+}
+.htFiltersConditionsMenu table tbody tr td {
+  background: @dark-mid!important;
+  &.current {
+    background: @dark-light!important;
+  }
+}
+
+.handsontable {
+  .htUISelectCaption {
+    background: @dark-mid!important;
+    &:hover {
+      background: @dark-light!important;
+    }
+  }
+  .htUIMultipleSelect {
+    input,
+    .handsontable .htCore td:hover {
+      background-color: @dark-mid!important;
+      background: @dark-mid;
+    }
+  }
+  th,
+  td,
+  tr {
+    background: transparent;
+    color: #eee;
+  }
+  thead {
+    tr {
+      background: @dark-mid;
+    }
+  }
+
+  thead,
+  tbody {
+    th {
+      &.ht__active_highlight,
+      &.ht__highlight {
+        background: @dark-light;
+        background-color: @dark-light;
+        color: #aaa;
+      }
+    }
+  }
+}

@@ -66,7 +66,7 @@ export default {
     backgroundColor: 'rgba(48, 54, 64, 0.8)',
     padding: 12,
     extraCssText:
-      'box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;border-radius: 3px;border:none;opacity: 0.95;backdrop-filter: saturate(180%) blur(20px);',
+      'box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;border-radius: 3px;border:none;opacity: 0.95;backdrop-filter: saturate(180%) blur(60px);',
     textStyle: {
       color: '#E0E0E3',
       fontSize: 12,

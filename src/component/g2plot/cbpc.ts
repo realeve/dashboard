@@ -895,7 +895,7 @@ export default {
           lineHeight: '12px',
           padding: '0 12px 0 12px',
           background: 'rgba(48, 54, 64, 0.8)',
-          backdropFilter: 'saturate(180%) blur(20px)',
+          backdropFilter: 'saturate(180%) blur(60px)',
         },
         'g2-tooltip-title': { marginBottom: '12px', marginTop: '12px' },
         'g2-tooltip-list': { margin: 0, listStyleType: 'none', padding: 0 },

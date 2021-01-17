@@ -36,7 +36,7 @@ export const tooltip = {
   domStyles: {
     'g2-tooltip': {
       background: 'rgba(48, 54, 64, 0.8)',
-      backdropFilter: 'saturate(180%) blur(20px)',
+      backdropFilter: 'saturate(180%) blur(60px)',
       color: labelColor,
       fontFamily,
     },

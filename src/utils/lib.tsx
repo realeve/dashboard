@@ -44,6 +44,87 @@ export const loadDataFile: (file: File | Blob) => Promise<null | string | ArrayB
 // 数字
 export const isNumOrFloat = (str) => /^(-|\+|)\d+(\.)\d+$|^(-|\+|)\d+$/.test(String(str));
 
+interface CartReelReg {
+  (str: string | number): boolean;
+}
+
+export const isDateTime: CartReelReg = (str) =>
+  /^\d{4}(-|\/|)[0-1]\d(-|\/|)[0-3]\d$|^\d{4}(-|\/|)[0-1]\d(-|\/|)[0-3]\d [0-2][0-9]:[0-5][0-9](:[0-5][0-9])$|^[0-2][0-9]:[0-5][0-9](:[0-5][0-9])$/.test(
+    String(str).trim(),
+  );
+
+export const isDate: CartReelReg = (str) =>
+  /^\d{4}(-|\/|)[0-1]\d(-|\/|)[0-3]\d$|^\d{4}(-|\/|)[0-1]\d(-|\/|)[0-3]\d$/.test(
+    String(str).trim(),
+  );
+export const isTime: CartReelReg = (str) =>
+  /^\d{4}(-|\/|)[0-1]\d(-|\/|)[0-3]\d [0-2][0-9]:[0-5][0-9](:[0-5][0-9])|^[0-2][0-9]:[0-5][0-9](:[0-5][0-9])(|.\d)/.test(
+    String(str).trim(),
+  );
+
+// 整数
+export const isInt: CartReelReg = (str) => /^(-|\+|)?[0-9]\d*$/.test(String(str));
+
+/**
+ * cart:车号
+ * reel:轴号
+ * reel_cart:纸张上下5千车号
+ * reel_patch:纸张批次号
+ * pallet:纸张拍号
+ * plate:印版
+ */
+interface Rules {
+  cart: RegExp;
+  reel: RegExp;
+  reel_cart: RegExp;
+  reel_patch: RegExp;
+  pallet: RegExp;
+  plate: RegExp;
+  phone: RegExp;
+  url: RegExp;
+  [key: string]: RegExp;
+}
+export const rules: Rules = {
+  cart: /^[0-9]\d{3}[A-Za-z]\d{3}(|[a-bA-B])$|^BP\d{2}[A-Z]\d{3}$/, // 车号
+  // reel: /^[1-9]\d{6}(|[A-Ca-c])$|[A-Z]\d{11}[A-Z]/, //^[1-9]\d{4}[A-Ca-c]$|
+  reel: /^[0-9]\d{6}([A-Ca-c]|)$|[A-Z]\d{11}([A-Z]|)|^\d{3}[A-Z]\d{5}(|[A-Z])$/, // 轴号 //^[1-9]\d{4}[A-Ca-c]$|
+  reel_cart: /^[0-9]\d{3}[A-Za-z]\d{3}([A-B]|[a-b])$/,
+  reel_patch: /^\d{5}([A-Z|a-z])\d$/,
+  pallet: /^\d{2}(0[1-9]|1[0-2])\d{2}(1|2)\d{6}$/,
+  plate: /^[A-Z|a-z]{2}\d{6}$|^[A-Z|a-z]{2}\d{8}$|^\d{8}$|^\d{6}$/,
+  phone: /^\d{8}$|^\d{11}$/,
+  url: /^http(s|):\/\//,
+};
+
+export const isCartOrReel: CartReelReg = (str) => {
+  return rules.cart.test(String(str).trim()) || rules.reel.test(String(str).trim());
+};
+
+export const isCart: CartReelReg = (str) => rules.cart.test(String(str).trim());
+export const isReel: CartReelReg = (str) => rules.reel.test(String(str).trim());
+export const isPlate: CartReelReg = (str) => rules.plate.test(String(str).trim());
+
+export const isUrl = (str) => rules.url.test(String(str).trim());
+
+// 浮点
+export const isFloat: CartReelReg = (str) =>
+  !isCart(str) &&
+  (isNumOrFloat(str) ||
+    /^(-|\+|)\d+\.\d+(|e|E)(|-|\+)\d+$|^(-|\+|)\d+(|e|E)(|-|\+)\d+$/.test(String(str)));
+
+export const isChineseWord = (str) => new RegExp(/[\u00A1-\uFFFF]/).test(str);
+
+// 中文宽1，其余宽0.7
+export const getStringWidth = (str) => {
+  if (isFloat(str)) {
+    str = Number(str).toFixed(2);
+  }
+  return String(str)
+    .trim()
+    .split('')
+    .reduce((x, y) => x + (isChineseWord(y) ? 1 : 0.7), 0);
+};
+
 export const loadDashboard = async (file: File | Blob) =>
   loadDataFile(file)
     .then((str) => JSON.parse(str as string))
