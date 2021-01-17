@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import styles from './index.less';
+import stylesChart from './canvas/Report.less';
 import { useSetState, useDebounce } from 'react-use';
 import HeaderComponent from './header';
 import type { IHideProps } from './panel/setting';
@@ -49,7 +50,7 @@ export const addPanel = (
 
   editor?.current?.append(
     <div
-      className={classnames(styles.chartWrapper, {
+      className={classnames(styles.chartWrapper, stylesChart.chart_report_wrapper, {
         scenaIgnore: SCREEN_EDGE_KEY === config.key,
       })}
       style={{ ...R.omit(['transform'], style), transformOrigin }}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DNA from './dna';
 import styles from './index.less';
+import stylesChart from '@/pages/config/canvas/Report.less';
 import {
   getConfig,
   getStyle,
@@ -92,7 +93,11 @@ const Index = () => {
       {panel.map(
         (item) =>
           ![SCREEN_EDGE_KEY, GROUP_COMPONENT_KEY].includes(item.key) && (
-            <div style={getStyle({ style: item.style, resizeType, page })} key={item.id}>
+            <div
+              className={stylesChart.chart_report_wrapper}
+              style={getStyle({ style: item.style, resizeType, page })}
+              key={item.id}
+            >
               <ChartItem config={item} page={page} />
             </div>
           ),

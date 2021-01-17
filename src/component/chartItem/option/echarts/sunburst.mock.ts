@@ -4,6 +4,7 @@ export const mock: IChartMock = {
   data: [
     {
       品种: '1112T',
+      工序: 'XX纸',
       数量: '731',
     },
     {
@@ -38,7 +39,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '1113T',
-      工序: '钞票纸',
+      工序: 'XX纸',
       数量: '707',
     },
     {
@@ -68,7 +69,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '1114T',
-      工序: '钞票纸',
+      工序: 'XX纸',
       数量: '581',
     },
     {
@@ -103,7 +104,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '1116T',
-      工序: '钞票纸',
+      工序: 'XX纸',
       数量: '762',
     },
     {
@@ -138,7 +139,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '1117T',
-      工序: '钞票纸',
+      工序: 'XX纸',
       数量: '1555',
     },
     {
@@ -173,7 +174,7 @@ export const mock: IChartMock = {
     },
     {
       品种: 'NRB10',
-      工序: '钞票纸',
+      工序: 'XX纸',
       数量: '121',
     },
     {

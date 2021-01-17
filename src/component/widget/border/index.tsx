@@ -11,7 +11,7 @@ import { useLocation } from 'react-use';
 export interface WidgetBorder {
   name?: string;
   style?: React.CSSProperties;
-  children: ScenaJSXElement;
+  children: ScenaJSXElement | React.ReactNode;
   engine?: TChartEngine;
   dispatch?: Dispatch;
   [key: string]: any;

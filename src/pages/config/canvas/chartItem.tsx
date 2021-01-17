@@ -7,6 +7,7 @@ import BorderItem from '@/component/widget/border';
 import { connect } from 'react-redux';
 import ChartInstance from './ChartInstance';
 import { ASSETS_URL } from '@/utils/setting';
+import Report from './Report';
 
 interface IChartItemProps {
   page: IPage;
@@ -14,6 +15,7 @@ interface IChartItemProps {
 }
 export const ChartItem = ({ page, config }: IChartItemProps) => {
   const [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
+  const [data, setData] = useState(null);
 
   if (!config || config.hide) {
     return null;
@@ -38,12 +40,14 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
         showBackground={config.showBackground}
         showBorder={config.showBorder}
       >
+        {data?.hash && <Report data={data} />}
         <ChartInstance
           style={{ height: config.showBorder ? '100%' : instanceHeight }}
           config={config}
           title={title}
           onLoad={setTitle}
           chartid={config.id}
+          onDataLoad={setData}
         />
       </BorderItem>
     </ErrorBoundary>

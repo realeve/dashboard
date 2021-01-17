@@ -54,6 +54,7 @@ export interface IConfirmProps {
   children: React.ReactNode;
   title: React.ReactNode;
   spinning?: boolean;
+  showFooter?: boolean;
   onOk?: () => void;
   onCancel?: () => void;
   okText?: string | React.ReactNode;
@@ -70,20 +71,23 @@ export const ConfirmPanel = ({
   onCancel = () => {},
   okText = '确定',
   cancelText = '取消',
+  showFooter = true,
   ...props
 }: IConfirmProps) => {
   return (
     <Popup onClose={onCancel} {...props}>
       <h2>{title}</h2>
       {spinning ? <Spin spinning /> : <div style={{ flex: 1 }}>{children}</div>}
-      <PopupFooter>
-        <Button type="ghost" onClick={onCancel}>
-          {cancelText}
-        </Button>
-        <Button type="primary" style={{ width: 120, marginLeft: 20 }} onClick={onOk}>
-          {okText}
-        </Button>
-      </PopupFooter>
+      {showFooter && (
+        <PopupFooter>
+          <Button type="ghost" onClick={onCancel}>
+            {cancelText}
+          </Button>
+          <Button type="primary" style={{ width: 120, marginLeft: 20 }} onClick={onOk}>
+            {okText}
+          </Button>
+        </PopupFooter>
+      )}
     </Popup>
   );
 };

@@ -114,6 +114,7 @@ interface ChartInstanceProps {
   title?: string;
   chartid?: string;
   onLoad?: (e: string) => void;
+  onDataLoad?: (e: IAxiosState) => void;
 }
 
 type ChartRenderProps = {
@@ -154,6 +155,7 @@ const ChartRender = ({
   onLoad,
   chartid,
   chartLib,
+  onDataLoad,
 }: ChartRenderProps) => {
   const [inited, setInited] = useState(false);
   const ref = useRef(null);
@@ -189,8 +191,10 @@ const ChartRender = ({
     valid: () => valid,
     interval:
       typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
-    callback: (e) =>
-      handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad }),
+    callback: (e) => {
+      onDataLoad?.(e);
+      return handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad });
+    },
   });
 
   if (error) {

@@ -1,0 +1,16 @@
+.chart_report_wrapper {
+  .report {
+    right: 0;
+    top: 0;
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+  }
+
+  &:hover {
+    .report {
+      opacity: 1;
+    }
+  }
+}
