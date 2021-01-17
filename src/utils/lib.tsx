@@ -268,3 +268,10 @@ export const getDataType = (mock: IAxiosState) => {
   }
   return isArray(mock.data[0]) ? 'array' : 'json';
 };
+
+export const getTableExtraLabel = ({ header, data }) => {
+  if (R.isNil(data) || data.length === 0) {
+    return [];
+  }
+  return header.map((item, idx) => `${item}:${data[0][idx]}`);
+};

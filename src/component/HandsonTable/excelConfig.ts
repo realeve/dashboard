@@ -1,6 +1,8 @@
 import * as R from 'ramda';
 import { getDataByIdx } from '@/component/chartItem/option/lib';
-import { getType } from './axios';
+import { getType } from '@/utils/axios';
+import * as Excel from './exceljs';
+
 /**
  * @param prefix 前缀
  * @param suffix 后续
@@ -118,6 +120,7 @@ export const handleMerge: (config: SrcConfig) => MergeRes = (config) => {
     }
     return arr;
   });
+
   let mergetextArr: string[] = [];
   switch (typeof mergetext) {
     case 'undefined':
@@ -142,6 +145,12 @@ export const handleMerge: (config: SrcConfig) => MergeRes = (config) => {
   // 纵向合并
   const mergeVConfig = getType(mergev) === 'undefined' ? [] : splitParam2Arr(mergev);
 
+  // console.log({
+  //   mergetext: mergetextArr,
+  //   merge: mergeArr,
+  //   mergedRows,
+  //   mergev: mergeVConfig,
+  // });
   return {
     mergetext: mergetextArr,
     merge: mergeArr,
@@ -224,4 +233,152 @@ export const handleMergeV = (data: (string | number)[][], mergev: number[]) => {
   res = R.reject((item) => item.colspan === 1 && item.rowspan === 1, res);
 
   return { mergeCells: res, cell };
+};
+
+// 获取表头层级数，用于sheet的表头处理
+const getNestHeader = (tableColumn, level = 0) => {
+  const handleItem = (item) => {
+    if (!item.children) {
+      return {
+        label: item.title,
+        level,
+        colspan: 1,
+      };
+    }
+    return {
+      level,
+      label: item.title,
+      colspan: item.children.length,
+      children: getNestHeader(item.children, level + 1),
+    };
+  };
+  return tableColumn.map((item) => handleItem(item));
+};
+
+// 表头合并处理
+interface defaultData {
+  merge?: string;
+  mergesize?: string;
+  mergetext?: string;
+}
+export const mergeConfig = (columns, config, dataSrc: defaultData = {}) => {
+  // 如果使用外部接口，返回了配置信息则启用外部数据引入的配置
+  let params = R.clone(config);
+
+  params = { ...params, ...R.pick(['merge', 'mergesize', 'mergetext'], dataSrc) };
+
+  if (R.isNil(params) || R.isNil(params.merge)) {
+    return columns;
+  }
+  if (getType(params.merge) === 'string') {
+    params.merge = [params.merge];
+  }
+  if (getType(params.mergetext) === 'string') {
+    params.mergetext = [params.mergetext];
+  } else if (typeof params.mergetext === 'undefined') {
+    params.mergetext = [];
+  }
+
+  //  合并列宽
+  params.mergesize = params.mergesize || '2';
+  params.mergesize = Number(params.mergesize);
+
+  params.merge = params.merge.map((item) =>
+    item
+      .split('-')
+      .map((cell) => Number(cell))
+      .sort((a, b) => a - b),
+  );
+
+  // 逆序排列
+  // params.merge.sort((a, b) => b[0] - a[0]);
+  // params.mergetext.reverse(); // 文字也需要逆序
+
+  // 不做排序之后，方便复杂表头合并
+
+  let mergeColumns = R.clone(columns);
+
+  params.merge.forEach(([start, end], idx) => {
+    // 将起始点合并
+    end = end || start + params.mergesize - 1;
+
+    // 如果合并列大于给定的总列数，停止合并
+    if (end > columns.length) {
+      return;
+    }
+    mergeColumns[start] = {
+      title: params.mergetext[idx],
+      children: R.slice(start, end + 1)(mergeColumns),
+    };
+
+    // 移除后续数据
+    mergeColumns = R.remove(start + 1, end - start)(mergeColumns);
+  });
+
+  return mergeColumns;
+};
+
+export const handleSheetHeader = (tableColumn) => {
+  let header = getNestHeader(tableColumn);
+  console.log(JSON.stringify(header), tableColumn);
+  // 合并span列宽度
+  const handleColSpan = (arr) => {
+    let sum = 0;
+    let hasChild = false;
+    arr = arr.map((item) => {
+      if (!item.children) {
+        sum += item.colspan;
+      } else {
+        const { sum: nextSpan, hasChild: needAdd } = handleColSpan(item.children);
+        if (needAdd) {
+          sum = R.reduce(
+            R.add,
+            0,
+            item.children.map((e) => e.colspan),
+          );
+        } else {
+          sum = nextSpan;
+        }
+        item.colspan = sum;
+        hasChild = true;
+      }
+      return item;
+    });
+    return { arr, sum, hasChild };
+  };
+
+  header = handleColSpan(header).arr;
+
+  const findLevel = (arr, level) =>
+    arr.map((item) => {
+      const curLevel = item.level;
+      if (curLevel < level) {
+        if (!item.children) {
+          // if (item.colspan === 1) {
+          //   return item.label;
+          // }
+          return {
+            label: item.label,
+            colspan: item.colspan,
+          };
+        }
+        return findLevel(item.children, level);
+      }
+      // if (curLevel === level) {
+
+      // }
+      return {
+        label: item.label,
+        colspan: item.colspan,
+      };
+    });
+
+  const maxLevel = Excel.getHeadLevel(tableColumn);
+
+  const arr = [];
+  for (let i = 0; i < maxLevel; i++) {
+    arr.push(R.flatten(findLevel(header, i)));
+  }
+  // arr 合并数量可能有误
+  return arr;
 };

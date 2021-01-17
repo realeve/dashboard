@@ -26,6 +26,11 @@ export default ({ data }: { data: IAxiosState }) => {
               style={{ width: '100%', height: '100%' }}
               data={json2Array(data)}
               sheetHeight={800}
+              params={{
+                mergev: '0',
+                merge: '0-1',
+                mergetext: '合并两列',
+              }}
             />
           </div>
         </Confirm>

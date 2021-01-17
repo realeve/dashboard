@@ -8,7 +8,12 @@ import * as lib from '@/utils/lib';
 import * as R from 'ramda';
 import * as setting from '@/utils/setting';
 import { getDataByIdx } from '@/component/chartItem/option/lib';
-import { handleMerge, handleMergeV } from '@/utils/excelConfig';
+import {
+  handleMerge,
+  handleMergeV,
+  handleSheetHeader,
+  mergeConfig,
+} from '@/component/HandsonTable/excelConfig';
 import { round } from 'echarts/lib/util/number';
 import '@/style/HandsonTable.less';
 
@@ -35,7 +40,6 @@ const colTitles = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const getConfig = (data, afterFilter, sheetHeight) => {
   const firstRow = getFirstRow(data);
 
-  // console.log(data);
   const columns = (data.header || []).map((title, idx) => {
     const item = firstRow[idx] || '';
     let type = '';
@@ -181,9 +185,6 @@ const getConfig = (data, afterFilter, sheetHeight) => {
     undo: true,
     colWidths: 100,
   };
-  if (data?.nestedHeaders?.[0]?.[0]) {
-    config.nestedHeaders = data.nestedHeaders;
-  }
 
   return config;
 };
@@ -209,7 +210,7 @@ const TableSheet = ({
   const hotTable = useRef(null);
 
   // 处理列合并逻辑
-  const { mergev } = handleMerge(params);
+  const { mergev, merge } = handleMerge(params);
 
   useEffect(() => {
     const hot = hotTable.current.hotInstance;
@@ -232,7 +233,6 @@ const TableSheet = ({
     if (beforeRender) {
       cfg = beforeRender(cfg, renderParam);
     }
-
     if (mergev.length > 0) {
       const nextConfig = handleMergeV(data.data, mergev);
       let columns = R.clone(cfg.columns);
@@ -249,6 +249,15 @@ const TableSheet = ({
         ...nextConfig,
         multiColumnSorting: false,
         hash: data.hash,
+      };
+    }
+
+    if (merge.length > 0) {
+      const columns = mergeConfig(cfg.columns, params, data);
+      const nestedHeaders = handleSheetHeader(columns);
+      cfg = {
+        ...cfg,
+        nestedHeaders,
       };
     }
 
@@ -269,11 +278,14 @@ const TableSheet = ({
     // console.log(filtersPlugin);
   }, [data.hash]);
 
-  console.log(config);
-
-  return React.useMemo(() => <HotTable ref={hotTable} settings={config} {...props} />, [
-    config.hash,
-  ]);
+  return React.useMemo(
+    () => (
+      <div style={{ width: '100%', height: sheetHeight || 800, overflowY: 'scroll' }}>
+        <HotTable ref={hotTable} settings={config} {...props} />
+      </div>
+    ),
+    [config.hash],
+  );
 };
 
 export default TableSheet;
