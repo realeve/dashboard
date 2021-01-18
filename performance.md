@@ -178,6 +178,13 @@ export default Class Index extends React.PureComponent{
 }  
 ```
 
+12. 调整 handsontable
+
+移除 plugins/index.ts 中  不使用公式
+```ts 
+import Formulas from './formulas/formulas';
+```
+
 ---
 
 ## 单元测试相关
