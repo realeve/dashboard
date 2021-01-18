@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'handsontable/dist/handsontable.full.css';
 import { HotTable } from '@handsontable/react';
-import Handsontable from 'handsontable';
+import type { GridSettings } from 'handsontable';
 import 'handsontable/languages/zh-CN';
 
 import * as lib from '@/utils/lib';
@@ -128,7 +128,7 @@ const getConfig = (data, afterFilter, sheetHeight) => {
   // }
   // console.log(columns)
 
-  const config: Handsontable.GridSettings = {
+  const config: GridSettings = {
     stretchH: 'all',
     autoWrapRow: true,
     height: sheetHeight || 800, //  data.data.length < 20 ||
@@ -214,6 +214,9 @@ const TableSheet = ({
 
   useEffect(() => {
     const hot = hotTable.current.hotInstance;
+
+    // 禁止使用公式插件
+    hot.getPlugin('formulas').disablePlugin();
 
     // 数据过滤后返回结果，单元格由于可编辑，此处不使用 hot.getData() 拿数据。
     const afterFilter = () => {

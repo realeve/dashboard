@@ -58,6 +58,7 @@ export default defineConfig({
   routes,
   ...chain,
   headScripts,
+  ignoreMomentLocale: true,
   targets: {
     chrome: 70,
     firefox: false,

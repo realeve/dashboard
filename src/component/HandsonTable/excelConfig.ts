@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import { getDataByIdx } from '@/component/chartItem/option/lib';
 import { getType } from '@/utils/axios';
-import * as Excel from './exceljs';
+import { getHeadLevel } from './lib';
 
 /**
  * @param prefix 前缀
@@ -373,7 +373,7 @@ export const handleSheetHeader = (tableColumn) => {
       };
     });
 
-  const maxLevel = Excel.getHeadLevel(tableColumn);
+  const maxLevel = getHeadLevel(tableColumn);
 
   const arr = [];
   for (let i = 0; i < maxLevel; i++) {

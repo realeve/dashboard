@@ -1,24 +1,14 @@
 import Excel from 'exceljs/dist/es5/exceljs.browser.js';
 import { saveAs } from 'file-saver';
 import * as R from 'ramda';
-import jStat from 'jstat';
+
 import * as lib from '@/component/chartItem/option/lib';
 import { AUTHOR, company } from '@/utils/setting';
 import { getParams, Config, BasicConfig, DstConfig } from './excelConfig';
 import { getStringWidth, getTableExtraLabel, isInt, isFloat, isTime } from '@/utils/lib';
+import { getHeadLevel } from './lib';
 
-export const getHeadLevel = (columns, level = 1) => {
-  let curLevel = 1;
-  columns.forEach((column) => {
-    let tempLevel = level;
-    if (column.children) {
-      tempLevel += 1;
-      tempLevel = getHeadLevel(column.children, tempLevel);
-    }
-    curLevel = Math.max(curLevel, tempLevel);
-  });
-  return Math.max(curLevel, level);
-};
+const jStat_max = (arr) => Math.max(...arr);
 
 const initWorkSheet = (config: Config) => {
   const workbook = new Excel.Workbook(config);
@@ -78,7 +68,7 @@ export const getColumn = (config) => {
     const rows = lib.getUniqByIdx({ key, data: config.body });
     const wordLength = R.compose(
       R.max(getStringWidth(header)),
-      jStat.max,
+      jStat_max,
       R.map(getStringWidth),
     )(rows);
 
