@@ -135,7 +135,7 @@ const getConfig = (data, afterFilter, sheetHeight) => {
     rowHeaders: true,
     colHeaders: data.header,
     columns,
-    data: data.data,
+    data: R.clone(data.data),
     licenseKey: 'non-commercial-and-evaluation',
 
     mergeCells: true,

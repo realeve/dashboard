@@ -55,6 +55,8 @@ export const getApiConfig = (config, lib) => {
     interval: lib?.apiConfig?.interval,
     dataType: getDataType(lib.mock),
     api_type: lib?.apiConfig?.type,
+    showReport: api?.showReport || false,
+    reportParam: api?.reportParam || '',
   };
 
   return {
@@ -114,7 +116,10 @@ interface ChartInstanceProps {
   title?: string;
   chartid?: string;
   onLoad?: (e: string) => void;
-  onDataLoad?: (e: IAxiosState) => void;
+  onDataLoad?: (e: {
+    data: IAxiosState;
+    param: { reportParam?: string; showReport?: boolean; [key: string]: any };
+  }) => void;
 }
 
 type ChartRenderProps = {
@@ -192,7 +197,13 @@ const ChartRender = ({
     interval:
       typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
     callback: (e) => {
-      onDataLoad?.(e);
+      onDataLoad?.({
+        data: e,
+        param: {
+          showReport: api.showReport || false,
+          reportParam: api.reportParam || '',
+        },
+      });
       return handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad });
     },
   });

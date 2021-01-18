@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import type { ICommon, IPage, IPanelConfig, IHistoryProps } from '@/models/common';
-
+import type { IAxiosState } from '@/utils/axios';
 import * as R from 'ramda';
 import ErrorBoundary from '@/component/ErrorBoundary';
 import BorderItem from '@/component/widget/border';
 import { connect } from 'react-redux';
 import ChartInstance from './ChartInstance';
 import { ASSETS_URL } from '@/utils/setting';
-import Report from './Report';
+
+// import Report from './Report';
+
+const Report = React.lazy(() => import('./Report'));
 
 interface IChartItemProps {
   page: IPage;
@@ -15,7 +18,13 @@ interface IChartItemProps {
 }
 export const ChartItem = ({ page, config }: IChartItemProps) => {
   const [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<{
+    data: IAxiosState;
+    param: {
+      reportParam?: string;
+      showReport?: boolean;
+    };
+  }>(null);
 
   if (!config || config.hide) {
     return null;
@@ -40,7 +49,11 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
         showBackground={config.showBackground}
         showBorder={config.showBorder}
       >
-        {data?.hash && <Report data={data} />}
+        {data?.param?.showReport && data?.data?.hash && (
+          <Suspense fallback={null}>
+            <Report data={data} />
+          </Suspense>
+        )}
         <ChartInstance
           style={{ height: config.showBorder ? '100%' : instanceHeight }}
           config={config}

@@ -320,7 +320,7 @@ export const mergeConfig = (columns, config, dataSrc: defaultData = {}) => {
 
 export const handleSheetHeader = (tableColumn) => {
   let header = getNestHeader(tableColumn);
-  console.log(JSON.stringify(header), tableColumn);
+  // console.log(JSON.stringify(header), tableColumn);
   // 合并span列宽度
   const handleColSpan = (arr) => {
     let sum = 0;

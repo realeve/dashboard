@@ -117,6 +117,22 @@ const appendConfig: IChartConfig[] = [
     defaultValue: false,
     type: 'switch',
   },
+  {
+    key: 'showReport',
+    subTitle: '显示该组件所引用的源数据',
+    title: '显示报表',
+    defaultValue: true,
+    type: 'switch',
+  },
+  {
+    key: 'reportParam',
+    subTitle: '报表组件参数',
+    title: '报表组件参数',
+    defaultValue: '',
+    type: 'input',
+    valueType: 'text',
+    placeholder: 'mergev=0&merge=0-2&mergetext=3',
+  },
 ];
 
 const ApiSetting = ({
@@ -157,8 +173,8 @@ const ApiSetting = ({
   };
 
   const arrSettings = state.isCarousel
-    ? [0, 1, 2, 4, 5, 6, 7, 8, 9, 10]
-    : [0, 1, 2, 4, 5, 6, 7, 8, 10];
+    ? [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    : [0, 1, 2, 4, 5, 6, 7, 8, 10, 11, 12];
 
   return (
     <div className={styles.pageconfig} style={{ height: '100%' }}>
