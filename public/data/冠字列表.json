@@ -42,6 +42,8 @@
       "api": {
         "url": "1197/54d0a53345.array",
         "show": true,
+        "showReport": true,
+        "reportParam": "mergev=0",
         "cache": 10,
         "api_type": "url",
         "dataType": "array",

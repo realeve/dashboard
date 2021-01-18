@@ -23,7 +23,7 @@ const seq = (from: number, to: number, len: number) => {
 
 const getColSum = (data: TChartMockData[], key) => {
   const vals = R.pluck<number, TChartMockData>(key, data) as number[];
-  return R.sum(vals);
+  return R.sum(vals.map((item) => Number(item)));
 };
 
 interface SunburstItem {
@@ -99,7 +99,7 @@ const getLevels = (len, from = 15, showBorder = true) => {
     return null;
   }
 
-  const to = 85;
+  const to = 80;
   const levels = seq(from, to, len + (showBorder ? 0 : 1));
   const res = [];
   levels.forEach((r0, i) => {
@@ -160,7 +160,7 @@ export const config: IChartConfig[] = [
     title: '圆环大小',
     type: 'range',
     min: 0,
-    max: 80,
+    max: 70,
     step: 2,
   },
   {
