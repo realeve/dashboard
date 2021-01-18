@@ -1,0 +1,421 @@
+{
+  "rec_time": "2021-01-18 14:24:51",
+  "panel": [{
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "ajax": true,
+    "style": {
+      "transform": {
+        "translate": "27.799997142857308px,34.49999999999994px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "position": "absolute",
+      "width": "578.188px",
+      "height": "479.188px"
+    },
+    "name": "echarts.sunburst",
+    "key": "sunburst",
+    "engine": "echarts",
+    "type": "regular_bar",
+    "title": "旭日图",
+    "image": "/img/icons/47_sunburst.webp",
+    "id": "8fdb3d0b59e01",
+    "icon": "com-font icon-com-regular_bar",
+    "general": {
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
+    },
+    "useGeneralStyle": true,
+    "lock": false,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "api": {
+      "dataType": "json",
+      "show": true,
+      "url": "/1207/e395080869.json",
+      "interval": 5,
+      "cache": 2,
+      "api_type": "url",
+      "legend": 0,
+      "y": 2,
+      "dateType": "不设置",
+      "isCarousel": false,
+      "carouselTime": 10,
+      "carouselKey": 0,
+      "showReport": true,
+      "appendParam": "suffix=在制品库2#",
+      "reportParam": "mergev=0"
+    }
+  }, {
+    "id": "105bd818668c7",
+    "api": {
+      "dataType": "json",
+      "show": true,
+      "url": "/1207/e395080869.json",
+      "interval": 5,
+      "cache": 2,
+      "api_type": "url",
+      "legend": 0,
+      "y": 2,
+      "dateType": "不设置",
+      "isCarousel": false,
+      "showReport": true,
+      "appendParam": "suffix=在制品库4#",
+      "carouselKey": 0,
+      "reportParam": "mergev=0",
+      "carouselTime": 10
+    },
+    "key": "sunburst",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "echarts.sunburst",
+    "type": "regular_bar",
+    "image": "/img/icons/47_sunburst.webp",
+    "style": {
+      "transform": {
+        "translate": "670.999971428573px,34.299957142867015px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "578.188px",
+      "height": "479.188px",
+      "position": "absolute"
+    },
+    "title": "平面库实时货位使用情况",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "9883c7bf735bd",
+    "api": {
+      "dataType": "json",
+      "show": true,
+      "url": "/1207/e395080869.json",
+      "interval": 5,
+      "cache": 2,
+      "api_type": "url",
+      "legend": 0,
+      "y": 2,
+      "dateType": "不设置",
+      "isCarousel": false,
+      "showReport": true,
+      "appendParam": "suffix=在制品库7#",
+      "carouselKey": 0,
+      "reportParam": "mergev=0",
+      "carouselTime": 10
+    },
+    "key": "sunburst",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "echarts.sunburst",
+    "type": "regular_bar",
+    "image": "/img/icons/47_sunburst.webp",
+    "style": {
+      "transform": {
+        "translate": "1306.4011142857157px,34.28567142858134px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "578.188px",
+      "height": "479.188px",
+      "position": "absolute"
+    },
+    "title": "平面库实时货位使用情况",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "f3b85aec8a75b",
+    "api": {
+      "dataType": "json",
+      "show": true,
+      "url": "/1207/e395080869.json",
+      "interval": 5,
+      "cache": 2,
+      "api_type": "url",
+      "legend": 0,
+      "y": 2,
+      "dateType": "不设置",
+      "isCarousel": false,
+      "showReport": true,
+      "appendParam": "suffix=号票库1#",
+      "carouselKey": 0,
+      "reportParam": "mergev=0",
+      "carouselTime": 10
+    },
+    "key": "sunburst",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "echarts.sunburst",
+    "type": "regular_bar",
+    "image": "/img/icons/47_sunburst.webp",
+    "style": {
+      "transform": {
+        "translate": "671.2004000000012px,578.8003857142957px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "578.188px",
+      "height": "479.188px",
+      "position": "absolute"
+    },
+    "title": "平面库实时货位使用情况",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "425057e730cfa",
+    "api": {
+      "dataType": "json",
+      "show": true,
+      "url": "/1207/e395080869.json",
+      "interval": 5,
+      "cache": 2,
+      "api_type": "url",
+      "legend": 0,
+      "y": 2,
+      "dateType": "不设置",
+      "isCarousel": false,
+      "showReport": true,
+      "appendParam": "suffix=号票库2#",
+      "carouselKey": 0,
+      "reportParam": "mergev=0",
+      "carouselTime": 10
+    },
+    "key": "sunburst",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "echarts.sunburst",
+    "type": "regular_bar",
+    "image": "/img/icons/47_sunburst.webp",
+    "style": {
+      "transform": {
+        "translate": "1306.3995428571443px,578.5999571428671px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "578.188px",
+      "height": "479.188px",
+      "position": "absolute"
+    },
+    "title": "平面库实时货位使用情况",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }, {
+    "id": "1ccc469a0d9bf",
+    "api": {
+      "y": 2,
+      "url": "/1168/d5593bab3f.json",
+      "show": true,
+      "cache": 2,
+      "legend": 0,
+      "api_type": "url",
+      "dataType": "json",
+      "dateType": "不设置",
+      "interval": 5,
+      "showReport": true,
+      "reportParam": "mergev=0"
+    },
+    "key": "sunburst",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "echarts.sunburst",
+    "type": "regular_bar",
+    "image": "/img/icons/47_sunburst.webp",
+    "style": {
+      "transform": {
+        "translate": "27.999971428572508px,578.5713857142956px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "578.188px",
+      "height": "479.188px",
+      "position": "absolute"
+    },
+    "title": "立体库货位使用情况",
+    "engine": "echarts",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_29.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": true,
+    "showBorder": true,
+    "showBackground": true,
+    "componentConfig": {
+      "theme": 7,
+      "needRerverse": false,
+      "border": true,
+      "innerRadius": 0,
+      "fontSize": 12,
+      "borderWidth": 1,
+      "borderColor": "#080226",
+      "borderRadiusInner": 0,
+      "borderRadiusOutter": 0
+    },
+    "useGeneralStyle": true,
+    "business": true
+  }],
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "bg_03.png.webp",
+    "author": "管理员",
+    "title": "库房实时货位",
+    "padding": 15,
+    "border": "border_29.svg",
+    "borderSlice": [8, 8, 8, 8],
+    "borderRadius": [0, 0, 0, 0],
+    "chartBackground": "rgba(3,11,31,0.8)",
+    "head": {
+      "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+      "fontSize": 20,
+      "color": "#aec1f9",
+      "textAlign": "left",
+      "padding": 10
+    },
+    "thumbnail": "./KuFangShiShiHuoWei.jpg"
+  }
+}
