@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `Object {}`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "barHeight": 16,
+  "carousel": "page",
+  "fontColor": "#f2f2f2",
+  "fontSize": 18,
+  "fontWeight": "normal",
+  "letterSpacing": 0,
+  "padding": 6,
+  "rowNum": 5,
+  "textAlign": "center",
+  "unit": "",
+  "waitTime": 4,
+}
+`;

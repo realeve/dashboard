@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "breakWeekday": true,
+  "datetype": "YYYY-MM-DD HH:mm:ss",
+  "fontColor": "#9aa8d4",
+  "fontSize": 16,
+  "fontWeight": "normal",
+  "letterSpacing": 0,
+  "showWeekday": true,
+  "textAlign": "center",
+}
+`;

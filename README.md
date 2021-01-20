@@ -41,6 +41,9 @@ http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=movie
 ## 测试
 > npm test
 
+### 更新测试快照
+> umi test -u
+
 ## 开发期间单元测试
 
 1. 安装 jestrunner 插件

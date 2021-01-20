@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "legend": 0,
+  "x": 1,
+  "y": 2,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "area_opacity": 1,
+  "axisPointer": "shadow",
+  "barBackgroundColor": "rgba(140,150,200,0.2)",
+  "barWidth": 20,
+  "chartType": "line",
+  "isArea": false,
+  "isPercent": false,
+  "isPolar": false,
+  "isReverse": false,
+  "isStack": false,
+  "isStep": false,
+  "legendAlign": "center",
+  "legendOrient": "horizontal",
+  "legendPosition": "top",
+  "legendShow": true,
+  "lineWidth": 2,
+  "markArea1": Array [
+    10,
+    20,
+  ],
+  "markArea2": Array [
+    10,
+    20,
+  ],
+  "markArea3": Array [
+    10,
+    20,
+  ],
+  "markArea4": Array [
+    10,
+    20,
+  ],
+  "markArea5": Array [
+    10,
+    20,
+  ],
+  "markAreaColor": "rgba(255,255,255,0.1)",
+  "markAreaColor2": "rgba(255,255,255,0.3)",
+  "markTitle1": "",
+  "markTitle2": "",
+  "markTitle3": "",
+  "markTitle4": "",
+  "markTitle5": "",
+  "needRerverse": false,
+  "roundCap": false,
+  "showBackground": true,
+  "showEndlabel": true,
+  "showLabel": false,
+  "showMarkArea": false,
+  "showMarkline": false,
+  "showMarkpoint": false,
+  "showSymbol": false,
+  "smooth": true,
+  "symbol": "circle",
+  "symbolSize": 4,
+  "theme": "cbpc",
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "color": Array [
+    "#5B8FF9",
+    "#5AD8A6",
+    "#5D7092",
+    "#F6BD16",
+    "#E86452",
+    "#6DC8EC",
+    "#945FB9",
+    "#FF9845",
+    "#1E9493",
+    "#FF99C3",
+  ],
+  "grid": Object {
+    "bottom": "3%",
+    "containLabel": true,
+    "left": "3%",
+    "right": "4%",
+  },
+  "legend": Object {
+    "icon": "circle",
+    "left": "center",
+    "orient": "horizontal",
+    "show": true,
+    "textStyle": Object {
+      "color": "#ddd",
+    },
+    "top": 15,
+  },
+  "series": Array [
+    Object {
+      "backgroundStyle": Object {
+        "color": "rgba(140,150,200,0.2)",
+      },
+      "barWidth": 20,
+      "coordinateSystem": "cartesian2d",
+      "data": Array [
+        175,
+        125,
+        98,
+        120,
+        50,
+      ],
+      "emphasis": Object {
+        "focus": "series",
+      },
+      "endLabel": Object {
+        "color": "#5B8FF9",
+        "formatter": "{a}",
+        "overflow": "truncate",
+        "show": true,
+      },
+      "label": Object {
+        "color": "#fff",
+        "position": "insideTop",
+        "show": false,
+      },
+      "labelLayout": Object {
+        "moveOverlap": "shiftY",
+      },
+      "lineStyle": Object {
+        "width": 2,
+      },
+      "name": "类目1",
+      "roundCap": false,
+      "showBackground": true,
+      "showSymbol": false,
+      "smooth": true,
+      "stack": false,
+      "step": false,
+      "symbol": "circle",
+      "symbolSize": 4,
+      "type": "line",
+    },
+    Object {
+      "backgroundStyle": Object {
+        "color": "rgba(140,150,200,0.2)",
+      },
+      "barWidth": 20,
+      "coordinateSystem": "cartesian2d",
+      "data": Array [
+        210,
+        140,
+        120,
+        140,
+        60,
+      ],
+      "emphasis": Object {
+        "focus": "series",
+      },
+      "endLabel": Object {
+        "color": "#5AD8A6",
+        "formatter": "{a}",
+        "overflow": "truncate",
+        "show": true,
+      },
+      "label": Object {
+        "color": "#fff",
+        "position": "insideTop",
+        "show": false,
+      },
+      "labelLayout": Object {
+        "moveOverlap": "shiftY",
+      },
+      "lineStyle": Object {
+        "width": 2,
+      },
+      "name": "类目2",
+      "roundCap": false,
+      "showBackground": true,
+      "showSymbol": false,
+      "smooth": true,
+      "stack": false,
+      "step": false,
+      "symbol": "circle",
+      "symbolSize": 4,
+      "type": "line",
+    },
+  ],
+  "tooltip": Object {
+    "axisPointer": Object {
+      "type": "shadow",
+    },
+    "trigger": "axis",
+  },
+  "xAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#ddd",
+      },
+      "axisLine": Object {
+        "lineStyle": Object {
+          "color": "#ddd",
+        },
+      },
+      "axisTick": Object {
+        "show": false,
+      },
+      "data": Array [
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+      ],
+      "nameLocation": "middle",
+      "type": "category",
+    },
+  ],
+  "yAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#ddd",
+      },
+      "axisLine": Object {
+        "lineStyle": Object {
+          "color": "#ddd",
+        },
+      },
+      "axisTick": Object {
+        "show": false,
+      },
+      "position": "top",
+      "splitLine": Object {
+        "show": false,
+      },
+      "type": "value",
+    },
+  ],
+}
+`;

@@ -26,7 +26,7 @@ Object {
   "interval": 5,
   "show": true,
   "type": "url",
-  "url": "http://localhost:8000/mock/34_base_line.json",
+  "url": "/mock/34_base_line.json",
 }
 `;
 
@@ -773,14 +773,7 @@ Array [
         ],
         "desc": "cbpc",
         "theme": "cbpc",
-        "title": <img
-          src="默认"
-          style={
-            Object {
-              "height": 30,
-            }
-          }
-        />,
+        "title": "默认",
         "value": 18,
       },
       Object {

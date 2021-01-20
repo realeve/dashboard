@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+  "y": 1,
+  "y2": 2,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "color": "#096dd9",
+  "fill": "#ddd",
+  "renderer": "svg",
+  "reverseXY": false,
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "chartType": "column",
+  "color": "#096dd9",
+  "data": Array [
+    Object {
+      "type": "分类一",
+      "value": Array [
+        76,
+        100,
+      ],
+    },
+    Object {
+      "type": "分类二",
+      "value": Array [
+        56,
+        108,
+      ],
+    },
+    Object {
+      "type": "分类三",
+      "value": Array [
+        38,
+        129,
+      ],
+    },
+    Object {
+      "type": "分类四",
+      "value": Array [
+        58,
+        155,
+      ],
+    },
+    Object {
+      "type": "分类五",
+      "value": Array [
+        45,
+        120,
+      ],
+    },
+    Object {
+      "type": "分类六",
+      "value": Array [
+        23,
+        99,
+      ],
+    },
+    Object {
+      "type": "分类七",
+      "value": Array [
+        18,
+        56,
+      ],
+    },
+    Object {
+      "type": "分类八",
+      "value": Array [
+        18,
+        34,
+      ],
+    },
+  ],
+  "isRange": true,
+  "label": Object {
+    "position": "middle",
+    "style": Object {
+      "fill": "#ddd",
+    },
+  },
+  "renderer": "svg",
+  "xField": "type",
+  "yField": "value",
+}
+`;

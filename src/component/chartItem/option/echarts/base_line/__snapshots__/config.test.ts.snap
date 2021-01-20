@@ -743,14 +743,7 @@ Array [
         ],
         "desc": "cbpc",
         "theme": "cbpc",
-        "title": <img
-          src="默认"
-          style={
-            Object {
-              "height": 30,
-            }
-          }
-        />,
+        "title": "默认",
         "value": 18,
       },
       Object {

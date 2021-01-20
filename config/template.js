@@ -515,6 +515,7 @@ const handleTemplate = () => {
   console.log('3.文件组件写入完成');
 };
 
+// 对现有组件增加默认测试用例
 const rewriteTestFile = () => {
   const chartArr = getCharts();
 
@@ -522,11 +523,14 @@ const rewriteTestFile = () => {
     return;
   }
 
-  chartArr.forEach((dirName) => {
-    const content = `import init from './lib.test';
-init(__filename);`;
-    fs.writeFileSync(`${dir}charts/${dirName}.test.ts`, content);
-  });
+  chartArr.forEach(setTestFile);
+};
+
+const setTestFile = (dirName) => {
+  const content = `import init from './lib';
+init(__filename);
+  `;
+  fs.writeFileSync(`${dir}charts/${dirName}.test.ts`, content);
 };
 
 const init = () => {

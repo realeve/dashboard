@@ -1,2 +1,2 @@
-import init from './lib.test';
+import init from './lib';
 init(__filename);

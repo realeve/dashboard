@@ -4,8 +4,6 @@ import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 import * as THREE from 'three';
 import useMeasure from './useMeasure';
 
-export const mock = {};
-
 export const config: IChartConfig[] = [
   {
     key: 'speed',

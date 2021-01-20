@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+  "y": 1,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "barWidth": 20,
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "grid": Object {
+    "bottom": "5%",
+    "left": "5%",
+    "right": "5%",
+    "top": "8%",
+  },
+  "series": Array [
+    Object {
+      "barWidth": 20,
+      "data": Array [
+        23,
+        12,
+        18,
+        12,
+        43,
+        23,
+        32,
+        21,
+      ],
+      "itemStyle": Object {
+        "borderRadius": Array [
+          30,
+          30,
+          30,
+          30,
+        ],
+        "color": LinearGradient {
+          "colorStops": Array [
+            Object {
+              "color": "rgba(0,244,255,1)",
+              "offset": 0,
+            },
+            Object {
+              "color": "rgba(0,77,167,1)",
+              "offset": 1,
+            },
+          ],
+          "global": false,
+          "type": "linear",
+          "x": 0,
+          "x2": 0,
+          "y": 0,
+          "y2": 1,
+        },
+        "shadowBlur": 4,
+        "shadowColor": "rgba(0,160,221,1)",
+      },
+      "label": Object {
+        "backgroundColor": "rgba(0,160,221,0.1)",
+        "borderRadius": 200,
+        "distance": 1,
+        "formatter": "    {d|●}, {a|{c}}     
+,    {b|}",
+        "height": 30,
+        "lineHeight": 30,
+        "position": Array [
+          -6,
+          "-60",
+        ],
+        "rich": Object {
+          "a": Object {
+            "align": "center",
+            "color": "#fff",
+          },
+          "b": Object {
+            "align": "left",
+            "borderColor": "#234e6c",
+            "borderWidth": 1,
+            "height": 30,
+            "width": 1,
+          },
+          "d": Object {
+            "color": "#3CDDCF",
+          },
+        },
+        "show": true,
+        "width": 80,
+      },
+      "type": "bar",
+    },
+  ],
+  "tooltip": Object {
+    "axisPointer": Object {
+      "type": "shadow",
+    },
+    "trigger": "axis",
+  },
+  "xAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#e2e9ff",
+        "fontSize": 14,
+        "margin": 10,
+      },
+      "axisLine": Object {
+        "show": false,
+      },
+      "axisTick": Object {
+        "show": false,
+      },
+      "data": Array [
+        "新能源智能汽车",
+        "航天航空",
+        "第三代半导体",
+        "产业金融",
+        "商务会展",
+        "临空经济",
+        "文创旅游",
+        "智能制造业",
+      ],
+      "type": "category",
+    },
+  ],
+  "yAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#e2e9ff",
+        "formatter": "{value}",
+      },
+      "axisLine": Object {
+        "show": false,
+      },
+      "splitLine": Object {
+        "show": false,
+      },
+    },
+  ],
+}
+`;

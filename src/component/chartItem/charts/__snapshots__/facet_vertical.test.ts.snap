@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "legend": 0,
+  "x": 1,
+  "y": 2,
+}
+`;
+
+exports[`基础信息测试-默认渲染设置/边距 1`] = `[Function]`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "barWidth": 20,
+  "cols": 4,
+  "needRerverse": false,
+  "showLegend": false,
+  "theme": "cbpc",
+  "transpose": false,
+  "type": "line",
+}
+`;

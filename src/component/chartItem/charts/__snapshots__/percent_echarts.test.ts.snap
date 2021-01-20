@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "fontSize": 20,
+  "fontWeight": "normal",
+  "lineWidth": 10,
+  "speed": 40,
+  "st1": "#69bffe",
+  "st2": "#f37b1d",
+}
+`;
