@@ -8,9 +8,11 @@ export { mock } from './sunburst.mock';
 
 type TChartMockData = (string | number)[];
 
-const seq = (from: number, to: number, len: number) => {
+export const seq = (from: number, to: number, len: number) => {
   if (len < 2) {
     throw Error('数据项不能小于2');
+  } else if (to === from) {
+    throw Error('起始设置不能相同');
   }
 
   const step = (to - from) / (len - 1);
@@ -21,7 +23,7 @@ const seq = (from: number, to: number, len: number) => {
   return arr;
 };
 
-const getColSum = (data: TChartMockData[], key) => {
+export const getColSum = (data: TChartMockData[], key) => {
   const vals = R.pluck<number, TChartMockData>(key, data) as number[];
   return R.sum(vals.map((item) => Number(item)));
 };
@@ -46,7 +48,7 @@ interface ISunburstConfig {
   valkey: string;
 }
 
-const handleSunBrustData = (
+export const handleSunBrustData = (
   data: TChartMockData[],
   header: string[],
   config: ISunburstConfig,
@@ -94,7 +96,7 @@ const handleSunBrustData = (
   });
 };
 
-const getLevels = (len, from = 15, showBorder = true) => {
+export const getLevels = (len, from = 15, showBorder = true) => {
   if (len < 2) {
     return null;
   }
