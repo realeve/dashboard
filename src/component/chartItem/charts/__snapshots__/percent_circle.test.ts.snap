@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "color": "#30c3a7",
+  "half": true,
+  "length": 10,
+  "width": 2,
+}
+`;

@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "max": 3,
+  "x": 0,
+  "y": 1,
+  "y2": 2,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "direction": "horizontal",
+  "legendShow": true,
+  "renderer": "svg",
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "bulletStyle": Object {
+    "target": Object {
+      "lineWidth": 3,
+    },
+  },
+  "chartType": "bullet",
+  "color": Object {
+    "measure": "#5B8FF9",
+    "range": "#5B8FF9",
+    "target": "#ee4444",
+  },
+  "data": Array [
+    Object {
+      "measures": Array [
+        80,
+      ],
+      "ranges": Array [
+        100,
+      ],
+      "target": 85,
+      "title": "A",
+    },
+    Object {
+      "measures": Array [
+        60,
+      ],
+      "ranges": Array [
+        100,
+      ],
+      "target": 85,
+      "title": "B",
+    },
+    Object {
+      "measures": Array [
+        92,
+      ],
+      "ranges": Array [
+        100,
+      ],
+      "target": 85,
+      "title": "C",
+    },
+    Object {
+      "measures": Array [
+        88,
+      ],
+      "ranges": Array [
+        100,
+      ],
+      "target": 85,
+      "title": "D",
+    },
+  ],
+  "label": Object {
+    "measure": Object {
+      "offsetX": -28,
+      "position": "right",
+      "style": Object {
+        "fill": "#fff",
+      },
+    },
+  },
+  "layout": "horizontal",
+  "legend": Object {
+    "custom": true,
+    "items": Array [
+      Object {
+        "marker": Object {
+          "style": Object {
+            "fill": "#5B8FF9",
+            "r": 5,
+          },
+          "symbol": "square",
+        },
+        "name": "实际值",
+        "value": "实际值",
+      },
+      Object {
+        "marker": Object {
+          "style": Object {
+            "r": 5,
+            "stroke": "#5B8FF9",
+          },
+          "symbol": "line",
+        },
+        "name": "目标值",
+        "value": "目标值",
+      },
+    ],
+    "position": "bottom",
+  },
+  "measureField": "measures",
+  "rangeField": "ranges",
+  "renderer": "svg",
+  "size": Object {
+    "measure": 25,
+    "target": 30,
+  },
+  "targetField": "target",
+  "xAxis": Object {
+    "line": null,
+  },
+  "xField": "title",
+}
+`;

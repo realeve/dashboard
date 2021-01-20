@@ -1,0 +1,787 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "legend": 0,
+  "y": 2,
+}
+`;
+
+exports[`基础信息测试-默认渲染设置/边距 1`] = `
+Object {
+  "renderer": "svg",
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "border": true,
+  "borderColor": "#080226",
+  "borderRadiusInner": 0,
+  "borderRadiusOutter": 0,
+  "borderWidth": 1,
+  "fontSize": 12,
+  "innerRadius": 0,
+  "needRerverse": false,
+  "theme": "cbpc",
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "color": Array [
+    "#5B8FF9",
+    "#5AD8A6",
+    "#5D7092",
+    "#F6BD16",
+    "#E86452",
+    "#6DC8EC",
+    "#945FB9",
+    "#FF9845",
+    "#1E9493",
+    "#FF99C3",
+  ],
+  "legend": Object {
+    "show": false,
+  },
+  "series": Object {
+    "data": Array [
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 731,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 197,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹一印",
+            "value": 23,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 99,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "涂布",
+            "value": 339,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶二印",
+            "value": 140,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1112T",
+        "value": 1529,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 1,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1113A",
+        "value": 1,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 707,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 2,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶一印",
+            "value": 340,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹二印",
+            "value": 16,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 65,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "涂布",
+            "value": 22,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1113T",
+        "value": 1152,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 581,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 178,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶一印",
+            "value": 51,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹一印",
+            "value": 10,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹二印",
+            "value": 257,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 84,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "涂布",
+            "value": 101,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1114T",
+        "value": 1262,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 762,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 196,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶一印",
+            "value": 147,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹一印",
+            "value": 70,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹二印",
+            "value": 158,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 112,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "涂布",
+            "value": 277,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1116T",
+        "value": 1722,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 1555,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 433,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶一印",
+            "value": 209,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "丝印",
+            "value": 221,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹一印",
+            "value": 16,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹二印",
+            "value": 134,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "印码",
+            "value": 357,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "1117T",
+        "value": 2925,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "XX纸",
+            "value": 121,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "白纸",
+            "value": 152,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶一印",
+            "value": 92,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "凹二印",
+            "value": 3,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "涂布",
+            "value": 7,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "胶二印",
+            "value": 10,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "NRB10",
+        "value": 385,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-网罩",
+            "value": 35,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-隔板",
+            "value": 7,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-十字扣",
+            "value": 13,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-布罩",
+            "value": 11,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-网罩+十字扣",
+            "value": 2,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-空托盘组",
+            "value": 178,
+          },
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "辅料-收纳箱",
+            "value": 18,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "辅料",
+        "value": 264,
+      },
+      Object {
+        "children": Array [
+          Object {
+            "itemStyle": Object {
+              "borderColor": "#080226",
+              "borderRadius": Array [
+                0,
+                0,
+              ],
+              "borderWidth": 1,
+            },
+            "name": "闲置",
+            "value": 3454,
+          },
+        ],
+        "itemStyle": Object {
+          "borderColor": "#080226",
+          "borderRadius": Array [
+            0,
+            0,
+          ],
+          "borderWidth": 1,
+        },
+        "name": "空货位",
+        "value": 3454,
+      },
+    ],
+    "label": Object {
+      "fontSize": 12,
+      "formatter": [Function],
+    },
+    "levels": Array [
+      Object {},
+      Object {
+        "itemStyle": Object {
+          "borderWidth": 2,
+        },
+        "label": Object {
+          "rotate": "tangential",
+        },
+        "r": "80%",
+        "r0": "0%",
+      },
+      Object {
+        "itemStyle": Object {
+          "borderWidth": 3,
+        },
+        "label": Object {
+          "padding": 3,
+          "position": "outside",
+          "silent": false,
+        },
+        "r": "83%",
+        "r0": "80%",
+      },
+    ],
+    "type": "sunburst",
+  },
+  "tooltip": Object {
+    "trigger": "item",
+  },
+}
+`;

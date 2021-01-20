@@ -26,7 +26,7 @@ Object {
   "interval": 5,
   "show": true,
   "type": "url",
-  "url": "http://localhost:8000/mock/46_base_pie.json",
+  "url": "/mock/46_base_pie.json",
 }
 `;
 
@@ -793,14 +793,7 @@ Array [
         ],
         "desc": "cbpc",
         "theme": "cbpc",
-        "title": <img
-          src="默认"
-          style={
-            Object {
-              "height": 30,
-            }
-          }
-        />,
+        "title": "默认",
         "value": 18,
       },
       Object {

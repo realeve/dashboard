@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "percentFontSize": 16,
+  "titleFontSize": 16,
+  "valueFontSize": 30,
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "graphic": Array [
+    Object {
+      "children": Array [
+        Object {
+          "left": "10",
+          "style": Object {
+            "fill": "#aab2fa",
+            "fontFamily": "Microsoft Yahei",
+            "fontSize": 16,
+            "text": "水球图_MOCK数据",
+          },
+          "top": "middle",
+          "type": "text",
+          "z": 100,
+        },
+      ],
+      "left": "center",
+      "top": "60%",
+      "type": "group",
+    },
+  ],
+  "series": Array [
+    Object {
+      "backgroundStyle": Object {
+        "color": Object {
+          "colorStops": Array [
+            Object {
+              "color": "rgba(68, 145, 253, 0)",
+              "offset": 1,
+            },
+            Object {
+              "color": "rgba(68, 145, 253, .25)",
+              "offset": 0.5,
+            },
+            Object {
+              "color": "rgba(68, 145, 253, 1)",
+              "offset": 0,
+            },
+          ],
+          "globalCoord": false,
+          "type": "linear",
+          "x": 1,
+          "x2": 0.5,
+          "y": 0,
+          "y2": 1,
+        },
+      },
+      "center": Array [
+        "50%",
+        "50%",
+      ],
+      "color": Array [
+        "rgba(31, 222, 225, 0.6)",
+        "rgba(31, 222, 225, .4)",
+        "rgba(58, 71, 212, 0.2)",
+      ],
+      "data": Array [
+        0.457,
+        0.457,
+        0.457,
+      ],
+      "label": Object {
+        "formatter": "",
+      },
+      "outline": Object {
+        "borderDistance": 0,
+        "itemStyle": Object {
+          "borderColor": Object {
+            "colorStops": Array [
+              Object {
+                "color": "rgba(69, 73, 240, 0.05)",
+                "offset": 0,
+              },
+              Object {
+                "color": "rgba(69, 73, 240, .25)",
+                "offset": 0.5,
+              },
+              Object {
+                "color": "rgba(69, 73, 240, 1)",
+                "offset": 1,
+              },
+            ],
+            "globalCoord": false,
+            "type": "linear",
+            "x": 0,
+            "x2": 0,
+            "y": 0,
+            "y2": 1,
+          },
+          "borderWidth": 20,
+          "shadowBlur": 10,
+          "shadowColor": "#000",
+        },
+      },
+      "radius": "80%",
+      "type": "liquidFill",
+    },
+  ],
+  "title": Object {
+    "text": "46{a| %}",
+    "textStyle": Object {
+      "color": "#bcb8fb",
+      "fontFamily": "Microsoft Yahei",
+      "fontSize": 30,
+      "fontWeight": "normal",
+      "rich": Object {
+        "a": Object {
+          "fontSize": 16,
+        },
+      },
+    },
+    "x": "center",
+    "y": "35%",
+  },
+}
+`;

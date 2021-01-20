@@ -1,0 +1,818 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "legend": 2,
+  "x": 0,
+  "y": 1,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "cardPosition": "left",
+  "chartType": "line",
+  "connectNulls": true,
+  "endLabel": false,
+  "fillOpacity": 0.4,
+  "isPercent": false,
+  "isStack": false,
+  "legendAlign": "center",
+  "legendOrient": "horizontal",
+  "legendPosition": "top",
+  "legendShow": true,
+  "lineWidth": 2,
+  "pointColor": "#ffffff",
+  "pointShape": "hollow-circle",
+  "pointSize": 0,
+  "renderer": "canvas",
+  "showLabel": true,
+  "showSlider": false,
+  "stepType": undefined,
+  "theme": "cbpc",
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+<_default
+  cardPosition="left"
+  config={
+    Object {
+      "appendPadding": Array [
+        0,
+        0,
+        0,
+        0,
+      ],
+      "areaStyle": Object {
+        "fillOpacity": 0.4,
+      },
+      "chartType": "line",
+      "connectNulls": true,
+      "connectedArea": Object {
+        "trigger": "hover",
+      },
+      "data": Array [
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 54,
+          "year": "1850",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 54,
+          "year": "1851",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 57,
+          "year": "1852",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 59,
+          "year": "1853",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 69,
+          "year": "1854",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 71,
+          "year": "1855",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 76,
+          "year": "1856",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 77,
+          "year": "1857",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 78,
+          "year": "1858",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 83,
+          "year": "1859",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 91,
+          "year": "1860",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 95,
+          "year": "1861",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 96,
+          "year": "1862",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 103,
+          "year": "1863",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1863",
+        },
+      ],
+      "interactions": Array [
+        Object {
+          "type": "marker-active",
+        },
+      ],
+      "isGroup": true,
+      "isStack": false,
+      "legend": false,
+      "lineStyle": Object {
+        "lineWidth": 2,
+      },
+      "point": Object {
+        "size": 0,
+      },
+      "renderer": "canvas",
+      "seriesField": "category",
+      "smooth": false,
+      "stepType": undefined,
+      "tooltip": Object {
+        "follow": false,
+        "marker": Object {
+          "lineWidth": 2,
+          "r": 6,
+        },
+        "showContent": false,
+        "showMarkers": true,
+        "showTitle": false,
+      },
+      "xAxis": Object {
+        "label": Object {
+          "autoRotate": false,
+        },
+        "type": "category",
+      },
+      "xField": "year",
+      "yAxis": Object {
+        "grid": Object {
+          "line": false,
+        },
+      },
+      "yField": "value",
+    }
+  }
+  data={
+    Object {
+      "data": Array [
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 54,
+          "year": "1850",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1850",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 54,
+          "year": "1851",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1851",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 57,
+          "year": "1852",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1852",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 59,
+          "year": "1853",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1853",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 69,
+          "year": "1854",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1854",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 71,
+          "year": "1855",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1855",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 76,
+          "year": "1856",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1856",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 77,
+          "year": "1857",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1857",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 78,
+          "year": "1858",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1858",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 83,
+          "year": "1859",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1859",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 91,
+          "year": "1860",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1860",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 95,
+          "year": "1861",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1861",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 96,
+          "year": "1862",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1862",
+        },
+        Object {
+          "category": "Liquid fuel",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Solid fuel",
+          "value": 103,
+          "year": "1863",
+        },
+        Object {
+          "category": "Gas fuel",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Cement production",
+          "value": 0,
+          "year": "1863",
+        },
+        Object {
+          "category": "Gas flarinl",
+          "value": 0,
+          "year": "1863",
+        },
+      ],
+      "hash": "mockdata",
+      "header": Array [
+        "year",
+        "value",
+        "category",
+      ],
+      "rows": 1000,
+      "title": "某数据_MOCK数据",
+    }
+  }
+  legend={2}
+  x={0}
+  y={1}
+/>
+`;

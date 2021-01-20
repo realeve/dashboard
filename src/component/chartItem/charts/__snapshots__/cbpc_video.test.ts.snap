@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "autoHeight": true,
+  "borderRadius": Array [
+    18,
+    18,
+    18,
+    18,
+  ],
+  "controls": true,
+  "fadeColor": "#0c0131",
+  "fadeIn": false,
+  "fadePosition": 60,
+  "muted": true,
+  "opacity": 1,
+  "padding": 0,
+  "playbackRate": undefined,
+  "video_url": "//127.0.0.1:9999/video/01.mp4.webm",
+}
+`;

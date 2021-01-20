@@ -31,7 +31,8 @@ if (!dirName) {
 }
 
 let dir = './src/component/chartItem/';
-const handleOptionIndex = () => {
+
+const getCharts = () => {
   let str = fs.readFileSync(dir + 'option/index.ts', 'utf8');
   let chartArr = eval(str.match(/\[(\S|\s)+\]/)[0]);
 
@@ -39,7 +40,14 @@ const handleOptionIndex = () => {
     console.error(dirName + '图表已存在，请更换名称');
     return false;
   }
+  return chartArr;
+};
 
+const handleOptionIndex = () => {
+  const chartArr = getCharts();
+  if (!chartArr) {
+    return;
+  }
   let nextIndex = chartArr.length + 1;
 
   let nextOption = str.replace('];', `  '${dirName}',\n];`);
@@ -506,6 +514,25 @@ const handleTemplate = () => {
   }
   console.log('3.文件组件写入完成');
 };
+
+// 对现有组件增加默认测试用例
+const rewriteTestFile = () => {
+  const chartArr = getCharts();
+
+  if (!chartArr) {
+    return;
+  }
+
+  chartArr.forEach(setTestFile);
+};
+
+const setTestFile = (dirName) => {
+  const content = `import init from './lib';
+init(__filename);
+  `;
+  fs.writeFileSync(`${dir}charts/${dirName}.test.ts`, content);
+};
+
 const init = () => {
   let success = handleOptionIndex();
   if (!success) {
@@ -515,6 +542,7 @@ const init = () => {
   console.log(`模版${dirName}已创建`);
 };
 
-init();
+// init();
+rewriteTestFile();
 
 process.exit(0);

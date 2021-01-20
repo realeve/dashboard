@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "legend": 0,
+  "x": 1,
+  "y": 2,
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "area_opacity": 1,
+  "barWidth": 20,
+  "legendAlign": "center",
+  "legendOrient": "horizontal",
+  "legendPosition": "top",
+  "legendShow": true,
+  "lineWidth": 2,
+  "roundBorder": true,
+  "smooth": true,
+}
+`;
+
+exports[`默认配置项测试 1`] = `
+Object {
+  "grid": Object {
+    "bottom": "3%",
+    "containLabel": true,
+    "left": "3%",
+    "right": "4%",
+  },
+  "legend": Object {
+    "icon": "circle",
+    "left": "center",
+    "orient": "horizontal",
+    "show": true,
+    "textStyle": Object {
+      "color": "#ddd",
+    },
+    "top": 15,
+  },
+  "series": Array [
+    Object {
+      "barWidth": 20,
+      "data": Array [
+        -320,
+        -302,
+        -341,
+        -374,
+        -390,
+        -450,
+        -420,
+      ],
+      "itemStyle": Object {
+        "borderRadius": Array [
+          10,
+          0,
+          0,
+          10,
+        ],
+        "color": LinearGradient {
+          "colorStops": Array [
+            Object {
+              "color": "#ef00ff",
+              "offset": 0,
+            },
+            Object {
+              "color": "#ba00ff",
+              "offset": 1,
+            },
+          ],
+          "global": false,
+          "type": "linear",
+          "x": 0,
+          "x2": 1,
+          "y": 0,
+          "y2": 0,
+        },
+      },
+      "label": Object {
+        "color": "#ff3e8b",
+        "formatter": [Function],
+        "position": "left",
+        "show": true,
+      },
+      "name": "收入",
+      "smooth": true,
+      "stack": "总量",
+      "type": "bar",
+    },
+    Object {
+      "barWidth": 20,
+      "data": Array [
+        120,
+        132,
+        101,
+        134,
+        190,
+        230,
+        210,
+      ],
+      "itemStyle": Object {
+        "borderRadius": Array [
+          0,
+          10,
+          10,
+          0,
+        ],
+        "color": LinearGradient {
+          "colorStops": Array [
+            Object {
+              "color": "#2846ff",
+              "offset": 0,
+            },
+            Object {
+              "color": "#00baff",
+              "offset": 1,
+            },
+          ],
+          "global": false,
+          "type": "linear",
+          "x": 0,
+          "x2": 1,
+          "y": 0,
+          "y2": 0,
+        },
+      },
+      "label": Object {
+        "color": "#00baff",
+        "position": "right",
+        "show": true,
+      },
+      "name": "付出",
+      "smooth": true,
+      "stack": "总量",
+      "type": "bar",
+    },
+  ],
+  "tooltip": Object {
+    "axisPointer": Object {
+      "type": "shadow",
+    },
+    "trigger": "axis",
+  },
+  "xAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#ddd",
+        "formatter": [Function],
+      },
+      "axisLine": Object {
+        "lineStyle": Object {
+          "color": "#203651",
+        },
+      },
+      "axisTick": Object {
+        "show": false,
+      },
+      "max": 500,
+      "min": -500,
+      "position": "top",
+      "splitLine": Object {
+        "show": false,
+      },
+      "type": "value",
+    },
+  ],
+  "yAxis": Array [
+    Object {
+      "axisLabel": Object {
+        "color": "#ddd",
+        "margin": 0,
+      },
+      "axisLine": Object {
+        "lineStyle": Object {
+          "color": "#203651",
+        },
+      },
+      "axisTick": Object {
+        "show": false,
+      },
+      "data": Array [
+        "周一",
+        "周二",
+        "周三",
+        "周四",
+        "周五",
+        "周六",
+        "周日",
+      ],
+      "type": "category",
+    },
+  ],
+}
+`;

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { IChartMock, IChartConfig, IApiConfig } from '@/component/chartItem/interface';
 // import { IG2Config } from '@/component/chartItem/option/g2plot/config';
 import { textColor } from '../index';

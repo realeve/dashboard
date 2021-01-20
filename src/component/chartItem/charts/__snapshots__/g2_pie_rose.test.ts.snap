@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-API配置项 1`] = `
+Object {
+  "x": 0,
+  "y": 1,
+}
+`;
+
+exports[`基础信息测试-默认渲染设置/边距 1`] = `
+Object {
+  "renderer": "svg",
+}
+`;
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "coordinate": "polar",
+  "endAngle": 360,
+  "fontSize": 16,
+  "innerPercent": 20,
+  "legend": false,
+  "needRerverse": false,
+  "startAngle": 180,
+  "theme": "cbpc",
+}
+`;

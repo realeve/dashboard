@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`基础信息测试-默认配置项 1`] = `
+Object {
+  "animationDuration": 30,
+  "background": "transparent",
+  "content": "在这里输入文字",
+  "fontColor": "#27e2e6",
+  "fontSize": 25,
+  "fontWeight": "normal",
+  "letterSpacing": 0,
+  "marquee": false,
+  "opacity": 1,
+  "padding": 0,
+  "textAlign": "center",
+  "textShadowBlur": 0,
+  "textShadowColor": "rgba(39 ,228, 247 , 0.85)",
+  "textShadowOffsetX": 0,
+  "textShadowOffsetY": 0,
+}
+`;
