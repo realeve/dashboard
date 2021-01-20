@@ -1,4 +1,53 @@
-import { IChartMock } from '@/component/chartItem/interface';
+import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import * as lib from '@/component/chartItem/option/lib';
+
+export const config: IChartConfig[] = [
+  {
+    key: 'legend',
+    defaultValue: 0,
+  },
+  {
+    key: 'x',
+    defaultValue: 1,
+  },
+  {
+    key: 'y',
+    defaultValue: 2,
+  },
+  ...lib.getPositionConfig(),
+];
+
+export const apiConfig: IApiConfig = {
+  show: true,
+  type: 'url',
+  url: '/mock/48_bar_group.json',
+  interval: 5,
+  cache: 2,
+  config: [
+    {
+      key: 'legend',
+      title: 'legend 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 2,
+      min: 0,
+    },
+  ],
+};
+
+export const defaultOption = {
+  renderer: 'canvas',
+};
 
 export const mock: IChartMock = {
   data: [
