@@ -821,7 +821,7 @@ export default ({
     barWidth,
   };
 
-  const handleXData = ({ data:_data, header:_header }): string[] => {
+  const handleXData = ({ data: _data, header: _header }): string[] => {
     const prodata = R.filter(R.propEq(_header[0], product))(_data as any[]);
     const allProcessData = R.reject((item: any) => R.equals(item[_header[2]], planName))(prodata);
 
@@ -831,15 +831,14 @@ export default ({
   const xAxisData = handleXData(data);
   console.log('xaxis', xAxisData);
 
-  const handleData = (
-    { data: _data, header: _header },
+  const handleData = ({ data: _data, header: _header }) =>
     // { legend: _legend, x: _x, y: _y }: { legend?: number | string; x: number | string; y: number | string },
-  ) => {
-    const prodata = R.filter(R.propEq(_header[0], product))(_data as any[]);
-    let series = [];
+    {
+      const prodata = R.filter(R.propEq(_header[0], product))(_data as any[]);
+      let series = [];
 
-    // if (typeof legend === 'undefined') {
-    // } else {
+      // if (typeof legend === 'undefined') {
+      // } else {
       const whitePut = R.project(
         [_header[2], _header[3]],
         R.filter(R.propEq(_header[1], whitepaper))(prodata),
@@ -862,7 +861,8 @@ export default ({
       const allProcessData = R.reject((item: any) => R.equals(item[_header[2]], planName))(prodata);
       const allProcessGroup = R.groupBy((c: any) => c[_header[1]])(allProcessData);
       const processData = R.reject(
-        (item: any) => R.equals(item[_header[2]], planName) || R.equals(item[_header[2]], whitename),
+        (item: any) =>
+          R.equals(item[_header[2]], planName) || R.equals(item[_header[2]], whitename),
       )(prodata);
       const processGroup = R.groupBy((c: any) => c[_header[1]])(processData);
       const yAxisGroup: number[] = [];
@@ -923,12 +923,12 @@ export default ({
           },
         },
       });
-    // }
+      // }
 
-    return series;
-  };
+      return series;
+    };
 
-  const series = handleData(data,);
+  const series = handleData(data);
 
   return {
     backgroundColor: '#080226',
@@ -944,7 +944,7 @@ export default ({
         const str = arr
           .map((item) => `<div>${item.marker} ${item.name}: ${item.value}</div>`)
           .join('');
-          const sum = arr.reduce((b, a) => a.value + b, 0);
+        const sum = arr.reduce((b, a) => a.value + b, 0);
         return `<div><b>${arr[0].axisValue}</b><br/>${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div><div>${plan.seriesName}: ${plan.value}</div></div>`;
       },
     },
