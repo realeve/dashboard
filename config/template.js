@@ -525,7 +525,7 @@ const rewriteTestFile = () => {
   chartArr.forEach((dirName) => {
     const content = `import init from './lib.test';
 init(__filename);`;
-    fs.writeFileSync(`${dir}charts/${dirName}.ts`, content);
+    fs.writeFileSync(`${dir}charts/${dirName}.test.ts`, content);
   });
 };
 
