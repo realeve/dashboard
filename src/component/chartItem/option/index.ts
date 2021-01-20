@@ -49,4 +49,5 @@ export const chartList = [
   'waffle',
   'basePie',
   'sunburst',
+  'bar_group',
 ];

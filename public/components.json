@@ -513,7 +513,16 @@
       {
         "title": "开发测试",
         "icon": "com-font datav-com-icon icon-com-default icon-com-text_table icon-com-text",
-        "list": []
+        "list": [
+          {
+            "name": "echarts.bar_group",
+            "key": "bar_group",
+            "engine": "echarts",
+            "type": "regular_bar",
+            "title": "请设置图表名称",
+            "image": "/img/icons/01_barChartPositiveNegative.png.webp"
+          }
+        ]
       }
     ]
   }
