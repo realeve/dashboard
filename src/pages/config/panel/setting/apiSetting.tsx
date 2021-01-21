@@ -10,16 +10,10 @@ import JsonViewer from './JsonViewer';
 import { rangeConfig } from '@/utils/range';
 import { Spin } from 'antd';
 import { chartList } from '@/component/chartItem/option';
+import { getDefaultValue } from '@/pages/config/canvas/lib';
 
 import { getDataType } from '@/utils/lib';
 
-const initState = (configs: IApiConfig, api: any, dataType: 'array' | 'json' = 'array') => {
-  const { config, type, ...props } = configs;
-  // 配置项中的信息
-  const setting = getDefaultState(config, api);
-
-  return { dataType, ...props, api_type: type, ...setting, ...api };
-};
 const cacheConfig: IChartConfig = { defaultValue: 2, min: 0, step: 0.5, max: 10, type: 'range' };
 const appendConfig: IChartConfig[] = [
   {
@@ -108,7 +102,7 @@ const appendConfig: IChartConfig[] = [
     defaultValue: 10,
     min: 2,
     step: 2,
-    max: 600,
+    max: 120,
     type: 'range',
   },
   {
@@ -121,7 +115,7 @@ const appendConfig: IChartConfig[] = [
     key: 'showReport',
     subTitle: '显示该组件所引用的源数据',
     title: '显示报表',
-    defaultValue: true,
+    defaultValue: false,
     type: 'switch',
   },
   {
@@ -134,6 +128,16 @@ const appendConfig: IChartConfig[] = [
     placeholder: 'mergev=0&merge=0-2&mergetext=3',
   },
 ];
+
+const initState = (configs: IApiConfig, api: any, dataType: 'array' | 'json' = 'array') => {
+  const { config, type, ...props } = configs;
+  // 配置项中的信息
+  const setting = getDefaultState(config, api);
+
+  const apiSettingConfig = getDefaultValue(appendConfig);
+
+  return { ...apiSettingConfig, dataType, ...props, api_type: type, ...setting, ...api };
+};
 
 const ApiSetting = ({
   onChange,

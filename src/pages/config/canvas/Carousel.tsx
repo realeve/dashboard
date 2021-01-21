@@ -20,7 +20,7 @@ export default ({
   return useMemo(
     () => (
       <Carousel
-        autoplaySpeed={(props?.carouselTime || 5) * 1000}
+        autoplaySpeed={(props?.carouselTime || 10) * 1000}
         speed={800}
         dots
         pauseOnDotsHover
