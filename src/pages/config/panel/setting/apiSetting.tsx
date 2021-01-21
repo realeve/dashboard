@@ -108,7 +108,7 @@ const appendConfig: IChartConfig[] = [
     defaultValue: 10,
     min: 2,
     step: 2,
-    max: 60,
+    max: 600,
     type: 'range',
   },
   {

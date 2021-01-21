@@ -228,7 +228,7 @@ export const handleHistoryPanel: (
 export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) => IAxiosState<T> = (
   data: IAxiosState,
 ) => {
-  if (data.rows === 0) {
+  if (!data?.data?.length) {
     return data;
   }
   const res = data.data[0];
@@ -244,7 +244,7 @@ export const json2Array: <T extends any[] | axios.TDbWrite>(data: IAxiosState) =
 export const array2Json: <T extends any[] | axios.TDbWrite>(data: IAxiosState) => IAxiosState<T> = (
   data: IAxiosState,
 ) => {
-  if (data.rows === 0) {
+  if (!data?.data?.length) {
     return data;
   }
   const res = data.data[0];

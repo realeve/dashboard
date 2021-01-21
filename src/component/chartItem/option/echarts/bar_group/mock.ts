@@ -1,20 +1,21 @@
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-import * as lib from '@/component/chartItem/option/lib';
 
 export const config: IChartConfig[] = [
   {
-    key: 'legend',
-    defaultValue: 0,
+    key: 'barWidth',
+    defaultValue: 30,
+    title: '柱状宽度',
+    type: 'range',
+    min: 10,
+    max: 80,
+    step: 2,
   },
   {
-    key: 'x',
-    defaultValue: 1,
+    key: 'planName',
+    defaultValue: '计划量',
+    title: '期望值标题',
+    valueType: 'text',
   },
-  {
-    key: 'y',
-    defaultValue: 2,
-  },
-  ...lib.getPositionConfig(),
 ];
 
 export const apiConfig: IApiConfig = {
@@ -23,6 +24,8 @@ export const apiConfig: IApiConfig = {
   url: '/mock/48_bar_group.json',
   interval: 5,
   cache: 2,
+  carouselKey: 0,
+  isCarousel: true,
   config: [
     {
       key: 'legend',
@@ -503,7 +506,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '9992T',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '240',
     },
@@ -551,7 +554,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '9993T',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '0',
     },
@@ -605,7 +608,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '9994T',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '220',
     },
@@ -659,7 +662,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '9996T',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '440',
     },
@@ -713,7 +716,7 @@ export const mock: IChartMock = {
     },
     {
       品种: '9997T',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '840',
     },
@@ -773,7 +776,7 @@ export const mock: IChartMock = {
     },
     {
       品种: 'NRB10',
-      工序: '白纸投入',
+      工序: '白纸',
       机台: '计划量',
       产量: '260',
     },
