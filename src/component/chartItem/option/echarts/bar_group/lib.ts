@@ -1,12 +1,31 @@
 import * as R from 'ramda';
+import { getDataByIdx } from '@/component/chartItem/option/lib';
+
+/**
+ *获取当前数据中的最大值
+ * @param data 数据数组
+ * @param y 值索引
+ */
+export const getAxisMaxNum = ({ data, y }) => {
+  const yAxisValues = getDataByIdx({ key: y, data });
+  return Math.max(...yAxisValues);
+};
 
 export const planTooltipFormatter = (e, planName) => {
   const arr = e.filter((item) => item.value !== '-' && item.seriesName !== planName);
-  const plan = e.find((item) => item.seriesName === planName);
+
   const str = arr.map((item) => `<div>${item.marker} ${item.name}: ${item.value}</div>`).join('');
   const sum = arr.reduce((b, a) => a.value + b, 0);
+  const baseText =
+    arr.length === 0
+      ? ''
+      : `${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>`;
+
+  // 计划量
+  const plan = e.find((item) => item.seriesName === planName);
   const planText = !plan ? '' : `<div>${plan.seriesName}: ${plan.value}</div>`;
-  return `<div><b>${arr[0].axisValue}</b><br/>${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>${planText}</div>`;
+
+  return `<div><b>${e[0].axisValue}</b><br/>${baseText}${planText}</div>`;
 };
 
 interface ILabelProp {
@@ -50,6 +69,10 @@ interface IPlanDataProp {
   y: string;
   xAxisLength: number;
 }
+/**
+ * 获取计划量数据配置项
+ * @param param0
+ */
 export const handlePlanData = ({
   data,
   legend,
@@ -60,35 +83,31 @@ export const handlePlanData = ({
 }: IPlanDataProp) => {
   const plans = R.filter(R.propEq(legend, planName))(data);
   const planData = R.pluck(y, plans).map(Number);
-  const planDataMin = Math.min(...planData);
-  const res: { series: Partial<ISeriesStyle>; planDataMin: number } = {
-    series: {
-      name: planName,
-      type: 'line',
-      data: planData,
-      lineStyle: {
-        width: 0,
-      },
-      color: '#0ef',
-      symbolSize: [2, 16 + barWidth],
-      symbol: 'rect',
-      label: {
-        show: true,
-        position: 'center',
-        rotate: 90,
-        offset: [-4 - barWidth, 6],
-        color: '#fff',
-        formatter(e) {
-          if (e.dataIndex === xAxisLength - 1) {
-            return `${e.value}(${planName})`;
-          }
-          return e.value;
-        },
+  const series: Partial<ISeriesStyle> = {
+    name: planName,
+    type: 'line',
+    data: planData,
+    lineStyle: {
+      width: 0,
+    },
+    color: '#0ef',
+    symbolSize: [2, 16 + barWidth],
+    symbol: 'rect',
+    label: {
+      show: true,
+      position: 'center',
+      rotate: 90,
+      offset: [-4 - barWidth, 6],
+      color: '#fff',
+      formatter(e) {
+        if (e.dataIndex === xAxisLength - 1) {
+          return `${e.value}(${planName})`;
+        }
+        return e.value;
       },
     },
-    planDataMin,
   };
-  return res;
+  return series;
 };
 
 interface IBarGroupProps {

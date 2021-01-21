@@ -1,5 +1,5 @@
 import type { IChartMock } from '@/component/chartItem/interface';
-import { handleData, handlePlanData, planTooltipFormatter } from './lib';
+import { handleData, handlePlanData, planTooltipFormatter, getAxisMaxNum } from './lib';
 import { array2Json } from '@/utils/lib';
 import { getUniqByIdx } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
@@ -42,14 +42,18 @@ export default ({
     xAxisLength: xAxisData.length,
   });
 
+  // 当前数据下，Y轴的最大值（含计划量）
+  const axisMaxNum = getAxisMaxNum({ data: data.data, y });
+
   const seriesStyle: Partial<ISeriesStyle> = {
     type: 'bar',
     stack: 'total',
     label: {
       show: true,
       formatter(e) {
-        const percent = 0.3; // 较短的bar不显示label
-        return planSeries.planDataMin * percent - e.value > 0 ? '' : `${e.name}: ${e.value}`;
+        const percent = 0.1;
+        // 较短的bar不显示label
+        return axisMaxNum * percent > e.value ? '' : `${e.name}: ${e.value}`;
       },
       position: 'insideRight',
     },
@@ -68,7 +72,7 @@ export default ({
     ...seriesStyle,
   }))(seriesData);
 
-  series = [planSeries.series, ...series];
+  series = [planSeries, ...series];
 
   return {
     backgroundColor: '#080226',
@@ -82,16 +86,14 @@ export default ({
         return planTooltipFormatter(e, planName);
       },
     },
-    // legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {
-      // left: '3%',
-      // right: '4%',
-      // bottom: '3%',
+      right: 30,
       containLabel: true,
     },
     xAxis: {
       type: 'value',
       splitLine: null,
+      axisLabel: { color: '#fff' },
     },
     yAxis: {
       type: 'category',

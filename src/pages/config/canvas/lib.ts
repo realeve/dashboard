@@ -22,14 +22,16 @@ export const getApiConfig = (config, lib) => {
 
   const objComponent = getDefaultValue(lib?.config);
   const objApi = getDefaultValue(lib?.apiConfig?.config);
+  const apiConfig = R.clone(lib?.apiConfig || {});
+  apiConfig.api_type = lib?.apiConfig.type || '';
+  Reflect.deleteProperty(apiConfig, 'type');
+  Reflect.deleteProperty(apiConfig, 'config');
+
   const initApi = {
-    url: lib?.apiConfig?.url,
-    cache: lib?.apiConfig?.cache,
-    interval: lib?.apiConfig?.interval,
-    dataType: getDataType(lib.mock),
-    api_type: lib?.apiConfig?.type,
     showReport: api?.showReport || false,
     reportParam: api?.reportParam || '',
+    ...apiConfig,
+    dataType: getDataType(lib.mock),
   };
 
   return {

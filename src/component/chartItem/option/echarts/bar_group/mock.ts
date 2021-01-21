@@ -30,7 +30,7 @@ export const apiConfig: IApiConfig = {
     {
       key: 'legend',
       title: 'legend 字段',
-      defaultValue: 0,
+      defaultValue: 2,
       min: 0,
     },
     {
@@ -42,7 +42,7 @@ export const apiConfig: IApiConfig = {
     {
       key: 'y',
       title: 'y 字段',
-      defaultValue: 2,
+      defaultValue: 3,
       min: 0,
     },
   ],

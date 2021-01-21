@@ -64,7 +64,7 @@ const ChartRender = ({
     });
   }, [api.api_type, api.url, api.dateType, api.cache, api.appendParam]);
 
-  const isCarousel = config.api.isCarousel || false;
+  const isCarousel = api.isCarousel || false;
 
   const mock =
     api?.api_type === 'mock' || !config.ajax
@@ -85,7 +85,7 @@ const ChartRender = ({
           reportParam: api.reportParam || '',
         },
       });
-      return handleCarouselData(e, { isCarousel, carouselKey: config.api.carouselKey, onLoad });
+      return handleCarouselData(e, { isCarousel, carouselKey: api.carouselKey, onLoad });
     },
   });
 
