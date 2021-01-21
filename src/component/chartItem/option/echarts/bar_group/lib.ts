@@ -55,6 +55,7 @@ export interface ISeriesStyle extends ISeriesItemProps {
   lineStyle: {
     width: number;
   };
+  symbolOffset: number[];
   color: string;
   symbolSize: number[];
   symbol: string;
@@ -90,18 +91,18 @@ export const handlePlanData = ({
     lineStyle: {
       width: 0,
     },
-    color: '#0ef',
-    symbolSize: [2, 16 + barWidth],
+    color: '#e23',
+    symbolSize: [3, 22 + barWidth],
     symbol: 'rect',
+    symbolOffset: [0, -6],
     label: {
       show: true,
       position: 'center',
-      rotate: 90,
-      offset: [-4 - barWidth, 6],
+      offset: [-24 + barWidth, 0],
       color: '#fff',
       formatter(e) {
         if (e.dataIndex === xAxisLength - 1) {
-          return `${e.value}(${planName})`;
+          return `${planName}\n${e.value}`;
         }
         return e.value;
       },

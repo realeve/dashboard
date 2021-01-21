@@ -75,7 +75,6 @@ export default ({
   series = [planSeries, ...series];
 
   return {
-    backgroundColor: '#080226',
     tooltip: {
       trigger: 'axis',
       axisPointer: {
