@@ -4,6 +4,7 @@ import { array2Json } from '@/utils/lib';
 import { getUniqByIdx } from '@/component/chartItem/option/lib';
 import * as R from 'ramda';
 import type { ISeriesItemProps, ISeriesStyle } from './lib';
+import { getColors } from '../../g2plot/lib';
 
 export { mock, apiConfig, config, defaultOption } from './mock';
 
@@ -15,6 +16,12 @@ interface IBarGroupProps {
   x: number;
   y: number;
   planName?: string;
+  theme: number | string;
+  needRerverse: boolean;
+  isStack: boolean;
+  isReverse: boolean;
+  showBackground: boolean;
+  barBackgroundColor: string;
 }
 export default ({
   data: _data,
@@ -23,11 +30,19 @@ export default ({
   x: _x,
   y: _y,
   planName,
+  theme = 18,
+  needRerverse,
+  isStack,
+  isReverse = false,
+  showBackground,
+  barBackgroundColor,
 }: IBarGroupProps) => {
   const data = array2Json(_data);
   const x = data.header[_x];
   const y = data.header[_y];
   const legend = data.header[_legend];
+
+  const color = getColors(theme, needRerverse);
 
   const xAxisData = getUniqByIdx({ key: x, data: data.data });
 
@@ -40,6 +55,7 @@ export default ({
     barWidth,
     y,
     xAxisLength: xAxisData.length,
+    isReverse,
   });
 
   // 当前数据下，Y轴的最大值（含计划量）
@@ -47,15 +63,21 @@ export default ({
 
   const seriesStyle: Partial<ISeriesStyle> = {
     type: 'bar',
-    stack: 'total',
+    stack: isStack,
     label: {
       show: true,
       formatter(e) {
         const percent = 0.1;
         // 较短的bar不显示label
-        return axisMaxNum * percent > e.value ? '' : `${e.name}: ${e.value}`;
+        return axisMaxNum * percent > e.value
+          ? ''
+          : `${e.name}${isReverse ? '\n' : ':'} ${e.value}`;
       },
-      position: 'insideRight',
+      position: `inside${!isReverse ? 'Right' : 'Top'}`,
+    },
+    showBackground,
+    backgroundStyle: {
+      color: barBackgroundColor,
     },
   };
 
@@ -75,6 +97,7 @@ export default ({
   series = [planSeries, ...series];
 
   return {
+    color,
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -86,15 +109,15 @@ export default ({
       },
     },
     grid: {
-      right: 30,
+      [isReverse ? 'top' : 'right']: 30,
       containLabel: true,
     },
-    xAxis: {
+    [!isReverse ? 'xAxis' : 'yAxis']: {
       type: 'value',
       splitLine: null,
       axisLabel: { color: '#fff' },
     },
-    yAxis: {
+    [isReverse ? 'xAxis' : 'yAxis']: {
       type: 'category',
       data: xAxisData,
       axisTick: false,

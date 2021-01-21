@@ -49,7 +49,7 @@ export interface ISeriesItemProps {
 }
 export interface ISeriesStyle extends ISeriesItemProps {
   type: string;
-  stack: string;
+  stack: boolean;
 
   name: string;
   lineStyle: {
@@ -59,6 +59,10 @@ export interface ISeriesStyle extends ISeriesItemProps {
   color: string;
   symbolSize: number[];
   symbol: string;
+  showBackground: boolean;
+  backgroundStyle: {
+    color: string;
+  };
 
   label: Partial<ILabelProp>;
 }
@@ -69,6 +73,7 @@ interface IPlanDataProp {
   barWidth: number;
   y: string;
   xAxisLength: number;
+  isReverse: boolean;
 }
 /**
  * 获取计划量数据配置项
@@ -81,6 +86,7 @@ export const handlePlanData = ({
   barWidth,
   xAxisLength,
   y,
+  isReverse,
 }: IPlanDataProp) => {
   const plans = R.filter(R.propEq(legend, planName))(data);
   const planData = R.pluck(y, plans).map(Number);
@@ -92,13 +98,13 @@ export const handlePlanData = ({
       width: 0,
     },
     color: '#e23',
-    symbolSize: [3, 22 + barWidth],
+    symbolSize: isReverse ? [2 * barWidth + 20, 3] : [3, 22 + barWidth],
     symbol: 'rect',
-    symbolOffset: [0, -6],
+    symbolOffset: isReverse ? [-8, 0] : [0, -6],
     label: {
       show: true,
       position: 'center',
-      offset: [-24 + barWidth, 0],
+      offset: isReverse ? [0, -12] : [-24 + barWidth, 0],
       color: '#fff',
       formatter(e) {
         if (e.dataIndex === xAxisLength - 1) {

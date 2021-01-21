@@ -1,6 +1,14 @@
 import { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import * as lib from '@/component/chartItem/option/lib';
 
 export const config: IChartConfig[] = [
+  lib.getAntThemePanel(),
+  {
+    key: 'needRerverse',
+    defaultValue: false,
+    title: '翻转颜色表',
+    type: 'switch',
+  },
   {
     key: 'barWidth',
     defaultValue: 30,
@@ -10,6 +18,31 @@ export const config: IChartConfig[] = [
     max: 80,
     step: 2,
   },
+  {
+    key: 'isStack',
+    defaultValue: true,
+    type: 'switch',
+    title: '堆叠',
+  },
+  {
+    key: 'isReverse',
+    defaultValue: false,
+    type: 'switch',
+    title: '交换XY轴',
+  },
+  {
+    key: 'showBackground',
+    defaultValue: false,
+    type: 'switch',
+    title: '显示背景',
+  },
+  {
+    key: 'barBackgroundColor',
+    defaultValue: 'rgba(140,150,200,0.2)',
+    type: 'purecolor',
+    title: '背景颜色',
+  },
+  { type: 'divider', title: '数据设置，设为空时不处理对应逻辑' },
   {
     key: 'planName',
     defaultValue: '计划量',
