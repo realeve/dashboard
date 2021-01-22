@@ -109,7 +109,8 @@ export default ({
       },
     },
     grid: {
-      [isReverse ? 'top' : 'right']: 30,
+      top: 20,
+      right: 30,
       containLabel: true,
     },
     [!isReverse ? 'xAxis' : 'yAxis']: {

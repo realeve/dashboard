@@ -119,10 +119,7 @@ const Actions = ({
             <p>3.运行完毕后，系统将自动打开链接；</p>
             <p>
               4.
-              <a
-                href={`${window.location.origin}?id=/data/${title}.json&autoresize=movie`}
-                target="_blank"
-              >
+              <a href={`${window.location.origin}?id=/data/${title}.json`} target="_blank">
                 手动浏览这个链接查看线上版本
               </a>
             </p>

@@ -23,7 +23,7 @@ export const saveBat = async (title) => {
 rem move file
 copy .\\${title}.* ${api.deployDir}
 rem open website
-start ${window.location.origin}?id=/data/${title}.json&autoresize=movie
+start ${window.location.origin}?id=/data/${title}.json
 rem remove temp files
 del .\\${title}.*
 del .\\${title}_deploy.bat

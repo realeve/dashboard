@@ -23,7 +23,7 @@ export const getApiConfig = (config, lib) => {
   const objComponent = getDefaultValue(lib?.config);
   const objApi = getDefaultValue(lib?.apiConfig?.config);
   const apiConfig = R.clone(lib?.apiConfig || {});
-  apiConfig.api_type = lib?.apiConfig.type || '';
+  apiConfig.api_type = lib?.apiConfig?.type || '';
   Reflect.deleteProperty(apiConfig, 'type');
   Reflect.deleteProperty(apiConfig, 'config');
 

@@ -84,7 +84,7 @@ const ScreenItem = ({ publish = 1, title = '这是名称', file, id, img, setSho
               <Tooltip placement="bottom" title="查看大屏">
                 <a
                   className={styles['button-span']}
-                  href={`/?id=./data/${file}&autoresize=movie`}
+                  href={`/?id=./data/${file}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
