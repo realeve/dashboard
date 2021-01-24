@@ -1,5 +1,5 @@
 {
-  "rec_time": "2021-01-22 09:32:58",
+  "rec_time": "2021-01-22 10:16:10",
   "panel": [{
     "showTitle": false,
     "showBorder": false,
@@ -51,7 +51,7 @@
       "showReport": true,
       "appendParam": "",
       "carouselKey": 0,
-      "reportParam": "mergev=0",
+      "reportParam": "mergev=0-1",
       "carouselTime": 10
     },
     "key": "bar_group",
@@ -67,8 +67,8 @@
         "rotate": "0deg",
         "scale": "1,1"
       },
-      "width": "948.188px",
-      "height": "528.188px",
+      "width": "1893.19px",
+      "height": "1053.19px",
       "position": "absolute"
     },
     "title": "工序月度生产完成情况",
@@ -111,6 +111,6 @@
       "textAlign": "left",
       "padding": 10
     },
-    "thumbnail": "./YiBiaoPan.jpg"
+    "thumbnail": "./仪表盘.jpg"
   }
 }
