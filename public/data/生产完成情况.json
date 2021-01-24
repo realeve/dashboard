@@ -1,98 +1,101 @@
 {
   "rec_time": "2021-01-22 10:16:10",
-  "panel": [{
-    "showTitle": false,
-    "showBorder": false,
-    "showBackground": false,
-    "ajax": false,
-    "style": {
-      "width": "100%",
-      "height": "100%",
-      "zIndex": 1000,
-      "pointerEvents": "none",
-      "transform": {
-        "translate": ""
-      }
-    },
-    "name": "other.screen_edge",
-    "key": "screen_edge",
-    "engine": "other",
-    "type": "regular_bar",
-    "title": "屏幕分割线",
-    "image": "/img/icons/45_screen_edge.jpg",
-    "id": "def1389e24e9e",
-    "icon": "com-font icon-com-regular_bar",
-    "general": {},
-    "useGeneralStyle": false,
-    "lock": true,
-    "componentConfig": {
-      "showEdge": true,
-      "screen_x": 2,
-      "screen_y": 2,
-      "screen_edge_width": 6,
-      "screen_edge_background": "rgba(240,240,240,0.5)",
-      "showEdgeTag": true
-    },
-    "api": {}
-  }, {
-    "id": "5e84c7ca28dc3",
-    "api": {
-      "x": 1,
-      "y": 3,
-      "url": "1205/d5e436ff7e.json",
-      "show": true,
-      "cache": 2,
-      "legend": 2,
-      "api_type": "url",
-      "dataType": "array",
-      "dateType": 9,
-      "interval": 5,
-      "isCarousel": true,
-      "showReport": true,
-      "appendParam": "",
-      "carouselKey": 0,
-      "reportParam": "mergev=0-1",
-      "carouselTime": 10
-    },
-    "key": "bar_group",
-    "ajax": true,
-    "icon": "com-font icon-com-regular_bar",
-    "lock": false,
-    "name": "echarts.bar_group",
-    "type": "regular_bar",
-    "image": "/img/icons/48_bargroup.webp",
-    "style": {
-      "transform": {
-        "translate": "11.999999999999943px,11.999999999999886px",
-        "rotate": "0deg",
-        "scale": "1,1"
+  "panel": [
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "style": {
+        "width": "100%",
+        "height": "100%",
+        "zIndex": 1000,
+        "pointerEvents": "none",
+        "transform": {
+          "translate": ""
+        }
       },
-      "width": "1893.19px",
-      "height": "1053.19px",
-      "position": "absolute"
-    },
-    "title": "工序月度生产完成情况",
-    "engine": "echarts",
-    "general": {
-      "head": {
-        "color": "#aec1f9",
-        "padding": 10,
-        "fontSize": 20,
-        "textAlign": "left",
-        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      "name": "other.screen_edge",
+      "key": "screen_edge",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "屏幕分割线",
+      "image": "/img/icons/45_screen_edge.jpg",
+      "id": "def1389e24e9e",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {},
+      "useGeneralStyle": false,
+      "lock": true,
+      "componentConfig": {
+        "showEdge": true,
+        "screen_x": 2,
+        "screen_y": 2,
+        "screen_edge_width": 6,
+        "screen_edge_background": "rgba(240,240,240,0.5)",
+        "showEdgeTag": true
       },
-      "border": "border_29.svg",
-      "borderSlice": [8, 8, 8, 8],
-      "borderRadius": [0, 0, 0, 0],
-      "chartBackground": "rgba(3,11,31,0.8)"
+      "api": {}
     },
-    "showTitle": true,
-    "showBorder": true,
-    "showBackground": true,
-    "componentConfig": {},
-    "useGeneralStyle": true,
-    "business": true
-  }],
+    {
+      "id": "5e84c7ca28dc3",
+      "api": {
+        "x": 1,
+        "y": 3,
+        "url": "1205/d5e436ff7e.json",
+        "show": true,
+        "cache": 2,
+        "legend": 2,
+        "api_type": "url",
+        "dataType": "array",
+        "dateType": 9,
+        "interval": 5,
+        "isCarousel": true,
+        "showReport": true,
+        "appendParam": "",
+        "carouselKey": 0,
+        "reportParam": "mergev=0-1",
+        "carouselTime": 10
+      },
+      "key": "bar_group",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "echarts.bar_group",
+      "type": "regular_bar",
+      "image": "/img/icons/48_bargroup.webp",
+      "style": {
+        "transform": {
+          "translate": "11.999999999999943px,11.999999999999886px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "1893.19px",
+        "height": "1053.19px",
+        "position": "absolute"
+      },
+      "title": "工序月度生产完成情况",
+      "engine": "echarts",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": true,
+      "showBorder": true,
+      "showBackground": true,
+      "componentConfig": {},
+      "useGeneralStyle": true,
+      "business": true
+    }
+  ],
   "page": {
     "width": "1920",
     "height": "1080",
