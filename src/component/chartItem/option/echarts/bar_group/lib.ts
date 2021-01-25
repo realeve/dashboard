@@ -1,33 +1,6 @@
 import * as R from 'ramda';
 import { getDataByIdx } from '@/component/chartItem/option/lib';
 
-/**
- *获取当前数据中的最大值
- * @param data 数据数组
- * @param y 值索引
- */
-export const getAxisMaxNum = ({ data, y }) => {
-  const yAxisValues = getDataByIdx({ key: y, data });
-  return Math.max(...yAxisValues);
-};
-
-export const planTooltipFormatter = (e, planName) => {
-  const arr = e.filter((item) => item.value !== '-' && item.seriesName !== planName);
-
-  const str = arr.map((item) => `<div>${item.marker} ${item.name}: ${item.value}</div>`).join('');
-  const sum = arr.reduce((b, a) => a.value + b, 0);
-  const baseText =
-    arr.length === 0
-      ? ''
-      : `${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>`;
-
-  // 计划量
-  const plan = e.find((item) => item.seriesName === planName);
-  const planText = !plan ? '' : `<div>${plan.seriesName}: ${plan.value}</div>`;
-
-  return `<div><b>${e[0].axisValue}</b><br/>${baseText}${planText}</div>`;
-};
-
 interface ILabelProp {
   show: boolean;
   formatter: (e: any) => string;
@@ -42,11 +15,12 @@ export interface ISeriesItemProps {
     | number
     | string
     | {
-        name: string;
-        value: number;
-      }
+      name: string;
+      value: number;
+    }
   )[];
 }
+
 export interface ISeriesStyle extends ISeriesItemProps {
   type: string;
   stack: boolean;
@@ -66,6 +40,7 @@ export interface ISeriesStyle extends ISeriesItemProps {
 
   label: Partial<ILabelProp>;
 }
+
 interface IPlanDataProp {
   data: any[];
   legend: string;
@@ -75,6 +50,48 @@ interface IPlanDataProp {
   xAxisLength: number;
   isReverse: boolean;
 }
+
+interface IBarGroupProps {
+  data: {}[];
+  xAxisData: string[];
+  x: string;
+  y: string;
+  legend: string;
+}
+
+/**
+ *获取当前数据中的最大值
+ * @param data 数据数组
+ * @param y 值索引
+ */
+export const getAxisMaxNum = ({ data, y }) => {
+  const yAxisValues = getDataByIdx({ key: y, data });
+  return Math.max(...yAxisValues);
+};
+
+interface IPropsE {
+  value: number | string;
+  seriseName: string;
+  marker: string;
+  name: string;
+  [key: string]: any;
+};
+
+export const planTooltipFormatter = ({ e, planName }: { e: IPropsE[], planName: string }) => {
+  const arr = R.filter((item: IPropsE) => item.value !== '-' && item.seriesName !== planName)(e);
+  const str = R.join('')(R.map((item: IPropsE) => `<div>${item.marker} ${item.name}: ${item.value}</div>`)(arr));
+  const sum = R.reduce((b, a: IPropsE) => Number(a.value) + b, 0)(arr);
+  const baseText = arr.length === 0 
+                    ? '' 
+                    : `${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>`;
+
+  // 计划量
+  const plan = R.find((item: IPropsE) => item.seriesName === planName)(e);
+  const planText = !plan ? '' : `<div>${plan.seriesName}: ${plan.value}</div>`;
+
+  return `<div><b>${e[0].axisValue}</b><br/>${baseText}${planText}</div>`;
+};
+
 /**
  * 获取计划量数据配置项
  * @param param0
@@ -114,16 +131,9 @@ export const handlePlanData = ({
       },
     },
   };
+
   return series;
 };
-
-interface IBarGroupProps {
-  data: {}[];
-  xAxisData: string[];
-  x: string;
-  y: string;
-  legend: string;
-}
 
 export const handleData = ({ data, xAxisData, legend, x, y }: IBarGroupProps) => {
   const allProcessGroup = R.groupBy((c) => c[x])(data);
