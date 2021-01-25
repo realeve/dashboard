@@ -105,7 +105,7 @@ export default ({
         type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
       },
       formatter(e) {
-        return planTooltipFormatter({e, planName});
+        return planTooltipFormatter({ e, planName });
       },
     },
     grid: {

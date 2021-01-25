@@ -15,9 +15,9 @@ export interface ISeriesItemProps {
     | number
     | string
     | {
-      name: string;
-      value: number;
-    }
+        name: string;
+        value: number;
+      }
   )[];
 }
 
@@ -75,15 +75,18 @@ interface IPropsE {
   marker: string;
   name: string;
   [key: string]: any;
-};
+}
 
-export const planTooltipFormatter = ({ e, planName }: { e: IPropsE[], planName: string }) => {
+export const planTooltipFormatter = ({ e, planName }: { e: IPropsE[]; planName: string }) => {
   const arr = R.filter((item: IPropsE) => item.value !== '-' && item.seriesName !== planName)(e);
-  const str = R.join('')(R.map((item: IPropsE) => `<div>${item.marker} ${item.name}: ${item.value}</div>`)(arr));
+  const str = R.join('')(
+    R.map((item: IPropsE) => `<div>${item.marker} ${item.name}: ${item.value}</div>`)(arr),
+  );
   const sum = R.reduce((b, a: IPropsE) => Number(a.value) + b, 0)(arr);
-  const baseText = arr.length === 0 
-                    ? '' 
-                    : `${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>`;
+  const baseText =
+    arr.length === 0
+      ? ''
+      : `${str}<div style="border-top:1px solid #ddd;margin-top:8px;padding-top:8px">合计: ${sum}</div>`;
 
   // 计划量
   const plan = R.find((item: IPropsE) => item.seriesName === planName)(e);
