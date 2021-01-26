@@ -1,14 +1,15 @@
 :global {
   .ant-carousel {
     height: 100%;
-
+    overflow: hidden;
     &:hover {
       .slick-prev,
-      .slick-next,
-      .slick-dots {
+      .slick-next {
         opacity: 1;
       }
     }
+
+    @buttonPosition: 10px;
 
     .slick {
       &-slider {
@@ -21,7 +22,7 @@
         height: 100%;
       }
       &-prev {
-        left: 0;
+        left: @buttonPosition;
         z-index: 100;
         border-top: 3px solid #373737;
         border-left: 3px solid #373737;
@@ -35,7 +36,7 @@
         }
       }
       &-next {
-        right: 0;
+        right: @buttonPosition;
         z-index: 100;
         opacity: 0;
         transition: opacity 0.3s linear;
@@ -52,7 +53,11 @@
         opacity: 0.2;
         transition: opacity 0.3s linear;
         &-bottom {
-          bottom: -20px;
+          // bottom: -20px;
+          bottom: 5px;
+        }
+        &:hover {
+          opacity: 1;
         }
       }
     }

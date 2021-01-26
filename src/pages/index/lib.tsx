@@ -4,6 +4,7 @@ import { getDashboardStyle } from '@/component/Editor/lib';
 import { message } from 'antd';
 import type { IPage, IPanelConfig } from '@/models/common';
 import { parseStyle, calcTranslate } from '@/pages/config/lib';
+import * as R from 'ramda';
 
 export enum EResizeType {
   NONE = 'none', // 不缩放
@@ -62,10 +63,14 @@ export const getConfig = async (url) => {
         baseURL: window.location.origin,
       };
     }
-    return axios(option).then((config: IAxiosState | string) => {
+    return axios(option).then((config: IAxiosState | string | IAxiosState[]) => {
       if (typeof config === 'string' && config.slice(0, 15) === '<!DOCTYPE html>') {
         return { type: 'notExist' };
       }
+      if (R.type(config) === 'Array') {
+        return config;
+      }
+
       return { type: 'online', ...(config as IAxiosState) };
     });
   }

@@ -1,0 +1,66 @@
+{
+  "rec_time": "2021-01-26 21:24:58",
+  "panel": [
+    {
+      "showTitle": true,
+      "showBorder": true,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "213.00000000000006px,67px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "875.188px",
+        "height": "460.188px"
+      },
+      "name": "echarts.base_line",
+      "key": "base_line",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "基础曲线图",
+      "image": "/img/icons/43_baseline.png.webp",
+      "id": "f34356953ad5a",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {},
+      "api": {}
+    }
+  ],
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "bg_03.png.webp",
+    "author": "管理员",
+    "title": "2",
+    "padding": 15,
+    "border": "border_29.svg",
+    "borderSlice": [8, 8, 8, 8],
+    "borderRadius": [0, 0, 0, 0],
+    "chartBackground": "rgba(3,11,31,0.8)",
+    "head": {
+      "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+      "fontSize": 12,
+      "color": "#aec1f9",
+      "textAlign": "left",
+      "padding": 10
+    },
+    "thumbnail": "./2.jpg"
+  }
+}

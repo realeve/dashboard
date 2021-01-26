@@ -14,6 +14,8 @@ import { getDashboardStyle } from '@/component/Editor/lib';
 import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 import { useLocation } from 'umi';
+import * as R from 'ramda';
+import { Carousel, Tooltip } from 'antd';
 
 const ScaleBackground = ({
   resizeType,
@@ -60,30 +62,33 @@ const ScaleBackground = ({
     </div>
   );
 };
-/**
- *
- * @enum autoresize=scale(横纵向缩放)
- * @enum autoresize=component:(只缩放组件的尺寸和位置)
- * @enum 不设置或其它(不缩放)
- * @enum autoresize=movie(电影一样留出左右两边)
- */
-// DEMO:  http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
-const Index = () => {
-  const [config, setConfig] = useState(null);
 
-  const location = useLocation<{ query: Record<string, any> }>();
+const DashBoard = ({
+  config: propConfig,
+  url,
+  autoSize,
+}: {
+  config?: any;
+  url: string;
+  autoSize: any;
+}) => {
+  const [config, setConfig] = useState(propConfig);
 
   useEffect(() => {
+    if (propConfig) {
+      return;
+    }
     setConfig(null);
-    getConfig(location?.query.id).then(setConfig);
-  }, [location?.query.id]);
+    getConfig(url).then(setConfig);
+  }, [url]);
+
   if (!config) {
     return <DNA />;
   }
+
   const { page, panel, type } = config;
-  const autoSize = location?.query?.autoresize;
   if (type === 'notExist') {
-    return <DNA title={`文件${location?.query?.id}加载失败，请检查是否上传!`} />;
+    return <DNA title={`文件${url}加载失败，请检查是否上传!`} />;
   }
 
   const resizeType = getResizeType(autoSize);
@@ -104,6 +109,61 @@ const Index = () => {
       )}
     </ScaleBackground>
   );
+};
+
+/**
+ *
+ * @enum autoresize=scale(横纵向缩放)
+ * @enum autoresize=component:(只缩放组件的尺寸和位置)
+ * @enum 不设置或其它(不缩放)
+ * @enum autoresize=movie(电影一样留出左右两边)
+ */
+// DEMO:  http://localhost:8000/?id=/data/YiBiaoPan.json&autoresize=component
+const Index = () => {
+  const [config, setConfig] = useState(null);
+  // const [current, setCurrent] = useState(0);
+
+  const location = useLocation<{ query: Record<string, any> }>();
+
+  useEffect(() => {
+    setConfig(null);
+    getConfig(location?.query.id).then(setConfig);
+  }, [location?.query.id]);
+
+  const autoSize = location?.query?.autoresize;
+
+  if (!config) {
+    return <DNA />;
+  }
+
+  if (R.type(config) === 'Array') {
+    return (
+      <Carousel
+        autoplaySpeed={(location?.query?.speed || 10) * 1000}
+        speed={800}
+        dots
+        pauseOnDotsHover={false}
+        pauseOnFocus={false}
+        arrows={false}
+        autoplay
+        lazyLoad="ondemand"
+        // afterChange={(e) => {
+        //   setCurrent(e);
+        // }}
+        customPaging={(i) => (
+          <Tooltip title={config[i].title} placement="bottom">
+            <button style={{ height: 12, borderRadius: '50%' }}>{i}</button>
+          </Tooltip>
+        )}
+      >
+        {config.map((item) => (
+          <DashBoard key={item.url} url={item.url} autoSize={autoSize} />
+        ))}
+      </Carousel>
+    );
+  }
+
+  return <DashBoard config={config} url={location?.query?.id} autoSize={autoSize} />;
 };
 
 export default Index;

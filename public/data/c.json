@@ -1,0 +1,10 @@
+[
+  {
+    "title": "生产信息",
+    "url": "/data/1.json"
+  },
+  {
+    "title": "质量信息",
+    "url": "/data/2.json"
+  }
+]
