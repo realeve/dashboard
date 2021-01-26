@@ -226,7 +226,7 @@ const ApiSetting = ({
                 handleStateChange(res, config, false);
               }}
               config={config}
-              disabled={isBusiness}
+              // disabled={isBusiness}
             />
           ))}
 

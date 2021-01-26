@@ -41,7 +41,11 @@ export const mock: IChartMock = {
 
 export const handleData = (
   { data, header },
-  { legend, x, y }: { legend?: number | string; x: number | string; y: number | string },
+  {
+    legend,
+    x,
+    y,
+  }: { legend?: number | string | undefined; x: number | string; y: number | string },
 ) => {
   const xArr = lib.getUniqByIdx({ key: x, data });
   const series = [];

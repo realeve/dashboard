@@ -1,5 +1,5 @@
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
-import { orderOption } from '@/component/chartItem/option/lib';
+import { orderOption, disableLegend } from '@/component/chartItem/option/lib';
 
 export { config } from './config';
 
@@ -29,6 +29,7 @@ export const apiConfig: IApiConfig = {
   interval: 5,
   cache: 2,
   config: [
+    disableLegend,
     {
       key: 'legend',
       title: 'legend 字段',

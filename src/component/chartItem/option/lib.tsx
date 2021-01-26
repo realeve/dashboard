@@ -852,6 +852,13 @@ export function getPercentWithPrecision(
   return seats.map((item) => item / digits);
 }
 
+export const disableLegend: IChartConfig = {
+  key: 'disableLegend',
+  title: '禁用legend',
+  defaultValue: false,
+  type: 'switch',
+};
+
 /**
  * 数据排序配置项
  */
@@ -885,6 +892,11 @@ export const orderDataByValue = ({
   const orderFn = order === '升序' ? R.ascend(R.prop(String(key))) : R.descend(R.prop(String(key)));
   return {
     ...nextData,
-    data: R.sort(orderFn)(nextData.data),
+    data: R.sort(orderFn)(
+      nextData.data.map((item) => ({
+        ...item,
+        [key]: Number(item[key]),
+      })),
+    ),
   };
 };

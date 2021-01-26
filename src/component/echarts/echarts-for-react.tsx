@@ -82,6 +82,7 @@ export default class EchartsReactCore extends Component<IChartProps> {
       elementResizeEvent(this.echartsElement, () => {
         echartObj?.resize();
       });
+      this.props.updateInstance(echartObj);
     }
   }
 

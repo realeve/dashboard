@@ -40,6 +40,7 @@ export const getMarkArea: (num: number, step?: number, split?: string) => IChart
 export const getMarkAreaData: (
   markTitle: string,
   markArea: [number, number],
+  isReverse?: boolean,
 ) => {
   name?: string;
   label?: {
@@ -49,7 +50,7 @@ export const getMarkAreaData: (
   };
   itemStyle?: { color: string };
   yAxis: number;
-}[] = (markTitle, markArea) => {
+}[] = (markTitle, markArea, isReverse = false) => {
   if (markTitle.length > 0) {
     return [
       {
@@ -58,11 +59,12 @@ export const getMarkAreaData: (
           position: 'right',
           offset: [-(markTitle.length * 9), 0],
           color: '#fff',
+          rotate: isReverse ? 90 : 0,
         },
-        yAxis: markArea[0],
+        [isReverse ? 'xAxis' : 'yAxis']: markArea[0],
       },
       {
-        yAxis: markArea[1],
+        [isReverse ? 'xAxis' : 'yAxis']: markArea[1],
       },
     ];
   }
@@ -121,6 +123,7 @@ export const handlePercent = (series: ISeries[]) => {
 
 export const getMarkAreaInfo = ({
   showMarkArea,
+  isReverse = false,
   markAreaColor,
   markAreaColor2,
   markTitle1 = '',
@@ -136,11 +139,11 @@ export const getMarkAreaInfo = ({
 }) => {
   let markAreaInfo = {};
   if (showMarkArea) {
-    let markData = [getMarkAreaData(markTitle1, markArea1)];
-    markData = [...markData, getMarkAreaData(markTitle2, markArea2)];
-    markData = [...markData, getMarkAreaData(markTitle3, markArea3)];
-    markData = [...markData, getMarkAreaData(markTitle4, markArea4)];
-    markData = [...markData, getMarkAreaData(markTitle5, markArea5)];
+    let markData = [getMarkAreaData(markTitle1, markArea1, isReverse)];
+    markData = [...markData, getMarkAreaData(markTitle2, markArea2, isReverse)];
+    markData = [...markData, getMarkAreaData(markTitle3, markArea3, isReverse)];
+    markData = [...markData, getMarkAreaData(markTitle4, markArea4, isReverse)];
+    markData = [...markData, getMarkAreaData(markTitle5, markArea5, isReverse)];
     markData = markData.filter((item) => item.length);
     markData = markData.filter((item, i) => {
       const nextItem = R.clone(item);

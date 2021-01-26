@@ -94,6 +94,7 @@ export default ({
   fontSize,
   fontColor,
   order,
+  disableLegend,
 }: IEchartsBaselineProps) => {
   if (String(legend) === '') {
     return {};
@@ -111,12 +112,13 @@ export default ({
     data,
   });
 
-  const res = handleData(nextData, { legend, x, y });
+  const res = handleData(nextData, { legend: disableLegend ? undefined : legend, x, y });
 
   const color = getColors(theme, needRerverse);
 
   const markAreaInfo = utils.getMarkAreaInfo({
     showMarkArea,
+    isReverse,
     markAreaColor,
     markAreaColor2,
     markTitle1,

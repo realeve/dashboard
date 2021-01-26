@@ -117,6 +117,9 @@ export type IEchartsBaselineProps = {
 
   /** 数据排序方式 */
   readonly order: '不排序' | '升序' | '降序';
+
+  /** 是否禁用legend数据 */
+  readonly disableLegend: boolean;
 } & ILegendProps &
   IApiProps;
 

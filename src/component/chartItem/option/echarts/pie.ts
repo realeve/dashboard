@@ -63,15 +63,17 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
         type: 'pie',
         label: {
           show: false,
-          emphasis: {
+        },
+        emphasis: {
+          label: {
+            show: false,
+          },
+          labelLine: {
             show: false,
           },
         },
         labelLine: {
           show: false,
-          emphasis: {
-            show: false,
-          },
         },
         animation: false,
         tooltip: {
