@@ -110,7 +110,15 @@ export type IEchartsBaselineProps = {
 
   /** 鼠标移入时，tooltip对应的坐标轴样式 */
   readonly axisPointer: 'shadow' | 'cross' | 'line';
-} & ILegendProps & IApiProps
+
+  /** 标签样式 */
+  readonly fontSize: number;
+  readonly fontColor: string;
+
+  /** 数据排序方式 */
+  readonly order: '不排序' | '升序' | '降序';
+} & ILegendProps &
+  IApiProps;
 
 export interface ISeries {
   name: string;

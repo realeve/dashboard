@@ -1,4 +1,5 @@
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
+import { orderOption } from '@/component/chartItem/option/lib';
 
 export { config } from './config';
 
@@ -46,6 +47,7 @@ export const apiConfig: IApiConfig = {
       defaultValue: 2,
       min: 0,
     },
+    orderOption,
   ],
 };
 

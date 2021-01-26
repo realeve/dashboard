@@ -91,7 +91,7 @@ const TabBusiness = ({ onAddPanel, businessCategory }: IBusinessTabProps) => {
             return {
               title,
               list: nextList,
-              num: item.list.length,
+              num: nextList.length,
             };
           });
 

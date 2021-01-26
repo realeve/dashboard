@@ -81,12 +81,6 @@ export const config: IChartConfig[] = [
     title: '尾部跟随标签',
   },
   {
-    key: 'showLabel',
-    defaultValue: false,
-    type: 'switch',
-    title: '显示标签',
-  },
-  {
     key: 'isReverse',
     defaultValue: false,
     type: 'switch',
@@ -105,6 +99,31 @@ export const config: IChartConfig[] = [
       { value: 'shadow', title: '阴影' },
       { value: 'cross', title: '十字准星' },
     ],
+  },
+  {
+    type: 'divider',
+    title: '标签设置',
+  },
+  {
+    key: 'showLabel',
+    defaultValue: false,
+    type: 'switch',
+    title: '显示标签',
+  },
+  {
+    key: 'fontSize',
+    defaultValue: 12,
+    title: '字号',
+    step: 1,
+    type: 'range',
+    min: 10,
+    max: 100,
+  },
+  {
+    key: 'fontColor',
+    defaultValue: '#f2f2f2',
+    title: '颜色',
+    type: 'purecolor',
   },
   {
     type: 'divider',
@@ -143,7 +162,7 @@ export const config: IChartConfig[] = [
     title: '宽度',
     type: 'range',
     min: 10,
-    max: 40,
+    max: 80,
     step: 2,
   },
   {
@@ -156,7 +175,7 @@ export const config: IChartConfig[] = [
     key: 'barBackgroundColor',
     defaultValue: 'rgba(140,150,200,0.2)',
     type: 'purecolor',
-    title: '背景颜色', 
+    title: '背景颜色',
   },
   {
     key: 'roundCap',
@@ -216,14 +235,14 @@ export const config: IChartConfig[] = [
     defaultValue: 'rgba(255,255,255,0.1)',
     type: 'purecolor',
     title: '标记区域颜色',
-    position: 'bottom', 
+    position: 'bottom',
   },
   {
     key: 'markAreaColor2',
     defaultValue: 'rgba(255,255,255,0.3)',
     type: 'purecolor',
     title: '标记区域颜色2',
-    position: 'bottom', 
+    position: 'bottom',
   },
   ...utils.getMarkArea(5, 1),
 ];

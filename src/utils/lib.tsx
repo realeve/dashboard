@@ -275,3 +275,12 @@ export const getTableExtraLabel = ({ header, data }) => {
   }
   return header.map((item, idx) => `${item}:${data[0][idx]}`);
 };
+
+// /**
+//  * 处理js中的小数显示
+//  *
+//  * @param num 需要处理的数据
+//  */
+// export const prettyNumber = (num:string|number)=>{
+//   let nextNum = Number(num)
+// }

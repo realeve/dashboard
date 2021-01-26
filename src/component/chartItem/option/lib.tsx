@@ -4,7 +4,7 @@ import type { EChartsSeriesType } from 'echarts';
 import * as Position from '@/component/field/Align/iconPosition';
 import * as Align from '@/component/field/Align/iconAlign';
 import { BarChartOutlined, LineChartOutlined, AreaChartOutlined } from '@ant-design/icons';
-import type { IChartConfig } from '@/component/chartItem/interface';
+import type { IChartMock, IChartConfig } from '@/component/chartItem/interface';
 
 import { palette } from '@/component/g2plot/palette';
 // 获取最佳轴长度
@@ -851,3 +851,40 @@ export function getPercentWithPrecision(
 
   return seats.map((item) => item / digits);
 }
+
+/**
+ * 数据排序配置项
+ */
+export const orderOption: IChartConfig = {
+  key: 'order',
+  title: '对Y轴排序',
+  defaultValue: '不排序',
+  type: 'radio',
+  option: `不排序,升序,降序`,
+};
+
+/**
+ * 对数据排序
+ * @param order 排序方式
+ * @param data 原始数据
+ * @param key 需要排序的索引字段
+ */
+export const orderDataByValue = ({
+  order,
+  data,
+  key,
+}: {
+  order: '不排序' | '升序' | '降序';
+  data: IChartMock;
+  key: string | number;
+}) => {
+  const nextData = R.clone(data);
+  if (order === '不排序') {
+    return nextData;
+  }
+  const orderFn = order === '升序' ? R.ascend(R.prop(String(key))) : R.descend(R.prop(String(key)));
+  return {
+    ...nextData,
+    data: R.sort(orderFn)(nextData.data),
+  };
+};

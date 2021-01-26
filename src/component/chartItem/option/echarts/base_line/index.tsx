@@ -91,6 +91,9 @@ export default ({
   symbolSize,
   roundCap,
   axisPointer = 'shadow',
+  fontSize,
+  fontColor,
+  order,
 }: IEchartsBaselineProps) => {
   if (String(legend) === '') {
     return {};
@@ -100,7 +103,15 @@ export default ({
   if (isPolar) {
     import('echarts/lib/component/polar');
   }
-  const res = handleData(data, { legend, x, y });
+
+  // 数据排序功能
+  const nextData = lib.orderDataByValue({
+    key: y,
+    order,
+    data,
+  });
+
+  const res = handleData(nextData, { legend, x, y });
 
   const color = getColors(theme, needRerverse);
 
@@ -139,7 +150,6 @@ export default ({
     align: 'left',
     verticalAlign: 'middle',
     rotate: isReverse ? 0 : 90,
-    formatter: '{a}  {c}',
     fontSize: 16,
   };
 
@@ -205,11 +215,13 @@ export default ({
     label: {
       show: showLabel,
       position: `inside${isReverse ? 'Right' : 'Top'}`,
-      color: '#fff',
 
       // https://echarts.apache.org/next/examples/en/editor.html?c=bar-label-rotation
       // 柱状图标签自动旋转
       ...(showEndlabel && chartType === 'bar' ? barLabelOption : {}),
+      color: fontColor,
+      fontSize,
+      formatter: (e) => (showEndlabel ? `${e.seriesName} ${Number(e.value)}` : Number(e.value)),
     },
     showBackground,
     backgroundStyle: {

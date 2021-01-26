@@ -131,6 +131,8 @@ export const onMount = (
     sync: true,
   };
 
+  const content = (obj) => Number(obj[y]);
+
   chart.scale({
     [y]: yConfig,
     [legend]: {
@@ -206,7 +208,7 @@ export const onMount = (
     transpose: isVertical,
     ...showTitle,
     // 自动调整两侧间距
-    padding: isVertical ? [0, 45 + 13 * Math.max(...xLen), 0, 0] : [0, 0, 30, 0],
+    padding: isVertical ? [0, 45 + 5 * Math.max(...xLen), 0, 0] : [0, 0, 30, 0],
     eachView: function eachView(view, facet) {
       const facetIndex = facet[isVertical ? 'columnIndex' : 'rowIndex'];
 
@@ -217,6 +219,7 @@ export const onMount = (
         .label(y, () => {
           if (!isVertical) {
             return {
+              content,
               position: 'top',
               offsetY: facetIndex === 1 ? 30 : 7,
               style: {
@@ -226,6 +229,7 @@ export const onMount = (
           }
 
           return {
+            content,
             position: 'right',
             offset: facetIndex === 0 ? -4 : 4,
             style: {
