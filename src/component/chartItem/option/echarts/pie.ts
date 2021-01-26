@@ -55,6 +55,9 @@ export default ({ data: value, x = 0, y = 1, circlePos = 'inner', roseType = '' 
           show: false,
         },
         data,
+        // https://github.com/apache/echarts/issues/14122
+        // echarts 5.0下，做选中需要设定 selectedMode
+        selectedMode: 'single',
       },
       {
         radius: radius[1],
