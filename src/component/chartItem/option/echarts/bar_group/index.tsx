@@ -22,6 +22,8 @@ interface IBarGroupProps {
   isReverse: boolean;
   showBackground: boolean;
   barBackgroundColor: string;
+  fontSize: number;
+  fontColor: string;
 }
 export default ({
   data: _data,
@@ -36,6 +38,8 @@ export default ({
   isReverse = false,
   showBackground,
   barBackgroundColor,
+  fontSize = 12,
+  fontColor = '#f2f2f2',
 }: IBarGroupProps) => {
   const data = array2Json(_data);
   const x = data.header[_x];
@@ -74,6 +78,8 @@ export default ({
           : `${e.name}${isReverse ? '\n' : ':'} ${e.value}`;
       },
       position: `inside${!isReverse ? 'Right' : 'Top'}`,
+      fontSize,
+      color: fontColor,
     },
     showBackground,
     backgroundStyle: {

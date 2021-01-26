@@ -8,6 +8,7 @@ interface ILabelProp {
   rotate: number;
   offset: number[];
   color: string;
+  fontSize: number;
 }
 
 export interface ISeriesItemProps {

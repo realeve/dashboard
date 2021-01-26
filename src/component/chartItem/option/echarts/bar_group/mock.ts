@@ -49,6 +49,25 @@ export const config: IChartConfig[] = [
     title: '期望值标题',
     valueType: 'text',
   },
+  {
+    type: 'divider',
+    title: '标签设置',
+  },
+  {
+    key: 'fontSize',
+    defaultValue: 12,
+    title: '字号',
+    step: 1,
+    type: 'range',
+    min: 12,
+    max: 100,
+  },
+  {
+    key: 'fontColor',
+    defaultValue: '#f2f2f2',
+    title: '颜色',
+    type: 'purecolor',
+  },
 ];
 
 export const apiConfig: IApiConfig = {

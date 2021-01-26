@@ -29,7 +29,8 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
   if (!config || config.hide) {
     return null;
   }
-  const instanceHeight = config.showTitle ? `calc(100% - 50px)` : '100%';
+  // console.log(config, config.showTitle);
+  const instanceHeight = config.showTitle && config.showBorder ? `calc(100% - 50px)` : '100%';
 
   return (
     <ErrorBoundary>
