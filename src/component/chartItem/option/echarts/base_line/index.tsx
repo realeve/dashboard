@@ -95,6 +95,8 @@ export default ({
   fontColor,
   order,
   disableLegend,
+  showX = true,
+  showY = true,
 }: IEchartsBaselineProps) => {
   if (String(legend) === '') {
     return {};
@@ -266,6 +268,7 @@ export default ({
           show: false,
         },
         axisLabel: {
+          show: showY,
           color: '#ddd',
         },
         axisLine: {
@@ -283,6 +286,7 @@ export default ({
         },
         data: isReverse ? res.xArr.reverse() : res.xArr,
         axisLine: {
+          show: showX,
           lineStyle: {
             color: '#ddd',
           },

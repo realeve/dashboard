@@ -87,6 +87,20 @@ export const config: IChartConfig[] = [
     title: '交换XY轴',
   },
   {
+    key: 'showX',
+    defaultValue: true,
+    type: 'switch',
+    subTitle: '显示X轴刻度线，在交换X/Y轴时建议关闭',
+    title: '显示X轴',
+  },
+  {
+    key: 'showY',
+    defaultValue: true,
+    type: 'switch',
+    subTitle: '显示Y轴标签',
+    title: '显示Y轴',
+  },
+  {
     key: 'axisPointer',
     defaultValue: 'shadow',
     type: 'radio',

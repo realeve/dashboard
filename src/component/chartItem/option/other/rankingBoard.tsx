@@ -93,6 +93,10 @@ export const config = [
         value: 10,
       },
       {
+        title: '15条',
+        value: 15,
+      },
+      {
         title: '20条',
         value: 20,
       },

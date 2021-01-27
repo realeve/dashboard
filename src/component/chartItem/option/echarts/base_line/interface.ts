@@ -31,6 +31,12 @@ export type IEchartsBaselineProps = {
   /** 交换XY轴 */
   readonly isReverse: boolean;
 
+  /** 显示X轴线 */
+  readonly showX: boolean;
+
+  /** 显示Y轴标签 */
+  readonly showY: boolean;
+
   /** 显示尾部跟随标签 */
   readonly showEndlabel: boolean;
 

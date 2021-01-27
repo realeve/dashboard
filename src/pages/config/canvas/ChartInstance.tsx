@@ -44,7 +44,7 @@ const ChartRender = ({
   chartid,
   chartLib,
   onDataLoad,
-  currentDashboardPage,
+  currentDashboardPage = true,
 }: ChartRenderProps) => {
   const [inited, setInited] = useState(false);
   const ref = useRef(null);

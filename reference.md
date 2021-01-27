@@ -74,6 +74,7 @@ https://web.raykite.com/square/play/2708cbb4b1d04b248537850459b80e9a/true
 
 https://web.raykite.com/square
 
+https://www.zcool.com.cn/collection/ZMjY5NzAzMTY=?from=search&word=%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B1%8F%E6%98%BE%E7%A4%BA%E8%AE%BE%E8%AE%A1
 
 --- 
 
@@ -133,3 +134,10 @@ A——B——C
 [Typescript 类型练习 https://github.com/type-challenges/type-challenges](https://github.com/type-challenges/type-challenges)
 
 [微软无头浏览器playwright https://playwright.dev/](https://playwright.dev/)
+
+
+## TODO 下一版本
+
+1.调整首页 全屏切换按钮的模式；（类似播放按钮）
+2.冠字列表组件优化；
+3.新增检封大量业务；

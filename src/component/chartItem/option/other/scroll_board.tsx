@@ -3,6 +3,7 @@ import type { IScrollBoardProps } from '@/component/widget/ScrollBoard';
 import ScrollBoard from '@/component/widget/ScrollBoard';
 import * as lib from '../lib';
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
+import { SEARCH_PREFIX } from '@/utils/setting';
 
 export const mock: IChartMock = {
   header: ['列1', '列2', '列3'],
@@ -64,6 +65,10 @@ export const config: IChartConfig[] = [
         value: 10,
       },
       {
+        title: '15条',
+        value: 15,
+      },
+      {
         title: '20条',
         value: 20,
       },
@@ -86,6 +91,14 @@ export const config: IChartConfig[] = [
     defaultValue: false,
     title: '使用系统默认字体',
     type: 'switch',
+  },
+  {
+    key: 'hoverColumns',
+    defaultValue: '',
+    title: '交互数据列',
+    placeholder: '使用逗号分割',
+    type: 'input',
+    valueType: 'text',
   },
   ...lib.getFontConfig(),
 
@@ -146,11 +159,17 @@ interface IScrollTable {
 
 export default ({
   option: { data, waitTime = 4, ...props },
-  onClick = () => {},
+  onClick = null,
   style = {},
 }: IScrollTable) =>
-  useMemo(
-    () => (
+  useMemo(() => {
+    // eslint-disable-next-line
+    let hoverColumns: number[] | string = props.hoverColumns;
+    if (typeof hoverColumns === 'string') {
+      hoverColumns = hoverColumns.split(',').map((item) => Number(item));
+    }
+
+    return (
       <ScrollBoard
         config={{
           ...data,
@@ -158,13 +177,19 @@ export default ({
           align: ['center'],
           waitTime: waitTime * 1000,
           ...props,
+          hoverColumns,
         }}
-        onClick={onClick}
+        onClick={(e) => {
+          if (onClick) {
+            onClick(e);
+            return;
+          }
+          window.open(SEARCH_PREFIX + e.ceil, '_blank');
+        }}
         style={style}
       />
-    ),
-    [JSON.stringify(props), data?.hash],
-  );
+    );
+  }, [JSON.stringify(props), data?.hash]);
 
 // style.width, style.height waitTime,
 
