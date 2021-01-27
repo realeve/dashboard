@@ -42,7 +42,8 @@
       "componentConfig": {},
       "api": {
         "show": true,
-        "interval": 0.1}
+        "interval": 0.1
+      }
     }
   ],
   "page": {
