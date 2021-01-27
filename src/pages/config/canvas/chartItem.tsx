@@ -15,8 +15,10 @@ const Report = React.lazy(() => import('./Report'));
 interface IChartItemProps {
   page: IPage;
   config: IPanelConfig;
+  /** 当前页面索引 */
+  currentDashboardPage: boolean;
 }
-export const ChartItem = ({ page, config }: IChartItemProps) => {
+export const ChartItem = ({ page, config, currentDashboardPage }: IChartItemProps) => {
   const [title, setTitle] = useState(JSON.parse(config.api.mock || '{}').title || config?.title);
   const [data, setData] = useState<{
     data: IAxiosState;
@@ -62,6 +64,7 @@ export const ChartItem = ({ page, config }: IChartItemProps) => {
           onLoad={setTitle}
           chartid={config.id}
           onDataLoad={setData}
+          currentDashboardPage={currentDashboardPage}
         />
       </BorderItem>
     </ErrorBoundary>

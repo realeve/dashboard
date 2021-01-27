@@ -40,7 +40,10 @@
       "useGeneralStyle": true,
       "lock": false,
       "componentConfig": {},
-      "api": {}
+      "api": {
+        "show": true,
+        "interval": 0.1
+		}
     }
   ],
   "page": {

@@ -215,13 +215,26 @@ export interface IHistoryProps {
   curHistoryIdx: number; // 当前历史记录的指针
 }
 export type ICommon = {
-  panel: IPanelConfig[]; // 配置页面中面板列表
-  selectedPanel: string[]; // 当前选中面板
-  page: Partial<IPage>; // 当前页面设置
-  curTool: TQuickTool; // 当前的工具
-  businessCategory: IBusinessCategory[]; // 业务组件两级分类
+  /** 配置页面中面板列表 */
+  panel: IPanelConfig[]; //
+  /** 当前选中面板 */
+  selectedPanel: string[];
+  /** 当前页面设置 */
+  page: Partial<IPage>;
+  /** 当前的工具 */
+  curTool: TQuickTool;
+
+  /** 业务组件两级分类 */
+  businessCategory: IBusinessCategory[];
+
+  /** 历史操作记录 */
   history: { panel: IPanelConfig[]; title: string | null }[];
+
+  /** 当前历史记录索引 */
   curHistoryIdx: number;
+
+  /** 多页滚动时，dashboard 有效页面,用于判断是否发起数据请求 */
+  dashboardPage: number;
 } & IHistoryProps;
 
 const defaultState: ICommon = {
@@ -241,6 +254,7 @@ const defaultState: ICommon = {
   },
   curTool: 'MoveTool',
   businessCategory: [],
+  dashboardPage: 0,
 };
 
 // 历史记录最大存储的条数

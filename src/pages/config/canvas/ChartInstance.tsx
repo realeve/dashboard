@@ -20,6 +20,8 @@ const G2Plot = React.lazy(() => import('@/component/g2plot'));
 
 interface ChartInstanceProps {
   config: IPanelConfig;
+  /** 是否是当前页面索引 */
+  currentDashboardPage: boolean;
   style?: React.CSSProperties;
   title?: string;
   chartid?: string;
@@ -42,6 +44,7 @@ const ChartRender = ({
   chartid,
   chartLib,
   onDataLoad,
+  currentDashboardPage,
 }: ChartRenderProps) => {
   const [inited, setInited] = useState(false);
   const ref = useRef(null);
@@ -71,12 +74,14 @@ const ChartRender = ({
       ? (api.mock && JSON.parse(api.mock)) || lib?.mock
       : null;
 
-  const { data, error } = useFetch({
+  const { data, error, reFetch } = useFetch({
     param,
     initData: mock,
-    valid: () => valid,
+    valid: () => currentDashboardPage && valid,
     interval:
-      typeof api.interval === 'undefined' ? 0 : parseInt(`${Number(api.interval) * 60}`, 10),
+      !currentDashboardPage || typeof api.interval === 'undefined'
+        ? 0
+        : parseInt(`${Number(api.interval) * 60}`, 10),
     callback: (e) => {
       onDataLoad?.({
         data: e,
@@ -88,6 +93,11 @@ const ChartRender = ({
       return handleCarouselData(e, { isCarousel, carouselKey: api.carouselKey, onLoad });
     },
   });
+
+  // 页面刷新状态变更时，重新强制加载数据
+  useEffect(() => {
+    currentDashboardPage && reFetch();
+  }, [currentDashboardPage]);
 
   if (error) {
     return (

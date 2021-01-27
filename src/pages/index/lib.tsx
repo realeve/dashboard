@@ -7,10 +7,14 @@ import { parseStyle, calcTranslate } from '@/pages/config/lib';
 import * as R from 'ramda';
 
 export enum EResizeType {
-  NONE = 'none', // 不缩放
-  SCALE = 'scale', // 横纵向拉伸
-  COMPONENT = 'component', // 只缩放组件尺寸和位置，不处理文字大小
-  MOVIE = 'movie', // 电影模式，上下或左右留黑边
+  /** 不缩放 */
+  NONE = 'none',
+  /** 横纵向拉伸 */
+  SCALE = 'scale',
+  /** 只缩放组件尺寸和位置，不处理文字大小 */
+  COMPONENT = 'component',
+  /** 电影模式，上下或左右留黑边 */
+  MOVIE = 'movie',
 }
 
 /**
