@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import type { IApiConfig, IChartConfig } from '@/component/chartItem/interface';
-import * as THREE from 'three';
+import {
+  Color,
+  PerspectiveCamera,
+  WebGLRenderer,
+  Scene,
+  TextureLoader,
+  SpriteMaterial,
+  Sprite,
+} from 'three';
 import useMeasure from './useMeasure';
 
 export const config: IChartConfig[] = [
@@ -106,7 +114,7 @@ export default ({
       b: Math.floor(offset + offset * ratio),
     };
 
-    return new THREE.Color(
+    return new Color(
       // color.r / 255,
       Math.random() * 0.4,
       color.g / 255,
@@ -124,36 +132,36 @@ export default ({
     }
 
     let camera = null;
-    camera = new THREE.PerspectiveCamera(35, width / 2 / (height / 2), 1, 10000);
+    camera = new PerspectiveCamera(35, width / 2 / (height / 2), 1, 10000);
     camera.position.y = 1000;
     camera.position.z = 2000;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.setClearAlpha(0);
 
     container.appendChild(renderer.domElement);
-    const scene = new THREE.Scene();
+    const scene = new Scene();
 
     const particles = [];
     let count = 0;
 
     function setup() {
-      const map = new THREE.TextureLoader().load(
+      const map = new TextureLoader().load(
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAb1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8v0wLRAAAAJHRSTlMAC/goGvDhmwcExrVjWzrm29TRqqSKenRXVklANSIUE8mRkGpv+HOfAAABCElEQVQ4y4VT13LDMAwLrUHteO+R9f/fWMfO6dLaPeKVEECRxOULWsEGpS9nULDwia2Y+ALqUNbAWeg775zv+sA4/FFRMxt8U2FZFCVWjR/YrH4/H9sarclSKdPMWKzb8VsEeHB3m0shkhVCyNzeXeAQ9Xl4opEieX2QCGnwGbj6GMyjw9t1K0fK9YZunPXeAGsfJtYjwzxaBnozGGorYz0ypK2HzQSYx1y8DgSRo2ewOiyh2QWOEk1Y9OrQV0a8TiBM1a8eMHWYnRMy7CZ4t1CmyRkhSUvP3gRXyHOCLBxNoC3IJv//ZrJ/kxxUHPUB+6jJZZHrpg6GOjnqaOmzp4NDR48OLxn/H27SRQ08S0ZJAAAAAElFTkSuQmCC',
       );
       for (let x = 0; x < AMOUNT; x++) {
         particles.push([]);
         const ratio = x / AMOUNT; // + Math.random() / 10;
         for (let y = 0; y < AMOUNT_Y; y++) {
-          const material = new THREE.SpriteMaterial({
+          const material = new SpriteMaterial({
             map,
             opacity: 1,
             color: getColor({ ratio, blue_offset }),
           });
 
-          const particle = new THREE.Sprite(material);
+          const particle = new Sprite(material);
           particle.position.x = x * SEPARATION - (AMOUNT * SEPARATION) / 2;
           particle.position.z = y * SEPARATION - (AMOUNT_Y * SEPARATION) / 2;
           particles[x].push(particle);

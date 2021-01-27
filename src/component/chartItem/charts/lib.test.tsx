@@ -2,6 +2,10 @@
 import React from 'react';
 import { getDefaultValue } from '@/pages/config/canvas/lib';
 
+test('自动测试逻辑启动', () => {
+  expect(1).toBe(1);
+});
+
 export default (file: string) => {
   let moduleName: string | null = file.match(/charts(.*)+.test./)[1];
   if (!moduleName) {
@@ -10,7 +14,7 @@ export default (file: string) => {
   }
   moduleName = moduleName.replace(/\\/, '');
   // eslint-disable-next-line
-  const { default: lib } = require(`./${moduleName}`);
+  let lib = require(`./${moduleName}`);
 
   test('基础信息测试-模拟数据', () => {
     lib.mock && expect(lib.mock.rows).toBeGreaterThan(0);
