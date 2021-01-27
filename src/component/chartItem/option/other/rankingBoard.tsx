@@ -1,10 +1,10 @@
 import ScrollRankingBoard from '@/component/widget/ScrollRankingBoard';
 import type { IChartMock, IApiConfig } from '@/component/chartItem/interface';
 import * as lib from '../lib';
-import { json2Array } from '@/utils/lib';
+import { array2Json } from '@/utils/lib';
 
 export const mock: IChartMock = {
-  header: ['列1', '列2'],
+  header: ['name', 'value'],
   data: [
     {
       name: '周口',
@@ -110,10 +110,6 @@ export const config = [
     valueType: 'text',
     type: 'input',
   },
-  {
-    type: 'divider',
-    title: '样式设置',
-  },
   ...lib.getFontConfig(),
   {
     key: 'padding',
@@ -141,21 +137,42 @@ export const apiConfig: IApiConfig = {
   url: '/mock/08_scroll_board.json',
   interval: 5,
   cache: 2,
-  config: [],
+  config: [
+    {
+      key: 'x',
+      title: 'x 字段',
+      defaultValue: 0,
+      min: 0,
+    },
+    {
+      key: 'y',
+      title: 'y 字段',
+      defaultValue: 1,
+      min: 0,
+    },
+  ],
 };
 
-export default ({ option: { data: _data, waitTime = 4, carousel = 'page', ...props } }) => {
-  const data = json2Array(_data);
+export default ({
+  option: { data: _data, waitTime = 4, carousel = 'page', x: _x = 0, y: _y = 1, ...props },
+}) => {
+  const data = array2Json(_data);
+  const x = data.header[_x];
+  const y = data.header[_y];
+
   return (
     <ScrollRankingBoard
       config={{
         ...data,
+        data: data.data.filter((item) => item[y] > 0),
         index: true,
         columnWidth: [50],
         align: ['center'],
         carousel,
         waitTime: waitTime * 1000,
         ...props,
+        x,
+        y,
       }}
     />
   );

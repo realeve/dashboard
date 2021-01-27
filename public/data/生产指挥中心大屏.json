@@ -4,7 +4,11 @@
     "url": "/data/YiBiaoPan.json"
   },
   {
-    "title": "质量信息",
+    "title": "质量信息-印码工序",
     "url": "/data/质量信息.json"
+  },
+  {
+    "title": "质量信息-检封工序",
+    "url": "/data/检封工序.json"
   }
 ]

@@ -57,32 +57,31 @@ const defaultConfig = {
   barHeight: 16,
 };
 
-function calcRows({ data, rowNum }) {
-  data.sort(({ value: a }, { value: b }) => {
-    if (a > b) return -1;
-    if (a < b) return 1;
+function calcRows({ data, rowNum }, key: string) {
+  let nextData = R.clone(data);
+  nextData.sort((a, b) => {
+    if (Number(a[key]) > Number(b[key])) return -1;
+    if (Number(a[key]) < Number(b[key])) return 1;
     return 0;
   });
 
-  const value = data.map(({ value: val }) => val);
+  const value = data.map((e) => e[key]);
 
   const max = Math.max(...value) || 0;
 
-  data = data.map((row, i) => ({
+  nextData = nextData.map((row, i) => ({
     ...row,
     ranking: i + 1,
-    percent: (row.value / max) * 100,
+    percent: (row[key] / max) * 100,
   }));
 
-  const rowLength = data.length;
+  const rowLength = nextData.length;
 
   if (rowLength > rowNum && rowLength < 2 * rowNum) {
-    data = [...data, ...data];
+    nextData = [...nextData, ...nextData];
   }
 
-  data = data.map((d, i) => ({ ...d, scroll: i }));
-
-  return data;
+  return nextData.map((d, i) => ({ ...d, scroll: i }));
 }
 
 const ScrollRankingBoard = ({ config, className, style }) => {
@@ -123,7 +122,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
   function calcData() {
     const nextConfig = deepMerge(deepClone(defaultConfig), config || {});
 
-    const nextRow = calcRows(nextConfig);
+    const nextRow = calcRows(nextConfig, config.y);
 
     const nextHeight = calcHeights(nextConfig);
 
@@ -205,7 +204,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     if (rowNum >= rowLength) return;
 
     return co(loop);
-  }, [calcData, config, domRef.current]);
+  }, [config]);
 
   useEffect(() => {
     if (heightRef.current === 0 && height !== 0) {
@@ -215,7 +214,7 @@ const ScrollRankingBoard = ({ config, className, style }) => {
     } else {
       onResize(true);
     }
-  }, [width, height, domRef.current]);
+  }, [width, height]);
 
   const classNames = useMemo(() => classnames(styles['dv-scroll-ranking-board'], className), [
     className,
@@ -248,9 +247,9 @@ const ScrollRankingBoard = ({ config, className, style }) => {
             <div className={styles.rank} style={fontConfig}>
               {item.ranking <= 3 ? emojiList[item.ranking - 1] : item.ranking}
             </div>
-            <div className={styles['info-name']}>{item.name}</div>
+            <div className={styles['info-name']}>{item[config.x]}</div>
             <div className={styles['info-value']}>
-              {item.value} {mergedConfig.unit}
+              {item[config.y]} {mergedConfig.unit}
             </div>
           </div>
 
