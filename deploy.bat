@@ -14,5 +14,5 @@ REM 拷贝JSON文件
 xcopy %srcDir% %destDir% /E /Y /F
 
 rem 打开网站
-start http://10.8.1.35/
+start http://10.8.1.35/list/
 pause

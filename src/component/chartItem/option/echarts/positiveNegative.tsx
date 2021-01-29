@@ -226,7 +226,7 @@ export default ({
     ],
     series: [
       {
-        name: res.series[0].name,
+        name: res.series[0]?.name,
         type: 'bar',
         stack: '总量',
         barWidth,
@@ -250,10 +250,10 @@ export default ({
             },
           ]),
         },
-        data: res.series[0].arr,
+        data: res.series[0]?.arr || [],
       },
       {
-        name: res.series[1].name,
+        name: res.series[1]?.name,
         type: 'bar',
         stack: '总量',
         barWidth,
@@ -276,7 +276,7 @@ export default ({
             },
           ]),
         },
-        data: res.series[1].arr,
+        data: res.series[1]?.arr || [],
       },
     ],
   };
