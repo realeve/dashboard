@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Tooltip } from 'antd';
 import type { IHideProps, TFnHide } from '../panel/setting';
 import qs from 'querystring';
-import pinyin from '@/utils/pinyin';
+// import pinyin from '@/utils/pinyin';
 import type { FnOnLoadConfig } from './Actions';
 import Actions from './Actions';
 
@@ -23,7 +23,7 @@ export default ({
   const query: { file?: string; id?: string } = qs.parse(window.location.search.slice(1));
   const fileTitle = query.file
     ? query.file.replace('.json', '').split('/').slice(-1)[0]
-    : pinyin.toPinYinFull(props.title);
+    : props.title; // pinyin.toPinYinFull(props.title);
 
   return (
     <div className={styles.header}>

@@ -1,5 +1,6 @@
 import type { IChartConfig } from '@/component/chartItem/interface';
 import type { ISeries } from './interface';
+import { getUniqByIdx } from '@/component/chartItem/option/lib';
 
 import * as R from 'ramda';
 /**
@@ -163,4 +164,48 @@ export const getMarkAreaInfo = ({
     };
   }
   return markAreaInfo;
+};
+
+export const handleTimeAxis = (
+  { data, header },
+  {
+    legend,
+    x,
+    y,
+  }: {
+    legend?: number | string | undefined;
+    x: number | string;
+    y: number | string;
+  },
+) => {
+  const series = [];
+  if (typeof legend === 'undefined') {
+    const arr = [];
+    data.forEach((item) => {
+      arr.push({
+        value: [item[x], item[y]],
+      });
+    });
+
+    series.push({
+      name: header[y],
+      arr,
+    });
+  } else {
+    const legendArr = getUniqByIdx({ key: legend, data });
+    legendArr.forEach((name) => {
+      const arr = [];
+      const legendData = data.filter((itemData) => itemData[legend] === name);
+      legendData.forEach((item) => {
+        arr.push({
+          value: [item[x], item[y]],
+        });
+      });
+      series.push({
+        name,
+        arr,
+      });
+    });
+  }
+  return { series, xArr: [] };
 };

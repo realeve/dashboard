@@ -97,8 +97,24 @@ export default ({
   disableLegend,
   showX = true,
   showY = true,
+  minY,
+  maxY,
+  xAxisType = 'category',
+  gridRight = 100,
 }: IEchartsBaselineProps) => {
   if (String(legend) === '') {
+    return {};
+  }
+
+  const isTimeAxis = xAxisType === 'time';
+
+  // 数据排序功能
+  const nextData = lib.orderDataByValue({
+    key: y,
+    order,
+    data,
+  });
+  if (!nextData) {
     return {};
   }
 
@@ -107,14 +123,17 @@ export default ({
     import('echarts/lib/component/polar');
   }
 
-  // 数据排序功能
-  const nextData = lib.orderDataByValue({
-    key: y,
-    order,
-    data,
-  });
-
-  const res = handleData(nextData, { legend: disableLegend ? undefined : legend, x, y });
+  const res = isTimeAxis
+    ? utils.handleTimeAxis(nextData, {
+        legend: disableLegend ? undefined : legend,
+        x,
+        y,
+      })
+    : handleData(nextData, {
+        legend: disableLegend ? undefined : legend,
+        x,
+        y,
+      });
 
   const color = getColors(theme, needRerverse);
 
@@ -239,6 +258,34 @@ export default ({
     series = utils.handlePercent(series);
   }
 
+  let yAxisMinMax = {};
+  if (minY !== 0) {
+    yAxisMinMax = {
+      ...yAxisMinMax,
+      min: minY,
+    };
+  }
+  if (maxY !== 0) {
+    yAxisMinMax = {
+      ...yAxisMinMax,
+      max: maxY,
+    };
+  }
+
+  let xAxisData = {};
+  let xAxisFormatter = {};
+  if (!isTimeAxis) {
+    xAxisData = { data: isReverse ? res.xArr.reverse() : res.xArr };
+    xAxisFormatter = {
+      formatter(e) {
+        if (lib.isDate(e)) {
+          return String(e.slice(0, 16)).replace(' ', '\n');
+        }
+        return e;
+      },
+    };
+  }
+
   return {
     color,
     tooltip: {
@@ -250,7 +297,7 @@ export default ({
     legend: lib.getLegendOption({ legendShow, legendAlign, legendPosition, legendOrient }),
     grid: {
       left: '3%',
-      right: '4%', // chartType == 'line' && showEndlabel ? '100' :
+      right: chartType === 'line' && showEndlabel ? gridRight : '4%',
       bottom: '3%',
       containLabel: true,
     },
@@ -276,15 +323,16 @@ export default ({
             color: '#ddd',
           },
         },
+        ...yAxisMinMax,
       },
     ],
     [utils.getAxisName({ isPolar, isReverse, type: 'y' })]: [
       {
-        type: 'category',
+        type: xAxisType,
         axisTick: {
           show: false,
         },
-        data: isReverse ? res.xArr.reverse() : res.xArr,
+        ...xAxisData,
         axisLine: {
           show: showX,
           lineStyle: {
@@ -293,6 +341,7 @@ export default ({
         },
         axisLabel: {
           color: '#ddd',
+          ...xAxisFormatter,
         },
         nameLocation: 'middle',
       },

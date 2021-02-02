@@ -4,6 +4,14 @@
     "url": "/data/YiBiaoPan.json"
   },
   {
+    "title": "质量信息-胶印离线",
+    "url": "/data/胶印离线检测.json"
+  },
+  {
+    "title": "质量信息-胶印离线",
+    "url": "/data/凹印离线检测.json"
+  },
+  {
     "title": "质量信息-印码工序",
     "url": "/data/质量信息.json"
   },

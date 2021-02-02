@@ -45,7 +45,11 @@ export const handleData = (
     legend,
     x,
     y,
-  }: { legend?: number | string | undefined; x: number | string; y: number | string },
+  }: {
+    legend?: number | string | undefined;
+    x: number | string;
+    y: number | string;
+  },
 ) => {
   const xArr = lib.getUniqByIdx({ key: x, data });
   const series = [];

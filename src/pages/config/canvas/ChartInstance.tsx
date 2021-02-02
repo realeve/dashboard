@@ -157,7 +157,7 @@ const ChartRender = ({
           Slide={({ dataItem }) => (
             <Echarts
               ref={ref}
-              key={dataItem.key || dataItem.hash}
+              key={dataItem?.key || dataItem?.hash}
               option={method({ data: dataItem, ...api }, chart)}
               renderer={appendConfig.renderer || 'canvas'}
               style={style}

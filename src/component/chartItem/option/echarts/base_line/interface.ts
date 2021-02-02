@@ -31,11 +31,19 @@ export type IEchartsBaselineProps = {
   /** 交换XY轴 */
   readonly isReverse: boolean;
 
+  /** 右侧宽度 */
+  readonly gridRight: number;
+
   /** 显示X轴线 */
   readonly showX: boolean;
+  readonly xAxisType: 'category' | 'time' | 'value';
 
   /** 显示Y轴标签 */
   readonly showY: boolean;
+
+  /** Y轴最大最小值 */
+  readonly minY: number;
+  readonly maxY: number;
 
   /** 显示尾部跟随标签 */
   readonly showEndlabel: boolean;

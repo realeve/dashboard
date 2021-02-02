@@ -889,6 +889,7 @@ export const orderDataByValue = ({
   if (order === '不排序') {
     return nextData;
   }
+  console.log(nextData);
   const orderFn = order === '升序' ? R.ascend(R.prop(String(key))) : R.descend(R.prop(String(key)));
   return {
     ...nextData,

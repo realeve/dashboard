@@ -101,7 +101,7 @@ export const handleCarouselData = (data, { isCarousel, onLoad, carouselKey }) =>
     return data;
   }
   if (!isCarousel) {
-    onLoad(data.title);
+    onLoad(data?.title);
     return [data];
   }
 
@@ -111,14 +111,13 @@ export const handleCarouselData = (data, { isCarousel, onLoad, carouselKey }) =>
   const groupData = R.groupBy<IAxiosState>(R.prop<string>(keyName))(data.data);
   const nextCarouselData = Object.entries(groupData).map(([name, value]: [string, []]) => ({
     ...data,
-    title: `${data.title}(${name})`,
+    title: `${data?.title}(${name})`,
     data: value,
     rows: value.length,
     key: name,
   }));
 
   // 第一组数据的标题更新
-  onLoad(nextCarouselData[0].title);
-
+  nextCarouselData.length > 0 && onLoad(nextCarouselData[0].title);
   return nextCarouselData;
 };
