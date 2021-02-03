@@ -9,9 +9,9 @@
         "api_type": "url",
         "dataType": "array",
         "url": "1228/d31d02485b.array",
-        "appendParam": "suffix=9604T",
+        "appendParam": "suffix=9602T",
         "dateType": 9,
-        "cache": 3,
+        "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
         "isCarousel": true,
@@ -40,7 +40,7 @@
         "height": "363.188px",
         "position": "absolute"
       },
-      "title": "胶印离线检测得分",
+      "title": "凹印离线检测得分（9602T）",
       "engine": "echarts",
       "general": {
         "head": {
@@ -73,7 +73,7 @@
         "showX": true,
         "xAxisType": "time",
         "showY": true,
-        "minY": 85,
+        "minY": 70,
         "maxY": 104,
         "axisPointer": "line",
         "undefined": "",
@@ -120,9 +120,9 @@
         "api_type": "url",
         "dataType": "array",
         "url": "1228/d31d02485b.array",
-        "appendParam": "suffix=9604T",
+        "appendParam": "suffix=9603T",
         "dateType": 9,
-        "cache": 3,
+        "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
         "isCarousel": true,
@@ -151,7 +151,7 @@
         "height": "339.188px",
         "position": "absolute"
       },
-      "title": "凹印离线检测得分",
+      "title": "凹印离线检测得分（9603T）",
       "engine": "echarts",
       "general": {
         "head": {
@@ -184,7 +184,7 @@
         "showX": true,
         "xAxisType": "time",
         "showY": true,
-        "minY": 75,
+        "minY": 70,
         "maxY": 100,
         "axisPointer": "line",
         "undefined": "",
@@ -234,7 +234,7 @@
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9606T",
         "dateType": 9,
-        "cache": 3,
+        "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
         "isCarousel": true,
@@ -263,7 +263,7 @@
         "height": "498.188px",
         "position": "absolute"
       },
-      "title": "凹印离线检测得分",
+      "title": "凹印离线检测得分（9606T）",
       "engine": "echarts",
       "general": {
         "head": {
@@ -296,7 +296,7 @@
         "showX": true,
         "xAxisType": "time",
         "showY": true,
-        "minY": 85,
+        "minY": 70,
         "maxY": 104,
         "axisPointer": "line",
         "undefined": "",
@@ -346,7 +346,7 @@
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9604T",
         "dateType": 9,
-        "cache": 3,
+        "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
         "isCarousel": true,
@@ -375,7 +375,7 @@
         "height": "351.188px",
         "position": "absolute"
       },
-      "title": "凹印离线检测得分",
+      "title": "凹印离线检测得分（9604T）",
       "engine": "echarts",
       "general": {
         "head": {
@@ -408,7 +408,7 @@
         "showX": true,
         "xAxisType": "time",
         "showY": true,
-        "minY": 75,
+        "minY": 70,
         "maxY": 104,
         "axisPointer": "line",
         "undefined": "",
@@ -458,7 +458,7 @@
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9607T",
         "dateType": 9,
-        "cache": 2,
+        "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
         "isCarousel": true,
@@ -487,7 +487,7 @@
         "height": "509.188px",
         "position": "absolute"
       },
-      "title": "凹印离线检测得分",
+      "title": "凹印离线检测得分（9607T）",
       "engine": "echarts",
       "general": {
         "head": {
@@ -520,7 +520,7 @@
         "showX": true,
         "xAxisType": "time",
         "showY": true,
-        "minY": 75,
+        "minY": 70,
         "maxY": 104,
         "axisPointer": "line",
         "undefined": "",
