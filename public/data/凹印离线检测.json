@@ -1,6 +1,42 @@
 {
-  "rec_time": "2021-02-02 17:05:27",
+  "rec_time": "2021-02-05 11:59:22",
   "panel": [
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": false,
+      "ajax": false,
+      "style": {
+        "width": "100%",
+        "height": "100%",
+        "zIndex": -1
+      },
+      "name": "other.screen_edge",
+      "key": "screen_edge",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "屏幕分割线",
+      "image": "/img/icons/45_screen_edge.jpg",
+      "id": "df3521fb307da",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": false,
+      "lock": true,
+      "componentConfig": {},
+      "api": {}
+    },
     {
       "id": "f1942c0d4f156",
       "api": {
@@ -10,7 +46,7 @@
         "dataType": "array",
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9602T",
-        "dateType": 9,
+        "dateType": "不设置",
         "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
@@ -36,7 +72,7 @@
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "886.188px",
+        "width": "700.188px",
         "height": "363.188px",
         "position": "absolute"
       },
@@ -121,7 +157,7 @@
         "dataType": "array",
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9603T",
-        "dateType": 9,
+        "dateType": "不设置",
         "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
@@ -143,11 +179,11 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "19.999971428585923px,383.20029999998906px",
+          "translate": "19.99987955499654px,383.20029999998906px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "886.188px",
+        "width": "700.188px",
         "height": "339.188px",
         "position": "absolute"
       },
@@ -233,7 +269,7 @@
         "dataType": "array",
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9606T",
-        "dateType": 9,
+        "dateType": "不设置",
         "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
@@ -255,12 +291,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "968.6004000000141px,19.999999999988972px",
+          "translate": "1310.6004000000135px,19.99999999998903px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "931.188px",
-        "height": "498.188px",
+        "width": "589.188px",
+        "height": "527.188px",
         "position": "absolute"
       },
       "title": "凹印离线检测得分（9606T）",
@@ -345,7 +381,7 @@
         "dataType": "array",
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9604T",
-        "dateType": 9,
+        "dateType": "不设置",
         "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
@@ -367,11 +403,11 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "20.00011428572867px,722.3999999999801px",
+          "translate": "20.000024443742006px,722.399999999976px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "886.188px",
+        "width": "700.188px",
         "height": "351.188px",
         "position": "absolute"
       },
@@ -457,7 +493,7 @@
         "dataType": "array",
         "url": "1228/d31d02485b.array",
         "appendParam": "suffix=9607T",
-        "dateType": 9,
+        "dateType": "不设置",
         "cache": 0,
         "carouselKey": 2,
         "carouselTime": 10,
@@ -479,11 +515,11 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "968.6004000000141px,564.5999999999885px",
+          "translate": "1310.6004000000135px,564.5999999999885px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "931.188px",
+        "width": "589.188px",
         "height": "509.188px",
         "position": "absolute"
       },
@@ -559,6 +595,117 @@
       },
       "useGeneralStyle": true,
       "business": true
+    },
+    {
+      "showTitle": true,
+      "showBorder": true,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "746.4285714285713px,20px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "542.188px",
+        "height": "1054.188px"
+      },
+      "name": "echarts.base_line",
+      "key": "base_line",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "基础曲线图",
+      "image": "/img/icons/43_baseline.png.webp",
+      "id": "4e3785bf1d986",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "theme": 1,
+        "needRerverse": false,
+        "chartType": "bar",
+        "isPolar": false,
+        "isArea": false,
+        "isStack": false,
+        "isPercent": false,
+        "isStep": false,
+        "showEndlabel": false,
+        "gridRight": 40,
+        "isReverse": true,
+        "showX": false,
+        "xAxisType": "category",
+        "showY": false,
+        "minY": 0,
+        "maxY": 0,
+        "axisPointer": "shadow",
+        "undefined": "",
+        "showLabel": true,
+        "fontSize": 18,
+        "fontColor": "#f2f2f2",
+        "showSymbol": false,
+        "symbolSize": 4,
+        "symbol": "circle",
+        "legendShow": false,
+        "legendAlign": "center",
+        "legendPosition": "top",
+        "legendOrient": "horizontal",
+        "smooth": true,
+        "area_opacity": 1,
+        "lineWidth": 2,
+        "barWidth": 36,
+        "showBackground": true,
+        "barBackgroundColor": "rgba(140,150,200,0.2)",
+        "roundCap": false,
+        "showMarkpoint": false,
+        "showMarkline": false,
+        "showMarkArea": false,
+        "markAreaColor": "rgba(255,255,255,0.1)",
+        "markAreaColor2": "rgba(255,255,255,0.3)",
+        "markTitle1": "",
+        "markArea1": [10, 20],
+        "markTitle2": "",
+        "markArea2": [10, 20],
+        "markTitle3": "",
+        "markArea3": [10, 20],
+        "markTitle4": "",
+        "markArea4": [10, 20],
+        "markTitle5": "",
+        "markArea5": [10, 20]
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1229/8c593433d3.array",
+        "appendParam": "",
+        "dateType": "不设置",
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "disableLegend": true,
+        "legend": 0,
+        "x": 1,
+        "y": 4,
+        "order": "降序"
+      }
     }
   ],
   "page": {

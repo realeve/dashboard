@@ -105,9 +105,23 @@ export const config: IChartConfig[] = [
   },
   {
     key: 'xAxisType',
+    title: 'X轴类型',
     defaultValue: 'category',
     type: 'radio',
-    option: 'category,time,value',
+    option: [
+      {
+        title: '文字',
+        value: 'category',
+      },
+      {
+        title: '时间',
+        value: 'time',
+      },
+      {
+        title: '数值',
+        value: 'value',
+      },
+    ],
   },
   {
     key: 'showY',
