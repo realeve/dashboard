@@ -1,5 +1,5 @@
 {
-  "rec_time": "2021-01-27 17:20:29",
+  "rec_time": "2021-02-06 14:24:06",
   "panel": [
     {
       "showTitle": false,
@@ -44,13 +44,13 @@
       "ajax": true,
       "style": {
         "transform": {
-          "translate": "15.000000000000057px,14.999966666667262px",
+          "translate": "15.000000000000057px,14.99996666666732px",
           "rotate": "0deg",
           "scale": "1,1"
         },
         "position": "absolute",
         "width": "463.188px",
-        "height": "525.188px"
+        "height": "407.188px"
       },
       "name": "echarts.base_line",
       "key": "base_line",
@@ -85,9 +85,13 @@
         "isPercent": false,
         "isStep": false,
         "showEndlabel": false,
+        "gridRight": 40,
         "isReverse": true,
         "showX": false,
+        "xAxisType": "category",
         "showY": false,
+        "minY": 0,
+        "maxY": 0,
         "axisPointer": "shadow",
         "undefined": "",
         "showLabel": true,
@@ -103,7 +107,7 @@
         "smooth": true,
         "area_opacity": 1,
         "lineWidth": 2,
-        "barWidth": 18,
+        "barWidth": 10,
         "showBackground": false,
         "barBackgroundColor": "rgba(140,150,200,0.2)",
         "roundCap": false,
@@ -152,7 +156,7 @@
         "api_type": "url",
         "dataType": "array",
         "url": "1222/a6b661c48a.array",
-        "appendParam": "suffix= —— 平均废票数",
+        "appendParam": "suffix= —— 平均拒钞数",
         "dateType": "不设置",
         "cache": 2,
         "carouselKey": 2,
@@ -163,7 +167,7 @@
         "disableLegend": false,
         "legend": 0,
         "x": 1,
-        "y": 3,
+        "y": 4,
         "order": "升序"
       },
       "key": "base_line",
@@ -175,12 +179,12 @@
       "image": "/img/icons/43_baseline.png.webp",
       "style": {
         "transform": {
-          "translate": "491.000000000001px,14.999999999967258px",
+          "translate": "14.999666666668247px,422.2003333333002px",
           "rotate": "0deg",
           "scale": "1,1"
         },
-        "width": "469.188px",
-        "height": "525.188px",
+        "width": "463.188px",
+        "height": "380.188px",
         "position": "absolute"
       },
       "title": "清分机作废数统计",
@@ -211,9 +215,13 @@
         "isPercent": false,
         "isStep": false,
         "showEndlabel": false,
+        "gridRight": 40,
         "isReverse": true,
         "showX": false,
+        "xAxisType": "category",
         "showY": false,
+        "minY": 0,
+        "maxY": 0,
         "axisPointer": "shadow",
         "undefined": "",
         "showLabel": true,
@@ -229,7 +237,7 @@
         "smooth": true,
         "area_opacity": 1,
         "lineWidth": 2,
-        "barWidth": 18,
+        "barWidth": 10,
         "showBackground": false,
         "barBackgroundColor": "rgba(140,150,200,0.2)",
         "roundCap": false,
@@ -259,13 +267,13 @@
       "ajax": true,
       "style": {
         "transform": {
-          "translate": "965.0000000000005px,540.2px",
+          "translate": "965.0000000000005px,557.2px",
           "rotate": "0deg",
           "scale": "1,1"
         },
         "position": "absolute",
         "width": "940.188px",
-        "height": "540.188px"
+        "height": "523.188px"
       },
       "name": "echarts.base_line",
       "key": "base_line",
@@ -439,12 +447,12 @@
       "ajax": true,
       "style": {
         "transform": {
-          "translate": "9.200000000000045px,547px",
+          "translate": "15.000000000000057px,810.3px",
           "rotate": "0deg",
           "scale": "1,1"
         },
         "position": "absolute",
-        "width": "449.188px",
+        "width": "463.188px",
         "height": "274.188px"
       },
       "name": "other.rankingBoard",
@@ -500,6 +508,117 @@
         "reportParam": "",
         "x": 1,
         "y": 5
+      }
+    },
+    {
+      "showTitle": true,
+      "showBorder": true,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "484px,15px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "469.188px",
+        "height": "1065.19px"
+      },
+      "name": "echarts.base_line",
+      "key": "base_line",
+      "engine": "echarts",
+      "type": "regular_bar",
+      "title": "基础曲线图",
+      "image": "/img/icons/43_baseline.png.webp",
+      "id": "bf7951efa31b5",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "theme": 3,
+        "needRerverse": false,
+        "chartType": "bar",
+        "isPolar": false,
+        "isArea": false,
+        "isStack": false,
+        "isPercent": false,
+        "isStep": false,
+        "showEndlabel": false,
+        "gridRight": 40,
+        "isReverse": true,
+        "showX": false,
+        "xAxisType": "category",
+        "showY": true,
+        "minY": 0,
+        "maxY": 0,
+        "axisPointer": "shadow",
+        "undefined": "",
+        "showLabel": true,
+        "fontSize": 11,
+        "fontColor": "#f2f2f2",
+        "showSymbol": false,
+        "symbolSize": 4,
+        "symbol": "circle",
+        "legendShow": true,
+        "legendAlign": "right",
+        "legendPosition": "bottom",
+        "legendOrient": "horizontal",
+        "smooth": true,
+        "area_opacity": 1,
+        "lineWidth": 2,
+        "barWidth": 22,
+        "showBackground": false,
+        "barBackgroundColor": "rgba(140,150,200,0.2)",
+        "roundCap": false,
+        "showMarkpoint": false,
+        "showMarkline": false,
+        "showMarkArea": false,
+        "markAreaColor": "rgba(255,255,255,0.1)",
+        "markAreaColor2": "rgba(255,255,255,0.3)",
+        "markTitle1": "",
+        "markArea1": [10, 20],
+        "markTitle2": "",
+        "markArea2": [10, 20],
+        "markTitle3": "",
+        "markArea3": [10, 20],
+        "markTitle4": "",
+        "markArea4": [10, 20],
+        "markTitle5": "",
+        "markArea5": [10, 20]
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1231/d3e55a86d3.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": true,
+        "showReport": true,
+        "reportParam": "mergev=0,1",
+        "disableLegend": false,
+        "legend": 1,
+        "x": 2,
+        "y": 3,
+        "order": "降序"
       }
     }
   ],
