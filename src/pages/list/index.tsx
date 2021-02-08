@@ -31,7 +31,9 @@ const List = () => {
     <div className={styles.list}>
       <div className={styles.navMain}>
         <div className={styles.headerImg}>
-          <img className={styles['nav-img-text']} src="/img/list/logo.png" />
+          {/* <img className={styles['nav-img-text']} src="/img/list/logo.png" /> */}
+          <div className={styles.mainTitle}>欢迎来到生产指挥中心</div>
+          <div className={styles.subTitle}>让数据栩栩如生</div>
           <div
             className={styles['nav-img']}
             style={{ backgroundImage: `url("/img/list/header.png.webp")` }}

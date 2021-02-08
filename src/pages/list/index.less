@@ -19,16 +19,37 @@
       cursor: pointer;
       opacity: 1;
       transition: 1s opacity ease-in-out;
-      .nav-img-text {
+      .mainTitle {
+        background: linear-gradient(to right, rgb(160, 229, 255), rgb(44, 213, 255));
+        -webkit-background-clip: text;
+        color: transparent;
+        font-size: 60px;
+        font-family: 华文黑体;
         position: absolute;
         top: 80px;
         left: 40px;
         z-index: 1;
-        transform: scale(0.5);
-        transform-origin: 0 0;
         cursor: pointer;
         user-select: none;
+        font-weight: bolder;
+        letter-spacing: 10px;
       }
+      .subTitle {
+        .mainTitle;
+        top: 160px;
+        font-size: 25px;
+        font-weight: normal;
+      }
+      // .nav-img-text {
+      //   position: absolute;
+      //   top: 80px;
+      //   left: 40px;
+      //   z-index: 1;
+      //   transform: scale(0.5);
+      //   transform-origin: 0 0;
+      //   cursor: pointer;
+      //   user-select: none;
+      // }
       .nav-img {
         position: absolute;
         width: 100%;
