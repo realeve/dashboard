@@ -885,11 +885,13 @@ export const orderDataByValue = ({
   data: IChartMock;
   key: string | number;
 }) => {
+  if (!data) {
+    return null;
+  }
   const nextData = R.clone(data);
   if (order === '不排序') {
     return nextData;
   }
-  console.log(nextData);
   const orderFn = order === '升序' ? R.ascend(R.prop(String(key))) : R.descend(R.prop(String(key)));
   return {
     ...nextData,

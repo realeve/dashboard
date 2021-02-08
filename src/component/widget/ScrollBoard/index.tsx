@@ -2,12 +2,14 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as R from 'ramda';
-import { useMeasure } from 'react-use';
-import { co } from '@/utils/useAutoResize';
+import { useMeasure, useInterval } from 'react-use';
 import { isArray } from '@antv/util';
 import styles from './index.less';
+import Play from '../Play';
 
 export const emojiList = ['🥇', '🥈', '🥉'];
+
+const sleep = (time = 300) => new Promise((resolve) => setTimeout(resolve, time));
 
 export interface IScrollBoardProps {
   header: string[];
@@ -272,18 +274,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     return new Array(data.length).fill(avgHeight);
   }
 
-  function* animation(start = false) {
+  const nextPage = async (direction = 'next') => {
     let { animationIndex } = stateRef.current;
     const {
       avgHeight,
-      mergedConfig: { waitTime, carousel, rowNum },
+      mergedConfig: { carousel, rowNum },
       rowsData,
     } = stateRef.current;
 
     const rowLength = rowsData.length;
-
-    // 等待事先设定的时长
-    if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
     const animationNum = carousel === 'single' ? 1 : rowNum;
 
@@ -295,9 +294,13 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     setState((prevState) => ({ ...prevState, rows: nextRows, heights: nextHeights }));
 
     // 等待300 ms 动画加载
-    yield new Promise((resolve) => setTimeout(resolve, 300));
+    await sleep(300);
 
-    animationIndex += animationNum;
+    if (direction === 'next') {
+      animationIndex += animationNum;
+    } else {
+      animationIndex -= animationNum;
+    }
 
     const back = animationIndex - rowLength;
     if (back >= 0) animationIndex = back;
@@ -308,7 +311,7 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
     Object.assign(stateRef.current, { animationIndex });
 
     setState((prevState) => ({ ...prevState, heights: newHeights }));
-  }
+  };
 
   function emitEvent(ri, ci, row, ceil) {
     const { ceils, rowIndex } = row;
@@ -330,32 +333,15 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
       return;
     }
     calcData();
-
-    let start = true;
-
-    function* loop() {
-      while (true) {
-        yield* animation(start);
-
-        start = false;
-
-        const { waitTime } = stateRef.current.mergedConfig;
-
-        yield new Promise((resolve) => setTimeout(resolve, waitTime - 300));
-      }
-    }
-
-    const {
-      mergedConfig: { rowNum },
-      rows: rowsData,
-    } = stateRef.current;
-
-    const rowLength = rowsData.length;
-
-    if (rowNum >= rowLength) return;
-
-    return co(loop);
   }, [JSON.stringify(config), height]);
+
+  const [isHover, setIshover] = useState(false);
+  const [play, setPlay] = useState(true);
+
+  useInterval(
+    nextPage,
+    !play || isHover ? null : (state?.mergedConfig?.waitTime || 10 * 1000) - 300,
+  );
 
   useEffect(() => height > 0 && onResize(), [width, height]);
 
@@ -366,7 +352,24 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
       className={classNames}
       style={{ ...style, fontFamily: config.beautyFont ? 'inherit' : 'Acens' }}
       ref={domRef}
+      onMouseEnter={() => {
+        !isHover && setIshover(true);
+      }}
+      onMouseLeave={() => {
+        setIshover(false);
+      }}
     >
+      <Play
+        play={play}
+        setPlay={setPlay}
+        gotoNext={() => {
+          nextPage('next');
+        }}
+        gotoPrev={() => {
+          nextPage('prev');
+        }}
+        className={styles.arrow}
+      />
       {!!state.header.length && !!state.mergedConfig && (
         <div
           className={styles.header}

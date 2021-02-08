@@ -231,7 +231,7 @@ const WaffleChart = ({
     () => {
       setVisibleIdx((visibleIdx + 1) % (warnNum + 1));
     },
-    warnNum < 2 || !intervalTooltip ? 0 : 5000,
+    warnNum < 2 || !intervalTooltip ? null : 5000,
   );
 
   return (

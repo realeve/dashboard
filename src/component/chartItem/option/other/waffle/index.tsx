@@ -19,12 +19,13 @@ interface IWaffleState {
 
 const ScrollTable = ({ config: props, onClick, style }) => {
   const detailType = ['印码', '涂布', '检封', '装箱'];
+
   return (
     <ScrollBoard
       style={style}
       option={{
-        hoverColumns: [5, 6, 7, 8],
         ...props,
+        hoverColumns: [5, 6, 7, 8],
       }}
       onClick={(e) => {
         const type = e.col - 5;
@@ -50,10 +51,12 @@ export default ({
   option: IWaffleProps;
 }) => {
   const [state, setState] = useState<IWaffleState>(null);
+  const [isinited, setIsinited] = useState(false);
   useEffect(() => {
-    if (!props.data) {
+    if (!props.data || isinited) {
       return;
     }
+    setIsinited(true);
     const [prod, gz] = props.data.data[0] as [string, string];
     setState({ prod, gz, procname: '印码' });
   }, [props?.data?.hash]);
