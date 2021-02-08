@@ -286,7 +286,7 @@
         "dateType": "不设置",
         "isCarousel": false,
         "showReport": true,
-        "appendParam": "suffix=号票库2#",
+        "appendParam": "suffix=检封装箱周转库1#",
         "carouselKey": 0,
         "reportParam": "mergev=0",
         "carouselTime": 10

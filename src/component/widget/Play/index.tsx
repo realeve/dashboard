@@ -17,7 +17,7 @@ export default ({
   setPlay,
   gotoNext,
   gotoPrev,
-  style = { width: 100 },
+  style = { width: 80 },
 }: IPlayProps) => {
   return (
     <div className={classnames(styles.play, className)} style={style}>
@@ -34,6 +34,7 @@ export default ({
         <CaretRightOutlined
           onClick={() => {
             setPlay(true);
+            gotoNext?.();
           }}
           className={styles.playItem}
           title="点击开始"

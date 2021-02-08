@@ -1,18 +1,24 @@
 .play {
   display: flex;
   flex-direction: row;
-  width: 100px;
-  height: 30px;
+  width: 70px;
+  height: 24px;
   justify-content: space-evenly;
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
+  opacity: 0.4;
+  transition: opacity 0.3s linear;
+  &:hover {
+    opacity: 1;
+  }
   &Item {
     transition: opacity 0.3s linear;
-    opacity: 0.6;
+    opacity: 0.4;
     &:hover,
     &:focus {
       opacity: 1;
       color: #4aa4f8;
     }
+    cursor: pointer;
   }
 }

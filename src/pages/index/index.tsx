@@ -15,10 +15,11 @@ import { GROUP_COMPONENT_KEY, SCREEN_EDGE_KEY } from '@/models/common';
 import type { ICommon } from '@/models/common';
 import { ChartItem } from '@/pages/config/canvas/chartItem';
 import * as R from 'ramda';
-import { Carousel, Tooltip } from 'antd';
+import { Carousel } from 'antd';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { useInterval } from 'react-use';
+import Play from '@/component/widget/Play';
 
 const ScaleBackground = ({
   resizeType,
@@ -149,16 +150,25 @@ const Index = ({ dashboardPage, location, dispatch }: IDashboardPageProps) => {
 
   const isCarousel = R.type(config) === 'Array';
 
-  useInterval(
-    () => {
-      if (current === config.length - 1) {
-        ref.current?.goTo(0);
-      } else {
-        ref.current?.next();
-      }
-    },
-    isCarousel ? Number(location?.query?.speed || 60) * 1000 : null,
-  );
+  const [play, setPlay] = useState(true);
+
+  const gotoNext = () => {
+    if (current === config.length - 1) {
+      ref.current?.goTo(0);
+      return;
+    }
+    ref.current?.next();
+  };
+
+  const gotoPrev = () => {
+    if (current === 0) {
+      ref.current?.goTo(config.length - 1);
+      return;
+    }
+    ref.current?.prev();
+  };
+
+  useInterval(gotoNext, play && isCarousel ? Number(location?.query?.speed || 60) * 1000 : null);
 
   const autoSize = location?.query?.autoresize;
   if (!config) {
@@ -169,9 +179,15 @@ const Index = ({ dashboardPage, location, dispatch }: IDashboardPageProps) => {
     // DONE 当前页面未展示时，禁止数据加载；
     return (
       <Suspense fallback={null}>
+        <Play
+          play={play}
+          setPlay={setPlay}
+          className={styles.arrow}
+          gotoNext={gotoNext}
+          gotoPrev={gotoPrev}
+        />
         <Carousel
           speed={800}
-          dots
           ref={ref}
           /** 当启用infinite及autoplay时，自动开始滚动，此时假设有2个页面，会渲染出5个页面，页面中的数据请求会多次重复发起 */
           /** 此处需要关闭 infinite 及autoplay，在外层通过事件来触发滚动 */
@@ -190,11 +206,13 @@ const Index = ({ dashboardPage, location, dispatch }: IDashboardPageProps) => {
             });
             setCurrent(nextSlide);
           }}
-          customPaging={(i) => (
-            <Tooltip title={config[i].title} placement="bottom">
-              <button style={{ height: 12, borderRadius: '50%' }}>{i}</button>
-            </Tooltip>
-          )}
+          dots={false}
+          // dots
+          // customPaging={(i) => (
+          //   <Tooltip title={config[i].title} placement="bottom">
+          //     <button style={{ height: 12, borderRadius: '50%' }}>{i}</button>
+          //   </Tooltip>
+          // )}
         >
           {config.map((item, idx) => (
             <DashBoard
