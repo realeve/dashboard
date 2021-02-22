@@ -233,7 +233,7 @@
         "rowNum": 5,
         "boxSize": 13,
         "boxShape": "circle",
-        "carousel": "single",
+        "carousel": "page",
         "fontSize": 14,
         "waitTime": 4,
         "detailApi": "/1199/3f5aca42dd",
