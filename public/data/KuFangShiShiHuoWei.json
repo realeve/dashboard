@@ -1,6 +1,14 @@
-﻿{
-  "rec_time": "2021-01-18 14:24:51",
+{
+  "rec_time": "2021-02-25 15:03:01",
   "panel": [
+    {
+      "id": "40bf8ecb07022",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "在制品2#",
+      "engine": "other",
+      "fold": true
+    },
     {
       "showTitle": true,
       "showBorder": true,
@@ -8,7 +16,7 @@
       "ajax": true,
       "style": {
         "transform": {
-          "translate": "27.799997142857308px,34.49999999999994px",
+          "translate": "27.799997142857308px,15.499999999999943px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -55,7 +63,7 @@
         "show": true,
         "url": "/1207/e395080869.json",
         "interval": 5,
-        "cache": 2,
+        "cache": 0,
         "api_type": "url",
         "legend": 0,
         "y": 2,
@@ -66,7 +74,154 @@
         "showReport": true,
         "appendParam": "suffix=在制品库2#",
         "reportParam": "mergev=0"
-      }
+      },
+      "group": "40bf8ecb07022"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "476.85714285714073px,24.571471428573282px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "119.18799999999999px",
+        "height": "33.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "4222480a152aa",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "right",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [800]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "40bf8ecb07022"
+    },
+    {
+      "id": "e69a1d1745038",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "/1244/4c2dcb42aa.array",
+        "appendParam": "suffix=在制品库2#",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "scroll_digit",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.scroll_digit",
+      "type": "regular_bar",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "style": {
+        "transform": {
+          "translate": "147.9504142857113px,460.0000285714314px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "311.188px",
+        "height": "61.1875px",
+        "position": "absolute"
+      },
+      "title": "平面库已用货位",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "scale": 1,
+        "theme": "blueTheme",
+        "prefix": "已用货位",
+        "suffix": "",
+        "padding": 16,
+        "decimals": 0,
+        "duration": 0.8,
+        "outlineColor": "#0996f9"
+      },
+      "useGeneralStyle": true,
+      "business": true,
+      "group": "40bf8ecb07022"
+    },
+    {
+      "id": "2e46d3b5e8409",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "在制品4#",
+      "engine": "other",
+      "fold": true
     },
     {
       "id": "105bd818668c7",
@@ -75,7 +230,7 @@
         "show": true,
         "url": "/1207/e395080869.json",
         "interval": 5,
-        "cache": 2,
+        "cache": 0,
         "api_type": "url",
         "legend": 0,
         "y": 2,
@@ -96,7 +251,7 @@
       "image": "/img/icons/47_sunburst.webp",
       "style": {
         "transform": {
-          "translate": "670.999971428573px,34.299957142867015px",
+          "translate": "670.999971428573px,15.299957142867015px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -134,7 +289,220 @@
         "borderRadiusOutter": 0
       },
       "useGeneralStyle": true,
-      "business": true
+      "business": true,
+      "group": "2e46d3b5e8409"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "819.2004142857113px,460.20002857143146px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "311.188px",
+        "height": "61.1875px"
+      },
+      "name": "other.scroll_digit",
+      "key": "scroll_digit",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "滚动翻牌器",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "id": "9e7560df9ea74",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "已用货位",
+        "duration": 0.8,
+        "theme": "blueTheme",
+        "scale": 1,
+        "padding": 16,
+        "outlineColor": "#0996f9"
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "/1244/4c2dcb42aa.array",
+        "appendParam": "suffix=在制品库4#",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "group": "2e46d3b5e8409"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "1130.195857142855px,24.299971428573258px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "119.18799999999999px",
+        "height": "33.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "63f0b801685e1",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "right",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [400]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "2e46d3b5e8409"
+    },
+    {
+      "id": "2a4a08ac57546",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "在制品7#",
+      "engine": "other",
+      "fold": true
+    },
+    {
+      "id": "9ce888845ccc4",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "/1244/4c2dcb42aa.array",
+        "appendParam": "suffix=在制品库7#",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "scroll_digit",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.scroll_digit",
+      "type": "regular_bar",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "style": {
+        "transform": {
+          "translate": "1447.0004142857113px,464.20002857143146px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "311.188px",
+        "height": "61.1875px",
+        "position": "absolute"
+      },
+      "title": "平面库已用货位",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "scale": 1,
+        "theme": "blueTheme",
+        "prefix": "已用货位",
+        "suffix": "",
+        "padding": 16,
+        "decimals": 0,
+        "duration": 0.8,
+        "outlineColor": "#0996f9"
+      },
+      "useGeneralStyle": true,
+      "business": true,
+      "group": "2a4a08ac57546"
     },
     {
       "id": "9883c7bf735bd",
@@ -143,7 +511,7 @@
         "show": true,
         "url": "/1207/e395080869.json",
         "interval": 5,
-        "cache": 2,
+        "cache": 0,
         "api_type": "url",
         "legend": 0,
         "y": 2,
@@ -164,7 +532,7 @@
       "image": "/img/icons/47_sunburst.webp",
       "style": {
         "transform": {
-          "translate": "1306.4011142857157px,34.28567142858134px",
+          "translate": "1306.4011142857157px,15.285671428581338px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -202,7 +570,87 @@
         "borderRadiusOutter": 0
       },
       "useGeneralStyle": true,
-      "business": true
+      "business": true,
+      "group": "2a4a08ac57546"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "1738.597285714284px,8.099971428573202px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "146.188px",
+        "height": "49.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "8cef69ad797c2",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "center",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [1000]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "2a4a08ac57546"
+    },
+    {
+      "id": "daa6190e8f429",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "号票库1#",
+      "engine": "other",
+      "fold": false
     },
     {
       "id": "f3b85aec8a75b",
@@ -211,7 +659,7 @@
         "show": true,
         "url": "/1207/e395080869.json",
         "interval": 5,
-        "cache": 2,
+        "cache": 0,
         "api_type": "url",
         "legend": 0,
         "y": 2,
@@ -232,7 +680,7 @@
       "image": "/img/icons/47_sunburst.webp",
       "style": {
         "transform": {
-          "translate": "671.2004000000012px,578.8003857142957px",
+          "translate": "671.0004000000012px,547.4003857142958px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -270,23 +718,170 @@
         "borderRadiusOutter": 0
       },
       "useGeneralStyle": true,
-      "business": true
+      "business": true,
+      "group": "daa6190e8f429"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "1130.195857142855px,555.2999714285735px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "119.18799999999999px",
+        "height": "33.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "4edf60377a294",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "right",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [250]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "daa6190e8f429"
+    },
+    {
+      "id": "45773e576a9f9",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "/1244/4c2dcb42aa.array",
+        "appendParam": "suffix=号票库1#",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "scroll_digit",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.scroll_digit",
+      "type": "regular_bar",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "style": {
+        "transform": {
+          "translate": "804.3004142857112px,1007.6000285714318px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "311.188px",
+        "height": "61.1875px",
+        "position": "absolute"
+      },
+      "title": "平面库已用货位",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "scale": 1,
+        "theme": "blueTheme",
+        "prefix": "已用货位",
+        "suffix": "",
+        "padding": 16,
+        "decimals": 0,
+        "duration": 0.8,
+        "outlineColor": "#0996f9"
+      },
+      "useGeneralStyle": true,
+      "business": true,
+      "group": "daa6190e8f429"
+    },
+    {
+      "id": "428e7995d5b5a",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "装箱周转库",
+      "engine": "other",
+      "fold": true
     },
     {
       "id": "425057e730cfa",
       "api": {
         "dataType": "json",
         "show": true,
-        "url": "/1207/e395080869.json",
+        "url": "/1243/2048607c86.json",
         "interval": 5,
-        "cache": 2,
+        "cache": 0,
         "api_type": "url",
         "legend": 0,
         "y": 2,
         "dateType": "不设置",
         "isCarousel": false,
         "showReport": true,
-        "appendParam": "suffix=检封装箱周转库1#",
+        "appendParam": "",
         "carouselKey": 0,
         "reportParam": "mergev=0",
         "carouselTime": 10
@@ -300,7 +895,7 @@
       "image": "/img/icons/47_sunburst.webp",
       "style": {
         "transform": {
-          "translate": "1306.3995428571443px,578.5999571428671px",
+          "translate": "1306.3995428571443px,547.6999571428671px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -338,7 +933,155 @@
         "borderRadiusOutter": 0
       },
       "useGeneralStyle": true,
-      "business": true
+      "business": true,
+      "group": "428e7995d5b5a"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "1738.5972857142845px,539.9999714285734px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "146.188px",
+        "height": "49.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "44a414fcadde6",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "center",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [8000]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "428e7995d5b5a"
+    },
+    {
+      "id": "f9375970bc477",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1246/4f9663c918.array",
+        "appendParam": "",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "scroll_digit",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.scroll_digit",
+      "type": "regular_bar",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "style": {
+        "transform": {
+          "translate": "1417.7004142857115px,1011.1000285714317px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "394.188px",
+        "height": "61.1875px",
+        "position": "absolute"
+      },
+      "title": "平面库已用货位",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimals": 0,
+        "useThouands": false,
+        "suffix": "",
+        "prefix": "已用货位",
+        "duration": 0.8,
+        "theme": "blueTheme",
+        "scale": 1,
+        "padding": 16,
+        "outlineColor": "#0996f9"
+      },
+      "useGeneralStyle": true,
+      "business": true,
+      "group": "428e7995d5b5a"
+    },
+    {
+      "id": "5bbbd3973efcc",
+      "icon": "datav-font icon-group layer-item-icon",
+      "key": "group_rect",
+      "title": "立体库",
+      "engine": "other",
+      "fold": true
     },
     {
       "id": "1ccc469a0d9bf",
@@ -346,7 +1089,7 @@
         "y": 2,
         "url": "/1168/d5593bab3f.json",
         "show": true,
-        "cache": 2,
+        "cache": 0,
         "legend": 0,
         "api_type": "url",
         "dataType": "json",
@@ -364,7 +1107,7 @@
       "image": "/img/icons/47_sunburst.webp",
       "style": {
         "transform": {
-          "translate": "27.999971428572508px,578.5713857142956px",
+          "translate": "27.999971428572508px,547.6713857142956px",
           "rotate": "0deg",
           "scale": "1,1"
         },
@@ -402,7 +1145,147 @@
         "borderRadiusOutter": 0
       },
       "useGeneralStyle": true,
-      "business": true
+      "business": true,
+      "group": "5bbbd3973efcc"
+    },
+    {
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "ajax": true,
+      "style": {
+        "transform": {
+          "translate": "449.9972857142841px,547.6999714285732px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "position": "absolute",
+        "width": "146.188px",
+        "height": "49.1875px"
+      },
+      "name": "other.flipboard",
+      "key": "flipboard",
+      "engine": "other",
+      "type": "regular_bar",
+      "title": "翻牌器",
+      "image": "/img/icons/19_flipboard.png.webp",
+      "id": "c07f5e9eb6138",
+      "icon": "com-font icon-com-regular_bar",
+      "general": {
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)",
+        "head": {
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+          "fontSize": 20,
+          "color": "#aec1f9",
+          "textAlign": "left",
+          "padding": 10
+        }
+      },
+      "useGeneralStyle": true,
+      "lock": false,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "",
+        "duration": 1.5,
+        "undefined": "",
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "textAlign": "center",
+        "fontColor": "#9aa8d4",
+        "letterSpacing": 0,
+        "backgroundColor": "#0f396b",
+        "padding": 5
+      },
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "mock",
+        "dataType": "array",
+        "url": "/mock/19_flipboard.json",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0,
+        "mock": "{  \"data\": [    [12694]  ],  \"title\": \"进度条_MOCK数据\",  \"header\": [\"指标值\"],  \"rows\": 1,  \"hash\": \"mockdata\"}"
+      },
+      "group": "5bbbd3973efcc"
+    },
+    {
+      "id": "9b545d4f137fa",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1245/ebeb52db10.array",
+        "appendParam": "",
+        "dateType": "不设置",
+        "cache": 0,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "scroll_digit",
+      "ajax": true,
+      "icon": "com-font icon-com-regular_bar",
+      "lock": false,
+      "name": "other.scroll_digit",
+      "type": "regular_bar",
+      "image": "/img/icons/20_scroll_digit.png.webp",
+      "style": {
+        "transform": {
+          "translate": "124.7504142857108px,1010.8857428571457px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "390.188px",
+        "height": "61.1875px",
+        "position": "absolute"
+      },
+      "title": "平面库已用货位",
+      "engine": "other",
+      "general": {
+        "head": {
+          "color": "#aec1f9",
+          "padding": 10,
+          "fontSize": 20,
+          "textAlign": "left",
+          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+        },
+        "border": "border_29.svg",
+        "borderSlice": [8, 8, 8, 8],
+        "borderRadius": [0, 0, 0, 0],
+        "chartBackground": "rgba(3,11,31,0.8)"
+      },
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimals": 0,
+        "suffix": "",
+        "prefix": "已用货位",
+        "duration": 0.8,
+        "theme": "blueTheme",
+        "scale": 1,
+        "padding": 16,
+        "outlineColor": "#0996f9",
+        "useThouands": false
+      },
+      "useGeneralStyle": true,
+      "business": true,
+      "group": "5bbbd3973efcc"
     }
   ],
   "page": {
@@ -423,6 +1306,6 @@
       "textAlign": "left",
       "padding": 10
     },
-    "thumbnail": "./KuFangShiShiHuoWei.jpg"
+    "thumbnail": "./库房实时货位.jpg"
   }
 }

@@ -848,7 +848,7 @@
         "y": 3,
         "url": "1205/d5e436ff7e.json",
         "show": true,
-        "cache": 2,
+        "cache": 0,
         "legend": 2,
         "api_type": "url",
         "dataType": "array",

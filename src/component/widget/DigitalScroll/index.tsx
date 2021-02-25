@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import type { CountUpProps } from 'react-countup';
 import classnames from 'classnames';
-import { useInterval } from 'react-use';
+// import { useInterval } from 'react-use';
 import { thouandsNum } from '@/utils/lib';
 
 export type ICountUp = {
@@ -12,6 +12,7 @@ export type ICountUp = {
   className?: string;
   style?: React.CSSProperties;
   theme?: 'transparent' | 'theme1' | 'theme2';
+  useThouands?: boolean;
   [key: string]: any;
 } & CountUpProps;
 
@@ -42,6 +43,7 @@ export default ({
   outlineColor = '#0f396b',
   padding = 15,
   scale = 1.2,
+  useThouands = true,
 }: ICountUp) => {
   const [inited, setInited] = useState(false);
   const [val, setVal] = useState<string | number>(
@@ -65,16 +67,16 @@ export default ({
     };
   }, []);
 
-  useInterval(() => {
-    const nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
-    setVal(nextVal);
-  }, 2000);
+  // useInterval(() => {
+  //   const nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
+  //   setVal(nextVal);
+  // }, 2000);
 
   return (
     <div className={classnames(styles.digitalScroll, className)} style={style}>
       <div className={styles.counter}>
         <span>{prefix}</span>
-        {thouandsNum(Number(val), decimals)
+        {thouandsNum(Number(val), decimals, useThouands)
           .split('')
           .map((num, idx) => {
             return (

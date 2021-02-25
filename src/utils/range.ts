@@ -36,6 +36,7 @@ const range = {
   三天前: [moment().subtract(3, 'day'), moment().subtract(3, 'day')],
   过去一年: [moment().subtract(1, 'year'), moment()],
   不设置: false,
+  日历月: [moment().startOf('month'), moment().endOf('month')],
 };
 export default range;
 

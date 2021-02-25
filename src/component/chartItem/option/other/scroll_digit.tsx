@@ -20,6 +20,12 @@ export const config: IChartConfig[] = [
     max: 4,
   },
   {
+    key: 'useThouands',
+    defaultValue: true,
+    title: '千分位记数',
+    type: 'switch',
+  },
+  {
     key: 'suffix',
     title: '单位',
     defaultValue: '',
