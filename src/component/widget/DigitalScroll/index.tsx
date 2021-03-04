@@ -11,7 +11,7 @@ export type ICountUp = {
   decimals?: number;
   className?: string;
   style?: React.CSSProperties;
-  theme?: 'transparent' | 'theme1' | 'theme2';
+  theme?: 'transparent' | 'whiteTheme' | 'blueTheme';
   useThouands?: boolean;
   [key: string]: any;
 } & CountUpProps;
@@ -39,7 +39,7 @@ export default ({
   className,
   style,
   duration = 0.8,
-  theme = 'theme1',
+  theme = 'blueTheme',
   outlineColor = '#0f396b',
   padding = 15,
   scale = 1.2,
@@ -61,33 +61,34 @@ export default ({
     const timeId = setTimeout(() => {
       setVal(value.toFixed(decimals));
       setInited(true);
-    }, 100);
+    }, 200);
     return () => {
       window.clearTimeout(timeId);
     };
   }, []);
 
-  // useInterval(() => {
-  //   const nextVal = Number(val) + Number((Math.random() * 10000).toFixed(decimals));
-  //   setVal(nextVal);
-  // }, 2000);
-
   return (
     <div className={classnames(styles.digitalScroll, className)} style={style}>
       <div className={styles.counter}>
         <span>{prefix}</span>
-        {thouandsNum(Number(val), decimals, useThouands)
+        {thouandsNum(val, decimals, useThouands)
           .split('')
           .map((num, idx) => {
             return (
-              <div style={{ margin: `0 ${padding}px` }} key={idx}>
-                <div
-                  className={classnames(styles.num, styles[theme])}
+              <div
+                className={classnames(styles.num, styles[theme])}
+                style={{
+                  margin: `0 ${padding}px`,
+                  transform: `scale(${scale})`,
+                  outlineColor,
+                }}
+                key={idx}
+              >
+                <img
+                  src={`/img/number${theme === 'whiteTheme' ? '_white' : ''}.svg`}
                   style={{
-                    backgroundPosition: `0 ${-numId[num] * 61.1}px`, // 58
-                    transitionDuration: `${duration} s`,
-                    transform: `scale(${scale})`,
-                    outlineColor,
+                    transform: `translateY(${-numId[num] * 61.1}px)`,
+                    transitionDuration: `${duration * 2} s`,
                   }}
                 />
               </div>

@@ -7,18 +7,16 @@
     align-items: center;
     height: 100%;
     .num {
-      display: inline-block;
+      position: relative;
+      overflow: hidden;
       width: 31.695px;
       height: 53.693px;
-      margin: 0 10px;
-      background: url('./number.svg') no-repeat;
-      // background: url('./number.png') no-repeat;
-      background-position: 0 0;
-      background-size: 100%;
-      transition: background-position cubic-bezier(0.4, 0, 0.2, 1) 0.8s;
-    }
-    .whiteTheme {
-      background-image: url('./number_white.svg');
+      img {
+        // 此处如果使用backgroundPosition会有兼容性问题
+        width: 100%;
+        transform: translateY(0);
+        transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.8s;
+      }
     }
 
     .blueTheme {

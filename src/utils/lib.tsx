@@ -141,10 +141,13 @@ export const decodeBase64 = (str: string) => decodeURIComponent(escape(window.at
  * @param {小数位数} decimalLength
  */
 export const thouandsNum: {
-  (num: number, len?: number, useThouands?: boolean): string;
+  (num: string | number, len?: number, useThouands?: boolean): string;
 } = (num, decimalLength = 0, useThouands = true) => {
   if (String(num).length === 0) {
     return '';
+  }
+  if (String(num)[0] === '0' && String(num)[1] !== '.') {
+    return String(num);
   }
 
   const numStr: string = useThouands ? Number(num).toLocaleString() : String(num);
