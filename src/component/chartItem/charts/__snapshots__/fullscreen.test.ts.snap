@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`基础信息测试-默认配置项 1`] = `
-Object {
-  "fill": "#e6e6e6",
-}
-`;

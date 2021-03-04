@@ -1,7 +1,7 @@
 let ignoreFiles = [
   '<rootDir>/src/app.ts',
   '<rootDir>/src/component/Editor/',
-  // '<rootDir>/src/component/chartItem/charts/',
+  '<rootDir>/src/component/chartItem/charts/',
   '<rootDir>/(.*).min.js$',
   '<rootDir>/(.*)interface.ts(|x)$',
 ];

@@ -542,7 +542,7 @@ const init = () => {
   console.log(`模版${dirName}已创建`);
 };
 
-// init();
-rewriteTestFile();
+init();
+// rewriteTestFile();
 
 process.exit(0);
