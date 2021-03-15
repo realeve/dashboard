@@ -30,7 +30,10 @@ const range = {
   '7天前': [moment().subtract(1, 'week'), moment()],
   上周: [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
   本周: [moment().startOf('week'), moment()],
-  昨天: [moment().subtract(1, 'day'), moment().subtract(1, 'day')],
+  昨天: [
+    moment().subtract(moment().format('d') == '1' ? 3 : 1, 'days'),
+    moment().subtract(moment().format('d') == '1' ? 3 : 1, 'days'),
+  ],
   今天: [moment(), moment()],
   前天: [moment().subtract(2, 'day'), moment().subtract(2, 'day')],
   三天前: [moment().subtract(3, 'day'), moment().subtract(3, 'day')],
