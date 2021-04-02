@@ -26,7 +26,10 @@ export interface IFetchProps<T> {
   param?: AxiosRequestConfig | null;
   initData?: T;
   valid?: (e?: any) => boolean;
+  /** 错误回调 */
+  onError?: (e) => void;
   callback?: (data: any) => T;
+  /** 定时刷新 单位 秒钟 */
   interval?: number;
   pollingWhenHidden?: boolean;
   refreshOnWindowFocus?: boolean;
@@ -62,6 +65,7 @@ const useAxios = <T extends {} | void>({
   param,
   initData,
   callback: onFetchData = (e) => e,
+  onError = () => {},
   interval = 0,
   valid = () => true,
   refreshOnWindowFocus = true,
@@ -137,8 +141,11 @@ const useAxios = <T extends {} | void>({
         setLoading(false);
       })
       .catch((e: any) => {
-        !unmounted && setError(e.message);
-        !unmounted && setLoading(false);
+        if (!unmounted) {
+          setError(e.message);
+          setLoading(false);
+          onError?.(e.message);
+        }
       })
       .finally(() => {
         // 如果屏幕隐藏，并且 !pollingWhenHidden, 则停止轮询，并记录 flag，等 visible 时，继续轮询

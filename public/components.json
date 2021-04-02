@@ -369,6 +369,16 @@
               "width": "530px",
               "height": "240px"
             }
+          },
+          {
+            "name": "other.db_alive",
+            "key": "db_alive",
+            "engine": "other",
+            "type": "regular_bar",
+            "title": "数据库存活状态",
+            "showTitle": false,
+            "showBackground": false,
+            "image": "/img/icons/49_dbalive.png.webp"
           }
         ]
       }

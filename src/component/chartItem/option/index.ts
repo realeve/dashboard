@@ -50,4 +50,5 @@ export const chartList = [
   'basePie',
   'sunburst',
   'bar_group',
+  'db_alive',
 ];

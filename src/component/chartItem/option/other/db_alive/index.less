@@ -1,0 +1,51 @@
+.alive {
+  display: flex;
+  flex-direction: column;
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  @size: 92px;
+  .status {
+    width: @size;
+    height: @size;
+    border-radius: 50%;
+    margin: 15px 0;
+  }
+  .success {
+    background: rgb(38, 209, 15);
+    box-shadow: 0px 0px 5px 3px #88ed67;
+    animation: breathSuccess 1s infinite alternate-reverse;
+  }
+  .error {
+    background: rgb(235, 19, 30);
+    box-shadow: 0px 0px 5px 3px #e36a9c;
+    animation: breathError 1s infinite alternate-reverse;
+  }
+  .loading {
+    background: rgb(248, 236, 67);
+  }
+  .main {
+    text-align: center;
+    font-size: 22px;
+    // color: #111;
+    // background: #2be1ff;
+    // border-radius: 4px;
+  }
+  @keyframes breathError {
+    from {
+      box-shadow: 0px 0px 5px 3px #e36a9c;
+    }
+    to {
+      box-shadow: 0px 0px 10px 5px #ffe6f1;
+    }
+  }
+  @keyframes breathSuccess {
+    from {
+      box-shadow: 0px 0px 5px 3px #88ed67;
+    }
+    to {
+      box-shadow: 0px 0px 10px 5px #ffe6f1;
+    }
+  }
+}

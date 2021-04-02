@@ -48,6 +48,7 @@ const handleOptionIndex = () => {
   if (!chartArr) {
     return;
   }
+  let str = fs.readFileSync(dir + 'option/index.ts', 'utf8');
   let nextIndex = chartArr.length + 1;
 
   let nextOption = str.replace('];', `  '${dirName}',\n];`);
