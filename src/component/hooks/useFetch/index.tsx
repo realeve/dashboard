@@ -23,16 +23,23 @@ export const callback = <T extends Record<string, any>>(data: Record<string, any
 const { CancelToken } = http;
 
 export interface IFetchProps<T> {
+  /** axios请求的参数 */
   param?: AxiosRequestConfig | null;
+  /** 模拟数据请求时传入的初始数据，如果传入了数据则优先使用模拟数据，否则使用param的接口参数发起请求 */
   initData?: T;
+  /** 数据发起前有效性校验 */
   valid?: (e?: any) => boolean;
   /** 错误回调 */
   onError?: (e) => void;
+  /** 对数据的回调处理 */
   callback?: (data: any) => T;
   /** 定时刷新 单位 秒钟 */
   interval?: number;
+  /** 窗口聚焦刷新 */
   pollingWhenHidden?: boolean;
+  /** 窗体隐藏时是否继续刷新数据 */
   refreshOnWindowFocus?: boolean;
+  /** focus后几秒重新加载数据 */
   focusTimespan?: number;
   [key: string]: any;
 }

@@ -5,6 +5,7 @@ import styles from './index.less';
 import classnames from 'classnames';
 import * as lib from '@/component/chartItem/option/lib';
 import { sendRTXMessage } from '@/utils/db';
+import { now } from '@/utils/lib';
 /**
  *   @database: { 全局接口 }
  *   @desc:     { 数据库心跳状态 }
@@ -34,6 +35,14 @@ export const config: IChartConfig[] = [
     title: '数据库键值',
     defaultValue: 'db1',
     valueType: 'text',
+  },
+  {
+    key: 'timeout',
+    title: '超时(秒)',
+    defaultValue: 5,
+    min: 1,
+    max: 30,
+    type: 'range',
   },
   {
     type: 'label',
@@ -75,9 +84,9 @@ export const config: IChartConfig[] = [
 ];
 
 export const apiConfig: IApiConfig = {
-  show: true,
+  show: false,
   type: 'url',
-  url: '/mock/0_db_alive.json',
+  url: '',
   interval: 1,
   cache: 0,
   config: [],
@@ -102,18 +111,21 @@ export default ({
   const { data, loading, error } = useFetch({
     param: {
       url: `/alive/${db_key}`,
+      timeout: 5 * 1000,
     },
     valid: () => db_key?.trim?.()?.length > 0,
     callback({ data: res }) {
       return res?.[0]?.rec_time;
     },
     interval: interval * 60,
+    pollingWhenHidden: true,
     onError() {
       if (!push_message || rtx_users?.trim?.()?.length === 0) {
         return;
       }
+
       sendRTXMessage({
-        msg: `数据库 【 ${db_name} 】连接出现异常，[(请点击此处确认)|http://10.8.1.25:100/alive/${db_key}]`,
+        msg: `${now()}: 数据库 【 ${db_name} 】连接出现异常，[(请点击此处确认)|http://10.8.1.25:100/alive/${db_key}]`,
         receiver: rtx_users,
       });
     },
