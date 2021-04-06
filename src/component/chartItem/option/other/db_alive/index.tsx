@@ -108,14 +108,16 @@ export default ({
   },
   style = {},
 }) => {
+  const url = db_key.includes('http') ? db_key : `http://10.8.1.25:100/alive/${db_key}`;
   const { data, loading, error } = useFetch({
     param: {
-      url: `/alive/${db_key}`,
-      timeout: 5 * 1000,
+      url,
+      timeout: 8 * 1000,
     },
     valid: () => db_key?.trim?.()?.length > 0,
-    callback({ data: res }) {
-      return res?.[0]?.rec_time;
+    callback(obj) {
+      const { data: res } = obj;
+      return res?.[0]?.rec_time || obj?.serverTime || obj;
     },
     interval: interval * 60,
     pollingWhenHidden: true,
@@ -146,12 +148,12 @@ export default ({
             [styles.error]: error,
             [styles.loading]: loading,
           })}
-          href={`http://10.8.1.25:100/alive/${db_key}`}
+          href={url}
           target="_blank"
           title="点击查看状态"
         />
       </div>
-      {!error && !loading && (
+      {!error && !loading && typeof data === 'string' && (
         <div className={styles.center} style={{ fontSize: 16 }}>
           <span>数据库时间：</span>
           <span>{data}</span>

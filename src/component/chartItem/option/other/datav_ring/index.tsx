@@ -1,3 +1,4 @@
+import React from 'react';
 import type { IChartMock, IApiConfig, IChartConfig } from '@/component/chartItem/interface';
 
 // import { textColor } from '@/component/chartItem/option';
@@ -101,8 +102,11 @@ export const apiConfig: IApiConfig = {
 const getRadius = (radius, max = 12) => `${Math.floor(Math.random() * max + radius)}%`;
 const formatRadius = ({ radius, innerRadius, max }) => {
   const nextRadius = R.clone(radius);
-  while (radius[0] === radius[1]) {
+
+  let step = 0;
+  while (radius[0] === radius[1] && step < 5) {
     nextRadius[0] = getRadius(innerRadius, max);
+    step += 1;
   }
   return nextRadius;
 };

@@ -24,10 +24,11 @@ export default ({
   const chartInstanceofRef = useRef(null);
 
   useEffect(() => {
-    !chartInstanceofRef.current || (chartInstanceofRef.current = new Chart(chartRef.current));
-
-    chartInstanceofRef.current?.setOption(option || {}, true);
-  }, [option]);
+    if (!chartInstanceofRef.current) {
+      chartInstanceofRef.current = new Chart(chartRef.current);
+    }
+    chartInstanceofRef.current?.setOption?.(option || {}, true);
+  }, [JSON.stringify(option)]);
 
   useEffect(() => {
     chartInstanceofRef.current?.resize();

@@ -340,7 +340,9 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
 
   useInterval(
     nextPage,
-    !play || isHover ? null : (state?.mergedConfig?.waitTime || 10 * 1000) - 300,
+    !play || isHover || state?.mergedConfig?.waitTime === 0
+      ? null
+      : (state?.mergedConfig?.waitTime || 10 * 1000) - 300,
   );
 
   useEffect(() => height > 0 && onResize(), [width, height]);
@@ -359,17 +361,19 @@ const ScrollBoard = ({ onClick, config, className, style }) => {
         setIshover(false);
       }}
     >
-      <Play
-        play={play}
-        setPlay={setPlay}
-        gotoNext={() => {
-          nextPage('next');
-        }}
-        gotoPrev={() => {
-          nextPage('prev');
-        }}
-        className={styles.arrow}
-      />
+      {state?.mergedConfig?.waitTime > 0 && (
+        <Play
+          play={play}
+          setPlay={setPlay}
+          gotoNext={() => {
+            nextPage('next');
+          }}
+          gotoPrev={() => {
+            nextPage('prev');
+          }}
+          className={styles.arrow}
+        />
+      )}
       {!!state.header.length && !!state.mergedConfig && (
         <div
           className={styles.header}

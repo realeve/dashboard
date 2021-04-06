@@ -1,5 +1,5 @@
 {
-  "rec_time": "2021-04-02 16:57:39",
+  "rec_time": "2021-04-06 09:39:35",
   "panel": [
     {
       "showTitle": false,
@@ -1046,8 +1046,9 @@
       "showBorder": true,
       "showBackground": false,
       "componentConfig": {
-        "db_name": "企业经营事件管理系统",
-        "db_key": "db30",
+        "db_name": "MES后台调度服务",
+        "db_key": "http://10.8.1.25:100/1284/89f82dfd64.json",
+        "timeout": 5,
         "undefined": "",
         "push_message": true,
         "rtx_users": "10080,10654,10093",
