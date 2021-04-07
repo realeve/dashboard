@@ -1,0 +1,475 @@
+{
+  "rec_time": "2021-04-07 12:10:28",
+  "panel": [
+    {
+      "id": "f2f25aa5bddfe",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1286/1b5041bf94.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "37.50000000000014px,11.99999999999983px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true,
+      "business": true
+    },
+    {
+      "id": "3d25202ba2a8b",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1287/57cbfca226.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "498.27147142857166px,12.199999999999903px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "32493a5f4e65a",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1288/1fbaa21dc3.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "965.4996142857145px,12.000004285714084px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "9ae96fb7b89c2",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1289/eed27082e7.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "1119.1429000000005px,540.0002857142856px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "50c49e137279d",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1290/4fb905b8a7.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "-29.714285714242607px,541.2004285714285px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "4024b981c25a6",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1291/dd4ddccaef.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "347.28532857142886px,539.9999999999999px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "5dcb32c6291c3",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1292/6fcb761dc3.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "733.9999428571434px,541.3995714285714px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "0263c2d9ec476",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1293/14df8470dd.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "1430.3571428571431px,11.999999999999488px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    },
+    {
+      "id": "5f632313eb812",
+      "api": {
+        "show": true,
+        "interval": 5,
+        "api_type": "url",
+        "dataType": "array",
+        "url": "1294/97787924a5.array",
+        "appendParam": "",
+        "dateType": 9,
+        "cache": 2,
+        "carouselKey": 0,
+        "carouselTime": 10,
+        "isCarousel": false,
+        "showReport": false,
+        "reportParam": "",
+        "x": 0
+      },
+      "key": "water",
+      "ajax": true,
+      "icon": "com-font icon-com-others",
+      "lock": false,
+      "name": "other.water",
+      "type": "others",
+      "image": "/img/icons/05_water.png.webp",
+      "style": {
+        "transform": {
+          "translate": "1496.7428571429002px,541.6001428571428px",
+          "rotate": "0deg",
+          "scale": "1,1"
+        },
+        "width": "432.188px",
+        "height": "409.188px",
+        "position": "absolute"
+      },
+      "title": "数据库使用量",
+      "engine": "echarts",
+      "general": null,
+      "business": true,
+      "showTitle": false,
+      "showBorder": false,
+      "showBackground": true,
+      "componentConfig": {
+        "decimal": 1,
+        "titleFontSize": 24,
+        "valueFontSize": 72,
+        "percentFontSize": 22
+      },
+      "useGeneralStyle": true
+    }
+  ],
+  "page": {
+    "width": "1920",
+    "height": "1080",
+    "background": "bg_03.png.webp",
+    "author": "管理员",
+    "title": "数据库用量",
+    "padding": 15,
+    "border": "border_29.svg",
+    "borderSlice": [8, 8, 8, 8],
+    "borderRadius": [0, 0, 0, 0],
+    "chartBackground": "rgba(3,11,31,0.8)",
+    "head": {
+      "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+      "fontSize": 20,
+      "color": "#aec1f9",
+      "textAlign": "left",
+      "padding": 10
+    },
+    "thumbnail": "./数据库用量.jpg"
+  }
+}

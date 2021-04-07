@@ -123,7 +123,7 @@ export default ({
     fontSize = 16,
   },
 }) => {
-  const res = R.clone(data).map((item) => ({ name: item[x], value: item[y] }));
+  const res = R.clone(data).map((item) => ({ name: item[x], value: Number(item[y]) }));
 
   const _data = res.map((item) => {
     let radius = [getRadius(innerRadius, max), getRadius(innerRadius, max)];
@@ -151,7 +151,7 @@ export default ({
     ],
     color,
   };
-
+  console.log(option);
   return <Charts option={option} />;
 };
 

@@ -38,6 +38,15 @@ export const config = [
     min: 0,
     max: 60,
   },
+  {
+    key: 'decimal',
+    defaultValue: 0,
+    title: '小数位数',
+    step: 1,
+    type: 'range',
+    min: 0,
+    max: 4,
+  },
 ];
 
 export const apiConfig: IApiConfig = {
@@ -62,13 +71,14 @@ export default ({
   valueFontSize = 30,
   percentFontSize = 16,
   titleFontSize = 16,
+  decimal = 0,
 }) => {
-  const value = _data.data[0][x];
+  const value = Number(_data.data[0][x]);
   const data = [value / 100, value / 100, value / 100];
 
   const option = {
     title: {
-      text: `${value.toFixed(0)}{a| %}`,
+      text: `${value.toFixed(decimal)}{a| %}`,
       textStyle: {
         fontSize: valueFontSize,
         fontFamily: 'Microsoft Yahei',
