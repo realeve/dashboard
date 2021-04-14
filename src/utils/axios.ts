@@ -238,11 +238,17 @@ export const axios: <T = TAxiosData>(params: IAxiosConfig) => Promise<IAxiosStat
   let option: AxiosRequestConfig = handleUrl(_option);
 
   option = Object.assign(option, {
-    headers: {
-      Authorization: window.g_axios.token,
-    },
     method: option.method || 'get',
   });
+
+  // 系统提供的接口提交Authorization参数
+  if (option.url.includes(host)) {
+    option = Object.assign(option, {
+      headers: {
+        Authorization: window.g_axios.token,
+      },
+    });
+  }
 
   return http
     .create({

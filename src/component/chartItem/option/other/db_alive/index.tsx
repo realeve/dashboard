@@ -125,9 +125,8 @@ export default ({
       if (!push_message || rtx_users?.trim?.()?.length === 0) {
         return;
       }
-
       sendRTXMessage({
-        msg: `${now()}: 数据库 【 ${db_name} 】连接出现异常，[(请点击此处确认)|http://10.8.1.25:100/alive/${db_key}]`,
+        msg: `${now()}: 数据库 【 ${db_name} 】连接出现异常，[(请点击此处确认)|${url}]`,
         receiver: rtx_users,
       });
     },
