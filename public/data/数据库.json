@@ -1,1067 +1,1047 @@
 {
-  "rec_time": "2021-04-06 09:39:35",
-  "panel": [
-    {
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "ajax": true,
-      "style": {
-        "transform": {
-          "translate": "12.142885714285512px,22.40004285714275px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "position": "absolute",
-        "width": "372.188px",
-        "height": "239.188px"
+  "rec_time": "2021-04-14 10:50:28",
+  "panel": [{
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "ajax": true,
+    "style": {
+      "transform": {
+        "translate": "12.142885714285512px,22.40004285714275px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "name": "other.db_alive",
-      "key": "db_alive",
-      "engine": "other",
-      "type": "regular_bar",
-      "title": "数据库存活状态",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "id": "fecdd962354e8",
-      "icon": "com-font icon-com-regular_bar",
-      "general": {
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)",
-        "head": {
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
-          "fontSize": 20,
-          "color": "#aec1f9",
-          "textAlign": "left",
-          "padding": 10
-        }
-      },
-      "useGeneralStyle": false,
-      "lock": false,
-      "componentConfig": {
-        "db_name": "接口管理平台",
-        "db_key": "db1",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "api": {}
+      "position": "absolute",
+      "width": "372.188px",
+      "height": "239.188px"
     },
-    {
-      "id": "f2b23c8fdd268",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "388.61399999999975px,281.19989999999984px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "质量信息系统",
-        "db_key": "db2",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "name": "other.db_alive",
+    "key": "db_alive",
+    "engine": "other",
+    "type": "regular_bar",
+    "title": "数据库存活状态",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "id": "fecdd962354e8",
+    "icon": "com-font icon-com-regular_bar",
+    "general": {
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)",
+      "head": {
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)",
+        "fontSize": 20,
+        "color": "#aec1f9",
+        "textAlign": "left",
+        "padding": 10
+      }
     },
-    {
-      "id": "ec9e04295919b",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "388.6858571428569px,22.600042857142768px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "全幅面",
-        "db_key": "db4",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "useGeneralStyle": false,
+    "lock": false,
+    "componentConfig": {
+      "db_name": "接口管理平台",
+      "db_key": "db1",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "56cf520a4b06c",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "12.142871428571254px,281.0004285714284px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "api": {}
+  }, {
+    "id": "f2b23c8fdd268",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "388.61399999999975px,281.19989999999984px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "工艺质量管理",
-        "db_key": "db3",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "4dd1d689f2cb3",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1150.614000000002px,22.400014285714235px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "小张核查",
-        "db_key": "db5",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
     },
-    {
-      "id": "757e2f22dc1c1",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1540.7711428571442px,19.54288571428563px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "在线清数",
-        "db_key": "db6",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "质量信息系统",
+      "db_key": "db2",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "5947ea69261ba",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "764.8571428571423px,22.800042857142728px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "ec9e04295919b",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "388.6858571428569px,22.600042857142768px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "号码三合一",
-        "db_key": "db7",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "01e30f1839bad",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "763.9997142857139px,281.4000428571427px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "钞纸机检",
-        "db_key": "db8",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
     },
-    {
-      "id": "0fd3325c165b3",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1150.5997142857138px,280.1714714285714px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "检封装箱系统",
-        "db_key": "db1",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "全幅面",
+      "db_key": "db4",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "e5c6b0380d2ce",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1540.7997142857141px,278.9428999999999px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "56cf520a4b06c",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "12.142871428571254px,281.0004285714284px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "总公司数据共享平台",
-        "db_key": "db11",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "1b3147b5ac041",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "12.099714285714043px,530.5714285714286px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "ERP系统",
-        "db_key": "db15",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
     },
-    {
-      "id": "e054f65c9f488",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "388.599714285714px,530.8000428571429px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "MES系统",
-        "db_key": "db16",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "MES工艺调度API接口",
+      "db_key": "http://cognosdb.cdyc.cbpm:8080/wms/if/heartbeat",
+      "timeout": 5,
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "5a73ff93b4aa9",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "764.9997142857142px,531.0000428571428px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "4dd1d689f2cb3",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1150.614000000002px,22.400014285714235px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "立体库系统",
-        "db_key": "db17",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "a55e1ce5ea193",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1150.5997142857138px,531.428614285714px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "成钞信息网",
-        "db_key": "db18",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
     },
-    {
-      "id": "ce5269933fb2c",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1540.999714285714px,531.6286142857141px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "业务协同平台",
-        "db_key": "db20",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "小张核查",
+      "db_key": "db5",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "14b64c73399c2",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "12.100014285714053px,779.1998571428571px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "757e2f22dc1c1",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1540.7711428571442px,19.54288571428563px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "胶凹离线检测系统",
-        "db_key": "db21",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "b8d9a80ab2754",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "388.599714285714px,779.4000428571428px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "二维码系统",
-        "db_key": "db22",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
     },
-    {
-      "id": "3d06293a7b46b",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "763.9997142857139px,779.6000428571429px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
-      },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "数据共享平台",
-        "db_key": "db28",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "在线清数",
+      "db_key": "db6",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
     },
-    {
-      "id": "cb10e8b5ef562",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1150.7997142857141px,777.7142857142856px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "5947ea69261ba",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "764.8571428571423px,22.800042857142728px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
-      },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "生产指挥中心BI数据",
-        "db_key": "db29",
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
-      },
-      "useGeneralStyle": false,
-      "business": true
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
     },
-    {
-      "id": "f9f6ea7b12fe3",
-      "api": {},
-      "key": "db_alive",
-      "ajax": true,
-      "icon": "com-font icon-com-regular_bar",
-      "lock": false,
-      "name": "other.db_alive",
-      "type": "regular_bar",
-      "image": "/img/icons/01_barChartPositiveNegative.png.webp",
-      "style": {
-        "transform": {
-          "translate": "1540.7997142857141px,779.1428571428569px",
-          "rotate": "0deg",
-          "scale": "1,1"
-        },
-        "width": "372.188px",
-        "height": "239.188px",
-        "position": "absolute"
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "title": "数据库存活状态",
-      "engine": "other",
-      "general": {
-        "head": {
-          "color": "#aec1f9",
-          "padding": 10,
-          "fontSize": 20,
-          "textAlign": "left",
-          "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
-        },
-        "border": "border_27.svg",
-        "borderSlice": [8, 8, 8, 8],
-        "borderRadius": [0, 0, 0, 0],
-        "chartBackground": "rgba(3,11,31,0.8)"
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "号码三合一",
+      "db_key": "db7",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "01e30f1839bad",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "763.9997142857139px,281.4000428571427px",
+        "rotate": "0deg",
+        "scale": "1,1"
       },
-      "showTitle": false,
-      "showBorder": true,
-      "showBackground": false,
-      "componentConfig": {
-        "db_name": "MES后台调度服务",
-        "db_key": "http://10.8.1.25:100/1284/89f82dfd64.json",
-        "timeout": 5,
-        "undefined": "",
-        "push_message": true,
-        "rtx_users": "10080,10654,10093",
-        "fontSize": 26,
-        "fontWeight": "normal",
-        "textAlign": "center",
-        "fontColor": "rgba(105, 192, 255,1)",
-        "letterSpacing": 5
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
       },
-      "useGeneralStyle": false,
-      "business": true
-    }
-  ],
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "钞纸机检",
+      "db_key": "db8",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "0fd3325c165b3",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1150.5997142857138px,280.1714714285714px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "检封装箱系统",
+      "db_key": "db1",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "e5c6b0380d2ce",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1540.7997142857141px,278.9428999999999px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "总公司数据共享平台",
+      "db_key": "db11",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "1b3147b5ac041",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "12.099714285714043px,530.5714285714286px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "ERP系统",
+      "db_key": "db15",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "e054f65c9f488",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "388.599714285714px,530.8000428571429px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "MES系统",
+      "db_key": "db16",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "5a73ff93b4aa9",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "764.9997142857142px,531.0000428571428px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "立体库系统",
+      "db_key": "db17",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "a55e1ce5ea193",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1150.5997142857138px,531.428614285714px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "成钞信息网",
+      "db_key": "db18",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "ce5269933fb2c",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1540.999714285714px,531.6286142857141px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "业务协同平台",
+      "db_key": "db20",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "14b64c73399c2",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "12.100014285714053px,779.1998571428571px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "胶凹离线检测系统",
+      "db_key": "db21",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "b8d9a80ab2754",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "388.599714285714px,779.4000428571428px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "二维码系统",
+      "db_key": "db22",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "3d06293a7b46b",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "763.9997142857139px,779.6000428571429px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "数据共享平台",
+      "db_key": "db28",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "cb10e8b5ef562",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1150.7997142857141px,777.7142857142856px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "生产指挥中心BI数据",
+      "db_key": "db29",
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }, {
+    "id": "f9f6ea7b12fe3",
+    "api": {},
+    "key": "db_alive",
+    "ajax": true,
+    "icon": "com-font icon-com-regular_bar",
+    "lock": false,
+    "name": "other.db_alive",
+    "type": "regular_bar",
+    "image": "/img/icons/01_barChartPositiveNegative.png.webp",
+    "style": {
+      "transform": {
+        "translate": "1540.7997142857141px,779.1428571428569px",
+        "rotate": "0deg",
+        "scale": "1,1"
+      },
+      "width": "372.188px",
+      "height": "239.188px",
+      "position": "absolute"
+    },
+    "title": "数据库存活状态",
+    "engine": "other",
+    "general": {
+      "head": {
+        "color": "#aec1f9",
+        "padding": 10,
+        "fontSize": 20,
+        "textAlign": "left",
+        "background": "linear-gradient(90deg, #250e66 0%, #102f6e 40%, rgba(0,0,0,0) 70%)"
+      },
+      "border": "border_27.svg",
+      "borderSlice": [8, 8, 8, 8],
+      "borderRadius": [0, 0, 0, 0],
+      "chartBackground": "rgba(3,11,31,0.8)"
+    },
+    "showTitle": false,
+    "showBorder": true,
+    "showBackground": false,
+    "componentConfig": {
+      "db_name": "MES后台调度服务",
+      "db_key": "http://10.8.1.25:100/1284/89f82dfd64.json",
+      "timeout": 5,
+      "undefined": "",
+      "push_message": true,
+      "rtx_users": "10080,10654,10093",
+      "fontSize": 26,
+      "fontWeight": "normal",
+      "textAlign": "center",
+      "fontColor": "rgba(105, 192, 255,1)",
+      "letterSpacing": 5
+    },
+    "useGeneralStyle": false,
+    "business": true
+  }],
   "page": {
     "width": "1920",
     "height": "1080",
